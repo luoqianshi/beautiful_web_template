@@ -10,336 +10,336 @@
 | 显示名称 | Art Deco |
 | 模式 | 🌙 深色模式 (Dark) |
 | 字体类型 | serif |
-| 描述 | 1920s Gatsby elegance, geometric precision, metallic gold accents, architectural symmetry, luxury heritage |
+| 描述 | 1920 年代盖茨比式优雅，几何精准，金属金色调点缀，建筑式对称，奢华传承。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Centered symmetrical composition with massive uppercase serif headline. Radial sunburst gradient emanates from center. Vertical gold line divider adds architectural height. CTAs arranged horizontally with sharp borders and glow effects.
+居中对称构图，配超大号大写衬线标题。自中心放射的太阳光芒渐变。垂直金线分隔符增添建筑高度感。CTA 横向排列，带锐利边框与辉光效果。
 
 ### Stats
 
-Four-column grid with bordered boxes featuring stepped corner decorations. Large gold numbers with uppercase labels. Subtle hover state intensifies gold borders.
+四列网格，带边框方框配阶梯式角部装饰。大号金色数字配大写标签。悬停时金边增强的含蓄状态。
 
 ### Product Detail
 
-Centered heading with two-column text layout below. Left-border accent on paragraphs. Contained in darker card background for depth separation.
+居中标题，下方双栏文字布局。段落带左边框点缀。置于较深的卡片背景中以营造深度区隔。
 
 ### Features
 
-Three-column responsive grid. Cards feature rotated diamond icon containers, corner decorative elements, and lift-on-hover micro-interaction. Icons rotate back on hover for theatrical effect.
+三列响应式网格。卡片含旋转菱形图标容器、角部装饰元素与悬停上浮微交互。悬停时图标回旋，营造戏剧效果。
 
 ### Blog
 
-Three-column grid. Images with double-frame treatment (outer border + inner inset border). Grayscale images with gold overlay on hover. Film noir aesthetic with high contrast typography.
+三列网格。图片采用双边框处理（外边框 + 内嵌边框）。灰度图片，悬停时金色叠加。黑色电影美学配高对比字体。
 
 ### How It Works
 
-Vertical timeline with central gold divider line. Diamond-shaped step markers with Roman numerals. Alternating left-right text layout creates visual rhythm. Steps use geometric precision.
+垂直时间线，中央金色分隔线。菱形步骤标记配罗马数字。左右交替的文字布局营造视觉节奏。步骤采用几何精准。
 
 ### Benefits
 
-Two-column grid with large bordered cards. Corner flourishes (top-left, bottom-right). Rotated diamond checkmarks. Background darkens slightly on hover for depth.
+双栏网格，大型带边框卡片。角部纹饰（左上、右下）。旋转菱形勾选标记。悬停时背景略微加深以营造深度。
 
 ### Testimonials
 
-Three-column grid. Giant quotation mark watermark in background. Rotated diamond avatar frames with counter-rotated images. Author details with role in gold.
+三列网格。背景中巨型引号水印。旋转菱形头像框配反向旋转的图片。作者详情中身份以金色显示。
 
 ### Pricing
 
-Three columns with center tier elevated and highlighted. Gold badge floats above popular plan. Feature lists with gold checkmarks. Sharp geometric borders throughout.
+三列，中间档位上浮并高亮。金色徽章悬浮于热门方案之上。特性列表配金色勾选标记。整体采用锐利几何边框。
 
 ### Faq
 
-Clean accordion with full-width questions. Chevron indicators. Expanded answers show left gold border accent. Smooth height transitions.
+简洁手风琴，全宽问题。Chevron 指示器。展开的回答显示左侧金色边框点缀。平滑高度过渡。
 
 ### Footer
 
-Five-column grid (company spans wider on mobile). Large uppercase serif brand. Gold headings with muted link text. Border separator above social icons.
+五列网格（移动端公司栏跨度更宽）。大号大写衬线品牌名。金色标题配柔和链接文字。社交图标上方边框分隔符。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Design Style: Art Deco (The "Gatsby" Aesthetic)
+# 设计风格：Art Deco（"盖茨比"美学）
 
-## 1. Design Philosophy
+## 1. 设计哲学
 
-Art Deco is the visual embodiment of the Roaring Twenties—an era of jazz, prosperity, and unbridled optimism. This design style captures **opulence, mathematical precision, and architectural grandeur**. It celebrates luxury through geometry rather than organic forms, creating a aesthetic that feels both **timeless and theatrical**.
+Art Deco 是咆哮二十年代的视觉化身——一个爵士、繁荣与无尽乐观的时代。这种设计风格捕捉了**奢华、数学精准与建筑的宏伟**。它通过几何而非有机形态来赞颂奢华，创造出既**永恒又戏剧化**的美学。
 
-### The DNA of Art Deco
+### Art Deco 的 DNA
 
-This is not minimalism. Art Deco is **maximalist restraint**—every element is intentional, ornamental, yet precisely placed. The style rejects soft curves in favor of **hard edges, sharp angles, and geometric repetition**. It's the visual language of the machine age meeting high society, where **structure equals beauty**.
+这不是极简主义。Art Deco 是**极繁的克制**——每个元素都经过精心设计、装饰考究，却安放精准。该风格拒绝柔和曲线，转而拥抱**硬边、锐角与几何重复**。它是机器时代与上流社会交汇的视觉语言，**结构即美**。
 
-The vibe is "The Great Gatsby" meets Fritz Lang's "Metropolis"—champagne towers in skyscraper ballrooms, chrome elevator grilles, sunburst marquees, and zigzag moderne facades. It feels **expensive, confident, and timeless**.
+气质是"了不起的盖茨比"遇上弗里茨·朗的"大都会"——摩天大楼宴会厅里的香槟塔、铬金属电梯格栅、太阳光芒招牌与折线现代派立面。它显得**昂贵、自信、永恒**。
 
-### Core Principles
+### 核心原则
 
-**Geometry as Decoration:**
-Art Deco worships mathematical forms. Triangles, chevrons, trapezoids, stepped pyramids (ziggurat shapes), sunbursts, and fan motifs dominate. These aren't random—they create **visual rhythm through repetition**. Borders aren't just lines; they're multi-layered frames. Corners feature decorative cuts or stepped embellishments. Every surface is an opportunity for geometric ornamentation.
+**几何即装饰**：
+Art Deco 崇尚数学形态。三角形、人字纹、梯形、阶梯金字塔（金字形神塔）、太阳光芒与扇形母题占据主导。这些并非随机——它们通过重复创造**视觉节奏**。边框不只是线条，而是多层画框。角落采用装饰性切割或阶梯式点缀。每个表面都是几何装饰的机会。
 
-**Contrast as Drama:**
-This style thrives on **extreme tonal contrast**. Deep, obsidian blacks set against radiant metallic golds create instant luxury. There's no muddy middle ground—elements are either in shadow or bathed in light. This high contrast extends to typography (massive display faces vs refined body text) and spatial hierarchy (dense ornamentation vs deliberate negative space).
+**对比即戏剧**：
+这种风格依赖**极端的色调对比**。深邃的黑曜石黑映衬璀璨的金属金，瞬间营造奢华感。没有浑浊的中间地带——元素要么在阴影中，要么沐浴于光。这种高对比延伸至字体（巨型展示字 vs 精炼正文）与空间层级（密集装饰 vs 刻意留白）。
 
-**Symmetry and Balance:**
-Art Deco layouts favor **central axes and bilateral symmetry**. Content radiates from centerlines. Column counts are even. Decorative elements mirror across vertical dividers. This symmetry isn't rigid—it's **ceremonial**, like the entrance to a grand hotel or the facade of a cinema palace.
+**对称与平衡**：
+Art Deco 布局偏好**中轴与双侧对称**。内容从中线放射。列数为偶数。装饰元素跨越垂直分隔线镜像。这种对称不僵硬——它是**仪式性的**，如大酒店的门厅或电影宫的立面。
 
-**Verticality and Aspiration:**
-Inspired by skyscrapers, Art Deco emphasizes **upward movement**. Vertical lines, tall narrow proportions, and stacked elements create a sense of height and ambition. Sections feel like floors of a building. Dividers act like architectural columns. The design **reaches skyward**.
+**垂直与向上**：
+受摩天大楼启发，Art Deco 强调**向上的动势**。垂直线条、高而窄的比例与堆叠元素营造出高度与雄心。区块如建筑的楼层。分隔符如建筑的立柱。设计**直指天际**。
 
-**Material Luxury:**
-Even in digital form, Art Deco evokes **tactile richness**—polished brass, etched glass, lacquered wood, terrazzo floors. Metallic sheens, subtle glows, and layered shadows simulate these premium materials. The style says "this is crafted, not mass-produced."
+**材质奢华**：
+即使在数字形式中，Art Deco 也唤起**触感的丰富**——抛光黄铜、蚀刻玻璃、漆木、水磨石地面。金属光泽、微妙辉光与分层阴影模拟这些高级材质。这种风格在说"这是精工细作，而非流水线产物"。
 
-**Theatricality:**
-Art Deco doesn't whisper—it **announces**. Transitions are dramatic. Hover states glow. Headings demand attention with all-caps, wide tracking, and imposing scale. Interactive elements feel like mechanical buttons on a vintage elevator panel—precise, satisfying, engineered.
+**戏剧性**：
+Art Deco 不低语——它**宣告**。过渡是戏剧性的。悬停状态会发光。标题以全大写、宽字距与恢弘尺度吸引注意。交互元素如老式电梯面板上的机械按钮——精准、令人满足、工程感十足。
 
-### Emotional Resonance
+### 情感共鸣
 
-When executed correctly, Art Deco should evoke:
-- **Confidence** - Nothing tentative or apologetic
-- **Heritage** - Rooted in a golden age of design
-- **Exclusivity** - Premium, members-only, VIP access
-- **Optimism** - The future was bright in 1925, and it still is
-- **Sophistication** - Educated taste, cultural refinement
+执行得当时，Art Deco 应唤起：
+- **自信** — 毫不含糊或致歉
+- **传承** — 扎根于设计的黄金时代
+- **专属** — 高端、会员制、VIP 通道
+- **乐观** — 1925 年的未来光明，至今依然
+- **精致** — 有教养的品味，文化修养
 
-This isn't a style for soft SaaS startups or friendly consumer apps. It's for **luxury brands, premium services, cultural institutions, and products that want to feel like heirlooms**.
-
-### Key Visual Signatures
+这不是为柔软的 SaaS 初创或友好的消费应用准备的风格。它属于**奢华品牌、高端服务、文化机构，以及希望呈现传家宝质感的产品**。
+
+### 关键视觉签名
 
-1. **Stepped Corners** - Ziggurat-style cuts on cards and containers
-2. **Rotated Diamonds** - 45-degree squares as frames and accents
-3. **Sunburst Radials** - Emanating rays from focal points
-4. **Metallic Gold (#D4AF37)** - Used sparingly but decisively on obsidian black
-5. **Double Borders** - Frames within frames for depth
-6. **Roman Numerals** - Classical sophistication in numbering
-7. **All-Caps Typography** - Display text in uppercase with generous tracking
-8. **Linear Patterns** - Repeating diagonal grids, chevrons, or fan motifs at low opacity
-9. **Glow Effects** - Soft halos around gold elements, never harsh drop shadows
-10. **Corner Embellishments** - Decorative L-brackets or lines at card corners
-
-The goal is instant recognition: when someone sees this design, they should immediately think "Art Deco" without being told.
-
-## 2. Design Token System
-
-### Colors (Dark Luxury Palette)
-*   **Background**: `#0A0A0A` (Obsidian Black) - The deep void.
-*   **Foreground**: `#F2F0E4` (Champagne Cream) - For primary text, warm and readable.
-*   **Card Background**: `#141414` (Rich Charcoal) - Slightly lighter than bg for depth.
-*   **Primary Accent (Gold)**: `#D4AF37` (Metallic Gold) - The core luxury element.
-*   **Secondary Accent**: `#1E3D59` (Midnight Blue) - For subtle depth or inactive states.
-*   **Border**: `#D4AF37` (Gold) - Borders are celebrated, not hidden.
-*   **Muted**: `#888888` (Pewter) - For secondary text.
+1. **阶梯角部** — 卡片与容器上的金字形神塔式切割
+2. **旋转菱形** — 作为画框与点缀的 45 度方块
+3. **太阳光芒放射** — 自焦点放射的光线
+4. **金属金（#D4AF37）** — 在黑曜石黑上克制而果断地使用
+5. **双边框** — 框中之框营造深度
+6. **罗马数字** — 编号中的古典精致
+7. **全大写排印** — 展示文字大写配慷慨字距
+8. **线性图案** — 低不透明度的重复对角网格、人字纹或扇形母题
+9. **辉光效果** — 金色元素周围的柔和光晕，绝非刺眼投影
+10. **角部点缀** — 卡片角落的装饰性 L 形括号或线条
+
+目标是即时识别：当人们看到这个设计，应立即想到"Art Deco"，无需告知。
+
+## 2. 设计 Token 系统
+
+### 色彩（深色奢华调色板）
+*   **Background**：`#0A0A0A`（黑曜石黑）— 深邃的虚空。
+*   **Foreground**：`#F2F0E4`（香槟奶油）— 主要文字，温暖可读。
+*   **Card Background**：`#141414`（浓郁炭灰）— 略浅于背景以营造深度。
+*   **Primary Accent (Gold)**：`#D4AF37`（金属金）— 核心奢华元素。
+*   **Secondary Accent**：`#1E3D59`（午夜蓝）— 用于含蓄深度或非激活状态。
+*   **Border**：`#D4AF37`（金）— 边框是被赞颂的，而非隐藏的。
+*   **Muted**：`#888888`（锡灰）— 次要文字。
 
-### Typography
-*   **Headings**: **"Marcellus"** (Google Font) or "Italiana". These have the classic Roman structures with Art Deco flair.
-*   **Body**: **"Josefin Sans"** (Google Font). Geometric, vintage feel, but readable.
-*   **Scaling**: High contrast. Headings should be imposing.
-    *   H1: `text-6xl` or `text-7xl`, uppercase, generous letter-spacing (`tracking-widest`).
-    *   Body: `text-lg`, comfortable `leading-relaxed`.
+### 字体
+*   **标题**：**"Marcellus"**（Google Font）或 "Italiana"。具有古典罗马结构配 Art Deco 韵味。
+*   **正文**：**"Josefin Sans"**（Google Font）。几何感、复古感，但可读。
+*   **字号阶梯**：高对比。标题应具压迫感。
+    *   H1：`text-6xl` 或 `text-7xl`，大写，慷慨字距（`tracking-widest`）。
+    *   正文：`text-lg`，舒适的 `leading-relaxed`。
 
-### Radius & Border
-*   **Radius**: **Strictly `0px`** or very specific `2px` for softness. Art Deco is about sharp lines.
-*   **Border Width**: Thin, precise lines (`1px`) or double lines (`3px` double style) are common.
-*   **Stepped Corners**: Use CSS clip-paths or pseudo-elements to create "stepped" corners (ziggurat shape) on cards.
+### 圆角与边框
+*   **圆角**：严格 `0px` 或特定的 `2px` 以求柔和。Art Deco 在于锐利的线条。
+*   **边框宽度**：细而精准的线（`1px`）或双线（`3px` double 样式）常见。
+*   **阶梯角部**：用 CSS clip-path 或伪元素在卡片上创造"阶梯"角部（金字形神塔形）。
 
-### Shadows & Effects
-*   **Glow**: Instead of soft drop shadows, use "glows" or hard offsets.
-    *   `box-shadow: 0 0 15px rgba(212, 175, 55, 0.2)` (Gold Glow).
-*   **Gradients**: Use linear gradients that mimic metallic sheen on buttons or borders (e.g., Gold Light to Gold Dark).
-*   **Textures**: A subtle "grain" or "noise" overlay on the background adds vintage film quality.
+### 阴影与效果
+*   **辉光**：以"辉光"或硬偏移替代柔和投影。
+    *   `box-shadow: 0 0 15px rgba(212, 175, 55, 0.2)`（金色辉光）。
+*   **渐变**：用模仿金属光泽的线性渐变作按钮或边框（如金亮至金暗）。
+*   **纹理**：背景上含蓄的"颗粒"或"噪点"叠加增添复古胶片质感。
 
-## 3. Component Stylings
+## 3. 组件样式
 
-### Buttons (Precision Instruments)
-Buttons in Art Deco are **architectural elements**, not soft pills. They command attention and provide satisfying tactile feedback.
+### 按钮（精密仪器）
+Art Deco 中的按钮是**建筑元素**，而非柔软的胶囊。它们吸引注意并提供令人满足的触感反馈。
 
-**Structure:**
-- Sharp corners (`rounded-none`) or minimal softness (`rounded-sm` at 2px max)
-- Minimum height of 48px (h-12) for touch accessibility
-- All-caps text with wide tracking (`tracking-widest` or `tracking-[0.2em]`)
-- 2px borders that glow on hover
+**结构**：
+- 锐角（`rounded-none`）或极小柔和（`rounded-sm` 至 2px）
+- 最小高度 48px（h-12）以保证触控可访问性
+- 全大写文字配宽字距（`tracking-widest` 或 `tracking-[0.2em]`）
+- 2px 边框，悬停时发光
 
-**Variants:**
-- **Default**: Transparent background, gold border (2px), gold text. Hover: gold background, black text, intensified glow (`shadow-[0_0_20px_rgba(212,175,55,0.4)]`)
-- **Solid**: Gold background, black text. Hover: lighter gold (`#F2E8C4`) for brightness shift
-- **Outline**: Thin gold border (1px), transparent background. Hover: midnight blue fill (`#1E3D59`)
+**变体**：
+- **默认**：透明背景，金边（2px），金色文字。悬停：金色背景，黑色文字，辉光增强（`shadow-[0_0_20px_rgba(212,175,55,0.4)]`）
+- **实心**：金色背景，黑色文字。悬停：更亮的金（`#F2E8C4`）作亮度偏移
+- **描边**：细金边（1px），透明背景。悬停：午夜蓝填充（`#1E3D59`）
 
-**Interaction:**
-- Transition duration: 300-500ms for theatrical effect
-- Glow effect increases on hover (subtle shadow-based halo)
-- No rounded corners—maintain geometric precision
-
-### Cards (Geometric Containers)
-Cards are **framed exhibits**, each one a miniature architectural facade.
-
-**Structure:**
-- Background: Rich charcoal (`#141414`) for depth against obsidian black page
-- Border: Full 1px gold border at 30% opacity, increases to 100% on hover
-- Corner decorations: Small L-shaped brackets at opposite corners (top-right + bottom-left OR top-left + bottom-right)
-- Header separator: Bottom border on card header at 20% gold opacity
-
-**Decorative Elements:**
-- Stepped corners using pseudo-elements with 2px borders
-- Corner embellishments positioned absolutely at 4-8px inset
-- Optional: diagonal corner cut using `clip-path` for advanced cards
-
-**Interaction:**
-- Subtle lift on hover: `-translate-y-2` with 500ms duration
-- Border opacity intensifies from 30% to 100%
-- Corner decorations transition from 50% to 100% opacity
-
-**Card Internal Hierarchy:**
-- CardHeader: `p-6` with bottom border separator
-- CardTitle: Display font, gold color (`#D4AF37`), 2xl, uppercase, wide tracking
-- CardDescription: Body font, muted gray (`#888888`), normal case
-- CardContent: `p-6` spacing
-
-### Inputs (Underlined Elegance)
-Inputs embrace **minimalism within maximalism**—no background boxes, just refined underlines.
-
-**Structure:**
-- Transparent background (`bg-transparent`)
-- Bottom border only: 2px solid gold (`#D4AF37`)
-- No side or top borders—emphasizes horizontal flow
-- Height: `h-12` (48px) for touch accessibility
-- Padding: `px-3 py-2` for comfortable text entry
-
-**Typography:**
-- Font: Body sans-serif (Josefin Sans)
-- Text color: Champagne cream (`#F2F0E4`)
-- Placeholder: Muted gray (`#888888`)
-
-**Focus State:**
-- Border color brightens to lighter gold (`#F2E8C4`)
-- Bottom shadow appears: `shadow-[0_4px_10px_rgba(212,175,55,0.2)]`
-- Smooth transition: `transition-all`
-- No ring, only the enhanced underline
-
-**Label Pattern:**
-- Uppercase, small font size (xs or sm)
-- Gold color for active state
-- Positioned above input or floating label pattern
-
-## 4. Non-Generic Bold Choices
-
-These mandatory elements prevent the design from looking like default Tailwind or generic templates:
-
-**1. Diagonal Crosshatch Background Pattern**
-Apply a repeating diagonal grid pattern to the main background at 3-5% opacity. Use CSS `repeating-linear-gradient` at 45° and -45° angles with gold lines. This subtle texture adds vintage print quality.
-
-**2. Rotated Diamond Containers**
-Icons and avatars sit inside 45-degree rotated squares (`rotate-45`). The content inside counter-rotates (`-rotate-45`) to remain upright. This creates instant Art Deco recognition.
-
-**3. Roman Numerals for Numbering**
-Use I, II, III, IV instead of 1, 2, 3, 4 for steps, tiers, or lists. Display them in the serif display font for classical elegance.
-
-**4. Stepped Corner Decorations**
-Add small L-shaped border elements at opposite corners of cards and containers. Use absolute positioning with 2-4px borders on two sides only (e.g., `border-t border-l` for top-left corner).
-
-**5. Double-Frame Images**
-Never use plain images. Wrap in:
-- Outer border container with gold border
-- Inner inset div with thick dark border (creates frame-within-frame)
-- Apply grayscale filter by default, remove or add gold overlay on hover
-
-**6. Sunburst Radial Gradients**
-Use `radial-gradient` with gold at 10-20% opacity emanating from key focal points (especially hero section). This creates the iconic Art Deco sunburst effect.
-
-**7. Section Dividers with Decorative Lines**
-Section headings include horizontal gold lines above and below the text (e.g., `h-px w-24` dividers). These are never full-width—they're measured, balanced accents.
-
-**8. Vertical Divider Lines**
-Use absolute-positioned vertical lines (`w-px h-full`) to create column separation or architectural height. These should be gold at low opacity.
-
-**9. Glow Effects Over Drop Shadows**
-Replace traditional drop shadows with box-shadow glows: `0 0 15px rgba(212,175,55,0.2)`. This simulates neon or backlit signage from the 1920s.
-
-**10. All-Caps Display Typography with Extreme Tracking**
-Headings must be uppercase with `tracking-widest` (0.2em). This isn't optional—it's fundamental to the style's voice.
-
-## 5. Layout & Spacing
-
-**Container Width:**
-- Maximum content width: `max-w-6xl` for primary sections, `max-w-7xl` for wider grids (testimonials, blog)
-- Hero and major sections: `max-w-5xl` for focused, centered content
-
-**Spacing System:**
-- Base unit: 8px (Tailwind's default)
-- Section padding: `py-32` (128px) for generous breathing room
-- Card padding: `p-8` (32px) for comfortable content spacing
-- Grid gaps: `gap-8` (32px) between cards and columns
-
-**Grid Philosophy:**
-Art Deco is mathematically precise. Use even column counts:
-- Features: 3 columns (lg), 2 columns (md), 1 column (base)
-- Testimonials: 3 columns (lg), 2 columns (md), 1 column (base)
-- Pricing: 3 columns, equal width
-- Benefits: 2 columns (md), 1 column (base)
-- Footer: 5 columns (lg) with company info spanning wider
-
-**Alignment:**
-- Centered axis for hero, headings, and CTAs
-- Justified or centered text for formal sections
-- Alternating left-right patterns in timeline layouts (How It Works)
-
-**Negative Space:**
-Space is intentional, not accidental. Large gaps between sections (32-40px) create visual separation. White space around centered headings provides "stage presence."
-
-## 6. Animation & Interaction
-
-**Philosophy:**
-Animations should feel **theatrical and mechanical**—like Art Deco elevator doors opening or stage curtains rising. Nothing bouncy or organic.
-
-**Transition Timing:**
-- Standard: `duration-300` (300ms) for quick feedback
-- Theatrical: `duration-500` (500ms) for dramatic reveals
-- Easing: `ease-out` or `ease-in-out` for smooth mechanical motion
-
-**Hover States:**
-- Cards: Lift upward (`-translate-y-2`) + border glow intensifies
-- Buttons: Background color flip + glow expansion
-- Links: Color shift to gold + subtle underline expansion
-- Images: Scale slightly (`scale-105`) + overlay appearance
-
-**Page Load Animations (Optional):**
-- Sections slide up with fade: `translate-y-8 opacity-0` → `translate-y-0 opacity-100`
-- Stagger delays for sequential reveal (100ms between elements)
-- Hero elements can have a sunburst expand effect
-
-**Interactive Micro-details:**
-- FAQ chevrons rotate 180° on open
-- Icon containers rotate from 45° to 0° on hover (then back)
-- Gold lines can animate width from 0 to full on section scroll-into-view
-- Button glows pulse subtly on focus state
-
-## 7. Accessibility & Contrast
-
-**Color Contrast:**
-- Gold text (`#D4AF37`) on black (`#0A0A0A`): **Passes WCAG AA** at ~7:1 ratio
-- For body text or smaller sizes, use champagne cream (`#F2F0E4`) for better readability
-- Gold should be used for accents, headings, and borders—not long-form body text
-- Muted text (`#888888`) on black: ~4.5:1 ratio, acceptable for secondary content
-
-**Focus States:**
-- Buttons: 2px gold ring with 2px offset (`ring-2 ring-[#D4AF37] ring-offset-2 ring-offset-black`)
-- Links: Gold underline appears or thickens
-- Inputs: Bottom border glows brighter with subtle shadow
-- Interactive cards: Border intensifies rather than adding a ring
-
-**Touch Targets:**
-- Minimum button height: 48px (`h-12`)
-- Minimum clickable area: 44x44px for mobile
-- FAQ accordion buttons: Full-width with generous padding (`p-6`)
-- Adequate spacing between interactive elements (min 8px gap)
-
-**Keyboard Navigation:**
-- Clear focus indicators on all interactive elements
-- Focus follows visual hierarchy (top to bottom, left to right)
-- Skip-to-content link for keyboard users (if header is complex)
-
-**Screen Reader Considerations:**
-- Decorative elements (corner brackets, divider lines) use `aria-hidden="true"`
-- Images have descriptive alt text
-- Icon buttons include accessible labels
-- Form inputs have associated labels
+**交互**：
+- 过渡时长：300-500ms 以求戏剧效果
+- 悬停时辉光效果增强（基于阴影的含蓄光晕）
+- 无圆角——保持几何精准
+
+### 卡片（几何容器）
+卡片是**装裱的展品**，每一张都是微缩的建筑立面。
+
+**结构**：
+- 背景：浓郁炭灰（`#141414`）以在黑曜石黑页面上营造深度
+- 边框：完整 1px 金边，30% 不透明度，悬停时增至 100%
+- 角部装饰：对角（右上+左下 或 左上+右下）的小型 L 形括号
+- 头部分隔符：卡片头部底部边框，20% 金色不透明度
+
+**装饰元素**：
+- 用 2px 边框伪元素实现阶梯角部
+- 角部点缀绝对定位，4-8px 内嵌
+- 可选：高级卡片用 `clip-path` 作对角角部切割
+
+**交互**：
+- 悬停时含蓄上浮：`-translate-y-2`，500ms 时长
+- 边框不透明度从 30% 增至 100%
+- 角部装饰从 50% 过渡至 100% 不透明度
+
+**卡片内部层级**：
+- CardHeader：`p-6` 配底部边框分隔符
+- CardTitle：展示字体，金色（`#D4AF37`），2xl，大写，宽字距
+- CardDescription：正文字体，柔和灰（`#888888`），正常大小写
+- CardContent：`p-6` 间距
+
+### 输入框（下划线的优雅）
+输入框拥抱**极繁中的极简**——无背景方框，唯有精致的下方线条。
+
+**结构**：
+- 透明背景（`bg-transparent`）
+- 仅底部边框：2px solid 金（`#D4AF37`）
+- 无侧边或顶部边框——强调横向流动
+- 高度：`h-12`（48px）以保证触控可访问性
+- 内边距：`px-3 py-2` 以舒适输入
+
+**字体**：
+- 字体：正文无衬线（Josefin Sans）
+- 文字颜色：香槟奶油（`#F2F0E4`）
+- 占位符：柔和灰（`#888888`）
+
+**聚焦状态**：
+- 边框色提亮至更亮的金（`#F2E8C4`）
+- 出现底部阴影：`shadow-[0_4px_10px_rgba(212,175,55,0.2)]`
+- 平滑过渡：`transition-all`
+- 无 ring，仅增强的下划线
+
+**标签模式**：
+- 大写，小字号（xs 或 sm）
+- 激活状态用金色
+- 定位于输入上方或浮动标签模式
+
+## 4. 非通用的标志性选择
+
+这些强制元素防止设计看起来像默认 Tailwind 或通用模板：
+
+**1. 对角交叉网格背景图案**
+在主背景上以 3-5% 不透明度应用重复对角网格图案。用 CSS `repeating-linear-gradient`，45° 与 -45° 角配金线。这种含蓄纹理增添复古印刷质感。
+
+**2. 旋转菱形容器**
+图标与头像置于 45 度旋转的方块（`rotate-45`）内。内部内容反向旋转（`-rotate-45`）以保持正立。这创造即时的 Art Deco 识别。
+
+**3. 罗马数字编号**
+步骤、档位或列表用 I, II, III, IV 替代 1, 2, 3, 4。以衬线展示字体显示以求古典优雅。
+
+**4. 阶梯角部装饰**
+在卡片与容器对角添加小型 L 形边框元素。绝对定位，2-4px 边框仅两侧（如 `border-t border-l` 作左上角）。
+
+**5. 双框图片**
+切勿使用朴素图片。包裹于：
+- 带金边的外边框容器
+- 带厚深色边框的内嵌 div（创造框中之框）
+- 默认灰度滤镜，悬停时移除或添加金色叠加
+
+**6. 太阳光芒径向渐变**
+用 `radial-gradient`，金色 10-20% 不透明度自关键焦点（尤其 Hero 区）放射。创造标志性的 Art Deco 太阳光芒效果。
+
+**7. 带装饰线的章节分隔符**
+章节标题包含文字上方与下方的水平金线（如 `h-px w-24` 分隔符）。这些从不全宽——它们是有节制的、平衡的点缀。
+
+**8. 垂直分隔线**
+用绝对定位的垂直线（`w-px h-full`）创造列分隔或建筑高度。这些应为低不透明度金色。
+
+**9. 辉光效果替代投影**
+以 box-shadow 辉光替代传统投影：`0 0 15px rgba(212,175,55,0.2)`。这模拟 1920 年代的霓虹或背光招牌。
+
+**10. 全大写展示字体配极致字距**
+标题必须大写配 `tracking-widest`（0.2em）。这不可选——它是该风格声音的基础。
+
+## 5. 布局与间距
+
+**容器宽度**：
+- 最大内容宽度：主要区块 `max-w-6xl`，更宽网格（证言、博客）`max-w-7xl`
+- Hero 与主要区块：`max-w-5xl` 以聚焦居中内容
+
+**间距系统**：
+- 基础单位：8px（Tailwind 默认）
+- 区块内边距：`py-32`（128px）以留慷慨呼吸空间
+- 卡片内边距：`p-8`（32px）以舒适内容间距
+- 网格间隙：`gap-8`（32px）于卡片与列之间
+
+**网格哲学**：
+Art Deco 数学精准。使用偶数列数：
+- 特性：3 列（lg），2 列（md），1 列（base）
+- 证言：3 列（lg），2 列（md），1 列（base）
+- 定价：3 列，等宽
+- 收益：2 列（md），1 列（base）
+- 页脚：5 列（lg），公司信息跨度更宽
+
+**对齐**：
+- Hero、标题与 CTA 居中轴
+- 正式区块用两端对齐或居中文字
+- 时间线布局中左右交替模式（How It Works）
+
+**留白**：
+空间是有意的，非偶然。区块间大间隙（32-40px）创造视觉区隔。居中标题周围的留白提供"舞台感"。
+
+## 6. 动画与交互
+
+**哲学**：
+动画应感觉**戏剧化且机械**——如 Art Deco 电梯门开启或舞台幕布升起。无弹跳或有机感。
+
+**过渡时机**：
+- 标准：`duration-300`（300ms）以快速反馈
+- 戏剧化：`duration-500`（500ms）以戏剧性显现
+- 缓动：`ease-out` 或 `ease-in-out` 以流畅机械运动
+
+**悬停状态**：
+- 卡片：向上抬升（`-translate-y-2`）+ 边框辉光增强
+- 按钮：背景色翻转 + 辉光扩展
+- 链接：色彩转为金色 + 含蓄下划线扩展
+- 图片：轻微缩放（`scale-105`）+ 叠加出现
+
+**页面加载动画（可选）**：
+- 区块上滑淡入：`translate-y-8 opacity-0` → `translate-y-0 opacity-100`
+- 顺序显现的错峰延迟（元素间 100ms）
+- Hero 元素可含太阳光芒扩展效果
+
+**交互微细节**：
+- FAQ chevron 展开时旋转 180°
+- 图标容器悬停时从 45° 旋转至 0°（再回旋）
+- 金线可在区块滚动进入视口时从 0 动画至全宽
+- 按钮辉光在聚焦状态轻微脉动
+
+## 7. 可访问性与对比
+
+**色彩对比**：
+- 金色文字（`#D4AF37`）于黑（`#0A0A0A`）：达 WCAG AA，约 7:1 比例
+- 正文或较小尺寸用香槟奶油（`#F2F0E4`）以更好可读性
+- 金色应用于点缀、标题与边框——而非长篇正文
+- 柔和文字（`#888888`）于黑：约 4.5:1，次要内容可接受
+
+**聚焦状态**：
+- 按钮：2px 金环配 2px offset（`ring-2 ring-[#D4AF37] ring-offset-2 ring-offset-black`）
+- 链接：金色下划线出现或加粗
+- 输入框：底部边框更亮发光配含蓄阴影
+- 交互卡片：边框增强而非添加 ring
+
+**触控目标**：
+- 最小按钮高度：48px（`h-12`）
+- 最小可点击区域：移动端 44x44px
+- FAQ 手风琴按钮：全宽配慷慨内边距（`p-6`）
+- 交互元素间充足间距（最小 8px 间隙）
+
+**键盘导航**：
+- 所有交互元素清晰聚焦指示器
+- 聚焦遵循视觉层级（从上到下、从左到右）
+- 键盘用户的跳至内容链接（若头部复杂）
+
+**屏幕阅读器考量**：
+- 装饰元素（角括号、分隔线）用 `aria-hidden="true"`
+- 图片有描述性 alt 文本
+- 图标按钮含可访问标签
+- 表单输入有关联标签

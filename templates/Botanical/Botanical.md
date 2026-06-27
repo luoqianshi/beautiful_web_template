@@ -10,107 +10,107 @@
 | 显示名称 | Botanical / Organic Serif |
 | 模式 | ☀️ 浅色模式 (Light) |
 | 字体类型 | serif |
-| 描述 | Soft, earthy, elegant design inspired by nature. Features organic shapes, generous rounded corners, paper grain texture, muted earth tones, and sophisticated serif typography that breathes warmth and natural luxury. |
+| 描述 | 柔和、质朴、优雅的自然灵感设计。有机形态、大圆角、纸张颗粒质感、柔和大地色，以及透出温暖与自然奢华感的精致衬线字体。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Split two-column layout with massive serif typography on left and arched image (200px top radius) on right. Decorative botanical icons float in corners. Quote overlay on image.
+双栏分割布局，左侧巨型衬线字体，右侧拱形图片（200px 顶部圆角）。装饰性植物图标浮于角落。图片上叠加引文。
 
 ### Stats
 
-Horizontal band with subtle sage background and border. Large serif numbers paired with uppercase sans-serif labels in grid.
+横向条带，含蓄鼠尾草绿背景与边框。大号衬线数字配网格中的大写无衬线标签。
 
 ### Features
 
-Three-column grid with staggered vertical offsets (translate-y-12 on middle card). Soft rounded cards with botanical icons in muted circles.
+三列网格，错落的垂直偏移（中间卡片 translate-y-12）。柔和圆角卡片，植物图标置于柔和圆圈中。
 
 ### How It Works
 
-Dark forest green background with three-step grid. Dotted SVG connecting path. Steps in translucent cards with numbered terracotta badges.
+深森林绿背景配三步网格。虚线 SVG 连接路径。步骤置于半透明卡片中，配编号赤陶徽章。
 
 ### Benefits
 
-Alternating zig-zag layout with organic blob-shaped image backgrounds (rotate transform). Checkmark bullets in terracotta circles.
+交替锯齿布局，配有机水滴形图片背景（旋转变换）。赤陶圆圈中的勾选项目符号。
 
 ### Pricing
 
-Three-column grid with center card elevated and scaled. Dark background for highlighted plan with terracotta badge. Pill-shaped buttons.
+三列网格，中间卡片上浮并缩放。高亮方案用深色背景配赤陶徽章。胶囊形按钮。
 
 ### Testimonials
 
-Three-column grid on soft clay background with radial dot pattern overlay. Large quotation marks, circular avatars, serif quotes.
+柔和陶土背景上的三列网格，配径向圆点图案叠加。大号引号、圆形头像、衬线引文。
 
 ### Faq
 
-Centered accordion with rounded items. Smooth expand/collapse animations. Active items get white background and shadow.
+居中手风琴，圆角项目。平滑展开/收起动画。激活项获得白色背景与阴影。
 
 ### Blog
 
-Three-column grid with tall aspect-ratio images (3:4) in organic rounded containers (32px radius). Hover lifts cards with scale effect on images.
+三列网格，高宽比图片（3:4）置于有机圆角容器（32px 圆角）。悬停时卡片上浮，图片缩放效果。
 
 ### Footer
 
-Rounded top edge (60px radius), dark moss background. Four-column grid for nav links with social icons.
+圆角顶边（60px 圆角），深苔藓绿背景。四列导航链接配社交图标。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Design Style: Botanical / Organic Serif
+# 设计风格：Botanical / Organic Serif
 
-## 1. Design Philosophy
+## 1. 设计哲学
 
-This style is a **digital ode to nature**—it breathes, flows, and grounds itself in organic beauty. It is **soft, sophisticated, and deeply intentional**, rejecting the rigid, hyper-digital sharpness of modern tech aesthetics in favor of **warmth, tactility, and natural imperfection**.
+这种风格是**对自然的数字颂歌**——它呼吸、流动，扎根于有机之美。它**柔和、精致且深思熟虑**，拒绝现代科技美学僵硬、超数字化的锐利，转而拥抱**温暖、触感与自然的不完美**。
 
-### Core Essence
-The Botanical Organic style embodies the calming presence of a botanical garden, the earthy warmth of a ceramics studio, and the refined elegance of editorial design. It whispers rather than shouts. Every element feels **hand-touched, sun-warmed, and naturally crafted**.
+### 核心本质
+Botanical Organic 风格体现了植物园的宁静存在、陶艺工作室的质朴温暖与编辑设计的精致优雅。它低语而非呐喊。每个元素都感觉**经手工触碰、被阳光温暖、自然雕琢**。
 
-### Fundamental Principles
+### 基本原则
 
-*   **Vibe**: Peaceful, curated, artisanal, high-end wellness, sustainable luxury, botanical elegance
-*   **Visual DNA**:
-    *   **Organic Softness**: Hard angles are purposefully rare. Every corner is rounded, every shape flows like water-smoothed stones or unfurling leaves. The 200px arch radius on images creates iconic architectural moments.
-    *   **Typographic Elegance**: Typography is the protagonist—Playfair Display's high-contrast strokes command attention while maintaining grace. Italics add a handwritten, personal touch. Headlines breathe with generous scale (text-5xl to text-8xl).
-    *   **Earthbound Palette**: Every color derives from nature—forest floors, clay pottery, sage gardens, terracotta tiles. No artificial brights. Muted, sophisticated, grounded.
-    *   **Tactile Texture**: The subtle paper grain overlay is non-negotiable—it transforms cold digital pixels into warm, touchable surfaces. This is the secret ingredient that prevents flatness.
-    *   **Breathing Space**: Whitespace is sacred. Sections have generous vertical padding (py-32), cards float with ample gaps (gap-8, gap-16), and every element has room to exist without crowding.
-    *   **Intentional Movement**: Animations are slow, graceful, and fluid—like plants swaying in breeze. Duration-500 to duration-700 with ease-out curves. Nothing snaps or jerks.
-    *   **Staggered Rhythm**: Breaking the grid creates natural, organic flow. Every second feature card translates vertically. Images rotate subtly. The design breathes asymmetry within structure.
+*   **气质**：宁静、精心策展、手工艺、高端养生、可持续奢华、植物优雅
+*   **视觉 DNA**：
+    *   **有机柔和**：刻意地极少使用硬角。每个角落都是圆的，每个形状都如水磨石或舒展的叶片般流动。图片上 200px 的拱形圆角创造标志性的建筑时刻。
+    *   **排印优雅**：字体是主角——Playfair Display 的高对比笔画引人注目同时保持优雅。斜体增添手写的个人触感。标题以慷慨尺度呼吸（text-5xl 至 text-8xl）。
+    *   **大地调色板**：每种色彩源自自然——森林地表、陶器、鼠尾草花园、赤陶瓦。无人造亮色。柔和、精致、扎根。
+    *   **触感纹理**：含蓄的纸张颗粒叠加不可妥协——它将冰冷的数字像素转化为温暖、可触的表面。这是防止扁平化的秘密配方。
+    *   **呼吸空间**：留白是神圣的。区块有慷慨的垂直内边距（py-32），卡片以充裕间隙漂浮（gap-8, gap-16），每个元素都有存在空间而不拥挤。
+    *   **有意运动**：动画缓慢、优雅、流畅——如植物在微风中摇曳。duration-500 至 duration-700 配 ease-out 曲线。无突兀或抽搐。
+    *   **错落节奏**：打破网格创造自然、有机的流动。每隔一张特性卡片垂直位移。图片微妙旋转。设计在结构中呼吸不对称。
 
-## 2. Design Token System
+## 2. 设计 Token 系统
 
-### Colors (Light Mode - Earthy & Muted)
-*   **Background**: `#F9F8F4` (Warm Alabaster / Rice Paper) - Not stark white.
-*   **Foreground**: `#2D3A31` (Deep Forest Green) - The primary text color. Softer than black.
-*   **Primary/Accent**: `#8C9A84` (Sage Green) - For buttons, highlights, icons.
-*   **Secondary/Muted**: `#DCCFC2` (Soft Clay / Mushroom) - For backgrounds of cards, secondary buttons.
-*   **Border**: `#E6E2DA` (Stone) - Very subtle, low contrast.
-*   **Interactive**: `#C27B66` (Terracotta) - Hover states or "call to action" pops.
+### 色彩（浅色模式 — 质朴与柔和）
+*   **Background**：`#F9F8F4`（暖雪花石膏 / 米纸）— 非刺眼白。
+*   **Foreground**：`#2D3A31`（深森林绿）— 主要文字色。比黑更柔和。
+*   **Primary/Accent**：`#8C9A84`（鼠尾草绿）— 用于按钮、高亮、图标。
+*   **Secondary/Muted**：`#DCCFC2`（柔和陶土 / 蘑菇）— 用于卡片背景、次级按钮。
+*   **Border**：`#E6E2DA`（石）— 极含蓄，低对比。
+*   **Interactive**：`#C27B66`（赤陶）— 悬停状态或"号召行动"的跳跃。
 
-### Typography
-*   **Headings**: **"Playfair Display"** (Google Font). It is a transitional serif with high contrast strokes, feeling both classic and modern.
-    *   Weight: 600/700 for headlines.
-    *   Style: Italicize key words for emphasis.
-*   **Body**: **"Source Sans 3"** (Google Font). A clean, legible humanist sans-serif that pairs beautifully with Playfair.
-    *   Weight: 400/500.
-*   **Scaling**: Large. Headlines should feel airy and grand.
+### 字体
+*   **标题**：**"Playfair Display"**（Google Font）。过渡型衬线，高对比笔画，兼具古典与现代。
+    *   字重：标题用 600/700。
+    *   样式：斜体强调关键词。
+*   **正文**：**"Source Sans 3"**（Google Font）。干净、可读的人文主义无衬线，与 Playfair 美妙搭配。
+    *   字重：400/500。
+*   **字号阶梯**：大。标题应显得通透而恢弘。
 
-### Radius & Shapes
-*   **Radius**: Highly rounded.
-    *   Standard Card: `rounded-3xl` (24px).
-    *   Buttons: `rounded-full` (Pill shape).
-    *   Images: Often `rounded-t-full` (Arch) or `rounded-[40px]`.
-*   **Border**: Thin, delicate. `1px` solid.
+### 圆角与形状
+*   **圆角**：高度圆润。
+    *   标准卡片：`rounded-3xl`（24px）。
+    *   按钮：`rounded-full`（胶囊形）。
+    *   图片：常用 `rounded-t-full`（拱形）或 `rounded-[40px]`。
+*   **边框**：细而精致。`1px` solid。
 
-### Shadows & Effects
-*   **Elevation**: Very soft, diffused shadows. No harsh dark drops.
-    *   Default: `0 4px 6px -1px rgba(45, 58, 49, 0.05)`
-    *   Medium: `0 10px 15px -3px rgba(45, 58, 49, 0.05)`
-    *   Large: `0 20px 40px -10px rgba(45, 58, 49, 0.05)`
-    *   Extra Large: `0 25px 50px -12px rgba(45, 58, 49, 0.15)`
-*   **Paper Grain Texture** (CRITICAL): A subtle SVG noise overlay is **mandatory** on the main background. This is applied as a fixed, full-screen overlay with `opacity-[0.015]` using an SVG fractal noise filter. This texture is the defining element that transforms the design from flat digital to warm, tactile, paper-like. Without it, the design loses its soul.
+### 阴影与效果
+*   **抬升**：非常柔和、弥散的阴影。无刺眼深色投影。
+    *   默认：`0 4px 6px -1px rgba(45, 58, 49, 0.05)`
+    *   中：`0 10px 15px -3px rgba(45, 58, 49, 0.05)`
+    *   大：`0 20px 40px -10px rgba(45, 58, 49, 0.05)`
+    *   特大：`0 25px 50px -12px rgba(45, 58, 49, 0.15)`
+*   **纸张颗粒纹理**（关键）：含蓄的 SVG 噪点叠加在主背景上**强制**使用。作为固定全屏叠加，`opacity-[0.015]`，使用 SVG 分形噪点滤镜。该纹理是将设计从扁平数字转化为温暖、可触、纸质感的关键元素。没有它，设计便失去灵魂。
     ```jsx
     <div
       className="pointer-events-none fixed inset-0 z-50 opacity-[0.015]"
@@ -120,67 +120,67 @@ The Botanical Organic style embodies the calming presence of a botanical garden,
       }}
     />
     ```
-*   **Blur Effects**: Use backdrop-blur-sm on overlays (like the hero quote card) to create depth and layering.
+*   **模糊效果**：在叠加层（如 Hero 引文卡片）上用 backdrop-blur-sm 创造深度与层次。
 
-## 3. Component Stylings
+## 3. 组件样式
 
-### Buttons
-*   **Primary**: Pill-shaped (`rounded-full`). Background is **Deep Forest Green** (`#2D3A31`) with White text. On hover, it lightens slightly or shifts to Terracotta.
-*   **Secondary**: Transparent background with a **Sage Green** border (`1px`). Text is Sage Green.
-*   **Typography**: Uppercase, wide tracking (`tracking-widest`), small font size (text-sm).
+### 按钮
+*   **主**：胶囊形（`rounded-full`）。背景为**深森林绿**（`#2D3A31`）配白字。悬停时略微提亮或转为赤陶。
+*   **次**：透明背景配**鼠尾草绿**边框（`1px`）。文字为鼠尾草绿。
+*   **字体**：大写，宽字距（`tracking-widest`），小字号（text-sm）。
 
-### Cards (Features, Pricing)
-*   **Background**: White (`#FFFFFF`) or Soft Clay (`#F2F0EB`).
-*   **Border**: None or very subtle Stone (`#E6E2DA`).
-*   **Shape**: `rounded-3xl`.
-*   **Hover**: Slight lift (`-translate-y-1`) and a bloom of soft shadow.
+### 卡片（特性、定价）
+*   **背景**：白（`#FFFFFF`）或柔和陶土（`#F2F0EB`）。
+*   **边框**：无或极含蓄的石色（`#E6E2DA`）。
+*   **形状**：`rounded-3xl`。
+*   **悬停**：轻微上浮（`-translate-y-1`）与柔和阴影的绽放。
 
-### Inputs
-*   **Style**: Underlined only (Border-bottom) or pill-shaped with a very light background (`#F2F0EB`).
-*   **Focus**: No harsh blue rings. A soft Sage Green border transition.
+### 输入框
+*   **样式**：仅下划线（border-bottom）或胶囊形配极浅背景（`#F2F0EB`）。
+*   **聚焦**：无刺眼蓝环。柔和鼠尾草绿边框过渡。
 
-## 4. Non-Generic "Bold" Choices
-*   **Arch Imagery**: Use CSS `clip-path` or `border-radius` to turn standard rectangular images into **Arches** (classic Roman arch shape) or **Organic Blobs**.
-*   **Overlapping Typography**: Allow big serif headlines to slightly overlap images or background shapes.
-*   **Decorative Lines**: Use fine, 1px SVG lines that curve or meander to connect sections, mimicking vines or roots.
-*   **Italic Emphasis**: Frequently use the *Italic* variant of Playfair Display for single words within a bold headline.
+## 4. 非通用的"标志性"选择
+*   **拱形图像**：用 CSS `clip-path` 或 `border-radius` 将标准矩形图片变为**拱门**（经典罗马拱形）或**有机水滴**。
+*   **重叠字体**：允许大号衬线标题略微重叠图片或背景形状。
+*   **装饰线条**：用精细的 1px SVG 线条弯曲或蜿蜒连接区块，模仿藤蔓或根须。
+*   **斜体强调**：在粗体标题中频繁使用 Playfair Display 的*斜体*变体强调单词。
 
-## 5. Layout Strategy & Spacing
-*   **Container**: `max-w-7xl`. We want airiness.
-*   **Whitespace**: Generous. `gap-12` or `gap-16` between grid items. `py-24` or `py-32` between sections.
-*   **Grid**: Break the grid. Use `translate-y-12` on every second card in a row to create a "staggered" natural look.
+## 5. 布局策略与间距
+*   **容器**：`max-w-7xl`。我们要通透感。
+*   **留白**：慷慨。网格项间 `gap-12` 或 `gap-16`。区块间 `py-24` 或 `py-32`。
+*   **网格**：打破网格。每行第二张卡片用 `translate-y-12` 创造"错落"的自然外观。
 
-## 6. Icons (Lucide React)
-*   **Style**: Thin stroke (`stroke-width={1.5}`).
-*   **Color**: Deep Forest Green or Sage.
-*   **Integration**: Don't put them in heavy boxes. Let them float, or place them in soft, pale circles.
+## 6. 图标（Lucide React）
+*   **样式**：细描边（`stroke-width={1.5}`）。
+*   **颜色**：深森林绿或鼠尾草绿。
+*   **集成**：勿置于厚重方框中。让它们漂浮，或置于柔和浅色圆圈中。
 
-## 7. Animation & Micro-Interactions
-*   **Feel**: Slow, graceful, fluid. Everything moves like it's suspended in honey or swaying in a gentle breeze. "Eased out" significantly.
-*   **Durations**:
-    *   Fast interactions: `duration-300` (button hovers, link colors)
-    *   Standard: `duration-500` (card lifts, transforms)
-    *   Slow, dramatic: `duration-700` to `duration-1000` (image scales, hero image hover)
-*   **Hover Behaviors**:
-    *   Cards: `-translate-y-1` or `-translate-y-2` with shadow intensification
-    *   Images: `scale-105` with `duration-700` for smooth, luxurious feel
-    *   Buttons: `bg-opacity-90` subtle darkening with `duration-300`
-    *   Blog cards: Lift entire card while scaling image, arrow translates right (`translate-x-1`)
-*   **Focus States**: Sage green ring (`ring-[#8C9A84]`) with 2px width and offset for accessibility
-*   **Accordion**: Smooth height transitions with `max-h-0` to `max-h-48` and opacity fade
-*   **Mobile Menu**: Slide in from top with backdrop
-*   **Scroll**: Elements should gently fade up and float into place (`opacity-0` to `opacity-100`, `translate-y-4` to `translate-y-0`)
+## 7. 动画与微交互
+*   **质感**：缓慢、优雅、流畅。一切如悬浮于蜜中或在微风中摇曳。显著"缓出"。
+*   **时长**：
+    *   快速交互：`duration-300`（按钮悬停、链接色）
+    *   标准：`duration-500`（卡片上浮、变换）
+    *   缓慢戏剧：`duration-700` 至 `duration-1000`（图片缩放、Hero 图片悬停）
+*   **悬停行为**：
+    *   卡片：`-translate-y-1` 或 `-translate-y-2` 配阴影增强
+    *   图片：`scale-105` 配 `duration-700` 以流畅奢华感
+    *   按钮：`bg-opacity-90` 含蓄加深配 `duration-300`
+    *   博客卡片：整卡上浮同时图片缩放，箭头右移（`translate-x-1`）
+*   **聚焦状态**：鼠尾草绿环（`ring-[#8C9A84]`），2px 宽配 offset 以保可访问性
+*   **手风琴**：平滑高度过渡（`max-h-0` 至 `max-h-48`）配透明度淡入
+*   **移动菜单**：自顶部滑入配背景遮罩
+*   **滚动**：元素应轻柔淡入上浮就位（`opacity-0` 至 `opacity-100`，`translate-y-4` 至 `translate-y-0`）
 
-## 8. Responsive Strategy
-*   **Mobile-First Approach**: The design gracefully adapts while maintaining its organic, sophisticated character.
-*   **Navigation**: Desktop shows horizontal nav with Sign In button. Mobile displays hamburger menu that opens a full-screen overlay with vertical nav links.
-*   **Hero Image**: Uses `aspect-[3/4]` on mobile, transitions to `aspect-square` with fixed height on md+ breakpoints. This prevents excessive height on small screens.
-*   **Grid Breakpoints**:
-    *   Features: `grid-cols-1` → `md:grid-cols-3`
-    *   Stats: `grid-cols-2` → `md:grid-cols-4`
-    *   Blog/Testimonials: `grid-cols-1` → `md:grid-cols-3`
-    *   Pricing: `grid-cols-1` → `lg:grid-cols-3`
-*   **Typography Scaling**: Headlines reduce from `text-8xl` to `text-5xl` on mobile. Body text remains `text-lg` but line-height adjusts.
-*   **Spacing Adjustments**: `py-32` becomes `py-16` on mobile, `gap-16` becomes `gap-12`, padding reduces from `p-8` to `p-4` where needed.
-*   **Touch Targets**: All buttons maintain minimum 44px height (`h-12`, `h-14`) for comfortable mobile tapping.
-*   **Staggered Cards**: The `translate-y-12` offset on alternating cards only applies at `md:` breakpoint and above to prevent awkward stacking on mobile.
+## 8. 响应式策略
+*   **移动优先方法**：设计优雅适配同时保持其有机、精致的特质。
+*   **导航**：桌面端显示水平导航配登录按钮。移动端显示汉堡菜单，打开全屏遮罩配垂直导航链接。
+*   **Hero 图片**：移动端用 `aspect-[3/4]`，md+ 断点转为 `aspect-square` 配固定高度。这防止小屏上过高。
+*   **网格断点**：
+    *   特性：`grid-cols-1` → `md:grid-cols-3`
+    *   数据：`grid-cols-2` → `md:grid-cols-4`
+    *   博客/证言：`grid-cols-1` → `md:grid-cols-3`
+    *   定价：`grid-cols-1` → `lg:grid-cols-3`
+*   **字体缩放**：标题移动端从 `text-8xl` 降至 `text-5xl`。正文保持 `text-lg` 但调整行高。
+*   **间距调整**：`py-32` 移动端变 `py-16`，`gap-16` 变 `gap-12`，内边距按需从 `p-8` 降至 `p-4`。
+*   **触控目标**：所有按钮保持最小 44px 高度（`h-12`、`h-14`）以舒适移动端点击。
+*   **错落卡片**：交替卡片的 `translate-y-12` 偏移仅在 `md:` 断点及以上应用，以防移动端尴尬堆叠。

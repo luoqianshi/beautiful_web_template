@@ -10,229 +10,228 @@
 | 显示名称 | Hand-Drawn / Sketch |
 | 模式 | ☀️ 浅色模式 (Light) |
 | 字体类型 | sans-serif |
-| 描述 | Organic wobbly borders, handwritten typography, paper textures, and playful imperfection. Every element feels sketched with markers and pencils on textured paper. |
+| 描述 | 有机摇摆边框、手写体字体、纸张质感与俏皮的不完美。每个元素都仿佛用马克笔和铅笔在质感纸上手绘而成。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Split 2-column grid with oversized marker-style headline, decorative hand-drawn arrow pointing to CTA, and polaroid-frame product mockup with wobbly borders. Trust indicators use overlapping avatar circles.
+2 列分割网格配超大号马克笔风格标题、指向 CTA 的手绘箭头装饰，以及摇摆边框的拍立得框产品模型。信任指标用重叠头像圆圈。
 
 ### Stats
 
-Horizontal grid of stats displayed in irregular organic shapes (wobbly circles) with varying border radii. Each stat has playful rotation for authentic hand-drawn feel.
+数据横向网格显示于不规则有机形状（摇摆圆圈）中，配变化 border-radius。每个数据有俏皮旋转以增真实手绘感。
 
 ### Product Detail
 
-Centered content in white card with wobbly borders, sticky-note tag at top center, drop-cap first letter treatment, and constrained text width for readability.
+居中内容于白卡配摇摆边框，顶部中央便利贴标签，首字下沉首字母处理，文字宽度约束以保可读。
 
 ### Features
 
-3-column grid of post-it yellow cards with tape decoration at top. Each card includes rough circular icon container and wobbly borders for sketchy aesthetic.
+3 列便利贴黄色卡片网格，顶部有胶带装饰。每张卡片含粗糙圆形图标容器与摇摆边框以增手绘美学。
 
 ### Blog
 
-3-column grid with polaroid-style frames. Dashed borders on image placeholders, hard offset shadows, and playful rotation on hover for scrapbook feel.
+3 列网格配拍立得风格框。图片占位符配虚线边框、硬偏移阴影，悬停俏皮旋转以增剪贴簿感。
 
 ### How It Works
 
-3-column step layout with decorative squiggly connecting line (desktop). Steps numbered in wobbly-border circles with hard offset shadows.
+3 列步骤布局配装饰波浪连接线（桌面）。步骤编号于摇摆边框圆圈中配硬偏移阴影。
 
 ### Benefits
 
-Centered white container with thick wobbly border and hard shadow. 2-column grid with hand-drawn bullet points (filled circles) for each benefit item.
+居中白色容器配厚摇摆边框与硬阴影。2 列网格配手绘项目符号（实心圆）作每个收益项。
 
 ### Testimonials
 
-3-column grid of speech bubbles with geometric tail pointing down-left. Quote icon, italic text, and author info with circular avatar below bubble.
+3 列对话气泡网格，几何尾指向左下。引号图标、斜体文字，气泡下方作者信息配圆形头像。
 
 ### Pricing
 
-3-column grid with wobbly-border cards. Highlighted plan has rotating badge, dashed circle overlay, slight scale, and stronger shadow for emphasis.
+3 列网格配摇摆边框卡片。高亮方案有旋转徽章、虚线圆叠加、轻微缩放与更强阴影以强调。
 
 ### Faq
 
-Single column, dashed border dividers between questions. Bold headings with relaxed body text for easy scannability.
+单列，问题间虚线边框分隔符。粗体标题配宽松正文以便扫描。
 
 ### Footer
 
-4-column grid navigation with wavy underline on section headers. Social icons in wobbly circles, dashed border separator at bottom.
+4 列网格导航，区块标题有波浪下划线。社交图标于摇摆圆圈中，底部虚线边框分隔符。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Design Philosophy
+# 设计哲学
 
-The Hand-Drawn design style celebrates authentic imperfection and human touch in a digital world. It rejects the clinical precision of modern UI design in favor of organic, playful irregularity that evokes sketches on paper, sticky notes on a wall, and napkin diagrams from a brainstorming session.
+手绘设计风格在数字世界赞颂真实不完美与人性触感。它拒绝现代 UI 设计的冰冷精准，转而追求唤起纸上素描、墙上便利贴与头脑风暴餐巾纸图的有机俏皮不规则。
 
-**Core Principles:**
-- **No Straight Lines**: Every border, shape, and container uses irregular border-radius values to create wobbly, hand-drawn edges that reject geometric perfection
-- **Authentic Texture**: The design layer paper grain, dot patterns, and subtle background textures to simulate physical media (notebook paper, post-its, sketch pads)
-- **Playful Rotation**: Elements are deliberately tilted using small rotation transforms (-2deg to 2deg) to break rigid grid alignment and create casual energy
-- **Hard Offset Shadows**: Reject soft blur shadows entirely. Use solid, offset box-shadows (4px 4px 0px) to create a cut-paper, layered collage aesthetic
-- **Handwritten Typography**: Use exclusively handwritten or marker-style fonts (Kalam, Patrick Hand) that feel human and approachable, never corporate or sterile
-- **Scribbled Decoration**: Add visual flourishes like dashed lines, hand-drawn arrows, tape effects, thumbtacks, and irregular shapes to reinforce the sketched aesthetic
-- **Limited Color Palette**: Stick to pencil blacks, paper whites, correction marker red, and post-it yellow for bold but cohesive simplicity
-- **Intentional Messiness**: Embrace overlap, asymmetry, and visual "mistakes" that make the design feel spontaneous and creative rather than manufactured
+**核心原则**：
+- **无直线**：每个边框、形状与容器用不规则 border-radius 值创造摇摆、手绘边缘，拒绝几何完美
+- **真实纹理**：设计层叠纸张颗粒、点阵图案与含蓄背景纹理以模拟物理媒介（笔记本纸、便利贴、素描本）
+- **俏皮旋转**：元素用小旋转变换（-2deg 至 2deg）刻意倾斜，打破僵硬网格对齐，创造随意能量
+- **硬偏移阴影**：完全拒绝柔和模糊阴影。用实心偏移 box-shadow（4px 4px 0px）创造剪纸、分层拼贴美学
+- **手写字体**：专用于手写或马克笔风格字体（Kalam、Patrick Hand），感觉人性亲和，绝不企业或无菌
+- **涂鸦装饰**：添加虚线、手绘箭头、胶带效果、图钉与不规则形状等视觉 flourish 以强化手绘美学
+- **有限调色板**：坚持铅笔黑、纸张白、修正笔红与便利贴黄，以大胆而凝聚的简洁
+- **有意凌乱**：拥抱重叠、非对称与视觉"错误"，使设计感觉自发创意而非制造
 
-**Emotional Intent:**
-This style should feel approachable, creative, human-centered, and fun. It lowers barriers and invites interaction by appearing unfinished and work-in-progress, making users feel like collaborators rather than consumers. Perfect for creative tools, brainstorming platforms, educational content, or any product that wants to emphasize human creativity over corporate polish.
+**情感意图**：
+此风格应感觉亲和、创意、以人为本与有趣。它通过显得未完成与进行中来降低门槛并邀请交互，使用户感觉如合作者而非消费者。完美用于创意工具、头脑风暴平台、教育内容，或任何想强调人类创意胜过企业打磨的产品。
 
-# Design Token System
+# 设计 Token 系统
 
-## Colors (Single Palette - Light Mode)
-- **Background**: `#fdfbf7` (Warm Paper)
-- **Foreground**: `#2d2d2d` (Soft Pencil Black - never pure black)
-- **Muted**: `#e5e0d8` (Old Paper / Erased Pencil)
-- **Accent**: `#ff4d4d` (Red Correction Marker)
-- **Border**: `#2d2d2d` (Pencil Lead)
-- **Secondary Accent**: `#2d5da1` (Blue Ballpoint Pen)
+## 色彩（单一调色板 — 浅色模式）
+- **Background**：`#fdfbf7`（暖纸）
+- **Foreground**：`#2d2d2d`（柔铅笔黑 — 绝非纯黑）
+- **Muted**：`#e5e0d8`（旧纸/擦除铅笔）
+- **Accent**：`#ff4d4d`（红修正笔）
+- **Border**：`#2d2d2d`（铅笔芯）
+- **Secondary Accent**：`#2d5da1`（蓝圆珠笔）
 
-## Typography
-- **Headings**: `Kalam` (wght 700) - Looks like a thick felt-tip marker.
-- **Body**: `Patrick Hand` (wght 400) - Legible but distinctly handwritten.
-- **Scale**: Large and readable. Headings should vary in size dramatically to look like emphasized notes.
+## 字体
+- **标题**：`Kalam`（wght 700）— 看似粗毡尖马克笔。
+- **正文**：`Patrick Hand`（wght 400）— 可读但鲜明手写。
+- **字号阶梯**：大且可读。标题应大小戏剧性变化以看似强调笔记。
 
-## Radius & Border
-- **Wobbly Borders**: CRITICAL. Do NOT use standard `rounded-*` classes alone.
-- **Technique**: Use inline `style={{ borderRadius: ... }}` with multiple values to create irregular organic ellipses.
-  - Example: `border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;`
-  - Store reusable radius values in config as `wobbly` and `wobblyMd`
-- **Border Width**: Thick and variable. `border-2` is the minimum. Use `border-[3px]` or `border-4` for emphasis.
-- **Style**: `border-solid` is default for most elements. Use `border-dashed` for secondary elements, dividers, and sketchy overlays.
+## 圆角与边框
+- **摇摆边框**：关键。勿仅用标准 `rounded-*` 类。
+- **技巧**：用内联 `style={{ borderRadius: ... }}` 配多值创造不规则有机椭圆。
+  - 示例：`border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;`
+  - 在 config 中存可复用圆角值为 `wobbly` 与 `wobblyMd`
+- **边框宽度**：厚且可变。`border-2` 为最小。强调用 `border-[3px]` 或 `border-4`。
+- **样式**：大多数元素 `border-solid` 为默认。次级元素、分隔符与手绘叠加用 `border-dashed`。
 
-## Shadows/Effects
-- **Hard Offset Shadows**: No blur. Just a solid offset to create a cut-paper, layered collage aesthetic.
-  - Standard: `box-shadow: 4px 4px 0px 0px #2d2d2d;`
-  - Emphasized: `box-shadow: 8px 8px 0px 0px #2d2d2d;`
-  - Hover State: Reduce offset `2px 2px` or `6px 6px` to create "lifting" effect
-- **Paper Texture**: Use `radial-gradient` dot pattern on body background to simulate notebook paper grain
+## 阴影/效果
+- **硬偏移阴影**：无模糊。仅实心偏移以创造剪纸、分层拼贴美学。
+  - 标准：`box-shadow: 4px 4px 0px 0px #2d2d2d;`
+  - 强调：`box-shadow: 8px 8px 0px 0px #2d2d2d;`
+  - 悬停状态：减偏移 `2px 2px` 或 `6px 6px` 以创造"抬起"效果
+- **纸张纹理**：body 背景用 `radial-gradient` 点阵图案模拟笔记本纸颗粒
   - `backgroundImage: radial-gradient(#e5e0d8 1px, transparent 1px)`
   - `backgroundSize: 24px 24px`
-- **Subtle Animations**: Gentle bounce (3s duration) for decorative elements, rotation on hover for playful interaction
+- **含蓄动画**：装饰元素轻柔弹跳（3s 时长），悬停旋转作俏皮交互
 
-# Component Stylings
+# 组件样式
 
-## Buttons
-- **Shape**: Irregular wobbly oval using custom border-radius from config
-- **Normal State**:
-  - White background, `border-[3px]` black border, black text
-  - Hard offset shadow: `shadow-[4px_4px_0px_0px_#2d2d2d]`
-  - Font: Patrick Hand (body font)
-- **Hover State**:
-  - Background fills with Accent red `#ff4d4d`, text turns white
-  - Shadow reduces to `shadow-[2px_2px_0px_0px_#2d2d2d]`
-  - Subtle translate: `translate-x-[2px] translate-y-[2px]`
-- **Active State**:
-  - Shadow disappears completely (button "presses flat")
-  - Translate increases: `translate-x-[4px] translate-y-[4px]`
-- **Secondary Variant**: Uses muted background `#e5e0d8`, hovers to blue `#2d5da1`
+## 按钮
+- **形状**：用 config 中自定义 border-radius 的不规则摇摆椭圆
+- **正常状态**：
+  - 白背景、`border-[3px]` 黑边框、黑字
+  - 硬偏移阴影：`shadow-[4px_4px_0px_0px_#2d2d2d]`
+  - 字体：Patrick Hand（正文字体）
+- **悬停状态**：
+  - 背景填充点缀红 `#ff4d4d`，文字变白
+  - 阴影减至 `shadow-[2px_2px_0px_0px_#2d2d2d]`
+  - 含蓄位移：`translate-x-[2px] translate-y-[2px]`
+- **激活状态**：
+  - 阴影完全消失（按钮"压平"）
+  - 位移增加：`translate-x-[4px] translate-y-[4px]`
+- **次变体**：用柔和背景 `#e5e0d8`，悬停变蓝 `#2d5da1`
 
-## Cards/Containers
-- **Base Style**: White background (`#ffffff`) with wobbly black border (`border-2`)
-- **Border Radius**: Use `wobblyMd` radius from config for medium containers
-- **Shadow**: Subtle `3px 3px 0px 0px rgba(45, 45, 45, 0.1)` for depth
-- **Decoration Options**:
-  - `decoration="tape"`: Translucent gray bar positioned at top center with slight rotation
-  - `decoration="tack"`: Red circular thumbtack at top center
-  - No decoration for minimal aesthetic
-- **Special Treatments**:
-  - Post-it yellow background `#fff9c4` for feature cards
-  - Speech bubble style for testimonials with geometric tail using border-based triangle
-  - Sticky-note tags for section labels
+## 卡片/容器
+- **基础样式**：白背景（`#ffffff`）配摇摆黑边框（`border-2`）
+- **圆角**：中等容器用 config 中 `wobblyMd` 圆角
+- **阴影**：含蓄 `3px 3px 0px 0px rgba(45, 45, 45, 0.1)` 以增深度
+- **装饰选项**：
+  - `decoration="tape"`：顶部中央半透明灰条配轻微旋转
+  - `decoration="tack"`：顶部中央红色圆形图钉
+  - 极简美学无装饰
+- **特殊处理**：
+  - 特性卡片用便利贴黄背景 `#fff9c4`
+  - 证言用对话气泡风格配几何尾（基于边框三角形）
+  - 区块标签用便利贴标签
 
-## Inputs
-- **Style**: Full box with wobbly borders (not just underline)
-- **Border**: `border-2` with wobbly radius matching button aesthetic
-- **Font**: Patrick Hand (body font) for authentic hand-written feel
-- **Background**: White with placeholder text in muted color `#2d2d2d/40`
-- **Focus State**:
-  - Border changes to blue `#2d5da1`
-  - Ring effect: `ring-2 ring-[#2d5da1]/20`
-  - No standard outline, maintains wobbly aesthetic
+## 输入框
+- **样式**：完整方框配摇摆边框（非仅下划线）
+- **边框**：`border-2` 配匹配按钮美学的摇摆圆角
+- **字体**：Patrick Hand（正文字体）以增真实手写感
+- **背景**：白配柔和色 `#2d2d2d/40` 占位符文字
+- **聚焦状态**：
+  - 边框变蓝 `#2d5da1`
+  - 环效果：`ring-2 ring-[#2d5da1]/20`
+  - 无标准 outline，保持摇摆美学
 
-# Layout Strategy
-- **Grid System**: Use Tailwind's responsive grid (`md:grid-cols-2`, `md:grid-cols-3`) but add visual irregularity
-- **Rotation**: Apply small rotations (`rotate-1`, `-rotate-2`) to cards, images, and decorative elements
-- **Breaking Alignment**:
-  - Stats: Organic shapes with varied border-radius instead of perfect circles
-  - Cards: Slight rotation on hover (`hover:rotate-1` or `hover:-rotate-1`)
-  - Pricing: Scale up highlighted card slightly on desktop (`md:scale-105`)
-- **Overlap & Layering**:
-  - Overlapping avatar circles with negative margin (`-space-x-4`)
-  - Decorative elements positioned absolutely outside parent bounds
-  - Speech bubble tails extending beyond card borders
-- **Whitespace**:
-  - Consistent section padding (`py-20`) for rhythm
-  - Generous gap in grids (`gap-8`) to prevent crowding
-  - Max-width containers (`max-w-5xl`, `max-w-3xl`) for focused content
-- **Z-Index Layering**: Decorative SVG backgrounds at low z-index, step numbers elevated with `z-10`
+# 布局策略
+- **网格系统**：用 Tailwind 响应式网格（`md:grid-cols-2`、`md:grid-cols-3`）但添加视觉不规则
+- **旋转**：对卡片、图片与装饰元素应用小旋转（`rotate-1`、`-rotate-2`）
+- **打破对齐**：
+  - 数据：用变化 border-radius 的有机形状替代完美圆
+  - 卡片：悬停轻微旋转（`hover:rotate-1` 或 `hover:-rotate-1`）
+  - 定价：桌面端高亮卡片轻微放大（`md:scale-105`）
+- **重叠与分层**：
+  - 重叠头像圆圈配负边距（`-space-x-4`）
+  - 装饰元素绝对定位超出父边界
+  - 对话气泡尾延伸超出卡片边框
+- **留白**：
+  - 一致区块内边距（`py-20`）以增节奏
+  - 网格中慷慨间隙（`gap-8`）以防拥挤
+  - 最大宽度容器（`max-w-5xl`、`max-w-3xl`）以聚焦内容
+- **Z-Index 分层**：装饰 SVG 背景低 z-index，步骤编号以 `z-10` 抬升
 
-# Non-Genericness (Bold Choices)
+# 非通用性（大胆选择）
 
-**Unique Visual Signatures:**
-- **NO STRAIGHT LINES**: Every container, button, card, and frame uses irregular border-radius values—never standard Tailwind rounded classes
-- **Hand-Drawn SVG Decorations**:
-  - Arrow pointing to hero CTA with dashed path
-  - Squiggly connecting line between "How It Works" steps
-  - Corner frame marks on hero image placeholder
-- **Authentic Paper Effects**:
-  - Tape strips (translucent gray rectangles) on feature cards
-  - Thumbtack pins (colored circles) for card decoration
-  - Dashed circle overlay highlighting popular pricing tier
-  - Speech bubble geometric tails on testimonials
-- **Playful Typography Treatments**:
-  - Rotating exclamation mark in hero headline
-  - Wavy underline decoration on navigation links and footer headers
-  - Drop-cap first letter treatment in Product Detail section
-  - Post-it yellow sticky-note tag on Product Detail card
-- **Scribbled Accents**:
-  - Bouncing decorative circle near hero image (desktop only)
-  - Dashed borders on secondary elements and dividers
-  - Emoji sketches in blog post placeholders
-  - Line-through hover effect on footer links
-- **Interactive Personality**:
-  - Buttons "press flat" by eliminating shadow on active state
-  - Cards rotate slightly on hover
-  - Blog cards increase shadow offset on hover for "lift" effect
-  - Grayscale-to-color transition on blog images (removed in final implementation for simplicity)
+**独特视觉签名**：
+- **无直线**：每个容器、按钮、卡片与框用不规则 border-radius 值——绝不标准 Tailwind rounded 类
+- **手绘 SVG 装饰**：
+  - 指向 Hero CTA 的虚线路径箭头
+  - "How It Works" 步骤间的波浪连接线
+  - Hero 图片占位符的角框标记
+- **真实纸张效果**：
+  - 特性卡片上的胶带条（半透明灰矩形）
+  - 卡片装饰的图钉（彩色圆）
+  - 高亮定价档位的虚线圆叠加
+  - 证言上的对话气泡几何尾
+- **俏皮字体处理**：
+  - Hero 标题中旋转感叹号
+  - 导航链接与页脚标题的波浪下划线装饰
+  - Product Detail 区块的首字下沉首字母处理
+  - Product Detail 卡片的便利贴黄标签
+- **涂鸦点缀**：
+  - Hero 图片附近的弹跳装饰圆（仅桌面）
+  - 次级元素与分隔符的虚线边框
+  - 博客文章占位符中的 emoji 素描
+  - 页脚链接的删除线悬停效果
+- **交互个性**：
+  - 按钮激活状态通过消除阴影"压平"
+  - 卡片悬停轻微旋转
+  - 博客卡片悬停增加阴影偏移以增"抬起"效果
 
-# Effects & Animation
-- **Hover**: "Jiggle" effect. `hover:rotate-1` or `hover:-rotate-2`.
-- **Transition**: `transition-transform duration-100` (Fast and snappy).
+# 效果与动画
+- **悬停**："摇摆"效果。`hover:rotate-1` 或 `hover:-rotate-2`。
+- **过渡**：`transition-transform duration-100`（快速利落）。
 
-# Spacing, Layout & Iconography
-- **Max Width**: `max-w-5xl` (Keep it contained like a sketchbook).
-- **Icons**: `lucide-react` icons with `stroke-width={2.5}` or `3`.
-- **Icon Style**: Enclose key icons in rough circles.
+# 间距、布局与图标
+- **最大宽度**：`max-w-5xl`（保持如素描本般包含）。
+- **图标**：`lucide-react` 图标配 `stroke-width={2.5}` 或 `3`。
+- **图标样式**：将关键图标包裹于粗糙圆中。
 
-# Responsive Strategy
+# 响应式策略
 
-**Mobile-First Approach:**
-- **Typography Scaling**:
-  - Headings: `text-4xl md:text-5xl` or `text-5xl md:text-6xl`
-  - Body text: `text-lg md:text-xl` or `text-base md:text-xl`
-  - Buttons: `text-lg md:text-2xl`
-- **Layout Stacking**:
-  - All grids collapse to single column on mobile, expand to 2-3 columns on `md:` breakpoint
-  - Hero switches from 2-column to stacked with `md:grid-cols-2`
-  - Stats: 2-column grid on mobile (`grid-cols-2`), 4-column on desktop (`md:grid-cols-4`)
-- **Hide Decorative Elements**:
-  - Hand-drawn arrow near CTA: `hidden md:block`
-  - Bouncing decorative circle: `hidden md:block`
-  - Squiggly connecting line in "How It Works": `hidden md:block`
-  - Dashed circle on pricing card: `hidden md:block`
-- **Maintain Core Aesthetic**:
-  - Keep wobbly borders and handwritten fonts on all screen sizes
-  - Reduce rotation slightly if needed (`-rotate-1` instead of `-rotate-2`)
-  - Maintain hard offset shadows (never add blur)
-  - Preserve playful personality and irregular shapes
-- **Touch-Friendly Targets**:
-  - Buttons use minimum `h-12` (48px) for accessibility
-  - Adequate spacing between interactive elements with `gap-8`
-- **Spacing Adjustments**:
-  - Section padding remains `py-20` for vertical rhythm
-  - Reduce horizontal padding when needed: `px-6`
-  - Stats scale down: `h-24 w-24 md:h-32 md:w-32`
-  - Pricing cards: `p-6 md:p-8` for better mobile fit
+**移动优先方法**：
+- **字体缩放**：
+  - 标题：`text-4xl md:text-5xl` 或 `text-5xl md:text-6xl`
+  - 正文：`text-lg md:text-xl` 或 `text-base md:text-xl`
+  - 按钮：`text-lg md:text-2xl`
+- **布局堆叠**：
+  - 所有网格移动端折叠为单列，`md:` 断点扩展为 2-3 列
+  - Hero 从 2 列切换为堆叠配 `md:grid-cols-2`
+  - 数据：移动 2 列网格（`grid-cols-2`），桌面 4 列（`md:grid-cols-4`）
+- **隐藏装饰元素**：
+  - CTA 附近手绘箭头：`hidden md:block`
+  - 弹跳装饰圆：`hidden md:block`
+  - "How It Works" 波浪连接线：`hidden md:block`
+  - 定价卡虚线圆：`hidden md:block`
+- **保持核心美学**：
+  - 所有屏幕尺寸保持摇摆边框与手写字体
+  - 需要时略减旋转（`-rotate-1` 替代 `-rotate-2`）
+  - 保持硬偏移阴影（绝不加模糊）
+  - 保留俏皮个性与不规则形状
+- **触控友好目标**：
+  - 按钮用最小 `h-12`（48px）以增可访问性
+  - 交互元素间充足间距配 `gap-8`
+- **间距调整**：
+  - 区块内边距保持 `py-20` 以增垂直节奏
+  - 需要时减水平内边距：`px-6`
+  - 数据缩小：`h-24 w-24 md:h-32 md:w-32`
+  - 定价卡片：`p-6 md:p-8` 以更好移动适配

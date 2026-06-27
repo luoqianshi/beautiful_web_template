@@ -10,257 +10,257 @@
 | 显示名称 | Corporate Trust |
 | 模式 | ☀️ 浅色模式 (Light) |
 | 字体类型 | sans-serif |
-| 描述 | Modern SaaS aesthetic balancing professionalism with approachability. Vibrant indigo/violet gradients, soft colored shadows, isometric depth, and clean geometric sans-serif typography. |
+| 描述 | 现代 SaaS 美学，平衡专业感与亲和力。鲜艳的 indigo/violet 渐变、柔和彩色阴影、等距深度感与干净的几何无衬线字体。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Split layout with 60/40 composition. Left: Gradient headline split, dual-CTA buttons, trust indicator. Right: Isometric floating card with subtle 3D transforms and decorative elements.
+60/40 构图分割布局。左：渐变标题分割、双 CTA 按钮、信任指标。右：等距浮动卡片，配含蓄 3D 变换与装饰元素。
 
 ### Stats
 
-Clean horizontal strip with large bold numbers, subtle text. Bordered top/bottom to create visual break.
+简洁横向条带，配大号粗体数字、含蓄文字。上下加边框以形成视觉断点。
 
 ### Product Detail
 
-Two-column layout with text-left, visual-right. Abstract UI mockup inside gradient container with offset shadow element.
+双栏布局，左文右图。渐变容器内的抽象 UI 模型，配偏移阴影元素。
 
 ### Features
 
-Zig-zag alternating layout. Icon badges with soft backgrounds, feature cards with isometric perspective transforms, decorative gradient blobs.
+锯齿状交替布局。柔和背景的图标徽章、具等距透视变换的特性卡片、装饰性渐变色块。
 
 ### Blog
 
-Three-column card grid. Image-first design with gradient overlays on hover, metadata above headline.
+三列卡片网格。图片优先设计，悬停时渐变叠加，元信息位于标题上方。
 
 ### How It Works
 
-Horizontal step timeline with connecting gradient line. Numbered badges with glow effects on dark background.
+横向步骤时间线，配连接渐变线。深色背景上带辉光效果的编号徽章。
 
 ### Benefits
 
-Two-column split: checklist items on left, isometric 3D card visualization on right with gradient background.
+双栏分割：左侧清单项，右侧渐变背景上的等距 3D 卡片可视化。
 
 ### Pricing
 
-Three-column grid with center card elevated and highlighted. Relative positioning badge for 'Most Popular'.
+三列网格，中间卡片上浮并高亮。"Most Popular" 徽章用相对定位。
 
 ### Testimonials
 
-Three-column card grid with star ratings, quotes, and user avatars with ring styling.
+三列卡片网格，含星级评分、引言与带 ring 样式的用户头像。
 
 ### Faq
 
-Accordion with details/summary HTML. Chevron rotation on expand, subtle background wash on open state.
+使用 details/summary HTML 的手风琴。展开时 chevron 旋转，打开状态有含蓄背景渐变。
 
 ### Footer
 
-Four-column grid on desktop, stacked on mobile. Dark slate background with lighter link hover states.
+桌面端四列网格，移动端堆叠。深色 slate 背景配较亮的链接悬停状态。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Design Style: Corporate Trust
+# 设计风格：Corporate Trust
 
-## 1. Design Philosophy
-This style embodies the **modern enterprise SaaS aesthetic** — professional yet approachable, sophisticated yet friendly. It draws inspiration from tech unicorns and high-growth startups that have successfully humanized the corporate experience. The design rejects the cold, sterile formality of traditional corporate websites in favor of a warm, confident, and inviting presence.
+## 1. 设计哲学
+这种风格体现了**现代企业 SaaS 美学**——专业而不失亲和，精致而不失友好。它从成功将企业体验人性化的科技独角兽与高增长初创公司中汲取灵感。设计摒弃传统企业网站的冰冷、刻板与正式，转而呈现温暖、自信、令人愉悦的面貌。
 
-**Core Principles:**
-- **Trustworthy Yet Vibrant**: Establishes credibility through clean structure and professional typography while maintaining visual energy through vibrant gradients and colorful accents
-- **Dimensional Depth**: Uses isometric perspectives, soft colored shadows, and subtle 3D transforms to create visual interest and break free from flat design
-- **Refined Elegance**: Every element is polished with attention to micro-interactions, smooth transitions, and sophisticated hover states
-- **Purposeful Gradients**: Indigo-to-violet gradients serve as the visual signature, used strategically in headlines, buttons, and decorative elements
-- **Professional Polish**: Generous white space, consistent spacing rhythms, and crisp typography create a premium, enterprise-ready feel
+**核心原则**：
+- **可信而充满活力**：通过干净结构与专业字体建立可信度，同时以鲜艳渐变与彩色点缀维持视觉活力
+- **维度深度**：运用等距透视、柔和彩色阴影与含蓄 3D 变换创造视觉趣味，摆脱扁平设计
+- **精致优雅**：每个元素都经打磨，注重微交互、平滑过渡与精致的悬停状态
+- **有目的的渐变**：Indigo 至 Violet 渐变作为视觉签名，战略性运用于标题、按钮与装饰元素
+- **专业打磨**：慷慨留白、一致间距节奏与利落排版共同营造高端、企业级质感
 
-**Keywords**: Trustworthy, Vibrant, Polished, Dimensional, Modern, Approachable, Enterprise-Ready, Elegant
+**关键词**：可信、充满活力、精致、有层次、现代、亲和、企业级、优雅
 
-**Visual DNA**: The unmistakable signature of this style comes from:
-1. **Colored Shadows**: Soft shadows with blue/purple tints instead of neutral grays
-2. **Isometric Elements**: Subtle 3D transforms (rotate-x, rotate-y) on decorative cards and visualizations
-3. **Gradient Text**: Strategic use of gradient text for emphasis in headlines
-4. **Soft Blobs**: Large, blurred gradient orbs in the background for atmospheric depth
-5. **Elevated Cards**: White cards that lift on hover with enhanced shadows
-6. **Dual-Tone Palette**: Indigo (primary) + Violet (secondary) creating a cohesive gradient spectrum
+**视觉 DNA**：此风格的标志性特征来源于：
+1. **彩色阴影**：带蓝/紫色调的柔和阴影取代中性灰
+2. **等距元素**：装饰卡片与可视化上含蓄的 3D 变换（rotate-x, rotate-y）
+3. **渐变文字**：战略性使用渐变文字突出标题
+4. **柔和色块**：背景中大型模糊渐变光球营造氛围深度
+5. **抬升卡片**：白色卡片在悬停时上浮并增强阴影
+6. **双色调色板**：Indigo（主色）+ Violet（辅色）构建连贯的渐变光谱
 
-## 2. Design Token System
+## 2. 设计 Token 系统
 
-### Colors (Light Mode)
-*   **Background**: `#F8FAFC` (Slate 50) - A very subtle cool grey/white base.
-*   **Foreground (Surface)**: `#FFFFFF` (White) - For cards and raised elements.
-*   **Primary**: `#4F46E5` (Indigo 600) - The core brand color. Vibrant blue-purple.
-*   **Secondary**: `#7C3AED` (Violet 600) - For gradients and accents.
-*   **Text Main**: `#0F172A` (Slate 900) - High contrast, sharp.
-*   **Text Muted**: `#64748B` (Slate 500) - For supporting text.
-*   **Accent/Success**: `#10B981` (Emerald 500) - For positive indicators.
-*   **Border**: `#E2E8F0` (Slate 200) - Subtle separation.
+### 色彩（浅色模式）
+*   **Background**：`#F8FAFC`（Slate 50）— 非常含蓄的冷灰/白色基底。
+*   **Foreground (Surface)**：`#FFFFFF`（白）— 用于卡片与抬升元素。
+*   **Primary**：`#4F46E5`（Indigo 600）— 核心品牌色。鲜艳蓝紫。
+*   **Secondary**：`#7C3AED`（Violet 600）— 用于渐变与点缀。
+*   **Text Main**：`#0F172A`（Slate 900）— 高对比，锐利。
+*   **Text Muted**：`#64748B`（Slate 500）— 用于辅助文字。
+*   **Accent/Success**：`#10B981`（Emerald 500）— 用于正面指标。
+*   **Border**：`#E2E8F0`（Slate 200）— 含蓄分隔。
 
-### Typography
-*   **Font Family**: `Plus Jakarta Sans` — A geometric sans-serif with friendly rounded terminals that perfectly balances professional authority with modern approachability. Its clean letterforms ensure excellent readability while maintaining visual warmth.
-*   **Scaling**: Major Third (1.250) scale provides substantial hierarchy without overwhelming the layout
-*   **Font Weights**:
-    *   **Display/Headings**: ExtraBold (800) for hero headlines, Bold (700) for section headings
-    *   **Subheadings**: SemiBold (600) for card titles and emphasis
-    *   **Body Text**: Regular (400) for paragraphs, Medium (500) for navigation and labels
-*   **Line Heights**:
-    *   Headlines: 1.1 (tight tracking for impact)
-    *   Body Text: 1.6-1.7 (relaxed for readability)
-*   **Letter Spacing**: Tight tracking (-0.02em) on large headlines for modern polish
-*   **Responsive Type Scale**:
-    *   Mobile: text-2xl to text-4xl for h1
-    *   Desktop: text-4xl to text-6xl for h1
-    *   Progressive scaling ensures legibility across all devices
+### 字体
+*   **字族**：`Plus Jakarta Sans` — 几何无衬线，友好的圆角终端完美平衡专业权威感与现代亲和力。干净字形确保出色可读性同时保持视觉温度。
+*   **字号阶梯**：Major Third (1.250) 比例提供充分层级而不压制布局
+*   **字重**：
+    *   **展示/标题**：ExtraBold (800) 用于 Hero 标题，Bold (700) 用于区块标题
+    *   **副标题**：SemiBold (600) 用于卡片标题与强调
+    *   **正文**：Regular (400) 用于段落，Medium (500) 用于导航与标签
+*   **行高**：
+    *   标题：1.1（紧凑字距以增冲击）
+    *   正文：1.6-1.7（宽松以保可读性）
+*   **字距**：大标题用紧凑字距（-0.02em）以增现代精致感
+*   **响应式字号阶梯**：
+    *   移动端：h1 用 text-2xl 至 text-4xl
+    *   桌面端：h1 用 text-4xl 至 text-6xl
+    *   渐进缩放确保所有设备可读性
 
-### Radius & Border
-*   **Radius**: `rounded-xl` (12px) for cards and `rounded-lg` (8px) for inputs. Buttons are `rounded-full` or `rounded-lg`.
-*   **Borders**: Thin, 1px borders using the `Border` token.
+### 圆角与边框
+*   **圆角**：卡片用 `rounded-xl`（12px），输入框用 `rounded-lg`（8px）。按钮用 `rounded-full` 或 `rounded-lg`。
+*   **边框**：细 1px 边框，使用 `Border` token。
 
-### Shadows & Effects
-This is where the design truly shines. **Colored shadows** replace neutral grays to reinforce the brand palette:
+### 阴影与效果
+这是设计的精华所在。**彩色阴影**取代中性灰以强化品牌色板：
 
-*   **Default Card Shadow**: `0 4px 20px -2px rgba(79, 70, 229, 0.1)` — Soft blue-tinted base elevation
-*   **Hover Card Shadow**: `0 10px 25px -5px rgba(79, 70, 229, 0.15), 0 8px 10px -6px rgba(79, 70, 229, 0.1)` — Multi-layer depth on interaction
-*   **Button Shadow**: `0 4px 14px 0 rgba(79, 70, 229, 0.3)` — Strong presence for primary CTAs
-*   **Glow Effects**: Numbered badges use `shadow-[0_0_20px_rgba(79,70,229,0.5)]` for ethereal glow
-*   **Background Blobs**: Large gradient orbs with 3xl blur create atmospheric depth without distraction
-    *   `blur-3xl filter` combined with low opacity (20-50%)
-    *   Positioned absolutely to create layered depth
-*   **Gradients**:
-    *   **Primary Gradient**: `from-indigo-600 to-violet-600` — Used for buttons and active states
-    *   **Text Gradient**: Combined with `bg-clip-text text-transparent` for striking headlines
-    *   **Background Gradients**: Subtle `from-indigo-100 to-violet-100` for container backgrounds
-    *   **Final CTA Background**: `from-indigo-900 to-indigo-950` for dramatic dark section
+*   **默认卡片阴影**：`0 4px 20px -2px rgba(79, 70, 229, 0.1)` — 柔和蓝色调基础抬升
+*   **悬停卡片阴影**：`0 10px 25px -5px rgba(79, 70, 229, 0.15), 0 8px 10px -6px rgba(79, 70, 229, 0.1)` — 交互时多层深度
+*   **按钮阴影**：`0 4px 14px 0 rgba(79, 70, 229, 0.3)` — 主 CTA 的强烈存在感
+*   **辉光效果**：编号徽章用 `shadow-[0_0_20px_rgba(79,70,229,0.5)]` 营造空灵辉光
+*   **背景色块**：大型渐变光球配 3xl 模糊营造氛围深度而不干扰
+    *   `blur-3xl filter` 配低不透明度（20-50%）
+    *   绝对定位以创建分层深度
+*   **渐变**：
+    *   **主渐变**：`from-indigo-600 to-violet-600` — 用于按钮与激活状态
+    *   **文字渐变**：配合 `bg-clip-text text-transparent` 打造醒目标题
+    *   **背景渐变**：含蓄的 `from-indigo-100 to-violet-100` 用于容器背景
+    *   **最终 CTA 背景**：`from-indigo-900 to-indigo-950` 营造戏剧性深色区块
 
-## 3. Component Stylings
+## 3. 组件样式
 
-### Buttons
-*   **Primary**: Gradient background (Indigo to Violet). `rounded-full` or `rounded-lg`. White text. Slight shadow. Transition: Lift (`-translate-y-0.5`) and increase shadow on hover.
-*   **Secondary**: White background, Border `E2E8F0`, Text `Slate 700`. Hover: `bg-slate-50` and darker border.
+### 按钮
+*   **主**：渐变背景（Indigo 至 Violet）。`rounded-full` 或 `rounded-lg`。白字。轻微阴影。过渡：悬停时上浮（`-translate-y-0.5`）并增强阴影。
+*   **次**：白色背景，边框 `E2E8F0`，文字 `Slate 700`。悬停：`bg-slate-50` 与更深边框。
 
-### Cards
-*   **Base**: White background, `rounded-xl`, `border border-slate-100`, `shadow-soft`.
-*   **Behavior**: On hover, slight lift and increased shadow intensity.
-*   **Feature Cards**: May feature an icon in a soft-colored circle (bg-indigo-50 text-indigo-600).
+### 卡片
+*   **基础**：白色背景，`rounded-xl`，`border border-slate-100`，`shadow-soft`。
+*   **行为**：悬停时轻微上浮与增强阴影强度。
+*   **特性卡片**：可含柔和色圆圈中的图标（bg-indigo-50 text-indigo-600）。
 
-### Inputs
-*   **Style**: `bg-white`, `border-slate-200`, `rounded-lg`.
-*   **Focus**: `ring-2 ring-indigo-500 ring-offset-1` and `border-indigo-500`.
-*   **Label**: `text-sm font-semibold text-slate-700`.
+### 输入框
+*   **样式**：`bg-white`，`border-slate-200`，`rounded-lg`。
+*   **聚焦**：`ring-2 ring-indigo-500 ring-offset-1` 与 `border-indigo-500`。
+*   **标签**：`text-sm font-semibold text-slate-700`。
 
-## 4. Non-Generic Bold Choices
+## 4. 非通用的标志性选择
 
-The Corporate Trust aesthetic stands out through deliberate, sophisticated design decisions:
+Corporate Trust 美学通过刻意、精致的设计决策脱颖而出：
 
-### Isometric Depth & 3D Transforms
-*   **Hero Card**: `perspective-[2000px]` parent with `rotate-x-[5deg] rotate-y-[-12deg]` child creates subtle isometric effect
-*   **Hover Transforms**: `hover:rotate-x-[2deg] hover:rotate-y-[-8deg]` — Subtle 3D movement on interaction
-*   **Feature Cards**: Alternating `rotate-y-[6deg]` and `rotate-y-[-6deg]` based on layout position
-*   **Benefit Visualization**: `rotate-x-6 rotate-y-12 transform` on gradient container for dramatic depth
+### 等距深度与 3D 变换
+*   **Hero 卡片**：`perspective-[2000px]` 父级配 `rotate-x-[5deg] rotate-y-[-12deg]` 子级创造含蓄等距效果
+*   **悬停变换**：`hover:rotate-x-[2deg] hover:rotate-y-[-8deg]` — 交互时含蓄 3D 运动
+*   **特性卡片**：依布局位置交替 `rotate-y-[6deg]` 与 `rotate-y-[-6deg]`
+*   **收益可视化**：渐变容器上 `rotate-x-6 rotate-y-12 transform` 营造戏剧性深度
 
-### Strategic Gradient Usage
-*   **Split Headlines**: First 3 words in standard color, remaining words in gradient for visual hierarchy
-*   **Gradient Buttons**: Full background gradient with hover lift (`-translate-y-0.5`)
-*   **Badge Elements**: NEW badge with solid indigo background inside gradient-ringed container
-*   **Final CTA**: White button on dark gradient background creates dramatic contrast
+### 战略性渐变使用
+*   **分割标题**：前 3 词标准色，其余词渐变以创视觉层级
+*   **渐变按钮**：完整背景渐变配悬停上浮（`-translate-y-0.5`）
+*   **徽章元素**：NEW 徽章配实心 indigo 背景于渐变环容器内
+*   **最终 CTA**：深色渐变背景上的白色按钮创造戏剧性对比
 
-### Atmospheric Background Elements
-*   **Blur Orbs**: Large (400-600px) circular gradients with heavy blur positioned absolutely
-*   **Layered Positioning**: Multiple blobs at different z-indexes create depth
-*   **Subtle Animation**: `animate-pulse duration-[4000ms]` on floating cards for gentle movement
+### 氛围背景元素
+*   **模糊光球**：大型（400-600px）圆形渐变配重度模糊，绝对定位
+*   **分层定位**：不同 z-index 的多个光块创造深度
+*   **含蓄动画**：浮动卡片上 `animate-pulse duration-[4000ms]` 作轻柔运动
 
-### Elevated Card System
-*   **Default State**: Soft colored shadow with subtle border
-*   **Hover State**: Lift effect (`-translate-y-1`) combined with enhanced shadow
-*   **Transition**: Smooth `duration-200` for professional polish
-*   **Pricing Highlight**: Center card uses `md:scale-105` with special ring styling
+### 抬升卡片系统
+*   **默认状态**：柔和彩色阴影配含蓄边框
+*   **悬停状态**：上浮效果（`-translate-y-1`）结合增强阴影
+*   **过渡**：平滑 `duration-200` 以增专业打磨
+*   **定价高亮**：中间卡片用 `md:scale-105` 配特殊 ring 样式
 
-### Micro-Interactions
-*   **Arrow Icons**: `transition-transform group-hover:translate-x-1` for directional feedback
-*   **Image Zoom**: `group-hover:scale-105` on blog images with overlay fade-in
-*   **Chevron Rotation**: `group-open:rotate-180` for FAQ accordions
-*   **Button Lift**: Subtle upward movement on hover reinforces clickability
+### 微交互
+*   **箭头图标**：`transition-transform group-hover:translate-x-1` 作方向反馈
+*   **图片缩放**：博客图片 `group-hover:scale-105` 配叠加淡入
+*   **Chevron 旋转**：FAQ 手风琴 `group-open:rotate-180`
+*   **按钮上浮**：悬停时含蓄向上移动强化可点击感
 
-## 5. Spacing & Layout
-*   **Container**: `max-w-7xl` (1280px) provides spacious, enterprise-appropriate width
-*   **Padding**: Responsive padding with `px-4 sm:px-6` pattern for consistent gutters
-*   **Vertical Rhythm**:
-    *   Mobile: `py-16` (64px)
-    *   Tablet: `sm:py-20` (80px)
-    *   Desktop: `lg:py-24` (96px)
-*   **Section Spacing**: Generous white space between sections creates breathing room
-*   **Grid Strategy**:
-    *   Hero: Two-column `lg:grid-cols-2` with text-first approach
-    *   Features: Alternating zig-zag with `lg:flex-row` and `lg:flex-row-reverse`
-    *   Pricing: Three-column `md:grid-cols-3` with center emphasis
-    *   Stats: Four-column `md:grid-cols-4` for metric display
-*   **Responsive Breakpoints**:
-    *   Mobile-first approach with progressive enhancement
-    *   sm: 640px, md: 768px, lg: 1024px, xl: 1280px
-*   **Text Width Constraints**: `max-w-xl` or `max-w-2xl` on paragraphs to maintain 60-75 character line lengths
+## 5. 间距与布局
+*   **容器**：`max-w-7xl`（1280px）提供宽敞、企业级适宜宽度
+*   **内边距**：响应式内边距配 `px-4 sm:px-6` 模式以保一致间距
+*   **垂直节奏**：
+    *   移动：`py-16`（64px）
+    *   平板：`sm:py-20`（80px）
+    *   桌面：`lg:py-24`（96px）
+*   **区块间距**：区块间慷慨留白创造呼吸空间
+*   **网格策略**：
+    *   Hero：双列 `lg:grid-cols-2`，文字优先
+    *   特性：交替锯齿配 `lg:flex-row` 与 `lg:flex-row-reverse`
+    *   定价：三列 `md:grid-cols-3`，中间强调
+    *   数据：四列 `md:grid-cols-4` 作指标展示
+*   **响应式断点**：
+    *   移动优先配渐进增强
+    *   sm：640px，md：768px，lg：1024px，xl：1280px
+*   **文字宽度约束**：段落 `max-w-xl` 或 `max-w-2xl` 以保持 60-75 字符行长
 
-## 6. Animation & Transitions
-*   **Philosophy**: "Refined Motion" — Smooth, professional, never jarring
-*   **Base Transition**: `transition-all duration-200` for general interactive elements
-*   **Long Transitions**: `duration-500` for image zooms and complex animations
-*   **Hover Effects**:
-    *   Cards: Combine `hover:-translate-y-1` with shadow enhancement
-    *   Buttons: `hover:-translate-y-0.5` for subtle lift
-    *   Icons: `transition-transform group-hover:translate-x-1` for directional cues
-*   **Easing**: Default `ease-out` for natural deceleration
-*   **Pulse Animation**: `animate-pulse duration-[4000ms]` on decorative floating elements for gentle breathing effect
-*   **State Changes**: Smooth color transitions on links and buttons reinforce interactivity
+## 6. 动画与过渡
+*   **哲学**："精致运动" — 平滑、专业、绝不突兀
+*   **基础过渡**：`transition-all duration-200` 用于一般交互元素
+*   **长过渡**：`duration-500` 用于图片缩放与复杂动画
+*   **悬停效果**：
+    *   卡片：结合 `hover:-translate-y-1` 与阴影增强
+    *   按钮：`hover:-translate-y-0.5` 作含蓄上浮
+    *   图标：`transition-transform group-hover:translate-x-1` 作方向暗示
+*   **缓动**：默认 `ease-out` 以自然减速
+*   **脉动动画**：装饰性浮动元素 `animate-pulse duration-[4000ms]` 作轻柔呼吸效果
+*   **状态变化**：链接与按钮平滑色彩过渡强化交互性
 
-## 7. Iconography
-*   **Library**: `lucide-react` for consistent, modern icon system
-*   **Style**:
-    *   Default stroke width: `2px` (standard)
-    *   Size: `h-4 w-4` for inline icons, `h-5 w-5` or `h-6 w-6` for featured icons
-    *   Joins: Rounded for friendliness
-*   **Color Treatment**:
-    *   **Badge Icons**: Icon in `text-indigo-600` on `bg-indigo-100` container
-    *   **Navigation Icons**: Inherit text color, transition on hover
-    *   **Social Icons**: `text-slate-400 hover:text-indigo-400`
-*   **Icon Containers**:
-    *   Small badges: `h-12 w-12 rounded-xl` with soft background
-    *   Large features: `h-14 w-14 rounded-xl` for prominent sections
-    *   Circular: `rounded-full` for avatars or status indicators
-*   **Accessibility**: Icons are decorative with proper text alternatives or hidden from screen readers when paired with text
+## 7. 图标
+*   **库**：`lucide-react` 提供一致、现代的图标系统
+*   **样式**：
+    *   默认描边宽度：`2px`（标准）
+    *   尺寸：行内图标 `h-4 w-4`，特色图标 `h-5 w-5` 或 `h-6 w-6`
+    *   连接：圆角以增亲和
+*   **色彩处理**：
+    *   **徽章图标**：`text-indigo-600` 图标于 `bg-indigo-100` 容器
+    *   **导航图标**：继承文字色，悬停过渡
+    *   **社交图标**：`text-slate-400 hover:text-indigo-400`
+*   **图标容器**：
+    *   小徽章：`h-12 w-12 rounded-xl` 配柔和背景
+    *   大特性：`h-14 w-14 rounded-xl` 用于突出区块
+    *   圆形：`rounded-full` 用于头像或状态指示
+*   **可访问性**：图标为装饰性，配适当文字替代或与文字配对时对屏幕阅读器隐藏
 
-## 8. Responsive Strategy
-*   **Mobile-First Philosophy**: Design begins at 375px width, progressively enhances
-*   **Touch Targets**: Minimum 44x44px for all interactive elements (buttons, links)
-*   **Typography Scaling**:
-    *   Headlines reduce from `text-6xl` (desktop) to `text-4xl` (mobile)
-    *   Body text maintains readability at `text-base` with responsive line heights
-*   **Layout Adaptations**:
-    *   Two-column layouts stack to single column on mobile
-    *   Navigation collapses to essential items (login hidden on mobile)
-    *   Pricing cards stack vertically with equal width
-    *   Footer columns stack progressively (4 col → 2 col → 1 col)
-*   **Spacing Compression**: Padding and margins reduce proportionally on smaller screens
-*   **Image Optimization**: Aspect ratios maintained, sizes adapt to container width
-*   **Horizontal Scrolling**: Never required; all content fits viewport width
-*   **Visual Hierarchy Preserved**: Even on mobile, clear distinction between heading levels maintained
+## 8. 响应式策略
+*   **移动优先哲学**：设计自 375px 宽度开始，渐进增强
+*   **触控目标**：所有交互元素最小 44x44px（按钮、链接）
+*   **字体缩放**：
+    *   标题从 `text-6xl`（桌面）降至 `text-4xl`（移动）
+    *   正文保持 `text-base` 可读性配响应式行高
+*   **布局适配**：
+    *   双列布局移动端堆叠为单列
+    *   导航折叠为必要项（移动端隐藏登录）
+    *   定价卡片垂直堆叠等宽
+    *   页脚列渐进堆叠（4 列 → 2 列 → 1 列）
+*   **间距压缩**：更小屏幕按比例缩减内边距与外边距
+*   **图片优化**：保持宽高比，尺寸适配容器宽度
+*   **横向滚动**：绝不要求；所有内容适配视口宽度
+*   **视觉层级保留**：即使移动端也保持标题层级清晰区分
 
-## 9. Accessibility & Best Practices
-*   **Color Contrast**: All text meets WCAG AA standards
-    *   Slate 900 on Slate 50 background: AAA compliant
-    *   White text on Indigo 900 background: AAA compliant
-    *   Link colors tested for 4.5:1 minimum ratio
-*   **Focus States**:
-    *   Visible ring on all interactive elements: `focus-visible:ring-2 focus-visible:ring-indigo-500`
-    *   Ring offset for clarity: `focus-visible:ring-offset-2`
-    *   Never remove focus indicators
-*   **Semantic HTML**:
-    *   Proper heading hierarchy (h1 → h2 → h3)
-    *   Native `<button>` elements for interactive actions
-    *   `<nav>` for navigation, `<footer>` for footer
-    *   Details/summary for FAQ accordions
-*   **Image Alt Text**: Descriptive alternatives for all images
-*   **Interactive States**:
-    *   Hover: Visual feedback on all clickable elements
-    *   Active: Subtle state change on click
-    *   Disabled: Reduced opacity with `pointer-events-none`
-*   **Motion Preferences**: Consider `prefers-reduced-motion` for users sensitive to animation
-*   **Screen Reader Support**: Proper ARIA labels where semantic HTML insufficient
+## 9. 可访问性与最佳实践
+*   **色彩对比**：所有文字达 WCAG AA 标准
+    *   Slate 900 于 Slate 50 背景：达 AAA
+    *   白字于 Indigo 900 背景：达 AAA
+    *   链接色测试最低 4.5:1 比例
+*   **聚焦状态**：
+    *   所有交互元素可见环：`focus-visible:ring-2 focus-visible:ring-indigo-500`
+    *   环 offset 以保清晰：`focus-visible:ring-offset-2`
+    *   绝不移除聚焦指示器
+*   **语义化 HTML**：
+    *   正确标题层级（h1 → h2 → h3）
+    *   交互操作用原生 `<button>` 元素
+    *   导航用 `<nav>`，页脚用 `<footer>`
+    *   FAQ 手风琴用 details/summary
+*   **图片 alt 文本**：所有图片描述性替代
+*   **交互状态**：
+    *   悬停：所有可点击元素视觉反馈
+    *   激活：点击时含蓄状态变化
+    *   禁用：降低不透明度配 `pointer-events-none`
+*   **运动偏好**：考虑 `prefers-reduced-motion` 服务动画敏感用户
+*   **屏幕阅读器支持**：语义化 HTML 不足时使用适当 ARIA 标签

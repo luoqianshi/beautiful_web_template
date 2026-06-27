@@ -10,226 +10,226 @@
 | 显示名称 | Neumorphism |
 | 模式 | ☀️ 浅色模式 (Light) |
 | 字体类型 | sans-serif |
-| 描述 | Extruded and inset elements via dual shadows on monochromatic backgrounds. Soft, tactile, and physically grounded with excellent accessibility. |
+| 描述 | 通过单色背景上的双向阴影实现凸出与凹陷元素。柔软、有触感、物理感强，且具备出色的可访问性。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Asymmetric split layout (60/40) with content on left and nested depth visual on right. Features animated floating cards and interactive 3D nested circles that respond to hover with scale and rotation.
+非对称分割布局（60/40），左侧内容，右侧嵌套深度视觉。含动画浮动卡片与交互式 3D 嵌套圆圈，悬停时以缩放与旋转响应。
 
 ### Stats
 
-Two-stage presentation: inline stats in hero, then dedicated section with four extruded cards inside a deep inset container. Cards lift and scale on hover.
+两阶段呈现：Hero 中行内数据，然后专用区块配深凹陷容器内的四张凸出卡片。卡片悬停抬起并缩放。
 
 ### Features
 
-Bento-style grid with one large featured card (2 rows) and smaller cards. Deep inset icon wells create tactile depth. Smooth hover scale transforms.
+Bento 风格网格，含一张大型精选卡片（2 行）与较小卡片。深凹陷图标槽创造触感深度。平滑悬停缩放变换。
 
 ### How It Works
 
-Three-column horizontal stepper with nested depth circles for step numbers, connected by a visible inset rail with gradient progress indicator.
+三列横向步进器，配嵌套深度圆圈作步骤编号，由可见凹陷轨道连接，配渐变进度指示器。
 
 ### Benefits
 
-Split layout with checklist items in inset containers on left, abstract UI mockup visualization on right showing layered neumorphic elements.
+分割布局，左侧清单项置于凹陷容器中，右侧抽象 UI 模型可视化展示分层新拟态元素。
 
 ### Pricing
 
-Three-column grid with center card highlighted via subtle scale (1.05x) and enhanced shadow depth. Badge floating above highlighted tier.
+三列网格，中间卡片通过含蓄缩放（1.05x）与增强阴影深度高亮。徽章悬浮于高亮档位上方。
 
 ### Testimonials
 
-Asymmetric grid with one large featured testimonial (2 columns, 2 rows) and four smaller testimonials. Star ratings in inset pills, avatars in deep inset circles.
+非对称网格，含一条大型精选证言（2 列 2 行）与四条较小证言。星级评分置于凹陷胶囊中，头像置于深凹陷圆圈中。
 
 ### Faq
 
-Two-column grid with question headers and answers inside inset containers that feel carved into cards.
+双列网格，问题头部与答案置于凹陷容器中，感觉如雕刻入卡片。
 
 ### Blog
 
-Three-column grid with first post spanning 2 columns. Image areas with overlay, smooth scale transforms on hover.
+三列网格，首篇跨 2 列。图片区配叠加，悬停平滑缩放变换。
 
 ### Footer
 
-Four-column link grid with company info spanning 2 columns. Copyright in centered inset pill at bottom.
+四列链接网格，公司信息跨 2 列。版权置于底部居中凹陷胶囊中。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Neumorphism (Soft UI) Design System
+# Neumorphism（Soft UI）设计系统
 
-## Design Philosophy
+## 设计哲学
 
-**Core Principles**: Neumorphism creates the illusion of physical depth through carefully balanced dual shadows—one light source from the top-left, one dark shadow falling bottom-right—on monochromatic backgrounds. Elements appear to either extrude from the surface (convex/raised) or be pressed into it (concave/inset). The effect mimics soft, pillowed physical objects with realistic lighting, creating a "molded from the same material" aesthetic. Every element feels like it's part of the same continuous surface, either raised or pressed, never flat.
+**核心原则**：Neumorphism 通过精心平衡的双向阴影创造物理深度的错觉——左上光源、右下暗影——于单色背景之上。元素显得或自表面凸出（凸面/抬起）或被压入（凹面/凹陷）。效果模拟柔软、枕状的物理物件配逼真光照，创造"从同一材质模塑"的美学。每个元素都感觉如同同一连续表面的一部分，或抬起或压入，绝不扁平。
 
-**Vibe**: Tactile, calm, modern, and physically grounded. This is UI that feels like cooler matte plastic or soft ceramic. It is satisfying and tangible. The aesthetic is deliberately restrained, utilizing a cooler grey palette to feel fresh and distinct from "warm" legacy neumorphism. The design prioritizes accessibility with WCAG AA compliant contrast ratios while maintaining the soft aesthetic.
+**气质**：触感、宁静、现代、物理感强。这 UI 感觉如较凉的哑光塑料或柔软陶瓷。它令人满足且有形。美学刻意克制，用较凉的灰色调以显清新并区别于"暖"传统新拟态。设计优先可访问性，配 WCAG AA 合规对比比同时保持柔和美学。
 
-**Unique Visual Signatures**:
-- **Dual opposing RGB shadows** (top-left light, bottom-right dark) using alpha transparency for smoother, more realistic blending than solid hex shadows.
-- **Monochromatic "Cool Grey" discipline** (`#E0E5EC`) where shadows and highlights do all the visual heavy lifting. No flat backgrounds.
-- **Same-surface illusion**: Elements appear to be part of the same material as the background—molded, not placed.
-- **Deep Inset States**: Wells for icons and inputs that feel significantly deeper (`insetDeep`) than standard pressed states, creating true 3D depth.
-- **Soft, Hyper-Rounded Corners**: `32px` for containers and `16px` for smaller elements, reinforcing the pillowed, organic aesthetic.
-- **Complex Nested Depth**: Visuals formed by nesting elements (Extruded → Inset → Extruded) to showcase the physics of the system.
-- **Smooth Micro-interactions**: 300ms transitions with scale, rotation, and shadow depth changes. Floating animations for ambient motion.
-- **Mobile-First Responsive**: Fully responsive with touch-friendly targets (44px minimum), hamburger menu, and maintained neumorphic aesthetic on all screen sizes.
+**独特视觉签名**：
+- **双向对向 RGB 阴影**（左上亮、右下暗）用 alpha 透明度以比实心 hex 阴影更平滑、更逼真的混合。
+- **单色"冷灰"纪律**（`#E0E5EC`），阴影与高光承担所有视觉重担。无扁平背景。
+- **同表面错觉**：元素显得为背景同材质的一部分——模塑，非放置。
+- **深凹陷状态**：图标与输入框的槽感觉比标准按压状态显著更深（`insetDeep`），创造真正 3D 深度。
+- **柔和、超圆角**：容器 `32px`、较小元素 `16px`，强化枕状有机美学。
+- **复杂嵌套深度**：由嵌套元素构成的视觉（凸出 → 凹陷 → 凸出）以展示系统物理。
+- **平滑微交互**：300ms 过渡配缩放、旋转与阴影深度变化。环境运动的浮动动画。
+- **移动优先响应式**：完全响应式，配触控友好目标（最小 44px）、汉堡菜单与所有屏幕尺寸保持的新拟态美学。
 
 ---
 
-## Design Token System (The DNA)
+## 设计 Token 系统（DNA）
 
-### Colors (Light Mode - Cool Monochromatic)
+### 色彩（浅色模式 — 冷单色）
 
-The entire palette is built around a single base cool grey. **All visual interest comes from shadow play, not color variety.**
+整个调色板围绕单一基础冷灰构建。**所有视觉趣味来自阴影游戏，非色彩多样。**
 
-- **Background**: `#E0E5EC` — The base "cool clay" surface. Everything is molded from this.
-- **Foreground**: `#3D4852` — Dark blue-grey for primary text. Excellent contrast (7.5:1 ratio) for optimal readability.
-- **Muted**: `#6B7280` — Cool grey for secondary text with WCAG AA compliant contrast (4.6:1 ratio on the background).
-- **Accent**: `#6C63FF` — Soft violet for interactive highlights. Used sparingly for CTAs and focus states.
-- **Accent Light**: `#8B84FF` — Lighter violet for gradients and hover states.
-- **Accent Secondary**: `#38B2AC` — Teal for success states, checkmarks, and positive indicators.
-- **Border**: `transparent` — Neumorphism **never** uses borders; shadows define all edges.
+- **Background**：`#E0E5EC` — 基础"冷黏土"表面。一切由此模塑。
+- **Foreground**：`#3D4852` — 深蓝灰作主要文字。出色对比（7.5:1 比例）以达最佳可读性。
+- **Muted**：`#6B7280` — 冷灰作次要文字，WCAG AA 合规对比（背景上 4.6:1 比例）。
+- **Accent**：`#6C63FF` — 柔紫作交互高亮。克制用于 CTA 与聚焦状态。
+- **Accent Light**：`#8B84FF` — 较浅紫作渐变与悬停状态。
+- **Accent Secondary**：`#38B2AC` — 青绿作成功状态、勾选与正面指示。
+- **Border**：`transparent` — Neumorphism **绝不**用边框；阴影定义所有边缘。
 
-**Shadow Colors** (CRITICAL - RGBA for Smoothness):
-- **Shadow Light**: `rgba(255, 255, 255, 0.5-0.6)` — Pure white with transparency for the light-source shadow (top-left).
-- **Shadow Dark**: `rgb(163, 177, 198, 0.6-0.7)` — A specific cool blue-grey shadow color that matches the background tone perfectly (bottom-right).
+**阴影色**（关键 — RGBA 以保平滑）：
+- **Shadow Light**：`rgba(255, 255, 255, 0.5-0.6)` — 带透明的纯白作光源阴影（左上）。
+- **Shadow Dark**：`rgb(163, 177, 198, 0.6-0.7)` — 特定冷蓝灰阴影色，完美匹配背景色调（右下）。
 
-### Typography
+### 字体
 
-- **Display Font**: **"Plus Jakarta Sans"** (500, 600, 700, 800) — Modern geometric sans for headlines. Applied via `.font-display` class.
-- **Body Font**: **"DM Sans"** (400, 500, 700) — Clean, highly legible sans-serif for all body text and UI elements.
-- **Weights**:
-  - Display Headings: `font-extrabold` (800) with `tracking-tight`
-  - Headings: `font-bold` (700) with `tracking-tight`
-  - Body: `font-normal` (400) to `font-medium` (500)
-- **Colors**:
-  - Primary: `#3D4852` (excellent contrast)
-  - Secondary/Muted: `#6B7280` (WCAG AA compliant)
-- **Scale**: Responsive scale from `text-sm` (14px) to `text-7xl` (72px) for hero headlines
+- **展示字体**：**"Plus Jakarta Sans"**（500, 600, 700, 800）— 现代几何无衬线作标题。通过 `.font-display` 类应用。
+- **正文字体**：**"DM Sans"**（400, 500, 700）— 干净、高可读无衬线作所有正文与 UI 元素。
+- **字重**：
+  - 展示标题：`font-extrabold`（800）配 `tracking-tight`
+  - 标题：`font-bold`（700）配 `tracking-tight`
+  - 正文：`font-normal`（400）至 `font-medium`（500）
+- **颜色**：
+  - 主要：`#3D4852`（出色对比）
+  - 次要/柔和：`#6B7280`（WCAG AA 合规）
+- **字号阶梯**：响应式阶梯自 `text-sm`（14px）至 `text-7xl`（72px）作 Hero 标题
 
-### Radius
+### 圆角
 
-- **Container / Card**: `32px` (`rounded-[32px]`) — Very soft, friendly corners.
-- **Base / Button**: `16px` (`rounded-2xl`).
-- **Inner Elements**: `12px` (`rounded-xl`) or `9999px` (`rounded-full`).
+- **容器/卡片**：`32px`（`rounded-[32px]`）— 非常柔和、友好的角。
+- **基础/按钮**：`16px`（`rounded-2xl`）。
+- **内部元素**：`12px`（`rounded-xl`）或 `9999px`（`rounded-full`）。
 
-### Shadows & Effects (The Physics)
+### 阴影与效果（物理）
 
-Shadows are defined using `rgba` for a premium, smooth finish.
+阴影用 `rgba` 定义以达高级平滑质感。
 
-**Extruded (Standard)** — The default resting state:
+**凸出（标准）** — 默认静止状态：
 ```css
 box-shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255,0.5);
 ```
-- **Tailwind**: `shadow-[9px_9px_16px_rgb(163,177,198,0.6),-9px_-9px_16px_rgba(255,255,255,0.5)]`
+- **Tailwind**：`shadow-[9px_9px_16px_rgb(163,177,198,0.6),-9px_-9px_16px_rgba(255,255,255,0.5)]`
 
-**Extruded Hover (Lifted)** — For hover states:
+**凸出悬停（抬起）** — 用于悬停状态：
 ```css
 box-shadow: 12px 12px 20px rgb(163,177,198,0.7), -12px -12px 20px rgba(255,255,255,0.6);
 ```
-- **Tailwind**: `shadow-[12px_12px_20px_rgb(163,177,198,0.7),-12px_-12px_20px_rgba(255,255,255,0.6)]`
+- **Tailwind**：`shadow-[12px_12px_20px_rgb(163,177,198,0.7),-12px_-12px_20px_rgba(255,255,255,0.6)]`
 
-**Extruded Small** — For smaller elements:
+**凸出小** — 用于较小元素：
 ```css
 box-shadow: 5px 5px 10px rgb(163,177,198,0.6), -5px -5px 10px rgba(255,255,255,0.5);
 ```
 
-**Inset (Pressed)** — For standard pressed states or shallow wells:
+**凹陷（按压）** — 用于标准按压状态或浅槽：
 ```css
 box-shadow: inset 6px 6px 10px rgb(163,177,198,0.6), inset -6px -6px 10px rgba(255,255,255,0.5);
 ```
 
-**Inset Deep** — For inputs, active wells, and deep "carved" elements:
+**凹陷深** — 用于输入框、激活槽与深"雕刻"元素：
 ```css
 box-shadow: inset 10px 10px 20px rgb(163,177,198,0.7), inset -10px -10px 20px rgba(255,255,255,0.6);
 ```
-- **Tailwind**: `shadow-[inset_10px_10px_20px_rgb(163,177,198,0.7),inset_-10px_-10px_20px_rgba(255,255,255,0.6)]`
+- **Tailwind**：`shadow-[inset_10px_10px_20px_rgb(163,177,198,0.7),inset_-10px_-10px_20px_rgba(255,255,255,0.6)]`
 
-**Inset Small** — For subtle tracks or pills:
+**凹陷小** — 用于含蓄轨道或胶囊：
 ```css
 box-shadow: inset 3px 3px 6px rgb(163,177,198,0.6), inset -3px -3px 6px rgba(255,255,255,0.5);
 ```
 
 ---
 
-## Component Styling
+## 组件样式
 
-### Buttons
-- **Shape**: `rounded-2xl`
-- **Transition**: `duration-300 ease-out`
-- **Default State**: Extruded shadow.
-- **Hover State**: `translate-y-[-1px]` (slight lift) + `Extruded Hover` shadow.
-- **Active/Pressed State**: `translate-y-[0.5px]` (physical press) + `Inset Small` shadow (or standard inset depending on size).
-- **Primary**: Accent background `#6C63FF`. Active state uses specific rgba inset shadows to work on color.
-- **Secondary**: Background `#E0E5EC` (match page).
+### 按钮
+- **形状**：`rounded-2xl`
+- **过渡**：`duration-300 ease-out`
+- **默认状态**：凸出阴影。
+- **悬停状态**：`translate-y-[-1px]`（轻微抬起）+ `凸出悬停` 阴影。
+- **激活/按压状态**：`translate-y-[0.5px]`（物理按压）+ `凹陷小` 阴影（或视尺寸标准凹陷）。
+- **主**：点缀背景 `#6C63FF`。激活状态用特定 rgba 内嵌阴影以在色上工作。
+- **次**：背景 `#E0E5EC`（匹配页面）。
 
-### Cards
-- **Shape**: `rounded-[32px]` (Significant rounding).
-- **Background**: `#E0E5EC`.
-- **Padding**: `p-8` to `p-20` depending on prominence.
-- **Hover**: `translate-y-[-2px]` + `Extruded Hover` shadow.
-- **Feature**: Use nested depth. Card is Extruded -> Icon well inside is Inset Deep -> Icon inside is distinct.
+### 卡片
+- **形状**：`rounded-[32px]`（显著圆角）。
+- **背景**：`#E0E5EC`。
+- **内边距**：`p-8` 至 `p-20` 视突出度。
+- **悬停**：`translate-y-[-2px]` + `凸出悬停` 阴影。
+- **特性**：用嵌套深度。卡片凸出 → 内部图标槽凹陷深 → 内部图标独立。
 
-### Inputs
-- **Shape**: `rounded-2xl`.
-- **Background**: `#E0E5EC`.
-- **Default**: `Inset` shadow.
-- **Focus**: `Inset Deep` shadow + Accent color Ring (offset by 2px with background color).
-- **Placeholder**: `#A0AEC0`.
+### 输入框
+- **形状**：`rounded-2xl`。
+- **背景**：`#E0E5EC`。
+- **默认**：`凹陷` 阴影。
+- **聚焦**：`凹陷深` 阴影 + 点缀色环（以背景色 offset 2px）。
+- **占位符**：`#A0AEC0`。
 
-### Visual Decorations
-- **Icon Wells**: Always use `Inset Deep` or `Inset` shadows for icon containers. This makes them look "drilled" into the card.
-- **Decorations**: Use concentric circles of alternating Extruded and Inset shadows to create abstract, tactile background art.
-
----
-
-## Layout Principles
-
-- **Spacing**: Open and airy. Use `py-32` for hero sections to let the shadows breathe. `gap-12` for grids.
-- **Container**: `max-w-7xl` for a wide, modern feel.
-- **Background**: The page background must be `#E0E5EC` globally. No gradients on the root background.
-
-## Animation & Micro-interactions
-- **Duration**: `300ms` for UI elements, `500ms` for nested depth circles (weightier, physics-based feel).
-- **Easing**: `ease-out` for natural deceleration.
-- **Properties**: `transform` (scale, translateY, rotate), `box-shadow` (depth changes).
-- **Hover Effects**:
-  - Cards: `-translate-y-1` (1px lift) + enhanced shadow depth
-  - Buttons: `-translate-y-1` on hover, `translate-y-0.5` on active (press down)
-  - Nested circles: `scale-105` (5% scale up) + `rotate-180` on inner element
-- **Floating Animation**: Custom `@keyframes float` with 3s ease-in-out infinite loop for ambient motion on decorative elements.
-- **Smooth Scrolling**: `scroll-behavior: smooth` for anchor navigation.
-
-## Accessibility
-- **Contrast**:
-  - Primary text `#3D4852` on `#E0E5EC`: 7.5:1 (WCAG AAA)
-  - Muted text `#6B7280` on `#E0E5EC`: 4.6:1 (WCAG AA)
-- **Focus States**: Visible 2px accent rings (`ring-2 ring-[#6C63FF]`) with 2px offset on `#E0E5EC` background. Mandatory on all interactive elements.
-- **Touch Targets**: Minimum 44x44px for mobile (buttons use `h-12 w-12` = 48px minimum).
-- **Mobile Navigation**: Hamburger menu with clear open/close states (Menu/X icons).
-- **Keyboard Navigation**: Full keyboard support with visible focus indicators on all links and buttons.
-
-## Responsive Design
-
-- **Mobile First**: Design starts with mobile view and enhances upward.
-- **Breakpoints**: `md:` (768px) for tablet, `lg:` (1024px) for desktop.
-- **Mobile Adaptations**:
-  - Hero visual shows on all screens with `max-w-md` constraint on mobile
-  - Hamburger menu replaces desktop navigation below `md:` breakpoint
-  - Grid layouts collapse: 3-column → 1-column, 2-column → 1-column
-  - Font sizes scale down: `text-7xl` → `text-5xl` on mobile
-  - Padding reduces: `p-16` → `p-8` on cards
-- **Navigation**: Sticky header with backdrop blur. Mobile menu slides down from header with extruded shadow.
+### 视觉装饰
+- **图标槽**：始终用 `凹陷深` 或 `凹陷` 阴影作图标容器。这使它们看起来"钻入"卡片。
+- **装饰**：用交替凸出与凹陷阴影的同心圆创造抽象、触感背景艺术。
 
 ---
 
-## Anti-Patterns (Do Not Do)
-- **Hard Hex Shadows**: Do not use opaque hex codes for shadows (e.g., `#A3B1C6`). Use `rgb(... 0.6)` for transparency and blending.
-- **White Backgrounds**: Never use `bg-white` for cards. They must match the body background `#E0E5EC`.
-- **Flat Buttons**: Buttons must have depth (shadows). No flat designs.
-- **Sharp Corners**: `rounded-lg` is too sharp. Use `rounded-2xl` (16px) or `rounded-3xl` (24px) minimum.
-- **Poor Contrast**: Never use `#8B95A5` or `#A0AEC0` for body text. Use `#6B7280` or darker for WCAG compliance.
-- **Missing Focus States**: All interactive elements must have visible focus indicators.
-- **Block Display for Fonts**: Use `display=swap` in Google Fonts URL, not `display=block`.
+## 布局原则
+
+- **间距**：开放通透。Hero 区用 `py-32` 让阴影呼吸。网格用 `gap-12`。
+- **容器**：`max-w-7xl` 以增宽阔现代感。
+- **背景**：页面背景必须全局 `#E0E5EC`。根背景无渐变。
+
+## 动画与微交互
+- **时长**：UI 元素 `300ms`，嵌套深度圆圈 `500ms`（更重、基于物理的感觉）。
+- **缓动**：`ease-out` 作自然减速。
+- **属性**：`transform`（缩放、translateY、旋转）、`box-shadow`（深度变化）。
+- **悬停效果**：
+  - 卡片：`-translate-y-1`（1px 抬起）+ 增强阴影深度
+  - 按钮：悬停 `-translate-y-1`，激活 `translate-y-0.5`（下压）
+  - 嵌套圆圈：`scale-105`（5% 放大）+ 内部元素 `rotate-180`
+- **浮动动画**：自定义 `@keyframes float` 配 3s ease-in-out infinite 循环作装饰元素环境运动。
+- **平滑滚动**：`scroll-behavior: smooth` 作锚导航。
+
+## 可访问性
+- **对比**：
+  - 主要文字 `#3D4852` 于 `#E0E5EC`：7.5:1（WCAG AAA）
+  - 柔和文字 `#6B7280` 于 `#E0E5EC`：4.6:1（WCAG AA）
+- **聚焦状态**：可见 2px 点缀环（`ring-2 ring-[#6C63FF]`）配 2px offset 于 `#E0E5EC` 背景。所有交互元素强制。
+- **触控目标**：移动端最小 44x44px（按钮用 `h-12 w-12` = 最小 48px）。
+- **移动导航**：汉堡菜单配清晰开/关状态（Menu/X 图标）。
+- **键盘导航**：完整键盘支持，所有链接与按钮有可见聚焦指示器。
+
+## 响应式设计
+
+- **移动优先**：设计自移动视图开始向上增强。
+- **断点**：`md:`（768px）平板，`lg:`（1024px）桌面。
+- **移动适配**：
+  - Hero 视觉在所有屏幕显示，移动端 `max-w-md` 约束
+  - `md:` 断点以下汉堡菜单替代桌面导航
+  - 网格布局折叠：3 列 → 1 列、2 列 → 1 列
+  - 字号缩小：移动端 `text-7xl` → `text-5xl`
+  - 内边距缩减：卡片 `p-16` → `p-8`
+- **导航**：粘性头部配 backdrop blur。移动菜单自头部下滑配凸出阴影。
+
+---
+
+## 反模式（勿做）
+- **硬 Hex 阴影**：勿用不透明 hex 码作阴影（如 `#A3B1C6`）。用 `rgb(... 0.6)` 以透明与混合。
+- **白色背景**：绝不用 `bg-white` 作卡片。它们必须匹配 body 背景 `#E0E5EC`。
+- **扁平按钮**：按钮必须有深度（阴影）。无扁平设计。
+- **锐角**：`rounded-lg` 过锐。用 `rounded-2xl`（16px）或 `rounded-3xl`（24px）最小。
+- **差对比**：绝不用 `#8B95A5` 或 `#A0AEC0` 作正文。用 `#6B7280` 或更深以达 WCAG 合规。
+- **缺失聚焦状态**：所有交互元素必须有可见聚焦指示器。
+- **字体块显示**：Google Fonts URL 用 `display=swap`，非 `display=block`。

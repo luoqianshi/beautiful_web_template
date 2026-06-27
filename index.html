@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beautiful Web Template — A curated HTML template gallery</title>
-  <meta name="description" content="Browse 33 beautiful single-page HTML landing page templates, each showcasing a unique web design style. Original prompts from designprompts.dev.">
+  <title>Beautiful Web Template — 精选 HTML 模板画廊</title>
+  <meta name="description" content="浏览 33 套精美的单页 HTML 落地页模板，每套展示独特的网页设计风格。原始提示词来自 designprompts.dev。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -30,10 +30,10 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Noto Sans CJK SC", sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
@@ -241,28 +241,28 @@
     <div class="container header-inner">
       <div class="logo">Beautiful Web Template</div>
       <nav class="header-links">
-        <a href="#gallery">Gallery</a>
+        <a href="#gallery">画廊</a>
       </nav>
     </div>
   </header>
 
   <section class="hero">
     <div class="container">
-      <div class="hero-badge">33 free HTML templates</div>
-      <h1>Beautiful web templates<br><span>for every style</span></h1>
-      <p>A curated collection of single-page HTML landing pages. Each template explores a distinct design language — from brutalist pixel art to glassmorphism and editorial academia.</p>
+      <div class="hero-badge">33 套免费 HTML 模板</div>
+      <h1>精美网页模板<br><span>覆盖每一种风格</span></h1>
+      <p>一组精选的单页 HTML 落地页模板。每套模板探索一种独特的设计语言——从粗野像素风到玻璃拟态与编辑学院风。</p>
       <div class="hero-cta">
-        <a href="#gallery" class="btn btn-primary">Browse the gallery</a>
-        <a href="https://www.designprompts.dev" class="btn btn-outline" target="_blank">Visit designprompts.dev</a>
+        <a href="#gallery" class="btn btn-primary">浏览画廊</a>
+        <a href="https://www.designprompts.dev" class="btn btn-outline" target="_blank">访问 designprompts.dev</a>
       </div>
-      <div class="source-note">Many Thanks to <a href="https://www.designprompts.dev" target="_blank">designprompts.dev</a>.</div>
+      <div class="source-note">特别感谢 <a href="https://www.designprompts.dev" target="_blank">designprompts.dev</a>。</div>
     </div>
   </section>
 
   <section class="gallery" id="gallery">
     <div class="container">
       <div class="controls">
-        <input type="text" class="search-input" id="search" placeholder="Search styles, e.g. glassmorphism, cyberpunk...">
+        <input type="text" class="search-input" id="search" placeholder="搜索风格，如 玻璃拟态、赛博朋克……">
       </div>
       <div class="grid" id="grid"></div>
     </div>
@@ -270,7 +270,7 @@
 
   <footer>
     <div class="container">
-      <p>Beautiful Web Template — Built with prompts from <a href="https://www.designprompts.dev" target="_blank">designprompts.dev</a>.</p>
+      <p>Beautiful Web Template — 基于 <a href="https://www.designprompts.dev" target="_blank">designprompts.dev</a> 的提示词构建。</p>
     </div>
   </footer>
 
@@ -291,8 +291,8 @@
             <button id="modal-copy" class="btn btn-outline">复制设计说明</button>
           </div>
           <div class="modal-tabs">
-            <div class="modal-tab active" data-panel="shots">Screenshots</div>
-            <div class="modal-tab" data-panel="md">Design Prompt</div>
+            <div class="modal-tab active" data-panel="shots">截图</div>
+            <div class="modal-tab" data-panel="md">设计提示词</div>
           </div>
           <div class="modal-panel active" id="panel-shots">
             <div class="shots-strip" id="shots-strip"></div>
@@ -309,7 +309,7 @@
   <div class="modal-backdrop md-modal" id="md-modal">
     <div class="modal">
       <div class="modal-header">
-        <div class="modal-title" id="md-modal-title">Design Prompt</div>
+        <div class="modal-title" id="md-modal-title">设计提示词</div>
         <button class="modal-close" id="md-modal-close">&times;</button>
       </div>
       <div class="modal-body">
@@ -320,39 +320,39 @@
 
   <script>
     const templates = [
-      {"name": "Academia", "display": "Academia", "description": "University aesthetic, old libraries, warm paper textures, traditional serifs, gold/crimson accents.", "tags": ["Dark", "serif"], "htmlPath": "./templates/Academia/Academia.html", "mdPath": "./templates/Academia/Academia.md", "shots": ["./assets/screenshots/Academia-01.png", "./assets/screenshots/Academia-02.png", "./assets/screenshots/Academia-03.png"]},
-      {"name": "Art-Deco", "display": "Art Deco", "description": "1920s Gatsby elegance, geometric precision, metallic gold accents, architectural symmetry, luxury heritage.", "tags": ["Dark", "serif"], "htmlPath": "./templates/Art-Deco/Art-Deco.html", "mdPath": "./templates/Art-Deco/Art-Deco.md", "shots": ["./assets/screenshots/Art-Deco-01.png", "./assets/screenshots/Art-Deco-02.png", "./assets/screenshots/Art-Deco-03.png"]},
-      {"name": "Aurora-Mesh", "display": "Aurora Mesh", "description": "Flowing mesh gradients, aurora effects, vibrant color transitions, modern startup aesthetic inspired by Stripe and Vercel.", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Aurora-Mesh/Aurora-Mesh.html", "mdPath": "./templates/Aurora-Mesh/Aurora-Mesh.md", "shots": ["./assets/screenshots/Aurora-Mesh-01.png", "./assets/screenshots/Aurora-Mesh-02.png", "./assets/screenshots/Aurora-Mesh-03.png"]},
-      {"name": "Bauhaus", "display": "Bauhaus", "description": "Bold geometric modernism with circles, squares, and triangles. Primary color palette (Red/Blue/Yellow) with stark black borders and hard shadows. Functional yet artistic with constructivist asymmetry.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Bauhaus/Bauhaus.html", "mdPath": "./templates/Bauhaus/Bauhaus.md", "shots": ["./assets/screenshots/Bauhaus-01.png", "./assets/screenshots/Bauhaus-02.png", "./assets/screenshots/Bauhaus-03.png"]},
-      {"name": "Bold-Typography", "display": "Bold Typography", "description": "Type-driven design that treats massive typography as the primary visual element. Ultra-large headlines, extreme contrast, and dramatic negative space create poster-like compositions where words become art.", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Bold-Typography/Bold-Typography.html", "mdPath": "./templates/Bold-Typography/Bold-Typography.md", "shots": ["./assets/screenshots/Bold-Typography-01.png", "./assets/screenshots/Bold-Typography-02.png", "./assets/screenshots/Bold-Typography-03.png"]},
-      {"name": "Botanical", "display": "Botanical / Organic Serif", "description": "Soft, earthy, elegant design inspired by nature. Features organic shapes, generous rounded corners, paper grain texture, muted earth tones, and sophisticated serif typography that breathes warmth and natural luxury.", "tags": ["Light", "serif"], "htmlPath": "./templates/Botanical/Botanical.html", "mdPath": "./templates/Botanical/Botanical.md", "shots": ["./assets/screenshots/Botanical-01.png", "./assets/screenshots/Botanical-02.png", "./assets/screenshots/Botanical-03.png"]},
-      {"name": "Brutalist-Pixel", "display": "Brutalist Pixel", "description": "Brutalist pixel art aesthetic combining raw typography with 8-bit/16-bit pixel elements, grid backgrounds, and high-contrast blocky visuals.", "tags": ["Dark", "mono"], "htmlPath": "./templates/Brutalist-Pixel/Brutalist-Pixel.html", "mdPath": "./templates/Brutalist-Pixel/Brutalist-Pixel.md", "shots": ["./assets/screenshots/Brutalist-Pixel-01.png", "./assets/screenshots/Brutalist-Pixel-02.png", "./assets/screenshots/Brutalist-Pixel-03.png"]},
-      {"name": "Claymorphism", "display": "Clay", "description": "A hyper-realistic 3D aesthetic simulating soft, inflatable clay objects with multi-layered shadow stacks, vibrant candy-store colors, tactile micro-interactions, and organic floating ambient elements that create a premium, playful digital toy experience.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Claymorphism/Claymorphism.html", "mdPath": "./templates/Claymorphism/Claymorphism.md", "shots": ["./assets/screenshots/Claymorphism-01.png", "./assets/screenshots/Claymorphism-02.png", "./assets/screenshots/Claymorphism-03.png"]},
-      {"name": "Cyberpunk", "display": "Cyberpunk", "description": "High contrast neon on black, glitch animations, terminal/monospace fonts, tech-oriented decorations. A dystopian digital aesthetic inspired by 80s sci-fi and hacker culture.", "tags": ["Dark", "mono"], "htmlPath": "./templates/Cyberpunk/Cyberpunk.html", "mdPath": "./templates/Cyberpunk/Cyberpunk.md", "shots": ["./assets/screenshots/Cyberpunk-01.png", "./assets/screenshots/Cyberpunk-02.png", "./assets/screenshots/Cyberpunk-03.png"]},
-      {"name": "Enterprise", "display": "Corporate Trust", "description": "Modern SaaS aesthetic balancing professionalism with approachability. Vibrant indigo/violet gradients, soft colored shadows, isometric depth, and clean geometric sans-serif typography.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Enterprise/Enterprise.html", "mdPath": "./templates/Enterprise/Enterprise.md", "shots": ["./assets/screenshots/Enterprise-01.png", "./assets/screenshots/Enterprise-02.png", "./assets/screenshots/Enterprise-03.png"]},
-      {"name": "Flat-Design", "display": "Flat Design", "description": "A design philosophy centered on removing depth cues (shadows, bevels, gradients) in favor of pure color, typography, and layout. Crisp, two-dimensional, and geometric with bold color blocking.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Flat-Design/Flat-Design.html", "mdPath": "./templates/Flat-Design/Flat-Design.md", "shots": ["./assets/screenshots/Flat-Design-01.png", "./assets/screenshots/Flat-Design-02.png", "./assets/screenshots/Flat-Design-03.png"]},
-      {"name": "Glassmorphism", "display": "Glassmorphism", "description": "Apple-inspired aesthetic with rich mesh gradients, premium blur, and constrained layouts.", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Glassmorphism/Glassmorphism.html", "mdPath": "./templates/Glassmorphism/Glassmorphism.md", "shots": ["./assets/screenshots/Glassmorphism-01.png", "./assets/screenshots/Glassmorphism-02.png", "./assets/screenshots/Glassmorphism-03.png"]},
-      {"name": "Industrial", "display": "Industrial", "description": "A high-fidelity industrial skeuomorphism aesthetic inspired by Dieter Rams and Teenage Engineering. Features tactile neumorphic elements, matte plastic surfaces, and safety-orange accents. Every component mimics physical hardware with realistic lighting, mechanical interactions, and manufacturing details like screws, vents, and LED indicators.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Industrial/Industrial.html", "mdPath": "./templates/Industrial/Industrial.md", "shots": ["./assets/screenshots/Industrial-01.png", "./assets/screenshots/Industrial-02.png", "./assets/screenshots/Industrial-03.png"]},
-      {"name": "Kinetic", "display": "Kinetic", "description": "Motion-first design where typography is the primary visual medium. Features infinite marquees, viewport-scaled text, scroll-triggered animations, and aggressive uppercase styling. High contrast, brutalist energy with rhythmic movement.", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Kinetic/Kinetic.html", "mdPath": "./templates/Kinetic/Kinetic.md", "shots": ["./assets/screenshots/Kinetic-01.png", "./assets/screenshots/Kinetic-02.png", "./assets/screenshots/Kinetic-03.png"]},
-      {"name": "Luxury", "display": "Luxury", "description": "Elegant serif typography with monochromatic palette and gold accents. Ultra-slow animations, generous white space, and architectural precision. High-end fashion magazine editorial aesthetic with depth through subtle shadows and layering.", "tags": ["Light", "serif"], "htmlPath": "./templates/Luxury/Luxury.html", "mdPath": "./templates/Luxury/Luxury.md", "shots": ["./assets/screenshots/Luxury-01.png", "./assets/screenshots/Luxury-02.png", "./assets/screenshots/Luxury-03.png"]},
-      {"name": "Material-Design", "display": "Material", "description": "Playful, dynamic color extraction, pill-shaped buttons, and distinct elevation states. Based on Google's Material Design 3 with enhanced depth and micro-interactions.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Material-Design/Material-Design.html", "mdPath": "./templates/Material-Design/Material-Design.md", "shots": ["./assets/screenshots/Material-Design-01.png", "./assets/screenshots/Material-Design-02.png", "./assets/screenshots/Material-Design-03.png"]},
-      {"name": "Maximalism", "display": "Maximalism", "description": "Clashing patterns, dense layouts, oversaturated colors, intentional visual clutter. MORE IS MORE.", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Maximalism/Maximalism.html", "mdPath": "./templates/Maximalism/Maximalism.md", "shots": ["./assets/screenshots/Maximalism-01.png", "./assets/screenshots/Maximalism-02.png", "./assets/screenshots/Maximalism-03.png"]},
-      {"name": "Minimal-Dark", "display": "Simple Dark", "description": "An atmospheric dark mode design system built on deep slate tones with warm amber accents. Features ambient glow effects, glass-like translucent cards, geometric typography, and generous breathing room. Ethereal yet grounded—like a premium app at midnight.", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Minimal-Dark/Minimal-Dark.html", "mdPath": "./templates/Minimal-Dark/Minimal-Dark.md", "shots": ["./assets/screenshots/Minimal-Dark-01.png", "./assets/screenshots/Minimal-Dark-02.png", "./assets/screenshots/Minimal-Dark-03.png"]},
-      {"name": "Modern-Dark", "display": "Modern Dark", "description": "A cinematic, high-precision dark mode design featuring layered ambient lighting through animated gradient blobs, mouse-tracking spotlight effects, and meticulously crafted micro-interactions that feel like premium software.", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Modern-Dark/Modern-Dark.html", "mdPath": "./templates/Modern-Dark/Modern-Dark.md", "shots": ["./assets/screenshots/Modern-Dark-01.png", "./assets/screenshots/Modern-Dark-02.png", "./assets/screenshots/Modern-Dark-03.png"]},
-      {"name": "Monochrome", "display": "Monochrome", "description": "A stark, editorial design system built on pure black and white. No accent colors—just dramatic contrast, oversized serif typography, and precise geometric layouts. Evokes high-end fashion editorials and architectural portfolios. Austere, sophisticated, unapologetically bold.", "tags": ["Light", "serif"], "htmlPath": "./templates/Monochrome/Monochrome.html", "mdPath": "./templates/Monochrome/Monochrome.md", "shots": ["./assets/screenshots/Monochrome-01.png", "./assets/screenshots/Monochrome-02.png", "./assets/screenshots/Monochrome-03.png"]},
-      {"name": "Neo-Brutalism", "display": "Neo-brutalism", "description": "A raw, high-contrast aesthetic that mimics print design and DIY punk culture. Characterized by cream backgrounds, thick black borders (4px), hard offset shadows with zero blur, clashing vibrant colors (Hot Red, Vivid Yellow, Soft Violet), and Space Grotesk typography at heavy weights. Embraces asymmetry, rotation, sticker-like layering, and organized visual chaos.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Neo-Brutalism/Neo-Brutalism.html", "mdPath": "./templates/Neo-Brutalism/Neo-Brutalism.md", "shots": ["./assets/screenshots/Neo-Brutalism-01.png", "./assets/screenshots/Neo-Brutalism-02.png", "./assets/screenshots/Neo-Brutalism-03.png"]},
-      {"name": "Neumorphism", "display": "Neumorphism", "description": "Extruded and inset elements via dual shadows on monochromatic backgrounds. Soft, tactile, and physically grounded with excellent accessibility.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Neumorphism/Neumorphism.html", "mdPath": "./templates/Neumorphism/Neumorphism.md", "shots": ["./assets/screenshots/Neumorphism-01.png", "./assets/screenshots/Neumorphism-02.png", "./assets/screenshots/Neumorphism-03.png"]},
-      {"name": "Newsprint", "display": "Newsprint", "description": "Stark black and white, high contrast, tight grids, newspaper aesthetic, sharp lines, editorial depth.", "tags": ["Light", "serif"], "htmlPath": "./templates/Newsprint/Newsprint.html", "mdPath": "./templates/Newsprint/Newsprint.md", "shots": ["./assets/screenshots/Newsprint-01.png", "./assets/screenshots/Newsprint-02.png", "./assets/screenshots/Newsprint-03.png"]},
-      {"name": "Organic", "display": "Organic / Natural", "description": "Earth-inspired palette with moss greens, terracotta, and sand tones. Features organic blob shapes, grain texture overlays, asymmetric rounded corners, and soft shadows. Embraces wabi-sabi philosophy with warmth and natural imperfection.", "tags": ["Light", "serif"], "htmlPath": "./templates/Organic/Organic.html", "mdPath": "./templates/Organic/Organic.md", "shots": ["./assets/screenshots/Organic-01.png", "./assets/screenshots/Organic-02.png", "./assets/screenshots/Organic-03.png"]},
-      {"name": "Playful-Geometric", "display": "Playful Geometric", "description": "A vibrant, high-energy aesthetic that combines a stable structural grid with whimsical geometric decorations. It relies on bright solid colors, simple primitive shapes (circles, triangles, squiggles), and tactile interactions to create a friendly, optimistic vibe reminiscent of modern Memphis design.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Playful-Geometric/Playful-Geometric.html", "mdPath": "./templates/Playful-Geometric/Playful-Geometric.md", "shots": ["./assets/screenshots/Playful-Geometric-01.png", "./assets/screenshots/Playful-Geometric-02.png", "./assets/screenshots/Playful-Geometric-03.png"]},
-      {"name": "Professional", "display": "Business Style", "description": "An editorial-inspired minimalist design system centered on elegant serif typography. Warm ivory backgrounds with subtle paper texture, refined spacing, rule lines, and classical proportions create a timeless, literary aesthetic. Enhanced depth through layered gradients and multi-toned shadows. The design whispers sophistication through restraint and typographic excellence.", "tags": ["Light", "serif"], "htmlPath": "./templates/Professional/Professional.html", "mdPath": "./templates/Professional/Professional.md", "shots": ["./assets/screenshots/Professional-01.png", "./assets/screenshots/Professional-02.png", "./assets/screenshots/Professional-03.png"]},
-      {"name": "Retro", "display": "Retro", "description": "Ugly-cool 90s nostalgia aesthetic with Windows 95 beveled UI, system fonts, bright primary colors, marquee scrolling text, and maximum visual chaos.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Retro/Retro.html", "mdPath": "./templates/Retro/Retro.md", "shots": ["./assets/screenshots/Retro-01.png", "./assets/screenshots/Retro-02.png", "./assets/screenshots/Retro-03.png"]},
-      {"name": "SaaS", "display": "Tech Style", "description": "A bold, minimalist-modern visual system combining clean aesthetics with dynamic execution. Features signature Electric Blue gradients, sophisticated dual-font pairing (Calistoga + Inter), animated hero graphics, inverted contrast sections, and micro-interactions throughout. Professional yet design-forward—confidence without clutter.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/SaaS/SaaS.html", "mdPath": "./templates/SaaS/SaaS.md", "shots": ["./assets/screenshots/SaaS-01.png", "./assets/screenshots/SaaS-02.png", "./assets/screenshots/SaaS-03.png"]},
-      {"name": "Sketch", "display": "Hand-Drawn / Sketch", "description": "Organic wobbly borders, handwritten typography, paper textures, and playful imperfection. Every element feels sketched with markers and pencils on textured paper.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Sketch/Sketch.html", "mdPath": "./templates/Sketch/Sketch.md", "shots": ["./assets/screenshots/Sketch-01.png", "./assets/screenshots/Sketch-02.png", "./assets/screenshots/Sketch-03.png"]},
-      {"name": "Swiss-Minimalist", "display": "Swiss", "description": "A rigorous implementation of the International Typographic Style (1950s). Characterized by objective typography, sans-serif fonts (Inter), mathematical grids with subtle texture patterns, and a strict black/white/red palette. Prioritizes readability, precision, asymmetrical organization, and visual depth through layered patterns.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Swiss-Minimalist/Swiss-Minimalist.html", "mdPath": "./templates/Swiss-Minimalist/Swiss-Minimalist.md", "shots": ["./assets/screenshots/Swiss-Minimalist-01.png", "./assets/screenshots/Swiss-Minimalist-02.png", "./assets/screenshots/Swiss-Minimalist-03.png"]},
-      {"name": "Terminal", "display": "Terminal CLI", "description": "A raw, functional, and retro-futuristic command-line interface aesthetic. High contrast, monospaced precision, and blinking cursors.", "tags": ["Dark", "mono"], "htmlPath": "./templates/Terminal/Terminal.html", "mdPath": "./templates/Terminal/Terminal.md", "shots": ["./assets/screenshots/Terminal-01.png", "./assets/screenshots/Terminal-02.png", "./assets/screenshots/Terminal-03.png"]},
-      {"name": "Vaporwave", "display": "Vaporwave", "description": "A nostalgic, neon-drenched journey into 80s retro-futurism. High-contrast neon pinks and cyans against deep void purples. Digital grids, glowing horizons, surreal sunset gradients, and CRT scanline overlays create an immersive synthetic world.", "tags": ["Dark", "mono"], "htmlPath": "./templates/Vaporwave/Vaporwave.html", "mdPath": "./templates/Vaporwave/Vaporwave.md", "shots": ["./assets/screenshots/Vaporwave-01.png", "./assets/screenshots/Vaporwave-02.png", "./assets/screenshots/Vaporwave-03.png"]},
-      {"name": "Web3", "display": "Crypto", "description": "A bold, futuristic aesthetic inspired by Bitcoin and decentralized finance. Deep void backgrounds with Bitcoin orange accents, golden highlights, glowing elements, and precision data visualization.", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Web3/Web3.html", "mdPath": "./templates/Web3/Web3.md", "shots": ["./assets/screenshots/Web3-01.png", "./assets/screenshots/Web3-02.png", "./assets/screenshots/Web3-03.png"]}
+      {"name": "Academia", "display": "Academia", "description": "学院派美学，古老图书馆气息，温暖纸张质感，传统衬线字体，金/绯红点缀。", "tags": ["Dark", "serif"], "htmlPath": "./templates/Academia/Academia.html", "mdPath": "./templates/Academia/Academia.md", "shots": ["./assets/screenshots/Academia-01.png", "./assets/screenshots/Academia-02.png", "./assets/screenshots/Academia-03.png"]},
+      {"name": "Art-Deco", "display": "Art Deco", "description": "1920 年代盖茨比式优雅，几何精准，金属金色调点缀，建筑式对称，奢华传承。", "tags": ["Dark", "serif"], "htmlPath": "./templates/Art-Deco/Art-Deco.html", "mdPath": "./templates/Art-Deco/Art-Deco.md", "shots": ["./assets/screenshots/Art-Deco-01.png", "./assets/screenshots/Art-Deco-02.png", "./assets/screenshots/Art-Deco-03.png"]},
+      {"name": "Aurora-Mesh", "display": "Aurora Mesh", "description": "流动的网格渐变，极光效果，鲜明色彩过渡，受 Stripe 与 Vercel 启发的现代初创美学。", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Aurora-Mesh/Aurora-Mesh.html", "mdPath": "./templates/Aurora-Mesh/Aurora-Mesh.md", "shots": ["./assets/screenshots/Aurora-Mesh-01.png", "./assets/screenshots/Aurora-Mesh-02.png", "./assets/screenshots/Aurora-Mesh-03.png"]},
+      {"name": "Bauhaus", "display": "Bauhaus", "description": "大胆的几何现代主义，以圆、方、三角为基本形。三原色调色板配硬朗黑边和硬阴影。", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Bauhaus/Bauhaus.html", "mdPath": "./templates/Bauhaus/Bauhaus.md", "shots": ["./assets/screenshots/Bauhaus-01.png", "./assets/screenshots/Bauhaus-02.png", "./assets/screenshots/Bauhaus-03.png"]},
+      {"name": "Bold-Typography", "display": "Bold Typography", "description": "字体驱动的设计，将巨型排版作为主要视觉元素。超大标题、极致对比与戏剧性留白。", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Bold-Typography/Bold-Typography.html", "mdPath": "./templates/Bold-Typography/Bold-Typography.md", "shots": ["./assets/screenshots/Bold-Typography-01.png", "./assets/screenshots/Bold-Typography-02.png", "./assets/screenshots/Bold-Typography-03.png"]},
+      {"name": "Botanical", "display": "Botanical / Organic Serif", "description": "柔和、质朴、优雅的自然灵感设计。有机形态、大圆角、纸张颗粒质感与精致衬线字体。", "tags": ["Light", "serif"], "htmlPath": "./templates/Botanical/Botanical.html", "mdPath": "./templates/Botanical/Botanical.md", "shots": ["./assets/screenshots/Botanical-01.png", "./assets/screenshots/Botanical-02.png", "./assets/screenshots/Botanical-03.png"]},
+      {"name": "Brutalist-Pixel", "display": "Brutalist Pixel", "description": "粗野像素美学，结合原始排版与 8-bit/16-bit 像素元素、网格背景与高对比方块视觉。", "tags": ["Dark", "mono"], "htmlPath": "./templates/Brutalist-Pixel/Brutalist-Pixel.html", "mdPath": "./templates/Brutalist-Pixel/Brutalist-Pixel.md", "shots": ["./assets/screenshots/Brutalist-Pixel-01.png", "./assets/screenshots/Brutalist-Pixel-02.png", "./assets/screenshots/Brutalist-Pixel-03.png"]},
+      {"name": "Claymorphism", "display": "Clay", "description": "超写实 3D 美学，模拟柔软可充气黏土物件，多层阴影堆叠与糖果店般鲜艳色彩。", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Claymorphism/Claymorphism.html", "mdPath": "./templates/Claymorphism/Claymorphism.md", "shots": ["./assets/screenshots/Claymorphism-01.png", "./assets/screenshots/Claymorphism-02.png", "./assets/screenshots/Claymorphism-03.png"]},
+      {"name": "Cyberpunk", "display": "Cyberpunk", "description": "黑底高对比霓虹，故障动画，终端/等宽字体，科技感装饰。受 80 年代科幻与黑客文化启发。", "tags": ["Dark", "mono"], "htmlPath": "./templates/Cyberpunk/Cyberpunk.html", "mdPath": "./templates/Cyberpunk/Cyberpunk.md", "shots": ["./assets/screenshots/Cyberpunk-01.png", "./assets/screenshots/Cyberpunk-02.png", "./assets/screenshots/Cyberpunk-03.png"]},
+      {"name": "Enterprise", "display": "Corporate Trust", "description": "现代 SaaS 美学，平衡专业感与亲和力。鲜艳靛蓝/紫色渐变、柔和彩色阴影与等距深度感。", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Enterprise/Enterprise.html", "mdPath": "./templates/Enterprise/Enterprise.md", "shots": ["./assets/screenshots/Enterprise-01.png", "./assets/screenshots/Enterprise-02.png", "./assets/screenshots/Enterprise-03.png"]},
+      {"name": "Flat-Design", "display": "Flat Design", "description": "以移除深度提示为核心的设计哲学，转而倚重纯粹的色彩、字体与布局。利落、扁平、几何化。", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Flat-Design/Flat-Design.html", "mdPath": "./templates/Flat-Design/Flat-Design.md", "shots": ["./assets/screenshots/Flat-Design-01.png", "./assets/screenshots/Flat-Design-02.png", "./assets/screenshots/Flat-Design-03.png"]},
+      {"name": "Glassmorphism", "display": "Glassmorphism", "description": "苹果风格美学，搭配丰富的网格渐变、高级感模糊与克制的布局。", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Glassmorphism/Glassmorphism.html", "mdPath": "./templates/Glassmorphism/Glassmorphism.md", "shots": ["./assets/screenshots/Glassmorphism-01.png", "./assets/screenshots/Glassmorphism-02.png", "./assets/screenshots/Glassmorphism-03.png"]},
+      {"name": "Industrial", "display": "Industrial", "description": "受 Dieter Rams 与 Teenage Engineering 启发的高保真工业拟物美学。触感新拟态元素与安全橙点缀。", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Industrial/Industrial.html", "mdPath": "./templates/Industrial/Industrial.md", "shots": ["./assets/screenshots/Industrial-01.png", "./assets/screenshots/Industrial-02.png", "./assets/screenshots/Industrial-03.png"]},
+      {"name": "Kinetic", "display": "Kinetic", "description": "动效优先的设计，字体是主要视觉媒介。无限跑马灯、视口缩放文字与滚动触发动画。", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Kinetic/Kinetic.html", "mdPath": "./templates/Kinetic/Kinetic.md", "shots": ["./assets/screenshots/Kinetic-01.png", "./assets/screenshots/Kinetic-02.png", "./assets/screenshots/Kinetic-03.png"]},
+      {"name": "Luxury", "display": "Luxury", "description": "优雅的衬线字体配单色调色板与金色点缀。极慢动画、慷慨留白与建筑般的精准。", "tags": ["Light", "serif"], "htmlPath": "./templates/Luxury/Luxury.html", "mdPath": "./templates/Luxury/Luxury.md", "shots": ["./assets/screenshots/Luxury-01.png", "./assets/screenshots/Luxury-02.png", "./assets/screenshots/Luxury-03.png"]},
+      {"name": "Material-Design", "display": "Material", "description": "活泼、动感的色彩提取，胶囊形按钮与分明的层级状态。基于 Google Material Design 3。", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Material-Design/Material-Design.html", "mdPath": "./templates/Material-Design/Material-Design.md", "shots": ["./assets/screenshots/Material-Design-01.png", "./assets/screenshots/Material-Design-02.png", "./assets/screenshots/Material-Design-03.png"]},
+      {"name": "Maximalism", "display": "Maximalism", "description": "冲突的图案、密集的布局、过饱和的色彩、刻意的视觉杂乱。多多益善。", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Maximalism/Maximalism.html", "mdPath": "./templates/Maximalism/Maximalism.md", "shots": ["./assets/screenshots/Maximalism-01.png", "./assets/screenshots/Maximalism-02.png", "./assets/screenshots/Maximalism-03.png"]},
+      {"name": "Minimal-Dark", "display": "Simple Dark", "description": "建立在深石板色调与暖琥珀点缀之上的氛围感深色模式设计系统。环境光晕与玻璃般半透明卡片。", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Minimal-Dark/Minimal-Dark.html", "mdPath": "./templates/Minimal-Dark/Minimal-Dark.md", "shots": ["./assets/screenshots/Minimal-Dark-01.png", "./assets/screenshots/Minimal-Dark-02.png", "./assets/screenshots/Minimal-Dark-03.png"]},
+      {"name": "Modern-Dark", "display": "Modern Dark", "description": "电影般高精度的深色模式设计，通过动画渐变光斑营造分层环境光与鼠标追踪聚光效果。", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Modern-Dark/Modern-Dark.html", "mdPath": "./templates/Modern-Dark/Modern-Dark.md", "shots": ["./assets/screenshots/Modern-Dark-01.png", "./assets/screenshots/Modern-Dark-02.png", "./assets/screenshots/Modern-Dark-03.png"]},
+      {"name": "Monochrome", "display": "Monochrome", "description": "建立在纯黑白之上的冷峻编辑设计系统。无点缀色——唯有戏剧性对比与超大衬线字体。", "tags": ["Light", "serif"], "htmlPath": "./templates/Monochrome/Monochrome.html", "mdPath": "./templates/Monochrome/Monochrome.md", "shots": ["./assets/screenshots/Monochrome-01.png", "./assets/screenshots/Monochrome-02.png", "./assets/screenshots/Monochrome-03.png"]},
+      {"name": "Neo-Brutalism", "display": "Neo-brutalism", "description": "模仿印刷设计与 DIY 朋克文化的原始高对比美学。奶油色背景、粗黑边框与零模糊硬偏移阴影。", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Neo-Brutalism/Neo-Brutalism.html", "mdPath": "./templates/Neo-Brutalism/Neo-Brutalism.md", "shots": ["./assets/screenshots/Neo-Brutalism-01.png", "./assets/screenshots/Neo-Brutalism-02.png", "./assets/screenshots/Neo-Brutalism-03.png"]},
+      {"name": "Neumorphism", "display": "Neumorphism", "description": "通过单色背景上的双向阴影实现凸出与凹陷元素。柔软、有触感、物理感强。", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Neumorphism/Neumorphism.html", "mdPath": "./templates/Neumorphism/Neumorphism.md", "shots": ["./assets/screenshots/Neumorphism-01.png", "./assets/screenshots/Neumorphism-02.png", "./assets/screenshots/Neumorphism-03.png"]},
+      {"name": "Newsprint", "display": "Newsprint", "description": "纯黑白、高对比、紧凑网格、报纸美学、锐利线条、编辑深度。", "tags": ["Light", "serif"], "htmlPath": "./templates/Newsprint/Newsprint.html", "mdPath": "./templates/Newsprint/Newsprint.md", "shots": ["./assets/screenshots/Newsprint-01.png", "./assets/screenshots/Newsprint-02.png", "./assets/screenshots/Newsprint-03.png"]},
+      {"name": "Organic", "display": "Organic / Natural", "description": "大地灵感的调色板，含苔藓绿、赤陶与沙色调。有机水滴形、颗粒质感与柔和阴影。", "tags": ["Light", "serif"], "htmlPath": "./templates/Organic/Organic.html", "mdPath": "./templates/Organic/Organic.md", "shots": ["./assets/screenshots/Organic-01.png", "./assets/screenshots/Organic-02.png", "./assets/screenshots/Organic-03.png"]},
+      {"name": "Playful-Geometric", "display": "Playful Geometric", "description": "充满活力的美学，将稳定结构网格与俏皮几何装饰结合。明亮纯色与简单基本形状。", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Playful-Geometric/Playful-Geometric.html", "mdPath": "./templates/Playful-Geometric/Playful-Geometric.md", "shots": ["./assets/screenshots/Playful-Geometric-01.png", "./assets/screenshots/Playful-Geometric-02.png", "./assets/screenshots/Playful-Geometric-03.png"]},
+      {"name": "Professional", "display": "Business Style", "description": "以优雅衬线字体为中心的编辑风极简设计系统。温暖象牙白背景、考究间距与古典比例。", "tags": ["Light", "serif"], "htmlPath": "./templates/Professional/Professional.html", "mdPath": "./templates/Professional/Professional.md", "shots": ["./assets/screenshots/Professional-01.png", "./assets/screenshots/Professional-02.png", "./assets/screenshots/Professional-03.png"]},
+      {"name": "Retro", "display": "Retro", "description": "丑酷的 90 年代怀旧美学，Windows 95 凸凹立体 UI、系统字体、明亮原色与跑马灯滚动文字。", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Retro/Retro.html", "mdPath": "./templates/Retro/Retro.md", "shots": ["./assets/screenshots/Retro-01.png", "./assets/screenshots/Retro-02.png", "./assets/screenshots/Retro-03.png"]},
+      {"name": "SaaS", "display": "Tech Style", "description": "兼具简洁美学与动感执行的大胆极简现代视觉系统。标志性电光蓝渐变与动画首屏图形。", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/SaaS/SaaS.html", "mdPath": "./templates/SaaS/SaaS.md", "shots": ["./assets/screenshots/SaaS-01.png", "./assets/screenshots/SaaS-02.png", "./assets/screenshots/SaaS-03.png"]},
+      {"name": "Sketch", "display": "Hand-Drawn / Sketch", "description": "有机摇摆边框、手写体字体、纸张质感与俏皮的不完美。仿佛用马克笔在质感纸上手绘。", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Sketch/Sketch.html", "mdPath": "./templates/Sketch/Sketch.md", "shots": ["./assets/screenshots/Sketch-01.png", "./assets/screenshots/Sketch-02.png", "./assets/screenshots/Sketch-03.png"]},
+      {"name": "Swiss-Minimalist", "display": "Swiss", "description": "对国际字体排印风格的严谨实现。客观字体、数学网格与严格黑/白/红调色板。", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Swiss-Minimalist/Swiss-Minimalist.html", "mdPath": "./templates/Swiss-Minimalist/Swiss-Minimalist.md", "shots": ["./assets/screenshots/Swiss-Minimalist-01.png", "./assets/screenshots/Swiss-Minimalist-02.png", "./assets/screenshots/Swiss-Minimalist-03.png"]},
+      {"name": "Terminal", "display": "Terminal CLI", "description": "原始、功能性且复古未来主义的命令行界面美学。高对比、等宽精准与闪烁光标。", "tags": ["Dark", "mono"], "htmlPath": "./templates/Terminal/Terminal.html", "mdPath": "./templates/Terminal/Terminal.md", "shots": ["./assets/screenshots/Terminal-01.png", "./assets/screenshots/Terminal-02.png", "./assets/screenshots/Terminal-03.png"]},
+      {"name": "Vaporwave", "display": "Vaporwave", "description": "怀旧、霓虹弥漫的 80 年代复古未来主义。高对比霓虹粉与青色映衬深邃虚空紫。", "tags": ["Dark", "mono"], "htmlPath": "./templates/Vaporwave/Vaporwave.html", "mdPath": "./templates/Vaporwave/Vaporwave.md", "shots": ["./assets/screenshots/Vaporwave-01.png", "./assets/screenshots/Vaporwave-02.png", "./assets/screenshots/Vaporwave-03.png"]},
+      {"name": "Web3", "display": "Crypto", "description": "受比特币与去中心化金融启发的大胆未来主义美学。深邃虚空背景配比特币橙点缀与金色高光。", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Web3/Web3.html", "mdPath": "./templates/Web3/Web3.md", "shots": ["./assets/screenshots/Web3-01.png", "./assets/screenshots/Web3-02.png", "./assets/screenshots/Web3-03.png"]}
     ];
 
     const grid = document.getElementById('grid');
@@ -393,9 +393,9 @@
               ${t.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
             </div>
             <div class="card-actions">
-              <button class="btn btn-primary preview-btn" data-name="${t.name}">Preview</button>
+              <button class="btn btn-primary preview-btn" data-name="${t.name}">预览</button>
               <a href="${t.htmlPath}" class="btn btn-outline" target="_blank">HTML</a>
-              <button class="btn btn-outline md-btn" data-name="${t.name}">MD</button>
+              <button class="btn btn-outline md-btn" data-name="${t.name}">提示词</button>
             </div>
           </div>
         </article>
@@ -453,7 +453,7 @@
       const t = templates.find(x => x.name === name);
       if (!t) return;
       mdModalTitle.textContent = `${t.display} — Design Prompt`;
-      mdReader.innerHTML = '<p style="color: var(--text-muted);">Loading...</p>';
+      mdReader.innerHTML = '<p style="color: var(--text-muted);">加载中……</p>';
       mdModal.classList.add('active');
       document.body.style.overflow = 'hidden';
 
@@ -462,7 +462,7 @@
         const md = await res.text();
         mdReader.innerHTML = marked.parse(md);
       } catch (err) {
-        mdReader.innerHTML = `<p style="color: #dc2626;">Failed to load markdown: ${err.message}</p>`;
+        mdReader.innerHTML = `<p style="color: #dc2626;">加载 Markdown 失败：${err.message}</p>`;
       }
     }
 

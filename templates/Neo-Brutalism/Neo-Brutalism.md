@@ -10,335 +10,335 @@
 | 显示名称 | Neo-brutalism |
 | 模式 | ☀️ 浅色模式 (Light) |
 | 字体类型 | sans-serif |
-| 描述 | A raw, high-contrast aesthetic that mimics print design and DIY punk culture. Characterized by cream backgrounds, thick black borders (4px), hard offset shadows with zero blur, clashing vibrant colors (Hot Red, Vivid Yellow, Soft Violet), and Space Grotesk typography at heavy weights. Embraces asymmetry, rotation, sticker-like layering, and organized visual chaos. |
+| 描述 | 模仿印刷设计与 DIY 朋克文化的原始高对比美学。奶油色背景、粗黑边框（4px）、零模糊硬偏移阴影、冲突的鲜艳色（热红、明黄、柔紫），以及重字重的 Space Grotesk 字体。拥抱不对称、旋转、贴纸式层叠与有组织的视觉混乱。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Asymmetric split with massive rotated headline text blocks. Left side has border-boxed text with different colors and rotations. Right side features a 'visual chaos' container with overlapping shapes and badges. CTAs use brutalist shadows that translate on hover. Fully responsive with stacked layout on mobile.
+非对称分割配巨型旋转标题文字块。左侧含带边框文字块，不同色彩与旋转。右侧为"视觉混乱"容器，配重叠形状与徽章。CTA 用粗野阴影，悬停时位移。完全响应式，移动端堆叠布局。
 
 ### Stats
 
-4-column brutalist grid (2 columns on tablet, 1 on mobile) with thick white borders on black background. Hover inverts to accent color. Each stat has oversized numbers (text-7xl), uppercase labels, and decorative bars. No icons, just raw numerical data.
+4 列粗野网格（平板 2 列，移动 1 列），黑底上粗白边框。悬停反相为点缀色。每个数据有超大号数字（text-7xl）、大写标签与装饰条。无图标，仅原始数字数据。
 
 ### Features
 
-3-column grid (1 on mobile) of cards with thick black borders and 8px offset shadows. Icons enclosed in bordered, colored accent boxes. Card headers have numbered badges and border separators. Hover lifts cards upward with deeper shadows.
+3 列网格（移动 1 列），卡片配粗黑边框与 8px 偏移阴影。图标置于带边框彩色点缀盒内。卡片头部有编号徽章与边框分隔符。悬停时卡片向上抬升配更深阴影。
 
 ### How It Works
 
-3 centered boxes (stacked on mobile) connected by dashed line on desktop. Each step has a large rotated number badge at top with accent background and thick border. Hover rotates the badge further. Process badge at top with pill shape.
+3 个居中方框（移动堆叠），桌面端以虚线连接。每步顶部有大型旋转编号徽章配点缀背景与粗边框。悬停时徽章旋转更多。顶部有胶囊形流程徽章。
 
 ### Benefits
 
-Split 2-column (stacked on mobile). Left: vibrant red accent with radial dot pattern overlay, massive white text with text shadow, rotated white card for subtitle. Right: clean cream background with bold list items using square bullets that change color on hover.
+双栏分割（移动堆叠）。左：鲜艳红点缀配径向圆点图案叠加，巨型白字配文字阴影，旋转白卡片作副标题。右：干净奶油色背景配粗体列表项，方形项目符号悬停变色。
 
 ### Pricing
 
-3-column card grid (1 on mobile) with massive hard shadows (12-16px). Highlighted plan scales up slightly and uses black header with white text. Price numbers are huge (text-6xl). Features use custom checkbox bullets. Decorative pattern border at top.
+3 列卡片网格（移动 1 列）配巨型硬阴影（12-16px）。高亮方案轻微放大并用黑头白字。价格数字巨大（text-6xl）。特性用自定义勾选框项目符号。顶部装饰图案边框。
 
 ### Testimonials
 
-Infinite horizontal marquee (react-fast-marquee) with gradient fade edges. Cards are white with thick borders and large shadows. 5-star ratings as large text. Author section has bordered avatar and separate background.
+无限横向跑马灯（react-fast-marquee）配渐变淡入边缘。卡片为白色配粗边框与大阴影。5 星评分作大号文字。作者区有带边框头像与独立背景。
 
 ### Faq
 
-Stacked accordion with details/summary. Each item is a thick-bordered card with shadow. Open state rotates the +/X icon and reveals border separator. Questions in bold uppercase. Answers on different background (neo-muted).
+堆叠手风琴配 details/summary。每项为粗边框卡片配阴影。打开状态旋转 +/X 图标并显现边框分隔符。问题用粗体大写。回答在不同背景（neo-muted）。
 
 ### Blog
 
-3-column grid (1 on mobile). Cards with thick borders. Images are grayscale with date badge overlay. Hover restores color and scales image. Title underlines on hover. Author section has border separator at bottom.
+3 列网格（移动 1 列）。卡片配粗边框。图片灰度配日期徽章叠加。悬停恢复彩色并缩放图片。标题悬停下划线。作者区底部有边框分隔符。
 
 ### Footer
 
-Yellow background with thick top border. Logo is rotated text block. Navigation links are bold uppercase with hover state that inverts to black background. Social icons in bordered squares with shadows.
+黄色背景配粗顶边框。logo 为旋转文字块。导航链接为粗体大写，悬停状态反相为黑底。社交图标为带边框方块配阴影。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Design Style: Neo-brutalism
+# 设计风格：Neo-brutalism
 
-## Design Philosophy
+## 设计哲学
 
-**Neo-brutalism (or Neu-Brutalism)** is the digital punk rebellion against the "Corporate Memphis" and polished "Clean SaaS" aesthetics that dominated the 2010s. While traditional Brutalism (architecture/early web) was utilitarian and drab, **Neo-brutalism** is vibrant, performative, and intentionally distinct. It combines the raw, unrefined structural honesty of brutalism with the high-saturation energy of Pop Art, the "sticker" culture of the early internet, and the rebellious spirit of DIY zine design.
+**Neo-brutalism（或 Neu-Brutalism）** 是数字朋克对主导 2010 年代的"Corporate Memphis"与精致"Clean SaaS"美学的反叛。传统粗野主义（建筑/早期网页）功利而单调，而 **Neo-brutalism** 鲜艳、表演性、刻意独特。它结合粗野主义原始未精炼的结构诚实与波普艺术的高饱和能量、早期互联网的"贴纸"文化，以及 DIY 杂志设计的叛逆精神。
 
-**Core DNA & Fundamental Principles:**
+**核心 DNA 与基本原则**：
 
-1.  **Unapologetic Visibility (The Anti-Subtle)**: Modern design often tries to be invisible—borderless cards floating on gradients, soft shadows that barely exist, blur effects that obscure structure. Neo-brutalism rejects this entirely. It demands to be seen. Structure is not implied; it is **enforced with thick, hard-edged black lines** (`border-4` everywhere). Shadows are not simulated light diffusion; they are **solid blocks of ink** offset at 45-degree angles (8px, 12px, 16px offsets with zero blur). Every element has **visual weight and presence**.
+1.  **毫不妥协的可见性（反含蓄）**：现代设计常试图隐形——漂浮于渐变上的无边框卡片、几乎不存在的柔和阴影、模糊结构的模糊效果。Neo-brutalism 完全拒绝这点。它要求被看见。结构非暗示；而是以**粗硬黑线强制**（处处 `border-4`）。阴影非模拟光弥散；而是**实心墨块**以 45 度角偏移（8px、12px、16px 偏移配零模糊）。每个元素都有**视觉重量与存在感**。
 
-2.  **Digital Tactility (The Sticker Effect)**: The screen is treated not as a fluid glass surface, but as a **collage board or bulletin board**. Elements feel like physical stickers, paper cutouts, or printed cards layered on top of each other. They have "physicality"—buttons **press down mechanically** (translate X and Y to cover their shadow), cards **lift up physically** (translate up while shadow grows), and text blocks are **rotated like stickers slapped on at angles** (`rotate-1`, `-rotate-2`). This creates a tangible, almost sculptural interface.
+2.  **数字触感（贴纸效果）**：屏幕不被视为流畅玻璃表面，而是**拼贴板或公告板**。元素感觉如物理贴纸、纸剪纸或层叠印刷卡片。它们有"物理性"——按钮**机械下压**（translate X 与 Y 覆盖其阴影），卡片**物理抬起**（上移同时阴影增大），文字块**如贴纸般斜贴旋转**（`rotate-1`、`-rotate-2`）。这创造有形、近乎雕塑的界面。
 
-3.  **Organized Chaos (Controlled Messiness)**: The design embraces a "planned messiness" that looks spontaneous but is carefully orchestrated. We use **slight rotations** (`-rotate-2`, `rotate-1`, `rotate-3`) on containers and text to break the monotony of the grid. Elements **overlap intentionally** (floating decorative shapes, badges positioned absolutely). **Asymmetry is encouraged**—headlines split across lines with different colors and rotations, layouts favor 60/40 splits over perfect 50/50. Yet the underlying structure remains **rigid and functional** to ensure usability. It is "ugly-cool"—ugly by traditional polished standards, cool by rebellious intention.
+3.  **有组织的混乱（受控的凌乱）**：设计拥抱"计划的凌乱"——看似自发实则精心编排。容器与文字用**轻微旋转**（`-rotate-2`、`rotate-1`、`rotate-3`）打破网格单调。元素**有意重叠**（浮动装饰形状、绝对定位徽章）。**鼓励非对称**——标题跨行分割配不同色彩与旋转，布局偏好 60/40 而非完美 50/50。然而底层结构保持**僵硬功能**以确保可用性。它是"丑酷"——按传统精致标准丑，按叛逆意图酷。
 
-4.  **Default & Raw (Web 1.0 Homage)**: The aesthetic celebrates the "default" look of the web before CSS3 smoothed everything out. It uses **pure black** (`#000000`) for all borders and text—no subtle grays. It uses **high-saturation primary colors** (Hot Red `#FF6B6B`, Vivid Yellow `#FFD93D`, Soft Violet `#C4B5FD`) that feel like unmixed paint or highlighter markers. Typography is **bold and heavy** (font weights 700 and 900 only). The **cream background** (`#FFFDF5`) mimics aged paper or newsprint, rejecting stark white.
+4.  **默认与原始（Web 1.0 致敬）**：美学赞颂 CSS3 平滑一切之前的"默认"网页外观。用**纯黑**（`#000000`）作所有边框与文字——无含蓄灰。用**高饱和原色**（热红 `#FF6B6B`、明黄 `#FFD93D`、柔紫 `#C4B5FD`）感觉如未混合颜料或荧光笔。字体**粗重**（仅 700 与 900 字重）。**奶油背景**（`#FFFDF5`）模仿陈年纸张或报纸，拒绝刺眼白。
 
-5.  **Maximalism as Statement**: While modern design trends toward minimalism, neo-brutalism is **deliberately maximal**. More borders. More shadows. More uppercase text. More visual noise (halftone patterns, grid overlays, noise textures). This isn't visual clutter—it's **visual density** used to create energy and urgency.
+5.  **极繁即声明**：现代设计趋向极简，neo-brutalism **刻意极繁**。更多边框。更多阴影。更多大写文字。更多视觉噪音（半调图案、网格叠加、噪点纹理）。这不是视觉杂乱——而是用于创造能量与紧迫感的**视觉密度**。
 
-6.  **Irony & Confidence**: The style exudes a sense of irony and self-awareness. It says, "I know this looks unpolished, and that's exactly why it's good." It requires **confidence** to pull off; there is no room for timidity in Neo-brutalism. It's anti-corporate, anti-smooth, anti-boring.
+6.  **反讽与自信**：风格散发反讽与自我意识。它说："我知道这看起来不精致，而这正是它好的原因。"它需**自信**才能驾驭；Neo-brutalism 中无怯懦空间。它反企业、反平滑、反无聊。
 
-7.  **Mechanical Interactivity**: Interactions feel **mechanical and satisfying**, not smooth and ethereal. Buttons don't fade or glow—they **click down** like physical switches. Hovers don't soften—they **snap** into place. Transitions are **fast** (`duration-100`, `duration-200`) and **direct**, creating a snappy, arcade-game-like responsiveness.
+7.  **机械交互**：交互感觉**机械且令人满足**，非流畅飘渺。按钮不淡入或发光——它们**咔嗒下压**如物理开关。悬停不柔化——它们**snap** 就位。过渡**快速**（`duration-100`、`duration-200`）且**直接**，创造利落、街机游戏般的响应。
 
-**The Vibe & Emotional Tone**:
-*   **Nostalgic & Retro-Modern**: Channelling Y2K energy, 90s punk zines, DIY flyers, rave posters, and early web forums.
-*   **Energetic & Loud**: It **screams** rather than whispers. It grabs attention aggressively.
-*   **Playful yet Functional**: It uses **gamified interactions** (bouncy hovers, hard clicks, rotating badges) to make utilitarian software feel like a toy or game.
-*   **Anti-Corporate Authenticity**: It rejects the polished veneer of corporate design systems, embracing rawness and imperfection as honesty.
-*   **Confident & Bold**: Every design choice is **deliberate and exaggerated**. Nothing is subtle.
+**气质与情感基调**：
+*   **怀旧与复古现代**：汲取 Y2K 能量、90 年代朋克杂志、DIY 传单、锐舞海报与早期网络论坛。
+*   **能量与大声**：它**呐喊**而非低语。它激进地抓住注意。
+*   **俏皮而功能**：用**游戏化交互**（弹跳悬停、硬点击、旋转徽章）使功利软件感觉如玩具或游戏。
+*   **反企业真实**：拒绝企业设计系统的精致外衣，拥抱原始与不完美作诚实。
+*   **自信大胆**：每个设计选择都**刻意且夸张**。无含蓄之物。
 
-**Visual Signatures (What Makes It Instantly Recognizable)**:
-*   **Hard Black Strokes**: The unifying visual element. **If it doesn't have a border, it doesn't exist.** `border-4` is the default. All borders are solid black.
-*   **Offset Hard Shadows**: Shadows are **solid rectangles** with zero blur, offset at 45-degree angles (bottom-right). Small: `4px 4px 0px 0px #000`. Medium: `8px 8px 0px 0px #000`. Large: `12px 12px 0px 0px #000`. Massive: `16px 16px 0px 0px #000`.
-*   **The "Pop" Palette**: Cream background (`#FFFDF5`) serves as a neutral canvas for **intense bursts of highlighter colors** (Red, Yellow, Violet). Black is the structural color. White is used for contrast panels.
-*   **Typography as Texture**: Massive, heavy fonts (**Space Grotesk at 900 weight**) often treated with text outlines (`-webkit-text-stroke: 2px black` with transparent fill) or highlighted by placing text inside bordered, colored boxes. **All caps** for emphasis. Extreme tracking (`tracking-tighter` for headlines, `tracking-widest` for labels).
-*   **Sticker Layering**: Text blocks, badges, and containers are **rotated and layered** like stickers on a laptop. Elements cast hard shadows onto elements "below" them.
-*   **Texture & Patterns**: Backgrounds aren't flat. Use **halftone dots** (radial gradients), **grid patterns** (linear gradient lines), **noise textures** (SVG filters), and **geometric overlays** to add visual richness without traditional depth.
-*   **Asymmetric Composition**: Deliberately **break the grid**. Headlines split unevenly. Sections use 60/40 or 70/30 splits. Elements float off-axis.
+**视觉签名（即时可辨之处）**：
+*   **硬黑描边**：统一视觉元素。**若无边框，即不存在。** `border-4` 是默认。所有边框为实心黑。
+*   **偏移硬阴影**：阴影是**零模糊实心矩形**，以 45 度角偏移（右下）。小：`4px 4px 0px 0px #000`。中：`8px 8px 0px 0px #000`。大：`12px 12px 0px 0px #000`。巨：`16px 16px 0px 0px #000`。
+*   **"波普"调色板**：奶油背景（`#FFFDF5`）作中性画布供**荧光色爆发**（红、黄、紫）。黑是结构色。白用于对比面板。
+*   **字体即纹理**：巨型粗字体（**Space Grotesk 900 字重**）常配文字轮廓（`-webkit-text-stroke: 2px black` 配透明填充）或置于带边框彩色盒内高亮。**全大写**作强调。极端字距（标题 `tracking-tighter`，标签 `tracking-widest`）。
+*   **贴纸层叠**：文字块、徽章与容器**旋转层叠**如笔记本上贴纸。元素向"下方"元素投射硬阴影。
+*   **纹理与图案**：背景不扁平。用**半调圆点**（径向渐变）、**网格图案**（线性渐变线）、**噪点纹理**（SVG 滤镜）与**几何叠加**增添视觉丰富而无传统深度。
+*   **非对称构图**：刻意**打破网格**。标题不均分割。区块用 60/40 或 70/30 分割。元素离轴浮动。
 
-**What Neo-Brutalism Is NOT**:
-*   **Not Minimal**: It's maximal and dense.
-*   **Not Smooth**: It's jagged, sharp, and angular.
-*   **Not Subtle**: It's loud, high-contrast, and in-your-face.
-*   **Not Polished**: It celebrates roughness and rawness.
-*   **Not Corporate**: It's rebellious and anti-establishment in its aesthetic DNA.
+**Neo-brutalism 不是什么**：
+*   **不极简**：它极繁且密集。
+*   **不流畅**：它锯齿、锐利、棱角分明。
+*   **不含蓄**：它大声、高对比、直击面门。
+*   **不精致**：它赞颂粗糙与原始。
+*   **不企业**：它美学 DNA 叛逆反建制。
 
-## Design Token System (The DNA)
+## 设计 Token 系统（DNA）
 
-### Colors (High Saturation Light Mode Palette)
-Neo-brutalism uses a **single, definitive light mode palette**. All colors are high-saturation and unapologetic.
+### 色彩（高饱和浅色模式调色板）
+Neo-brutalism 用**单一、明确的浅色模式调色板**。所有色彩高饱和且毫不妥协。
 
-*   **Background (Canvas)**: `#FFFDF5` (Cream/Off-White)
-    *   A warm, paper-like background that mimics aged newsprint or recycled paper. Softer than stark white, more authentic.
-    *   Use: Main page background, card interiors, contrast panels.
+*   **Background（画布）**：`#FFFDF5`（奶油/近白）
+    *   暖、纸般背景模仿陈年报纸或再生纸。比刺眼白更柔，更真实。
+    *   用：主页面背景、卡片内部、对比面板。
 
-*   **Foreground (Ink)**: `#000000` (Pure Black)
-    *   The structural color. Used for ALL text, ALL borders, ALL shadows. No grays, no variations.
-    *   Use: Text, borders (`border-black`), shadows, icons.
+*   **Foreground（墨）**：`#000000`（纯黑）
+    *   结构色。用于所有文字、所有边框、所有阴影。无灰，无变化。
+    *   用：文字、边框（`border-black`）、阴影、图标。
 
-*   **Accent (Hot Red)**: `#FF6B6B`
-    *   Primary action color. Vibrant, energetic, attention-grabbing.
-    *   Use: Primary buttons (`bg-neo-accent`), hover states, important badges, call-to-action backgrounds.
+*   **Accent（热红）**：`#FF6B6B`
+    *   主操作色。鲜艳、能量、吸睛。
+    *   用：主按钮（`bg-neo-accent`）、悬停状态、重要徽章、CTA 背景。
 
-*   **Secondary (Vivid Yellow)**: `#FFD93D`
-    *   Secondary highlight color. Bright, cheerful, high-energy.
-    *   Use: Secondary buttons, badges, logo backgrounds, footer background, alternate section backgrounds.
+*   **Secondary（明黄）**：`#FFD93D`
+    *   次高亮色。明亮、欢快、高能量。
+    *   用：次按钮、徽章、logo 背景、页脚背景、交替区块背景。
 
-*   **Muted (Soft Violet)**: `#C4B5FD`
-    *   Tertiary color for depth and variation without clashing.
-    *   Use: Subtle backgrounds (`bg-neo-muted`), card headers, FAQ answer backgrounds, decorative elements.
+*   **Muted（柔紫）**：`#C4B5FD`
+    *   三级色增深度与变化而不冲突。
+    *   用：含蓄背景（`bg-neo-muted`）、卡片头部、FAQ 回答背景、装饰元素。
 
-*   **White**: `#FFFFFF`
-    *   Used for high-contrast text on dark backgrounds (e.g., black sections, accent buttons).
-    *   Use: Text on black backgrounds, inverted buttons, contrast panels.
+*   **White**：`#FFFFFF`
+    *   用于深色背景上高对比文字（如黑区块、点缀按钮）。
+    *   用：黑背景上文字、反相按钮、对比面板。
 
-**Color Usage Rules:**
-- **Never use subtle grays.** It's black or a color, never #333 or #666.
-- **High contrast is mandatory.** All text must pass WCAG AA on its background.
-- **Color blocking:** Sections alternate between cream, secondary, muted, and black to create visual rhythm.
+**用色规则**：
+- **绝不用含蓄灰。** 是黑或色，绝非 #333 或 #666。
+- **强制高对比。** 所有文字必须在其背景上达 WCAG AA。
+- **色块：** 区块在奶油、次色、柔和与黑间交替以创视觉节奏。
 
-### Typography
-*   **Family**: `Space Grotesk` (Google Font: `font-family: 'Space Grotesk', sans-serif`)
-    *   A geometric sans-serif with quirky personality. Modern but not clinical. Bold enough to carry heavy weights.
-    *   Load via Google Fonts: `https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&display=block`
+### 字体
+*   **字族**：`Space Grotesk`（Google Font：`font-family: 'Space Grotesk', sans-serif`）
+    *   几何无衬线配古怪个性。现代但不冷漠。足够粗以承载重字重。
+    *   通过 Google Fonts 加载：`https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&display=block`
 
-*   **Weights**: **Only heavy weights allowed.**
-    *   **Black (900)**: For all headings (h1, h2, h3). `font-black`
-    *   **Bold (700)**: For all body text, labels, buttons. `font-bold`
-    *   **Medium (500)**: Sparingly, only for subtle emphasis. `font-medium`
-    *   **Regular (400)**: Generally avoided. Lightness is forbidden in neo-brutalism.
+*   **字重**：**仅允许重字重。**
+    *   **Black (900)**：所有标题（h1, h2, h3）。`font-black`
+    *   **Bold (700)**：所有正文、标签、按钮。`font-bold`
+    *   **Medium (500)**：克制，仅含蓄强调。`font-medium`
+    *   **Regular (400)**：一般避免。neo-brutalism 中禁止轻盈。
 
-*   **Scale**:
-    *   Display: `text-8xl` to `text-9xl` (96px to 128px) for hero headlines.
-    *   Heading 2: `text-6xl` to `text-8xl` (60px to 96px) for section titles.
-    *   Heading 3: `text-4xl` to `text-5xl` (36px to 48px) for subsections.
-    *   Body Large: `text-2xl` to `text-3xl` (24px to 30px) for emphasis.
-    *   Body: `text-lg` to `text-xl` (18px to 20px) for readable text.
-    *   Small: `text-sm` to `text-base` (14px to 16px) for labels and metadata.
+*   **字号阶梯**：
+    *   展示：`text-8xl` 至 `text-9xl`（96px 至 128px）作 Hero 标题。
+    *   标题 2：`text-6xl` 至 `text-8xl`（60px 至 96px）作区块标题。
+    *   标题 3：`text-4xl` 至 `text-5xl`（36px 至 48px）作子标题。
+    *   大正文：`text-2xl` 至 `text-3xl`（24px 至 30px）作强调。
+    *   正文：`text-lg` 至 `text-xl`（18px 至 20px）作可读文字。
+    *   小：`text-sm` 至 `text-base`（14px 至 16px）作标签与元信息。
 
-*   **Styling Techniques**:
-    *   **Text Stroke (Display)**: Use `-webkit-text-stroke: 2px black` with `color: transparent` for massive hollow outlined text.
-    *   **Case**: Heavy use of **UPPERCASE** (`uppercase`) for headings, labels, buttons, and emphasis. Lowercase is acceptable for body text.
-    *   **Tracking**:
-        *   Headlines: `tracking-tighter` or `tracking-tight` for density.
-        *   Labels: `tracking-widest` or `tracking-[0.2em]` for emphasis.
-    *   **Line Height**: Tight leading. `leading-none` or `leading-[0.85]` for display. `leading-snug` or `leading-relaxed` for body.
+*   **样式技巧**：
+    *   **文字描边（展示）**：用 `-webkit-text-stroke: 2px black` 配 `color: transparent` 作巨型空心轮廓文字。
+    *   **大小写**：大量使用**大写**（`uppercase`）于标题、标签、按钮与强调。正文可小写。
+    *   **字距**：
+        *   标题：`tracking-tighter` 或 `tracking-tight` 以增密度。
+        *   标签：`tracking-widest` 或 `tracking-[0.2em]` 以增强调。
+    *   **行高**：紧凑行高。展示用 `leading-none` 或 `leading-[0.85]`。正文用 `leading-snug` 或 `leading-relaxed`。
 
-### Radius & Borders
-*   **Radius**: **Default is `0px` (sharp, angular corners).**
-    *   Exception: `rounded-full` ONLY for pill badges, circular stickers, or decorative shape elements.
-    *   Never use `rounded-md` or `rounded-lg`. It's either sharp or fully round.
+### 圆角与边框
+*   **圆角**：**默认 `0px`（锐利、棱角分明的角）。**
+    *   例外：`rounded-full` 仅用于胶囊徽章、圆形贴纸或装饰形状元素。
+    *   绝不用 `rounded-md` 或 `rounded-lg`。要么锐利要么全圆。
 
-*   **Borders**: **Mandatory on every visual element.**
-    *   Default: `border-4` (4px solid black). This is the signature thickness.
-    *   Thin: `border-2` (2px) only for subtle separators or ghost buttons.
-    *   Thick: `border-8` (8px) for major section dividers or hero elements.
-    *   All borders: `border-black` (solid black, no transparency).
+*   **边框**：**每个视觉元素强制。**
+    *   默认：`border-4`（4px solid black）。这是签名粗细。
+    *   细：`border-2`（2px）仅含蓄分隔符或幽灵按钮。
+    *   粗：`border-8`（8px）作主要区块分隔符或 Hero 元素。
+    *   所有边框：`border-black`（实心黑，无透明）。
 
-### Shadows & Effects
-*   **Hard Shadows (The Signature)**: Offset, solid black shadows with **zero blur** and **zero spread**. Always bottom-right direction.
-    *   **Small**: `shadow-[4px_4px_0px_0px_#000]` or `box-shadow: 4px 4px 0px 0px #000`
-    *   **Medium**: `shadow-[8px_8px_0px_0px_#000]` or `box-shadow: 8px 8px 0px 0px #000`
-    *   **Large**: `shadow-[12px_12px_0px_0px_#000]` or `box-shadow: 12px 12px 0px 0px #000`
-    *   **Massive**: `shadow-[16px_16px_0px_0px_#000]` or `shadow-[20px_20px_0px_0px_#fff]` (for elements on black backgrounds)
+### 阴影与效果
+*   **硬阴影（签名）**：偏移、实心黑阴影配**零模糊**与**零扩散**。始终右下方向。
+    *   **小**：`shadow-[4px_4px_0px_0px_#000]` 或 `box-shadow: 4px 4px 0px 0px #000`
+    *   **中**：`shadow-[8px_8px_0px_0px_#000]` 或 `box-shadow: 8px 8px 0px 0px #000`
+    *   **大**：`shadow-[12px_12px_0px_0px_#000]` 或 `box-shadow: 12px 12px 0px 0px #000`
+    *   **巨**：`shadow-[16px_16px_0px_0px_#000]` 或 `shadow-[20px_20px_0px_0px_#fff]`（用于黑背景上元素）
 
-*   **Text Shadows**: Use for text on colored backgrounds.
-    *   `text-shadow: 4px 4px 0px #000` or `text-shadow: 6px 6px 0px #000`
+*   **文字阴影**：用于彩色背景上文字。
+    *   `text-shadow: 4px 4px 0px #000` 或 `text-shadow: 6px 6px 0px #000`
 
-*   **Background Patterns & Textures** (Critical for depth):
-    *   **Halftone Dots**:
+*   **背景图案与纹理**（对深度至关重要）：
+    *   **半调圆点**：
         ```css
         background-image: radial-gradient(#000 1.5px, transparent 1.5px);
         background-size: 20px 20px;
         ```
-    *   **Grid Pattern** (graph paper):
+    *   **网格图案**（方格纸）：
         ```css
         background-size: 40px 40px;
         background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1) 1px, transparent 1px),
                           linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
         ```
-    *   **Noise Texture** (SVG filter):
+    *   **噪点纹理**（SVG 滤镜）：
         ```css
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'%2F%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         ```
-    *   **Radial Dots** (for backgrounds):
+    *   **径向圆点**（用于背景）：
         ```css
         background-image: radial-gradient(circle, #000 2px, transparent 2.5px);
         background-size: 30px 30px;
         ```
 
-## Component Styling Principles
+## 组件样式原则
 
-### Buttons
-*   **Shape**: Rectangular with sharp corners. Default height: `h-12` to `h-14`. No rounding.
-*   **Style**:
-    *   Primary: `bg-neo-accent` (red) with `border-4 border-black`.
-    *   Secondary: `bg-neo-secondary` (yellow) with `border-4 border-black`.
-    *   Outline: `bg-white` with `border-4 border-black`.
-    *   Ghost: `border-2 border-transparent` that becomes `border-black` on hover.
-*   **Typography**: `font-bold text-sm uppercase tracking-wide` (all caps, bold, spaced).
-*   **Shadow**: Hard shadow `shadow-[4px_4px_0px_0px_#000]` or `shadow-[6px_6px_0px_0px_#000]`.
-*   **Interaction (Critical)**: **"Push" effect.** On `:active`, translate the button to cover its shadow:
+### 按钮
+*   **形状**：锐角矩形。默认高度：`h-12` 至 `h-14`。无圆角。
+*   **样式**：
+    *   主：`bg-neo-accent`（红）配 `border-4 border-black`。
+    *   次：`bg-neo-secondary`（黄）配 `border-4 border-black`。
+    *   描边：`bg-white` 配 `border-4 border-black`。
+    *   幽灵：`border-2 border-transparent` 悬停变 `border-black`。
+*   **字体**：`font-bold text-sm uppercase tracking-wide`（全大写、粗、间距）。
+*   **阴影**：硬阴影 `shadow-[4px_4px_0px_0px_#000]` 或 `shadow-[6px_6px_0px_0px_#000]`。
+*   **交互（关键）**：**"推"效果。** `:active` 时，位移按钮覆盖其阴影：
     ```css
     active:translate-x-[2px] active:translate-y-[2px] active:shadow-none
     ```
-    This creates a mechanical "click down" feel, like a physical button.
-*   **Hover**: Slight background darkening or shadow intensification. Fast transition (`duration-100`).
+    这创造机械"咔嗒下压"感，如物理按钮。
+*   **悬停**：轻微背景加深或阴影强化。快速过渡（`duration-100`）。
 
-### Cards / Containers
-*   **Structure**: `bg-white` with `border-4 border-black` and sharp corners (`rounded-none`).
-*   **Shadow**: Deep hard shadows (`shadow-[8px_8px_0px_0px_#000]` to `shadow-[12px_12px_0px_0px_#000]`).
-*   **Hover (Lift Effect)**: Translate card **upward** and **increase shadow size**:
+### 卡片/容器
+*   **结构**：`bg-white` 配 `border-4 border-black` 与锐角（`rounded-none`）。
+*   **阴影**：深硬阴影（`shadow-[8px_8px_0px_0px_#000]` 至 `shadow-[12px_12px_0px_0px_#000]`）。
+*   **悬停（抬起效果）**：卡片**上移**并**增大阴影**：
     ```css
     hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_#000]
     ```
-    or
+    或
     ```css
     hover:-translate-y-2 hover:shadow-[16px_16px_0px_0px_#000]
     ```
-    This makes the card feel like it's physically lifting off the page.
-*   **Headers**: Often have colored backgrounds (`bg-neo-muted/20` or `bg-neo-secondary`) with `border-b-4 border-black` separator.
+    这使卡片感觉物理抬离页面。
+*   **头部**：常有彩色背景（`bg-neo-muted/20` 或 `bg-neo-secondary`）配 `border-b-4 border-black` 分隔符。
 
-### Inputs
-*   **Style**: Thick black borders (`border-4 border-black`). Sharp corners. `bg-white` default.
-*   **Typography**: Large, bold text (`font-bold text-lg` or `text-xl`). Placeholder is `placeholder:text-black/40`.
-*   **Focus**: **Background color change** instead of ring:
+### 输入框
+*   **样式**：粗黑边框（`border-4 border-black`）。锐角。默认 `bg-white`。
+*   **字体**：大、粗文字（`font-bold text-lg` 或 `text-xl`）。占位符 `placeholder:text-black/40`。
+*   **聚焦**：**背景色变化**替代环：
     ```css
     focus-visible:bg-neo-secondary focus-visible:shadow-[4px_4px_0px_0px_#000] focus-visible:outline-none focus-visible:ring-0
     ```
-    Input becomes yellow and gains a shadow when focused. No soft glow.
-*   **Height**: `h-14` to `h-20` for touch-friendly sizing.
+    聚焦时输入框变黄并获阴影。无柔光。
+*   **高度**：`h-14` 至 `h-20` 以增触控友好尺寸。
 
-### Navigation
-*   **Logo**: Bordered box (`border-4 border-black`) with accent background. Uppercase, black font.
-*   **Links**: Bold, uppercase text. Hover state adds border and background:
+### 导航
+*   **Logo**：带边框盒（`border-4 border-black`）配点缀背景。大写、黑字。
+*   **链接**：粗、大写文字。悬停状态加边框与背景：
     ```css
     hover:border-black hover:bg-neo-accent hover:px-2 hover:shadow-[4px_4px_0px_0px_#000]
     ```
-*   **Mobile Menu**: Hamburger button as bordered square with shadow. Menu slides in with stacked bordered buttons.
+*   **移动菜单**：汉堡按钮为带边框方块配阴影。菜单滑入配堆叠带边框按钮。
 
-### Badges
-*   **Shape**: Pill (`rounded-full`) or square (`border-4`).
-*   **Style**: Colored background (`bg-neo-accent` or `bg-neo-secondary`) with thick border and shadow.
-*   **Typography**: `font-black text-sm uppercase tracking-widest`.
-*   **Usage**: Positioned absolutely over elements (`:absolute top-4 left-4`), rotated (`rotate-3`), or inline.
+### 徽章
+*   **形状**：胶囊（`rounded-full`）或方块（`border-4`）。
+*   **样式**：彩色背景（`bg-neo-accent` 或 `bg-neo-secondary`）配粗边框与阴影。
+*   **字体**：`font-black text-sm uppercase tracking-widest`。
+*   **用法**：绝对定位覆盖元素（`:absolute top-4 left-4`）、旋转（`rotate-3`）或行内。
 
-## Layout Principles
+## 布局原则
 
-*   **Container Width**: Use `container mx-auto` with `max-w-7xl` or `max-w-6xl` for focused content width.
-*   **Spacing**: Dense 8px base grid. Sections have `py-16` to `py-32` vertical padding. Content spacing: `gap-8` to `gap-12`.
-*   **Rotation (Sticker Effect)**: Use slight rotations on containers and text blocks to break grid monotony:
-    *   `rotate-1` (1 degree), `-rotate-2` (-2 degrees), `rotate-3` (3 degrees).
-    *   Apply to headline spans, cards, badges, and CTAs.
-*   **Marquee**: Use horizontal scrolling marquees (e.g., `react-fast-marquee`) as:
-    *   Trust indicators at page top.
-    *   Testimonial carousels.
-    *   Section dividers with repeated text.
-*   **Overlapping**: Allow elements to overlap using absolute positioning:
-    *   Floating decorative shapes (`absolute top-20 left-0`).
-    *   Badges positioned on corners of cards (`-top-6 -right-6`).
-    *   Background text as texture (`absolute opacity-10 text-9xl`).
-*   **Visual Chaos Zones**: Intentionally create "busy" areas (like Hero right side) with:
-    *   Stacked geometric shapes.
-    *   Multiple rotated badges.
-    *   Large background numbers or text.
-*   **Asymmetry**: Avoid perfect symmetry. Use 60/40 splits, offset columns, and staggered grids.
+*   **容器宽度**：用 `container mx-auto` 配 `max-w-7xl` 或 `max-w-6xl` 以聚焦内容宽度。
+*   **间距**：密集 8px 基础网格。区块有 `py-16` 至 `py-32` 垂直内边距。内容间距：`gap-8` 至 `gap-12`。
+*   **旋转（贴纸效果）**：容器与文字块用轻微旋转打破网格单调：
+    *   `rotate-1`（1 度）、`-rotate-2`（-2 度）、`rotate-3`（3 度）。
+    *   应用于标题 span、卡片、徽章与 CTA。
+*   **跑马灯**：用横向滚动跑马灯（如 `react-fast-marquee`）作：
+    *   页面顶部信任指标。
+    *   证言轮播。
+    *   重复文字区块分隔符。
+*   **重叠**：用绝对定位允许元素重叠：
+    *   浮动装饰形状（`absolute top-20 left-0`）。
+    *   徽章定位于卡片角（`-top-6 -right-6`）。
+    *   背景文字作纹理（`absolute opacity-10 text-9xl`）。
+*   **视觉混乱区**：刻意创造"繁忙"区域（如 Hero 右侧）配：
+    *   堆叠几何形状。
+    *   多个旋转徽章。
+    *   大型背景数字或文字。
+*   **非对称**：避免完美对称。用 60/40 分割、偏移列与错落网格。
 
-## The "Bold Factor" (Non-Genericness)
+## "大胆要素"（非通用性）
 
-These techniques ensure the design is unmistakably neo-brutalist and never generic:
+这些技巧确保设计无可错认地 neo-brutalist 且绝不通用：
 
-1.  **Text Stroke for Display Typography**: Use `-webkit-text-stroke: 2px black` with `color: transparent` for massive hollow outlined headings. Overlay with solid version for depth effect.
+1.  **展示字体的文字描边**：用 `-webkit-text-stroke: 2px black` 配 `color: transparent` 作巨型空心轮廓标题。叠实心版本以增深度效果。
 
-2.  **Sticker Layering**: Elements feel like physical stickers:
-    *   Rotated text blocks with borders and shadows.
-    *   Absolutely positioned badges that overlap content.
-    *   Multiple "layers" created with shadows.
+2.  **贴纸层叠**：元素感觉如物理贴纸：
+    *   旋转文字块配边框与阴影。
+    *   绝对定位徽章重叠内容。
+    *   用阴影创造多"层"。
 
-3.  **Interactive Physics**: Elements must physically move:
-    *   Buttons: **Push down** on click (`active:translate-x-[2px] active:translate-y-[2px]`).
-    *   Cards: **Lift up** on hover (`hover:-translate-y-2`).
-    *   Badges: **Rotate further** on hover (`hover:rotate-12`).
+3.  **交互物理**：元素必须物理移动：
+    *   按钮：点击时**下压**（`active:translate-x-[2px] active:translate-y-[2px]`）。
+    *   卡片：悬停时**抬起**（`hover:-translate-y-2`）。
+    *   徽章：悬停时**旋转更多**（`hover:rotate-12`）。
 
-4.  **Primitive Shape Motifs**: Heavy use of:
-    *   **Stars** (5-point, `<Star />` from lucide-react). Use as decorative elements, ratings, and dividers.
-    *   **Arrows** (`<ArrowRight />`) for directional cues.
-    *   **Basic Shapes**: Squares, circles, rectangles as decorative floaters.
+4.  **原始形状母题**：大量使用：
+    *   **星形**（5 角，`<Star />` from lucide-react）。作装饰元素、评分与分隔符。
+    *   **箭头**（`<ArrowRight />`）作方向暗示。
+    *   **基本形状**：方、圆、矩形作浮动装饰。
 
-5.  **Thick Border Everywhere**: If an element doesn't have a visible border, it feels wrong. Even whitespace is bordered.
+5.  **处处粗边框**：若元素无可见边框，感觉不对。甚至留白也有边框。
 
-6.  **Color Blocking**: Large sections with solid color backgrounds (red, yellow, violet, black) to create high-contrast rhythm.
+6.  **色块**：大区块配纯色背景（红、黄、紫、黑）以创高对比节奏。
 
-7.  **Texture Overlays**: Never leave backgrounds flat. Always add halftone, grid, or noise.
+7.  **纹理叠加**：绝不留扁平背景。始终添加半调、网格或噪点。
 
-## Anti-Patterns (What to Avoid)
+## 反模式（应避免之事）
 
-These techniques would break the neo-brutalist aesthetic:
+这些技巧会破坏 neo-brutalist 美学：
 
-*   **Blur Effects**: No `blur()`, no `backdrop-blur`, no soft `box-shadow` with blur radius. All shadows must be hard.
-*   **Opacity/Transparency**: Avoid alpha transparency on backgrounds (except for texture overlays at low opacity).
-*   **Smooth Gradients**: No `bg-gradient-to-r` fades. Use hard color stops or patterns instead.
-*   **Rounded Corners (Mid-Range)**: Avoid `rounded-md`, `rounded-lg`, `rounded-xl`. It's either `rounded-none` (sharp) or `rounded-full` (pill/circle).
-*   **Subtle Grays**: No `#333`, `#666`, `#999`. Use pure black or a color.
-*   **Soft Animations**: No `ease-in-out` or slow durations. Use `ease-linear` or `ease-out` with fast durations.
-*   **Minimalist Whitespace**: Don't leave large empty areas. Fill with texture, patterns, or decorative elements.
+*   **模糊效果**：无 `blur()`、无 `backdrop-blur`、无带模糊半径的柔和 `box-shadow`。所有阴影必须硬。
+*   **不透明/透明**：避免背景 alpha 透明（低不透明纹理叠加除外）。
+*   **平滑渐变**：无 `bg-gradient-to-r` 渐变。改用硬色停或图案。
+*   **圆角（中档）**：避免 `rounded-md`、`rounded-lg`、`rounded-xl`。要么 `rounded-none`（锐）要么 `rounded-full`（胶囊/圆）。
+*   **含蓄灰**：无 `#333`、`#666`、`#999`。用纯黑或色。
+*   **柔和动画**：无 `ease-in-out` 或慢时长。用 `ease-linear` 或 `ease-out` 配快时长。
+*   **极简留白**：勿留大空区。以纹理、图案或装饰元素填充。
 
-## Animation & Motion
+## 动画与运动
 
-*   **Feel**: Bouncy, playful, mechanical, arcade-like.
-*   **Transition Speed**: Fast and snappy.
-    *   Buttons: `duration-100` (100ms).
-    *   Cards/Hovers: `duration-200` or `duration-300` (200-300ms).
-*   **Easing**: `ease-linear` for mechanical feel, `ease-out` for natural deceleration. Avoid `ease-in-out`.
-*   **Hover Interactions**:
-    *   Buttons: Background darken, then press on click.
-    *   Cards: Translate upward (`-translate-y-2`) and shadow deepens.
-    *   Links: Add border and background, snap into place.
-*   **Looping Animations**:
-    *   Slow spins on decorative stars (`animate-spin-slow`, custom duration 10s).
-    *   Pulsing on call-to-action elements (`animate-pulse`).
-    *   Bouncing on attention-grabbing badges (`animate-bounce`).
-*   **Custom Animations** (via CSS):
+*   **质感**：弹跳、俏皮、机械、街机感。
+*   **过渡速度**：快且利落。
+    *   按钮：`duration-100`（100ms）。
+    *   卡片/悬停：`duration-200` 或 `duration-300`（200-300ms）。
+*   **缓动**：`ease-linear` 作机械感，`ease-out` 作自然减速。避免 `ease-in-out`。
+*   **悬停交互**：
+    *   按钮：背景加深，点击下压。
+    *   卡片：上移（`-translate-y-2`）并阴影加深。
+    *   链接：加边框与背景，snap 就位。
+*   **循环动画**：
+    *   装饰星形慢转（`animate-spin-slow`，自定义时长 10s）。
+    *   CTA 元素脉动（`animate-pulse`）。
+    *   吸睛徽章弹跳（`animate-bounce`）。
+*   **自定义动画**（通过 CSS）：
     ```css
     @keyframes spin-slow {
       from { transform: rotate(0deg); }
@@ -349,44 +349,44 @@ These techniques would break the neo-brutalist aesthetic:
     }
     ```
 
-## Spacing, Layout & Iconography
+## 间距、布局与图标
 
-*   **Max-Width**: `max-w-7xl` or `max-w-6xl` for main content. Sections can be full-width with contained inner content.
-*   **Grid System**: Use Tailwind's grid (`grid-cols-1 md:grid-cols-2 lg:grid-cols-3`) with responsive breakpoints.
-*   **Spacing Scale**: Dense. `gap-6` to `gap-12` between elements. `py-16` to `py-32` for section padding.
-*   **Iconography**: Import from `lucide-react`.
-    *   Style: `stroke-[3px]` or `stroke-[4px]` for thick, bold strokes.
-    *   Size: `h-8 w-8` or larger (`h-12 w-12`) for emphasis.
-    *   Placement: Inside bordered boxes (`border-4 border-black bg-neo-accent p-4`).
-    *   Fill: Use `fill-black` or `fill-white` for solid icons.
+*   **最大宽度**：主要内容 `max-w-7xl` 或 `max-w-6xl`。区块可全宽配包含内部内容。
+*   **网格系统**：用 Tailwind 网格（`grid-cols-1 md:grid-cols-2 lg:grid-cols-3`）配响应式断点。
+*   **间距阶梯**：密集。元素间 `gap-6` 至 `gap-12`。区块内边距 `py-16` 至 `py-32`。
+*   **图标**：自 `lucide-react` 导入。
+    *   样式：`stroke-[3px]` 或 `stroke-[4px]` 作粗描边。
+    *   尺寸：`h-8 w-8` 或更大（`h-12 w-12`）以强调。
+    *   放置：带边框盒内（`border-4 border-black bg-neo-accent p-4`）。
+    *   填充：用 `fill-black` 或 `fill-white` 作实心图标。
 
-## Responsive Strategy
+## 响应式策略
 
-*   **Mobile First**: Design starts with mobile (`base`) and scales up.
-*   **Breakpoints**:
-    *   `sm:` (640px) - Small tablets
-    *   `md:` (768px) - Tablets
-    *   `lg:` (1024px) - Desktops
-    *   `xl:` (1280px) - Large desktops
-*   **Mobile Adaptations**:
-    *   **Typography**: Scale down (e.g., `text-4xl sm:text-6xl md:text-8xl`).
-    *   **Spacing**: Reduce padding (e.g., `p-8 sm:p-12 md:p-16`).
-    *   **Grids**: Stack to single column (`grid-cols-1 md:grid-cols-2 lg:grid-cols-3`).
-    *   **Shadows**: Reduce size on mobile (e.g., `shadow-[6px_6px_0px_0px_#000] sm:shadow-[8px_8px_0px_0px_#000]`).
-    *   **Navigation**: Hamburger menu with bordered button. Full-screen or slide-in drawer.
-    *   **Buttons**: Full width on mobile (`w-full sm:w-auto`).
-    *   **Touch Targets**: Minimum `h-14` for tappable elements.
-*   **Core Aesthetic Maintained**: Even on mobile, keep thick borders, hard shadows, and bold typography. Don't default to "generic mobile" design.
+*   **移动优先**：设计自移动（`base`）开始向上缩放。
+*   **断点**：
+    *   `sm:`（640px）- 小平板
+    *   `md:`（768px）- 平板
+    *   `lg:`（1024px）- 桌面
+    *   `xl:`（1280px）- 大桌面
+*   **移动适配**：
+    *   **字体**：缩小（如 `text-4xl sm:text-6xl md:text-8xl`）。
+    *   **间距**：减内边距（如 `p-8 sm:p-12 md:p-16`）。
+    *   **网格**：堆叠为单列（`grid-cols-1 md:grid-cols-2 lg:grid-cols-3`）。
+    *   **阴影**：移动端减尺寸（如 `shadow-[6px_6px_0px_0px_#000] sm:shadow-[8px_8px_0px_0px_#000]`）。
+    *   **导航**：带边框按钮汉堡菜单。全屏或滑入抽屉。
+    *   **按钮**：移动端全宽（`w-full sm:w-auto`）。
+    *   **触控目标**：可点击元素最小 `h-14`。
+*   **保持核心美学**：即使移动端也保持粗边框、硬阴影与粗字体。勿默认"通用移动"设计。
 
-## Accessibility & Best Practices
+## 可访问性与最佳实践
 
-*   **Contrast**: High contrast is built-in (black on cream, white on black, black on yellow). Ensure all color combinations pass WCAG AA (4.5:1 for normal text, 3:1 for large text).
-*   **Focus States**: Use thick focus rings:
+*   **对比**：高对比内置（黑于奶油、白于黑、黑于黄）。确保所有色彩组合达 WCAG AA（正常文字 4.5:1，大文字 3:1）。
+*   **聚焦状态**：用粗聚焦环：
     ```css
     focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2
     ```
-    or background color change (yellow) for inputs.
-*   **Motion**: Respect `prefers-reduced-motion`:
+    或输入框用背景色变化（黄）。
+*   **运动**：尊重 `prefers-reduced-motion`：
     ```css
     @media (prefers-reduced-motion: reduce) {
       .animate-spin-slow, .animate-bounce, .animate-pulse {
@@ -394,6 +394,6 @@ These techniques would break the neo-brutalist aesthetic:
       }
     }
     ```
-*   **Keyboard Navigation**: Ensure all interactive elements are keyboard-accessible. Tab order should be logical.
-*   **Screen Readers**: Use semantic HTML (`<button>`, `<nav>`, `<header>`, `<main>`). Add `aria-label` to icon-only buttons.
-*   **Touch Targets**: Minimum 44x44px (roughly `h-12` or `h-14` in Tailwind) for all tappable elements on mobile.
+*   **键盘导航**：确保所有交互元素键盘可访问。Tab 顺序应合逻辑。
+*   **屏幕阅读器**：用语义 HTML（`<button>`、`<nav>`、`<header>`、`<main>`）。纯图标按钮加 `aria-label`。
+*   **触控目标**：移动端所有可点击元素最小 44x44px（Tailwind 中约 `h-12` 或 `h-14`）。

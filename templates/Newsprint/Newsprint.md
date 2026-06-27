@@ -10,160 +10,160 @@
 | 显示名称 | Newsprint |
 | 模式 | ☀️ 浅色模式 (Light) |
 | 字体类型 | serif |
-| 描述 | Stark black and white, high contrast, tight grids, newspaper aesthetic, sharp lines, editorial depth. |
+| 描述 | 纯黑白、高对比、紧凑网格、报纸美学、锐利线条、编辑深度。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Split 8-col/4-col grid. Main column has massive headline (5xl → 9xl), drop-cap intro paragraph, and CTA buttons. Side column contains stats box and ad placeholder with borders.
+8 列/4 列分割网格。主列含巨型标题（5xl → 9xl）、首字下沉引言段与 CTA 按钮。侧列含数据框与带边框广告占位符。
 
 ### Stats
 
-Full-width black background ticker with horizontal marquee. Monospace labels, bold values, red accent badges.
+全宽黑背景滚动条配横向跑马灯。等宽标签、粗体值、红色点缀徽章。
 
 ### Features
 
-4-column top grid with icons in bordered boxes, 3-column bottom grid with bullet points. All cells separated by black borders (collapsed grid style).
+4 列顶部网格配带边框盒中图标，3 列底部网格配项目符号。所有单元格由黑边框分隔（折叠网格风格）。
 
 ### Blog
 
-3-column grid with bordered card style. Grayscale images with sepia hover, date/author metadata in monospace, underline on hover.
+3 列网格配带边框卡片风格。灰度图片配 sepia 悬停，等宽字体日期/作者元信息，悬停下划线。
 
 ### How It Works
 
-Dark inverted section (black bg, white text). 3-column grid with numbered red boxes, horizontal connecting line, vertical layout breakdown.
+深色反相区块（黑底白字）。3 列网格配编号红框，横向连接线，垂直布局分解。
 
 ### Benefits
 
-Editorial 5-col/7-col split. Left has illustration placeholder, right has numbered list in 2-column text layout.
+编辑 5 列/7 列分割。左侧插图占位符，右侧 2 列文字布局中的编号列表。
 
 ### Testimonials
 
-2-column grid with large quote marks, serif quotes, bordered author cards with grayscale images.
+2 列网格配大号引号、衬线引文、带边框作者卡片配灰度图片。
 
 ### Pricing
 
-3-column table grid with explicit borders. Highlighted tier has distinct background, massive serif pricing, feature checkmarks.
+3 列表格网格配明确边框。高亮档位有独特背景、巨型衬线定价、特性勾选标记。
 
 ### Faq
 
-4-col/8-col split. Sidebar has help center box. Main area has accordion with plus/minus icons that rotate, expandable answers.
+4 列/8 列分割。侧边栏有帮助中心框。主区有手风琴配 plus/minus 图标旋转、可展开回答。
 
 ### Footer
 
-Multi-column site map with strict borders, company description, social icons in bordered boxes, edition/copyright info.
+多列站点地图配严格边框、公司描述、带边框盒中社交图标、版本/版权信息。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Design Style: Newsprint
+# 设计风格：Newsprint
 
-## 1. Design Philosophy
+## 1. 设计哲学
 
 **"All the News That's Fit to Print."**
 
-This style is an ode to the golden age of print journalism, reimagined for the web. It embodies **absolute clarity, hierarchy, and structure** through its unwavering commitment to high-contrast typography, grid-based layouts, and sharp geometric precision.
+此风格是对印刷新闻黄金时代的颂歌，为网页重新想象。它通过对高对比字体、基于网格的布局与锐利几何精准的不妥协承诺，体现**绝对的清晰、层级与结构**。
 
-### Core DNA
-The newsprint aesthetic rejects modern web trends of soft shadows, blurred backgrounds, and rounded corners. Instead, it embraces:
+### 核心 DNA
+新闻纸美学拒绝柔和阴影、模糊背景与圆角等现代网页趋势。相反，它拥抱：
 
-- **Stark Geometry**: Zero border radius. Every element is a perfect rectangle with sharp 90-degree corners.
-- **High Information Density**: Tight padding, collapsed grid borders, and efficient use of space mimic newspaper column layouts.
-- **Typographic Drama**: Massive serif headlines (up to 9xl on desktop) paired with smaller, highly legible body text create extreme hierarchy.
-- **Visible Structure**: Grid lines aren't hidden—they're celebrated. Borders between columns and sections are explicit and prominent.
-- **Editorial Authority**: The design feels serious, timeless, and trustworthy—like a publication of record.
-- **Paper Texture**: Subtle grain overlays and line patterns simulate the tactile quality of newsprint without being overly skeuomorphic.
+- **鲜明几何**：零 border-radius。每个元素是完美矩形配锐利 90 度角。
+- **高信息密度**：紧凑内边距、折叠网格边框与高效用空间模仿报纸列布局。
+- **字体戏剧**：巨型衬线标题（桌面至 9xl）配较小、高可读正文创造极端层级。
+- **可见结构**：网格线不被隐藏——它们被赞颂。列与区块间边框明确且突出。
+- **编辑权威**：设计感觉严肃、永恒、可信赖——如权威出版物。
+- **纸张纹理**：含蓄颗粒叠加与线图案模拟新闻纸触感而不过度拟物。
 
-### Vibe
-Authoritative, intellectual, urgent, timeless. It feels like holding a fresh morning newspaper—crisp, organized, and information-rich. The design exudes confidence and credibility.
+### 气质
+权威、智识、紧迫、永恒。感觉如手持新鲜晨报——利落、有序、信息丰富。设计散发自信与可信。
 
-## 2. Design Token System (The DNA)
+## 2. 设计 Token 系统（DNA）
 
-### Colors (Single Palette)
-**Mode:** Light (Permanent - no dark mode)
+### 色彩（单一调色板）
+**模式**：浅色（永久 — 无深色模式）
 
-- **Background:** `#F9F9F7` (Newsprint Off-White)
-  A warm off-white that mimics aged paper. Not pure white—adds subtle warmth and reduces eye strain.
+- **Background**：`#F9F9F7`（新闻纸近白）
+  模仿陈年纸的暖近白。非纯白——增添含蓄暖意并减眼疲劳。
 
-- **Foreground:** `#111111` (Ink Black)
-  Very deep black, not pure `#000`. Used for all text and borders.
+- **Foreground**：`#111111`（墨黑）
+  极深黑，非纯 `#000`。用于所有文字与边框。
 
-- **Muted:** `#E5E5E0` (Divider Grey)
-  Light grey for secondary borders and subtle backgrounds.
+- **Muted**：`#E5E5E0`（分隔符灰）
+  浅灰作次级边框与含蓄背景。
 
-- **Accent:** `#CC0000` (Editorial Red)
-  Bright, unapologetic red used extremely sparingly—only for breaking news badges, CTAs, and hover states. 99% of the design is black and white.
+- **Accent**：`#CC0000`（编辑红）
+  明亮、毫不妥协的红，极克制使用——仅用于突发新闻徽章、CTA 与悬停状态。99% 设计为黑白。
 
-- **Border:** `#111111` (Ink Black)
-  The primary structural element. Borders define the grid and create visual rhythm.
+- **Border**：`#111111`（墨黑）
+  主要结构元素。边框定义网格并创造视觉节奏。
 
-- **Neutral Shades:**
-  `neutral-100`: `#F5F5F5` (hover backgrounds)
-  `neutral-200`: `#E5E5E5` (image placeholders)
-  `neutral-400`: `#A3A3A3` (muted text in dark sections)
-  `neutral-500`: `#737373` (metadata, captions)
-  `neutral-600`: `#525252` (body text variations)
-  `neutral-700`: `#404040` (secondary headings)
+- **中性色阶**：
+  `neutral-100`：`#F5F5F5`（悬停背景）
+  `neutral-200`：`#E5E5E5`（图片占位符）
+  `neutral-400`：`#A3A3A3`（深色区块中柔和文字）
+  `neutral-500`：`#737373`（元信息、说明）
+  `neutral-600`：`#525252`（正文变化）
+  `neutral-700`：`#404040`（次级标题）
 
-### Typography
+### 字体
 
-**Font Stack:**
-- **Serif (Headlines & Display):** `'Playfair Display', 'Times New Roman', serif`
-  High-contrast, elegant, authoritative. Used for all major headings.
+**字体栈**：
+- **衬线（标题与展示）**：`'Playfair Display', 'Times New Roman', serif`
+  高对比、优雅、权威。用于所有主要标题。
 
-- **Serif (Body):** `'Lora', Georgia, serif`
-  Highly legible serif for long-form reading text and paragraphs.
+- **衬线（正文）**：`'Lora', Georgia, serif`
+  高可读衬线作长篇阅读文字与段落。
 
-- **Sans-Serif (UI):** `'Inter', 'Helvetica Neue', sans-serif`
-  Clean, modern sans for labels, buttons, navigation, and metadata.
+- **无衬线（UI）**：`'Inter', 'Helvetica Neue', sans-serif`
+  干净、现代无衬线作标签、按钮、导航与元信息。
 
-- **Monospace (Data):** `'JetBrains Mono', 'Courier New', monospace`
-  For stats, dates, edition numbers, and technical information.
+- **等宽（数据）**：`'JetBrains Mono', 'Courier New', monospace`
+  用于数据、日期、版本号与技术信息。
 
-**Scale Strategy:**
-- **H1 (Hero Headlines):** `text-5xl sm:text-6xl lg:text-9xl` (80px → 128px)
-  Massive, viewport-dominating. Use `leading-[0.9]` for ultra-tight line height. Apply `tracking-tighter` for condensed feel.
+**字号策略**：
+- **H1（Hero 标题）**：`text-5xl sm:text-6xl lg:text-9xl`（80px → 128px）
+  巨型、主导视口。用 `leading-[0.9]` 作超紧行高。应用 `tracking-tighter` 以增紧凑感。
 
-- **H2 (Section Headers):** `text-4xl lg:text-5xl` (36px → 48px)
-  Bold, `font-black`, uppercase or sentence case depending on context.
+- **H2（区块标题）**：`text-4xl lg:text-5xl`（36px → 48px）
+  粗、`font-black`、视上下文大写或句式。
 
-- **H3 (Card Titles):** `text-2xl lg:text-3xl` (24px → 30px)
-  `font-bold`, serif.
+- **H3（卡片标题）**：`text-2xl lg:text-3xl`（24px → 30px）
+  `font-bold`、衬线。
 
-- **Body Text:** `text-sm` to `text-lg` (14px → 18px)
-  Body font (Lora), `leading-relaxed` (line-height: 1.625).
+- **正文**：`text-sm` 至 `text-lg`（14px → 18px）
+  正文字体（Lora）、`leading-relaxed`（行高 1.625）。
 
-- **Metadata/Labels:** `text-xs` (12px)
-  Uppercase, `tracking-widest`, monospace or sans.
+- **元信息/标签**：`text-xs`（12px）
+  大写、`tracking-widest`、等宽或无衬线。
 
-**Text Transform:**
-- Uppercase for: Navigation, labels, metadata, badges, small caps for author bylines.
-- Sentence case for: Headlines, article titles, body text.
+**文字变换**：
+- 大写用于：导航、标签、元信息、徽章、作者署名小型大写。
+- 句式用于：标题、文章标题、正文。
 
-### Radius & Border
+### 圆角与边框
 
-**Border Radius:** `0px` everywhere. No exceptions.
-Use inline styles or a `.sharp-corners` utility class to enforce zero radius on all components.
+**圆角**：处处 `0px`。无例外。
+用内联样式或 `.sharp-corners` 工具类强制所有组件零圆角。
 
-**Border Width:**
-- Standard: `1px` solid black (`border`, `border-r`, `border-b`)
-- Heavy emphasis: `border-b-4` or `border-4` (4px solid) for major section dividers
-- Collapsed grids: Adjacent elements share borders to avoid double lines
+**边框宽度**：
+- 标准：`1px` solid black（`border`、`border-r`、`border-b`）
+- 重强调：`border-b-4` 或 `border-4`（4px solid）作主要区块分隔符
+- 折叠网格：相邻元素共享边框以避免双线
 
-**Border Style:**
-Always solid. Never dashed or dotted except for rare decorative elements (e.g., `border-dashed` inside pricing cards for feature dividers).
+**边框样式**：
+始终 solid。绝不虚线或点线，除罕见装饰元素（如定价卡片内 `border-dashed` 作特性分隔符）。
 
-### Shadows/Effects
+### 阴影/效果
 
-**Philosophy:** Flat design. No soft drop shadows.
+**哲学**：扁平设计。无柔和投影。
 
-**Hover Effects:**
-- **Hard Offset Shadow:** `box-shadow: 4px 4px 0px 0px #111111`
-  Applied on hover to blog cards or interactive elements. Creates a "lifted" newspaper cutout effect.
+**悬停效果**：
+- **硬偏移阴影**：`box-shadow: 4px 4px 0px 0px #111111`
+  悬停时应用于博客卡片或交互元素。创造"抬起"的报纸剪纸效果。
 
-- **Implementation:**
+- **实现**：
   ```css
   .hard-shadow-hover:hover {
     box-shadow: 4px 4px 0px 0px #111111;
@@ -171,22 +171,22 @@ Always solid. Never dashed or dotted except for rare decorative elements (e.g., 
   }
   ```
 
-**No Effects:**
-- No blur
-- No inner shadows (except for rare decorative purposes)
-- No gradient overlays
+**无效果**：
+- 无模糊
+- 无内阴影（罕见装饰目的除外）
+- 无渐变叠加
 
-### Textures & Patterns
+### 纹理与图案
 
-**Critical for Depth:** The newsprint style avoids "flat generic web design" through layered textures.
+**对深度至关重要**：新闻纸风格通过分层纹理避免"扁平通用网页设计"。
 
-**1. Dot Grid Pattern (Main Background):**
+**1. 点阵网格图案（主背景）**：
 ```html
 backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23111111' fill-opacity='0.04' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E")`
 ```
-Subtle 4×4px dot pattern applied to the body background.
+含蓄 4×4px 点图案应用于 body 背景。
 
-**2. Line Grid Overlay (Section Texture):**
+**2. 线网格叠加（区块纹理）**：
 ```css
 .newsprint-texture {
   position: relative;
@@ -203,308 +203,308 @@ Subtle 4×4px dot pattern applied to the body background.
   opacity: 0.5;
 }
 ```
-Apply `.newsprint-texture` to major sections for a fine graph-paper effect.
+对主要区块应用 `.newsprint-texture` 以获精细方格纸效果。
 
-**3. Radial Dot Pattern (Image Placeholders):**
+**3. 径向点图案（图片占位符）**：
 ```html
 <div className="bg-[radial-gradient(#000_1px,transparent_1px)] opacity-10 [background-size:16px_16px]" />
 ```
-Used in placeholder images to simulate halftone printing.
+用于占位图片以模拟半调印刷。
 
-**4. Ornamental Dividers:**
-Use serif ornaments between major sections:
+**4. 装饰分隔符**：
+主要区块间用衬线装饰：
 ```html
 <div className="py-8 text-center font-serif text-2xl text-neutral-400 tracking-[1em]">
   &#x2727; &#x2727; &#x2727;
 </div>
 ```
 
-## 3. Component Stylings
+## 3. 组件样式
 
-### Buttons
+### 按钮
 
-**Primary Button (Default):**
+**主按钮（默认）**：
 ```tsx
 className="bg-[#111111] text-[#F9F9F7] border border-transparent hover:bg-white hover:text-[#111111] hover:border-[#111111]"
 ```
-- Solid black background, white text
-- On hover: Inverts to white background, black text and border
-- Sharp corners (enforced)
-- Uppercase text with `tracking-widest`
-- Transition: `transition-all duration-200`
+- 实心黑背景、白字
+- 悬停：反相为白底、黑字与边框
+- 锐角（强制）
+- 大写文字配 `tracking-widest`
+- 过渡：`transition-all duration-200`
 
-**Secondary Button (Outline):**
+**次按钮（描边）**：
 ```tsx
 className="border border-[#111111] bg-transparent hover:bg-[#111111] hover:text-[#F9F9F7]"
 ```
-- Transparent background, black border and text
-- On hover: Fills with black, text turns white
+- 透明背景、黑边框与文字
+- 悬停：填充黑、文字变白
 
-**Ghost Button:**
+**幽灵按钮**：
 ```tsx
 className="hover:bg-[#E5E5E0] hover:text-[#111111]"
 ```
-- No border, subtle grey background on hover
+- 无边框、悬停含蓄灰背景
 
-**Link Button:**
+**链接按钮**：
 ```tsx
 className="text-[#111111] underline-offset-4 decoration-2 decoration-[#CC0000] hover:underline"
 ```
-- Text-only, red underline on hover
+- 纯文字、悬停红下划线
 
-**Touch Targets:**
-Ensure minimum `min-h-[44px]` and `min-w-[44px]` for mobile accessibility.
+**触控目标**：
+确保移动端最小 `min-h-[44px]` 与 `min-w-[44px]`。
 
-### Cards/Containers
+### 卡片/容器
 
-**Standard Card:**
+**标准卡片**：
 ```tsx
 <div className="border border-[#111111] bg-[#F9F9F7] p-6">
 ```
-- Sharp black border
-- Off-white background
-- Tight padding (p-4 to p-8)
+- 锐利黑边框
+- 近白背景
+- 紧凑内边距（p-4 至 p-8）
 
-**Newspaper Column Grid:**
-- Use `border-r` and `border-b` to create collapsed grid layouts
-- Example: 4-column feature grid where each cell has `border-r` except the last, and all have `border-b` on mobile
+**报纸列网格**：
+- 用 `border-r` 与 `border-b` 创造折叠网格布局
+- 示例：4 列特性网格，每单元格有 `border-r`（最后一列除外），移动端所有有 `border-b`
 
-**Hover States:**
-- Add `hover:bg-neutral-100` to interactive cards
-- Optionally add `.hard-shadow-hover` for dramatic lift effect
+**悬停状态**：
+- 交互卡片加 `hover:bg-neutral-100`
+- 可选加 `.hard-shadow-hover` 作戏剧性抬起效果
 
-### Inputs
+### 输入框
 
-**Style:**
+**样式**：
 ```tsx
 className="border-b-2 border-[#111111] bg-transparent px-3 py-2 font-mono text-sm focus-visible:bg-[#F0F0F0] focus-visible:outline-none"
 ```
-- Transparent background
-- Only bottom border (2px solid black)
-- Monospace font
-- On focus: Light grey background (`#F0F0F0`), no ring
+- 透明背景
+- 仅底边框（2px solid black）
+- 等宽字体
+- 聚焦：浅灰背景（`#F0F0F0`）、无环
 
-**No Radius:** Enforce `borderRadius: 0px` inline.
+**无圆角**：内联强制 `borderRadius: 0px`。
 
-### Icons
+### 图标
 
-**Library:** `lucide-react`
+**库**：`lucide-react`
 
-**Style:**
-- `stroke-width={1.5}` or `stroke-1` class
-- Color: Always black (`text-[#111111]`) except in inverted sections (white)
-- Size: `h-6 w-6` standard, `h-4 w-4` for small
+**样式**：
+- `stroke-width={1.5}` 或 `stroke-1` 类
+- 颜色：始终黑（`text-[#111111]`），反相区块中白除外
+- 尺寸：标准 `h-6 w-6`，小 `h-4 w-4`
 
-**Icon Containers:**
-- Wrap in bordered boxes: `border border-black h-12 w-12 flex items-center justify-center`
-- Hover effect: `hover:bg-black hover:text-white transition-all`
+**图标容器**：
+- 包裹于带边框盒：`border border-black h-12 w-12 flex items-center justify-center`
+- 悬停效果：`hover:bg-black hover:text-white transition-all`
 
-## 4. Non-Genericness (The "Bold" Factor)
+## 4. 非通用性（"大胆"要素）
 
-### Mandatory Bold Choices
+### 强制标志性选择
 
-**1. Vertical Grid Dividers:**
-Don't just separate sections horizontally. Use `border-r` to create strict vertical columns even within the same row. The page should feel like a newspaper grid, not a typical website.
+**1. 垂直网格分隔符**：
+不只水平分隔区块。用 `border-r` 即使同行内也创造严格垂直列。页面应感觉如报纸网格，非典型网站。
 
-**2. Drop Caps:**
-Apply massive drop caps (`text-7xl`, `float-left`) to the first letter of key paragraphs (hero intro, product detail). Accent color optional.
+**2. 首字下沉**：
+对关键段落首字母（Hero 引言、产品详情）应用巨型首字下沉（`text-7xl`、`float-left`）。可选点缀色。
 
-**3. Marquee Ticker:**
-Use a horizontal scrolling ticker (e.g., `react-fast-marquee`) for stats. Black background, white text, red accent badges. Mimics stock ticker or breaking news crawl.
+**3. 跑马灯滚动条**：
+用横向滚动条（如 `react-fast-marquee`）作数据。黑底白字、红点缀徽章。模仿股票滚动条或突发新闻爬行。
 
-**4. Edition Metadata:**
-Add newspaper-style metadata:
-- "Vol. 1 | [Date] | New York Edition" in header
-- "Edition: Vol 1.0 | Printed in NYC" in footer
-- "Fig. 1.1" captions on images
+**4. 版本元信息**：
+添加报纸风格元信息：
+- 头部 "Vol. 1 | [日期] | New York Edition"
+- 页脚 "Edition: Vol 1.0 | Printed in NYC"
+- 图片 "Fig. 1.1" 说明
 
-**5. Justified Text:**
-Use `text-justify` for multi-column body text (blog descriptions, product detail) to create that newspaper column look.
+**5. 两端对齐文字**：
+多列正文（博客描述、产品详情）用 `text-justify` 创造报纸列外观。
 
-**6. Grayscale Images:**
-Apply `grayscale` filter to all images by default. On hover, add `sepia-[50%]` for a vintage newspaper photo effect.
+**6. 灰度图片**：
+默认对所有图片应用 `grayscale` 滤镜。悬停时加 `sepia-[50%]` 作复古报纸照片效果。
 
-**7. Asymmetric Layouts:**
-Don't default to 50/50 splits. Use 8-col/4-col, 5-col/7-col splits for editorial feel.
+**7. 非对称布局**：
+勿默认 50/50 分割。用 8 列/4 列、5 列/7 列分割以增编辑感。
 
-**8. Uppercase Labels:**
-Liberally use `uppercase tracking-widest text-xs font-mono` for section labels, navigation, and metadata.
+**8. 大写标签**：
+大量用 `uppercase tracking-widest text-xs font-mono` 作区块标签、导航与元信息。
 
-**9. Inverted Sections:**
-Flip at least one major section to black background with white text (e.g., How It Works). Use red accent for numbered steps.
+**9. 反相区块**：
+至少翻转一个主要区块为黑底白字（如 How It Works）。编号步骤用红点缀。
 
-## 5. Layout Strategy
+## 5. 布局策略
 
-### Container
-**Max Width:** `max-w-screen-xl` (1280px)
-Centered with `mx-auto`, horizontal padding `px-4`
+### 容器
+**最大宽度**：`max-w-screen-xl`（1280px）
+居中配 `mx-auto`，水平内边距 `px-4`
 
-### Grid System
-**Base:** 12-column grid
-Use Tailwind's `grid-cols-12` with `col-span-*` for precise control.
+### 网格系统
+**基础**：12 列网格
+用 Tailwind `grid-cols-12` 配 `col-span-*` 精准控制。
 
-**Common Splits:**
-- Hero: `lg:col-span-8` / `lg:col-span-4`
-- Benefits: `lg:col-span-5` / `lg:col-span-7`
-- Footer: `col-span-2` for logo/description, `col-span-1` for link columns
+**常见分割**：
+- Hero：`lg:col-span-8` / `lg:col-span-4`
+- 收益：`lg:col-span-5` / `lg:col-span-7`
+- 页脚：logo/描述 `col-span-2`，链接列 `col-span-1`
 
-**Collapsed Borders:**
-Adjacent grid cells share borders. Use `border-r` on all but the last column, `border-b` on all rows.
+**折叠边框**：
+相邻网格单元格共享边框。除最后一列外所有用 `border-r`，所有行用 `border-b`。
 
-### Spacing
-**Philosophy:** High information density. Tighter than typical web design.
+### 间距
+**哲学**：高信息密度。比典型网页设计更紧凑。
 
-- Section padding: `py-16` (vertical)
-- Card padding: `p-6` to `p-8`
-- Gap between items: `gap-6` to `gap-8`
-- Mobile: Reduce to `p-4`, `gap-4`
+- 区块内边距：`py-16`（垂直）
+- 卡片内边距：`p-6` 至 `p-8`
+- 项目间间隙：`gap-6` 至 `gap-8`
+- 移动：减至 `p-4`、`gap-4`
 
-### Z-Index Layers
-- Header (sticky): `z-40`
-- Overlays/modals: `z-50`
+### Z-Index 层
+- 头部（粘性）：`z-40`
+- 叠加/模态：`z-50`
 
-## 6. Effects & Animation
+## 6. 效果与动画
 
-### Motion Philosophy
-Fast, snappy, mechanical. No bouncy or organic easing.
+### 运动哲学
+快、利落、机械。无弹跳或有机缓动。
 
-**Transition Classes:**
+**过渡类**：
 ```tsx
 "transition-all duration-200 ease-out"
 "transition-colors duration-200"
 ```
 
-**Hover Behaviors:**
-1. **Color Inversion:** Buttons, icons flip between black/white instantly
-2. **Hard Shadows:** Cards gain offset shadow + slight translate
-3. **Underlines:** Links gain thick underline (`decoration-2 decoration-[#CC0000]`)
-4. **Scale:** Small elements like dots can `hover:scale-150`
-5. **Background:** Containers get subtle grey background (`hover:bg-neutral-100`)
+**悬停行为**：
+1. **色彩反相**：按钮、图标黑白即时翻转
+2. **硬阴影**：卡片获偏移阴影 + 轻微位移
+3. **下划线**：链接获粗下划线（`decoration-2 decoration-[#CC0000]`）
+4. **缩放**：圆点等小元素可 `hover:scale-150`
+5. **背景**：容器获含蓄灰背景（`hover:bg-neutral-100`）
 
-**No Floating:** Elements don't "lift" with soft shadows. They snap into place with hard shadows.
+**无浮动**：元素不以柔和阴影"抬起"。它们以硬阴影 snap 就位。
 
-**Accordion Animation:**
+**手风琴动画**：
 ```tsx
 className="grid transition-all duration-300 ease-in-out"
-// Open: grid-rows-[1fr] opacity-100
-// Closed: grid-rows-[0fr] opacity-0
+// 打开：grid-rows-[1fr] opacity-100
+// 关闭：grid-rows-[0fr] opacity-0
 ```
 
-### Micro-Interactions
-- FAQ plus icons rotate 45° when open
-- Blog card images scale 105% on hover
-- Feature icon boxes invert colors on hover
-- Navigation links turn red on hover
+### 微交互
+- FAQ plus 图标打开时旋转 45°
+- 博客卡片图片悬停缩放 105%
+- 特性图标盒悬停反相色彩
+- 导航链接悬停变红
 
-## 7. Spacing, Layout & Iconography
+## 7. 间距、布局与图标
 
-### Default Max-Width
-`max-w-screen-xl` (1280px) for primary content container.
+### 默认最大宽度
+主要内容容器 `max-w-screen-xl`（1280px）。
 
-### Spacing System
-Use an 8px grid system. Common values:
-- Tight: `gap-2` (8px), `p-2` (8px)
-- Standard: `gap-4` (16px), `p-4` (16px)
-- Comfortable: `gap-8` (32px), `p-8` (32px)
-- Spacious: `gap-16` (64px), `py-16` (64px)
+### 间距系统
+用 8px 网格系统。常见值：
+- 紧凑：`gap-2`（8px）、`p-2`（8px）
+- 标准：`gap-4`（16px）、`p-4`（16px）
+- 舒适：`gap-8`（32px）、`p-8`（32px）
+- 宽敞：`gap-16`（64px）、`py-16`（64px）
 
-**Mobile:** Reduce by one step (e.g., `p-8` → `p-6`)
+**移动**：减一级（如 `p-8` → `p-6`）
 
-### Iconography
-**Integration:**
-- Icons inside bordered boxes (feature cards)
-- Icons as section markers (small squares, bullets)
-- Icons in navigation (minimal use)
-- Icons in social links (bordered boxes in footer)
+### 图标
+**集成**：
+- 图标置于带边框盒内（特性卡片）
+- 图标作区块标记（小方块、项目符号）
+- 导航中图标（最小使用）
+- 社交链接中图标（页脚带边框盒）
 
-**Style Consistency:**
-- All icons from `lucide-react`
-- Consistent stroke width (`stroke-1`)
-- Black color by default, white in inverted sections
+**样式一致**：
+- 所有图标来自 `lucide-react`
+- 一致描边宽度（`stroke-1`）
+- 默认黑色，反相区块中白色
 
-## 8. Responsive Strategy
+## 8. 响应式策略
 
-### Breakpoints
-- Mobile: `< 768px` (default)
-- Tablet: `md:` (768px+)
-- Desktop: `lg:` (1024px+)
+### 断点
+- 移动：`< 768px`（默认）
+- 平板：`md:`（768px+）
+- 桌面：`lg:`（1024px+）
 
-### Mobile Adaptations
-1. **Grid Collapse:**
-   Multi-column grids collapse to single column (`grid-cols-1`)
+### 移动适配
+1. **网格折叠**：
+   多列网格折叠为单列（`grid-cols-1`）
 
-2. **Border Removal:**
-   Remove `border-r` on mobile, keep `border-b` for horizontal separators
+2. **边框移除**：
+   移动端移除 `border-r`，保留 `border-b` 作水平分隔符
    ```css
    @media (max-width: 767px) {
      .grid-border-r { border-right: none; }
    }
    ```
 
-3. **Typography Scaling:**
-   Headlines shrink dramatically: `text-5xl` → `text-6xl` → `text-9xl`
+3. **字体缩放**：
+   标题大幅缩小：`text-5xl` → `text-6xl` → `text-9xl`
 
-4. **Padding Reduction:**
-   `p-16` → `p-8` → `p-6` on smaller screens
+4. **内边距缩减**：
+   `p-16` → `p-8` → `p-6` 于更小屏幕
 
-5. **Touch Targets:**
-   All interactive elements minimum `44x44px` (`min-h-[44px] min-w-[44px]`)
+5. **触控目标**：
+   所有交互元素最小 `44x44px`（`min-h-[44px] min-w-[44px]`）
 
-6. **CTA Buttons:**
-   Full width on mobile (`w-full md:w-auto`)
+6. **CTA 按钮**：
+   移动端全宽（`w-full md:w-auto`）
 
-7. **Navigation:**
-   Show hamburger menu icon on mobile (44px tap target)
-   Hide main nav links, show mobile menu
+7. **导航**：
+   移动端显示汉堡菜单图标（44px 触控目标）
+   隐藏主导航链接，显示移动菜单
 
-### Maintaining Aesthetic
-Even on mobile, preserve:
-- Sharp corners (zero radius)
-- High contrast
-- Grid-based layout (just single column)
-- Horizontal rule separators between sections
-- Uppercase labels and metadata
+### 保持美学
+即使移动端也保持：
+- 锐角（零圆角）
+- 高对比
+- 基于网格的布局（仅单列）
+- 区块间水平线分隔符
+- 大写标签与元信息
 
-## 9. Accessibility & Best Practices
+## 9. 可访问性与最佳实践
 
-### Contrast Ratios
-- Black `#111111` on Off-White `#F9F9F7`: **AAA compliant** (>17:1)
-- Red `#CC0000` on Off-White: **AA compliant** (>5:1)
-- Never put red text on black background
+### 对比比
+- 黑 `#111111` 于近白 `#F9F9F7`：**AAA 合规**（>17:1）
+- 红 `#CC0000` 于近白：**AA 合规**（>5:1）
+- 绝不在黑背景上放红文字
 
-### Focus States
+### 聚焦状态
 ```tsx
 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2"
 ```
-- Thick black ring (2px)
-- 2px offset for visibility
-- Only visible when using keyboard navigation (`:focus-visible`)
+- 粗黑环（2px）
+- 2px offset 以保可见
+- 仅键盘导航时可见（`:focus-visible`）
 
-### Semantic HTML
-- Use `<header>`, `<nav>`, `<section>`, `<footer>`
-- Use `<h1>` through `<h6>` in proper hierarchy
-- Use `<button>` for interactive elements, not divs
-- Use `<a>` for links with proper `href`
+### 语义化 HTML
+- 用 `<header>`、`<nav>`、`<section>`、`<footer>`
+- 用 `<h1>` 至 `<h6>` 正确层级
+- 交互元素用 `<button>`，非 div
+- 链接用 `<a>` 配正确 `href`
 
-### ARIA Labels
-- Add `aria-label` to icon-only buttons
-- Add `alt` text to all images (even decorative ones)
-- Add `role="img"` and `aria-labelledby` to SVG icons
+### ARIA 标签
+- 纯图标按钮加 `aria-label`
+- 所有图片加 `alt` 文本（甚至装饰性）
+- SVG 图标加 `role="img"` 与 `aria-labelledby`
 
-### Keyboard Navigation
-- All interactive elements must be keyboard accessible
-- Visible focus states (see above)
-- Accordion items use `button` with proper `aria-expanded`
+### 键盘导航
+- 所有交互元素必须键盘可访问
+- 可见聚焦状态（见上）
+- 手风琴项用 `button` 配正确 `aria-expanded`
 
-## 10. Implementation Constraints
+## 10. 实现约束
 
-### Font Import
-Use `@import` in inline `<style>` tag:
+### 字体导入
+在内联 `<style>` 标签中用 `@import`：
 ```css
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=block');
 ```
 
-Define font classes:
+定义字体类：
 ```css
 .font-serif { font-family: 'Playfair Display', serif; }
 .font-body { font-family: 'Lora', serif; }
@@ -512,25 +512,25 @@ Define font classes:
 .font-mono { font-family: 'JetBrains Mono', monospace; }
 ```
 
-### Tailwind Utilities
-Create custom utilities in `<style>` block:
+### Tailwind 工具
+在 `<style>` 块中创建自定义工具：
 - `.sharp-corners { border-radius: 0px !important; }`
-- `.newsprint-texture { ... }` (see Textures section)
-- `.hard-shadow-hover:hover { ... }` (see Effects section)
+- `.newsprint-texture { ... }`（见纹理章节）
+- `.hard-shadow-hover:hover { ... }`（见效果章节）
 
-### Border Collapse Logic
-To avoid double borders in grids:
-1. Use `border-l` and `border-t` on the container
-2. Use `border-r` and `border-b` on children
-3. Remove `border-r` on last column
-4. Remove `border-b` on last row (if needed)
+### 边框折叠逻辑
+为避免网格中双边框：
+1. 容器用 `border-l` 与 `border-t`
+2. 子元素用 `border-r` 与 `border-b`
+3. 最后一列移除 `border-r`
+4. 最后一行移除 `border-b`（如需）
 
-### Component Structure (React 19+)
-- Use ref as prop, not `forwardRef`
-- Use `class-variance-authority` for button/card variants
-- Use `tailwind-merge` to merge className props
+### 组件结构（React 19+）
+- 用 ref 作 prop，非 `forwardRef`
+- 按钮用 `class-variance-authority` 变体
+- 用 `tailwind-merge` 合并 className props
 
-### Performance
-- Lazy load images below the fold
-- Use `transform` and `opacity` for animations (GPU accelerated)
-- Avoid animating `box-shadow` directly (use `will-change` if needed)
+### 性能
+- 延迟加载折叠下方图片
+- 动画用 `transform` 与 `opacity`（GPU 加速）
+- 避免直接动画 `box-shadow`（如需用 `will-change`）

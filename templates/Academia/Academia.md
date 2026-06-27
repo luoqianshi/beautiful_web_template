@@ -10,217 +10,217 @@
 | 显示名称 | Academia |
 | 模式 | 🌙 深色模式 (Dark) |
 | 字体类型 | serif |
-| 描述 | University aesthetic, old libraries, warm paper textures, traditional serifs, gold/crimson accents. |
+| 描述 | 学院派美学，古老图书馆气息，温暖纸张质感，传统衬线字体，金/绯红点缀。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Asymmetric two-column layout (7/5 split) with ornate decorative corner flourishes. Left column contains brass accent line with establishment date, large serif headline with first word highlighted in brass, drop-cap paragraph, and dual CTAs. Right column features arch-topped sepia image with brass border overlay.
+非对称双栏布局（7/5 比例分割），配以华丽装饰性角部纹饰。左栏含黄铜装饰线与建校年份、首词以黄铜高亮的大号衬线标题、首字下沉段落及双 CTA。右栏为带黄铜边框叠加的拱顶棕褐色图片。
 
 ### Stats
 
-Full-width horizontal band with four equal columns separated by vertical borders. Each stat features large brass numbers in Cinzel, small uppercase labels, and subtle hover interactions that scale numbers and change background opacity.
+全宽横向带状区，四等分列由垂直分隔线隔开。每个数据项含 Cinzel 字体的大号黄铜数字、小型大写标签，以及悬停时数字缩放并改变背景透明度的微妙交互。
 
 ### Product Detail
 
-Centered content within ornate frame. Brass horizontal lines flanking 'Proclamation' label, large serif headline, ornate divider, and multi-paragraph body text with drop cap on first paragraph.
+居中内容置于华丽边框内。"Proclamation" 标签两侧饰以黄铜水平线，大号衬线标题，华丽分隔符，以及首段带首字下沉的多段正文。
 
 ### Features
 
-Three-column grid of cards with corner flourishes. Each card has circular icon container with brass border, Roman numeral label in Cinzel, serif heading, and body text. Cards lift on hover with brass border tint.
+三列卡片网格，带角部纹饰。每张卡片含带黄铜边框的圆形图标容器、Cinzel 字体的罗马数字标签、衬线标题与正文。悬停时卡片上浮并出现黄铜边框色调。
 
 ### Benefits
 
-Three-column grid with gradient dividers above each item. Roman numeral labels, serif headings, and body text. Dividers animate from wood-grain to full brass on hover.
+三列网格，每项上方有渐变分隔符。罗马数字标签、衬线标题与正文。分隔符在悬停时由木纹渐变为全黄铜色。
 
 ### How It Works
 
-Alternating timeline layout with vertical brass connector line and medallions. Content alternates left/right with Roman numeral medallions centered. Each step features serif heading and description.
+交替式时间线布局，带垂直黄铜连接线与徽章。内容左右交替，罗马数字徽章居中。每步含衬线标题与描述。
 
 ### Pricing
 
-Three-column card layout with highlighted tier featuring brass border and ring. Wax seal badges on featured plans positioned at top-right. Cards include tier name, large price in Cormorant, feature list with check icons, and CTA button.
+三列卡片布局，高亮档位带黄铜边框与光环。精选方案右上角配蜡封徽章。卡片含档位名称、Cormorant 字体的大号价格、带勾选图标的特性列表及 CTA 按钮。
 
 ### Testimonials
 
-Two-column grid of testimonial blocks. Each features large decorative quote mark, 5-star rating, serif quote text in italic, circular avatar image with sepia filter, author name in Cinzel, and role.
+双栏证言块网格。每块含大号装饰性引号、五星评分、斜体衬线引文、棕褐色滤镜的圆形头像、Cinzel 字体的作者名及身份。
 
 ### Faq
 
-Accordion with border dividers. Each item has Roman numeral prefix, serif question, and brass-bordered toggle button that rotates on open. Mobile-optimized with larger touch targets (48px min-height).
+带边框分隔符的手风琴。每项含罗马数字前缀、衬线问题，以及展开时旋转的黄铜边框切换按钮。移动端优化，触控目标更大（最小高度 48px）。
 
 ### Blog
 
-Three-column grid of article cards. Each card has arch-topped sepia image that scales on hover, metadata row with date and author separated by divider, and serif headline that transitions to brass on hover.
+三列文章卡片网格。每张卡片含悬停时缩放的拱顶棕褐色图片、由分隔符隔开的日期与作者元信息行，以及悬停时变为黄铜色的衬线标题。
 
 ### Footer
 
-CTA section with two-column split (headline/email signup), ornate divider separator, then three-column footer with logo, copyright, and social links in uppercase Cinzel.
+CTA 区采用双栏分割（标题/邮箱订阅），配华丽分隔符，下方为三栏页脚，含 logo、版权与 Cinzel 大写字母的社交链接。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Design Style: Academia / Classical
+# 设计风格：Academia / 古典风
 
-## Design Philosophy
+## 设计哲学
 
-**Core Principles**: Scholarly gravitas meets timeless elegance. This style channels the atmosphere of centuries-old university libraries, Victorian study halls, and Renaissance manuscripts. Every element must feel like it belongs in a prestigious institution - combining **rich material references** (aged parchment, dark mahogany wood, polished brass hardware, crimson leather bindings) with **traditional typographic excellence** and **measured ornamentation**.
+**核心原则**：学术的庄重感与永恒的优雅相融。这种风格汲取了数百年历史的大学图书馆、维多利亚时代书房与文艺复兴手稿的氛围。每个元素都应让人觉得属于一所声望卓著的机构——将**丰富的材质意象**（陈年羊皮纸、深桃花心木、抛光黄铜五金、绯红皮革装帧）与**传统排印的卓越**及**克制的装饰**相结合。
 
-**Vibe**: Scholarly, Prestigious, Warm, Timeless, Dignified, Intellectual, Distinguished.
+**气质**：学术、尊贵、温暖、永恒、庄重、智识、卓越。
 
-**The Academia Promise**: This isn't a modern dark theme with serif fonts. It's a complete transformation into a physical library environment where every interaction feels like turning pages in a leather-bound tome, where brass fixtures catch the light, and where centuries of knowledge create an atmosphere of gravitas and trust.
+**Academia 的承诺**：这并非一个加了衬线字体的现代深色主题。它是一次对实体图书馆环境的彻底转化——每一次交互都如同翻阅皮革装帧的巨著，黄铜配件捕捉光线，而数个世纪的学识营造出庄重与信赖的氛围。
 
 ---
 
-## Design Token System (The DNA)
+## 设计 Token 系统（DNA）
 
-### Color System (Library at Night)
+### 色彩系统（夜色中的图书馆）
 
-**Foundation Colors**:
-- **background**: `#1C1714` (Deep Mahogany) - The darkest wood tone, foundation of all layouts
-- **backgroundAlt**: `#251E19` (Aged Oak) - Surface elevation, cards, and panel backgrounds
-- **foreground**: `#E8DFD4` (Antique Parchment) - Primary text, warm cream tone
-- **muted**: `#3D332B` (Worn Leather) - Tertiary backgrounds, disabled states
-- **mutedForeground**: `#9C8B7A` (Faded Ink) - Secondary text, labels, metadata
-- **border**: `#4A3F35` (Wood Grain) - Subtle borders and dividers
+**基础色**：
+- **background**：`#1C1714`（深桃花心木）— 最深的木色，所有布局的基础
+- **backgroundAlt**：`#251E19`（陈年橡木）— 表面抬升、卡片与面板背景
+- **foreground**：`#E8DFD4`（古旧羊皮纸）— 主要文字，温暖奶油色调
+- **muted**：`#3D332B`（磨损皮革）— 三级背景、禁用状态
+- **mutedForeground**：`#9C8B7A`（褪色墨水）— 次要文字、标签、元信息
+- **border**：`#4A3F35`（木纹）— 细腻边框与分隔符
 
-**Accent Colors**:
-- **accent**: `#C9A962` (Polished Brass) - Primary interactive color, highlights, focus states
-- **accentSecondary**: `#8B2635` (Library Crimson) - Emphasis badges, hover transforms
-- **accentForeground**: `#1C1714` (Dark on Brass) - Text on brass-colored buttons
+**点缀色**：
+- **accent**：`#C9A962`（抛光黄铜）— 主要交互色、高亮、聚焦状态
+- **accentSecondary**：`#8B2635`（图书馆绯红）— 强调徽章、悬停变换
+- **accentForeground**：`#1C1714`（黄铜上的深色）— 黄铜色按钮上的文字
 
-**Color Usage Rules**:
-1. **Contrast Ratios**: Maintain 8.5:1 for parchment on mahogany, minimum 4.5:1 for muted text
-2. **Layering Strategy**: Always layer backgroundAlt on top of background for depth (cards, panels)
-3. **Brass Application**: Use brass for ALL interactive elements (buttons, links, focus rings, icons)
-4. **Crimson Sparingly**: Reserve crimson for special emphasis (featured pricing tier, wax seals, hover transforms on secondary buttons)
-5. **Border Subtlety**: Borders should be visible but never harsh - wood grain color provides gentle separation
+**用色规则**：
+1. **对比度**：羊皮纸对桃花心木保持 8.5:1，次要文字最低 4.5:1
+2. **分层策略**：始终将 backgroundAlt 叠加于 background 之上以营造深度（卡片、面板）
+3. **黄铜应用**：所有交互元素（按钮、链接、聚焦环、图标）均使用黄铜
+4. **绯红克制**：绯红仅用于特殊强调（精选定价档位、蜡封、次级按钮悬停变换）
+5. **边框细腻**：边框应可见但不刺眼——木纹色提供温和的区隔
 
-**Brass Gradient Formula** (for buttons and metallic elements):
+**黄铜渐变公式**（用于按钮与金属元素）：
 ```
 background: linear-gradient(180deg, #D4B872 0%, #C9A962 50%, #B8953F 100%)
 ```
-This creates authentic polished brass with highlights and shadows.
+这创造出带高光与阴影的逼真抛光黄铜。
 
-### Typography System
+### 字体系统
 
-**Font Families**:
-- **Heading Font**: `"Cormorant Garamond", serif` - High-contrast old-style serif with calligraphic elegance
-- **Body Font**: `"Crimson Pro", serif` - Book-style serif designed for extended reading
-- **Display Font**: `"Cinzel", serif` - Engraved, all-caps display font for labels and special emphasis
+**字族**：
+- **标题字体**：`"Cormorant Garamond", serif` — 高对比度古体衬线，具书法般的优雅
+- **正文字体**：`"Crimson Pro", serif` — 为长篇阅读设计的书籍风衬线
+- **展示字体**：`"Cinzel", serif` — 雕刻感全大写展示字体，用于标签与特殊强调
 
-**Type Scale & Hierarchy**:
-- **Display Headings**: `text-5xl` to `text-7xl` (48px-72px), Cormorant Garamond, `leading-[1.1]`, `tracking-tight`
-- **Section Headings**: `text-4xl` to `text-5xl` (36px-48px), Cormorant Garamond
-- **Subsection Headings**: `text-2xl` to `text-3xl` (24px-30px), Cormorant Garamond
-- **Body Text**: `text-base` to `text-lg` (16px-18px), Crimson Pro, `leading-relaxed` (1.625)
-- **Labels/Overlines**: `text-xs` to `text-[10px]` (10px-12px), Cinzel, `uppercase`, `tracking-[0.2em]` to `tracking-[0.3em]`
+**字号阶梯与层级**：
+- **展示标题**：`text-5xl` 至 `text-7xl`（48px-72px），Cormorant Garamond，`leading-[1.1]`，`tracking-tight`
+- **区块标题**：`text-4xl` 至 `text-5xl`（36px-48px），Cormorant Garamond
+- **子标题**：`text-2xl` 至 `text-3xl`（24px-30px），Cormorant Garamond
+- **正文**：`text-base` 至 `text-lg`（16px-18px），Crimson Pro，`leading-relaxed`（1.625）
+- **标签/上划线**：`text-xs` 至 `text-[10px]`（10px-12px），Cinzel，`uppercase`，`tracking-[0.2em]` 至 `tracking-[0.3em]`
 
-**Font Weight Distribution**:
-- Headings: Regular/Normal (400-500) - avoid heavy weights, let the serif do the work
-- Body: Regular (400)
-- Labels: Medium (500-600) for Cinzel
-- Emphasis: Italic rather than bold for body text
+**字重分布**：
+- 标题：Regular/Normal（400-500）— 避免过重，让衬线发挥作用
+- 正文：Regular（400）
+- 标签：Cinzel 用 Medium（500-600）
+- 强调：正文以斜体替代加粗
 
-**Special Typography Patterns**:
-1. **Drop Caps**: First letter of introductory paragraphs
-   - Font: Cinzel (display font)
-   - Size: `text-7xl` (72px), `float-left`, `mr-4`, `leading-[0.8]`
-   - Color: Brass (`#C9A962`)
-   - Shadow: `2px 2px 4px rgba(0,0,0,0.3)` for engraved depth
+**特殊排印模式**：
+1. **首字下沉**：介绍段落首字母
+   - 字体：Cinzel（展示字体）
+   - 字号：`text-7xl`（72px），`float-left`，`mr-4`，`leading-[0.8]`
+   - 颜色：黄铜（`#C9A962`）
+   - 阴影：`2px 2px 4px rgba(0,0,0,0.3)`，营造雕刻深度
 
-2. **Section Numbering**: Use Roman numerals (I, II, III, IV, V...) with "Volume" prefix for major sections
-   - Font: Cinzel, `text-xs`, `uppercase`, `tracking-[0.25em]` to `tracking-[0.3em]`
-   - Color: Brass
-   - Pattern: "Volume I", "Volume II", etc. for major section headers; standalone Roman numerals for lists and sub-items
-   - Placement: Positioned above section headings as overline labels
+2. **章节编号**：主要章节使用罗马数字（I, II, III, IV, V...），配 "Volume" 前缀
+   - 字体：Cinzel，`text-xs`，`uppercase`，`tracking-[0.25em]` 至 `tracking-[0.3em]`
+   - 颜色：黄铜
+   - 模式：主要章节标题用 "Volume I"、"Volume II" 等；列表与子项用独立罗马数字
+   - 位置：作为上划线标签置于区块标题之上
 
-3. **Engraved Text Effect** (for buttons and special headings):
+3. **雕刻文字效果**（用于按钮与特殊标题）：
    - `text-shadow: 1px 1px 1px rgba(0,0,0,0.4), -1px -1px 1px rgba(255,255,255,0.1)`
-   - Creates pressed-into-metal appearance
+   - 营造压入金属的外观
 
-### Radius & Border System
+### 圆角与边框系统
 
-**Border Radius Values**:
-- **Default**: `4px` (`rounded`) - Subtle, traditional corners for buttons, cards, inputs
-- **Arch-Top Special**: `border-radius: 40% 40% 0 0 / 20% 20% 0 0` - Cathedral arch tops for images
-- **Full Circle**: For icon containers, badges, profile images
+**圆角值**：
+- **默认**：`4px`（`rounded`）— 按钮、卡片、输入框的传统含蓄圆角
+- **拱顶特例**：`border-radius: 40% 40% 0 0 / 20% 20% 0 0` — 用于图片的教堂拱顶
+- **正圆**：用于图标容器、徽章、头像
 
-**The Arch-Top Signature**:
-This is a defining visual element. The formula creates an elegant arch reminiscent of cathedral windows or library alcoves:
+**拱顶标志性元素**：
+这是定义性的视觉元素。该公式创造出令人联想起教堂花窗或图书馆壁龛的优雅拱顶：
 ```css
 .arch-top {
   border-radius: 40% 40% 0 0 / 20% 20% 0 0;
 }
 ```
-Apply to: Hero images, blog thumbnails, feature images, decorative containers.
+应用于：Hero 图片、博客缩略图、特性图片、装饰容器。
 
-**Border Styling**:
-- **Thickness**: `1px` standard, `2px` for decorative frames and focus states
-- **Color**: `#4A3F35` (wood grain) for standard borders, `#C9A962` (brass) for interactive/decorative
-- **Pattern**: Single solid borders, avoid dashed or dotted
+**边框样式**：
+- **粗细**：标准 `1px`，装饰性边框与聚焦状态用 `2px`
+- **颜色**：标准边框用 `#4A3F35`（木纹），交互/装饰用 `#C9A962`（黄铜）
+- **样式**：单实线边框，避免虚线或点线
 
-### Shadows & Depth
+### 阴影与深度
 
-**Shadow Philosophy**: Shadows should feel like physical depth in a dimly-lit library - soft, warm, and realistic.
+**阴影哲学**：阴影应像昏暗图书馆中的物理深度——柔和、温暖、真实。
 
-**Shadow Recipes**:
+**阴影配方**：
 
-1. **Card Elevation** (default):
+1. **卡片抬升**（默认）：
    ```
-   shadow: none (rely on border and background differentiation)
+   shadow: none（依靠边框与背景区分）
    hover: 0 8px 24px rgba(0,0,0,0.3)
    ```
 
-2. **Engraved/Embossed Effect** (buttons, decorative elements):
+2. **雕刻/浮雕效果**（按钮、装饰元素）：
    ```
    inset 0 1px 0 rgba(255,255,255,0.2),
    inset 0 -1px 0 rgba(0,0,0,0.2),
    0 2px 8px rgba(0,0,0,0.3)
 
-   hover: Add glow via 0 4px 12px rgba(201,169,98,0.3)
+   hover: 通过 0 4px 12px rgba(201,169,98,0.3) 增加辉光
    ```
 
-3. **Wax Seal Badge**:
+3. **蜡封徽章**：
    ```
    inset 0 2px 4px rgba(255,255,255,0.2),
    inset 0 -2px 4px rgba(0,0,0,0.3),
    0 4px 8px rgba(0,0,0,0.4)
    ```
 
-4. **Focus Ring**:
+4. **聚焦环**：
    ```
    ring-2 ring-[#C9A962] ring-offset-2 ring-offset-[#1C1714]
    ```
 
-### Textures & Atmospheric Effects
+### 纹理与氛围效果
 
-**1. Aged Paper Texture Overlay**:
-- SVG noise filter with fractal turbulence
-- Opacity: `0.03` (extremely subtle)
-- Position: Fixed overlay covering entire viewport
-- Blend mode: `overlay`
-- Purpose: Adds tactile paper grain without overpowering content
+**1. 陈年纸张纹理叠加**：
+- 带分形湍流的 SVG 噪点滤镜
+- 不透明度：`0.03`（极其含蓄）
+- 位置：覆盖整个视口的固定叠加
+- 混合模式：`overlay`
+- 目的：增添触感纸纹而不喧宾夺主
 
-**2. Vignette Effect**:
-- Radial gradient from center
-- Formula: `radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(28,23,20,0.4) 100%)`
-- Position: Fixed overlay
-- Purpose: Focuses attention toward center, mimics library lighting
+**2. 暗角效果**：
+- 自中心向外的径向渐变
+- 公式：`radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(28,23,20,0.4) 100%)`
+- 位置：固定叠加
+- 目的：将注意力引向中心，模拟图书馆照明
 
-**3. Sepia Image Treatment**:
-- Default state: `filter: sepia(0.6) contrast(0.95) brightness(0.9)`
-- Hover state: `filter: sepia(0) contrast(1) brightness(1)`
-- Transition: `duration-700 ease-out`
-- Purpose: Images appear as aged photographs that reveal full color on interaction
+**3. 棕褐色图片处理**：
+- 默认状态：`filter: sepia(0.6) contrast(0.95) brightness(0.9)`
+- 悬停状态：`filter: sepia(0) contrast(1) brightness(1)`
+- 过渡：`duration-700 ease-out`
+- 目的：图片呈现为陈年照片，交互时显现全彩
 
-**4. Decorative Patterns**:
+**4. 装饰图案**：
 
-**Ornate Corner Flourishes** (for major frames and cards):
+**华丽角部纹饰**（用于主要边框与卡片）：
 ```css
-/* Top-left and bottom-right brass corners */
+/* 左上与右下黄铜角 */
 .ornate-frame::before,
 .ornate-frame::after {
   content: "";
@@ -245,16 +245,16 @@ Apply to: Hero images, blog thumbnails, feature images, decorative containers.
 }
 ```
 
-**Ornate Divider** (section separators):
+**华丽分隔符**（章节分隔）：
 ```css
-/* Gradient line with centered decorative glyph */
+/* 带居中装饰字形的渐变线 */
 .ornate-divider {
   height: 1px;
   background: linear-gradient(90deg, transparent 0%, #4A3F35 20%, #C9A962 50%, #4A3F35 80%, transparent 100%);
 }
 
 .ornate-divider::before {
-  content: "✶"; /* or other decorative Unicode character */
+  content: "✶"; /* 或其他装饰性 Unicode 字符 */
   position: absolute;
   left: 50%;
   top: 50%;
@@ -268,260 +268,260 @@ Apply to: Hero images, blog thumbnails, feature images, decorative containers.
 
 ---
 
-## Section Patterns
+## 区块模式
 
-### Product Detail Section
-This section serves as a formal proclamation or manifesto, positioned after stats to elaborate on the value proposition.
+### Product Detail 区块
+此区块作为正式宣言或声明书，位于数据之后，用以阐述价值主张。
 
-**Structure**:
-- Container: Ornate frame with corner flourishes
-- Background: `#251E19/50` on rounded border
-- Header: Centered "Proclamation" label with flanking brass lines
-- Headline: Large serif (4xl-6xl) centered with tight line-height
-- Ornate divider: Full decorative divider with centered glyph
-- Body: Multi-paragraph content with drop cap on first paragraph
-- Spacing: Generous padding (p-8 to p-12), centered max-width (max-w-4xl)
+**结构**：
+- 容器：带角部纹饰的华丽边框
+- 背景：`#251E19/50` 圆角边框
+- 头部：居中 "Proclamation" 标签，两侧饰以黄铜线
+- 标题：大号衬线（4xl-6xl）居中，紧凑行高
+- 华丽分隔符：带居中字形的完整装饰分隔符
+- 正文：多段内容，首段首字下沉
+- 间距：慷慨内边距（p-8 至 p-12），居中最大宽度（max-w-4xl）
 
-**Typography**:
-- Label: Cinzel, uppercase, brass color, wide tracking
-- Headline: Cormorant Garamond, extra large, standard color
-- Body: Text-lg, muted foreground color, relaxed leading
-- First paragraph: Drop cap effect automatically applied
+**排印**：
+- 标签：Cinzel，大写，黄铜色，宽字距
+- 标题：Cormorant Garamond，特大号，标准色
+- 正文：Text-lg，柔和前景色，宽松行高
+- 首段：自动应用首字下沉效果
 
-This creates a "certificate of excellence" feeling - formal, centered, and authoritative.
-
----
-
-## Component Styling Principles
-
-### Buttons
-
-**Visual Treatment**:
-- Font: Cinzel (display font)
-- Text: Uppercase with `tracking-[0.15em]`
-- Size: Small text (`text-xs`) with generous padding for dignified presence
-- Effect: Engraved text shadow for pressed-metal appearance
-
-**Primary Button** (brass, main actions):
-- Background: Brass gradient (`linear-gradient(180deg, #D4B872 0%, #C9A962 50%, #B8953F 100%)`)
-- Text: Dark mahogany (`#1C1714`) for maximum contrast on brass
-- Radius: `4px` (rounded)
-- Shadow: Inset highlights and depth shadows (see shadow system)
-- Hover: Increase brightness to 110%, add brass glow shadow
-- Active: Deeper inset shadow for pressed effect
-
-**Secondary Button** (outlined, alternative actions):
-- Background: Transparent
-- Border: `2px solid #C9A962` (brass)
-- Text: Brass (`#C9A962`)
-- Hover: Transform to crimson - `border: #8B2635`, `bg: #8B2635`, `text: #E8DFD4`
-- Purpose: Offers elegant alternative that can dramatically transform
-
-**Ghost Button** (minimal, tertiary actions):
-- No background or border
-- Text: Brass with hover underline
-- Underline offset: `4px` for breathing room
-- Hover: Brighten to `#D4B872` with underline
-
-**Button Sizes**:
-- Default: `h-12 px-8`
-- Small: `h-10 px-6`
-- Large: `h-14 px-10`
-
-### Cards & Containers
-
-**Structure**:
-- Background: `#251E19` (aged oak - one layer above page background)
-- Border: `1px solid #4A3F35` (wood grain)
-- Radius: `4px` (rounded)
-- Padding: `p-8` to `p-12` depending on content density
-- Position: Relative (for corner flourishes)
-
-**Corner Flourish Pattern**:
-- Apply `.corner-flourish` class
-- Creates subtle brass corner brackets (24px × 24px)
-- Opacity: 0.6 default, 1.0 on hover
-- Purpose: Frames content like a certificate or portrait
-
-**Hover Behavior**:
-- Border: Transition to `#C9A962/50` (brass with transparency)
-- Shadow: Add `0 8px 24px rgba(0,0,0,0.3)` for lift effect
-- Duration: `300ms` ease
-
-**Special Card Treatments**:
-
-1. **Certificate/Ledger Style** (pricing cards):
-   - Double border effect using box-shadow inset
-   - Brass corner accents using pseudo-elements as triangular brackets
-   - Featured tier gets brass border and ring
-
-2. **Arch-Top Image Cards** (blog, features):
-   - Image container uses arch-top border-radius
-   - Image has sepia filter with hover reveal
-   - Scale image slightly on card hover (`scale-105`)
-
-3. **Wax Seal Badges** (featured items):
-   - Circular crimson badge positioned at top-right
-   - Radial gradient for dimensional wax appearance
-   - Contains icon (typically star)
-   - Position: `-top-3 absolute right-6`
-
-### Form Inputs
-
-**Text Inputs**:
-- Background: `#251E19` (aged oak)
-- Border: `1px solid #4A3F35` (wood grain)
-- Text: `#E8DFD4` (parchment), Crimson Pro font
-- Placeholder: Italic serif, `#9C8B7A` (faded ink)
-- Height: `h-12` (48px)
-- Padding: `px-4 py-2`
-- Radius: `4px` (rounded)
-
-**Focus State**:
-- Border: `#C9A962` (brass)
-- Ring: `ring-2 ring-[#C9A962]/30` with offset
-- No outline, rely on ring for accessibility
-
-**Labels**:
-- Position: Above input
-- Font: Cinzel, uppercase, small tracking
-- Color: `#9C8B7A` or brass for important fields
-
-### Interactive States
-
-**Hover States**:
-- Links: Brass text with expanded letter-spacing (tracking increase from 0.2em to 0.25em)
-- Cards: Brass border tint, shadow lift, corner flourish opacity increase
-- Buttons: Brightness increase or color transformation (secondary transforms to crimson)
-- Images: Sepia filter removal over 700ms with subtle scale (105%)
-- Stats: Number scales to 110%, label changes to brass, background darkens
-- Logo: Subtle scale to 105%
-- FAQ toggles: Rotate 180deg on open with color transformation
-
-**Focus States** (keyboard navigation):
-- Ring: `ring-2 ring-[#C9A962]` with `ring-offset-2 ring-offset-[#1C1714]`
-- Must be clearly visible against all backgrounds
-- No outline removal - accessibility critical
-
-**Active/Pressed States**:
-- Buttons: Deeper inset shadow
-- Links: Slightly darker brass tone
-- Cards: No special treatment (hover is sufficient)
-
-**Disabled States**:
-- Opacity: `0.5`
-- Pointer events: `none`
-- No color change - opacity handles it
+这营造出一种"卓越证书"的感觉——正式、居中、权威。
 
 ---
 
-## Layout Principles
+## 组件样式原则
 
-### Spacing Rhythm
+### 按钮
 
-**Base Grid**: 8px spacing system
-- Micro spacing (icon gaps, inline elements): `gap-2` to `gap-4` (8px-16px)
-- Element spacing (card internals): `gap-4` to `gap-8` (16px-32px)
-- Section spacing (between major blocks): `gap-8` to `gap-12` (32px-48px)
-- Vertical section padding: `py-24` to `py-32` (96px-128px)
+**视觉处理**：
+- 字体：Cinzel（展示字体）
+- 文字：大写配 `tracking-[0.15em]`
+- 字号：小号文字（`text-xs`），配慷慨内边距以显庄重
+- 效果：雕刻文字阴影，营造压入金属的外观
 
-**Content Width**:
-- Standard content: `max-w-6xl` (1152px)
-- Narrow content (blog posts, forms): `max-w-4xl` (896px)
-- Full-width sections: `max-w-7xl` (1280px) or full viewport for backgrounds
+**主按钮**（黄铜，主要操作）：
+- 背景：黄铜渐变（`linear-gradient(180deg, #D4B872 0%, #C9A962 50%, #B8953F 100%)`）
+- 文字：深桃花心木（`#1C1714`），黄铜上最大对比
+- 圆角：`4px`（rounded）
+- 阴影：内嵌高光与深度阴影（见阴影系统）
+- 悬停：亮度提升至 110%，增加黄铜辉光阴影
+- 按下：更深的内嵌阴影，营造按压效果
 
-**Grid Patterns**:
-- Three-column: `grid-cols-1 md:grid-cols-3` (features, pricing, benefits)
-- Two-column: `grid-cols-1 lg:grid-cols-2` (testimonials, hero split)
-- Four-column: `grid-cols-2 md:grid-cols-4` (stats bar)
+**次按钮**（描边，备选操作）：
+- 背景：透明
+- 边框：`2px solid #C9A962`（黄铜）
+- 文字：黄铜（`#C9A962`）
+- 悬停：变换为绯红——`border: #8B2635`，`bg: #8B2635`，`text: #E8DFD4`
+- 目的：提供可戏剧性变换的优雅备选
 
-**Asymmetry & Balance**:
-- Hero sections favor 60/40 or 7/5 column splits
-- Text can slightly "bleed" into adjacent columns for dynamic feel
-- Alternate left/right alignment in timeline-style sections
+**幽灵按钮**（极简，三级操作）：
+- 无背景或边框
+- 文字：黄铜，悬停下划线
+- 下划线偏移：`4px`，留出呼吸空间
+- 悬停：提亮至 `#D4B872` 并出现下划线
 
-### Section Separators
+**按钮尺寸**：
+- 默认：`h-12 px-8`
+- 小号：`h-10 px-6`
+- 大号：`h-14 px-10`
 
-**Border Separators**:
-- Full-width border: `border-y border-[#4A3F35]`
-- Background: Often pair with `bg-[#251E19]/30` or `bg-[#251E19]/50` for subtle panel effect
-- Use between major sections to create rhythm
+### 卡片与容器
 
-**Ornate Dividers**:
-- Use within sections to separate subsections
-- Width: `w-64` centered or full-width
-- Include decorative glyph at center
+**结构**：
+- 背景：`#251E19`（陈年橡木 — 高于页面背景一层）
+- 边框：`1px solid #4A3F35`（木纹）
+- 圆角：`4px`（rounded）
+- 内边距：视内容密度 `p-8` 至 `p-12`
+- 定位：relative（用于角部纹饰）
 
-**Visual Breathing Room**:
-- Allow generous vertical space between sections (96px-128px)
-- Don't pack content tightly - academia values space and contemplation
+**角部纹饰模式**：
+- 应用 `.corner-flourish` 类
+- 创造含蓄的黄铜角括号（24px × 24px）
+- 不透明度：默认 0.6，悬停 1.0
+- 目的：如证书或肖像般框定内容
+
+**悬停行为**：
+- 边框：过渡至 `#C9A962/50`（带透明的黄铜）
+- 阴影：增加 `0 8px 24px rgba(0,0,0,0.3)` 营造上浮效果
+- 时长：`300ms` ease
+
+**特殊卡片处理**：
+
+1. **证书/账簿风**（定价卡片）：
+   - 用 box-shadow inset 实现双边框效果
+   - 用伪元素作三角括号的黄铜角部点缀
+   - 精选档位获得黄铜边框与光环
+
+2. **拱顶图片卡片**（博客、特性）：
+   - 图片容器使用拱顶 border-radius
+   - 图片带棕褐色滤镜，悬停显现
+   - 卡片悬停时图片轻微缩放（`scale-105`）
+
+3. **蜡封徽章**（精选项）：
+   - 位于右上角的圆形绯红徽章
+   - 径向渐变营造立体蜡封外观
+   - 内含图标（通常为星形）
+   - 位置：`-top-3 absolute right-6`
+
+### 表单输入
+
+**文本输入**：
+- 背景：`#251E19`（陈年橡木）
+- 边框：`1px solid #4A3F35`（木纹）
+- 文字：`#E8DFD4`（羊皮纸），Crimson Pro 字体
+- 占位符：斜体衬线，`#9C8B7A`（褪色墨水）
+- 高度：`h-12`（48px）
+- 内边距：`px-4 py-2`
+- 圆角：`4px`（rounded）
+
+**聚焦状态**：
+- 边框：`#C9A962`（黄铜）
+- 环：`ring-2 ring-[#C9A962]/30` 配 offset
+- 无 outline，依靠 ring 保证可访问性
+
+**标签**：
+- 位置：输入框上方
+- 字体：Cinzel，大写，小字距
+- 颜色：`#9C8B7A` 或重要字段用黄铜
+
+### 交互状态
+
+**悬停状态**：
+- 链接：黄铜文字，字距扩大（tracking 从 0.2em 增至 0.25em）
+- 卡片：黄铜边框色调、阴影上浮、角部纹饰不透明度提升
+- 按钮：亮度提升或颜色变换（次级按钮变换为绯红）
+- 图片：700ms 内移除棕褐色滤镜并轻微缩放（105%）
+- 数据：数字缩放至 110%，标签变黄铜，背景加深
+- Logo：轻微缩放至 105%
+- FAQ 切换：展开时旋转 180 度并变换颜色
+
+**聚焦状态**（键盘导航）：
+- 环：`ring-2 ring-[#C9A962]` 配 `ring-offset-2 ring-offset-[#1C1714]`
+- 必须在所有背景上清晰可见
+- 不可移除 outline——可访问性至关重要
+
+**激活/按下状态**：
+- 按钮：更深的内嵌阴影
+- 链接：略深的黄铜色调
+- 卡片：无需特殊处理（悬停即可）
+
+**禁用状态**：
+- 不透明度：`0.5`
+- 指针事件：`none`
+- 无颜色变化——由不透明度处理
 
 ---
 
-## The "Bold Factor" (Non-Genericness)
+## 布局原则
 
-These are the **mandatory signature elements** that define Academia/Classical. A design is not complete without these:
+### 间距节奏
 
-### 1. **Arch-Topped Images**
-Every featured image must use the cathedral arch border-radius (`40% 40% 0 0 / 20% 20% 0 0`). This single element transforms modern web imagery into architectural references of classical libraries and Gothic buildings.
+**基础网格**：8px 间距系统
+- 微观间距（图标间隙、行内元素）：`gap-2` 至 `gap-4`（8px-16px）
+- 元素间距（卡片内部）：`gap-4` 至 `gap-8`（16px-32px）
+- 区块间距（主要块之间）：`gap-8` 至 `gap-12`（32px-48px）
+- 垂直区块内边距：`py-24` 至 `py-32`（96px-128px）
 
-### 2. **Sepia-to-Color Image Transitions**
-All images start with sepia filter (0.6) and transition to full color on hover over 700ms. This creates the magical effect of "aged photographs coming to life" when users interact.
+**内容宽度**：
+- 标准内容：`max-w-6xl`（1152px）
+- 窄内容（博客文章、表单）：`max-w-4xl`（896px）
+- 全宽区块：`max-w-7xl`（1280px）或视口全宽用于背景
 
-### 3. **Roman Numeral Volume System**
-Every major section must be prefixed with "Volume I", "Volume II", etc. using Roman numerals. List items and sub-elements use standalone Roman numerals (I, II, III...). Use Cinzel font, uppercase, brass color for all numbering.
+**网格模式**：
+- 三列：`grid-cols-1 md:grid-cols-3`（特性、定价、收益）
+- 双列：`grid-cols-1 lg:grid-cols-2`（证言、Hero 分割）
+- 四列：`grid-cols-2 md:grid-cols-4`（数据栏）
 
-### 4. **Drop Cap Introductions**
-Opening paragraphs of major sections should feature massive brass drop caps using Cinzel font at `text-7xl`, creating that illuminated manuscript feeling.
+**不对称与平衡**：
+- Hero 区倾向 60/40 或 7/5 的列分割
+- 文字可略微"渗入"相邻列以营造动态感
+- 时间线式区块中交替左右对齐
 
-### 5. **Corner Flourishes**
-Major frames (hero section) must have large brass corner brackets (40px). Cards should have subtle corner flourishes (24px). This frames content like certificates and portraits.
+### 章节分隔符
 
-### 6. **Ornate Dividers with Glyphs**
-Section breaks use gradient dividers (transparent → wood grain → brass → wood grain → transparent) with a centered decorative Unicode character (✶, ❧, ✤, ❦).
+**边框分隔符**：
+- 全宽边框：`border-y border-[#4A3F35]`
+- 背景：常搭配 `bg-[#251E19]/30` 或 `bg-[#251E19]/50` 营造含蓄面板效果
+- 用于主要区块之间以营造节奏
 
-### 7. **Wax Seal Badges**
-Featured or highlighted items get circular crimson badges with radial gradients and inset shadows, containing a centered star icon. This mimics traditional wax seals on important documents.
+**华丽分隔符**：
+- 用于区块内分隔子区
+- 宽度：居中 `w-64` 或全宽
+- 中心含装饰字形
 
-### 8. **Brass Interactive Elements**
-ALL interactive elements (buttons, links, focus rings, hover states) must use the brass color (#C9A962) or brass gradient. This is non-negotiable - brass is the interactive color language.
-
-### 9. **Engraved Text Effects**
-Buttons and special headings use dual text-shadow (dark below, light above) to create pressed-into-metal engraved appearance.
-
-### 10. **Texture Overlays**
-Page must include both subtle paper texture (3% opacity noise) and vignette effect (radial gradient darkening edges). These are fixed overlays that create atmospheric depth.
+**视觉呼吸空间**：
+- 区块之间留出慷慨的垂直空间（96px-128px）
+- 不要紧凑堆叠内容——学院风重视空间与沉思
 
 ---
 
-## Animation & Motion
+## "大胆要素"（非通用性）
 
-**Motion Philosophy**: Dignified, deliberate, and smooth. Nothing should feel snappy, bouncy, or playful. Motion should feel like the weight of leather-bound books, the swing of brass lamps, the turn of old pages.
+这些是定义 Academia/古典风的**强制性标志性元素**。缺少这些，设计即不完整：
 
-**Timing Functions**:
-- Default: `ease-out` (natural deceleration)
-- Never use: `ease-in-out` (too mechanical), `bounce`, `spring` (too playful)
+### 1. **拱顶图片**
+每张特色图片必须使用教堂拱顶 border-radius（`40% 40% 0 0 / 20% 20% 0 0`）。这一元素即可将现代网页图像转化为古典图书馆与哥特建筑的建筑学引用。
 
-**Duration Hierarchy**:
-- Fast interactions (button press, focus): `150ms`
-- Standard transitions (hover, border changes): `300ms`
-- Deliberate transitions (cards lifting, border color): `500ms`
-- Dramatic reveals (sepia to color, scale): `700ms`
+### 2. **棕褐色至全彩的图片过渡**
+所有图片初始带棕褐色滤镜（0.6），悬停时于 700ms 内过渡至全彩。这营造出"陈年照片苏醒"的魔幻效果。
 
-**Transform Patterns**:
-- Hover scale: `scale-105` or `scale-[1.02]` (subtle, never dramatic)
-- Hover lift: Increase shadow, don't translate vertically
-- No rotation transforms (except for chevron icons)
-- No slide-in or slide-out animations
+### 3. **罗马数字卷次系统**
+每个主要章节必须以罗马数字配 "Volume I"、"Volume II" 等前缀。列表项与子元素使用独立罗马数字（I, II, III...）。所有编号使用 Cinzel 字体、大写、黄铜色。
 
-**Signature Animation - Brass Shimmer** (optional enhancement):
-Subtle brightness oscillation on brass buttons:
+### 4. **首字下沉引言**
+主要章节的开篇段落应采用 Cinzel 字体、`text-7xl` 的巨型黄铜首字下沉，营造彩绘手稿的质感。
+
+### 5. **角部纹饰**
+主要边框（Hero 区）必须有大型黄铜角括号（40px）。卡片应有含蓄的角部纹饰（24px）。这如证书与肖像般框定内容。
+
+### 6. **带字形的华丽分隔符**
+章节分隔使用渐变分隔符（透明 → 木纹 → 黄铜 → 木纹 → 透明），中心含装饰性 Unicode 字符（✶, ❧, ✤, ❦）。
+
+### 7. **蜡封徽章**
+精选或高亮项获得带径向渐变与内嵌阴影的圆形绯红徽章，中心含星形图标。这模仿重要文件上的传统蜡封。
+
+### 8. **黄铜交互元素**
+所有交互元素（按钮、链接、聚焦环、悬停状态）必须使用黄铜色（#C9A962）或黄铜渐变。这一点不可妥协——黄铜是交互的色彩语言。
+
+### 9. **雕刻文字效果**
+按钮与特殊标题使用双向 text-shadow（下方暗、上方亮），营造压入金属的雕刻外观。
+
+### 10. **纹理叠加**
+页面必须同时包含含蓄的纸张纹理（3% 不透明度噪点）与暗角效果（径向渐变加深边缘）。这些固定叠加营造氛围深度。
+
+---
+
+## 动画与运动
+
+**运动哲学**：庄重、从容、流畅。任何事物都不应感觉急促、弹跳或俏皮。运动应如同皮革装帧书籍的重量、黄铜台灯的摆动、旧书页的翻动。
+
+**缓动函数**：
+- 默认：`ease-out`（自然减速）
+- 切勿使用：`ease-in-out`（过于机械）、`bounce`、`spring`（过于俏皮）
+
+**时长层级**：
+- 快速交互（按钮按下、聚焦）：`150ms`
+- 标准过渡（悬停、边框变化）：`300ms`
+- 从容过渡（卡片上浮、边框变色）：`500ms`
+- 戏剧性显现（棕褐至全彩、缩放）：`700ms`
+
+**变换模式**：
+- 悬停缩放：`scale-105` 或 `scale-[1.02]`（含蓄，绝不夸张）
+- 悬停上浮：增加阴影，不要垂直位移
+- 无旋转变换（chevron 图标除外）
+- 无滑入或滑出动画
+
+**标志性动画——黄铜微光**（可选增强）：
+黄铜按钮上微妙的亮度振荡：
 ```
 hover: brightness-110
-animation: Gentle pulse between 100% and 110% over 2s
+animation: 100% 与 110% 间于 2s 内轻柔脉动
 ```
 
-**Respect Motion Preferences**:
+**尊重运动偏好**：
 ```css
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -534,153 +534,153 @@ animation: Gentle pulse between 100% and 110% over 2s
 
 ---
 
-## Iconography
+## 图标
 
-**Icon Library**: Use Lucide React or similar minimal icon set
+**图标库**：使用 Lucide React 或类似极简图标集
 
-**Styling Rules**:
-- Stroke width: `1.5` (thin, elegant lines)
-- Color: Brass (`#C9A962`) for decorative icons
-- Size: `h-4 w-4` to `h-6 w-6` depending on context
-- Containers: Often enclosed in circular or shield-shaped containers with brass border
+**样式规则**：
+- 描边宽度：`1.5`（纤细、优雅的线条）
+- 颜色：装饰图标用黄铜（`#C9A962`）
+- 尺寸：视语境 `h-4 w-4` 至 `h-6 w-6`
+- 容器：常置于带黄铜边框的圆形或盾形容器中
 
-**Engraved Icon Treatment** (optional):
-- Place icons in circular containers: `rounded-full border border-[#C9A962]/30 bg-[#1C1714]`
-- Size: `h-12 w-12` with centered icon `h-5 w-5`
-- Creates "carved medallion" effect
+**雕刻图标处理**（可选）：
+- 将图标置于圆形容器：`rounded-full border border-[#C9A962]/30 bg-[#1C1714]`
+- 尺寸：`h-12 w-12`，居中图标 `h-5 w-5`
+- 营造"雕刻徽章"效果
 
-**Icon Usage**:
-- Feature icons: Educational symbols (book, scroll, graduation cap, quill)
-- Button icons: Actions (chevrons, external link, check marks)
-- Decorative icons: Stars for ratings, quotes for testimonials
-
----
-
-## Anti-Patterns (What to Avoid)
-
-### Do NOT:
-1. **Use sans-serif fonts** anywhere except for extreme edge cases (accessibility overrides)
-2. **Use bright, saturated colors** - everything should feel aged and warm
-3. **Use sharp, geometric shapes** - favor organic curves and traditional architecture
-4. **Overuse decorative elements** - restraint is scholarly; excess is gaudy
-5. **Use modern gradients** (except brass metallic effect) - no vibrant color transitions
-6. **Ignore the arch-top pattern** - flat-top images break the aesthetic
-7. **Skip Roman numerals** - they're essential to the classical academic vibe
-8. **Use pure black (#000000)** - always use warm dark browns
-9. **Use pure white (#FFFFFF)** - always use warm cream tones
-10. **Add playful animations** - no bouncing, no elastic effects, no whimsy
-11. **Forget sepia filters** - images must feel aged by default
-12. **Use thin borders everywhere** - let backgrounds do separation work, borders for emphasis
-13. **Mix cold and warm tones** - this is a warm palette exclusively
-
-### Common Mistakes:
-- **Too many corner flourishes** - reserve for hero and cards, not every element
-- **Overusing crimson** - it's for special emphasis only, brass should dominate
-- **Insufficient spacing** - academia needs breathing room for contemplation
-- **Missing texture overlays** - these add essential atmospheric depth
-- **Forgetting focus states** - keyboard navigation must have visible brass rings
-- **Inconsistent font usage** - Cormorant for headings, Crimson for body, Cinzel for labels/display
+**图标用途**：
+- 特性图标：教育符号（书、卷轴、学位帽、羽毛笔）
+- 按钮图标：操作（chevron、外链、勾选）
+- 装饰图标：评分用星形、证言用引号
 
 ---
 
-## Responsive Strategy
+## 反模式（应避免之事）
 
-### Mobile (< 768px):
-- **Stack all columns vertically** - maintain hierarchy
-- **Touch targets** - Minimum 48px height for interactive elements (FAQ buttons 40px, general links 48px min-height)
-- **Simplify decorative elements** - hide large corner flourishes, keep small ones
-- **Maintain typography** - reduce sizes slightly (text-lg becomes text-base) but keep font choices
-- **Full-width cards** - preserve arch-tops on images
-- **Single-line borders** - simplify double-border effects
-- **Reduce spacing** - py-16 instead of py-24 for sections, reduce internal padding (pl-6 instead of pl-10)
-- **Simplify navigation** - hamburger menu with same serif styling
-- **Form elements** - Stack email input and button vertically, ensure full-width buttons on mobile
+### 切勿：
+1. **使用无衬线字体**，除非极端边缘情况（可访问性覆盖）
+2. **使用明亮、高饱和色彩**——一切应显得陈旧而温暖
+3. **使用锐利、几何形状**——偏好有机曲线与传统建筑
+4. **过度使用装饰元素**——克制才显学术，过度则显俗气
+5. **使用现代渐变**（黄铜金属效果除外）——不要鲜艳色彩过渡
+6. **忽略拱顶模式**——平顶图片破坏美学
+7. **跳过罗马数字**——它们对古典学术氛围至关重要
+8. **使用纯黑（#000000）**——始终使用温暖的深棕色
+9. **使用纯白（#FFFFFF）**——始终使用温暖奶油色
+10. **添加俏皮动画**——不要弹跳、弹性效果或 whimsy
+11. **遗忘棕褐色滤镜**——图片默认应显得陈旧
+12. **到处用细边框**——让背景完成区隔，边框用于强调
+13. **混用冷暖色调**——这是纯暖色调色板
 
-### Tablet (768px - 1024px):
-- **Two-column grids** where appropriate (features, testimonials)
-- **Partial decorative elements** - show corner flourishes on cards
-- **Maintain most effects** - keep sepia transitions, brass interactions
-- **Flexible spacing** - scale between mobile and desktop values
-
-### Desktop (> 1024px):
-- **Full ornate experience** - all decorative elements visible
-- **Three-column grids** - features, pricing, benefits
-- **Maximum visual richness** - large corner flourishes, full texture overlays
-- **Generous spacing** - full py-24 to py-32 section padding
-
-### Responsive Image Strategy:
-- Arch-tops work at all sizes - maintain the effect
-- Use `aspect-[3/4]` or `aspect-[4/5]` for portraits, `aspect-[4/3]` for landscapes
-- Always apply sepia filter at all viewport sizes
+### 常见错误：
+- **角部纹饰过多**——仅用于 Hero 与卡片，而非每个元素
+- **绯红过度使用**——仅用于特殊强调，黄铜应占主导
+- **间距不足**——学院风需要呼吸空间以供沉思
+- **缺失纹理叠加**——这些增添关键的氛围深度
+- **遗忘聚焦状态**——键盘导航必须有可见的黄铜环
+- **字体使用不一致**——标题用 Cormorant，正文用 Crimson，标签/展示用 Cinzel
 
 ---
 
-## Accessibility Considerations
+## 响应式策略
 
-### Contrast Requirements:
-- **Primary text on background**: 8.5:1 (exceeds WCAG AAA)
-- **Secondary text on background**: 4.5:1 minimum (meets WCAG AA)
-- **Brass on dark backgrounds**: 7:1 (excellent)
-- **Dark text on brass buttons**: 8:1 (excellent)
+### 移动端（< 768px）：
+- **所有列垂直堆叠**——保持层级
+- **触控目标**——交互元素最小高度 48px（FAQ 按钮 40px，常规链接最小高度 48px）
+- **简化装饰元素**——隐藏大型角部纹饰，保留小型
+- **保持字体**——尺寸略减（text-lg 变 text-base）但保留字体选择
+- **全宽卡片**——保留图片拱顶
+- **单线边框**——简化双边框效果
+- **缩减间距**——区块用 py-16 而非 py-24，减少内边距（pl-6 而非 pl-10）
+- **简化导航**——汉堡菜单配相同衬线样式
+- **表单元素**——邮箱输入与按钮垂直堆叠，确保移动端全宽按钮
 
-### Focus Indicators:
-- **Always visible**: 2px brass ring with 2px offset
-- **High contrast**: Brass (#C9A962) against all backgrounds
-- **Never remove**: Critical for keyboard navigation
-- **Ring offset**: Uses background color for clear separation
+### 平板（768px - 1024px）：
+- **适当时使用双列网格**（特性、证言）
+- **部分装饰元素**——卡片显示角部纹饰
+- **保留大部分效果**——保持棕褐色过渡、黄铜交互
+- **灵活间距**——在移动与桌面值之间缩放
 
-### Motion Preferences:
-- Respect `prefers-reduced-motion` media query
-- Disable or drastically reduce transition durations
-- Maintain functionality without motion
+### 桌面（> 1024px）：
+- **完整华丽体验**——所有装饰元素可见
+- **三列网格**——特性、定价、收益
+- **最大视觉丰富度**——大型角部纹饰、完整纹理叠加
+- **慷慨间距**——完整 py-24 至 py-32 区块内边距
 
-### Semantic HTML:
-- Use proper heading hierarchy (h1 → h2 → h3)
-- Use `<nav>` for navigation, `<main>` for content, `<footer>` for footer
-- Use `<button>` for actions, `<a>` for navigation
-- Use `aria-label` for icon-only buttons
-
-### Screen Reader Considerations:
-- Decorative elements (flourishes, dividers) should have `aria-hidden="true"`
-- Images must have descriptive alt text
-- Form inputs must have associated labels
-- Focus order must be logical
-
----
-
-## Implementation Constraints
-
-### Technology Stack:
-- **CSS Framework**: Tailwind CSS v4+ with arbitrary value syntax `[#C9A962]`
-- **Fonts**: Google Fonts (Cormorant Garamond, Crimson Pro, Cinzel)
-- **Icons**: Lucide React or similar minimal icon set
-- **Custom CSS**: Required for textures, flourishes, and complex decorative elements
-
-### Custom CSS Requirements:
-The following cannot be achieved with Tailwind alone and require custom CSS:
-- Paper texture overlay (SVG noise filter)
-- Vignette radial gradient overlay
-- Corner flourishes (pseudo-elements)
-- Ornate dividers with centered glyphs
-- Wax seal badge (complex radial gradient)
-- Drop cap styling (::first-letter pseudo-element)
-- Arch-top border-radius (complex multi-value syntax)
-
-### Performance Considerations:
-- Fixed overlays (texture, vignette) use single elements, not per-component
-- Sepia filters are GPU-accelerated transforms
-- Minimize custom fonts to three families
-- Use font-display: swap for Google Fonts
-
-### Browser Support:
-- Modern browsers (last 2 versions of Chrome, Firefox, Safari, Edge)
-- CSS Grid and Flexbox required
-- CSS custom properties for theme tokens
-- Border-radius complex syntax for arch-tops
+### 响应式图片策略：
+- 拱顶适用于所有尺寸——保持该效果
+- 人像用 `aspect-[3/4]` 或 `aspect-[4/5]`，风景用 `aspect-[4/3]`
+- 所有视口尺寸均应用棕褐色滤镜
 
 ---
 
-## Design Token Reference (Quick Copy)
+## 可访问性考量
+
+### 对比度要求：
+- **主要文字对背景**：8.5:1（超过 WCAG AAA）
+- **次要文字对背景**：最低 4.5:1（达 WCAG AA）
+- **深色背景上的黄铜**：7:1（优秀）
+- **黄铜按钮上的深色文字**：8:1（优秀）
+
+### 聚焦指示器：
+- **始终可见**：2px 黄铜环配 2px offset
+- **高对比**：黄铜（#C9A962）在所有背景上
+- **绝不移除**：对键盘导航至关重要
+- **环 offset**：使用背景色以清晰分隔
+
+### 运动偏好：
+- 尊重 `prefers-reduced-motion` 媒体查询
+- 禁用或大幅缩减过渡时长
+- 在无运动的情况下保持功能
+
+### 语义化 HTML：
+- 使用正确的标题层级（h1 → h2 → h3）
+- 导航用 `<nav>`，内容用 `<main>`，页脚用 `<footer>`
+- 操作用 `<button>`，导航用 `<a>`
+- 纯图标按钮使用 `aria-label`
+
+### 屏幕阅读器考量：
+- 装饰元素（纹饰、分隔符）应设 `aria-hidden="true"`
+- 图片必须有描述性 alt 文本
+- 表单输入必须有关联标签
+- 聚焦顺序必须合乎逻辑
+
+---
+
+## 实现约束
+
+### 技术栈：
+- **CSS 框架**：Tailwind CSS v4+，支持任意值语法 `[#C9A962]`
+- **字体**：Google Fonts（Cormorant Garamond、Crimson Pro、Cinzel）
+- **图标**：Lucide React 或类似极简图标集
+- **自定义 CSS**：纹理、纹饰与复杂装饰元素所需
+
+### 自定义 CSS 需求：
+以下无法仅凭 Tailwind 实现，需自定义 CSS：
+- 纸张纹理叠加（SVG 噪点滤镜）
+- 暗角径向渐变叠加
+- 角部纹饰（伪元素）
+- 带居中字形的华丽分隔符
+- 蜡封徽章（复杂径向渐变）
+- 首字下沉样式（::first-letter 伪元素）
+- 拱顶 border-radius（复杂多值语法）
+
+### 性能考量：
+- 固定叠加（纹理、暗角）使用单个元素，而非每组件一个
+- 棕褐色滤镜为 GPU 加速变换
+- 自定义字体精简至三个字族
+- Google Fonts 使用 font-display: swap
+
+### 浏览器支持：
+- 现代浏览器（Chrome、Firefox、Safari、Edge 最近 2 个版本）
+- 需 CSS Grid 与 Flexbox
+- 主题 token 使用 CSS 自定义属性
+- 拱顶使用复杂 border-radius 语法
+
+---
+
+## 设计 Token 参考（快速复制）
 
 ```javascript
 export const academiaTokens = {
@@ -724,10 +724,10 @@ export const academiaTokens = {
 
 ---
 
-## Summary
+## 总结
 
-Academia/Classical is defined by its **material authenticity** (aged paper, dark wood, polished brass), **typographic excellence** (three distinct serifs used purposefully), and **signature architectural elements** (arch-tops, corner flourishes, Roman numerals).
+Academia/古典风由其**材质真实感**（陈年纸张、深色木材、抛光黄铜）、**排印卓越**（三种衬线字体各有用武之地）与**标志性建筑元素**（拱顶、角部纹饰、罗马数字）所定义。
 
-The style succeeds when every element feels like it could exist in a physical 19th-century university library. It fails when it feels like a generic dark theme with serifs tacked on.
+当每个元素都仿佛能存在于 19 世纪的大学图书馆实体中时，此风格即告成功。当它感觉只是套了衬线字体的通用深色主题时，即告失败。
 
-The brass/gold accent color is the interactive language. The sepia-to-color transition is the magical moment. The arch-topped images are the architectural signature. Together, these create a cohesive, prestigious, scholarly experience that feels timeless and trustworthy.
+黄铜/金色点缀色是交互的语言。棕褐至全彩的过渡是魔幻时刻。拱顶图片是建筑的签名。三者共同营造出连贯、尊贵、学术的体验，透出永恒与可信赖。

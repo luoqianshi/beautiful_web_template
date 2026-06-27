@@ -10,183 +10,183 @@
 | 显示名称 | Modern Dark |
 | 模式 | 🌙 深色模式 (Dark) |
 | 字体类型 | sans-serif |
-| 描述 | A cinematic, high-precision dark mode design featuring layered ambient lighting through animated gradient blobs, mouse-tracking spotlight effects, and meticulously crafted micro-interactions that feel like premium software. |
+| 描述 | 电影般高精度的深色模式设计，通过动画渐变光斑营造分层环境光、鼠标追踪聚光效果与精心打磨、质感如高端软件的微交互。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Centered cinematic hero with parallax scroll effects, gradient headline treatment, and floating announcement badge with ping animation. Trust indicators displayed as overlapping avatars below CTAs.
+居中电影感 Hero，配视差滚动效果、渐变标题处理与带 ping 动画的浮动公告徽章。信任指标以重叠头像显示于 CTA 下方。
 
 ### Stats
 
-Bold 4-column grid with gradient text for numbers, trend badges, and subtle hover glow effects. Numbers use massive typography (text-7xl) with gradient fills.
+大胆 4 列网格，数字用渐变文字、趋势徽章与含蓄悬停辉光效果。数字用巨型字体（text-7xl）配渐变填充。
 
 ### Product Detail
 
-Split 2-column layout with text content on left and mock interface visual on right. Mock interface includes macOS-style window controls and abstract UI components with accent highlights.
+双栏分割布局，左侧文字内容，右侧模拟界面视觉。模拟界面含 macOS 风格窗口控件与带点缀高亮的抽象 UI 组件。
 
 ### Features
 
-Asymmetric 6-column bento grid with varying card sizes. Hero feature card spans 4 columns and 2 rows with integrated data visualization. Cards use mouse-tracking spotlight effects.
+非对称 6 列 bento 网格，卡片尺寸不一。Hero 特性卡片跨 4 列 2 行，含集成数据可视化。卡片用鼠标追踪聚光效果。
 
 ### Blog
 
-Magazine-style 3-column grid with hover-zoom images, gradient overlays on hover, and clean metadata presentation. Images have subtle opacity transitions.
+杂志风 3 列网格，悬停缩放图片、悬停渐变叠加与干净元信息展示。图片有含蓄不透明度过渡。
 
 ### How It Works
 
-3-column grid with numbered cards featuring glowing accent borders. Step numbers displayed in large format with glow effects. Connection line spans across cards on desktop.
+3 列网格，编号卡片配发光点缀边框。步骤编号大号显示配辉光效果。桌面端跨卡片连接线。
 
 ### Benefits
 
-Sticky left column with scrolling right column. Right side features stacked cards with checkmark icons and hover border accent effects.
+粘性左列配滚动右列。右侧堆叠卡片配勾选图标与悬停边框点缀效果。
 
 ### Testimonials
 
-3-column masonry grid with star ratings, quote text, and author cards. Cards lift slightly on hover with subtle shadow enhancement.
+3 列瀑布流网格，配星级评分、引文与作者卡片。卡片悬停轻微上浮配含蓄阴影增强。
 
 ### Pricing
 
-3-column tier grid with highlighted middle tier. Badge labels, large pricing typography, checkmark feature lists, and full-width CTAs. Highlighted tier has enhanced glow shadow.
+3 列档位网格，中间档位高亮。徽章标签、大号定价字体、勾选特性列表与全宽 CTA。高亮档位有增强辉光阴影。
 
 ### Faq
 
-Centered single-column accordion with animated height transitions and rotating chevron icons. Smooth expand/collapse with expo-out easing.
+居中单列手风琴，配动画高度过渡与旋转 chevron 图标。配 expo-out 缓动的平滑展开/收起。
 
 ### Footer
 
-5-column grid with brand section, navigation columns, and social links. Subtle separation with top border and legal links in footer bottom.
+5 列网格，含品牌区、导航列与社交链接。顶边框含蓄分隔，页脚底部含法律链接。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Design Style: Linear / Modern
+# 设计风格：Linear / Modern
 
-## Design Philosophy
+## 设计哲学
 
-**Core Principles:** Precision, depth, and fluidity define this design system. Every surface exists in three-dimensional space, illuminated by soft ambient light sources that breathe and move. The design communicates "premium developer tools"—fast, responsive, and obsessively crafted like Linear, Vercel, or Raycast. Nothing is arbitrary: every shadow has three layers, every gradient transitions through multiple colors, every animation uses refined expo-out easing. The goal is software that feels expensive without feeling ostentatious.
+**核心原则**：精准、深度与流畅定义此设计系统。每个表面存在于三维空间，被呼吸移动的柔和环境光源照亮。设计传达"高端开发者工具"——快速、响应、如 Linear、Vercel 或 Raycast 般痴迷打磨。无物随意：每个阴影有三层，每个渐变过渡多色，每个动画用精炼 expo-out 缓动。目标是感觉昂贵而不浮夸的软件。
 
-**Vibe:** Cinematic meets technical minimalism. Imagine a developer's code editor crossed with a Blade Runner interface—deep near-blacks (#050506, never pure black) punctuated by soft pools of indigo light. The aesthetic is sophisticated but never cold, using warmth from accent glows (#5E6AD2 at varying opacities) to create inviting depth. It should feel like looking through frosted glass into a high-end application running at night. Dark, but not oppressive. Technical, but not sterile. Precise, but not rigid.
+**气质**：电影感遇上技术极简。想象开发者代码编辑器与银翼杀手界面交叉——深邃近黑（#050506，绝非纯黑）被柔和靛蓝光池点缀。美学精致但绝不冰冷，用点缀辉光（#5E6AD2 变化不透明度）的温暖创造诱人深度。应感觉如透过磨砂玻璃窥视夜间运行的高端应用。暗，但不压抑。技术，但不无菌。精准，但不僵硬。
 
-**Differentiation:** The signature of this style is **layered ambient lighting and interactive depth**. Unlike flat dark modes or simple gradient overlays, this creates genuine atmospheric presence through:
+**差异化**：此风格签名是**分层环境光与交互深度**。不同于扁平深色模式或简单渐变叠加，这通过以下创造真正氛围存在：
 
-1. **Multi-layer background system:** Four stacked gradients + noise texture + grid overlay create depth without any single dominant element
-2. **Animated gradient blobs:** Large (900-1400px), heavily blurred shapes float slowly across the canvas, simulating cinematic lighting pools
-3. **Mouse-tracking spotlights:** Interactive surfaces respond to cursor position with radial gradient glows (300px diameter, 15% opacity)
-4. **Scroll-linked parallax:** Hero content fades, scales, and translates based on scroll position for cinematic depth
-5. **Multi-layer shadows:** Every elevated surface uses 3-4 shadow layers: border highlight + soft diffuse + ambient darkness + optional accent glow
-6. **Precision micro-interactions:** All animations are 200-300ms with expo-out easing. Movements are tiny (4-8px max). Scale changes are subtle (0.98-1.02). Nothing bounces or overshoots.
+1. **多层背景系统**：四层堆叠渐变 + 噪点纹理 + 网格叠加，无单一主导元素即创深度
+2. **动画渐变光斑**：大型（900-1400px）、重度模糊形状缓慢飘过画布，模拟电影光照池
+3. **鼠标追踪聚光**：交互表面以径向渐变辉光（300px 直径，15% 不透明度）响应光标位置
+4. **滚动关联视差**：Hero 内容基于滚动位置淡入、缩放与位移以增电影深度
+5. **多层阴影**：每个抬升表面用 3-4 阴影层：边框高光 + 柔和弥散 + 环境暗 + 可选点缀辉光
+6. **精准微交互**：所有动画 200-300ms 配 expo-out 缓动。运动微小（最大 4-8px）。缩放变化含蓄（0.98-1.02）。无弹跳或过冲。
 
-**The "Software Feel":** This design should feel like using a desktop application, not a website. Interactions are instant and precise. Hover states are immediate. Focus rings are prominent. Everything responds to the cursor. The aesthetic borrows from native macOS/Windows design systems—subtle transparency, soft glows, refined typography, obsessive attention to 1px details.
+**"软件感"**：此设计应感觉如使用桌面应用，非网站。交互即时精准。悬停状态即时。聚焦环突出。一切响应光标。美学借鉴原生 macOS/Windows 设计系统——含蓄透明、柔和辉光、精炼字体、痴迷于 1px 细节。
 
 ---
 
-## Design Token System (The DNA)
+## 设计 Token 系统（DNA）
 
-### Color Strategy: Deep Space with Ambient Light
+### 色彩策略：深空配环境光
 
-The palette is built on near-black bases with a single saturated indigo accent. Depth comes from layered translucency and soft light sources, not harsh shadows.
+调色板建于近黑基底配单一饱和靛蓝点缀。深度来自分层半透明与柔和光源，非刺眼阴影。
 
-| Token | Value | Usage |
+| Token | 值 | 用法 |
 |:------|:------|:------|
-| `background-deep` | `#020203` | Absolute darkest — footer, deepest layers |
-| `background-base` | `#050506` | Primary page canvas |
-| `background-elevated` | `#0a0a0c` | Elevated surfaces, mock interfaces |
-| `surface` | `rgba(255,255,255,0.05)` | Card backgrounds, containers |
-| `surface-hover` | `rgba(255,255,255,0.08)` | Hovered card state |
-| `foreground` | `#EDEDEF` | Primary text — bright but not pure white |
-| `foreground-muted` | `#8A8F98` | Body text, descriptions, metadata |
-| `foreground-subtle` | `rgba(255,255,255,0.60)` | Tertiary text, placeholders |
-| `accent` | `#5E6AD2` | Primary interactive color — buttons, links, glows |
-| `accent-bright` | `#6872D9` | Hover state for accent |
-| `accent-glow` | `rgba(94,106,210,0.3)` | Glow effects, ambient lighting |
-| `border-default` | `rgba(255,255,255,0.06)` | Subtle hairline borders |
-| `border-hover` | `rgba(255,255,255,0.10)` | Border on hover |
-| `border-accent` | `rgba(94,106,210,0.30)` | Accent-tinted borders for emphasis |
+| `background-deep` | `#020203` | 绝对最暗 — 页脚、最深层 |
+| `background-base` | `#050506` | 主页面画布 |
+| `background-elevated` | `#0a0a0c` | 抬升表面、模拟界面 |
+| `surface` | `rgba(255,255,255,0.05)` | 卡片背景、容器 |
+| `surface-hover` | `rgba(255,255,255,0.08)` | 悬停卡片状态 |
+| `foreground` | `#EDEDEF` | 主要文字 — 亮但非纯白 |
+| `foreground-muted` | `#8A8F98` | 正文、描述、元信息 |
+| `foreground-subtle` | `rgba(255,255,255,0.60)` | 三级文字、占位符 |
+| `accent` | `#5E6AD2` | 主交互色 — 按钮、链接、辉光 |
+| `accent-bright` | `#6872D9` | 点缀悬停状态 |
+| `accent-glow` | `rgba(94,106,210,0.3)` | 辉光效果、环境光 |
+| `border-default` | `rgba(255,255,255,0.06)` | 含蓄发丝边框 |
+| `border-hover` | `rgba(255,255,255,0.10)` | 悬停边框 |
+| `border-accent` | `rgba(94,106,210,0.30)` | 点缀色调边框作强调 |
 
-### Background System: Layered Ambient Lighting
+### 背景系统：分层环境光
 
-The background is never flat. It's a composition of multiple layers:
+背景绝不扁平。它是多层构图：
 
-**Layer 1 — Base Gradient:**
+**第 1 层 — 基础渐变**：
 ```
 bg-[radial-gradient(ellipse_at_top,#0a0a0f_0%,#050506_50%,#020203_100%)]
 ```
-A radial gradient emanating from top-center creates vertical depth.
+自顶部中心放射的径向渐变创造垂直深度。
 
-**Layer 2 — Noise Texture:**
-A subtle SVG noise pattern at `opacity: 0.015` adds tactile quality and prevents banding.
+**第 2 层 — 噪点纹理**：
+`opacity: 0.015` 的含蓄 SVG 噪点图案增添触感并防条带。
 
-**Layer 3 — Animated Gradient Blobs:**
-Multiple large, heavily blurred shapes create ambient "light pools":
-- Primary blob: Top-center, `blur-[150px]`, 900×1400px, accent color at 25% opacity
-- Secondary blob: Left side, `blur-[120px]`, 600×800px, purple/pink mix at 15% opacity
-- Tertiary blob: Right side, `blur-[100px]`, 500×700px, indigo/blue mix at 12% opacity
-- Bottom accent: Lower area, pulsing animation, accent at 10% opacity
+**第 3 层 — 动画渐变光斑**：
+多个大型重度模糊形状创造环境"光池"：
+- 主光斑：顶部居中，`blur-[150px]`，900×1400px，点缀色 25% 不透明度
+- 次光斑：左侧，`blur-[120px]`，600×800px，紫/粉混合 15% 不透明度
+- 三级光斑：右侧，`blur-[100px]`，500×700px，靛蓝/蓝混合 12% 不透明度
+- 底部点缀：下方区域，脉动动画，点缀色 10% 不透明度
 
-**Blob Animation:** Blobs float slowly using keyframe animations:
+**光斑动画**：光斑用关键帧动画缓慢漂浮：
 ```css
 @keyframes float {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-20px) rotate(1deg); }
 }
-/* Duration: 8-10s, ease-in-out, infinite */
+/* 时长：8-10s，ease-in-out，infinite */
 ```
 
-**Layer 4 — Grid Overlay:**
-A subtle 64px grid pattern at `opacity: 0.02` adds technical precision.
+**第 4 层 — 网格叠加**：
+`opacity: 0.02` 的含蓄 64px 网格图案增添技术精准。
 
 ---
 
-### Typography System
+### 字体系统
 
-**Font Stack:** `"Inter", "Geist Sans", system-ui, sans-serif`
+**字体栈**：`"Inter", "Geist Sans", system-ui, sans-serif`
 
-**Type Scale & Weights:**
+**字号阶梯与字重**：
 
-| Level | Size | Weight | Tracking | Usage |
+| 级别 | 尺寸 | 字重 | 字距 | 用法 |
 |:------|:-----|:-------|:---------|:------|
-| Display | `text-7xl` to `text-8xl` | `font-semibold` | `tracking-[-0.03em]` | Hero headlines |
-| H1 | `text-5xl` to `text-6xl` | `font-semibold` | `tracking-tight` | Section headers |
-| H2 | `text-3xl` to `text-4xl` | `font-semibold` | `tracking-tight` | Subsection headers |
-| H3 | `text-xl` to `text-2xl` | `font-semibold` | `tracking-tight` | Card titles |
-| Body Large | `text-lg` to `text-xl` | `font-normal` | default | Lead paragraphs |
-| Body | `text-sm` to `text-base` | `font-normal` | default | Standard content |
-| Label | `text-xs` | `font-mono` | `tracking-widest` | Section tags, metadata |
+| 展示 | `text-7xl` 至 `text-8xl` | `font-semibold` | `tracking-[-0.03em]` | Hero 标题 |
+| H1 | `text-5xl` 至 `text-6xl` | `font-semibold` | `tracking-tight` | 区块标题 |
+| H2 | `text-3xl` 至 `text-4xl` | `font-semibold` | `tracking-tight` | 子标题 |
+| H3 | `text-xl` 至 `text-2xl` | `font-semibold` | `tracking-tight` | 卡片标题 |
+| 大正文 | `text-lg` 至 `text-xl` | `font-normal` | 默认 | 引导段 |
+| 正文 | `text-sm` 至 `text-base` | `font-normal` | 默认 | 标准内容 |
+| 标签 | `text-xs` | `font-mono` | `tracking-widest` | 区块标签、元信息 |
 
-**Gradient Text Treatment:**
-Headlines use gradient fills for dimensionality:
+**渐变文字处理**：
+标题用渐变填充以增维度：
 ```
 bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent
 ```
 
-For accent emphasis, use animated gradient:
+点缀强调用动画渐变：
 ```
 bg-gradient-to-r from-[#5E6AD2] via-indigo-400 to-[#5E6AD2] bg-clip-text text-transparent
-/* With background-size: 200% and animation for shimmer effect */
+/* 配 background-size: 200% 与动画作微光效果 */
 ```
 
-**Line Heights:**
-- Headlines: `leading-tight` or `leading-none`
-- Body text: `leading-relaxed`
+**行高**：
+- 标题：`leading-tight` 或 `leading-none`
+- 正文：`leading-relaxed`
 
 ---
 
-### Radius & Border System
+### 圆角与边框系统
 
-| Element | Radius | Border |
+| 元素 | 圆角 | 边框 |
 |:--------|:-------|:-------|
-| Large containers | `rounded-2xl` (16px) | `border border-white/[0.06]` |
-| Cards | `rounded-2xl` (16px) | `border border-white/[0.06]` |
-| Buttons | `rounded-lg` (8px) | Inset shadow instead of border |
-| Inputs | `rounded-lg` (8px) | `border border-white/10` |
-| Badges/Pills | `rounded-full` | `border border-accent/30` |
-| Icons containers | `rounded-xl` (12px) | `border border-white/10` |
+| 大容器 | `rounded-2xl`（16px） | `border border-white/[0.06]` |
+| 卡片 | `rounded-2xl`（16px） | `border border-white/[0.06]` |
+| 按钮 | `rounded-lg`（8px） | 内嵌阴影替代边框 |
+| 输入框 | `rounded-lg`（8px） | `border border-white/10` |
+| 徽章/胶囊 | `rounded-full` | `border border-accent/30` |
+| 图标容器 | `rounded-xl`（12px） | `border border-white/10` |
 
-**Border Gradients on Hover:**
-Cards can have animated gradient borders that fade in on hover:
+**悬停时边框渐变**：
+卡片可有悬停时淡入的动画渐变边框：
 ```css
 background: linear-gradient(to bottom, rgba(94,106,210,0.3), transparent);
 mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -196,237 +196,229 @@ padding: 1px;
 
 ---
 
-### Shadow & Glow System
+### 阴影与辉光系统
 
-**Multi-Layer Shadow Formula:**
-Shadows combine multiple layers for realistic depth:
+**多层阴影公式**：
+阴影结合多层以达真实深度：
 
 ```
-/* Card default */
+/* 卡片默认 */
 shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_2px_20px_rgba(0,0,0,0.4),0_0_40px_rgba(0,0,0,0.2)]
 
-/* Card hover */
+/* 卡片悬停 */
 shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_8px_40px_rgba(0,0,0,0.5),0_0_80px_rgba(94,106,210,0.1)]
 ```
 
-**Accent Glow for CTAs:**
+**CTA 点缀辉光**：
 ```
 shadow-[0_0_0_1px_rgba(94,106,210,0.5),0_4px_12px_rgba(94,106,210,0.3),inset_0_1px_0_0_rgba(255,255,255,0.2)]
 ```
 
-**Inner Highlight:**
-Buttons and elevated surfaces get a subtle top edge highlight:
+**内高光**：
+按钮与抬升表面获含蓄顶部边缘高光：
 ```
 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]
 ```
 
 ---
 
-## Component Styling Principles
+## 组件样式原则
 
-### Buttons
+### 按钮
 
-**Primary Button:**
-- Background: Solid accent color (`bg-[#5E6AD2]`)
-- Text: White
-- Shadow: Multi-layer with accent glow
-- Hover: Slightly brighter (`bg-[#6872D9]`), increased glow
-- Active: `scale-[0.98]`, reduced shadow
-- Shine effect: Pseudo-element gradient sweep on hover
+**主按钮**：
+- 背景：实心点缀色（`bg-[#5E6AD2]`）
+- 文字：白
+- 阴影：多层配点缀辉光
+- 悬停：略亮（`bg-[#6872D9]`），增强辉光
+- 激活：`scale-[0.98]`，减少阴影
+- 光泽效果：悬停时伪元素渐变扫过
 
-**Secondary Button:**
-- Background: `bg-white/[0.05]`
-- Text: `text-[#EDEDEF]`
-- Border: Inset shadow only
-- Hover: `bg-white/[0.08]`, subtle outer glow
+**次按钮**：
+- 背景：`bg-white/[0.05]`
+- 文字：`text-[#EDEDEF]`
+- 边框：仅内嵌阴影
+- 悬停：`bg-white/[0.08]`，含蓄外辉光
 
-**Ghost Button:**
-- Background: Transparent
-- Text: Muted foreground
-- Hover: `bg-white/[0.05]`, text brightens
+**幽灵按钮**：
+- 背景：透明
+- 文字：柔和前景
+- 悬停：`bg-white/[0.05]`，文字提亮
 
-### Cards & Containers
+### 卡片与容器
 
-**Base Card:**
-- Background: `bg-gradient-to-b from-white/[0.08] to-white/[0.02]`
-- Border: 1px at 6% white opacity
-- Radius: `rounded-2xl`
-- Inner glow line: 1px gradient at top edge
-- Mouse-tracking spotlight effect (optional)
+**基础卡片**：
+- 背景：`bg-gradient-to-b from-white/[0.08] to-white/[0.02]`
+- 边框：1px 配 6% 白不透明度
+- 圆角：`rounded-2xl`
+- 内辉光线：顶部边缘 1px 渐变
+- 鼠标追踪聚光效果（可选）
 
-**Spotlight Effect:**
-Cards track mouse position and render a radial gradient that follows the cursor:
+**聚光效果**：
+卡片追踪鼠标位置并渲染跟随光标的径向渐变：
 ```jsx
-// Radial gradient, 300px diameter, accent color at 15% opacity
-// Positioned at mouse coordinates relative to card
-// Opacity transitions on hover
+// 径向渐变，300px 直径，点缀色 15% 不透明度
+// 定位于相对卡片的鼠标坐标
+// 悬停时不透明度过渡
 ```
 
-**Card Variants:**
-- `default`: Standard glass effect
-- `glass`: More translucent with backdrop blur
-- `gradient`: Subtle accent gradient overlay
+**卡片变体**：
+- `default`：标准玻璃效果
+- `glass`：更透明配 backdrop blur
+- `gradient`：含蓄点缀渐变叠加
 
-### Form Inputs
+### 表单输入
 
-- Background: `bg-[#0F0F12]`
-- Border: `border-white/10`
-- Focus: `border-[#5E6AD2]` with accent glow ring
-- Text: `text-gray-100`
-- Placeholder: `text-gray-500`
+- 背景：`bg-[#0F0F12]`
+- 边框：`border-white/10`
+- 聚焦：`border-[#5E6AD2]` 配点缀辉光环
+- 文字：`text-gray-100`
+- 占位符：`text-gray-500`
 
-### Interactive States
+### 交互状态
 
-**Hover Principles:**
-- Movement is minimal: `y: -4px` to `y: -8px` maximum
-- Duration: `200-300ms`
-- Easing: `[0.16, 1, 0.3, 1]` (expo out)
-- Changes: Border brightens, glow increases, subtle scale
+**悬停原则**：
+- 运动最小：`y: -4px` 至 `y: -8px` 最大
+- 时长：`200-300ms`
+- 缓动：`[0.16, 1, 0.3, 1]`（expo out）
+- 变化：边框提亮、辉光增强、含蓄缩放
 
-**Focus States:**
-- Ring: `ring-2 ring-[#5E6AD2]/50 ring-offset-2 ring-offset-[#050506]`
+**聚焦状态**：
+- 环：`ring-2 ring-[#5E6AD2]/50 ring-offset-2 ring-offset-[#050506]`
 
-**Active States:**
-- Scale: `scale-[0.98]`
-- Shadow: Reduced depth
+**激活状态**：
+- 缩放：`scale-[0.98]`
+- 阴影：减少深度
 
-**Mobile Menu:**
-- Toggle button appears on screens < 768px
-- Animated dropdown with `opacity` and `y` transform (0.2s duration)
-- Semi-transparent backdrop: `bg-[#050506]/95` with `backdrop-blur-xl`
-- Vertical navigation links with hover states
-- Full-width CTA button at bottom
-- Menu icon transitions between hamburger (`Menu`) and close (`X`) icons
+**移动菜单**：
+- < 768px 屏幕显示切换按钮
+- 动画下拉配 `opacity` 与 `y` 变换（0.2s 时长）
+- 半透明背景：`bg-[#050506]/95` 配 `backdrop-blur-xl`
+- 垂直导航链接配悬停状态
+- 底部全宽 CTA 按钮
+- 菜单图标在汉堡（`Menu`）与关闭（`X`）图标间过渡
 
 ---
 
-## Layout Principles
+## 布局原则
 
-### Spacing Scale
-Base unit: 4px. Use Tailwind's default scale consistently.
+### 间距阶梯
+基础单位：4px。一致用 Tailwind 默认阶梯。
 
-| Context | Spacing |
+| 上下文 | 间距 |
 |:--------|:--------|
-| Section padding | `py-24` to `py-32` |
-| Container max-width | `container` with responsive padding |
-| Card padding | `p-6` to `p-8` |
-| Element gaps | `gap-4` to `gap-8` |
-| Between sections | `py-32` (128px) |
+| 区块内边距 | `py-24` 至 `py-32` |
+| 容器最大宽度 | `container` 配响应式内边距 |
+| 卡片内边距 | `p-6` 至 `p-8` |
+| 元素间隙 | `gap-4` 至 `gap-8` |
+| 区块间 | `py-32`（128px） |
 
-### Grid Philosophy
+### 网格哲学
 
-**Asymmetric Bento Grids:**
-Feature grids should NOT be uniform. Use varying spans:
-- 6-column base grid on desktop
-- Mix of `col-span-2`, `col-span-3`, `col-span-4`
-- Variable row heights with `auto-rows-[180px]` as baseline
-- One "hero" card spanning 4 columns and 2 rows
+**非对称 Bento 网格**：
+特性网格不应统一。用变化跨度：
+- 桌面 6 列基础网格
+- 混合 `col-span-2`、`col-span-3`、`col-span-4`
+- 可变行高以 `auto-rows-[180px]` 为基线
+- 一张"hero"卡片跨 4 列 2 行
 
-**Responsive Breakpoints:**
-- Mobile (`< 768px`): Single column, stacked layout with reduced padding
-- Tablet (`md: 768px`): 2-3 columns, intermediate grid layouts
-- Desktop (`lg: 1024px+`): Full grid expression with asymmetric layouts
+**响应式断点**：
+- 移动（`< 768px`）：单列，堆叠布局配缩减内边距
+- 平板（`md: 768px`）：2-3 列，中间网格布局
+- 桌面（`lg: 1024px+`）：完整网格表达配非对称布局
 
-**Mobile-Specific Adjustments:**
-- Section padding scales: `py-16` (mobile) → `py-24` (tablet) → `py-32` (desktop)
-- Hero typography: `text-4xl` (mobile) → `text-5xl` (tablet) → `text-7xl`/`text-8xl` (desktop)
-- Body text: `text-base` (mobile) → `text-lg` (tablet) → `text-xl` (desktop)
-- Navigation: Hamburger menu with animated slide-down panel on mobile (`Menu`/`X` icons), inline links on desktop
-- Cards: Full-width on mobile, grid on desktop
-- Bento grids: Single column mobile, full asymmetric layout desktop
+**移动端专项调整**：
+- 区块内边距缩放：`py-16`（移动）→ `py-24`（平板）→ `py-32`（桌面）
+- Hero 字体：`text-4xl`（移动）→ `text-5xl`（平板）→ `text-7xl`/`text-8xl`（桌面）
+- 正文：`text-base`（移动）→ `text-lg`（平板）→ `text-xl`（桌面）
+- 导航：移动端汉堡菜单配动画下滑面板（`Menu`/`X` 图标），桌面端行内链接
+- 卡片：移动端全宽，桌面端网格
+- Bento 网格：移动端单列，桌面端完整非对称布局
 
-### Section Flow
+### 区块流
 
-- Sections separated by subtle `border-t border-white/[0.06]`
-- Gradient line accents: `bg-gradient-to-r from-transparent via-white/10 to-transparent`
-- Occasional overlapping sections using negative margins
-
----
-
-## The "Bold Factor" (Signature Elements)
-
-These elements MUST be present for authenticity:
-
-1. **Animated Ambient Blobs:** Multiple layered, floating gradient shapes create cinematic lighting. Without these, the design becomes flat and generic.
-
-2. **Mouse-Tracking Spotlights:** Interactive surfaces respond to cursor position with soft radial glow effects. This creates the "magical" interaction feel.
-
-3. **Gradient Typography:** Headlines use vertical gradients (white to semi-transparent) and accent gradients with animation for key phrases.
-
-4. **Multi-Layer Shadows:** Never single shadows. Always combine: border highlight + soft diffuse shadow + optional accent glow.
-
-5. **Parallax/Scroll Effects:** Hero content fades and scales on scroll. Elements reveal with staggered animations. This adds cinematic depth.
-
-6. **Precision Micro-Interactions:** All animations are quick (200-300ms), use expo-out easing, and movements are tiny (4-8px). Never bouncy or exaggerated.
+- 区块间含蓄 `border-t border-white/[0.06]` 分隔
+- 渐变线点缀：`bg-gradient-to-r from-transparent via-white/10 to-transparent`
+- 偶尔用负外边距重叠区块
 
 ---
 
-## Anti-Patterns (What to Avoid)
+## "大胆要素"（签名元素）
 
-1. **Flat backgrounds:** Never use a single solid color. Always layer gradients, noise, and ambient light.
+这些元素必须存在以保真实：
 
-2. **Pure black (`#000000`):** Use near-blacks like `#050506` or `#020203` for softer appearance.
+1. **动画环境光斑**：多个分层、漂浮渐变形状创造电影光照。无此，设计变扁平通用。
 
-3. **Pure white text:** Use `#EDEDEF` or similar off-white to reduce harshness.
+2. **鼠标追踪聚光**：交互表面以柔和径向辉光效果响应光标位置。这创造"魔法"交互感。
 
-4. **Large hover movements:** Keep transforms under 8px. This isn't playful—it's precise.
+3. **渐变字体**：标题用垂直渐变（白至半透明）与动画点缀渐变用于关键短语。
 
-5. **Uniform grids:** Bento layouts should have variety in card sizes. Avoid same-size-everything.
+4. **多层阴影**：绝不仅单阴影。始终结合：边框高光 + 柔和弥散阴影 + 可选点缀辉光。
 
-6. **Harsh borders:** Borders should be nearly invisible (`6-10%` white opacity), not prominent.
+5. **视差/滚动效果**：Hero 内容滚动时淡入缩放。元素配错峰动画显现。这增添电影深度。
 
-7. **Colorful accent overuse:** The accent color is for highlights and interaction, not decoration. Most of the UI is monochromatic.
-
-8. **Bouncy animations:** Use expo-out easing, not spring physics. Movements should be swift and decisive.
-
-9. **Missing glow effects:** Accent buttons without glow look incomplete. The soft light emission is part of the language.
+6. **精准微交互**：所有动画快速（200-300ms），用 expo-out 缓动，运动微小（4-8px）。绝不弹跳或夸张。
 
 ---
 
-## Animation & Motion
+## 反模式（应避免之事）
 
-**Timing:**
-- Quick interactions: `200ms`
-- Standard transitions: `300ms`
-- Entrance animations: `600ms`
-- Background blob float: `8000-10000ms`
-
-**Easing:**
-- Primary: `[0.16, 1, 0.3, 1]` (expo-out)
-- Hover: `ease-out`
-
-**Entrance Patterns:**
-- Fade up: `opacity: 0 → 1`, `y: 24px → 0`
-- Scale in: `opacity: 0 → 1`, `scale: 0.95 → 1`
-- Stagger children: `0.08s` delay between items
-
-**Scroll-Triggered:**
-- Viewport threshold: `15-20%` visibility
-- Once: true (don't re-animate on scroll back)
-
-**Parallax (Hero):**
-- Opacity: Fades from `1 → 0` over first 50% of scroll
-- Scale: Shrinks from `1 → 0.95`
-- Y position: Moves down `0 → 100px`
+1. **扁平背景**：绝不用单一纯色。始终分层渐变、噪点与环境光。
+2. **纯黑（`#000000`）**：用近黑如 `#050506` 或 `#020203` 以更柔和外观。
+3. **纯白文字**：用 `#EDEDEF` 或类似近白以减刺眼。
+4. **大悬停运动**：保持变换 8px 以下。这不是俏皮——是精准。
+5. **统一网格**：Bento 布局应有卡片尺寸变化。避免全同尺寸。
+6. **刺眼边框**：边框应几乎不可见（`6-10%` 白不透明度），非突出。
+7. **彩色点缀过度**：点缀色用于高亮与交互，非装饰。大部分 UI 是单色。
+8. **弹跳动画**：用 expo-out 缓动，非弹簧物理。运动应迅速果断。
+9. **缺失辉光效果**：无辉光的点缀按钮显得不完整。柔和光发射是语言的一部分。
 
 ---
 
-## Accessibility Considerations
+## 动画与运动
 
-**Contrast:**
-- Primary text (`#EDEDEF` on `#050506`): ~15:1 ratio ✓
-- Muted text (`#8A8F98` on `#050506`): ~6:1 ratio ✓
-- Accent on dark: Ensure 4.5:1 minimum for interactive elements
+**时机**：
+- 快速交互：`200ms`
+- 标准过渡：`300ms`
+- 入场动画：`600ms`
+- 背景光斑漂浮：`8000-10000ms`
 
-**Focus States:**
-- Always visible focus rings using accent color
-- `ring-offset` matches background color
+**缓动**：
+- 主：`[0.16, 1, 0.3, 1]`（expo-out）
+- 悬停：`ease-out`
 
-**Motion:**
-- Respect `prefers-reduced-motion`
-- Provide fallbacks for parallax and floating animations
-- Essential interactions should work without animation
+**入场模式**：
+- 上浮淡入：`opacity: 0 → 1`，`y: 24px → 0`
+- 缩放入场：`opacity: 0 → 1`，`scale: 0.95 → 1`
+- 子元素错峰：项间 `0.08s` 延迟
 
-**Color Independence:**
-- Don't rely solely on accent color for meaning
-- Use icons, labels, and position to reinforce state
+**滚动触发**：
+- 视口阈值：`15-20%` 可见
+- Once：true（回滚不再动画）
+
+**视差（Hero）**：
+- 不透明度：前 50% 滚动从 `1 → 0` 淡出
+- 缩放：从 `1 → 0.95` 缩小
+- Y 位置：下移 `0 → 100px`
+
+---
+
+## 可访问性考量
+
+**对比**：
+- 主要文字（`#EDEDEF` 于 `#050506`）：约 15:1 比例 ✓
+- 柔和文字（`#8A8F98` 于 `#050506`）：约 6:1 比例 ✓
+- 深色上点缀：确保交互元素最低 4.5:1
+
+**聚焦状态**：
+- 始终可见聚焦环用点缀色
+- `ring-offset` 匹配背景色
+
+**运动**：
+- 尊重 `prefers-reduced-motion`
+- 为视差与漂浮动画提供回退
+- 基本交互应无动画也能工作
+
+**色彩独立**：
+- 勿仅靠点缀色传意
+- 用图标、标签与位置强化状态

@@ -10,219 +10,219 @@
 | 显示名称 | Business Style |
 | 模式 | ☀️ 浅色模式 (Light) |
 | 字体类型 | serif |
-| 描述 | An editorial-inspired minimalist design system centered on elegant serif typography. Warm ivory backgrounds with subtle paper texture, refined spacing, rule lines, and classical proportions create a timeless, literary aesthetic. Enhanced depth through layered gradients and multi-toned shadows. The design whispers sophistication through restraint and typographic excellence. |
+| 描述 | 以优雅衬线字体为中心的编辑风极简设计系统。温暖象牙白背景配细腻纸张质感、考究间距、分隔线与古典比例，营造永恒而文学化的美学。通过分层渐变与多色调阴影增强深度。设计以克制与排印之美低语出精致。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Full-width centered layout with dramatic oversized serif headline (2.5rem mobile, 7xl desktop). Generous vertical breathing room (py-32 to py-44). Subtle decorative rule line below headline. Dual CTA buttons with refined hover states including subtle lift. Trust indicator in small caps with generous letter-spacing. Responsive text scaling maintains hierarchy on all devices.
+全宽居中布局配戏剧性超大衬线标题（移动 2.5rem，桌面 7xl）。慷慨垂直呼吸空间（py-32 至 py-44）。标题下方含蓄装饰水平线。双 CTA 按钮配精致悬停状态含含蓄抬起。信任指标用小型大写配慷慨字距。响应式文字缩放在所有设备保持层级。
 
 ### Stats
 
-Horizontal 4-column layout (2-column on mobile) with thin vertical rule dividers between stats. Dividers appear between columns on mobile and all stats on desktop. Large display serif numbers (4xl mobile, 5xl desktop). Labels in monospace small caps with wide tracking (0.15em). Clean card background with border lines top and bottom.
+横向 4 列布局（移动 2 列），数据间细垂直分隔线。移动端列间出现分隔线，桌面端所有数据间。大号展示衬线数字（移动 4xl，桌面 5xl）。标签用等宽小型大写配宽字距（0.15em）。干净卡片背景配上下来边框线。
 
 ### Features
 
-3-column grid (stacks to 1 column mobile) with generous gaps (gap-8). Each card has 2px accent top border, rounded corners, and enhanced hover effect with background tint. Icon in muted circle background. Serif title with sans-serif description. Hover reveals subtle background shift and enhanced shadow.
+3 列网格（移动堆叠为 1 列）配慷慨间隙（gap-8）。每张卡片有 2px 点缀顶边框、圆角与增强悬停效果配背景色调。图标置于柔和圆背景中。衬线标题配无衬线描述。悬停显现含蓄背景偏移与增强阴影。
 
 ### How It Works
 
-3-column layout with large circular step numbers in serif. Horizontal connecting line on desktop. Each step has generous padding and clean typography hierarchy. Background uses card color for contrast.
+3 列布局配衬线大型圆形步骤编号。桌面端横向连接线。每步配慷慨内边距与干净字体层级。背景用 card 色以增对比。
 
 ### Benefits
 
-Asymmetric two-column layout (1.3fr / 0.7fr ratio, stacks on mobile). Left column has title, subtitle, and bulleted list with elegant dash markers. Right column features enhanced abstract graphic with gradient backgrounds, layered circles, and hover-interactive elements. Refined typography hierarchy throughout.
+非对称双栏布局（1.3fr / 0.7fr 比例，移动堆叠）。左列含标题、副标题与优雅破折号标记的项目符号列表。右列含增强抽象图形，配渐变背景、分层圆圈与悬停交互元素。全程精致字体层级。
 
 ### Pricing
 
-3-column grid (stacks vertically mobile) with center card elevated (-translate-y-4 on desktop). Thin rule borders with accent border on highlighted tier. Large serif price numbers. Feature lists with checkmarks colored by tier importance. Highlighted tier has warm accent background tint (accent-muted). Badge positioning uses absolute positioning.
+3 列网格（移动垂直堆叠），中间卡片抬升（桌面 -translate-y-4）。细分隔线边框，高亮档位配点缀边框。大号衬线价格数字。特性列表配勾选标记，按档位重要性着色。高亮档位有暖点缀背景色调（accent-muted）。徽章定位用绝对定位。
 
 ### Testimonials
 
-3-column grid (stacks mobile) with large decorative opening quotation mark (100px, 20% opacity) in accent color. Italic serif quotes with generous line-height. Author info with circular avatar (48x48px) and refined typography. Subtle card borders and shadows.
+3 列网格（移动堆叠），配大型装饰性开引号（100px，20% 不透明度）点缀色。斜体衬线引文配慷慨行高。作者信息配圆形头像（48x48px）与精致字体。含蓄卡片边框与阴影。
 
 ### Faq
 
-Clean accordion with serif question titles (text-xl). Circular button with plus icon that rotates 45deg to form X when open. Thin border separators between items. Generous padding (py-6). Sans-serif answer text with relaxed leading (1.75). Smooth height and opacity animations.
+干净手风琴配衬线问题标题（text-xl）。圆形按钮配 plus 图标，打开时旋转 45 度形成 X。项间细边框分隔符。慷慨内边距（py-6）。无衬线回答文字配宽松行高（1.75）。平滑高度与透明度动画。
 
 ### Blog
 
-3-column grid (stacks mobile) with images in 16:10 aspect ratio. Date in monospace small caps. Serif titles with hover color shift to accent. Images have subtle border and shadow enhancement on hover. 'Read more' link with arrow icon and translate animation.
+3 列网格（移动堆叠），图片 16:10 宽高比。日期用等宽小型大写。衬线标题配悬停色彩偏移至点缀。图片悬停时有含蓄边框与阴影增强。'Read more' 链接配箭头图标与位移动画。
 
 ### Footer
 
-5-column grid (2 columns for company, 1 each for nav groups, stacks to 2-col on mobile). Logo in serif. Social icons in circular borders with hover state showing accent color. Bottom copyright bar with thin top border and flex layout for alignment. Links have accent hover states.
+5 列网格（公司 2 列，导航组各 1 列，移动堆叠为 2 列）。衬线 logo。社交图标置于圆形边框中，悬停显示点缀色。底部版权栏配细顶边框与 flex 布局对齐。链接有点缀悬停状态。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Design Style: Serif
+# 设计风格：Serif
 
-## Design Philosophy
+## 设计哲学
 
-### Core Principle
+### 核心原则
 
-**Typographic elegance through classical restraint.** This design system draws inspiration from the finest editorial publications, literary magazines, and luxury brand identities. It believes that the highest form of design is one that elevates content through refined typography, considered spacing, and deliberate simplicity.
+**通过古典克制实现排印优雅。** 此设计系统从最优秀的编辑出版物、文学杂志与奢侈品牌标识中汲取灵感。它相信设计的最高形式是通过精炼字体、考究间距与刻意简约来提升内容。
 
-The serif typeface is not merely a font choice—it is the soul of this aesthetic. Every curve of the letterform, every carefully weighted stroke, speaks to centuries of typographic tradition. This design honors that heritage while executing with modern precision.
+衬线字体不仅是字体选择——它是此美学的灵魂。字形的每条曲线、每个精心加重的笔画，都诉说着数世纪的排印传统。此设计致敬那份传承，同时以现代精准执行。
 
-### The Visual Vibe
+### 视觉气质
 
-**Editorial. Timeless. Warm. Refined.**
+**编辑感。永恒。温暖。精致。**
 
-Imagine opening a beautifully designed hardcover book or a premium architecture magazine. The pages breathe. The typography has room to speak. Nothing screams for attention because everything has been placed with intention. This is the feeling we create.
+想象打开一本精美设计的精装书或高端建筑杂志。页面呼吸。字体有发言空间。无物呐喊求注意，因为一切都经过有意安放。这就是我们创造的感觉。
 
-**Emotional Keywords:**
-- *Timeless* — This design would feel appropriate today, a decade ago, or a decade from now. It transcends trends.
-- *Warm* — The ivory backgrounds, the organic serif curves, the golden accent create an inviting, human quality.
-- *Sophisticated* — Small caps, refined rules, generous margins all whisper quality and attention to detail.
-- *Literary* — This feels like it belongs in the world of ideas, of considered communication, of meaningful content.
-- *Confident* — True elegance comes from restraint, not embellishment. This design is secure enough to be quiet.
+**情感关键词**：
+- *永恒* — 此设计今天、十年前或十年后都感适宜。它超越潮流。
+- *温暖* — 象牙背景、有机衬线曲线、金色点缀创造亲和人性特质。
+- *精致* — 小型大写、精致分隔线、慷慨边距都低语品质与细节关注。
+- *文学* — 这感觉属于思想世界、考究交流、有意义内容。
+- *自信* — 真正优雅来自克制，非装饰。此设计足够自信以保持安静。
 
-**What This Design Is NOT:**
-- Not cold or stark (despite being minimal)
-- Not trendy or ephemeral (the serif anchors it in timelessness)
-- Not decorative or ornate (restraint is key)
-- Not corporate or generic (the typography gives it soul)
-- Not loud or aggressive (it draws you in rather than demanding attention)
+**此设计不是什么**：
+- 不冷或冷峻（尽管极简）
+- 不潮流或短暂（衬线将其锚定于永恒）
+- 不装饰或繁复（克制是关键）
+- 不企业或通用（字体赋予灵魂）
+- 不大声或激进（它吸引你而非要求注意）
 
-### The DNA of This Style
+### 此风格的 DNA
 
-#### 1. The Signature Serif
+#### 1. 签名衬线
 
-The **Playfair Display** typeface is the cornerstone. Its high contrast between thick and thin strokes, its elegant ball terminals, and its classical proportions immediately establish editorial gravitas. This font has presence—it commands attention without raising its voice.
+**Playfair Display** 字体是基石。其粗细笔画间的高对比、优雅球状终端与古典比例立即建立编辑庄重。此字体有存在感——它不提高音量即吸引注意。
 
-**Where it appears:**
-- All major headlines (h1, h2, h3)
-- Large display numbers (pricing, stats)
-- Pull quotes in testimonials
-- Logo wordmark
+**出现之处**：
+- 所有主要标题（h1, h2, h3）
+- 大号展示数字（定价、数据）
+- 证言引文
+- Logo 字标
 
-**Why it works:** Serif typefaces carry associations with tradition, trustworthiness, and intellectual depth. Playfair Display specifically feels both classical and contemporary—it's not stuffy or old-fashioned but brings warmth and character.
+**为何有效**：衬线字体携带传统、可信赖与智识深度的联想。Playfair Display 特别感觉既古典又当代——它不俗气或过时，而带来温暖与个性。
 
-#### 2. The Warm Palette
+#### 2. 温暖调色板
 
-Color in this system is used with extreme restraint. The palette is essentially monochromatic with a single warm accent:
+此系统中色彩极克制使用。调色板本质单色配单一暖点缀：
 
-- **Ivory (#FAFAF8)** — A cream-tinted white that feels warmer than pure white
-- **Rich Black (#1A1A1A)** — Deep but not harsh, for primary text
-- **Warm Gray (#6B6B6B)** — For secondary text, with slight warmth
-- **Burnished Gold (#B8860B)** — The single accent color, used sparingly for emphasis
+- **象牙白（#FAFAF8）** — 奶油色调白，比纯白更温暖
+- **浓郁黑（#1A1A1A）** — 深但不刺，作主要文字
+- **暖灰（#6B6B6B）** — 作次要文字，略带暖意
+- **磨砂金（#B8860B）** — 单一点缀色，克制用于强调
 
-The gold accent is inspired by gold leaf in illuminated manuscripts, the gilded edges of fine books, the brass details in luxury interiors. It adds just enough warmth and distinction without overwhelming the monochrome foundation.
+金色点缀受彩绘手稿金箔、精装书烫金边缘、奢华室内黄铜细节启发。它增添恰好足够的温暖与区别而不压倒单色基础。
 
-#### 3. The Rule Line System
+#### 3. 分隔线系统
 
-Thin horizontal rules (1px lines) are a defining element:
-- Section dividers
-- Card borders (top accent lines)
-- Underline effects on key elements
-- Table separators
+细水平线（1px 线）是定义元素：
+- 区块分隔符
+- 卡片边框（顶部点缀线）
+- 关键元素下划线效果
+- 表格分隔符
 
-These rules are inspired by editorial layouts where fine lines create structure and rhythm without visual weight. They're always in the border color (#E8E4DF), slightly warmer than pure gray.
+这些线受编辑布局启发，细线创造结构与节奏而无视觉重量。它们始终用边框色（#E8E4DF），比纯灰略暖。
 
-#### 4. Small Caps & Tracking
+#### 4. 小型大写与字距
 
-**Small caps** are used extensively for:
-- Section labels
-- Meta information (dates, categories)
-- Supporting text
-- Navigation items
+**小型大写**广泛用于：
+- 区块标签
+- 元信息（日期、类别）
+- 支持文字
+- 导航项
 
-Combined with **generous letter-spacing (0.1em - 0.15em)**, small caps create a refined, sophisticated look that's distinctly editorial. This is not a cheap trick—it's a typography fundamental that separates thoughtful design from generic output.
+结合**慷慨字距（0.1em - 0.15em）**，小型大写创造精致考究外观，鲜明编辑感。这不是廉价技巧——它是区分深思设计与通用输出的排印基础。
 
-#### 5. Generous Whitespace
+#### 5. 慷慨留白
 
-This design breathes. Margins are large. Padding is substantial. Line heights are relaxed.
+此设计呼吸。边距大。内边距充实。行高宽松。
 
-- Section padding: `py-32` to `py-44`
-- Content max-width: `max-w-5xl` (narrower for reading comfort)
-- Line height for body: `1.75` (very relaxed)
-- Letter spacing for body: slight positive tracking for readability
+- 区块内边距：`py-32` 至 `py-44`
+- 内容最大宽度：`max-w-5xl`（较窄以增阅读舒适）
+- 正文行高：`1.75`（非常宽松）
+- 正文字距：轻微正字距以增可读
 
-The whitespace isn't empty—it's an active design element that gives the typography room to perform.
+留白不是空的——它是活跃设计元素，给字体表演空间。
 
-#### 6. Asymmetric Balance
+#### 6. 非对称平衡
 
-While the overall aesthetic is classical, the layouts embrace asymmetric compositions:
-- Hero: Centered but with offset decorative elements
-- Benefits: Uneven column splits (1.3fr / 0.7fr)
-- Cards: Thin top border creates visual weight at top
+尽管整体美学古典，布局拥抱非对称构图：
+- Hero：居中但配偏移装饰元素
+- 收益：不均列分割（1.3fr / 0.7fr）
+- 卡片：细顶边框在顶部创造视觉重量
 
-This prevents the design from feeling static or predictable while maintaining elegance.
+这防止设计感觉静态或可预测，同时保持优雅。
 
-### Differentiation: Minimalism With Soul
+### 差异化：有灵魂的极简
 
-Many minimalist designs strip away so much that they become characterless—white backgrounds, gray text, system fonts. This design proves that minimalism and personality are not mutually exclusive.
+许多极简设计剥离过多以致无个性——白背景、灰文字、系统字体。此设计证明极简与个性并非互斥。
 
-**The serif typeface is the key differentiator.** It brings:
-- Visual interest without decoration
-- Warmth without color
-- Character without complexity
-- Timelessness without being dated
+**衬线字体是关键区分器。** 它带来：
+- 无装饰的视觉趣味
+- 无色彩的温暖
+- 无复杂度的个性
+- 非过时的永恒
 
-This is minimalism with a point of view. It has something to say.
+这是有观点的极简。它有话要说。
 
-### Sensory Description
+### 感官描述
 
-If this design were a physical space, it would be:
-- A private library with floor-to-ceiling bookshelves
-- Natural light filtering through tall windows
-- A worn leather chair and a mahogany writing desk
-- The smell of aged paper and fresh coffee
-- Silence that invites contemplation
+若此设计为物理空间，它会是：
+- 有落地书架的私人图书馆
+- 自然光透过高窗过滤
+- 磨损皮椅与桃花心木写字台
+- 陈年纸张与新鲜咖啡的气息
+- 邀请沉思的寂静
 
-If it were music, it would be:
-- Solo piano, perhaps Satie or Debussy
-- Lots of space between notes
-- Warm, resonant tones
-- Something you'd hear in a boutique hotel lobby
-- Understated but unmistakably refined
+若为音乐，它会是：
+- 独奏钢琴，也许是 Satie 或 Debussy
+- 音符间大量空间
+- 温暖、共鸣的音调
+- 精品酒店大堂会听到的
+- 低调但 unmistakably 精致
 
 ---
 
-## Design Token System (The DNA)
+## 设计 Token 系统（DNA）
 
-### Color Strategy
+### 色彩策略
 
-**Monochrome With Warmth:** An intentionally limited palette that gains sophistication through restraint. The single gold accent provides just enough distinction.
+**带温暖的黑白**：有意限制的调色板，通过克制获得精致。单一金色点缀提供恰好足够的区别。
 
-| Token | Value | Usage & Context |
+| Token | 值 | 用法与上下文 |
 |:------|:------|:----------------|
-| `background` | `#FAFAF8` | Primary canvas. Warm ivory that feels more refined than pure white. |
-| `foreground` | `#1A1A1A` | Primary text. Rich black, not pure black. |
-| `muted` | `#F5F3F0` | Secondary surfaces, card backgrounds. Slightly warmer than background. |
-| `muted-foreground` | `#6B6B6B` | Secondary text. Warm gray with softness. |
-| `accent` | `#B8860B` | Burnished gold. Links, highlights, key interactive elements. |
-| `accent-secondary` | `#D4A84B` | Lighter gold for gradients and hover states. |
-| `accent-foreground` | `#FFFFFF` | Text on accent backgrounds. |
-| `border` | `#E8E4DF` | Warm gray for rules, dividers, card borders. |
-| `card` | `#FFFFFF` | Card surfaces. Pure white for maximum lift from ivory background. |
-| `ring` | `#B8860B` | Focus rings. Matches accent gold. |
+| `background` | `#FAFAF8` | 主画布。温暖象牙，比纯白更精致。 |
+| `foreground` | `#1A1A1A` | 主要文字。浓郁黑，非纯黑。 |
+| `muted` | `#F5F3F0` | 次级表面、卡片背景。比背景略暖。 |
+| `muted-foreground` | `#6B6B6B` | 次要文字。暖灰配柔和。 |
+| `accent` | `#B8860B` | 磨砂金。链接、高亮、关键交互元素。 |
+| `accent-secondary` | `#D4A84B` | 较浅金作渐变与悬停状态。 |
+| `accent-foreground` | `#FFFFFF` | 点缀背景上文字。 |
+| `border` | `#E8E4DF` | 暖灰作分隔线、分隔符、卡片边框。 |
+| `card` | `#FFFFFF` | 卡片表面。纯白以从象牙背景最大抬升。 |
+| `ring` | `#B8860B` | 聚焦环。匹配点缀金。 |
 
 ---
 
-### Typography System
+### 字体系统
 
-**Font Pairing (Editorial System):**
-- **Display/Headlines:** `"Playfair Display", Georgia, serif` — Elegant high-contrast serif for all headings. The signature of this design.
-- **Body/UI:** `"Source Sans 3", system-ui, sans-serif` — Clean, highly readable sans-serif that complements without competing.
-- **Monospace:** `"IBM Plex Mono", monospace` — For labels and small caps treatments.
+**字体配对（编辑系统）**：
+- **展示/标题**：`"Playfair Display", Georgia, serif` — 优雅高对比衬线作所有标题。此设计的签名。
+- **正文/UI**：`"Source Sans 3", system-ui, sans-serif` — 干净、高可读无衬线，补充而不竞争。
+- **等宽**：`"IBM Plex Mono", monospace` — 用于标签与小型大写处理。
 
-**Type Scale & Usage:**
+**字号阶梯与用法**：
 
-| Element | Size | Font | Weight | Tracking | Notes |
+| 元素 | 尺寸 | 字体 | 字重 | 字距 | 备注 |
 |:--------|:-----|:-----|:-------|:---------|:------|
-| Hero Headline | `7xl` → `4.5rem` | Playfair Display | Normal | `-0.02em` | Tight leading (1.1). Center-aligned. |
-| Section Headlines | `4xl` → `2.5rem` | Playfair Display | Normal | `-0.01em` | Leading 1.2. |
-| Card Titles | `xl` → `1.25rem` | Playfair Display | Semibold | Normal | Leading 1.3. |
-| Body Text | `base` → `lg` | Source Sans 3 | Normal | `0.01em` | Relaxed line-height (1.75). |
-| Section Labels | `xs` (12px) | IBM Plex Mono | Medium | `0.15em` | UPPERCASE small caps style. |
-| Navigation | `sm` | Source Sans 3 | Medium | `0.05em` | Slightly tracked. |
+| Hero 标题 | `7xl` → `4.5rem` | Playfair Display | Normal | `-0.02em` | 紧凑行高（1.1）。居中。 |
+| 区块标题 | `4xl` → `2.5rem` | Playfair Display | Normal | `-0.01em` | 行高 1.2。 |
+| 卡片标题 | `xl` → `1.25rem` | Playfair Display | Semibold | Normal | 行高 1.3。 |
+| 正文 | `base` → `lg` | Source Sans 3 | Normal | `0.01em` | 宽松行高（1.75）。 |
+| 区块标签 | `xs`（12px） | IBM Plex Mono | Medium | `0.15em` | 大写小型大写风格。 |
+| 导航 | `sm` | Source Sans 3 | Medium | `0.05em` | 略加字距。 |
 
-**Small Caps Pattern:**
+**小型大写模式**：
 ```css
 .small-caps {
   font-family: "IBM Plex Mono", monospace;
@@ -235,128 +235,128 @@ If it were music, it would be:
 
 ---
 
-### Spacing & Layout
+### 间距与布局
 
-**Core Principle:** Luxurious breathing room. This design is not afraid of empty space.
+**核心原则**：奢华呼吸空间。此设计不惧空空间。
 
-- **Section Spacing:** Large vertical padding (`py-32` to `py-44`) creates paced, contemplative scrolling.
-- **Container Width:** `max-w-5xl` (64rem) for narrower, more readable content columns.
-- **Component Density:** Generous internal padding (p-8 to p-10) on cards.
-- **Grid Gaps:** `gap-8` to `gap-12` between grid items.
+- **区块间距**：大垂直内边距（`py-32` 至 `py-44`）创造有节奏、沉思的滚动。
+- **容器宽度**：`max-w-5xl`（64rem）以较窄、更可读的内容列。
+- **组件密度**：卡片慷慨内部内边距（p-8 至 p-10）。
+- **网格间隙**：网格项间 `gap-8` 至 `gap-12`。
 
-**Layout Patterns:**
-- Hero: Centered, narrow container, stacked elements
-- Features: 3-column grid with generous gaps
-- Benefits: Asymmetric 2-column (`grid-cols-[1.3fr_0.7fr]`)
-- Use thin rule lines to create visual structure
+**布局模式**：
+- Hero：居中、窄容器、堆叠元素
+- 特性：3 列网格配慷慨间隙
+- 收益：非对称 2 列（`grid-cols-[1.3fr_0.7fr]`）
+- 用细分隔线创造视觉结构
 
 ---
 
-### Borders, Surfaces & Shadows
+### 边框、表面与阴影
 
-**Surfaces:**
-- Cards use pure white (`#FFFFFF`) for lift from ivory background
-- Very subtle shadows—this isn't about depth, it's about refinement
-- Thin borders (1px) in warm gray
+**表面**：
+- 卡片用纯白（`#FFFFFF`）以从象牙背景抬升
+- 极含蓄阴影——这不是关于深度，而是关于精致
+- 暖灰中细边框（1px）
 
-**Border System:**
-| Token | Value | Usage |
+**边框系统**：
+| Token | 值 | 用法 |
 |:------|:------|:------|
-| `border-thin` | `1px solid #E8E4DF` | Primary borders, rules |
-| `border-accent` | `1px solid #B8860B` | Accent borders, highlighted cards |
+| `border-thin` | `1px solid #E8E4DF` | 主边框、分隔线 |
+| `border-accent` | `1px solid #B8860B` | 点缀边框、高亮卡片 |
 
-**Shadow System:**
-| Token | Value | Usage |
+**阴影系统**：
+| Token | 值 | 用法 |
 |:------|:------|:------|
-| `shadow-sm` | `0 1px 2px rgba(26,26,26,0.04)` | Subtle lift |
-| `shadow-md` | `0 4px 12px rgba(26,26,26,0.06)` | Cards, hover states |
-| `shadow-lg` | `0 8px 24px rgba(26,26,26,0.08)` | Elevated elements |
+| `shadow-sm` | `0 1px 2px rgba(26,26,26,0.04)` | 含蓄抬升 |
+| `shadow-md` | `0 4px 12px rgba(26,26,26,0.06)` | 卡片、悬停状态 |
+| `shadow-lg` | `0 8px 24px rgba(26,26,26,0.08)` | 抬升元素 |
 
-**Rule Lines (Critical for Style Identity):**
-- Thin horizontal rules as section dividers
-- Top border accent on cards (1px accent color)
-- Decorative rule under headlines
-
----
-
-## Component Styling & Interactions
-
-### Buttons
-
-**Primary Button:**
-- Background: `accent` gold
-- Text: White, medium weight, slightly tracked
-- Border-radius: `rounded-md` (6px) — not too round, not too sharp
-- Shadow: Very subtle, accent-tinted (`shadow-sm`)
-- Hover: Color shifts to `accent-secondary`, shadow enhances to `shadow-accent`, subtle lift (-translate-y-0.5)
-- Active: Returns to base position (translate-y-0)
-- Touch: `touch-manipulation` class for better mobile interaction
-- Minimum height: 44px on mobile (accessibility requirement)
-
-**Secondary/Outline Button:**
-- Background: Transparent
-- Border: `1px` in `foreground` color (strong contrast)
-- Text: `foreground`
-- Hover: Fill with `muted` background, border and text shift to `accent` color
-- Smooth color transitions on all properties
-
-**Ghost Button:**
-- No background or border
-- Text: `muted-foreground` → `foreground` on hover
-- Underline appears on hover with `accent` color decoration
-- Underline offset: 4px for breathing room
-
-**Animation:** Refined transitions (`200ms`). Subtle lift on primary buttons adds tactile feedback while maintaining elegance.
+**分隔线（对风格身份至关重要）**：
+- 细水平线作区块分隔符
+- 卡片顶部点缀边框（1px 点缀色）
+- 标题下方装饰分隔线
 
 ---
 
-### Cards
+## 组件样式与交互
 
-**Standard Card:**
-- Background: `card` (white)
-- Border: `1px` in `border` color
-- Border-radius: `rounded-lg` (8px)
-- Shadow: `shadow-sm` — very subtle
-- Top accent: Optional `2px` accent border on top edge (when `accentTop` prop used)
+### 按钮
 
-**Hover Effects (when `hoverEffect` prop used):**
-- Shadow increases to `shadow-md`
-- Border color shifts to `border-hover`
-- Background subtle tint to `muted/30` (30% opacity)
-- No translate/lift — maintains elegant restraint
-- Smooth `200ms` transition on all properties
+**主按钮**：
+- 背景：`accent` 金
+- 文字：白，medium 字重，略加字距
+- 圆角：`rounded-md`（6px）— 不过圆、不过锐
+- 阴影：极含蓄，点缀色调（`shadow-sm`）
+- 悬停：色彩偏移至 `accent-secondary`，阴影增强至 `shadow-accent`，含蓄抬起（-translate-y-0.5）
+- 激活：回基础位置（translate-y-0）
+- 触控：`touch-manipulation` 类以增更好移动交互
+- 最小高度：移动端 44px（可访问性要求）
 
-**Elevated Card:**
-- Uses `shadow-md` by default (when `elevated` prop used)
-- Provides more depth for important content like highlighted pricing tiers
+**次/描边按钮**：
+- 背景：透明
+- 边框：`1px` `foreground` 色（强对比）
+- 文字：`foreground`
+- 悬停：填充 `muted` 背景，边框与文字偏移至 `accent` 色
+- 所有属性平滑色彩过渡
 
-**Featured Card:**
-- Background tint of accent color at 6% (`accent-muted`)
-- Accent top border at 2px thickness
-- Often combined with elevated shadow for maximum prominence
+**幽灵按钮**：
+- 无背景或边框
+- 文字：`muted-foreground` → 悬停 `foreground`
+- 悬停出现下划线配 `accent` 色装饰
+- 下划线 offset：4px 以增呼吸空间
+
+**动画**：精致过渡（`200ms`）。主按钮含蓄抬起增添触感反馈同时保持优雅。
 
 ---
 
-### Inputs
+### 卡片
 
-- Height: `h-12` (44px minimum for accessibility)
-- Border: `1px` in `input` color (matches `border`)
-- Border-radius: `rounded-md` (6px)
-- Background: Transparent
-- Hover: Border shifts to `border-hover` color
-- Focus:
+**标准卡片**：
+- 背景：`card`（白）
+- 边框：`1px` `border` 色
+- 圆角：`rounded-lg`（8px）
+- 阴影：`shadow-sm` — 极含蓄
+- 顶部点缀：可选 `2px` 点缀顶边框（当用 `accentTop` prop）
+
+**悬停效果（当用 `hoverEffect` prop）**：
+- 阴影增至 `shadow-md`
+- 边框色偏移至 `border-hover`
+- 背景含蓄色调至 `muted/30`（30% 不透明度）
+- 无 translate/抬起 — 保持优雅克制
+- 所有属性平滑 `200ms` 过渡
+
+**抬升卡片**：
+- 默认用 `shadow-md`（当用 `elevated` prop）
+- 为重要内容如高亮定价档位提供更多深度
+
+**精选卡片**：
+- 点缀色 6% 背景色调（`accent-muted`）
+- 2px 厚点缀顶边框
+- 常结合抬升阴影以最大突出
+
+---
+
+### 输入框
+
+- 高度：`h-12`（44px 最小以增可访问性）
+- 边框：`1px` `input` 色（匹配 `border`）
+- 圆角：`rounded-md`（6px）
+- 背景：透明
+- 悬停：边框偏移至 `border-hover` 色
+- 聚焦：
   - `ring-2 ring-accent ring-offset-2`
-  - Border shifts to `accent` color for clear visual feedback
-  - Smooth `150ms` transition
-- Placeholder: `text-muted-foreground/60` (60% opacity for subtle hierarchy)
-- Typography: Sans-serif body font, base size
-- Transitions: All properties animate smoothly with `ease-out` easing
+  - 边框偏移至 `accent` 色以清晰视觉反馈
+  - 平滑 `150ms` 过渡
+- 占位符：`text-muted-foreground/60`（60% 不透明度以增含蓄层级）
+- 字体：无衬线正文字体，base 尺寸
+- 过渡：所有属性配 `ease-out` 缓动平滑动画
 
 ---
 
-### Section Labels
+### 区块标签
 
-A consistent label pattern appears at the start of each section:
+每个区块起始处出现一致标签模式：
 ```jsx
 <div className="mb-6 flex items-center gap-4">
   <span className="h-px flex-1 bg-[var(--border)]" />
@@ -369,60 +369,60 @@ A consistent label pattern appears at the start of each section:
 
 ---
 
-## The "Bold Factor" (Signature Elements)
+## "大胆要素"（签名元素）
 
-These elements prevent generic output and define this style:
+这些元素防止通用输出并定义此风格：
 
-1. **Dramatic Serif Headlines:** Oversized serif typography (7xl in hero) that commands attention through scale and beauty, not decoration.
+1. **戏剧性衬线标题**：超大衬线字体（Hero 7xl）通过尺度与美而非装饰吸引注意。
 
-2. **Rule Line System:** Thin horizontal rules throughout create rhythm and structure—a distinctly editorial element.
+2. **分隔线系统**：全程细水平线创造节奏与结构——鲜明编辑元素。
 
-3. **Small Caps Labels:** All section labels and meta info use tracked uppercase monospace, creating refined visual rhythm.
+3. **小型大写标签**：所有区块标签与元信息用加字距大写等宽，创造精致视觉节奏。
 
-4. **Burnished Gold Accent:** The single warm accent color adds just enough distinction to prevent sterility.
+4. **磨砂金点缀**：单一暖点缀色增添恰好足够区别以防无菌。
 
-5. **Generous Whitespace:** Sections breathe with `py-32` to `py-44` padding. This is premium, not cramped.
+5. **慷慨留白**：区块以 `py-32` 至 `py-44` 内边距呼吸。这是高端，非局促。
 
-6. **Large Display Numbers:** Stats and pricing use serif display numbers at dramatic sizes (5xl+).
+6. **大号展示数字**：数据与定价用衬线展示数字于戏剧尺寸（5xl+）。
 
-7. **Decorative Quote Marks:** Testimonials feature large opening quote marks in accent gold.
+7. **装饰引号**：证言以点缀金大型开引号为特色。
 
-8. **Asymmetric Layouts:** Strategic use of uneven columns prevents static feeling while maintaining elegance.
+8. **非对称布局**：战略性使用不均列防止静态感同时保持优雅。
 
-9. **Layered Depth in Abstracts:** Product detail and benefits sections feature enhanced abstract graphics with:
-   - Gradient backgrounds (`from-[color] via-[color] to-[color]`)
-   - Decorative ring/circle elements with low opacity
-   - Multi-layered card elements with borders and shadows
-   - Hover-interactive elements that respond to user interaction
-   - Subtle accent color tints for visual interest
+9. **抽象中的分层深度**：产品详情与收益区块含增强抽象图形，配：
+   - 渐变背景（`from-[color] via-[color] to-[color]`）
+   - 低不透明度装饰环/圆元素
+   - 多层卡片元素配边框与阴影
+   - 响应用户交互的悬停交互元素
+   - 含蓄点缀色调以增视觉趣味
 
-10. **Paper Texture Overlay:** Subtle noise texture overlay at 30% opacity across entire page creates tactile, print-like quality.
+10. **纸张纹理叠加**：全页 30% 不透明度含蓄噪点纹理创造触感印刷质感。
 
-11. **Ambient Glow:** Large blurred circle with 2% opacity accent color creates warm atmospheric depth.
+11. **环境辉光**：2% 不透明度点缀色大型模糊圆创造温暖氛围深度。
 
-12. **Enhanced Micro-interactions:**
-    - Button subtle lift on hover with return animation
-    - Card background tinting on hover
-    - Border color shifts throughout interface
-    - Smooth 200ms transitions on all interactive elements
+12. **增强微交互**：
+    - 按钮悬停含蓄抬起配返回动画
+    - 卡片悬停背景色调
+    - 全界面边框色偏移
+    - 所有交互元素平滑 200ms 过渡
 
 ---
 
-## Effects & Animation
+## 效果与动画
 
-**Motion Philosophy:** Restrained and refined. Nothing bounces, nothing overshoots. Every animation should feel inevitable, not surprising.
+**运动哲学**：克制与精致。无物弹跳，无物过冲。每个动画应感必然，非意外。
 
-**Transition Defaults:**
-- Standard: `transition-all duration-200 ease-out`
-- Subtle: `duration-150`
+**过渡默认**：
+- 标准：`transition-all duration-200 ease-out`
+- 含蓄：`duration-150`
 
-**Interaction States:**
-- Hover brightness change: 5-10%, no dramatic shifts
-- Shadow enhancement on hover
-- Underlines appearing/growing
-- NO translate/lift effects — too trendy for this timeless aesthetic
+**交互状态**：
+- 悬停亮度变化：5-10%，无戏剧偏移
+- 悬停阴影增强
+- 下划线出现/增长
+- 无 translate/抬起效果 — 对此永恒美学过潮流
 
-**Entrance Animations (Optional, Subtle):**
+**入场动画（可选、含蓄）**：
 ```js
 const fadeIn = {
   hidden: { opacity: 0 },
@@ -432,103 +432,103 @@ const fadeIn = {
 
 ---
 
-## Responsive Strategy
+## 响应式策略
 
-**Breakpoint Philosophy:** Mobile layouts maintain the editorial feel through typography and spacing, even when structure simplifies. All interactive elements meet accessibility requirements for touch targets.
+**断点哲学**：移动布局通过字体与间距保持编辑感，即使结构简化。所有交互元素满足触控目标可访问性要求。
 
-### Mobile Adaptations (< 768px)
+### 移动适配（< 768px）
 
-- **Hero:**
-  - Single column with centered text
-  - Headline size: `text-[2.5rem]` (40px) maintains presence
-  - CTAs stack vertically with full width on small screens
-  - Maintains generous vertical padding
+- **Hero**：
+  - 单列居中文字
+  - 标题尺寸：`text-[2.5rem]`（40px）保持存在感
+  - CTA 小屏垂直堆叠全宽
+  - 保持慷慨垂直内边距
 
-- **Stats:**
-  - 2-column grid on mobile (4-column on desktop)
-  - Vertical dividers between columns only (not all items)
-  - Numbers scale to `text-4xl` (still prominent)
-  - Horizontal gap added (`gap-x-6`) to prevent crowding
+- **Stats**：
+  - 移动 2 列网格（桌面 4 列）
+  - 仅列间垂直分隔线（非所有项）
+  - 数字缩放至 `text-4xl`（仍突出）
+  - 添加水平间隙（`gap-x-6`）以防拥挤
 
-- **Features/Testimonials/Blog:**
-  - Stack to single column
-  - Generous gaps maintained (`gap-8` minimum)
-  - Card styling remains consistent
-  - Hover effects work as tap effects on mobile
+- **Features/Testimonials/Blog**：
+  - 堆叠为单列
+  - 保持慷慨间隙（最小 `gap-8`）
+  - 卡片样式保持一致
+  - 悬停效果在移动端作点击效果
 
-- **Pricing:**
-  - Stack vertically
-  - Highlighted tier loses elevation (no -translate-y-4) but keeps visual distinction through background tint
-  - All cards equal width for consistency
+- **Pricing**：
+  - 垂直堆叠
+  - 高亮档位失去抬升（无 -translate-y-4）但通过背景色调保持视觉区别
+  - 所有卡片等宽以保一致
 
-- **Navigation:**
-  - Logo scales down slightly (`text-lg` → `text-xl`)
-  - Desktop nav hidden on mobile/tablet
-  - Primary CTA always visible
-  - Mobile menu would be hamburger pattern (if implemented)
+- **导航**：
+  - logo 略缩小（`text-lg` → `text-xl`）
+  - 移动/平板隐藏桌面导航
+  - 主 CTA 始终可见
+  - 移动菜单为汉堡模式（若实现）
 
-### Touch Optimization
+### 触控优化
 
-- **All buttons:** Minimum 44px height (`min-h-[44px]`) on mobile
-- **FAQ accordions:** 44px minimum height with `touch-manipulation`
-- **All interactive elements:** Use `touch-manipulation` CSS for better tap response
-- **Links:** Adequate padding and spacing for fat-finger friendly tapping
+- **所有按钮**：移动端最小 44px 高度（`min-h-[44px]`）
+- **FAQ 手风琴**：44px 最小高度配 `touch-manipulation`
+- **所有交互元素**：用 `touch-manipulation` CSS 以增更好点击响应
+- **链接**：充足内边距与间距以增胖指友好点击
 
-**Key Adaptations:**
-- Section padding reduces gracefully but maintains premium feel
-- Typography scales down but hierarchy crystal clear
-- Serif font impact preserved—soul of design intact on all devices
-- Rule lines and gold accents remain consistent
-- No horizontal overflow—tested with various content widths
-- Touch targets meet WCAG AAA standards (minimum 44x44px)
+**关键适配**：
+- 区块内边距优雅缩减但保持高端感
+- 字体缩小但层级清晰
+- 衬线字体影响保留——设计灵魂在所有设备完好
+- 分隔线与金色点缀保持一致
+- 无水平溢出——以多种内容宽度测试
+- 触控目标达 WCAG AAA 标准（最小 44x44px）
 
 ---
 
-## Accessibility & Best Practices
+## 可访问性与最佳实践
 
-**Color Contrast:**
-- All text meets WCAG AA standards minimum
-- Rich black (#1A1A1A) on ivory (#FAFAF8) provides excellent readability
-- Gold accent (#B8860B) passes contrast requirements on white backgrounds
-- Muted foreground (#6B6B6B) maintains sufficient contrast for secondary text
+**色彩对比**：
+- 所有文字最低达 WCAG AA 标准
+- 浓郁黑（#1A1A1A）于象牙（#FAFAF8）提供出色可读性
+- 金色点缀（#B8860B）于白背景通过对比要求
+- 柔和前景（#6B6B6B）为次要文字保持足够对比
 
-**Focus States:**
-- Visible focus rings on all interactive elements: `ring-2 ring-accent ring-offset-2`
-- Focus states use accent gold color for consistency
-- Offset creates clear visual separation from element
-- Input borders shift to accent color on focus for additional feedback
-- All focus states tested with keyboard navigation
+**聚焦状态**：
+- 所有交互元素可见聚焦环：`ring-2 ring-accent ring-offset-2`
+- 聚焦状态用点缀金色以保一致
+- offset 创造与元素的清晰视觉分离
+- 输入框聚焦时边框偏移至点缀色以增额外反馈
+- 所有聚焦状态经键盘导航测试
 
-**Touch & Interaction:**
-- All buttons meet minimum 44x44px touch target (WCAG AAA)
-- `touch-manipulation` CSS prevents double-tap zoom on mobile
-- FAQ accordion buttons have adequate size and spacing
-- All clickable areas have sufficient padding
-- No touch targets overlap or create confusion
+**触控与交互**：
+- 所有按钮满足最小 44x44px 触控目标（WCAG AAA）
+- `touch-manipulation` CSS 防移动端双击缩放
+- FAQ 手风琴按钮有充足尺寸与间距
+- 所有可点击区有充足内边距
+- 无触控目标重叠或造成混乱
 
-**Typography:**
-- Body text uses relaxed line-height (1.75) for comfortable reading
-- Slight positive tracking improves readability on screens
-- Base font size: 16px (never smaller for body text)
-- Heading hierarchy clearly defined with size and font variation
-- Line length controlled with max-width (max-w-5xl) for optimal reading
+**字体**：
+- 正文用宽松行高（1.75）以舒适阅读
+- 轻微正字距改善屏幕可读性
+- 基础字号：16px（正文绝不更小）
+- 标题层级以尺寸与字体变化明确定义
+- 行长以 max-width（max-w-5xl）控制以达最佳阅读
 
-**Motion:**
-- All animations are subtle and respectful (200ms standard)
-- No rapid movements or flashing
-- Transforms limited to subtle shifts (translate-y-0.5)
-- `prefers-reduced-motion` should be respected in production
-- Easing curves use gentle `ease-out` for natural feel
+**运动**：
+- 所有动画含蓄且尊重（标准 200ms）
+- 无快速运动或闪烁
+- 变换限于含蓄偏移（translate-y-0.5）
+- 生产应尊重 `prefers-reduced-motion`
+- 缓动曲线用轻柔 `ease-out` 以自然感
 
-**Semantic HTML:**
-- Proper heading hierarchy (h1 → h2 → h3)
-- Button elements for interactive actions (not divs)
-- Semantic sections with appropriate ARIA when needed
-- Images include meaningful alt text (width/height prevent CLS)
-- Form inputs properly labeled
+**语义化 HTML**：
+- 正确标题层级（h1 → h2 → h3）
+- 交互操作用 button 元素（非 div）
+- 语义区块配按需 ARIA
+- 图片含有意义 alt 文本（width/height 防 CLS）
+- 表单输入正确标签
 
-**Performance:**
-- CSS variables reduce specificity and improve maintainability
-- Transitions use transform and opacity (GPU-accelerated)
-- Images specify dimensions to prevent layout shift
-- Font loading optimized with proper font-display values
+**性能**：
+- CSS 变量减少特异性并改善可维护性
+- 过渡用 transform 与 opacity（GPU 加速）
+- 图片指定尺寸以防布局偏移
+- 字体加载以正确 font-display 值优化

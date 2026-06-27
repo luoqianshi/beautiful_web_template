@@ -10,385 +10,385 @@
 | 显示名称 | Industrial |
 | 模式 | ☀️ 浅色模式 (Light) |
 | 字体类型 | sans-serif |
-| 描述 | A high-fidelity industrial skeuomorphism aesthetic inspired by Dieter Rams and Teenage Engineering. Features tactile neumorphic elements, matte plastic surfaces, and safety-orange accents. Every component mimics physical hardware with realistic lighting, mechanical interactions, and manufacturing details like screws, vents, and LED indicators. |
+| 描述 | 受 Dieter Rams 与 Teenage Engineering 启发的高保真工业拟物美学。触感新拟态元素、哑光塑料表面与安全橙点缀。每个组件都模拟实体硬件，具备逼真光照、机械交互与螺丝、散热孔、LED 指示灯等制造细节。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Asymmetric split layout with control panel interface (text/CTAs) on left, and massive interactive 'Device' visualization on right featuring bezels, CRT-style scanlines, power indicators, and physical hardware buttons.
+非对称分割布局，左侧控制面板界面（文字/CTA），右侧大型交互式"设备"可视化，含边框、CRT 风格扫描线、电源指示灯与物理硬件按钮。
 
 ### Stats
 
-Full-width dark LED readout strip with inset shadow depth, resembling a digital dashboard display. Glowing monospace numbers with color-coded shadows.
+全宽深色 LED 读数条带，配内嵌阴影深度，形似数字仪表盘显示。发光等宽数字配色彩编码阴影。
 
 ### Features
 
-3-column grid of ventilated hardware modules. Each card has corner screws (CSS gradients), vent slots, recessed icon housings, and hover elevation effects.
+3 列通风硬件模块网格。每张卡片含角部螺丝（CSS 渐变）、散热槽、凹陷图标外壳与悬停抬升效果。
 
 ### How It Works
 
-Horizontal process flow with large circular neumorphic step indicators connected by physical cylindrical pipes (3D shadow effect).
+横向流程，配大型圆形新拟态步骤指示器，由物理圆柱管道（3D 阴影效果）连接。
 
 ### Benefits
 
-Split-panel control board with dark technical background. Left side has checklist with tactile toggle switches, right side features radar/sonar screen visualization with animated sweep.
+分割面板控制板，配深色技术背景。左侧含带触感切换开关的清单，右侧配雷达/声纳屏幕可视化与动画扫描。
 
 ### Pricing
 
-Metal dog-tag style cards with hanging holes at top. Center card elevated with accent ring. Monospace pricing and recessed checkmark icons.
+金属狗牌风格卡片，顶部有挂孔。中间卡片上浮配点缀环。等宽定价与凹陷勾选图标。
 
 ### Testimonials
 
-Rotated paper note cards pinned to surface with red push-pins. Grayscale avatars and serif quote typography for authenticity.
+旋转便签卡片，以红色图钉钉于表面。灰度头像与衬线引文字体以增真实感。
 
 ### Faq
 
-Neumorphic accordion drawers with recessed arrow indicators that rotate on open. Inset content areas with subtle inner shadow.
+新拟态手风琴抽屉，配凹陷箭头指示器，打开时旋转。内嵌内容区配含蓄内阴影。
 
 ### Blog
 
-Field log/cassette tape cards with label badges. Grayscale images that colorize on hover, overlaid gradient masks for depth.
+现场日志/磁带卡片配标签徽章。灰度图片悬停时彩色化，叠加渐变蒙版增深度。
 
 ### Footer
 
-Industrial base plate with online status LED, embossed copyright text, and minimal social icon grid with lift-on-hover.
+工业底板配在线状态 LED、压花版权文字与极简社交图标网格，悬停上浮。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Design Style: Industrial Skeuomorphism
+# 设计风格：Industrial Skeuomorphism
 
-## 1. Design Philosophy
+## 1. 设计哲学
 
-This style transcends simple skeuomorphism into **Industrial Realism**—a celebration of **tactile precision, mechanical reliability, and the soul of physical objects**. In an era of ephemeral flat digital experiences, this aesthetic offers something solid, grounded, and permanent. It doesn't just *look* like a machine; it *feels* like one.
+此风格超越简单拟物，进入**工业写实主义**——赞颂**触感精准、机械可靠与实体物件的灵魂**。在转瞬即逝的扁平数字体验时代，这种美学提供坚实、扎根、永恒之物。它不只*看起来*像机器；它*感觉*像机器。
 
-### The Core DNA
+### 核心 DNA
 
-**Physicality Through Light**: Every element exists in three-dimensional space defined by consistent top-left lighting. Shadows aren't decorative—they're structural. Highlights reveal form. The interplay of light and shadow creates the illusion of mass, depth, and material.
+**通过光实现物理性**：每个元素存在于由一致的左上光照定义的三维空间。阴影非装饰——它们是结构性的。高光揭示形态。光与影的交织创造质量、深度与材质的幻觉。
 
-**Mechanical Authenticity**: Interactions mimic real-world physics. Buttons depress with translation and shadow inversion. Cards elevate on hover. Icons rotate subtly. Every animation reinforces the metaphor of physical manipulation—springs, clicks, and tactile feedback encoded in motion curves.
+**机械真实感**：交互模拟真实世界物理。按钮按压时位移并反转阴影。卡片悬停时抬升。图标微妙旋转。每个动画都强化物理操作的隐喻——弹簧、咔嗒声与编码于运动曲线中的触感反馈。
 
-**Manufacturing Details Matter**: The difference between generic and exceptional lies in the details. Corner screws (rendered as radial gradients), ventilation slots, LED status indicators, scanlines on screens, push-pin shadows, hanging holes on price tags—these are not optional flourishes. They are the **signature elements** that make this style instantly recognizable.
+**制造细节至关重要**：通用与卓越之别在于细节。角部螺丝（渲染为径向渐变）、散热槽、LED 状态指示灯、屏幕扫描线、图钉阴影、价签挂孔——这些非可选点缀。它们是使此风格即时可辨的**签名元素**。
 
-**Material Honesty**: The palette and textures evoke specific materials—matte ABS plastic chassis, brushed aluminum panels, powder-coated steel, and safety-orange injection-molded controls. A subtle noise texture across the background simulates the microscopic imperfections of real plastic surfaces. External texture patterns (carbon fiber, diagmonds) add authenticity to specific components.
+**材质诚实**：调色板与纹理唤起特定材质——哑光 ABS 塑料外壳、拉丝铝面板、粉末涂层钢与安全橙注塑控件。背景上含蓄的噪点纹理模拟真实塑料表面的微观瑕疵。外部纹理图案（碳纤维、菱形）为特定组件增添真实感。
 
-### The Vibe
+### 气质
 
-Picture the control panel of a spacecraft, a 1980s Braun synthesizer, or a Teenage Engineering OP-1. It's **functional, organized, precise, and effortlessly cool**.
+想象宇宙飞船的控制面板、1980 年代 Braun 合成器或 Teenage Engineering OP-1。它**功能性、有序、精准且毫不费力地酷**。
 
-**Dieter Rams Heritage**: Maximum clarity with minimum ornamentation. Typography is legible and hierarchical. Color is used sparingly—only where necessary for function (the safety-orange accent for interactive triggers and alerts).
+**Dieter Rams 传承**：最大清晰度配最少装饰。字体清晰且分层。色彩克制使用——仅在功能必要处（安全橙点缀用于交互触发与提醒）。
 
-**Teenage Engineering Playfulness**: Modular construction. Professional-grade precision with a sense of joy. Components feel like they could be swapped, rearranged, or upgraded.
+**Teenage Engineering 趣味**：模块化构造。专业级精度配愉悦感。组件感觉可替换、重排或升级。
 
-**Timeless Futurism**: Not retro or nostalgic in a kitschy sense. This is the industrial design aesthetic that transcends trends—equally at home in 1985 or 2035.
+**永恒未来主义**：非廉价意义上的复古或怀旧。这是超越潮流的工业设计美学——在 1985 或 2035 同样自在。
 
-### The Physics Engine
+### 物理引擎
 
-The interface obeys immutable physical laws:
+界面遵循不变的物理定律：
 
-1. **Consistent Light Source**: All lighting originates from the **top-left at 45 degrees**. This determines every highlight (top/left edges) and every shadow (bottom/right edges). Deviation breaks the illusion.
+1. **一致光源**：所有光照源自**左上 45 度**。这决定每个高光（上/左边缘）与每个阴影（下/右边缘）。偏离即破坏幻觉。
 
-2. **Material Conservation**: Elements don't magically appear. They slide from behind panels, lights turn on, drawers open. Animations respect causality.
+2. **材质守恒**：元素不会魔法般出现。它们自面板后方滑出，灯光亮起，抽屉打开。动画尊重因果关系。
 
-3. **Elevation Hierarchy**:
-   - **Level -1 (Recessed)**: Inputs, screens, slots, grooves. Inner shadows create depth below the surface.
-   - **Level 0 (Chassis)**: The base layer—the matte plastic background that everything is mounted to.
-   - **Level +1 (Panels)**: Cards, modules, sections. Dual shadows (dark below, light above) create lift.
-   - **Level +2 (Floating Controls)**: Buttons, knobs, badges. Enhanced shadows with optional glow for active states.
+3. **抬升层级**：
+   - **层级 -1（凹陷）**：输入框、屏幕、插槽、凹槽。内阴影创造表面下方的深度。
+   - **层级 0（外壳）**：基础层——一切安装其上的哑光塑料背景。
+   - **层级 +1（面板）**：卡片、模块、区块。双向阴影（下暗、上亮）创造抬升。
+   - **层级 +2（浮动控件）**：按钮、旋钮、徽章。增强阴影，激活状态可选辉光。
 
-4. **Interaction Physics**: Active states reverse shadow direction (pressed elements get inner shadows). Hover states increase elevation. Transitions use mechanical easing with subtle bounce—mimicking spring-loaded switches.
+4. **交互物理**：激活状态反转阴影方向（按下元素获内阴影）。悬停状态增加抬升。过渡用机械缓动配含蓄弹跳——模拟弹簧开关。
 
-## 2. Design Token System (The DNA)
+## 2. 设计 Token 系统（DNA）
 
-### Colors (Industrial Palette)
+### 色彩（工业调色板）
 
-The palette is **strictly light mode** and mimics physical materials under diffuse workshop lighting:
+调色板**严格浅色模式**，模拟弥散工作间照明下的物理材质：
 
--   **Background (Chassis)**: `#e0e5ec` - Cool mid-tone industrial grey. The base "plastic" material everything is mounted to. This is Level 0.
--   **Foreground (Panel)**: `#f0f2f5` - Slightly lighter raised panel surface. Used sparingly for contrast.
--   **Muted (Recessed)**: `#d1d9e6` - Darker grey for sunken areas (input fields, screen bezels, grooves). Creates the "below surface" appearance.
--   **Text (Primary)**: `#2d3436` - Dark charcoal ink. High contrast but softer than pure black for reduced eye strain.
--   **Text Muted (Labels)**: `#4a5568` - Darker slate grey (improved from `#636e72` for WCAG AA compliance). Used for secondary text, labels, and metadata.
--   **Accent (Safety Orange)**: `#ff4757` - High-visibility "Braun Red" / "Safety Orange". Reserved exclusively for:
-  - Interactive elements (primary buttons, links, toggles)
-  - Status indicators (active LEDs, online badges)
-  - Critical alerts or highlights
-  This color should appear sparingly—it's the "emergency stop button" of the palette.
--   **Accent Foreground**: `#ffffff` - White text on accent backgrounds for maximum legibility.
--   **Border (Shadow)**: `#babecc` - The shadow color in neumorphic pairs. Represents the darker half of the lighting equation.
--   **Border Light (Highlight)**: `#ffffff` - The highlight color. The brighter half that creates dimensionality.
--   **Border Dark (Deep Shadow)**: `#a3b1c6` - Used for prominent borders and dividers where extra contrast is needed.
+-   **Background（外壳）**：`#e0e5ec` — 冷中调工业灰。一切安装其上的基础"塑料"材质。此为层级 0。
+-   **Foreground（面板）**：`#f0f2f5` — 略浅的抬升面板表面。克制使用以增对比。
+-   **Muted（凹陷）**：`#d1d9e6` — 用于下沉区域（输入框、屏幕边框、凹槽）的深灰。创造"表面下方"外观。
+-   **Text（主要）**：`#2d3436` — 深炭灰墨。高对比但比纯黑更柔和以减眼疲劳。
+-   **Text Muted（标签）**：`#4a5568` — 更深的石板灰（从 `#636e72` 改进以达 WCAG AA）。用于次要文字、标签与元信息。
+-   **Accent（安全橙）**：`#ff4757` — 高可见度"Braun 红"/"安全橙"。专属保留用于：
+  - 交互元素（主按钮、链接、切换）
+  - 状态指示（激活 LED、在线徽章）
+  - 关键提醒或高亮
+  此色应克制出现——它是调色板的"急停按钮"。
+-   **Accent Foreground**：`#ffffff` — 点缀背景上白字以最大可读性。
+-   **Border（阴影）**：`#babecc` — 新拟态对中的阴影色。代表光照方程的较暗一半。
+-   **Border Light（高光）**：`#ffffff` — 高光色。创造维度感的较亮一半。
+-   **Border Dark（深阴影）**：`#a3b1c6` — 用于需额外对比的突出边框与分隔符。
 
-**Dark Accent Surfaces**: For dark technical panels (stats strip, benefits section), use:
-- Background: `#2d3436` or `#2c3e50` (charcoal to slate)
-- Text: `#ffffff`, `#e0e5ec`, or `#a8b2d1` (graded whites)
-- Accent: Same `#ff4757` maintains brand consistency
+**深色点缀表面**：深色技术面板（数据条带、收益区块）用：
+- 背景：`#2d3436` 或 `#2c3e50`（炭至石板）
+- 文字：`#ffffff`、`#e0e5ec` 或 `#a8b2d1`（渐变白）
+- 点缀：相同 `#ff4757` 保持品牌一致
 
-### Typography
+### 字体
 
-**Font Pairing**:
--   **Primary (Sans-serif)**: **Inter** (weights 400/500/600/700/800) - Humanist sans-serif with excellent legibility. Objective, neutral, and highly functional. Perfect for body text, headings, and UI labels.
--   **Technical (Monospace)**: **JetBrains Mono** or **Roboto Mono** (weights 400/500) - Engineered typeface optimized for code and data. Use exclusively for:
-  - All numeric displays (stats, pricing, dates)
-  - Technical labels and badges
-  - Small uppercase metadata ("SYSTEM OPERATIONAL", "LOG #123")
-  - Input fields (simulates terminal/data entry aesthetic)
+**字体配对**：
+-   **主（无衬线）**：**Inter**（字重 400/500/600/700/800）— 人文主义无衬线，出色可读性。客观、中性、高度功能。完美用于正文、标题与 UI 标签。
+-   **技术（等宽）**：**JetBrains Mono** 或 **Roboto Mono**（字重 400/500）— 为代码与数据优化的工程字体。专用于：
+  - 所有数字显示（数据、定价、日期）
+  - 技术标签与徽章
+  - 小型大写元信息（"SYSTEM OPERATIONAL"、"LOG #123"）
+  - 输入框（模拟终端/数据录入美学）
 
-**Hierarchy & Application**:
--   **Hero Headings**: 5xl–7xl (3rem–4.5rem on desktop), font-weight 800, tight tracking (-0.03em), with white text-shadow for embossed effect: `drop-shadow-[0_1px_1px_#ffffff]`
--   **Section Headings**: 3xl–4xl (2rem–2.5rem), font-weight 700, tight tracking
--   **Body Text**: Base to lg (1rem–1.125rem), font-weight 400–500, normal tracking, optimal line-height 1.6–1.75, **max line length 60-65 characters** for readability
--   **Labels & Metadata**: xs–sm (0.75rem–0.875rem), font-weight 700, uppercase, wide tracking (0.05em–0.08em), monospace. Creates a "stamped" or "printed label" appearance
--   **Buttons**: Uppercase, wide tracking (0.05em), font-weight 700, xs–base depending on button size
+**层级与应用**：
+-   **Hero 标题**：5xl–7xl（桌面 3rem–4.5rem），font-weight 800，紧凑字距（-0.03em），白文字阴影作浮雕效果：`drop-shadow-[0_1px_1px_#ffffff]`
+-   **区块标题**：3xl–4xl（2rem–2.5rem），font-weight 700，紧凑字距
+-   **正文**：base 至 lg（1rem–1.125rem），font-weight 400–500，正常字距，最佳行高 1.6–1.75，**最大行长 60-65 字符**以保可读
+-   **标签与元信息**：xs–sm（0.75rem–0.875rem），font-weight 700，大写，宽字距（0.05em–0.08em），等宽。创造"冲压"或"印刷标签"外观
+-   **按钮**：大写，宽字距（0.05em），font-weight 700，视按钮尺寸 xs–base
 
-**Text Shadows for Depth**:
-- Light text on dark backgrounds: `drop-shadow-md` or `drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]`
-- Dark text on light backgrounds: `drop-shadow-[0_1px_0_#ffffff]` (subtle embossed highlight below text)
+**深度文字阴影**：
+- 深背景上浅文字：`drop-shadow-md` 或 `drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]`
+- 浅背景上深文字：`drop-shadow-[0_1px_0_#ffffff]`（文字下方含蓄浮雕高光）
 
-### Radius & Depth
+### 圆角与深度
 
-**Border Radius Scale**:
--   **sm**: `4px` - Tight mechanical edges (small buttons, badges)
--   **md**: `8px` - Standard controls (inputs, small cards)
--   **lg**: `16px` - Large panels (cards, modals)
--   **xl**: `24px` - Hero components (device bezels, major sections)
--   **2xl**: `30px+` - Oversized containers (benefit panels, final CTA)
--   **full**: `9999px` - Perfect circles (icon housings, LEDs, step indicators)
+**圆角阶梯**：
+-   **sm**：`4px` — 紧凑机械边缘（小按钮、徽章）
+-   **md**：`8px` — 标准控件（输入框、小卡片）
+-   **lg**：`16px` — 大面板（卡片、模态）
+-   **xl**：`24px` — Hero 组件（设备边框、主要区块）
+-   **2xl**：`30px+` — 超大容器（收益面板、最终 CTA）
+-   **full**：`9999px` — 正圆（图标外壳、LED、步骤指示器）
 
-Curves are soft and organic—mimicking injection-molded plastic, not sharp machined metal.
+曲线柔和有机——模拟注塑塑料，非锐利机加工金属。
 
-**Neumorphic Shadow System** (The Core Visual Signature):
+**新拟态阴影系统**（核心视觉签名）：
 
-These dual-shadow combinations create depth through light simulation:
+这些双向阴影组合通过光模拟创造深度：
 
--   **Card (Base Lift)**: `8px 8px 16px #babecc, -8px -8px 16px #ffffff`
-  - Standard elevation for panels and cards. Dark shadow bottom-right, light highlight top-left.
+-   **卡片（基础抬升）**：`8px 8px 16px #babecc, -8px -8px 16px #ffffff`
+  - 面板与卡片的标准抬升。暗影右下，亮高光左上。
 
--   **Floating (High Elevation)**: `12px 12px 24px #babecc, -12px -12px 24px #ffffff, inset 1px 1px 0 rgba(255,255,255,0.5)`
-  - Enhanced lift for interactive elements (buttons, elevated cards). Optional inner highlight rim for extra polish.
+-   **浮动（高抬升）**：`12px 12px 24px #babecc, -12px -12px 24px #ffffff, inset 1px 1px 0 rgba(255,255,255,0.5)`
+  - 交互元素（按钮、抬升卡片）的增强抬升。可选内高光环以增打磨。
 
--   **Pressed (Active State)**: `inset 6px 6px 12px #babecc, inset -6px -6px 12px #ffffff`
-  - Shadow direction reverses—element appears pushed INTO the surface. Critical for button interactions.
+-   **按下（激活状态）**：`inset 6px 6px 12px #babecc, inset -6px -6px 12px #ffffff`
+  - 阴影方向反转——元素感觉被压入表面。对按钮交互至关重要。
 
--   **Recessed (Inputs/Screens)**: `inset 4px 4px 8px #babecc, inset -4px -4px 8px #ffffff`
-  - Subtle inward depth for input fields, grooves, and display panels.
+-   **凹陷（输入/屏幕）**：`inset 4px 4px 8px #babecc, inset -4px -4px 8px #ffffff`
+  - 输入框、凹槽与显示面板的含蓄内向深度。
 
--   **Sharp (Mechanical Edge)**: `4px 4px 8px rgba(0,0,0,0.15), -1px -1px 1px rgba(255,255,255,0.8)`
-  - Harder-edged shadow for specific components (metal tags, borders).
+-   **锐利（机械边缘）**：`4px 4px 8px rgba(0,0,0,0.15), -1px -1px 1px rgba(255,255,255,0.8)`
+  - 特定组件（金属标签、边框）的硬边阴影。
 
--   **Glow (LED/Status Indicator)**: `0 0 10px 2px rgba(255, 71, 87, 0.6)`
-  - Colored bloom for active LEDs, focus states, and alerts. Can adjust color to green (`rgba(34,197,94,1)`) for "online" states.
+-   **辉光（LED/状态指示）**：`0 0 10px 2px rgba(255, 71, 87, 0.6)`
+  - 激活 LED、聚焦状态与提醒的彩色光晕。可调色为绿（`rgba(34,197,94,1)`）作"在线"状态。
 
-**Layered Shadows**: On hover, add additional shadows or increase spread to simulate elevation change. Example:
+**分层阴影**：悬停时添加额外阴影或增加扩散以模拟抬升变化。示例：
 ```css
 transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
 hover:shadow-[var(--shadow-floating)]
 ```
 
-### Textures & Patterns
+### 纹理与图案
 
-Textures differentiate this style from flat competitors. Apply strategically:
+纹理将此风格与扁平竞争者区分。战略性应用：
 
--   **Noise Overlay (Background)**: SVG-based fractal noise at 20-30% opacity with `mix-blend-overlay`. Simulates the micro-texture of matte plastic. Applied to entire page background via StyleWrapper.
+-   **噪点叠加（背景）**：SVG 分形噪点，20-30% 不透明度配 `mix-blend-overlay`。模拟哑光塑料的微观纹理。通过 StyleWrapper 应用于整页背景。
 
--   **Carbon Fiber Pattern**: External texture URL (`transparenttextures.com/patterns/carbon-fibre.png`) at 10-20% opacity on tech-heavy sections (device bezels, dark panels). Use `mix-blend-overlay` or `mix-blend-multiply`.
+-   **碳纤维图案**：外部纹理 URL（`transparenttextures.com/patterns/carbon-fibre.png`），10-20% 不透明度于技术密集区块（设备边框、深色面板）。用 `mix-blend-overlay` 或 `mix-blend-multiply`。
 
--   **Scanlines (CRT Screens)**: Linear gradients simulating old monitor scanlines:
+-   **扫描线（CRT 屏幕）**：模拟旧显示器扫描线的线性渐变：
   ```css
   background: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.25) 50%);
   background-size: 100% 4px;
   ```
-  Overlay on digital displays or "screen" elements.
+  叠加于数字显示或"屏幕"元素。
 
--   **Grid Patterns (Blueprint/Schematic Backgrounds)**:
+-   **网格图案（蓝图/示意图背景）**：
   ```css
   background-image: linear-gradient(#636e72 1px, transparent 1px),
                     linear-gradient(90deg, #636e72 1px, transparent 1px);
   background-size: 40px 40px;
   opacity: 0.1;
   ```
-  Use for technical documentation sections (product detail).
+  用于技术文档区块（产品详情）。
 
--   **Radial Gradients (Lighting Hotspots)**: Subtle `radial-gradient` from white/transparent to add dimensionality to flat backgrounds. Place top-left to reinforce lighting direction.
+-   **径向渐变（光照热点）**：自白/透明的含蓄 `radial-gradient` 为扁平背景增添维度。置于左上以强化光照方向。
 
-## 3. Component Stylings
+## 3. 组件样式
 
-### Buttons ("Physical Keys")
+### 按钮（"物理按键"）
 
-Buttons are **tactile 3D objects**, not flat rectangles. They must convey pressability.
+按钮是**触感 3D 对象**，非扁平矩形。它们必须传达可按性。
 
-**Visual Structure**:
--   **Primary (Accent)**: Background `#ff4757`, white text, uppercase, wide tracking. Border with `rgba(255,255,255,0.2)` for subtle rim. Shadow: `4px 4px 8px rgba(166,50,60,0.4), -4px -4px 8px rgba(255,100,110,0.4)` (neumorphic red-tinted shadows).
--   **Secondary (Chassis)**: Background matches chassis (`#e0e5ec`), dark text, base lift shadow. Hover darkens text to accent color.
--   **Ghost (Flat Label)**: No background initially. Text muted. Hover applies muted background and recessed shadow.
+**视觉结构**：
+-   **主（点缀）**：背景 `#ff4757`，白字，大写，宽字距。边框 `rgba(255,255,255,0.2)` 作含蓄环。阴影：`4px 4px 8px rgba(166,50,60,0.4), -4px -4px 8px rgba(255,100,110,0.4)`（新拟态红色调阴影）。
+-   **次（外壳）**：背景匹配外壳（`#e0e5ec`），深字，基础抬升阴影。悬停加深文字至点缀色。
+-   **幽灵（扁平标签）**：初始无背景。文字柔和。悬停应用柔和背景与凹陷阴影。
 
-**Interaction Physics (CRITICAL)**:
--   **Hover**: Slight brightness increase (`brightness-110`) or text color change. Shadow remains.
--   **Active (Pressed)**:
-  - `translate-y-[2px]` - Button moves down 2px
-  - Shadow inverts to `inset 6px 6px 12px #babecc, inset -6px -6px 12px #ffffff`
-  - Border may vanish or thin
-  - Transition is fast (`150ms`) for immediate tactile feedback
--   **Focus**: Accent-colored ring with offset: `ring-2 ring-[var(--ring)] ring-offset-2`
+**交互物理（关键）**：
+-   **悬停**：轻微亮度提升（`brightness-110`）或文字色变化。阴影保留。
+-   **激活（按下）**：
+  - `translate-y-[2px]` — 按钮下移 2px
+  - 阴影反转为 `inset 6px 6px 12px #babecc, inset -6px -6px 12px #ffffff`
+  - 边框可能消失或变薄
+  - 过渡快速（`150ms`）以即时触感反馈
+-   **聚焦**：点缀色环配 offset：`ring-2 ring-[var(--ring)] ring-offset-2`
 
-**Sizing**:
-- All buttons have minimum 48px height on mobile (touch-friendly)
-- Padding is generous for premium feel
-- Border radius: `md` for small, `lg` for default, `xl` for large
+**尺寸**：
+- 所有按钮移动端最小 48px 高度（触控友好）
+- 慷慨内边距以增高级感
+- 圆角：小 `md`，默认 `lg`，大 `xl`
 
-### Cards ("Bolted Modules")
+### 卡片（"螺栓模块"）
 
-Cards are **physical panels bolted onto the chassis background**.
+卡片是**螺栓固定于外壳背景的物理面板**。
 
-**Construction**:
--   Base shadow: `shadow-[var(--shadow-card)]` (neumorphic dual shadow)
--   Border radius: `lg` (16px)
--   Background: Chassis color (`#e0e5ec`)
--   Optional: `elevated` prop increases shadow to `--shadow-floating`
+**构造**：
+-   基础阴影：`shadow-[var(--shadow-card)]`（新拟态双向阴影）
+-   圆角：`lg`（16px）
+-   背景：外壳色（`#e0e5ec`）
+-   可选：`elevated` prop 将阴影增至 `--shadow-floating`
 
-**Manufacturing Details**:
--   **Corner Screws**: CSS radial gradients simulate screw indentations:
+**制造细节**：
+-   **角部螺丝**：CSS 径向渐变模拟螺丝凹痕：
   ```css
   background: radial-gradient(circle at 12px 12px, rgba(0,0,0,0.15) 2px, transparent 3px),
               radial-gradient(circle at calc(100%-12px) 12px, rgba(0,0,0,0.15) 2px, transparent 3px),
-              /* repeat for bottom corners */
+              /* 重复用于底部角 */
   ```
-  Positioned at exactly 12px from edges.
+  精确定位距边缘 12px。
 
--   **Vent Slots**: Vertical pill-shaped divs (1px width, 24px height) in top-right corner with `inset` shadows to appear recessed:
+-   **散热槽**：右上角垂直胶囊形 div（1px 宽，24px 高）配 `inset` 阴影以显凹陷：
   ```tsx
   <div className="h-6 w-1 rounded-full bg-[var(--muted)] shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)]" />
   ```
-  Place 3 in a row with `gap-1`.
+  3 个一排配 `gap-1`。
 
-**Hover Interaction**:
-- Cards lift on hover: `hover:-translate-y-1` with shadow transition to `--shadow-floating`
-- Duration 300ms with ease-out
-- Group child elements (icons) can rotate or scale on card hover using Tailwind group utilities
+**悬停交互**：
+- 卡片悬停上浮：`hover:-translate-y-1` 配阴影过渡至 `--shadow-floating`
+- 300ms ease-out
+- 子元素（图标）可用 Tailwind group 工具在卡片悬停时旋转或缩放
 
-### Inputs ("Data Slots")
+### 输入框（"数据槽"）
 
-Inputs are **recessed wells** machined into the chassis surface.
+输入框是**机加工于外壳表面的凹陷槽**。
 
-**Visual Treatment**:
--   Deeply inset shadow: `shadow-[var(--shadow-recessed)]`
--   No visible border (border-none) - depth is communicated through shadow alone
--   Background: Chassis color (matches surface level for subtle integration)
--   Border radius: `md` (8px)
--   Monospace font for technical data entry feel
--   Placeholder: Muted text at 50% opacity
+**视觉处理**：
+-   深度内嵌阴影：`shadow-[var(--shadow-recessed)]`
+-   无可见边框（border-none）— 深度仅通过阴影传达
+-   背景：外壳色（匹配表面层级以含蓄整合）
+-   圆角：`md`（8px）
+-   等宽字体以增技术数据录入感
+-   占位符：50% 不透明度柔和文字
 
-**States**:
--   **Focus**: Accent-colored glow appears: `focus-visible:shadow-[var(--shadow-recessed),0_0_0_2px_var(--accent)]`
-  - Simulates LED backlight activating behind input
--   **Disabled**: Reduced opacity (50%), cursor-not-allowed
+**状态**：
+-   **聚焦**：点缀色辉光出现：`focus-visible:shadow-[var(--shadow-recessed),0_0_0_2px_var(--accent)]`
+  - 模拟输入框后方 LED 背光激活
+-   **禁用**：降低不透明度（50%），cursor-not-allowed
 
-**Sizing**: Minimum 56px height (14 in Tailwind) for comfortable typing. Generous padding (24px horizontal).
+**尺寸**：最小 56px 高（Tailwind 14）以舒适输入。慷慨内边距（水平 24px）。
 
-## 4. Layout Strategy
+## 4. 布局策略
 
-**Container System**:
--   Max width: `72rem` (1152px) for primary content
--   Horizontal padding: `px-6` (24px) mobile, `px-12` (48px) desktop
--   Vertical spacing between sections: `space-y-24` (96px)
+**容器系统**：
+-   最大宽度：`72rem`（1152px）主要内容
+-   水平内边距：移动 `px-6`（24px），桌面 `px-12`（48px）
+-   区块间垂直间距：`space-y-24`（96px）
 
-**Grid Discipline**:
-- Use precise Tailwind grid classes: `grid-cols-2`, `grid-cols-3`, `md:grid-cols-4`
-- Gap consistency: `gap-6` (24px) for tight layouts, `gap-8` (32px) for breathing room
-- Alignment is critical—elements should feel "mounted" to an invisible grid structure
+**网格纪律**：
+- 使用精准 Tailwind 网格类：`grid-cols-2`、`grid-cols-3`、`md:grid-cols-4`
+- 间隙一致：紧布局 `gap-6`（24px），呼吸空间 `gap-8`（32px）
+- 对齐至关重要——元素应感觉"安装"于不可见的网格结构
 
-**Asymmetry & Balance**:
-- Hero is asymmetric (60/40 split on desktop, stacked on mobile)
-- Alternate left/right image placement in multi-column sections
-- Testimonial cards have intentional slight rotation (±1deg) for realism
-- Use `order-1/order-2` with responsive modifiers to control stacking order
+**不对称与平衡**：
+- Hero 非对称（桌面 60/40 分割，移动堆叠）
+- 多列区块中交替左右图片位置
+- 证言卡片刻意轻微旋转（±1deg）以增真实感
+- 用 `order-1/order-2` 配响应式修饰符控制堆叠顺序
 
-## 5. Non-Genericness (Signature Elements)
+## 5. 非通用性（签名元素）
 
-These details separate this style from generic neumorphic templates:
+这些细节将此风格与通用新拟态模板区分：
 
-**The Hero "Device" Visualization**:
-- Not a simple image—construct a **3D device mockup** entirely in CSS
-- Components:
-  - Outer bezel: Dark border (4px), rounded corners, carbon fiber texture overlay
-  - Inner screen: Black background with `inset` shadow, CRT scanline overlay
-  - Hardware details: Physical buttons on side edges, power LED in corner
-  - Screen content: Abstract dashboard with glowing elements, spinning loaders, status bars
-  - Hover effect: Slight scale increase for interactivity
+**Hero"设备"可视化**：
+- 非简单图片——完全用 CSS 构造**3D 设备模型**
+- 组件：
+  - 外边框：深色边框（4px），圆角，碳纤维纹理叠加
+  - 内屏：黑背景配 `inset` 阴影，CRT 扫描线叠加
+  - 硬件细节：侧边物理按钮，角部电源 LED
+  - 屏幕内容：带发光元素、旋转加载器、状态条的抽象仪表盘
+  - 悬停效果：轻微缩放增加以增交互性
 
-**LED Status Indicators**:
-- Small circular divs (8-12px) with:
-  - Solid color fill (green for online, red for alert, yellow for warning)
-  - `animate-pulse` for breathing effect
-  - Glow shadow: `shadow-[0_0_10px_rgba(color,1)]`
-- Place on: Navbar, hero badge, footer, device visualization
-- Always pair with monospace label ("SYSTEM OPERATIONAL", "PWR", "ONLINE")
+**LED 状态指示器**：
+- 小型圆形 div（8-12px）配：
+  - 实心色填充（绿在线、红提醒、黄警告）
+  - `animate-pulse` 作呼吸效果
+  - 辉光阴影：`shadow-[0_0_10px_rgba(color,1)]`
+- 置于：导航栏、Hero 徽章、页脚、设备可视化
+- 始终配等宽标签（"SYSTEM OPERATIONAL"、"PWR"、"ONLINE"）
 
-**Physical Connectors & Pipes**:
-- "How It Works" uses horizontal cylindrical pipe connecting step nodes
-- CSS: `h-3 w-full rounded-full bg-[#d1d9e6] shadow-[inset_0_1px_3px_rgba(0,0,0,0.2)]`
-- Hidden on mobile (`hidden md:block`)
+**物理连接器与管道**：
+- "How It Works" 用连接步骤节点的横向圆柱管道
+- CSS：`h-3 w-full rounded-full bg-[#d1d9e6] shadow-[inset_0_1px_3px_rgba(0,0,0,0.2)]`
+- 移动端隐藏（`hidden md:block`）
 
-**Masking Tape & Stickers**:
-- For metadata overlays (blog dates, testimonial labels)
-- Skewed yellow/white rectangles with `backdrop-blur-sm`
-- Example: `<div className="skew-x-12 bg-[rgba(255,230,0,0.3)] backdrop-blur-sm" />`
+**遮蔽胶带与贴纸**：
+- 用于元信息叠加（博客日期、证言标签）
+- 倾斜的黄/白矩形配 `backdrop-blur-sm`
+- 示例：`<div className="skew-x-12 bg-[rgba(255,230,0,0.3)] backdrop-blur-sm" />`
 
-**Push Pins & Hanging Holes**:
-- Testimonials: Red circular push-pin at top center with highlight shine
-- Pricing cards: Circular hole at top with inner shadow to simulate punched metal
+**图钉与挂孔**：
+- 证言：顶部中央红色圆形图钉配高光
+- 定价卡片：顶部圆形孔配内阴影模拟冲压金属
 
-**Screw Heads & Vent Slots** (detailed in Cards section):
-- Never omit these—they're the DNA of the style
-- Place consistently in same positions across all cards
+**螺丝头与散热槽**（详见卡片章节）：
+- 绝不省略——它们是风格的 DNA
+- 所有卡片一致放置于相同位置
 
-**Grayscale-to-Color Image Treatment**:
-- Blog and testimonial images start grayscale: `grayscale`
-- Transition to color on hover: `group-hover:grayscale-0 transition-all duration-500`
-- Adds subtle interactivity while maintaining industrial monotone baseline
+**灰度至彩色图片处理**：
+- 博客与证言图片初始灰度：`grayscale`
+- 悬停过渡至彩色：`group-hover:grayscale-0 transition-all duration-500`
+- 增添含蓄交互性同时保持工业单色基调
 
-## 6. Effects & Animation
+## 6. 效果与动画
 
-**Motion Philosophy**: Mechanical spring physics with subtle bounce—mimicking real physical switches and buttons.
+**运动哲学**：机械弹簧物理配含蓄弹跳——模拟真实物理开关与按钮。
 
-**Easing Curve**:
-- Primary: `cubic-bezier(0.175, 0.885, 0.32, 1.275)` - Slight overshoot/bounce
-- Fast interactions: `duration-150` to `duration-200`
-- Smooth transitions: `duration-300`
-- Image/scale effects: `duration-500`
+**缓动曲线**：
+- 主：`cubic-bezier(0.175, 0.885, 0.32, 1.275)` — 轻微过冲/弹跳
+- 快速交互：`duration-150` 至 `duration-200`
+- 平滑过渡：`duration-300`
+- 图片/缩放效果：`duration-500`
 
-**Framer Motion Integration**:
-- Hero section uses staggered entrance animations
-- Mechanical easing constant: `[0.175, 0.885, 0.32, 1.275]`
-- Variants: `slideUp` (opacity + y-translate), `stagger` (staggerChildren)
+**Framer Motion 集成**：
+- Hero 区使用错峰入场动画
+- 机械缓动常数：`[0.175, 0.885, 0.32, 1.275]`
+- 变体：`slideUp`（opacity + y-translate）、`stagger`（staggerChildren）
 
-**Key Micro-interactions**:
-- **Button Press**: `active:translate-y-[2px]` + shadow inversion (150ms)
-- **Card Hover**: `-translate-y-1` elevation with shadow upgrade (300ms)
-- **Icon Hover**: `group-hover:scale-110` + `group-hover:rotate-12` (200ms)
-- **Image Hover**: Grayscale to color (500ms)
-- **LED Pulse**: `animate-pulse` (Tailwind default, ~2s cycle)
-- **Loading Spinner**: `animate-spin` on border technique (1s linear)
+**关键微交互**：
+- **按钮按下**：`active:translate-y-[2px]` + 阴影反转（150ms）
+- **卡片悬停**：`-translate-y-1` 抬升配阴影升级（300ms）
+- **图标悬停**：`group-hover:scale-110` + `group-hover:rotate-12`（200ms）
+- **图片悬停**：灰度至彩色（500ms）
+- **LED 脉动**：`animate-pulse`（Tailwind 默认，约 2s 周期）
+- **加载旋转器**：`animate-spin` on border 技术（1s linear）
 
-**Advanced Animations**:
-- Radar sweep in benefits: `animate-spin` with `conic-gradient` and long duration (4s)
-- Device screen scanlines: Static background pattern (no animation needed)
-- Mobile menu: Slide down with opacity fade (200ms ease-out)
+**高级动画**：
+- 收益区雷达扫描：`animate-spin` 配 `conic-gradient` 与长时长（4s）
+- 设备屏幕扫描线：静态背景图案（无需动画）
+- 移动菜单：向下滑动配透明度淡入（200ms ease-out）
 
-## 7. Iconography & Icon Integration
+## 7. 图标与图标集成
 
-**Icon Library**: `lucide-react` exclusively
+**图标库**：`lucide-react` 专属
 
-**Styling Rules**:
--   **Stroke Width**: 1.5px standard, 1px for thin/delicate icons, 2-4px for bold/emphasis
--   **Size**: 20-24px for UI elements, 28-32px for feature icons, 16-18px for inline text icons
--   **Color**: Match text color or use accent color for interactive/highlighted icons
+**样式规则**：
+-   **描边宽度**：1.5px 标准，1px 细/精致图标，2-4px 粗/强调
+-   **尺寸**：UI 元素 20-24px，特性图标 28-32px，行内文字图标 16-18px
+-   **颜色**：匹配文字色或交互/高亮图标用点缀色
 
-**Integration Patterns** (never leave icons floating):
+**集成模式**（绝不孤立图标）：
 
-1. **Recessed Icon Housing** (Feature cards):
+1. **凹陷图标外壳**（特性卡片）：
    ```tsx
    <div className="flex h-14 w-14 items-center justify-center rounded-full
                    bg-[var(--background)] shadow-[var(--shadow-floating)]">
@@ -396,69 +396,69 @@ These details separate this style from generic neumorphic templates:
    </div>
    ```
 
-2. **Inline with Text** (Metadata, labels):
+2. **与文字行内**（元信息、标签）：
    ```tsx
    <Zap className="inline h-4 w-4 text-[var(--accent)]" />
    ```
 
-3. **Navigation Icons** (Social links):
+3. **导航图标**（社交链接）：
    ```tsx
    <Twitter className="h-5 w-5 transition-all hover:text-[var(--accent)]" />
    ```
 
-4. **LED-style Indicators**:
-   - Solid fill instead of stroke
-   - Pair with glow shadow
-   - Small size (12-16px)
+4. **LED 风格指示器**：
+   - 实心填充替代描边
+   - 配辉光阴影
+   - 小尺寸（12-16px）
 
-## 8. Responsive Strategy
+## 8. 响应式策略
 
-The physical metaphor **must persist** across all breakpoints—no sudden shifts to "generic mobile design."
+物理隐喻**必须贯穿**所有断点——不可突变为"通用移动设计"。
 
-**Breakpoint System**:
--   **Mobile-first**: Base styles assume narrow viewports
--   **Tablet**: `md:` prefix (768px+)
--   **Desktop**: `lg:` and `xl:` (1024px+, 1280px+)
+**断点系统**：
+-   **移动优先**：基础样式假设窄视口
+-   **平板**：`md:` 前缀（768px+）
+-   **桌面**：`lg:` 与 `xl:`（1024px+、1280px+）
 
-**Adaptations**:
+**适配**：
 
-**Navigation**:
-- Desktop: Horizontal menu with ghost buttons
-- Mobile: Hamburger menu button (neumorphic) reveals vertical drawer
+**导航**：
+- 桌面：水平菜单配幽灵按钮
+- 移动：汉堡菜单按钮（新拟态）显示垂直抽屉
 
-**Hero**:
-- Desktop: Side-by-side (lg:grid-cols-2)
-- Mobile: Stacked (text first, device second). Device aspect ratio shifts to reduce height.
+**Hero**：
+- 桌面：并排（lg:grid-cols-2）
+- 移动：堆叠（文字先，设备后）。设备宽高比转换以减高度。
 
-**Grids**:
-- Features: 3 cols desktop → 1 col mobile
-- Stats: 4 cols desktop → 2 cols mobile
-- Pricing: 3 cols → 1 col stack
-- Testimonials: 3 cols → 1 col
+**网格**：
+- 特性：3 列桌面 → 1 列移动
+- 数据：4 列桌面 → 2 列移动
+- 定价：3 列 → 1 列堆叠
+- 证言：3 列 → 1 列
 
-**Images & Devices**:
-- Device graphic scales proportionally but may adjust aspect-ratio (aspect-square on mobile, aspect-video on desktop)
-- Blog/testimonial images maintain aspect ratios
+**图片与设备**：
+- 设备图形按比例缩放但可调宽高比（移动 aspect-square，桌面 aspect-video）
+- 博客/证言图片保持宽高比
 
-**Touch Targets**:
-- **Minimum 48px height** for all interactive elements on mobile
-- Buttons expand to full width on mobile: `w-full sm:w-auto`
-- Increased padding on mobile CTAs for easier tapping
+**触控目标**：
+- 移动端所有交互元素**最小 48px 高度**
+- 按钮移动端全宽：`w-full sm:w-auto`
+- 移动 CTA 增加内边距以便点击
 
-**Typography**:
-- Hero heading reduces from 7xl → 5xl on mobile
-- Body text remains lg for readability (don't shrink below 16px)
+**字体**：
+- Hero 标题从 7xl → 移动 5xl
+- 正文保持 lg 以保可读（勿低于 16px）
 
-**Spacing**:
-- Section gaps reduce from 96px → 64px on mobile
-- Card padding reduces from 32px → 24px
+**间距**：
+- 区块间隙从 96px → 移动 64px
+- 卡片内边距从 32px → 24px
 
-**Hidden Elements**:
-- Physical connector pipes between steps: `hidden md:block`
-- Desktop-only navigation labels
-- Some decorative screws/vents can hide on small screens if needed
+**隐藏元素**：
+- 步骤间物理连接管道：`hidden md:block`
+- 仅桌面的导航标签
+- 部分装饰螺丝/散热槽可小屏隐藏
 
-**Performance**:
-- External texture images are small and cached
-- Animations use `transform` and `opacity` for GPU acceleration
-- Neumorphic shadows are CSS-only (no JS calculations)
+**性能**：
+- 外部纹理图片小且缓存
+- 动画用 `transform` 与 `opacity` 以 GPU 加速
+- 新拟态阴影仅 CSS（无 JS 计算）

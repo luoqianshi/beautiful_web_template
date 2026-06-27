@@ -10,153 +10,153 @@
 | 显示名称 | Flat Design |
 | 模式 | ☀️ 浅色模式 (Light) |
 | 字体类型 | sans-serif |
-| 描述 | A design philosophy centered on removing depth cues (shadows, bevels, gradients) in favor of pure color, typography, and layout. Crisp, two-dimensional, and geometric with bold color blocking. |
+| 描述 | 一种以移除深度提示（阴影、斜面、渐变）为核心的设计哲学，转而倚重纯粹的色彩、字体与布局。利落、扁平、几何化，配以大胆的色块分割。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Full-width bold color block background (Primary Blue). Large decorative geometric shapes as background elements. Left-aligned text with massive headline (4xl to 8xl responsive). High-contrast CTA buttons with strong hover states. Right side features abstract geometric composition with overlapping shapes.
+全宽大胆色块背景（Primary Blue）。大型装饰性几何形状作背景元素。左对齐文字配巨型标题（4xl 至 8xl 响应式）。高对比 CTA 按钮配强悬停状态。右侧含抽象几何构图，配重叠形状。
 
 ### Stats
 
-Clean 4-column grid with gradient background accent. Large colorful numbers (5xl-6xl) in varied accent colors. Uppercase labels. Hover scale effects on individual stats.
+简洁 4 列网格配渐变背景点缀。大型彩色数字（5xl-6xl），变化点缀色。大写标签。单个数据悬停缩放效果。
 
 ### Features
 
-3-column grid with section title. Each feature card has distinct soft background color (blue-50, green-50, amber-50, etc.) with white icon circles. Strong hover states with scale and color intensification.
+3 列网格配区块标题。每张特性卡片有独特柔和背景色（blue-50、green-50、amber-50 等）配白色图标圆圈。强悬停状态配缩放与色彩强化。
 
 ### How It Works
 
-Dark background (gray-900) for contrast. Horizontal step circles connected by background line. Large numbered circles in primary blue with border. Clean white text on dark.
+深色背景（gray-900）以增对比。横向步骤圆圈由背景线连接。Primary Blue 大号编号圆圈配边框。深色上干净白字。
 
 ### Benefits
 
-50/50 split screen layout. Left side emerald green solid with white text and bullet points. Right side white with abstract geometric overlapping shapes in mix-blend-multiply mode.
+50/50 分屏布局。左侧翡翠绿实色配白字与项目符号。右侧白色配抽象几何重叠形状，mix-blend-multiply 模式。
 
 ### Pricing
 
-3-column grid. Popular tier is scaled and uses primary blue block. Other tiers use light gray blocks. 'Most Popular' badge on featured tier. All cards have strong hover scale effects.
+3 列网格。热门档位缩放并使用 primary blue 色块。其他档位用浅灰色块。精选档位配 'Most Popular' 徽章。所有卡片有强悬停缩放效果。
 
 ### Testimonials
 
-Masonry columns layout. White cards on light gray background. Large decorative quote mark. Avatar circles with bold typography.
+瀑布流列布局。浅灰背景上的白色卡片。大型装饰性引号。头像圆圈配粗体字体。
 
 ### Faq
 
-Centered accordion with thick (2px) borders. Plus/Minus icons with bold stroke weight. Clean expansion with no background change.
+居中手风琴配粗（2px）边框。Plus/Minus 图标配粗描边。干净展开，无背景变化。
 
 ### Blog
 
-3-column grid on light gray background. White cards with image top (rounded corners). Strong hover state with image scale. Bold date, title, and 'Read Article' CTA.
+浅灰背景上的 3 列网格。白色卡片，图片在上（圆角）。强悬停状态配图片缩放。粗体日期、标题与 'Read Article' CTA。
 
 ### Footer
 
-Dark gray-900 background. Logo with colored square. Multiple column layout with primary blue section titles. Circular social icons.
+深色 gray-900 背景。logo 配彩色方块。多列布局配 primary blue 区块标题。圆形社交图标。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Design Philosophy
-**Flat Design** removes all artifice. It rejects the illusion of three-dimensionality—no drop shadows, no bevels, no realistic gradients, no textures. It relies entirely on **hierarchy through size, color, and typography**. This is not minimalism for the sake of being minimal; it's **confident reduction** that creates visual interest through pure form.
+# 设计哲学
+**Flat Design** 移除一切矫饰。它拒绝三维幻觉——无投影、无斜面、无写实渐变、无纹理。它完全依赖**通过尺寸、色彩与字体建立的层级**。这不是为极简而极简；这是**自信的减法**，通过纯粹形式创造视觉趣味。
 
-The aesthetic is **digital-native but print-inspired**: crisp edges, solid blocks of color, and a strict reliance on the grid. It communicates clarity, efficiency, and modernity. It is not "boring" or "plain"; it is **boldly reductive and graphic**. Every element exists because it is necessary. Visual interest comes from the strategic interplay of solid shapes, vibrant (but controlled) color palettes, and dynamic scale.
+美学是**数字原生但印刷启发**：利落边缘、纯色块、对网格的严格依赖。它传达清晰、效率与现代感。它不"无聊"或"平淡"；它**大胆地减法且图形化**。每个元素都因必要而存在。视觉趣味来自实心形状的战略性交织、鲜艳（但受控）的调色板与动态尺度。
 
-**Core Principles:**
-1.  **Zero Artificial Depth**: The Z-axis does not exist. Everything is on the same plane. However, visual hierarchy is created through scale, color contrast, and strategic layering of flat shapes.
-2.  **Color as Structure**: Bold background colors define sections and grouping, not lines or shadows. Color transitions are sharp, never blurred or gradual.
-3.  **Typography as Interface**: Text size and weight bear the load of hierarchy. Typography is geometric, bold, and demands attention.
-4.  **Geometric Purity**: Rectangles, circles, and squares dominate. Rounded corners are consistent and moderate. No organic blobs or complex shapes.
-5.  **Interactive Feedback**: Hover states are pronounced through color shifts, scale transformations, and instant transitions—never through shadow depth.
-6.  **Strategic Decoration**: Large, subtle geometric shapes in background create visual interest without breaking the flat aesthetic—think poster design.
+**核心原则**：
+1.  **零人造深度**：Z 轴不存在。一切在同一平面。然而视觉层级通过尺度、色彩对比与扁平形状的战略性分层创造。
+2.  **色彩即结构**：大胆背景色定义区块与分组，而非线条或阴影。色彩过渡锐利，绝不模糊或渐变。
+3.  **字体即界面**：文字尺寸与字重承担层级。字体几何、大胆、引人注目。
+4.  **几何纯粹**：矩形、圆与方块主导。圆角一致且适度。无有机水滴或复杂形状。
+5.  **交互反馈**：悬停状态通过色彩偏移、缩放变换与即时过渡突出——绝不通过阴影深度。
+6.  **战略性装饰**：背景中大型含蓄几何形状创造视觉趣味而不破坏扁平美学——想象海报设计。
 
-# Design Token System
+# 设计 Token 系统
 
-## Colors (Single Palette: Light Mode)
-A vibrant, confident palette that avoids muddy tones. High contrast is essential.
+## 色彩（单一调色板：浅色模式）
+鲜艳、自信的调色板，避免浑浊色调。高对比至关重要。
 
--   **Background**: `#FFFFFF` (Pure White) - The canvas.
--   **Foreground**: `#111827` (Gray 900) - Sharp, high-contrast text.
--   **Primary**: `#3B82F6` (Blue 500) - The "Action" color. Bright, standard digital blue.
--   **Secondary**: `#10B981` (Emerald 500) - Supporting accent.
--   **Accent**: `#F59E0B` (Amber 500) - For highlights/badges.
--   **Muted**: `#F3F4F6` (Gray 100) - Used for secondary backgrounds/blocks.
--   **Border**: `#E5E7EB` (Gray 200) - Used sparingly.
+-   **Background**：`#FFFFFF`（纯白）— 画布。
+-   **Foreground**：`#111827`（Gray 900）— 锐利、高对比文字。
+-   **Primary**：`#3B82F6`（Blue 500）— "行动"色。明亮标准数字蓝。
+-   **Secondary**：`#10B981`（Emerald 500）— 辅助点缀。
+-   **Accent**：`#F59E0B`（Amber 500）— 用于高亮/徽章。
+-   **Muted**：`#F3F4F6`（Gray 100）— 用于次级背景/色块。
+-   **Border**：`#E5E7EB`（Gray 200）— 克制使用。
 
-## Typography
-**Font Family**: **'Outfit', sans-serif**.
-A geometric sans-serif that mirrors the shapes of the UI.
--   **Headings**: Bold (700) or Extra Bold (800). Tight letter-spacing (`-0.02em`).
--   **Body**: Regular (400). Readable, standard spacing.
--   **Labels/Buttons**: Medium (500) or SemiBold (600). Uppercase often used for labels (`tracking-wider`).
+## 字体
+**字族**：**'Outfit', sans-serif**。
+镜像 UI 形状的几何无衬线。
+-   **标题**：Bold（700）或 Extra Bold（800）。紧凑字距（`-0.02em`）。
+-   **正文**：Regular（400）。可读，标准间距。
+-   **标签/按钮**：Medium（500）或 SemiBold（600）。标签常用大写（`tracking-wider`）。
 
-## Radius & Shapes
--   **Radius**: `rounded-md` (6px) or `rounded-lg` (8px). Consistent throughout. Not fully rounded (pill) unless it's a tag.
--   **Borders**: generally `0px`. We use background colors to define edges. If a border is needed (e.g., inputs), `border-2` solid color.
+## 圆角与形状
+-   **圆角**：`rounded-md`（6px）或 `rounded-lg`（8px）。全程一致。除非是标签，否则不全圆（胶囊）。
+-   **边框**：通常 `0px`。我们用背景色定义边缘。若需边框（如输入框），`border-2` solid 色。
 
-## Shadows & Effects
--   **Shadows**: `shadow-none`. **ABSOLUTELY NO BOX SHADOWS ON ELEMENTS.**
--   **Gradients**: Only subtle directional gradients for background decoration (e.g., `from-[#F3F4F6] to-transparent`). Never on buttons or cards. Never colorful or vibrant gradients.
--   **Blur**: None on elements. No backdrop-blur effects.
--   **Background Decoration**: Large geometric shapes with low opacity (`bg-white/5`) positioned absolutely for visual interest.
+## 阴影与效果
+-   **阴影**：`shadow-none`。**元素上绝对无 box-shadow。**
+-   **渐变**：仅背景装饰用含蓄方向渐变（如 `from-[#F3F4F6] to-transparent`）。绝不在按钮或卡片上。绝无鲜艳或彩色渐变。
+-   **模糊**：元素上无。无 backdrop-blur 效果。
+-   **背景装饰**：低不透明度（`bg-white/5`）的大型几何形状，绝对定位以增视觉趣味。
 
-# Component Stylings
+# 组件样式
 
-## Buttons
--   **Primary**: Solid Primary color background. White text. `rounded-md`. Height `h-14` to `h-16` for good touch targets. `transition-all duration-200 hover:scale-105` (scale transformation for feedback). Color shift on hover (e.g., `hover:bg-blue-600`). No shadow.
--   **Secondary**: Solid Muted background (Gray 100). Dark text. `hover:bg-gray-200` with scale effect.
--   **Outline**: `border-4` solid color (not border-2 for more boldness). Text matches border color. Transparent bg. `hover:bg-[color] hover:text-white` (fill effect on hover).
+## 按钮
+-   **主**：实心 Primary 色背景。白字。`rounded-md`。高度 `h-14` 至 `h-16` 以保良好触控目标。`transition-all duration-200 hover:scale-105`（缩放变换作反馈）。悬停色彩偏移（如 `hover:bg-blue-600`）。无阴影。
+-   **次**：实心 Muted 背景（Gray 100）。深色文字。`hover:bg-gray-200` 配缩放效果。
+-   **描边**：`border-4` solid 色（非 border-2 以更大胆）。文字匹配边框色。透明背景。`hover:bg-[color] hover:text-white`（悬停填充效果）。
 
-## Cards
--   **Style**: "Color Block".
--   **Appearance**: Solid background color (White on Gray page, or soft color tints like `bg-blue-50`, `bg-green-50` for features). No shadow. No border. Padding is generous (`p-6` or `p-8`). Rounded corners `rounded-lg`.
--   **Interaction**: `group cursor-pointer transition-all duration-200 hover:scale-[1.02]` (subtle scale). For colored backgrounds, add `hover:bg-[color]-100` for intensification. Icons within cards can have `group-hover:scale-110`.
+## 卡片
+-   **风格**："色块"。
+-   **外观**：实心背景色（灰页上白，或特性用柔和色调如 `bg-blue-50`、`bg-green-50`）。无阴影。无边框。慷慨内边距（`p-6` 或 `p-8`）。圆角 `rounded-lg`。
+-   **交互**：`group cursor-pointer transition-all duration-200 hover:scale-[1.02]`（含蓄缩放）。彩色背景加 `hover:bg-[color]-100` 以强化。卡片内图标可 `group-hover:scale-110`。
 
-## Inputs
--   **Normal**: Gray 100 background (`bg-gray-100`). No border. Text Gray 900. `rounded-md`.
--   **Focus**: White background. `border-2` solid Primary. No focus ring glow, just the hard border.
+## 输入框
+-   **正常**：Gray 100 背景（`bg-gray-100`）。无边框。文字 Gray 900。`rounded-md`。
+-   **聚焦**：白色背景。`border-2` solid Primary。无聚焦环辉光，仅硬边框。
 
-## Section Stylings
--   **Alternating Backgrounds**: Use White vs. Gray 100 (`#F3F4F6`) vs. Bold accent colors (Primary Blue, Emerald, Amber) to distinguish page sections. Sharp color transitions between sections.
--   **Dividers**: No thin line dividers between sections. Use whitespace or color blocks. Exception: FAQ uses thick `border-2` between items for structure.
--   **Background Decoration**: Use `absolute` positioned geometric shapes with low opacity or subtle gradients for visual interest. Examples: large circles (`rounded-full`), rotated squares, gradient overlays (`from-[color] to-transparent`).
+## 区块样式
+-   **交替背景**：用白 vs. Gray 100（`#F3F4F6`）vs. 大胆点缀色（Primary Blue、Emerald、Amber）区分页面区块。区块间锐利色彩过渡。
+-   **分隔符**：区块间无细线分隔符。用留白或色块。例外：FAQ 用粗 `border-2` 于项间作结构。
+-   **背景装饰**：用 `absolute` 定位的低不透明度几何形状或含蓄渐变增视觉趣味。示例：大圆（`rounded-full`）、旋转方块、渐变叠加（`from-[color] to-transparent`）。
 
-# Iconography
--   **Library**: `lucide-react`.
--   **Style**: Standard to bold stroke (2px to 2.5px for emphasis).
--   **Treatment**: Often placed inside a solid colored circle (white circle with colored icon like `bg-white text-blue-600`). Circle size `h-14 w-14` or `h-16 w-16`.
--   **Animation**: `transition-transform duration-200 group-hover:scale-110` for icons within cards. Simple color intensity shifts on hover.
+# 图标
+-   **库**：`lucide-react`。
+-   **样式**：标准至粗描边（2px 至 2.5px 以强调）。
+-   **处理**：常置于实心彩色圆圈内（白圆配彩色图标如 `bg-white text-blue-600`）。圆圈尺寸 `h-14 w-14` 或 `h-16 w-16`。
+-   **动画**：`transition-transform duration-200 group-hover:scale-110` 用于卡片内图标。悬停时简单色彩强度偏移。
 
-# Layout & Spacing
--   **Container**: `max-w-7xl`.
--   **Grid**: Rigid. 12-column base. Elements align perfectly.
--   **Spacing**: Comfortable but structured. Multiples of 4 (Tailwind default).
--   **Density**: Medium. Not too airy, not too dense. "Functional".
+# 布局与间距
+-   **容器**：`max-w-7xl`。
+-   **网格**：刚性。12 列基础。元素完美对齐。
+-   **间距**：舒适但结构化。4 的倍数（Tailwind 默认）。
+-   **密度**：中等。不过于通透，不过于密集。"功能性"。
 
-# Motion
--   **Vibe**: "Digital", "Snappy", "Direct".
--   **Transitions**: `transition-all duration-200` for most interactions. `duration-300` for larger transformations.
--   **Hover**: Immediate visual feedback through:
-     - Scale transformations (`hover:scale-105` for buttons, `hover:scale-[1.02]` for cards)
-     - Color shifts (darkening or lightening)
-     - Color fills (outline buttons filling with color)
-     - Icon scaling within cards (`group-hover:scale-110`)
+# 运动
+-   **气质**："数字"、"利落"、"直接"。
+-   **过渡**：`transition-all duration-200` 用于大多数交互。`duration-300` 用于更大变换。
+-   **悬停**：即时视觉反馈通过：
+     - 缩放变换（按钮 `hover:scale-105`，卡片 `hover:scale-[1.02]`）
+     - 色彩偏移（加深或变浅）
+     - 色彩填充（描边按钮填充色彩）
+     - 卡片内图标缩放（`group-hover:scale-110`）
 
-# Accessibility
--   **Focus Rings**: Since we have no shadows, focus states must use high-contrast `ring-2 ring-offset-2 ring-blue-500` or similar solid outlines.
--   **Contrast**: Text on colored backgrounds must pass WCAG AA (e.g., White text on Blue 500 is okay, but check carefully with lighter accents).
+# 可访问性
+-   **聚焦环**：由于无阴影，聚焦状态必须用高对比 `ring-2 ring-offset-2 ring-blue-500` 或类似实心轮廓。
+-   **对比**：彩色背景上文字必须达 WCAG AA（如白字于 Blue 500 可，但浅点缀需仔细检查）。
 
-# Non-Genericness / "The Bold Factor"
--   **Avoid**: "Material Design" floating cards, generic Bootstrap layouts, subtle pastels everywhere.
--   **Emphasize**: The "Poster" look. Treat every section like a flat graphic poster with bold color blocking.
--   **Bold Choices Implemented**:
-     - **Large decorative geometric shapes** in hero background (circles, rotated squares with low opacity)
-     - **Vibrant full-section color blocks** (Blue hero, Emerald benefits, Amber CTA, Dark gray How It Works & Footer)
-     - **Dramatic scale effects** on pricing cards (popular tier starts larger and scales more)
-     - **Multi-color stat numbers** (each stat uses a different accent color)
-     - **Abstract geometric compositions** (overlapping shapes in hero illustration and benefits section)
-     - **Pronounced hover states** (scale, color intensification, fills)
-     - **Bold typography** with tight leading and strong weight contrast
-     - **Thick borders** (border-4 on outline buttons, border-2 on FAQ items)
--   **Visual Interest Without Depth**: Achieved through color contrast, geometric layering, and scale—never shadows or gradients.
+# 非通用性 / "大胆要素"
+-   **避免**："Material Design" 浮动卡片、通用 Bootstrap 布局、处处含蓄粉彩。
+-   **强调**："海报"外观。将每个区块当作配大胆色块的扁平图形海报。
+-   **已实现的标志性选择**：
+     - Hero 背景中**大型装饰性几何形状**（低不透明度圆、旋转方块）
+     - **鲜艳的全区块色块**（蓝 Hero、翡翠收益、琥珀 CTA、深灰 How It Works 与页脚）
+     - 定价卡片上**戏剧性缩放效果**（热门档位起始更大且缩放更多）
+     - **多色数据数字**（每个数据用不同点缀色）
+     - **抽象几何构图**（Hero 插图与收益区块中重叠形状）
+     - **突出悬停状态**（缩放、色彩强化、填充）
+     - **大胆字体**配紧凑行高与强字重对比
+     - **粗边框**（描边按钮 border-4，FAQ 项 border-2）
+-   **无深度的视觉趣味**：通过色彩对比、几何分层与尺度实现——绝不用阴影或渐变。

@@ -10,133 +10,133 @@
 | 显示名称 | Terminal CLI |
 | 模式 | 🌙 深色模式 (Dark) |
 | 字体类型 | mono |
-| 描述 | A raw, functional, and retro-futuristic command-line interface aesthetic. High contrast, monospaced precision, and blinking cursors. |
+| 描述 | 原始、功能性且复古未来主义的命令行界面美学。高对比、等宽精准与闪烁光标。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-A massive ASCII art logo or headline. The subheadline types itself out. CTAs are rendered as command prompts.
+巨型 ASCII 艺术 logo 或标题。副标题逐字打出。CTA 渲染为命令提示符。
 
 ### Stats
 
-Displayed as a system status report or table output (e.g., 'UPTIME: 99.9%', 'USERS: 10k').
+显示为系统状态报告或表格输出（如 'UPTIME: 99.9%'、'USERS: 10k'）。
 
 ### Features
 
-A grid of terminal windows or 'man page' style entries. Each feature has a command-line flag (e.g., '--speed', '--security').
+终端窗口或 'man page' 风格条目网格。每个特性有命令行标志（如 '--speed'、'--security'）。
 
 ### How It Works
 
-A step-by-step shell script execution log. 'Step 1: Initializing...', 'Step 2: Processing...'.
+逐步 shell 脚本执行日志。'Step 1: Initializing...'、'Step 2: Processing...'。
 
 ### Benefits
 
-A split-screen layout like a code editor (vim/vscode) showing 'Before' vs 'After' code blocks.
+如代码编辑器（vim/vscode）的分屏布局显示 'Before' vs 'After' 代码块。
 
 ### Pricing
 
-An ASCII table layout. Selected plan highlights with an inverted color block.
+ASCII 表格布局。所选方案以反相色块高亮。
 
 ### Testimonials
 
-Git commit logs or IRC chat logs. 'User@host says: ...'
+Git commit 日志或 IRC 聊天日志。'User@host says: ...'。
 
 ### Faq
 
-A 'man' page manual layout or a help command output (e.g., 'help --topic billing').
+'man' page 手册布局或帮助命令输出（如 'help --topic billing'）。
 
 ### Blog
 
-A file directory listing (ls -l). Each post is a file with permissions, date, and author.
+文件目录列表（ls -l）。每篇文章为带权限、日期与作者的文件。
 
 ### Footer
 
-A simple system footer showing shell version, current path, and copyright as a comment.
+简单系统页脚显示 shell 版本、当前路径与版权（作注释）。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Design Philosophy
-The **Terminal CLI** aesthetic pays homage to the raw power of the command line. It strips away the "user interface" layers to reveal the "system" underneath. It is **brutally functional, high-contrast, and authentically retro**. It feels like hacking into a mainframe or configuring a server.
+# 设计哲学
+**Terminal CLI** 美学致敬命令行的原始力量。它剥离"用户界面"层以揭示下方的"系统"。它**残酷功能性、高对比且真实复古**。感觉如黑入大型机或配置服务器。
 
-The vibe is **Cyber-Industrial, Hacker, and System-Level**. It is not "Matrix" rain (too cliché); it is a clean, usable ZSH/BASH shell environment.
+气质是**赛博工业、黑客、系统级**。它不是"Matrix"雨（太陈词滥调）；它是干净、可用的 ZSH/BASH shell 环境。
 
-**Key visual signatures:**
-*   **Monospace Supremacy**: Every single character, from the largest headline to the smallest footer link, is monospaced.
-*   **The Cursor**: The blinking block or underscore cursor `_` is the heartbeat of the interface.
-*   **Shell Metaphors**: Use prompt characters (`>`, `$`, `~`), command flags (`--help`), and status codes (`[OK]`, `[ERR]`).
-*   **Scanlines (Subtle)**: A very faint CRT scanline effect to give it depth without ruining readability.
+**关键视觉签名**：
+*   **等宽至上**：从最大标题到最小页脚链接的每个字符都是等宽。
+*   **光标**：闪烁方块或下划线光标 `_` 是界面的心跳。
+*   **Shell 隐喻**：用提示符（`>`、`$`、`~`）、命令标志（`--help`）与状态码（`[OK]`、`[ERR]`）。
+*   **扫描线（含蓄）**：极淡 CRT 扫描线效果以增深度而不损可读性。
 
-# Design Token System
+# 设计 Token 系统
 
-## Colors (Dark Mode Only)
-The palette mimics a phosphor monitor. High contrast is non-negotiable.
+## 色彩（仅深色模式）
+调色板模仿磷光显示器。高对比不可妥协。
 
-*   **Background**: `#0a0a0a` (Deep black, but not pure OLED black to allow for scanlines)
-*   **Foreground**: `#33ff00` (Classic Terminal Green) or `#ffb000` (Amber) - *Let's go with Green for this implementation as the primary, with Amber as secondary.*
-    *   `primary`: `#33ff00` (Bright Neon Green)
-    *   `secondary`: `#ffb000` (Amber/Orange for warnings or accents)
-    *   `muted`: `#1f521f` (Dimmed green for borders/inactive text)
-    *   `accent`: `#33ff00` (Same as primary, used for cursors/active states)
-    *   `error`: `#ff3333` (Bright Red)
-    *   `border`: `#1f521f` (Dimmed green)
+*   **Background**：`#0a0a0a`（深黑，但非纯 OLED 黑以允许扫描线）
+*   **Foreground**：`#33ff00`（经典终端绿）或 `#ffb000`（琥珀）— *此实现以绿为主，琥珀为次。*
+    *   `primary`：`#33ff00`（亮霓虹绿）
+    *   `secondary`：`#ffb000`（琥珀/橙作警告或点缀）
+    *   `muted`：`#1f521f`（暗绿作边框/非激活文字）
+    *   `accent`：`#33ff00`（同 primary，用于光标/激活状态）
+    *   `error`：`#ff3333`（亮红）
+    *   `border`：`#1f521f`（暗绿）
 
-## Typography
-*   **Font**: `JetBrains Mono`, `Fira Code`, or `VT323`.
-*   **Style**: **ALL CAPS** for headers. Lowercase for "code" or body text is acceptable, but consistency is key.
-*   **Scale**: Strict modular scale. Headers shouldn't be "smooth"; they should snap to grid sizes.
+## 字体
+*   **字体**：`JetBrains Mono`、`Fira Code` 或 `VT323`。
+*   **样式**：标题**全大写**。"代码"或正文小写可接受，但一致是关键。
+*   **尺度**：严格模块化尺度。标题不应"平滑"；它们应 snap 至网格尺寸。
 
-## Radius & Borders
-*   **Radius**: `0px`. Absolutely no rounded corners.
-*   **Borders**: `1px` solid or dashed. Borders are crucial for defining "windows" or "panes".
+## 圆角与边框
+*   **圆角**：`0px`。绝对无圆角。
+*   **边框**：`1px` solid 或 dashed。边框对定义"窗口"或"窗格"至关重要。
 
-## Shadows & Effects
-*   **Shadows**: No drop shadows.
-*   **Text Shadow**: A subtle "glow" for the primary text to mimic phosphor persistence.
+## 阴影与效果
+*   **阴影**：无投影。
+*   **文字阴影**：主文字含蓄"辉光"以模仿磷光余晖。
     *   `text-shadow: 0 0 5px rgba(51, 255, 0, 0.5)`
-*   **CRT Overlay**: A pointer-events-none overlay with scanlines.
+*   **CRT 叠加**：pointer-events-none 叠加配扫描线。
 
-# Component Stylings
+# 组件样式
 
-## Buttons
-*   **Structure**: Text enclosed in brackets `[ INITIATE ]` or a solid block of color with inverted text.
-*   **Hover**: The background fills with the primary color, text becomes black (inverted video).
-*   **Active**: A "pressed" state might shift the text 1px down or blink rapidly.
+## 按钮
+*   **结构**：括号内文字 `[ INITIATE ]` 或实心色块配反相文字。
+*   **悬停**：背景填充主色，文字变黑（反相视频）。
+*   **激活**："按下"状态可能使文字下移 1px 或快速闪烁。
 
-## Cards (Windows/Panes)
-*   **Structure**: A black box with a 1px green border.
-*   **Header**: A "title bar" at the top: `+--- SYSTEM STATUS ---+` or a solid inverted bar.
-*   **Content**: Padded monospaced text inside.
+## 卡片（窗口/窗格）
+*   **结构**：黑盒配 1px 绿边框。
+*   **头部**：顶部"标题栏"：`+--- SYSTEM STATUS ---+` 或实心反相条。
+*   **内容**：内填等宽文字。
 
-## Inputs
-*   **Style**: No box. Just a prompt `user@acme:~$` followed by the input field.
-*   **Cursor**: A blinking block `█` at the caret position.
-*   **Focus**: No ring, just the blinking cursor.
+## 输入框
+*   **样式**：无盒。仅提示符 `user@acme:~$` 后接输入字段。
+*   **光标**：插入符位置闪烁方块 `█`。
+*   **聚焦**：无环，仅闪烁光标。
 
-# Layout Strategy
-The layout should feel like a grid of terminal windows (`tmux` or `vim` splits).
-*   **Strict Grid**: Content is aligned to a rigid character grid.
-*   **Separators**: Use ASCII characters for dividers: `----------------` or `================` or `//`.
+# 布局策略
+布局应感觉如终端窗口网格（`tmux` 或 `vim` 分屏）。
+*   **严格网格**：内容对齐至刚性字符网格。
+*   **分隔符**：用 ASCII 字符作分隔符：`----------------` 或 `================` 或 `//`。
 
-# Non-Genericness (The Bold Factor)
-*   **ASCII Art**: Use ASCII art for the logo or key graphic elements.
-*   **Typewriter Effect**: Headlines should appear character-by-character.
-*   **Raw Data Visualization**: Stats shouldn't be pie charts; they should be progress bars `[||||||||||.....]`.
+# 非通用性（大胆要素）
+*   **ASCII 艺术**：用 ASCII 艺术作 logo 或关键图形元素。
+*   **打字机效果**：标题应逐字出现。
+*   **原始数据可视化**：数据不应是饼图；应是进度条 `[||||||||||.....]`。
 
-# Effects & Animation
-*   **Blink**: Utilities for `animate-blink` (standard cursor blinking).
-*   **Glitch**: Occasional subtle text offsets on hover.
-*   **Typing**: `typing-demo` animation for the hero text.
+# 效果与动画
+*   **闪烁**：`animate-blink` 工具（标准光标闪烁）。
+*   **故障**：悬停时偶尔含蓄文字偏移。
+*   **打字**：Hero 文字的 `typing-demo` 动画。
 
-# Iconography
-*   **Lucide Icons**: Use them, but style them to look pixelated or low-fi if possible, or strict `stroke-width-2`.
-*   **Color**: Icons are always the primary terminal color.
+# 图标
+*   **Lucide 图标**：使用它们，但尽可能样式化为像素化或低保真，或严格 `stroke-width-2`。
+*   **颜色**：图标始终为主终端色。
 
-# Responsive Strategy
-*   **Mobile**: The "windows" stack vertically. The text size remains legible (monospaced fonts can be wide, so watch for overflow). Wrap long lines with a `\` indicator.
+# 响应式策略
+*   **移动**："窗口"垂直堆叠。文字尺寸保持可读（等宽字体可能宽，注意溢出）。用 `\` 指示符换行长行。
 
-# Accessibility
-*   **Contrast**: The bright green on black exceeds AA requirements.
-*   **Focus**: High visibility is inherent to this style (inverted colors).
+# 可访问性
+*   **对比**：亮绿于黑超过 AA 要求。
+*   **聚焦**：高可见度是此风格固有的（反相色）。

@@ -10,584 +10,584 @@
 | 显示名称 | Kinetic |
 | 模式 | 🌙 深色模式 (Dark) |
 | 字体类型 | sans-serif |
-| 描述 | Motion-first design where typography is the primary visual medium. Features infinite marquees, viewport-scaled text, scroll-triggered animations, and aggressive uppercase styling. High contrast, brutalist energy with rhythmic movement. |
+| 描述 | 动效优先的设计，字体是主要视觉媒介。无限跑马灯、视口缩放文字、滚动触发动画与激进的大写样式。高对比、粗野主义能量，富有节奏感的运动。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Full viewport height (90vh) with massive text using clamp() for responsive scaling (clamp(3rem,12vw,14rem)). Split headlines across lines with contrasting accent color. Add scroll-triggered scale (1.0→1.2) and opacity (1.0→0) transforms via Framer Motion. Center content with max-w-[95vw].
+全视口高度（90vh），巨型文字用 clamp() 响应式缩放（clamp(3rem,12vw,14rem)）。跨行分割标题配对比点缀色。通过 Framer Motion 添加滚动触发的缩放（1.0→1.2）与透明度（1.0→0）变换。居中内容配 max-w-[95vw]。
 
 ### Stats
 
-Infinite horizontal marquee on full-width accent background (py-8). Display huge numbers (6xl-8xl) paired with uppercase labels and decorative symbols (✦). Use react-fast-marquee with speed 80, no gradients—raw, continuous motion with border-y dividers.
+全宽点缀背景上的无限横向跑马灯（py-8）。巨型数字（6xl-8xl）配大写标签与装饰符号（✦）。用 react-fast-marquee，速度 80，无渐变——原始连续运动配 border-y 分隔符。
 
 ### Product Detail
 
-Two-column grid on desktop with massive heading (5xl-8xl uppercase). Each column has left border-l-4 with massive background numbers (6rem-8rem) positioned absolutely. Paragraphs in muted color with generous line-height. Numbers change color on hover.
+桌面端双列网格配巨型标题（5xl-8xl 大写）。每列有 border-l-4，配绝对定位的巨型背景数字（6rem-8rem）。段落用柔和色配慷慨行高。数字悬停变色。
 
 ### Features
 
-Sticky scroll cards (top-24/top-32) that stack vertically as user scrolls. Display massive index numbers (6xl-8xl) in muted tones. Feature titles in accent color at 3xl-6xl uppercase. Sharp 2px borders that highlight on hover. Cards use p-8/p-12 with responsive flex layout.
+粘性滚动卡片（top-24/top-32），随用户滚动垂直堆叠。显示巨型索引数字（6xl-8xl），柔和色调。特性标题点缀色，3xl-6xl 大写。锐利 2px 边框悬停时高亮。卡片用 p-8/p-12 配响应式 flex 布局。
 
 ### Blog
 
-2-3 column grid (md:grid-cols-2 lg:grid-cols-3) with gap-px hairline dividers. Each card shows massive background number (3rem-4rem), uppercase title with translate-x-4 hover effect. Author and date in footer with border-top. Hover transitions to muted background.
+2-3 列网格（md:grid-cols-2 lg:grid-cols-3），配 gap-px 发丝分隔符。每张卡片显示巨型背景数字（3rem-4rem），大写标题配 translate-x-4 悬停效果。页脚含作者与日期配 border-top。悬停过渡至柔和背景。
 
 ### How It Works
 
-Three-column grid with gap-px hairline dividers creating connected cards. Massive step numbers (8rem-12rem) at top, content at bottom. Full card color inversion on hover (background to accent, text to black). Min-height 500-600px for dramatic scale.
+三列网格配 gap-px 发丝分隔符，创造连接卡片。顶部巨型步骤编号（8rem-12rem），底部内容。悬停时整卡色彩反转（背景变点缀，文字变黑）。最小高度 500-600px 以增戏剧尺度。
 
 ### Benefits
 
-Full-width list with border-b dividers. Massive titles (4xl-7xl) that translate horizontally on hover (translate-x-4/translate-x-8). Descriptions fade in on hover (opacity-0→100) on desktop, always visible on mobile. Text-right alignment for descriptions on desktop.
+全宽列表配 border-b 分隔符。巨型标题（4xl-7xl）悬停时水平位移（translate-x-4/translate-x-8）。描述桌面端悬停淡入（opacity-0→100），移动端始终可见。桌面端描述右对齐。
 
 ### Pricing
 
-2-3 column grid (md:grid-cols-2 lg:grid-cols-3). Border-based cards with 2px borders. Prices at 6xl-7xl. Full card hover transitions (border and background to accent, text to black). Features use colored square bullets (h-2 w-2). Highlighted tier has muted background.
+2-3 列网格（md:grid-cols-2 lg:grid-cols-3）。边框卡片配 2px 边框。价格 6xl-7xl。悬停时整卡过渡（边框与背景变点缀，文字变黑）。特性用彩色方块项目符号（h-2 w-2）。高亮档位有柔和背景。
 
 ### Testimonials
 
-Horizontal scrolling marquee (slower speed 40). Large quotes (4xl bold uppercase) with accent border-left (4px). Author details with square placeholders. Wide spacing (mx-12) between cards for breathing room. No gradients on edges.
+横向滚动跑马灯（较慢速度 40）。大号引文（4xl bold 大写）配点缀 border-left（4px）。作者详情配方块占位符。卡片间宽间距（mx-12）以增呼吸空间。边缘无渐变。
 
 ### Faq
 
-Accordion with large questions (xl-4xl uppercase). Touch-friendly expand/collapse icons in 40x40px containers. Answers in muted color (lg-2xl) with generous line-height. Framer Motion height animations (duration 300ms, easeInOut).
+手风琴配大号问题（xl-4xl 大写）。40x40px 容器中触控友好的展开/收起图标。回答用柔和色（lg-2xl）配慷慨行高。Framer Motion 高度动画（duration 300ms，easeInOut）。
 
 ### Footer
 
-Full-height section (min-h-screen) on accent background with black text. Massive headline using clamp(2.5rem,8vw,10rem). Huge input with border-bottom styling. 2-4 column footer nav grid. Bold 2px border-t divider for copyright section.
+点缀背景上的全高区块（min-h-screen）配黑字。巨型标题用 clamp(2.5rem,8vw,10rem)。大号输入框配 border-bottom 样式。2-4 列页脚导航网格。版权区块用粗 2px border-t 分隔符。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Design Style: Kinetic Typography
-
-## Design Philosophy
-
-**Core Principle**: Typography is not decoration—it is the entire visual structure. Text becomes image, headline becomes hero, motion becomes rhythm. This style rejects static layouts completely. Every element should feel alive through constant motion (marquees), reactive motion (hover states), or scroll-triggered motion (parallax, scale transforms). The page pulses with kinetic energy—nothing is ever truly still.
-
-**Aesthetic Vibe**: High-energy brutalism meets kinetic poster design. Confidence through scale. Urgency through motion. Clarity through contrast. The design screams rather than whispers—everything is uppercase, oversized, and in-your-face. It's a poster come to life, with the raw energy of street art and the precision of Swiss typography, but animated and interactive. Think music festival posters, protest graphics, and underground zines translated to the web.
-
-**Visual DNA**: This style is instantly recognizable by its relentless motion and aggressive scale. Marquees scroll endlessly. Numbers tower at 8-12rem. Headlines use viewport units (clamp-based for control). Every hover state is dramatic—cards flood with color, text translates across the screen, borders glow with accent hues. The aesthetic is deliberately excessive: if traditional web design uses 2x scale difference between headline and body, this uses 10x. Where others add subtle shadows, this style stays brutally flat with sharp borders and hard edges.
-
-**Signature Elements**:
-- Infinite marquees that never stop moving (react-fast-marquee, no gradients)
-- Viewport-responsive typography using clamp() for fluid scaling (clamp(3rem,12vw,14rem))
-- Aggressive uppercase treatment on ALL display text (headings, buttons, labels)
-- Massive numerical elements (6rem-12rem) used as decorative graphic shapes
-- Hard color inversions on hover (background to accent yellow, text to black, instant transitions)
-- Scroll-triggered scale and opacity transforms (Framer Motion useScroll hook)
-- Sharp 2px borders with 0px border-radius (brutalist geometry)
-- Hairline gap-px grid dividers creating connected card systems
-
-## Design Token System (The DNA)
-
-### Color Architecture
-
-**Foundation Colors**:
-- `background`: `#09090B` (Rich black, not pure black—softer on eyes)
-- `foreground`: `#FAFAFA` (Off-white, not pure white—less harsh)
-- `muted`: `#27272A` (Dark gray for secondary surfaces)
-- `muted-foreground`: `#A1A1AA` (Zinc 400 for body text and descriptions)
-
-**Accent Strategy**:
-- `accent`: `#DFE104` (Acid yellow/lime—high energy, highly visible)
-- `accent-foreground`: `#000000` (Pure black for contrast on accent)
-- `border`: `#3F3F46` (Zinc 700—subtle structural lines)
-
-**Color Usage Patterns**:
-- Use acid yellow sparingly but boldly (hero text highlights, hover states, focus rings, marquee backgrounds)
-- Muted foreground (Zinc 400) for all secondary text—never use plain gray
-- Border color for ALL structural lines—never use foreground color for borders
-- Background numbers and inactive elements in `muted` (#27272A) to create depth layers
-- Selection highlight: Yellow background with black text
-
-**Contrast Requirements**:
-- Primary text to background: Minimum 15:1 ratio (off-white on rich black)
-- Accent to background: Must be vibrant and eye-catching
-- Never use mid-range grays—stay at the contrast extremes
-
-### Typography System
-
-**Font Selection**:
-- Primary: "Space Grotesk" (preferred—strong geometric shapes, excellent at large sizes)
-- Fallback: "Inter" (if Space Grotesk unavailable)
-- Both should support variable font weights if possible (300-700 range)
-
-**Scale Hierarchy** (using Tailwind classes with responsive scaling):
-- **Hero/Display**: `text-[clamp(3rem,12vw,14rem)]` (fluid viewport-based scaling with safe minimums)
-- **Section Headings**: `text-5xl md:text-7xl lg:text-8xl` or `text-[clamp(2.5rem,8vw,6rem)]` for ultra-massive headings
-- **Card Titles**: `text-2xl md:text-3xl lg:text-6xl` (responsive scaling from mobile to desktop)
-- **Body/Descriptions**: `text-lg md:text-xl lg:text-2xl` (18-24px—larger than typical web, responsive)
-- **Small Labels**: `text-xs md:text-sm lg:text-lg` (12-18px, responsive)
-- **Massive Numbers** (decorative): `text-[6rem] md:text-[8rem]` to `text-[8rem] md:text-[12rem]` (responsive massive scale)
-- **Navigation/Micro**: `text-sm md:text-base` (14-16px)
-
-**Type Treatment Rules**:
-- ALL display text (headings, buttons, labels) must be uppercase
-- Body text and descriptions stay in normal case for readability
-- Tracking: Use `tracking-tighter` on large display text, `tracking-tight` on body, `tracking-wide` or `tracking-widest` on small labels
-- Leading: `leading-[0.8]` or `leading-none` for display headlines to create tight, graphic lockups
-- Leading: `leading-tight` for large body text (xl-2xl)
-- Font weight: Bold (700) for all headings and buttons, Medium (500) for body, Regular (400) for secondary text
-
-**Font Size Relationships**:
-- Headlines are 3-5x larger than body text (not 1.5-2x like traditional web)
-- Numbers as graphics are 4-8x larger than accompanying labels
-- Decorative background text is 2-3x larger than foreground text in same context
-
-### Spacing & Layout
-
-**Base Unit**: 4px (Tailwind's default spacing scale)
-
-**Vertical Rhythm**:
-- Section padding: `py-32` (128px top/bottom) for major sections
-- Card/Container padding: `p-8` to `p-12` (32-48px)
-- Element gaps within containers: `gap-8` (32px)
-- Tight element groups: `gap-4` (16px)
-- Between large display elements: `mb-4` to `mb-8` (16-32px)
-
-**Horizontal Containment**:
-- Maximum width: `max-w-[95vw]` or `max-w-[90vw]`—push to the edges
-- Never use standard `max-w-7xl` or similar—too conservative for this style
-- Specific content widths: `max-w-2xl` (672px) for long-form text blocks
-- Full bleed for marquees and dramatic sections
-
-**Padding Relationships**:
-- Cards: Equal padding all sides (p-8 or p-12) OR asymmetric with more top/bottom than left/right
-- Buttons: Horizontal padding 2-3x vertical (e.g., px-8 py-4)
-- Inputs: Minimal horizontal padding (px-0 or px-2), more vertical for touch targets
-
-**Grid Patterns**:
-- Three-column grids for step processes (md:grid-cols-3)
-- Single column on mobile, maintain drama with large text
-- Use `gap-px` with colored backgrounds to create hairline grid dividers
-- Pricing typically uses three equal columns (lg:grid-cols-3)
-
-### Shape Language
-
-**Border Radius**:
-- Default: `0px` (completely sharp corners)
-- Exception: Rare use of `rounded-sm` (2px) for subtle softening on small elements
-- Never use rounded-lg or higher—destroys the brutalist aesthetic
-
-**Border Styling**:
-- Width: `border-2` (2px) for structural emphasis, `border` (1px) for subtle dividers
-- Style: Always solid, never dashed or dotted
-- Color: Use `border-[#3F3F46]` consistently
-- Border-only elements: Use `border-b-2` for input underlines, `border-l-4` for quote accents
-
-**Shadows & Depth**:
-- **NO drop shadows**—this style is completely flat
-- Depth created through color layering (muted background elements behind foreground)
-- Use massive background numbers in muted tones to create visual depth
-- Overlapping elements instead of shadow for hierarchy
-
-**Visual Dividers**:
-- Prefer borders over shadows
-- Use full-width border-top/border-bottom at section breaks
-- Grid gap patterns: `gap-px` with colored container creates hairline dividers
-
-### Texture & Overlay
-
-**Noise Texture**:
-- SVG-based feTurbulence filter (baseFrequency 0.8, numOctaves 4)
-- Fixed position, full viewport coverage
-- Opacity: `opacity-[0.03]` (barely visible)
-- Blend mode: `mix-blend-overlay`
-- Purpose: Adds subtle print/poster texture without affecting readability
-
-**Background Treatments**:
-- Solid colors only—no gradients
-- Accent color used for full-section backgrounds (stats marquee, footer)
-- Muted color for card hover backgrounds before accent flip
-
-**Blend Modes**:
-- Use `mix-blend-difference` or `mix-blend-exclusion` sparingly for text over images
-- Apply to custom cursors or special text treatments
-- Not part of the core style in current implementation but suggested for advanced implementations
-
-## Component Styling Principles
-
-### Buttons
-
-**Base Styling**:
-- Always uppercase text with tight tracking (`uppercase tracking-tighter`)
-- Font weight: Bold (700)
-- Sharp corners (rounded-none)
-- Height: Default 56px (h-14), Small 40px (h-10), Large 80px (h-20)
-- Horizontal padding 2x height: Default px-8, Small px-4, Large px-12
-
-**Variant Patterns**:
-
-**Primary (Accent)**:
-- Background: Acid yellow (#DFE104)
-- Text: Black
-- Hover: Scale up 1.05 (`hover:scale-105`)
-- Active: Scale down 0.95 (`active:scale-95`)
-- Transition: `transition-all` for smooth scale
-
-**Outline**:
-- Border: 2px solid zinc-700 (#3F3F46)
-- Background: Transparent
-- Text: Off-white
-- Hover: Full fill with off-white background, text inverts to black
-- Hard transition (instant color flip)
-
-**Ghost**:
-- No border, no background
-- Text: Off-white
-- Hover: Text color changes to accent yellow
-- Minimal, subtle variant
-
-**Advanced Interactions** (not implemented but suggested):
-- Marquee effect: Text inside button scrolls horizontally on hover
-- Character-by-character color fill on hover (left to right)
-
-### Cards & Containers
-
-**Base Structure**:
-- Border: 2px solid zinc-700 (`border-2 border-[#3F3F46]`)
-- Background: Rich black (#09090B)
-- Padding: Large and even (p-8 or p-12)
-- No border-radius (sharp corners)
-
-**Hover Behavior**:
-- Background floods with accent color (#DFE104)
-- Border color changes to accent
-- All text inverts to black
-- Transition: `duration-300` for smooth but noticeable shift
-- Use group classes to coordinate text color changes
-
-**Content Hierarchy Within Cards**:
-- Large title at top (text-3xl) in foreground color → black on hover
-- Description text in muted-foreground → black with reduced opacity on hover
-- Decorative numbers or icons in muted tone → black on hover
-
-**Sticky Card Pattern** (Features Section):
-- Each card uses `sticky top-32` positioning
-- Cards stack and overlap as user scrolls
-- Later cards appear to slide over earlier ones
-- Maintains visual rhythm through repetition
-
-### Inputs & Forms
-
-**Base Styling**:
-- Height: Extra tall (h-24 / 96px) for dramatic scale
-- Border: Bottom border only (`border-b-2`)
-- Border color: Zinc-700 default, accent on focus
-- Background: Transparent
-- Text: Extra large (text-4xl), bold, uppercase, tight tracking
-- Padding: Minimal horizontal (px-0), standard vertical for alignment
-
-**Focus States**:
-- Border-bottom changes to accent yellow
-- No outline ring—border serves as focus indicator
-- Instant color change (no transition needed)
-
-**Placeholder Styling**:
-- Muted color (#27272A)—very subtle
-- Same size and style as input text
-- Uppercase to match input
-- Low contrast ensures actual input stands out
-
-**Form Layout**:
-- Full width inputs (w-full)
-- Generous vertical spacing between fields (space-y-8)
-- Labels (if used) should be small, uppercase, tracked-wide, above input
-
-### Interactive States
-
-**Hover Transformations**:
-- Scale: Buttons scale to 1.05, cards stay at scale 1.0
-- Translation: Benefit titles translate horizontally (`translate-x-8`)
-- Color Floods: Cards completely invert color scheme
-- Opacity Reveals: Hidden descriptions fade in (opacity-0 to opacity-100)
-- All transitions use `duration-300` for consistent feel
-
-**Focus States**:
-- Inputs: Border color change to accent
-- Buttons: Same as hover (scale) plus visible focus ring in accent color
-- Links: Underline in accent color or text color change
-
-**Active States**:
-- Buttons: Scale down to 0.95 (`active:scale-95`) for tactile feedback
-- Links: Slight opacity reduction
-
-**Disabled States**:
-- Opacity: 50% (`disabled:opacity-50`)
-- Pointer events: None (`disabled:pointer-events-none`)
-- Maintain all other styling—just reduce visibility
-
-## Animation & Motion System
-
-### Marquee Motion
-
-**Implementation**: Use `react-fast-marquee` library for smooth, GPU-accelerated marquees
-
-**Stats Marquee** (High Energy):
-- Speed: 80 (fast)
-- Direction: Left to right
-- Gradient: false (no edge fade)
-- AutoFill: true (repeats content infinitely)
-- Content: Large numbers paired with labels and decorative symbols
-
-**Testimonials Marquee** (Slower Rhythm):
-- Speed: 40 (medium)
-- Direction: Left to right
-- Gradient: false
-- Content: Wide cards with quotes, generous spacing between items
-
-**Timing Rules**:
-- Never use gradients—raw edge is part of aesthetic
-- Fast marquees (speed 60-100) for stats and high-energy content
-- Slower marquees (speed 30-50) for reading content like testimonials
-- All marquees use linear easing (no acceleration/deceleration)
-
-### Scroll-Triggered Animations
-
-**Hero Parallax** (Framer Motion):
-- Track scroll progress: `useScroll()` hook
-- Scale transform: 1.0 → 1.2 as user scrolls (0-20% of page)
-- Opacity: 1.0 → 0 as user scrolls out
-- Creates dramatic zoom-out effect as user enters content
-
-**Sticky Scroll Cards**:
-- Position: `sticky top-32`
-- No transform animations—physical stacking creates effect
-- Cards remain in place as subsequent cards slide over them
-
-**Entrance Animations** (Suggested, not in current implementation):
-- Elements scale from 0.8 to 1.0 as they enter viewport
-- Text can "unmask" by animating from clipped to full visibility
-- Use intersection observer or Framer Motion `whileInView`
-
-### Micro-Interactions
-
-**Button Interactions**:
-- Hover: Scale 1.05 with all easing
-- Active: Scale 0.95
-- Transition timing: 200-300ms
-- Easing: Default ease-in-out
-
-**Card Hover**:
-- Color transition: 300ms
-- Hard flip, not gradual (suits the brutalist aesthetic)
-- All child text coordinates color change via group classes
-
-**Accordion Expansion** (FAQ):
-- Height: Animate from 0 to auto
-- Opacity: Fade in content (0 to 1)
-- Timing: Smooth with slight bounce (framer motion spring)
-- Initial: false (doesn't animate on mount)
-
-**Text Reveals**:
-- Benefit descriptions: Opacity 0 to 1, duration 300ms
-- Benefit titles: Horizontal translate + duration 300ms
-- Both triggered simultaneously on hover
-
-### Easing & Timing
-
-**Default Durations**:
-- Micro-interactions (hovers, focus): 200-300ms
-- Section animations: 500-800ms
-- Marquees: Continuous linear (no easing)
-
-**Easing Functions**:
-- Buttons and scale effects: `ease-in-out` (default)
-- Marquees: `linear` (constant speed)
-- Accordion: Spring physics from Framer Motion
-- Parallax: Linear mapping from scroll position
-
-**Performance Notes**:
-- Prefer transforms (scale, translate) over position changes
-- Use opacity instead of visibility for reveals
-- Marquees should use transform: translateX for GPU acceleration
-- Keep animations at 60fps—avoid complex calculations in scroll handlers
-
-## Layout Principles
-
-### Grid Philosophy
-
-**Break the Grid**: This style embraces asymmetry and overlap. Elements can:
-- Extend beyond their containers
-- Overlap previous elements (sticky scroll)
-- Use uneven column widths
-- Break alignment for dramatic effect
-
-**Standard Patterns**:
-- Single column mobile (always)
-- Two column for benefits/features on tablet (md)
-- Three column for pricing/steps on desktop (lg)
-- Four column for footer navigation
-
-**Grid Gaps**:
-- Standard: `gap-8` (32px) between major elements
-- Hairline: `gap-px` with colored container background for connected cards
-- Wide: `gap-12` to `gap-24` for breathing room in dense sections
-
-### Section Flow
-
-**Vertical Rhythm**:
-- Major sections: `py-32` (128px) top and bottom
-- Subsections: `py-20` (80px)
-- Dense content areas: `py-12` (48px)
-
-**Section Dividers**:
-- Full-width border-top or border-bottom in zinc-700
-- Accent color background flips (black section → yellow section)
-- Contrast creates natural breaks without needing extra space
-
-**Content Width Strategy**:
-- Hero: Max-w-[95vw]—push to edges
-- Body content: Max-w-5xl or max-w-6xl
-- Long-form text: Max-w-2xl or max-w-xl for readability
-- Marquees: Full bleed (w-full, no max-width)
-
-### Responsive Approach
-
-**Mobile-First Strategy**:
-- **Maintain drama**: Keep large text using clamp() values for safe scaling (e.g., `clamp(3rem,12vw,14rem)`)
-- **Stack everything vertically**: Single column layouts with `flex-col` and `md:flex-row` patterns
-- **Reduce padding progressively**: `p-8 md:p-12`, `py-20 md:py-32`, `px-4 md:px-8`
-- **Marquees persist**: Essential to the style—keep them at all breakpoints
-- **Touch targets**: Minimum 44x44px (h-10 w-10 for icon containers, h-14 for buttons)
-- **Adapt hover effects**: Show descriptions always on mobile (opacity-100), hide on desktop (md:opacity-0) then reveal on hover
-- **Sticky positioning**: Adjust top values (`top-24 md:top-32`) to account for nav height
-- **Grid simplification**: 1 column → `md:grid-cols-2` → `lg:grid-cols-3`
-
-**Breakpoints** (Tailwind defaults):
-- **Mobile**: Base styles (320px-767px) - Single column, reduced text sizes, full-width elements
-- **Tablet (md)**: 768px+ - Two-column layouts, medium text scaling, increased padding
-- **Desktop (lg)**: 1024px+ - Three-column layouts, full dramatic scale, all hover effects active
-
-**Text Scaling Best Practices**:
-- **Use clamp()** for hero and massive headings: `text-[clamp(3rem,12vw,14rem)]`
-- **Use responsive utilities** for section headings: `text-5xl md:text-7xl lg:text-8xl`
-- **Use responsive utilities** for body text: `text-lg md:text-xl lg:text-2xl`
-- **Use responsive utilities** for massive numbers: `text-[6rem] md:text-[8rem]` or `text-[8rem] md:text-[12rem]`
-- Always test at 320px, 768px, 1024px, and 1440px+ widths
-
-## The "Bold Factor" (Non-Generic Signatures)
-
-These elements MUST be present to achieve the Kinetic Typography aesthetic:
-
-1. **Viewport-Width Typography**: At least one headline must use viewport-width units (10vw+). This creates immediate scale and drama.
-
-2. **Active Marquees**: At least two sections should use infinite scrolling marquees. One fast (stats), one slower (testimonials). No gradient edges.
-
-3. **Massive Background Numbers**: Use oversized numbers (8rem-12rem) in muted tones as decorative background elements. They become graphic shapes, not just text.
-
-4. **Hard Color Inversions**: Cards or sections that completely flip color scheme on hover (black → yellow background, white → black text). The transition should be clean, not gradual.
-
-5. **Uppercase Display Treatment**: All headings, buttons, and labels in uppercase with tight tracking. This creates the poster-like, bold aesthetic.
-
-6. **Aggressive Scale Hierarchy**: The difference between largest and smallest text should be 8-10x, not the typical 2-3x. Body text at 20-24px, headlines at 160-200px+.
-
-7. **Minimal Border Styling**: Sharp corners (0px radius) and 2px borders in subtle zinc tones. Flat, no shadows. Brutalist structure.
-
-**What Makes it Instantly Recognizable**:
-- The constant motion (marquees never stop)
-- The screaming scale (text fills the screen)
-- The high contrast (near-black and off-white with acid yellow)
-- The uppercase lockup (everything yells)
-
-If these elements are removed or softened, the design becomes generic modern dark mode.
-
-## Anti-Patterns (What to Avoid)
-
-**Color Mistakes**:
-- Never use pure black (#000000) or pure white (#FFFFFF)—too harsh
-- Don't use soft pastels or mid-tone colors—breaks the high-contrast system
-- Avoid gradients on backgrounds—this style is flat
-- Don't use multiple accent colors—acid yellow only
-
-**Typography Errors**:
-- Don't use serif fonts or script fonts—kills the brutalist vibe
-- Never use small text for headings (<text-3xl)—loses the bold factor
-- Avoid mixed case in display text—uppercase is mandatory
-- Don't use normal or wide tracking on large text—always tighter
-
-**Layout Mistakes**:
-- Don't center-align body text—left-align for readability
-- Avoid small max-widths (max-w-4xl)—content should feel wide
-- Don't use standard section padding (py-16)—go bigger (py-32)
-- Never nest containers with conflicting max-widths
-
-**Animation Mistakes**:
-- Don't add drop shadow animations—stay flat
-- Avoid slow, gentle transitions (800ms+)—this style is snappy
-- Never stop the marquees or add pause-on-hover—motion is constant
-- Don't use bounce or elastic easing on everything—reserve for specific elements
-
-**Shape & Style Errors**:
-- Never add border-radius above 2px—sharp corners are essential
-- Don't use subtle borders (<1px)—go for 2px or border-bottom only
-- Avoid soft shadows—this style has no depth effects
-- Don't use opacity for hierarchy—use color contrast
-
-**Component Mistakes**:
-- Don't make buttons small and subtle—they should be bold and large
-- Avoid input fields that look traditional—oversized is key
-- Don't use cards with heavy padding and rounded corners—minimal, sharp
-- Never use subtle hover states—changes should be dramatic
-
-**Accessibility Violations**:
-- Don't ignore motion preferences—respect prefers-reduced-motion
-- Avoid color as the only indicator—ensure sufficient contrast
-- Don't make click targets too small—maintain 44px minimum
-- Never sacrifice readability for style—body text should be large and clear
-
-## Accessibility Considerations
-
-**Color Contrast**:
-- Off-white (#FAFAFA) on rich black (#09090B): ~15:1 ratio (exceeds WCAG AAA)
-- Accent yellow (#DFE104) on rich black: ~12:1 ratio (exceeds WCAG AAA)
-- Muted foreground (#A1A1AA) on rich black: ~6:1 ratio (meets WCAG AA for large text)
-- Accent with black text: ~14:1 ratio (exceeds WCAG AAA)
-
-**Motion Preferences**:
-- Wrap all marquees in `@media (prefers-reduced-motion: no-preference)`
-- Provide static fallback: show content without scrolling
-- Disable scroll-triggered animations for users who prefer reduced motion
-- Maintain layout and hierarchy without motion
-
-**Focus Indicators**:
-- Accent-colored border or ring on focus
-- Minimum 2px visible indicator
-- Never remove focus styles—make them obvious
-- Scale changes on buttons provide additional tactile feedback
-
-**Keyboard Navigation**:
-- All interactive elements must be focusable
-- Accordion items should expand/collapse with Enter or Space
-- Marquee content should be navigable via keyboard if interactive
-- Skip links to main content if navigation is complex
-
-**Screen Reader Considerations**:
-- Noise texture SVG includes `<title>` element
-- Decorative background numbers should have `aria-hidden="true"`
-- Marquees need `aria-live` attributes if content updates
-- Accordion state (expanded/collapsed) should be announced
-
-**Touch Targets**:
-- Minimum 44x44px for all interactive elements
-- Buttons exceed this (default 56px height)
-- Adequate spacing between clickable items (16px+)
-- Large input fields (96px height) easy to tap
-
-**Readability**:
-- Body text larger than standard web (20-24px vs 16px)
-- High contrast throughout
-- Left-aligned paragraphs for easier reading
-- Generous line-height (leading-tight = 1.25) for large text
-
-**Testing Checklist**:
-- Test with screen reader (NVDA, JAWS, VoiceOver)
-- Verify keyboard-only navigation
-- Check with prefers-reduced-motion enabled
-- Validate color contrast with tools (Stark, axe DevTools)
-- Test at 200% zoom level
-- Verify touch targets on mobile devices
+# 设计风格：Kinetic Typography
+
+## 设计哲学
+
+**核心原则**：字体不是装饰——它是整个视觉结构。文字成为图像，标题成为 Hero，运动成为节奏。此风格完全拒绝静态布局。每个元素都应通过持续运动（跑马灯）、反应性运动（悬停状态）或滚动触发运动（视差、缩放变换）而感觉鲜活。页面以动感能量脉动——无物真正静止。
+
+**美学气质**：高能量粗野主义遇上动感海报设计。通过尺度自信。通过运动紧迫。通过对比清晰。设计呐喊而非低语——一切大写、超大、直击面门。它是活过来的海报，具街头艺术的原始能量与瑞士排印的精准，但动画化且可交互。想象音乐节海报、抗议图形与地下杂志转译为网页。
+
+**视觉 DNA**：此风格由其无情运动与激进尺度即时可辨。跑马灯无尽滚动。数字高耸至 8-12rem。标题使用视口单位（clamp 控制以保）。每个悬停状态戏剧化——卡片被色彩淹没，文字横移屏幕，边框以点缀色发光。美学刻意过度：若传统网页设计标题与正文用 2x 尺度差，此用 10x。他人加含蓄阴影，此风格保持粗野扁平配锐利边框与硬边。
+
+**签名元素**：
+- 永不停歇的无限跑马灯（react-fast-marquee，无渐变）
+- 用 clamp() 流体缩放的视口响应式字体（clamp(3rem,12vw,14rem)）
+- 所有展示文字的激进大写处理（标题、按钮、标签）
+- 作装饰图形形状的巨型数字元素（6rem-12rem）
+- 悬停时硬色彩反转（背景变点缀黄，文字变黑，即时过渡）
+- 滚动触发的缩放与透明度变换（Framer Motion useScroll hook）
+- 锐利 2px 边框配 0px border-radius（粗野主义几何）
+- gap-px 发丝网格分隔符创造连接卡片系统
+
+## 设计 Token 系统（DNA）
+
+### 色彩架构
+
+**基础色**：
+- `background`：`#09090B`（浓郁黑，非纯黑——更柔和护眼）
+- `foreground`：`#FAFAFA`（近白，非纯白——更少刺眼）
+- `muted`：`#27272A`（次级表面深灰）
+- `muted-foreground`：`#A1A1AA`（Zinc 400，正文与描述）
+
+**点缀策略**：
+- `accent`：`#DFE104`（酸黄/酸橙——高能量、高可见）
+- `accent-foreground`：`#000000`（点缀上纯黑以增对比）
+- `border`：`#3F3F46`（Zinc 700——含蓄结构线）
+
+**用色模式**：
+- 酸黄克制但大胆使用（Hero 文字高亮、悬停状态、聚焦环、跑马灯背景）
+- 所有次要文字用 muted foreground（Zinc 400）——绝不用普通灰
+- 所有结构线用 border 色——绝不用前景色作边框
+- 背景数字与非激活元素用 `muted`（#27272A）以创深度层
+- 选择高亮：黄背景配黑字
+
+**对比要求**：
+- 主要文字对背景：最低 15:1 比例（近白于浓郁黑）
+- 点缀对背景：必须鲜艳吸睛
+- 绝不用中调灰——停留于对比极端
+
+### 字体系统
+
+**字体选择**：
+- 主："Space Grotesk"（首选——强几何形状，大尺寸出色）
+- 回退："Inter"（若 Space Grotesk 不可用）
+- 两者应支持可变字重（300-700 范围）
+
+**尺度层级**（用 Tailwind 类配响应式缩放）：
+- **Hero/展示**：`text-[clamp(3rem,12vw,14rem)]`（基于视口的流体缩调配安全最小值）
+- **区块标题**：`text-5xl md:text-7xl lg:text-8xl` 或 `text-[clamp(2.5rem,8vw,6rem)]` 用于超大标题
+- **卡片标题**：`text-2xl md:text-3xl lg:text-6xl`（移动至桌面的响应式缩放）
+- **正文/描述**：`text-lg md:text-xl lg:text-2xl`（18-24px——比典型网页大，响应式）
+- **小标签**：`text-xs md:text-sm lg:text-lg`（12-18px，响应式）
+- **巨型数字**（装饰）：`text-[6rem] md:text-[8rem]` 至 `text-[8rem] md:text-[12rem]`（响应式巨尺度）
+- **导航/微**：`text-sm md:text-base`（14-16px）
+
+**字体处理规则**：
+- 所有展示文字（标题、按钮、标签）必须大写
+- 正文与描述保持正常大小写以保可读
+- 字距：大展示文字用 `tracking-tighter`，正文用 `tracking-tight`，小标签用 `tracking-wide` 或 `tracking-widest`
+- 行高：展示标题用 `leading-[0.8]` 或 `leading-none` 创造紧凑图形锁死
+- 行高：大正文用 `leading-tight`（xl-2xl）
+- 字重：所有标题与按钮 Bold（700），正文 Medium（500），次要文字 Regular（400）
+
+**字号关系**：
+- 标题比正文大 3-5x（非传统网页的 1.5-2x）
+- 作图形的数字比伴随标签大 4-8x
+- 装饰背景文字比同上下文前景文字大 2-3x
+
+### 间距与布局
+
+**基础单位**：4px（Tailwind 默认间距阶梯）
+
+**垂直节奏**：
+- 区块内边距：`py-32`（128px 上下）主要区块
+- 卡片/容器内边距：`p-8` 至 `p-12`（32-48px）
+- 容器内元素间隙：`gap-8`（32px）
+- 紧凑元素组：`gap-4`（16px）
+- 大展示元素间：`mb-4` 至 `mb-8`（16-32px）
+
+**水平包含**：
+- 最大宽度：`max-w-[95vw]` 或 `max-w-[90vw]`——推至边缘
+- 绝不用标准 `max-w-7xl` 或类似——对此风格过于保守
+- 特定内容宽度：长文本块 `max-w-2xl`（672px）
+- 跑马灯与戏剧区块全幅
+
+**内边距关系**：
+- 卡片：四面等内边距（p-8 或 p-12）或上下多于左右的不对称
+- 按钮：水平内边距 2-3x 垂直（如 px-8 py-4）
+- 输入框：最小水平内边距（px-0 或 px-2），更多垂直以增触控目标
+
+**网格模式**：
+- 步骤流程三列网格（md:grid-cols-3）
+- 移动单列，以大文字保持戏剧性
+- 用 `gap-px` 配彩色背景创造发丝网格分隔符
+- 定价通常三等列（lg:grid-cols-3）
+
+### 形状语言
+
+**圆角**：
+- 默认：`0px`（完全锐角）
+- 例外：罕见 `rounded-sm`（2px）作小元素含蓄柔化
+- 绝不用 rounded-lg 或更高——破坏粗野美学
+
+**边框样式**：
+- 宽度：`border-2`（2px）结构强调，`border`（1px）含蓄分隔符
+- 样式：始终 solid，绝不虚线或点线
+- 颜色：一致用 `border-[#3F3F46]`
+- 仅边框元素：输入下划线用 `border-b-2`，引文点缀用 `border-l-4`
+
+**阴影与深度**：
+- **无投影**——此风格完全扁平
+- 深度通过色彩分层创造（前景后柔和背景元素）
+- 用柔和色调巨型背景数字创造视觉深度
+- 重叠元素替代阴影作层级
+
+**视觉分隔符**：
+- 优先边框而非阴影
+- 区块分隔用全宽 border-top/border-bottom
+- 网格间隙模式：`gap-px` 配彩色容器创造发丝分隔符
+
+### 纹理与叠加
+
+**噪点纹理**：
+- SVG feTurbulence 滤镜（baseFrequency 0.8，numOctaves 4）
+- 固定位置，全视口覆盖
+- 不透明度：`opacity-[0.03]`（几乎不可见）
+- 混合模式：`mix-blend-overlay`
+- 目的：增添含蓄印刷/海报纹理而不影响可读
+
+**背景处理**：
+- 仅纯色——无渐变
+- 点缀色用于全区块背景（数据跑马灯、页脚）
+- 柔和色用于卡片悬停背景（点缀翻转前）
+
+**混合模式**：
+- 克制用 `mix-blend-difference` 或 `mix-blend-exclusion` 作图片上文字
+- 应用于自定义光标或特殊文字处理
+- 当前实现非核心部分，但建议高级实现使用
+
+## 组件样式原则
+
+### 按钮
+
+**基础样式**：
+- 始终大写文字配紧凑字距（`uppercase tracking-tighter`）
+- 字重：Bold（700）
+- 锐角（rounded-none）
+- 高度：默认 56px（h-14），小 40px（h-10），大 80px（h-20）
+- 水平内边距 2x 高度：默认 px-8，小 px-4，大 px-12
+
+**变体模式**：
+
+**主（点缀）**：
+- 背景：酸黄（#DFE104）
+- 文字：黑
+- 悬停：放大 1.05（`hover:scale-105`）
+- 激活：缩小 0.95（`active:scale-95`）
+- 过渡：`transition-all` 以平滑缩放
+
+**描边**：
+- 边框：2px solid zinc-700（#3F3F46）
+- 背景：透明
+- 文字：近白
+- 悬停：近白背景全填充，文字反转为黑
+- 硬过渡（即时色彩翻转）
+
+**幽灵**：
+- 无边框，无背景
+- 文字：近白
+- 悬停：文字色变酸黄
+- 极简、含蓄变体
+
+**高级交互**（未实现但建议）：
+- 跑马灯效果：悬停时按钮内文字横向滚动
+- 逐字符色彩填充悬停（左至右）
+
+### 卡片与容器
+
+**基础结构**：
+- 边框：2px solid zinc-700（`border-2 border-[#3F3F46]`）
+- 背景：浓郁黑（#09090B）
+- 内边距：大而均匀（p-8 或 p-12）
+- 无 border-radius（锐角）
+
+**悬停行为**：
+- 背景被点缀色淹没（#DFE104）
+- 边框色变点缀
+- 所有文字反转为黑
+- 过渡：`duration-300` 以平滑但显著的转变
+- 用 group 类协调文字色变化
+
+**卡片内内容层级**：
+- 顶部大标题（text-3xl）前景色 → 悬停黑
+- 描述文字柔和前景 → 悬停黑配降低不透明度
+- 装饰数字或图标柔和色调 → 悬停黑
+
+**粘性卡片模式**（特性区块）：
+- 每张卡片用 `sticky top-32` 定位
+- 卡片随用户滚动堆叠与重叠
+- 后续卡片似滑过前卡片
+- 通过重复保持视觉节奏
+
+### 输入框与表单
+
+**基础样式**：
+- 高度：格外高（h-24 / 96px）以增戏剧尺度
+- 边框：仅底边框（`border-b-2`）
+- 边框色：默认 Zinc-700，聚焦变点缀
+- 背景：透明
+- 文字：超大（text-4xl），bold，大写，紧凑字距
+- 内边距：最小水平（px-0），标准垂直以对齐
+
+**聚焦状态**：
+- 底边框变酸黄
+- 无 outline ring——边框作聚焦指示器
+- 即时色彩变化（无需过渡）
+
+**占位符样式**：
+- 柔和色（#27272A）——非常含蓄
+- 与输入文字相同尺寸与样式
+- 大写以匹配输入
+- 低对比确保实际输入突出
+
+**表单布局**：
+- 全宽输入（w-full）
+- 字段间慷慨垂直间距（space-y-8）
+- 标签（若用）应小、大写、宽字距，置于输入上方
+
+### 交互状态
+
+**悬停变换**：
+- 缩放：按钮缩放至 1.05，卡片保持 scale 1.0
+- 位移：收益标题水平位移（`translate-x-8`）
+- 色彩淹没：卡片完全反转配色
+- 透明度显现：隐藏描述淡入（opacity-0 至 opacity-100）
+- 所有过渡用 `duration-300` 以保一致感
+
+**聚焦状态**：
+- 输入框：边框色变点缀
+- 按钮：同悬停（缩放）加可见点缀色聚焦环
+- 链接：点缀色下划线或文字色变化
+
+**激活状态**：
+- 按钮：缩放至 0.95（`active:scale-95`）作触感反馈
+- 链接：轻微不透明度降低
+
+**禁用状态**：
+- 不透明度：50%（`disabled:opacity-50`）
+- 指针事件：无（`disabled:pointer-events-none`）
+- 保持所有其他样式——仅降低可见性
+
+## 动画与运动系统
+
+### 跑马灯运动
+
+**实现**：用 `react-fast-marquee` 库实现流畅 GPU 加速跑马灯
+
+**数据跑马灯**（高能量）：
+- 速度：80（快）
+- 方向：左至右
+- 渐变：false（无边缘淡入）
+- AutoFill：true（无限重复内容）
+- 内容：大号数字配标签与装饰符号
+
+**证言跑马灯**（较慢节奏）：
+- 速度：40（中）
+- 方向：左至右
+- 渐变：false
+- 内容：宽卡片配引文，项目间慷慨间距
+
+**时机规则**：
+- 绝不用渐变——原始边缘是美学的一部分
+- 快跑马灯（速度 60-100）用于数据与高能量内容
+- 慢跑马灯（速度 30-50）用于证言等阅读内容
+- 所有跑马灯用 linear 缓动（无加速/减速）
+
+### 滚动触发动画
+
+**Hero 视差**（Framer Motion）：
+- 追踪滚动进度：`useScroll()` hook
+- 缩放变换：1.0 → 1.2 随用户滚动（页面 0-20%）
+- 透明度：1.0 → 0 随用户滚出
+- 创造用户进入内容时戏剧性缩小效果
+
+**粘性滚动卡片**：
+- 位置：`sticky top-32`
+- 无变换动画——物理堆叠创造效果
+- 后续卡片滑过时前卡片保持原位
+
+**入场动画**（建议，非当前实现）：
+- 元素进入视口时从 0.8 缩放至 1.0
+- 文字可从裁切动画至全可见以"揭面"
+- 用 intersection observer 或 Framer Motion `whileInView`
+
+### 微交互
+
+**按钮交互**：
+- 悬停：缩放 1.05 配全缓动
+- 激活：缩放 0.95
+- 过渡时机：200-300ms
+- 缓动：默认 ease-in-out
+
+**卡片悬停**：
+- 色彩过渡：300ms
+- 硬翻转，非渐进（适合粗野美学）
+- 所有子文字通过 group 类协调色彩变化
+
+**手风琴展开**（FAQ）：
+- 高度：从 0 动画至 auto
+- 透明度：内容淡入（0 至 1）
+- 时机：平滑配轻微弹跳（framer motion spring）
+- Initial：false（挂载时不动画）
+
+**文字显现**：
+- 收益描述：透明度 0 至 1，duration 300ms
+- 收益标题：水平位移 + duration 300ms
+- 两者悬停时同时触发
+
+### 缓动与时机
+
+**默认时长**：
+- 微交互（悬停、聚焦）：200-300ms
+- 区块动画：500-800ms
+- 跑马灯：连续 linear（无缓动）
+
+**缓动函数**：
+- 按钮与缩放效果：`ease-in-out`（默认）
+- 跑马灯：`linear`（恒速）
+- 手风琴：Framer Motion 弹簧物理
+- 视差：自滚动位置的 linear 映射
+
+**性能说明**：
+- 优先 transform（缩放、位移）而非 position 变化
+- 用 opacity 而非 visibility 作显现
+- 跑马灯应用 transform: translateX 以 GPU 加速
+- 保持动画 60fps——避免滚动处理中的复杂计算
+
+## 布局原则
+
+### 网格哲学
+
+**打破网格**：此风格拥抱不对称与重叠。元素可：
+- 超出容器
+- 重叠前元素（粘性滚动）
+- 使用不等列宽
+- 为戏剧效果打破对齐
+
+**标准模式**：
+- 移动单列（始终）
+- 平板（md）收益/特性双列
+- 桌面（lg）定价/步骤三列
+- 页脚导航四列
+
+**网格间隙**：
+- 标准：`gap-8`（32px）主要元素间
+- 发丝：`gap-px` 配彩色容器背景作连接卡片
+- 宽：`gap-12` 至 `gap-24` 为密集区块呼吸空间
+
+### 区块流
+
+**垂直节奏**：
+- 主要区块：`py-32`（128px）上下
+- 子区块：`py-20`（80px）
+- 密集内容区：`py-12`（48px）
+
+**区块分隔符**：
+- zinc-700 全宽 border-top 或 border-bottom
+- 点缀色背景翻转（黑区块 → 黄区块）
+- 对比创造自然断点而无需额外空间
+
+**内容宽度策略**：
+- Hero：Max-w-[95vw]——推至边缘
+- 正文内容：Max-w-5xl 或 max-w-6xl
+- 长文本：Max-w-2xl 或 max-w-xl 以保可读
+- 跑马灯：全幅（w-full，无 max-width）
+
+### 响应式方法
+
+**移动优先策略**：
+- **保持戏剧性**：用 clamp() 值保大文字安全缩放（如 `clamp(3rem,12vw,14rem)`）
+- **一切垂直堆叠**：单列布局配 `flex-col` 与 `md:flex-row` 模式
+- **渐进缩减内边距**：`p-8 md:p-12`、`py-20 md:py-32`、`px-4 md:px-8`
+- **跑马灯持续**：风格核心——所有断点保留
+- **触控目标**：最小 44x44px（图标容器 h-10 w-10，按钮 h-14）
+- **适配悬停效果**：移动端始终显示描述（opacity-100），桌面端隐藏（md:opacity-0）后悬停显现
+- **粘性定位**：调整 top 值（`top-24 md:top-32`）以容纳导航高度
+- **网格简化**：1 列 → `md:grid-cols-2` → `lg:grid-cols-3`
+
+**断点**（Tailwind 默认）：
+- **移动**：基础样式（320px-767px）— 单列、缩减文字尺寸、全宽元素
+- **平板（md）**：768px+ — 双列布局、中等文字缩放、增加内边距
+- **桌面（lg）**：1024px+ — 三列布局、完整戏剧尺度、所有悬停效果激活
+
+**文字缩放最佳实践**：
+- **Hero 与巨型标题用 clamp()**：`text-[clamp(3rem,12vw,14rem)]`
+- **区块标题用响应式工具**：`text-5xl md:text-7xl lg:text-8xl`
+- **正文用响应式工具**：`text-lg md:text-xl lg:text-2xl`
+- **巨型数字用响应式工具**：`text-[6rem] md:text-[8rem]` 或 `text-[8rem] md:text-[12rem]`
+- 始终在 320px、768px、1024px 与 1440px+ 宽度测试
+
+## "大胆要素"（非通用签名）
+
+这些元素必须存在以达成 Kinetic Typography 美学：
+
+1. **视口宽度字体**：至少一个标题必须使用视口宽度单位（10vw+）。这创造即时尺度与戏剧性。
+
+2. **活跃跑马灯**：至少两个区块应使用无限滚动跑马灯。一快（数据），一慢（证言）。无渐变边缘。
+
+3. **巨型背景数字**：用柔和色调超大数字（8rem-12rem）作装饰背景元素。它们成为图形形状，而非仅文字。
+
+4. **硬色彩反转**：悬停时完全翻转配色的卡片或区块（黑 → 黄背景，白 → 黑文字）。过渡应干净，非渐进。
+
+5. **大写展示处理**：所有标题、按钮与标签大写配紧凑字距。这创造海报般的大胆美学。
+
+6. **激进尺度层级**：最大与最小文字之差应为 8-10x，非典型 2-3x。正文 20-24px，标题 160-200px+。
+
+7. **极简边框样式**：锐角（0px 圆角）与柔和 zinc 色调 2px 边框。扁平、无阴影。粗野结构。
+
+**即时可辨之处**：
+- 持续运动（跑马灯永不停歇）
+- 呐喊的尺度（文字填满屏幕）
+- 高对比（近黑与近白配酸黄）
+- 大写锁死（一切呐喊）
+
+若移除或柔化这些元素，设计即变为通用现代深色模式。
+
+## 反模式（应避免之事）
+
+**色彩错误**：
+- 绝不用纯黑（#000000）或纯白（#FFFFFF）——过刺眼
+- 勿用柔和粉彩或中调色——破坏高对比系统
+- 避免背景渐变——此风格扁平
+- 勿用多种点缀色——仅酸黄
+
+**字体错误**：
+- 勿用衬线或手写字体——扼杀粗野气质
+- 绝不用小文字作标题（<text-3xl）——失去大胆要素
+- 避免展示文字混用大小写——大写强制
+- 勿在大文字用正常或宽字距——始终更紧
+
+**布局错误**：
+- 勿居中对齐正文——左对齐以保可读
+- 避免小 max-width（max-w-4xl）——内容应显宽
+- 勿用标准区块内边距（py-16）——更大（py-32）
+- 绝不嵌套冲突 max-width 的容器
+
+**动画错误**：
+- 勿加投影动画——保持扁平
+- 避免缓慢温和过渡（800ms+）——此风格利落
+- 绝不停止跑马灯或加悬停暂停——运动持续
+- 勿在一切上用弹跳或弹性缓动——保留给特定元素
+
+**形状与样式错误**：
+- 绝不加 2px 以上 border-radius——锐角至关重要
+- 勿用含蓄边框（<1px）——用 2px 或仅 border-bottom
+- 避免柔和阴影——此风格无深度效果
+- 勿用不透明度作层级——用色彩对比
+
+**组件错误**：
+- 勿使按钮小而含蓄——应大胆且大
+- 避免传统外观输入框——超大是关键
+- 勿用厚重内边距与圆角卡片——极简、锐利
+- 绝不用含蓄悬停状态——变化应戏剧化
+
+**可访问性违规**：
+- 勿忽略运动偏好——尊重 prefers-reduced-motion
+- 避免色彩作唯一指示器——确保足够对比
+- 勿使点击目标过小——保持 44px 最小
+- 绝不为风格牺牲可读性——正文应大且清晰
+
+## 可访问性考量
+
+**色彩对比**：
+- 近白（#FAFAFA）于浓郁黑（#09090B）：约 15:1 比例（超过 WCAG AAA）
+- 酸黄（#DFE104）于浓郁黑：约 12:1 比例（超过 WCAG AAA）
+- 柔和前景（#A1A1AA）于浓郁黑：约 6:1 比例（达大文字 WCAG AA）
+- 点缀配黑字：约 14:1 比例（超过 WCAG AAA）
+
+**运动偏好**：
+- 将所有跑马灯包裹于 `@media (prefers-reduced-motion: no-preference)`
+- 提供静态回退：无滚动显示内容
+- 为偏好减少运动的用户禁用滚动触发动画
+- 无运动时保持布局与层级
+
+**聚焦指示器**：
+- 聚焦时点缀色边框或环
+- 最小 2px 可见指示器
+- 绝不移除聚焦样式——使其明显
+- 按钮缩放变化提供额外触感反馈
+
+**键盘导航**：
+- 所有交互元素必须可聚焦
+- 手风琴项应可用 Enter 或 Space 展开/收起
+- 跑马灯内容若交互应可键盘导航
+- 导航复杂时提供跳至主内容链接
+
+**屏幕阅读器考量**：
+- 噪点纹理 SVG 含 `<title>` 元素
+- 装饰背景数字应设 `aria-hidden="true"`
+- 跑马灯内容更新时需 `aria-live` 属性
+- 手风琴状态（展开/收起）应被宣告
+
+**触控目标**：
+- 所有交互元素最小 44x44px
+- 按钮超过此值（默认 56px 高度）
+- 可点击项间充足间距（16px+）
+- 大输入框（96px 高度）易点击
+
+**可读性**：
+- 正文比标准网页大（20-24px vs 16px）
+- 全程高对比
+- 左对齐段落以便阅读
+- 大文字慷慨行高（leading-tight = 1.25）
+
+**测试清单**：
+- 用屏幕阅读器测试（NVDA、JAWS、VoiceOver）
+- 验证仅键盘导航
+- 启用 prefers-reduced-motion 检查
+- 用工具验证色彩对比（Stark、axe DevTools）
+- 200% 缩放级别测试
+- 移动设备验证触控目标

@@ -10,418 +10,418 @@
 | 显示名称 | Luxury |
 | 模式 | ☀️ 浅色模式 (Light) |
 | 字体类型 | serif |
-| 描述 | Elegant serif typography with monochromatic palette and gold accents. Ultra-slow animations, generous white space, and architectural precision. High-end fashion magazine editorial aesthetic with depth through subtle shadows and layering. |
+| 描述 | 优雅的衬线字体配单色调色板与金色点缀。极慢动画、慷慨留白与建筑般的精准。高端时尚杂志的编辑美学，通过细腻阴影与层次营造深度。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Asymmetric 12-column grid with text content in left 7 columns (bottom-aligned) and hero image in right 5 columns. Decorative horizontal line and 'Est. 2024' label. Massive type scale (text-5xl to text-9xl). Vertical writing mode label on image. Hero image has shadow and inner border.
+非对称 12 列网格，文字内容在左 7 列（底部对齐），Hero 图片在右 5 列。装饰性水平线与 'Est. 2024' 标签。巨型字号阶梯（text-5xl 至 text-9xl）。图片上垂直书写模式标签。Hero 图片有阴影与内边框。
 
 ### Stats
 
-Horizontal strip with 2-4 column grid. Vertical left border on each stat. Large italic Playfair numerals with tiny uppercase labels. Responsive: 2 cols mobile, 4 cols desktop.
+横向条带配 2-4 列网格。每个数据有垂直左边框。大号斜体 Playfair 数字配微型大写标签。响应式：移动 2 列，桌面 4 列。
 
 ### Product Detail
 
-Two-column asymmetric layout (5/6 split with offset). Headline on left with gold italic accent. Body text on right with drop cap on first paragraph.
+双栏非对称布局（5/6 分割配偏移）。左侧标题配金色斜体点缀。右侧正文，首段首字下沉。
 
 ### Features
 
-Alternating image-text layout with offset columns. Images 3:4 aspect ratio with shadow, grayscale default. Text in 4 columns offset from edges. Numbered labels (01, 02) in gold. 'Read More' link buttons.
+交替图文布局配偏移列。图片 3:4 宽高比配阴影，默认灰度。文字在距边缘偏移的 4 列中。金色编号标签（01, 02）。'Read More' 链接按钮。
 
 ### How It Works
 
-Dark section with inverted palette. Grid of cards with 1px gap simulated borders. Each card has numbered step label, title, and description. Hover effect darkens background.
+深色区块配反相调色板。卡片网格配 1px 间隙模拟边框。每张卡片含编号步骤标签、标题与描述。悬停效果加深背景。
 
 ### Benefits
 
-Dark section with horizontal line dividers above each benefit (hover turns gold). 3-column grid. Section header split across columns.
+深色区块，每个收益上方有水平线分隔符（悬停变金）。3 列网格。区块标题跨列分割。
 
 ### Pricing
 
-Minimalist cards with top border only. Featured tier has 4px gold top border and 'Most Popular' badge. Subtle shadows that deepen on hover. Check mark list with gold icons.
+极简卡片仅顶边框。精选档位有 4px 金色顶边框与 'Most Popular' 徽章。含蓄阴影悬停时加深。勾选标记列表配金色图标。
 
 ### Testimonials
 
-Two-column layout (content/testimonials). Each testimonial has left border (turns gold on hover), 5 gold stars, large italic serif quote, small grayscale avatar (color on hover), author name (gold on hover).
+双栏布局（内容/证言）。每条证言有左边框（悬停变金）、5 颗金星、大号斜体衬线引文、小型灰度头像（悬停彩色）、作者名（悬停变金）。
 
 ### Faq
 
-Left column: section title. Right column: accordion with dividers. Question in italic serif. Plus icon in bordered square rotates to minus when open. Gold accent on open state.
+左列：区块标题。右列：带分隔符的手风琴。问题用斜体衬线。带边框方块中的 Plus 图标打开时旋转为 minus。打开状态金色点缀。
 
 ### Blog
 
-3-column grid. Images 4:5 aspect, grayscale with shadow (deepens on hover). Metadata in tiny uppercase with decorative horizontal divider. Title turns gold on hover.
+3 列网格。图片 4:5 宽高比，灰度配阴影（悬停加深）。元信息用微型大写配装饰性水平分隔符。标题悬停变金。
 
 ### Footer
 
-Dark background. Large CTA headline (gold italic accent) on left, email signup on right. Full footer navigation in 2x4 grid. Bottom bar with company name, copyright, social links. All links hover to gold.
+深色背景。左侧大号 CTA 标题（金色斜体点缀），右侧邮箱订阅。完整页脚导航 2x4 网格。底栏含公司名、版权、社交链接。所有链接悬停变金。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Design Style: Luxury / Editorial
-
-## Design Philosophy
-
-**Core Principles**: Elegance through restraint, precision, and depth. This style emulates high-end fashion magazines (Vogue, Harper's Bazaar, Kinfolk) and luxury brand websites (Chanel, Hermès, Aesop). Success depends on **exquisite typography hierarchy**, **generous negative space**, **slow cinematic motion**, **intentional asymmetry**, and **layered depth through subtle shadows**. The design creates visual tension through grid-breaking layouts while maintaining perfect architectural balance.
-
-**Vibe**: Sophisticated, Timeless, Expensive, Serene, Curated, Deliberate, Editorial, Tactile.
-
-**The Secret**: Luxury isn't about adding decoration—it's about removing everything unnecessary and perfecting what remains. Every element must feel intentional and considered. Slow down all motion to cinematic speeds (1500-2000ms for images). Add more space than feels comfortable. Use asymmetry to create visual interest. Layer depth through subtle shadows (never harsh drops) and inner borders. The design should feel like expensive paper that you want to touch.
-
-## Design Token System (The DNA)
-
-### Colors (Sophisticated Monochrome)
-
-**Primary Palette:**
-- **Background**: `#F9F8F6` (Warm Alabaster) — Not pure white (#FFFFFF). This off-white feels like expensive paper or linen. The warm undertone is critical.
-- **Foreground**: `#1A1A1A` (Rich Charcoal) — Not pure black (#000000). Softer, more sophisticated. Used for primary text and sharp borders.
-- **Muted Background**: `#EBE5DE` (Pale Taupe) — For subtle surface elevation, disabled states, or alternate backgrounds.
-- **Muted Foreground**: `#6C6863` (Warm Grey) — For secondary text, captions, metadata. Maintains warmth of the palette.
-- **Accent**: `#D4AF37` (Metallic Gold) — Use sparingly. For hover states, underlines, focus indicators, small decorative elements. Never use gold for large areas.
-- **Accent Foreground**: `#FFFFFF` (Pure White) — Only used on top of dark backgrounds or gold elements.
-
-**Layering Strategy:**
-- Use opacity for borders and dividers: `#1A1A1A` at 10-20% opacity creates subtle separation
-- Dark sections use inverted palette: `#1A1A1A` background with `#F9F8F6` text and `#EBE5DE` muted text at 60-80% opacity
-- Never use pure black or pure white for text—always use the charcoal and alabaster values
-
-### Typography (The Most Critical Element)
-
-**Font Pairing:**
-- **Heading Font**: "Playfair Display" (High-contrast serif) — Elegant, editorial, with distinctive high-contrast strokes. Use for headlines, large quotes, and emphasis.
-- **Body Font**: "Inter" (Humanist sans-serif) — Clean, modern, highly legible. Use for body text, labels, UI elements.
-
-**Type Scale & Hierarchy:**
-- **Hero Headlines**: `text-6xl` to `text-9xl` (4rem to 8rem+) — Massive, dramatic. Use `leading-[0.9]` for tight, compressed vertical rhythm.
-- **Section Headlines**: `text-5xl` to `text-7xl` (3rem to 4.5rem) — Still large, commanding attention.
-- **Subsection Titles**: `text-3xl` to `text-4xl` (1.875rem to 2.25rem) — For card titles, feature headings.
-- **Body Text**: `text-base` to `text-lg` (1rem to 1.125rem) — Comfortable reading size with `leading-relaxed` (1.625).
-- **Overlines/Labels**: `text-xs` (0.75rem) — Always uppercase with wide tracking.
-- **Micro-text**: `text-[10px]` — For metadata, copyright, tiny labels.
-
-**Font Weight Distribution:**
-- Playfair: Regular (400) for most headlines, Light (300) for specific contrast, Italic (400) for emphasis within headlines
-- Inter: Medium (500) for buttons/links, Regular (400) for body, Light (300) sparingly
-
-**Letter Spacing (Critical for Luxury Feel):**
-- **Uppercase Labels**: `tracking-[0.25em]` to `tracking-[0.3em]` — Wide tracking creates elegance and readability
-- **Buttons**: `tracking-[0.2em]` — Slightly less than labels but still generous
-- **Headlines**: `tracking-tight` or default — Large serif headlines need tighter tracking
-- **Body Text**: Default tracking — Never adjust body text spacing
-
-**Line Height Strategy:**
-- **Headlines**: `leading-[0.9]` to `leading-tight` (0.9 to 1.25) — Tight creates drama
-- **Body Text**: `leading-relaxed` (1.625) — Generous for readability
-- **Small Text**: `leading-relaxed` to default — Maintains breathing room
-
-### Radius & Borders (Architectural Precision)
-
-**Border Radius:**
-- **Everything**: `0px` — Strictly rectangular. No rounded corners anywhere. This creates architectural precision and editorial sharpness.
-
-**Border Treatment:**
-- **Width**: Always `1px` — Thin, precise, deliberate
-- **Color**: `#1A1A1A` at full opacity for strong borders, 10-20% opacity for subtle dividers
-- **Style**: Single borders (top, bottom, left, right) rather than full boxes. Common pattern: `border-t` only
-- **Dividers**: Use horizontal lines (`h-px`) or vertical lines (`w-px`) as decorative elements with background color
-
-### Shadows & Effects (Subtle Layered Depth)
-
-**Shadows:**
-- **Philosophy**: Use extremely subtle, soft shadows to create depth and elevation—never harsh or prominent
-- **Hero Image**: `shadow-[0_8px_32px_rgba(0,0,0,0.12)]` — Medium shadow for primary focal point
-- **Feature Images**: `shadow-[0_4px_24px_rgba(0,0,0,0.08)]` — Light shadow with subtle inner border
-- **Blog Images**: `shadow-[0_4px_20px_rgba(0,0,0,0.06)]` deepens to `shadow-[0_8px_32px_rgba(0,0,0,0.12)]` on hover
-- **Cards**: `shadow-[0_2px_8px_rgba(0,0,0,0.02)]` deepens to `shadow-[0_8px_24px_rgba(0,0,0,0.06)]` on hover
-- **Primary Buttons**: `shadow-[0_4px_16px_rgba(0,0,0,0.15)]` deepens to `shadow-[0_8px_24px_rgba(0,0,0,0.25)]` on hover
-- **Inner Borders**: Use `shadow-[inset_0_0_0_1px_rgba(0,0,0,0.04-0.08)]` for subtle framing on images
-
-**Texture & Grain:**
-- **Paper Noise**: Subtle SVG noise texture overlay across entire page at 2% opacity to mimic expensive paper grain
-- **Implementation**: Fixed position overlay with SVG fractal noise filter, pointer-events disabled, z-index 50
-- **Purpose**: Adds tactile quality without being visible at first glance—creates "expensive paper" feel
-
-**Image Treatment:**
-- **Default State**: Grayscale filter (`grayscale`) — Creates monochromatic editorial look
-- **Hover State**: Full color (`grayscale-0`) — Slow transition reveals color as reward
-- **Transition**: `duration-[1500ms]` to `duration-[2000ms]` — Ultra-slow, cinematic reveal
-- **Transform**: Subtle scale on hover (`group-hover:scale-105`) combined with color transition
-- **Shadow Evolution**: Images gain deeper shadows on hover to enhance lift effect
-- **Group Context**: Use `group` utility on parent for coordinated hover effects
-
-### Grid & Vertical Lines (Structural Framework)
-
-**Visible Grid System:**
-- **4 Vertical Gridlines**: Fixed position lines spanning full viewport height, positioned at column boundaries
-- **Implementation**: `w-px` divs with `bg-[#1A1A1A]/20`, fixed position, pointer-events disabled
-- **Purpose**: Creates visible editorial grid structure, adds architectural quality
-- **Spacing**: Aligned with 12-column layout breakpoints, typically at container edges and middle thirds
-
-**Layout Grid:**
-- **Columns**: 12-column grid system
-- **Max Width**: 1600px for content container
-- **Padding**: `px-8` mobile, `px-16` desktop — Generous horizontal breathing room
-- **Asymmetry**: Use offset column starts (`col-start-2`, `col-start-6`) to create visual interest
-
-## Component Styling Principles
-
-### Buttons (Minimalist with Luxury Details)
-
-**Visual Structure:**
-- **Shape**: Rectangular, 0px border-radius, precise edges
-- **Height**: `h-12` default (48px), `h-14` large (56px), `h-10` small (40px)
-- **Padding**: Generous horizontal (`px-8` to `px-10`)
-- **Typography**: Uppercase, `text-xs`, `tracking-[0.2em]`, medium weight
-
-**Primary Button:**
-- **Default**: Dark background (`bg-[#1A1A1A]`), white text
-- **Hover Animation**: Gold layer (`bg-[#D4AF37]`) slides in from left using transform
-  - Initial state: `translate-x-[-100%]` (off-screen left)
-  - Hover state: `translate-x-0` (covers button)
-  - Duration: `duration-500` with custom easing `cubic-bezier(0.25, 0.46, 0.45, 0.94)`
-  - Text stays white and appears above gold layer using z-index
-- **Structure**: Requires internal `<span>` for gold overlay and another for content (z-10)
-
-**Secondary Button:**
-- **Default**: Transparent background, thin border (`border border-[#1A1A1A]`), dark text
-- **Hover**: Background fills to dark (`bg-[#1A1A1A]`), text inverts to white
-- **Transition**: Smooth `duration-500` for elegant fill
-
-**Link Button:**
-- **Style**: Text with underline on hover, no background or border
-- **Color**: Dark text, gold on hover optional
-
-### Cards & Containers (Defined by Lines)
-
-**Visual Approach:**
-- **Background**: Transparent or subtle (`bg-transparent`)
-- **Definition**: Single top border (`border-t`) rather than full box
-- **Border**: `border-[#1A1A1A]` at 1px width
-- **Padding**: Generous `p-8` mobile, `p-12` desktop
-- **Hover**: Subtle background color shift (`hover:bg-[#F9F8F6]/50`) — barely visible
-
-**Featured Cards:**
-- Use thicker top border (`border-t-4`) with gold color (`border-t-[#D4AF37]`) to indicate importance
-- Pricing tier highlighting, special features
+# 设计风格：Luxury / 编辑风
+
+## 设计哲学
+
+**核心原则**：通过克制、精准与深度实现优雅。此风格效仿高端时尚杂志（Vogue、Harper's Bazaar、Kinfolk）与奢侈品牌网站（Chanel、Hermès、Aesop）。成功取决于**精致的字体层级**、**慷慨的留白**、**缓慢的电影感运动**、**有意的非对称**与**通过细腻阴影的分层深度**。设计通过打破网格的布局创造视觉张力，同时保持完美的建筑平衡。
+
+**气质**：精致、永恒、昂贵、宁静、精心策展、刻意、编辑感、触感。
+
+**秘诀**：奢华不在于添加装饰——而在于移除一切不必要的，并完善所余。每个元素都必须感觉有意且深思熟虑。将所有运动放慢至电影速度（图片 1500-2000ms）。添加比舒适感更多的空间。用非对称创造视觉趣味。通过细腻阴影（绝不刺眼投影）与内边框分层深度。设计应感觉如你想触摸的昂贵纸张。
+
+## 设计 Token 系统（DNA）
+
+### 色彩（精致单色）
+
+**主调色板**：
+- **Background**：`#F9F8F6`（暖雪花石膏）— 非纯白（#FFFFFF）。此近白感觉如昂贵纸张或亚麻。暖底色至关重要。
+- **Foreground**：`#1A1A1A`（浓郁炭灰）— 非纯黑（#000000）。更柔和、更精致。用于主要文字与锐利边框。
+- **Muted Background**：`#EBE5DE`（浅灰褐）— 用于含蓄表面抬升、禁用状态或交替背景。
+- **Muted Foreground**：`#6C6863`（暖灰）— 用于次要文字、说明、元信息。保持调色板温暖。
+- **Accent**：`#D4AF37`（金属金）— 克制使用。用于悬停状态、下划线、聚焦指示器、小型装饰元素。绝不大面积用金。
+- **Accent Foreground**：`#FFFFFF`（纯白）— 仅用于深色背景或金色元素之上。
+
+**分层策略**：
+- 边框与分隔符用不透明度：`#1A1A1A` 10-20% 不透明度创造含蓄分隔
+- 深色区块用反相调色板：`#1A1A1A` 背景配 `#F9F8F6` 文字与 60-80% 不透明度 `#EBE5DE` 柔和文字
+- 绝不用纯黑或纯白作文字——始终用炭灰与雪花石膏值
+
+### 字体（最关键元素）
+
+**字体配对**：
+- **标题字体**："Playfair Display"（高对比衬线）— 优雅、编辑感，具独特高对比笔画。用于标题、大引文与强调。
+- **正文字体**："Inter"（人文主义无衬线）— 干净、现代、高可读。用于正文、标签、UI 元素。
+
+**字号阶梯与层级**：
+- **Hero 标题**：`text-6xl` 至 `text-9xl`（4rem 至 8rem+）— 巨型、戏剧化。用 `leading-[0.9]` 创紧凑压缩垂直节奏。
+- **区块标题**：`text-5xl` 至 `text-7xl`（3rem 至 4.5rem）— 仍大，吸引注意。
+- **子标题**：`text-3xl` 至 `text-4xl`（1.875rem 至 2.25rem）— 用于卡片标题、特性标题。
+- **正文**：`text-base` 至 `text-lg`（1rem 至 1.125rem）— 舒适阅读尺寸配 `leading-relaxed`（1.625）。
+- **上划线/标签**：`text-xs`（0.75rem）— 始终大写配宽字距。
+- **微文字**：`text-[10px]` — 用于元信息、版权、微型标签。
+
+**字重分布**：
+- Playfair：大多数标题 Regular（400），特定对比 Light（300），标题内强调 Italic（400）
+- Inter：按钮/链接 Medium（500），正文 Regular（400），Light（300）克制使用
+
+**字距（对奢华感至关重要）**：
+- **大写标签**：`tracking-[0.25em]` 至 `tracking-[0.3em]` — 宽字距创造优雅与可读性
+- **按钮**：`tracking-[0.2em]` — 略少于标签但仍慷慨
+- **标题**：`tracking-tight` 或默认 — 大衬线标题需更紧字距
+- **正文**：默认字距 — 绝不调整正文字距
+
+**行高策略**：
+- **标题**：`leading-[0.9]` 至 `leading-tight`（0.9 至 1.25）— 紧凑创造戏剧性
+- **正文**：`leading-relaxed`（1.625）— 慷慨以保可读
+- **小文字**：`leading-relaxed` 至默认 — 保持呼吸空间
+
+### 圆角与边框（建筑精准）
+
+**圆角**：
+- **一切**：`0px` — 严格矩形。任何地方无圆角。这创造建筑精准与编辑锐利。
+
+**边框处理**：
+- **宽度**：始终 `1px` — 细、精准、刻意
+- **颜色**：`#1A1A1A` 全不透明作强边框，10-20% 不透明度作含蓄分隔符
+- **样式**：单边框（上、下、左、右）而非完整方框。常见模式：仅 `border-t`
+- **分隔符**：用水平线（`h-px`）或垂直线（`w-px`）作装饰元素配背景色
+
+### 阴影与效果（含蓄分层深度）
+
+**阴影**：
+- **哲学**：用极其含蓄、柔和的阴影创造深度与抬升——绝不刺眼或突出
+- **Hero 图片**：`shadow-[0_8px_32px_rgba(0,0,0,0.12)]` — 主要焦点中等阴影
+- **特性图片**：`shadow-[0_4px_24px_rgba(0,0,0,0.08)]` — 轻阴影配含蓄内边框
+- **博客图片**：`shadow-[0_4px_20px_rgba(0,0,0,0.06)]` 悬停加深至 `shadow-[0_8px_32px_rgba(0,0,0,0.12)]`
+- **卡片**：`shadow-[0_2px_8px_rgba(0,0,0,0.02)]` 悬停加深至 `shadow-[0_8px_24px_rgba(0,0,0,0.06)]`
+- **主按钮**：`shadow-[0_4px_16px_rgba(0,0,0,0.15)]` 悬停加深至 `shadow-[0_8px_24px_rgba(0,0,0,0.25)]`
+- **内边框**：用 `shadow-[inset_0_0_0_1px_rgba(0,0,0,0.04-0.08)]` 作图片含蓄框定
+
+**纹理与颗粒**：
+- **纸张噪点**：全页含蓄 SVG 噪点纹理叠加，2% 不透明度，模仿昂贵纸张颗粒
+- **实现**：固定位置叠加配 SVG 分形噪点滤镜，pointer-events 禁用，z-index 50
+- **目的**：增添触感而初看不可见——创造"昂贵纸张"感
+
+**图片处理**：
+- **默认状态**：灰度滤镜（`grayscale`）— 创造单色编辑外观
+- **悬停状态**：全彩（`grayscale-0`）— 缓慢过渡作为奖励显现色彩
+- **过渡**：`duration-[1500ms]` 至 `duration-[2000ms]` — 超慢电影感显现
+- **变换**：悬停含蓄缩放（`group-hover:scale-105`）结合色彩过渡
+- **阴影演变**：图片悬停获更深阴影以增强上浮效果
+- **Group 上下文**：父级用 `group` 工具作协调悬停效果
+
+### 网格与垂直线（结构框架）
+
+**可见网格系统**：
+- **4 条垂直网格线**：固定位置线跨越全视口高度，位于列边界
+- **实现**：`w-px` div 配 `bg-[#1A1A1A]/20`，固定位置，pointer-events 禁用
+- **目的**：创造可见编辑网格结构，增添建筑质感
+- **间距**：与 12 列布局断点对齐，通常在容器边缘与中间三分之一处
+
+**布局网格**：
+- **列**：12 列网格系统
+- **最大宽度**：内容容器 1600px
+- **内边距**：移动 `px-8`，桌面 `px-16` — 慷慨水平呼吸空间
+- **非对称**：用偏移列起始（`col-start-2`、`col-start-6`）创造视觉趣味
+
+## 组件样式原则
+
+### 按钮（极简配奢华细节）
+
+**视觉结构**：
+- **形状**：矩形，0px border-radius，精准边缘
+- **高度**：默认 `h-12`（48px），大 `h-14`（56px），小 `h-10`（40px）
+- **内边距**：慷慨水平（`px-8` 至 `px-10`）
+- **字体**：大写，`text-xs`，`tracking-[0.2em]`，medium 字重
+
+**主按钮**：
+- **默认**：深色背景（`bg-[#1A1A1A]`），白字
+- **悬停动画**：金色层（`bg-[#D4AF37]`）用 transform 自左滑入
+  - 初始状态：`translate-x-[-100%]`（左屏外）
+  - 悬停状态：`translate-x-0`（覆盖按钮）
+  - 时长：`duration-500` 配自定义缓动 `cubic-bezier(0.25, 0.46, 0.45, 0.94)`
+  - 文字保持白色，用 z-index 位于金色层之上
+- **结构**：需内部 `<span>` 作金色叠加与另一作内容（z-10）
+
+**次按钮**：
+- **默认**：透明背景，细边框（`border border-[#1A1A1A]`），深色文字
+- **悬停**：背景填充深色（`bg-[#1A1A1A]`），文字反转为白
+- **过渡**：平滑 `duration-500` 以优雅填充
+
+**链接按钮**：
+- **样式**：文字配悬停下划线，无背景或边框
+- **颜色**：深色文字，悬停可选金色
+
+### 卡片与容器（由线条定义）
+
+**视觉方法**：
+- **背景**：透明或含蓄（`bg-transparent`）
+- **定义**：单顶边框（`border-t`）而非完整方框
+- **边框**：`border-[#1A1A1A]` 1px 宽
+- **内边距**：慷慨 `p-8` 移动，`p-12` 桌面
+- **悬停**：含蓄背景色偏移（`hover:bg-[#F9F8F6]/50`）— 几乎不可见
+
+**精选卡片**：
+- 用更厚顶边框（`border-t-4`）配金色（`border-t-[#D4AF37]`）标示重要性
+- 定价档位高亮、特殊特性
 
-**Image Cards:**
-- Image in grayscale with slow color reveal on hover
-- Use specific aspect ratios: `aspect-[3/4]` for features, `aspect-[4/5]` for blog posts
-- Combine image scale with parent card hover state using `group` utility
+**图片卡片**：
+- 灰度图片配悬停缓慢色彩显现
+- 用特定宽高比：特性 `aspect-[3/4]`，博客 `aspect-[4/5]`
+- 用 `group` 工具结合图片缩放与父卡片悬停状态
 
-### Inputs (Underline Only)
+### 输入框（仅下划线）
 
-**Visual Style:**
-- **Border**: Bottom border only (`border-b`), no other borders
-- **Background**: Transparent (`bg-transparent`)
-- **Border Color**: `#1A1A1A` default, `#D4AF37` on focus
-- **Height**: `h-12` for consistency with buttons
-- **Padding**: Minimal horizontal (`px-0`), vertical (`py-2`)
-
-**Typography:**
-- **Input Text**: Inter font, `text-sm`, dark color
-- **Placeholder**: Playfair Display font, italic, warm grey color (`text-[#6C6863]`)
-- **Reasoning**: Italic serif placeholder creates elegant, editorial feel
-
-**Focus State:**
-- Border changes to gold (`focus-visible:border-[#D4AF37]`)
-- No ring or glow effects — keep it minimal
+**视觉样式**：
+- **边框**：仅底边框（`border-b`），无其他边框
+- **背景**：透明（`bg-transparent`）
+- **边框色**：默认 `#1A1A1A`，聚焦 `#D4AF37`
+- **高度**：`h-12` 以与按钮一致
+- **内边距**：最小水平（`px-0`），垂直（`py-2`）
+
+**字体**：
+- **输入文字**：Inter 字体，`text-sm`，深色
+- **占位符**：Playfair Display 字体，斜体，暖灰（`text-[#6C6863]`）
+- **理由**：斜体衬线占位符创造优雅编辑感
+
+**聚焦状态**：
+- 边框变金（`focus-visible:border-[#D4AF37]`）
+- 无环或辉光效果——保持极简
 
-### Interactive States (Slow & Deliberate)
-
-**Hover Effects:**
-- **Duration**: `duration-500` to `duration-700` for most interactions (text, backgrounds, borders)
-- **Duration (Images)**: `duration-[1500ms]` to `duration-[2000ms]` for image transitions
-- **Easing**: `ease-out` or custom `cubic-bezier(0.25, 0.46, 0.45, 0.94)` for smooth luxury feel
-- **Color**: Gold accent (`#D4AF37`) appears subtly on hover (text, borders, underlines)
-- **Transform**: Subtle scale (`scale-105`) or translate — never abrupt
-- **Shadow Evolution**: Shadows deepen on hover for lift effect
-- **Testimonials**: Left border changes to gold, padding increases, avatar gains color
-- **FAQ**: Question text turns gold, icon square rotates 90° and border turns gold
-
-**Focus States:**
-- Minimal focus rings: `focus-visible:ring-1 focus-visible:ring-[#1A1A1A]`
-- Prefer border color change over visible rings
-- Gold accent for focused inputs (`focus-visible:border-[#D4AF37]`)
-
-**Disabled States:**
-- Reduced opacity (`opacity-50`)
-- Pointer events disabled
-- No special color changes — muted appearance
-
-**Micro-interactions:**
-- **FAQ Accordion**: Icon rotates 90°, border turns gold on open, content fades in with translateY animation
-- **Testimonial Stars**: Scale up slightly on card hover (`group-hover:scale-110`)
-- **Blog Cards**: Shadow deepens, image scales and gains color
-- **Navigation Links**: Gold color on hover with 500ms transition
-- **Button Animations**: Gold overlay slides from left on primary buttons, shadow deepens
-
-## Layout Principles (Breaking Symmetry)
-
-**Asymmetric Composition:**
-- **Avoid 50/50 splits**: Use 7/5, 4/4/4, or 4 offset by 2 column starts instead
-- **Bottom-left alignment**: Position primary content at bottom of container, aligned left
-- **Offset grids**: Start content at column 2 or 6 instead of 1, leaving deliberate empty space
-
-**Vertical Spacing (Generous Air):**
-- **Section Padding**: `py-24` to `py-32` (6rem to 8rem) — Massive vertical space between sections
-- **Component Padding**: `p-8` to `p-12` for cards and containers
-- **Element Spacing**: Use `gap-12` or `gap-16` for component groups, not tight spacing
-- **Breathing Room**: If it feels like too much space, it's probably correct for luxury design
-
-**Section Alternation:**
-- Alternate light (`bg-[#F9F8F6]`) and dark (`bg-[#1A1A1A]`) sections for rhythm
-- Use top borders (`border-t`) to separate sections without color changes
-- Dark sections use inverted color palette with muted text at 60-80% opacity
-
-**Content Width:**
-- Maximum container: `max-w-[1600px]`
-- Centered with `mx-auto`
-- Text columns: `max-w-md` to `max-w-xl` for comfortable reading
-
-## The "Bold Factor" (Non-Genericness)
-
-These signature elements make Luxury/Editorial instantly recognizable and must be present:
-
-1. **Vertical Text Labels**: Use CSS `writing-mode: vertical-rl` for decorative side labels (e.g., "Editorial / Vol. 01"). Position absolutely on images, typically on left or right edges. Uppercase with wide tracking. Hidden on mobile, visible on desktop.
-
-2. **Drop Caps**: Large initial letter for introductory paragraphs using `float-left`, Playfair Display font, 7xl size, tight line-height (0.8), with right margin (mr-3). Applied to first paragraph of Product Detail and Features intro. Creates classic editorial feel.
-
-3. **Mixed Italic Headlines**: Within large headlines, alternate between regular and italic styling for specific words to create "spoken" cadence. Use gold color on italic words. Examples: "Curated *Excellence*", "The *Details*", "The *Process*". Headline splits across lines with specific words emphasized.
-
-4. **Grayscale Image Transitions**: All images default to grayscale filter with ultra-slow (1500-2000ms) transition to full color on hover. Combines with subtle scale transform (`group-hover:scale-105`) and shadow deepening. Applied consistently to hero, features, blog, and testimonial avatars.
-
-5. **Visible Grid Lines**: Fixed vertical lines spanning viewport height, aligned with 12-column grid boundaries, at low opacity (20%). Four lines total (edges and middle thirds). Creates architectural editorial magazine feel. Pointer-events disabled.
-
-6. **Gold Sliding Animation**: Primary button hover reveals gold background (`#D4AF37`) sliding from left using `translate-x` transform. Requires layered span structure with z-index. Combined with shadow deepening from `shadow-[0_4px_16px]` to `shadow-[0_8px_24px]`.
-
-7. **Decorative Horizontal Lines**: Short horizontal lines (`h-px w-8 md:w-12`) used as decorative elements before labels (hero) or between metadata (blog dates). Deliberate, architectural spacing elements.
-
-8. **Extreme Type Scale**: Massive headlines (`text-5xl` mobile to `text-9xl` desktop) combined with tiny uppercase labels (`text-[10px]` to `text-xs`) creates dramatic hierarchy essential to luxury feel. Responsive scaling maintains proportions.
-
-9. **Layered Shadows**: Subtle shadows create depth without being obvious. Images have box shadows that deepen on hover. Inner borders (`inset` shadows) frame images. Cards lift with shadow evolution. Never harsh—always soft and refined.
-
-10. **Testimonial Interactions**: Left border animation (changes to gold and increases padding on hover), grayscale avatar transitions to color, author name turns gold, stars scale up. Multi-layered coordinated effect.
-
-## Anti-Patterns (What to Avoid)
-
-These mistakes will break the luxury aesthetic:
-
-1. **DO NOT use rounded corners** — Everything must be perfectly rectangular with 0px border-radius
-2. **DO NOT use harsh shadows** — Only use extremely subtle shadows with low opacity rgba values. Depth comes from layering, not prominent drops.
-3. **DO NOT use pure black (#000000) or pure white (#FFFFFF)** — Use charcoal (#1A1A1A) and alabaster (#F9F8F6)
-4. **DO NOT use fast animations** — Minimum 500ms for interactions, 1500-2000ms for images. Luxury is deliberate and slow.
-5. **DO NOT use vibrant colors** — Stick to monochromatic palette with gold (#D4AF37) as only accent
-6. **DO NOT center everything** — Use asymmetry, offset columns, bottom-left alignment. Break the grid intentionally.
-7. **DO NOT overcrowd spacing** — More space is better. If it feels too airy, you're on the right track. Mobile: py-20, Desktop: py-32.
-8. **DO NOT use decorative fonts** — Only Playfair Display (serif) and Inter (sans-serif). No script or display fonts.
-9. **DO NOT use icons prominently** — If needed, use lucide-react with thin strokes (1-2px), sparingly. Icons are functional, not decorative.
-10. **DO NOT make gold dominant** — Gold is an accent for hover/focus states and specific emphasis, not a primary color
-11. **DO NOT use small images** — Images should be large and prominent, portrait aspect ratios (3:4, 4:5) with shadows and inner borders
-12. **DO NOT use tight tracking on body text** — Only uppercase labels get wide tracking (0.2-0.3em). Body text uses default tracking.
-13. **DO NOT skip the grayscale filter** — All images must default to grayscale. Color is the reward on hover.
-14. **DO NOT use generic mobile layouts** — Maintain the core aesthetic on mobile with proper scaling, not generic stacking
-
-## Animation & Motion (Cinematic Timing)
-
-**Philosophy:** All motion should feel deliberate, slow, and expensive. Nothing snaps or jumps. Think of camera movements in luxury fashion videos—smooth, gradual, cinematic.
-
-**Timing:**
-- **Button Interactions**: `duration-500` (500ms)
-- **Color Transitions**: `duration-700` (700ms)
-- **Image Effects**: `duration-[1500ms]` to `duration-[2000ms]` (1500-2000ms)
-- **Background Transitions**: `duration-700` (700ms)
-
-**Easing Functions:**
-- **Default**: `ease-out` for most interactions
-- **Custom**: `cubic-bezier(0.25, 0.46, 0.45, 0.94)` for smooth luxury feel (use in Tailwind with arbitrary values)
-- **Never**: `ease-in-out` or `ease-in` — These feel too mechanical
-
-**Transition Properties:**
-- Combine multiple properties: `transition-all` or specific `transition-[colors,transform]`
-- Image transforms: Combine `scale` (1 to 1.05) with `grayscale` (1 to 0) in same transition
-- Button fills: Use transform on absolute positioned overlay rather than background color change
-
-**Hover Effects:**
-- Delay feels intentional — user must pause on element for effect to complete
-- Multiple effects layer together (scale + color + grayscale) for richness
-- Text color changes are instant or faster (300ms) while backgrounds are slower
-
-## Accessibility Considerations
-
-**Contrast:**
-- Charcoal (#1A1A1A) on Alabaster (#F9F8F6): 12.6:1 — Excellent (AAA)
-- Warm Grey (#6C6863) on Alabaster: 4.8:1 — Good for secondary text (AA)
-- Gold (#D4AF37) on Charcoal: 5.2:1 — Sufficient for accents (AA)
-- White on Charcoal: 14.5:1 — Excellent (AAA)
-
-**Focus Indicators:**
-- Use `focus-visible:ring-1` or `focus-visible:border-[color]` for keyboard navigation
-- Gold accent on focus makes interactive elements clear
-- Never remove focus indicators — just make them elegant
-
-**Motion Preferences:**
-- Respect `prefers-reduced-motion` for users with vestibular disorders
-- Reduce animation durations to 0ms or use simpler transitions
-- Keep color changes but remove transforms and scales
-
-**Typography:**
-- Large body text size (16-18px base) ensures readability
-- High contrast ratio for primary text
-- Generous line-height (1.625) improves readability
-- Avoid justified text — use left alignment
-
-**Interactive Areas:**
-- Buttons have minimum 48px height (h-12) for touch targets
-- Adequate padding creates larger clickable areas
-- Spacing between interactive elements prevents mis-taps
-
-## Implementation Notes
-
-**Tech Stack:**
-- Tailwind CSS v4 for all styling with custom color values
-- Google Fonts for "Playfair Display" and "Inter"
-- Lucide React for icons (if needed, use sparingly with thin stroke-width)
-- Custom CSS for noise texture (SVG data URI) and vertical writing mode
-
-**Responsive Strategy:**
-- **Mobile (< 768px)**:
-  - Stack all columns vertically
-  - Reduce padding: `px-8`, `py-20` (instead of px-16, py-32)
-  - Scale down typography: `text-4xl` headlines (instead of text-6xl), `text-xl` quotes (instead of text-3xl)
-  - Reduce gaps: `gap-8`, `gap-12` (instead of gap-12, gap-24)
-  - Stats: 2 columns, smaller text (text-3xl instead of text-5xl)
-  - Hero: Smaller type scale `text-5xl` (instead of text-9xl), smaller line and decorative elements
-  - Testimonials: Smaller left padding `pl-6` (instead of pl-8)
-  - Footer CTA: Stack email input and button vertically with `flex-col` on small screens
-  - Maintain core aesthetic: grayscale images, gold accents, slow animations
-
-- **Tablet (768px - 1024px)**:
-  - Begin introducing grid layouts (2-3 columns)
-  - Medium padding: `px-8 md:px-16`, `py-20 md:py-32`
-  - Typography scales up: `text-5xl md:text-6xl`
-  - Complex layouts still stack (testimonials, FAQ)
-
-- **Desktop (> 1024px)**:
-  - Full 12-column asymmetric grid with offset columns
-  - Maximum padding and spacing
-  - Visible vertical gridlines (4 lines at column boundaries)
-  - Vertical writing mode text visible
-  - Full typographic scale (text-9xl for hero)
-
-**Performance:**
-- Use CSS transforms (translate, scale) for animations — GPU accelerated
-- Grayscale filter is performant in modern browsers
-- Fixed gridlines and noise overlay use minimal resources
-- Shadows use rgba with low opacity for minimal render cost
-
-**Code Organization:**
-- Extract color values to config/constants for consistency
-- Create button component with variant system (primary/secondary/ghost/link) and shadow on primary
-- Create card component with border-top pattern and shadow evolution built in
-- Create input component with underline-only styling and italic placeholder
-- Add fadeIn keyframe animation for FAQ accordion content
+### 交互状态（缓慢而刻意）
+
+**悬停效果**：
+- **时长**：大多数交互 `duration-500` 至 `duration-700`（文字、背景、边框）
+- **时长（图片）**：图片过渡 `duration-[1500ms]` 至 `duration-[2000ms]`
+- **缓动**：`ease-out` 或自定义 `cubic-bezier(0.25, 0.46, 0.45, 0.94)` 以流畅奢华感
+- **色彩**：金色点缀（`#D4AF37`）悬停时含蓄出现（文字、边框、下划线）
+- **变换**：含蓄缩放（`scale-105`）或位移——绝不突兀
+- **阴影演变**：悬停时阴影加深以增上浮效果
+- **证言**：左边框变金，内边距增加，头像获色彩
+- **FAQ**：问题文字变金，图标方块旋转 90° 且边框变金
+
+**聚焦状态**：
+- 极简聚焦环：`focus-visible:ring-1 focus-visible:ring-[#1A1A1A]`
+- 优先边框色变化而非可见环
+- 聚焦输入框用金色点缀（`focus-visible:border-[#D4AF37]`）
+
+**禁用状态**：
+- 降低不透明度（`opacity-50`）
+- 指针事件禁用
+- 无特殊色彩变化——柔和外观
+
+**微交互**：
+- **FAQ 手风琴**：图标旋转 90°，打开时边框变金，内容配 translateY 动画淡入
+- **证言星标**：卡片悬停时轻微放大（`group-hover:scale-110`）
+- **博客卡片**：阴影加深，图片缩放并获色彩
+- **导航链接**：悬停金色配 500ms 过渡
+- **按钮动画**：主按钮金色叠加自左滑入，阴影加深
+
+## 布局原则（打破对称）
+
+**非对称构图**：
+- **避免 50/50 分割**：改用 7/5、4/4/4 或 4 偏移 2 列起始
+- **左下对齐**：将主要内容置于容器底部，左对齐
+- **偏移网格**：自第 2 或 6 列起始内容，留刻意空隙
+
+**垂直间距（慷慨空间）**：
+- **区块内边距**：`py-24` 至 `py-32`（6rem 至 8rem）— 区块间巨大垂直空间
+- **组件内边距**：卡片与容器 `p-8` 至 `p-12`
+- **元素间距**：组件组用 `gap-12` 或 `gap-16`，非紧凑间距
+- **呼吸空间**：若感觉空间过多，对奢华设计可能正好
+
+**区块交替**：
+- 交替浅色（`bg-[#F9F8F6]`）与深色（`bg-[#1A1A1A]`）区块以增节奏
+- 用顶边框（`border-t`）在不改色情况下分隔区块
+- 深色区块用反相调色板配 60-80% 不透明度柔和文字
+
+**内容宽度**：
+- 最大容器：`max-w-[1600px]`
+- 居中配 `mx-auto`
+- 文字列：`max-w-md` 至 `max-w-xl` 以舒适阅读
+
+## "大胆要素"（非通用性）
+
+这些签名元素使 Luxury/编辑风即时可辨且必须存在：
+
+1. **垂直文字标签**：用 CSS `writing-mode: vertical-rl` 作装饰性侧标签（如"Editorial / Vol. 01"）。绝对定位于图片，通常在左或右边缘。大写配宽字距。移动端隐藏，桌面端可见。
+
+2. **首字下沉**：介绍段落的大号首字母，用 `float-left`、Playfair Display 字体、7xl 尺寸、紧凑行高（0.8）、右外边距（mr-3）。应用于 Product Detail 与 Features 引言的首段。创造经典编辑感。
+
+3. **混合斜体标题**：大标题内交替常规与斜体样式以创造"口语"节奏。斜体词用金色。示例："Curated *Excellence*"、"The *Details*"、"The *Process*"。标题跨行分割配特定词强调。
+
+4. **灰度图片过渡**：所有图片默认灰度滤镜配超慢（1500-2000ms）过渡至全彩悬停。结合含蓄缩放变换（`group-hover:scale-105`）与阴影加深。一致应用于 Hero、特性、博客与证言头像。
+
+5. **可见网格线**：固定垂直线跨越视口高度，与 12 列网格边界对齐，低不透明度（20%）。共 4 条线（边缘与中间三分之一）。创造建筑编辑杂志感。pointer-events 禁用。
+
+6. **金色滑动动画**：主按钮悬停显现金色背景（`#D4AF37`）用 `translate-x` transform 自左滑入。需分层 span 结构配 z-index。结合阴影从 `shadow-[0_4px_16px]` 加深至 `shadow-[0_8px_24px]`。
+
+7. **装饰性水平线**：短水平线（`h-px w-8 md:w-12`）作标签前（Hero）或元信息间（博客日期）的装饰元素。刻意、建筑的间距元素。
+
+8. **极端字号阶梯**：巨型标题（移动 `text-5xl` 至桌面 `text-9xl`）配微型大写标签（`text-[10px]` 至 `text-xs`）创造奢华感必需的戏剧层级。响应式缩放保持比例。
+
+9. **分层阴影**：含蓄阴影创造深度而不明显。图片有悬停加深的 box shadow。内边框（`inset` 阴影）框定图片。卡片随阴影演变上浮。绝不刺眼——始终柔和精致。
+
+10. **证言交互**：左边框动画（悬停变金并增加内边距）、灰度头像过渡至彩色、作者名变金、星标放大。多层协调效果。
+
+## 反模式（应避免之事）
+
+这些错误将破坏奢华美学：
+
+1. **勿用圆角** — 一切必须完美矩形，0px border-radius
+2. **勿用刺眼阴影** — 仅用极含蓄的低不透明度 rgba 阴影。深度来自分层，非突出投影。
+3. **勿用纯黑（#000000）或纯白（#FFFFFF）** — 用炭灰（#1A1A1A）与雪花石膏（#F9F8F6）
+4. **勿用快速动画** — 交互最低 500ms，图片 1500-2000ms。奢华是刻意而缓慢的。
+5. **勿用鲜艳色彩** — 坚持单色调色板，金（#D4AF37）为唯一点缀
+6. **勿居中一切** — 用非对称、偏移列、左下对齐。刻意打破网格。
+7. **勿过度拥挤间距** — 更多空间更好。若感觉过通透，方向正确。移动：py-20，桌面：py-32。
+8. **勿用装饰字体** — 仅 Playfair Display（衬线）与 Inter（无衬线）。无手写或展示字体。
+9. **勿突出使用图标** — 若需，用 lucide-react 细描边（1-2px），克制。图标是功能性的，非装饰性的。
+10. **勿让金色占主导** — 金色是悬停/聚焦状态与特定强调的点缀，非主色
+11. **勿用小图片** — 图片应大而突出，人像宽高比（3:4, 4:5）配阴影与内边框
+12. **勿在正文用紧凑字距** — 仅大写标签获宽字距（0.2-0.3em）。正文用默认字距。
+13. **勿跳过灰度滤镜** — 所有图片必须默认灰度。色彩是悬停的奖励。
+14. **勿用通用移动布局** — 移动端保持核心美学配适当缩放，非通用堆叠
+
+## 动画与运动（电影时机）
+
+**哲学**：所有运动应感觉刻意、缓慢、昂贵。无物 snap 或 jump。想象奢华时尚视频中的摄影机运动——平滑、渐进、电影感。
+
+**时机**：
+- **按钮交互**：`duration-500`（500ms）
+- **色彩过渡**：`duration-700`（700ms）
+- **图片效果**：`duration-[1500ms]` 至 `duration-[2000ms]`（1500-2000ms）
+- **背景过渡**：`duration-700`（700ms）
+
+**缓动函数**：
+- **默认**：大多数交互用 `ease-out`
+- **自定义**：`cubic-bezier(0.25, 0.46, 0.45, 0.94)` 以流畅奢华感（Tailwind 用任意值）
+- **绝不用**：`ease-in-out` 或 `ease-in` — 感觉过机械
+
+**过渡属性**：
+- 结合多属性：`transition-all` 或特定 `transition-[colors,transform]`
+- 图片变换：同过渡中结合 `scale`（1 至 1.05）与 `grayscale`（1 至 0）
+- 按钮填充：用绝对定位叠加的 transform 而非背景色变化
+
+**悬停效果**：
+- 延迟感觉有意——用户须在元素上停留以使效果完成
+- 多效果层叠（缩放 + 色彩 + 灰度）以增丰富
+- 文字色变化即时或更快（300ms）而背景更慢
+
+## 可访问性考量
+
+**对比**：
+- 炭灰（#1A1A1A）于雪花石膏（#F9F8F6）：12.6:1 — 优秀（AAA）
+- 暖灰（#6C6863）于雪花石膏：4.8:1 — 次要文字良好（AA）
+- 金（#D4AF37）于炭灰：5.2:1 — 点缀充足（AA）
+- 白于炭灰：14.5:1 — 优秀（AAA）
+
+**聚焦指示器**：
+- 用 `focus-visible:ring-1` 或 `focus-visible:border-[color]` 作键盘导航
+- 聚焦时金色点缀使交互元素清晰
+- 绝不移除聚焦指示器——使其优雅
+
+**运动偏好**：
+- 尊重 `prefers-reduced-motion` 服务前庭障碍用户
+- 将动画时长减至 0ms 或用更简过渡
+- 保留色彩变化但移除变换与缩放
+
+**字体**：
+- 大正文尺寸（16-18px base）确保可读
+- 主要文字高对比比
+- 慷慨行高（1.625）提升可读性
+- 避免两端对齐文字——用左对齐
+
+**交互区域**：
+- 按钮最小 48px 高度（h-12）作触控目标
+- 充足内边距创造更大可点击区域
+- 交互元素间间距防止误触
+
+## 实现说明
+
+**技术栈**：
+- Tailwind CSS v4 用于所有样式配自定义色值
+- Google Fonts "Playfair Display" 与 "Inter"
+- Lucide React 作图标（若需，克制用细 stroke-width）
+- 自定义 CSS 作噪点纹理（SVG data URI）与垂直书写模式
+
+**响应式策略**：
+- **移动（< 768px）**：
+  - 所有列垂直堆叠
+  - 缩减内边距：`px-8`、`py-20`（而非 px-16、py-32）
+  - 缩小字体：标题 `text-4xl`（而非 text-6xl），引文 `text-xl`（而非 text-3xl）
+  - 缩减间隙：`gap-8`、`gap-12`（而非 gap-12、gap-24）
+  - 数据：2 列，更小文字（text-3xl 而非 text-5xl）
+  - Hero：更小字号 `text-5xl`（而非 text-9xl），更小线条与装饰元素
+  - 证言：更小左内边距 `pl-6`（而非 pl-8）
+  - 页脚 CTA：小屏垂直堆叠邮箱输入与按钮配 `flex-col`
+  - 保持核心美学：灰度图片、金色点缀、缓慢动画
+
+- **平板（768px - 1024px）**：
+  - 开始引入网格布局（2-3 列）
+  - 中等内边距：`px-8 md:px-16`、`py-20 md:py-32`
+  - 字体放大：`text-5xl md:text-6xl`
+  - 复杂布局仍堆叠（证言、FAQ）
+
+- **桌面（> 1024px）**：
+  - 完整 12 列非对称网格配偏移列
+  - 最大内边距与间距
+  - 可见垂直网格线（4 条于列边界）
+  - 垂直书写模式文字可见
+  - 完整字体阶梯（Hero text-9xl）
+
+**性能**：
+- 动画用 CSS transform（translate、scale）— GPU 加速
+- 灰度滤镜在现代浏览器中高性能
+- 固定网格线与噪点叠加用最少资源
+- 阴影用低不透明度 rgba 以最小渲染成本
+
+**代码组织**：
+- 提取色值至 config/constants 以保一致
+- 创建按钮组件配变体系统（primary/secondary/ghost/link）与 primary 阴影
+- 创建卡片组件配 border-top 模式与内置阴影演变
+- 创建输入组件配仅下划线样式与斜体占位符
+- 添加 fadeIn 关键帧动画作 FAQ 手风琴内容

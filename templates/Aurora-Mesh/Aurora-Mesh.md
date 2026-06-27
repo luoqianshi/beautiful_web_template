@@ -10,94 +10,94 @@
 | 显示名称 | Aurora Mesh |
 | 模式 | 🌙 深色模式 (Dark) |
 | 字体类型 | sans-serif |
-| 描述 | Flowing mesh gradients, aurora effects, vibrant color transitions, modern startup aesthetic inspired by Stripe and Vercel |
+| 描述 | 流动的网格渐变，极光效果，鲜明色彩过渡，受 Stripe 与 Vercel 启发的现代初创美学。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Full-height hero with animated mesh gradient background. Split layout with headline left (massive typography with gradient text fill), floating 3D-ish card mockup right with aurora glow underneath. CTAs have pill shapes with gradient borders.
+全高 Hero，配动画网格渐变背景。分割布局：左侧标题（巨型字体配渐变文字填充），右侧浮动 3D 感卡片模型，下方极光辉光。CTA 为渐变边框胶囊形。
 
 ### Stats
 
-Horizontal strip with glass-morphic stat cards floating over a subtle aurora wave. Each stat has a glowing accent bar on top indicating its category color.
+横向条带，玻璃拟态数据卡片浮于含蓄极光波之上。每个数据顶部有发光的点缀色条，标示其类别色。
 
 ### Features
 
-Asymmetric bento grid with varying card sizes. Cards have dark glass backgrounds with colored gradient borders that pulse subtly. Icons sit in gradient orbs.
+非对称 bento 网格，卡片尺寸不一。卡片为深色玻璃背景，带彩色渐变边框，轻微脉动。图标置于渐变光球中。
 
 ### How It Works
 
-Vertical timeline with a glowing gradient line connecting steps. Each step card has a mesh gradient corner accent. Numbers are oversized with gradient fills.
+垂直时间线，发光渐变线连接各步。每步卡片含网格渐变角部点缀。数字超大，配渐变填充。
 
 ### Benefits
 
-Two-column layout with benefit cards stacked. Each card has an aurora streak across the top edge. Checkmark icons with gradient fills.
+双栏布局，收益卡片堆叠。每张卡片顶边有极光条纹。勾选图标配渐变填充。
 
 ### Pricing
 
-Three cards with the featured card elevated and wrapped in an animated gradient border. Background has slow-moving mesh gradient. Prices use gradient text.
+三张卡片，精选卡片上浮并以动画渐变边框包裹。背景为缓慢移动的网格渐变。价格使用渐变文字。
 
 ### Testimonials
 
-Carousel or masonry of quote cards with avatar images having gradient ring borders. Quote marks are oversized with aurora gradient fills.
+证言卡片轮播或瀑布流，头像图片带渐变环边框。引号超大，配极光渐变填充。
 
 ### Faq
 
-Accordion style with gradient accent lines on the left. Expanded items reveal answers with a soft glow effect. Plus/minus icons have gradient treatment.
+手风琴样式，左侧渐变点缀线。展开项以柔和辉光效果显现回答。加减图标采用渐变处理。
 
 ### Blog
 
-Horizontal scrolling cards with image overlays featuring gradient mesh filters. Date badges have pill shapes with gradient backgrounds.
+横向滚动卡片，图片叠加配渐变网格滤镜。日期徽章为渐变背景胶囊形。
 
 ### Footer
 
-Dark base with subtle aurora waves at the top edge. Links organized in columns with gradient hover underlines. Social icons in gradient orbs.
+深色基底，顶边含蓄极光波。链接分列组织，悬停时渐变下划线。社交图标置于渐变光球中。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Aurora Mesh Design System
+# Aurora Mesh 设计系统
 
-## Design Philosophy
+## 设计哲学
 
-Aurora Mesh captures the ethereal, flowing beauty of the northern lights fused with modern mesh gradient technology. This is the aesthetic of **premium SaaS products**—think Stripe's cosmic depth, Vercel's dark elegance, and Linear's polished minimalism, but pushed further into the realm of **living, breathing color**.
+Aurora Mesh 捕捉了北极光空灵流动之美，与现代网格渐变技术相融。这是**高端 SaaS 产品**的美学——想象 Stripe 的宇宙深度、Vercel 的深色优雅与 Linear 的精致极简，但进一步推向**活的、呼吸的色彩**之境。
 
-**Core Principles:**
-- **Fluid Color**: Gradients are never static. They flow, morph, and breathe with organic movement
-- **Dark Canvas, Bright Accents**: Deep, near-black backgrounds make vibrant aurora colors sing
-- **Dimensional Depth**: Layers of blur, glow, and transparency create a sense of floating UI
-- **Premium Polish**: Every detail is refined—smooth curves, perfect spacing, considered micro-interactions
+**核心原则**：
+- **流动的色彩**：渐变永不静止。它们流动、变形、以有机运动呼吸
+- **深色画布，明亮点缀**：深邃近黑的背景让鲜艳的极光色彩歌唱
+- **维度深度**：模糊、辉光与透明的层次营造漂浮 UI 之感
+- **高端打磨**：每个细节都经精炼——流畅曲线、完美间距、考究的微交互
 
-**The Vibe:** Sophisticated, futuristic, premium, otherworldly. Like operating a spaceship's interface while flying through an aurora. The user should feel like they're touching the future.
+**气质**：精致、未来感、高端、超凡脱俗。如同在穿越极光时操作宇宙飞船的界面。用户应感到自己在触摸未来。
 
-**Visual Signatures:**
-- Mesh gradients that appear to move and shift
-- Colored glow effects bleeding from elements
-- Glass-like surfaces catching light
-- Gradient text on headlines
-- Floating cards with colored shadows
-- Aurora wave patterns in backgrounds
+**视觉签名**：
+- 似在移动与变换的网格渐变
+- 自元素溢出的彩色辉光效果
+- 捕捉光线的玻璃般表面
+- 标题上的渐变文字
+- 带彩色阴影的浮动卡片
+- 背景中的极光波纹图案
 
 ---
 
-## Design Token System
+## 设计 Token 系统
 
-### Colors (Dark Mode - Definitive)
+### 色彩（深色模式 — 定义版）
 
 ```
 Background:
-  base: #09090b (near-black with slight warmth)
-  elevated: #18181b (card backgrounds)
-  surface: #27272a (input backgrounds, borders)
+  base: #09090b (近黑，略带暖意)
+  elevated: #18181b (卡片背景)
+  surface: #27272a (输入框背景、边框)
 
 Foreground:
-  primary: #fafafa (headings, important text)
-  secondary: #a1a1aa (body text, descriptions)
-  muted: #71717a (placeholders, disabled)
+  primary: #fafafa (标题、重要文字)
+  secondary: #a1a1aa (正文、描述)
+  muted: #71717a (占位符、禁用)
 
-Aurora Palette (The Star):
+Aurora Palette (主角):
   violet: #8b5cf6
   purple: #a855f7
   fuchsia: #d946ef
@@ -105,13 +105,13 @@ Aurora Palette (The Star):
   cyan: #22d3ee
   teal: #2dd4bf
 
-Gradient Stops (for mesh):
+Gradient Stops (用于网格):
   aurora-1: #8b5cf6 (violet)
   aurora-2: #d946ef (fuchsia)
   aurora-3: #22d3ee (cyan)
   aurora-4: #2dd4bf (teal)
 
-Accent (Primary Actions):
+Accent (主要操作):
   DEFAULT: #a855f7
   hover: #c084fc
 
@@ -125,22 +125,22 @@ Warning: #fbbf24
 Error: #f87171
 ```
 
-### Typography
+### 字体
 
-**Font Stack:**
-- **Headlines**: "Instrument Sans" (Google Fonts) - Clean, geometric, modern. Alternative: Inter
-- **Body**: "Inter" (Google Fonts) - Highly legible, neutral, professional
-- **Mono/Code**: "JetBrains Mono" for any code snippets
+**字体栈**：
+- **标题**："Instrument Sans"（Google Fonts）— 干净、几何、现代。备选：Inter
+- **正文**："Inter"（Google Fonts）— 高可读性、中性、专业
+- **等宽/代码**："JetBrains Mono" 用于任何代码片段
 
-**Scale:**
-- Hero headline: `text-6xl md:text-7xl lg:text-8xl` with `font-bold tracking-tight`
-- Section titles: `text-4xl md:text-5xl` with `font-semibold`
-- Card titles: `text-xl md:text-2xl` with `font-semibold`
-- Body large: `text-lg` with `text-secondary`
-- Body: `text-base` with `leading-relaxed`
-- Small/Caption: `text-sm` with `text-muted`
+**字号阶梯**：
+- Hero 标题：`text-6xl md:text-7xl lg:text-8xl` 配 `font-bold tracking-tight`
+- 区块标题：`text-4xl md:text-5xl` 配 `font-semibold`
+- 卡片标题：`text-xl md:text-2xl` 配 `font-semibold`
+- 大号正文：`text-lg` 配 `text-secondary`
+- 正文：`text-base` 配 `leading-relaxed`
+- 小号/说明：`text-sm` 配 `text-muted`
 
-**Gradient Text Treatment:**
+**渐变文字处理**：
 ```css
 .gradient-text {
   background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #22d3ee 100%);
@@ -150,17 +150,17 @@ Error: #f87171
 }
 ```
 
-### Radius & Border
+### 圆角与边框
 
-- **Default radius**: `rounded-2xl` (16px) - Soft, modern, approachable
-- **Buttons**: `rounded-full` (pill-shaped for primary actions)
-- **Small elements**: `rounded-xl` (12px)
-- **Inputs**: `rounded-xl`
-- **Border width**: `border` (1px) with semi-transparent colors
+- **默认圆角**：`rounded-2xl`（16px）— 柔和、现代、亲和
+- **按钮**：`rounded-full`（主要操作的胶囊形）
+- **小元素**：`rounded-xl`（12px）
+- **输入框**：`rounded-xl`
+- **边框宽度**：`border`（1px）配半透明色
 
-### Shadows & Effects
+### 阴影与效果
 
-**Glow Shadows (The Signature):**
+**辉光阴影（签名元素）**：
 ```
 glow-sm: 0 0 20px rgba(168, 85, 247, 0.15)
 glow-md: 0 0 40px rgba(168, 85, 247, 0.2)
@@ -168,17 +168,17 @@ glow-lg: 0 0 60px rgba(168, 85, 247, 0.25), 0 0 120px rgba(34, 211, 238, 0.1)
 glow-colored: 0 0 40px var(--glow-color, rgba(168, 85, 247, 0.3))
 ```
 
-**Elevation (Layered):**
+**抬升（分层）**：
 ```
 elevation-1: 0 1px 2px rgba(0, 0, 0, 0.5)
 elevation-2: 0 4px 12px rgba(0, 0, 0, 0.4)
 elevation-3: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 40px rgba(168, 85, 247, 0.1)
 ```
 
-### Textures & Patterns (Critical)
+### 纹理与图案（关键）
 
-**Mesh Gradient Background:**
-CSS mesh gradient using multiple radial gradients layered:
+**网格渐变背景**：
+使用多层径向渐变的 CSS 网格渐变：
 ```css
 .aurora-mesh {
   background-color: #09090b;
@@ -192,102 +192,102 @@ CSS mesh gradient using multiple radial gradients layered:
 }
 ```
 
-**Noise Overlay:**
-Subtle grain texture at 2-5% opacity to add depth and reduce banding in gradients.
+**噪点叠加**：
+2-5% 不透明度的含蓄颗粒纹理，增添深度并减少渐变中的条带。
 
-**Aurora Wave (for section dividers):**
-SVG wave patterns with gradient fills, positioned at section tops/bottoms.
-
----
-
-## Component Stylings
-
-### Buttons
-
-**Primary Button:**
-- Background: Gradient `from-violet-500 via-fuchsia-500 to-pink-500`
-- Shape: `rounded-full` pill
-- Padding: `px-8 py-3`
-- Text: `text-white font-semibold`
-- Shadow: `shadow-lg shadow-violet-500/25`
-- Hover: Scale up slightly `hover:scale-105`, increase glow
-- Active: Scale down `active:scale-95`
-- Transition: `transition-all duration-200`
-
-**Secondary Button:**
-- Background: `bg-white/5` (glass effect)
-- Border: `border border-white/10`
-- Text: `text-white`
-- Hover: `bg-white/10`, border glows
-- Backdrop: `backdrop-blur-sm`
-
-**Ghost Button:**
-- Background: transparent
-- Text: `text-secondary`
-- Hover: `text-primary`, subtle glow underline
-
-### Cards/Containers
-
-**Standard Card:**
-- Background: `bg-zinc-900/50` with `backdrop-blur-xl`
-- Border: `border border-zinc-800/50`
-- Radius: `rounded-2xl`
-- Shadow: `shadow-2xl shadow-black/50`
-- Hover: Border brightens, subtle glow appears
-
-**Featured Card:**
-- Wrapped in gradient border container
-- Outer: Animated gradient border using `background: conic-gradient` trick
-- Inner: Dark solid background
-- Glow: Colored shadow matching the dominant gradient color
-
-**Glass Card:**
-- Background: `bg-white/5`
-- Backdrop: `backdrop-blur-2xl backdrop-saturate-150`
-- Border: `border border-white/10`
-
-### Inputs
-
-- Background: `bg-zinc-900`
-- Border: `border border-zinc-700`
-- Radius: `rounded-xl`
-- Text: `text-white`
-- Placeholder: `placeholder:text-zinc-500`
-- Focus: `focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20`
-- Transition: Smooth border color change
-
-### Icons
-
-- Default: `text-zinc-400` with `w-5 h-5`
-- In gradient orbs: Icon sits inside a `rounded-xl` container with gradient background
-- Interactive: Color shifts to accent on hover
-- Feature icons: Larger `w-8 h-8`, often with gradient backgrounds or colored glow
+**极光波（用于章节分隔符）**：
+带渐变填充的 SVG 波纹图案，置于章节顶部/底部。
 
 ---
 
-## Layout Strategy
+## 组件样式
 
-**Container:** `max-w-7xl mx-auto px-6 lg:px-8`
+### 按钮
 
-**Section Spacing:** `py-24 md:py-32` between major sections
+**主按钮**：
+- 背景：渐变 `from-violet-500 via-fuchsia-500 to-pink-500`
+- 形状：`rounded-full` 胶囊
+- 内边距：`px-8 py-3`
+- 文字：`text-white font-semibold`
+- 阴影：`shadow-lg shadow-violet-500/25`
+- 悬停：轻微放大 `hover:scale-105`，增强辉光
+- 按下：缩小 `active:scale-95`
+- 过渡：`transition-all duration-200`
 
-**Grid System:**
-- Features: `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8`
-- Bento: Varying `col-span` and `row-span` for visual interest
-- Stats: `grid grid-cols-2 md:grid-cols-4 gap-6`
+**次按钮**：
+- 背景：`bg-white/5`（玻璃效果）
+- 边框：`border border-white/10`
+- 文字：`text-white`
+- 悬停：`bg-white/10`，边框发光
+- 背景：`backdrop-blur-sm`
+
+**幽灵按钮**：
+- 背景：透明
+- 文字：`text-secondary`
+- 悬停：`text-primary`，含蓄辉光下划线
+
+### 卡片/容器
+
+**标准卡片**：
+- 背景：`bg-zinc-900/50` 配 `backdrop-blur-xl`
+- 边框：`border border-zinc-800/50`
+- 圆角：`rounded-2xl`
+- 阴影：`shadow-2xl shadow-black/50`
+- 悬停：边框提亮，出现含蓄辉光
+
+**精选卡片**：
+- 以渐变边框容器包裹
+- 外层：用 `background: conic-gradient` 技巧的动画渐变边框
+- 内层：深色实心背景
+- 辉光：与主渐变色匹配的彩色阴影
+
+**玻璃卡片**：
+- 背景：`bg-white/5`
+- 背景：`backdrop-blur-2xl backdrop-saturate-150`
+- 边框：`border border-white/10`
+
+### 输入框
+
+- 背景：`bg-zinc-900`
+- 边框：`border border-zinc-700`
+- 圆角：`rounded-xl`
+- 文字：`text-white`
+- 占位符：`placeholder:text-zinc-500`
+- 聚焦：`focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20`
+- 过渡：平滑边框色变化
+
+### 图标
+
+- 默认：`text-zinc-400` 配 `w-5 h-5`
+- 渐变光球中：图标置于带渐变背景的 `rounded-xl` 容器内
+- 交互：悬停时色彩转至点缀色
+- 特性图标：更大 `w-8 h-8`，常配渐变背景或彩色辉光
 
 ---
 
-## Effects & Animation
+## 布局策略
 
-**Motion Feel:** Smooth, elegant, and slightly slow—like floating through water or space. Never jarring.
+**容器**：`max-w-7xl mx-auto px-6 lg:px-8`
 
-**Transitions:**
-- Default: `transition-all duration-300 ease-out`
-- Hover effects: `duration-200`
-- Page elements: `duration-500` for fade-ins
+**区块间距**：主要区块间 `py-24 md:py-32`
 
-**Keyframe Animations:**
+**网格系统**：
+- 特性：`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8`
+- Bento：变化的 `col-span` 与 `row-span` 以增视觉趣味
+- 数据：`grid grid-cols-2 md:grid-cols-4 gap-6`
+
+---
+
+## 效果与动画
+
+**运动质感**：流畅、优雅、略缓——如漂浮于水或太空。绝不突兀。
+
+**过渡**：
+- 默认：`transition-all duration-300 ease-out`
+- 悬停效果：`duration-200`
+- 页面元素：`duration-500` 用于淡入
+
+**关键帧动画**：
 
 ```css
 @keyframes aurora-shift {
@@ -306,64 +306,64 @@ SVG wave patterns with gradient fills, positioned at section tops/bottoms.
 }
 ```
 
-**Scroll Animations:** Elements fade and slide up on scroll (use intersection observer or CSS scroll-driven animations).
+**滚动动画**：元素在滚动时淡入上滑（用 intersection observer 或 CSS scroll-driven 动画）。
 
 ---
 
-## Iconography
+## 图标
 
-- Library: `lucide-react`
-- Stroke: Default stroke width (2px)
-- Size: `w-5 h-5` for inline, `w-6 h-6` for standalone, `w-8 h-8` for feature cards
-- Treatment: Often placed inside gradient orbs or given colored backgrounds
-- Color: `text-zinc-400` default, `text-violet-400` for accents
-
----
-
-## Responsive Strategy
-
-**Mobile:**
-- Stack all grids to single column
-- Reduce headline sizes by 1-2 steps
-- Mesh gradients simplified (fewer layers for performance)
-- Cards go full-width with reduced padding
-- Navigation collapses to hamburger
-- Aurora effects stay but with reduced intensity
-
-**Tablet:**
-- 2-column grids
-- Side-by-side layouts for hero
-
-**Desktop:**
-- Full 3-4 column grids
-- All effects at full intensity
-- Maximum visual impact
+- 库：`lucide-react`
+- 描边：默认描边宽度（2px）
+- 尺寸：行内 `w-5 h-5`，独立 `w-6 h-6`，特性卡片 `w-8 h-8`
+- 处理：常置于渐变光球内或赋予彩色背景
+- 颜色：默认 `text-zinc-400`，点缀 `text-violet-400`
 
 ---
 
-## Accessibility
+## 响应式策略
 
-**Contrast:**
-- Primary text (#fafafa) on dark background (#09090b) = 18.4:1 ratio ✓
-- Secondary text (#a1a1aa) on dark background = 7.1:1 ratio ✓
-- All text passes WCAG AAA
+**移动端**：
+- 所有网格堆叠为单列
+- 标题尺寸缩减 1-2 级
+- 网格渐变简化（更少层级以保性能）
+- 卡片全宽，减少内边距
+- 导航折叠为汉堡菜单
+- 极光效果保留但强度降低
 
-**Focus States:**
-- Visible focus ring: `focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900`
-- Never remove focus outlines
-- Focus rings match the aurora accent color
+**平板**：
+- 双列网格
+- Hero 并排布局
 
-**Motion:**
-- Respect `prefers-reduced-motion`
-- Provide static fallbacks for all animations
+**桌面**：
+- 完整 3-4 列网格
+- 所有效果全强度
+- 最大视觉冲击
 
 ---
 
-## Implementation Notes
+## 可访问性
 
-- Use Tailwind CSS v4 with arbitrary values for specific colors
-- Create CSS custom properties for repeated gradient values
-- Use `style` prop for dynamic gradient backgrounds where needed
-- Build all components locally using `cva` and `tailwind-merge`
-- Import icons from `lucide-react`
-- Mesh gradient backgrounds should be in a style.css file and applied via className
+**对比**：
+- 主要文字（#fafafa）于深色背景（#09090b）= 18.4:1 比例 ✓
+- 次要文字（#a1a1aa）于深色背景 = 7.1:1 比例 ✓
+- 所有文字达 WCAG AAA
+
+**聚焦状态**：
+- 可见聚焦环：`focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900`
+- 绝不移除聚焦轮廓
+- 聚焦环匹配极光点缀色
+
+**运动**：
+- 尊重 `prefers-reduced-motion`
+- 为所有动画提供静态回退
+
+---
+
+## 实现说明
+
+- 使用 Tailwind CSS v4 配任意值以指定色彩
+- 为重复的渐变值创建 CSS 自定义属性
+- 需要时用 `style` prop 作动态渐变背景
+- 用 `cva` 与 `tailwind-merge` 本地构建所有组件
+- 自 `lucide-react` 导入图标
+- 网格渐变背景应置于 style.css 文件中，通过 className 应用

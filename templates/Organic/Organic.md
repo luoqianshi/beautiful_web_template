@@ -10,211 +10,211 @@
 | 显示名称 | Organic / Natural |
 | 模式 | ☀️ 浅色模式 (Light) |
 | 字体类型 | serif |
-| 描述 | Earth-inspired palette with moss greens, terracotta, and sand tones. Features organic blob shapes, grain texture overlays, asymmetric rounded corners, and soft shadows. Embraces wabi-sabi philosophy with warmth and natural imperfection. |
+| 描述 | 大地灵感的调色板，含苔藓绿、赤陶与沙色调。有机水滴形、颗粒质感叠加、不对称圆角与柔和阴影。拥抱侘寂哲学，透出温暖与自然的不完美。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Centered layout with overlapping organic blob backgrounds. Large serif typography with generous spacing. Trust badge with rounded pill shape. Dual CTAs in pill-shaped buttons.
+居中布局配重叠有机水滴背景。大号衬线字体配慷慨间距。信任徽章用圆角胶囊形。双 CTA 胶囊形按钮。
 
 ### Stats
 
-Horizontal grid (2 cols mobile, 4 cols desktop) with centered text. Large serif numbers with hover scale animation. Subtle border separators.
+横向网格（移动 2 列，桌面 4 列）配居中文字。大号衬线数字配悬停缩放动画。含蓄边框分隔符。
 
 ### Product Detail
 
-Two-column split with rotated image frame and organic blob accent. Image has thick white border and soft shadow. Text constrained to max-w-2xl for readability.
+双栏分割配旋转图片框与有机水滴点缀。图片有厚白边框与柔和阴影。文字约束至 max-w-2xl 以保可读。
 
 ### Features
 
-3-column responsive grid with cards featuring varied organic border radii. Icon containers with rounded corners that fill on hover. Blob background for ambient depth.
+3 列响应式网格，卡片含变化的有机圆角。图标容器圆角，悬停时填充。水滴背景作环境深度。
 
 ### Blog
 
-3-column grid of articles. Rounded image containers with overlay that fades on hover. Metadata with dot separators.
+3 列文章网格。圆角图片容器配悬停淡入的叠加。元信息配圆点分隔符。
 
 ### How It Works
 
-3-step horizontal layout with curved SVG connecting path. Large numbered circles with thick borders. Centered text alignment.
+3 步横向布局配弯曲 SVG 连接路径。大号编号圆圈配粗边框。居中文字对齐。
 
 ### Benefits
 
-Two-column layout with dark moss green background and grain texture. Checkmark icons in rounded containers. Image masked with organic blob border-radius shape.
+双栏布局配深苔藓绿背景与颗粒纹理。勾选图标置于圆角容器中。图片以有机水滴 border-radius 形状遮罩。
 
 ### Testimonials
 
-3-column grid on textured sand-colored background. Cards with subtle rotation on hover. Large quote marks as decorative element.
+沙色纹理背景上的 3 列网格。卡片悬停时含蓄旋转。大号引号作装饰元素。
 
 ### Pricing
 
-3-column grid with center card scaled and highlighted. Rounded cards with soft shadows. Badge labels for featured tier.
+3 列网格，中间卡片缩放并高亮。圆角卡片配柔和阴影。精选档位配徽章标签。
 
 ### Faq
 
-Vertical accordion with organic rounded borders. Chevron rotates on open. Smooth expand/collapse animation.
+垂直手风琴配有机圆角边框。打开时 chevron 旋转。平滑展开/收起动画。
 
 ### Footer
 
-Dark charcoal background with 4-column grid. Rounded social icons with hover states. Moss green accent for company branding.
+深炭灰背景配 4 列网格。圆角社交图标配悬停状态。苔藓绿点缀用于公司品牌。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Design Style: Organic / Natural
+# 设计风格：Organic / Natural
 
-## 1. Design Philosophy
-This style embraces **wabi-sabi**—the acceptance of transience and imperfection. It rejects the cold precision of digital interfaces in favor of **warmth, softness, and natural connection**. It feels **tactile, grounded, and calming**.
+## 1. 设计哲学
+此风格拥抱**侘寂**——接受无常与不完美。它拒绝数字界面的冰冷精准，转而追求**温暖、柔和与自然连接**。它感觉**触感、扎根、宁静**。
 
-### Visual DNA
-*   **Core Signature**: Soft, amorphous blob shapes with varied organic border radii (using complex percentages like `60% 40% 30% 70% / 60% 30% 70% 40%`)
-*   **Texture is Essential**: Global grain/noise texture overlay at 3-4% opacity with multiply blend mode creates paper-like quality
-*   **Color Psychology**: Earth-drawn palette evokes forest floors, clay pottery, unbleached paper, dried grass, and river stones
-*   **Shadow Philosophy**: Soft, diffused shadows with natural color tints (moss green, clay orange) instead of pure black
-*   **Typography Emotion**: Fraunces serif brings old-world warmth with modern softness; Nunito's rounded terminals echo organic shapes
+### 视觉 DNA
+*   **核心签名**：柔软、无定形水滴形状配变化的有机 border-radius（用复杂百分比如 `60% 40% 30% 70% / 60% 30% 70% 40%`）
+*   **纹理至关重要**：全局颗粒/噪点纹理叠加，3-4% 不透明度配 multiply 混合模式创造纸张质感
+*   **色彩心理**：大地调色板唤起森林地表、陶器、未漂白纸、干草与河石
+*   **阴影哲学**：柔和弥散阴影配自然色调（苔藓绿、黏土橙）而非纯黑
+*   **字体情感**：Fraunces 衬线带来旧世界温暖配现代柔和；Nunito 的圆润终端呼应有机形状
 
-### Design Principles
-*   **Vibe**: Peaceful, sustainable, handcrafted, authentic, rooted, welcoming, human
-*   **Core Tenet**: "There are no straight lines in nature." Avoid sharp 90-degree angles. Everything should feel eroded by wind or water, or shaped by hand.
-*   **Rhythm**: Generous whitespace creates breathing room. Staggered grids and varied border radii prevent mechanical uniformity.
-*   **Interaction**: Gentle, natural motion—elements scale and lift on hover like picking up a river stone. No harsh snaps.
-*   **Asymmetry**: Intentional imperfection through rotated images, offset elements, and varied card shapes creates organic authenticity
-*   **Depth**: Multiple z-layers with blurred blobs, translucent overlays, and soft shadows create atmospheric depth without harsh contrast
+### 设计原则
+*   **气质**：宁静、可持续、手工艺、真实、扎根、欢迎、人性
+*   **核心信条**："自然中无直线。"避免锐利 90 度角。一切应感觉被风或水侵蚀，或被手塑造。
+*   **节奏**：慷慨留白创造呼吸空间。错落网格与变化圆角防止机械统一。
+*   **交互**：轻柔自然运动——元素悬停时缩放抬起如拾起河石。无刺耳 snap。
+*   **非对称**：通过旋转图片、偏移元素与变化卡片形状的有意不完美创造有机真实
+*   **深度**：多个 z 层配模糊水滴、半透明叠加与柔和阴影创造氛围深度而无刺眼对比
 
-## 2. Design Token System (The DNA)
+## 2. 设计 Token 系统（DNA）
 
-### Colors (Single Palette - Light Mode)
-A palette drawn from the forest floor, clay, and unbleached paper.
-*   `background`: `#FDFCF8` (Off-white, Rice Paper)
-*   `foreground`: `#2C2C24` (Deep Loam / Charcoal)
-*   `primary`: `#5D7052` (Moss Green)
-*   `primary-foreground`: `#F3F4F1` (Pale Mist)
-*   `secondary`: `#C18C5D` (Terracotta / Clay)
-*   `secondary-foreground`: `#FFFFFF` (White)
-*   `accent`: `#E6DCCD` (Sand / Beige)
-*   `accent-foreground`: `#4A4A40` (Bark)
-*   `muted`: `#F0EBE5` (Stone)
-*   `muted-foreground`: `#78786C` (Dried Grass)
-*   `border`: `#DED8CF` (Raw Timber)
-*   `destructive`: `#A85448` (Burnt Sienna)
+### 色彩（单一调色板 — 浅色模式）
+取自森林地表、黏土与未漂白纸的调色板。
+*   `background`：`#FDFCF8`（近白、米纸）
+*   `foreground`：`#2C2C24`（深腐殖土/炭灰）
+*   `primary`：`#5D7052`（苔藓绿）
+*   `primary-foreground`：`#F3F4F1`（淡雾）
+*   `secondary`：`#C18C5D`（赤陶/黏土）
+*   `secondary-foreground`：`#FFFFFF`（白）
+*   `accent`：`#E6DCCD`（沙/米色）
+*   `accent-foreground`：`#4A4A40`（树皮）
+*   `muted`：`#F0EBE5`（石）
+*   `muted-foreground`：`#78786C`（干草）
+*   `border`：`#DED8CF`（原木）
+*   `destructive`：`#A85448`（焦赭）
 
-### Typography
-Combining a characterful serif with a clean, rounded sans-serif.
-*   **Headings**: **'Fraunces'** (Google Font). A variable font with "soft" axes. It has a distinct, old-style warmth but feels modern. Use weights 600-800.
-*   **Body**: **'Nunito'** or **'Quicksand'**. Rounded terminals are essential to match the organic shapes.
-*   **Scale**: Moderate, not aggressive. 1.25 scale.
+### 字体
+结合有特色衬线与干净圆润无衬线。
+*   **标题**：**'Fraunces'**（Google Font）。带"soft"轴的可变字体。具独特旧式温暖但感觉现代。用字重 600-800。
+*   **正文**：**'Nunito'** 或 **'Quicksand'**。圆润终端对匹配有机形状至关重要。
+*   **字号阶梯**：适中，非激进。1.25 比例。
 
-### Radius & Shapes
-*   **Standard Radius**: `rounded-2xl` (16px) or `rounded-3xl` (24px).
-*   **Organic Shapes**: Use custom classes or inline styles for specific elements to create blob shapes.
-    *   Example: `border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;`
-*   **Borders**: Soft, sometimes slightly imperfect (simulated via double borders or slightly transparent thick borders).
+### 圆角与形状
+*   **标准圆角**：`rounded-2xl`（16px）或 `rounded-3xl`（24px）。
+*   **有机形状**：用自定义类或内联样式为特定元素创造水滴形状。
+    *   示例：`border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;`
+*   **边框**：柔和，有时略不完美（通过双边框或略透明厚边框模拟）。
 
-### Shadows & Effects
-*   **Shadows**: Soft, diffused, colored shadows. Never pure black.
-    *   `shadow-soft`: `0 4px 20px -2px rgba(93, 112, 82, 0.15)` (Moss tinted)
-    *   `shadow-float`: `0 10px 40px -10px rgba(193, 140, 93, 0.2)` (Clay tinted)
-*   **Textures**: **CRITICAL**. The background should have a subtle noise or paper grain overlay.
-    *   Implementation: Use a fixed pseudo-element on the body or main container with a base64 noise pattern set to `mix-blend-mode: multiply` and very low opacity (3-5%).
+### 阴影与效果
+*   **阴影**：柔和、弥散、彩色阴影。绝不纯黑。
+    *   `shadow-soft`：`0 4px 20px -2px rgba(93, 112, 82, 0.15)`（苔藓色调）
+    *   `shadow-float`：`0 10px 40px -10px rgba(193, 140, 93, 0.2)`（黏土色调）
+*   **纹理**：**关键**。背景应有含蓄噪点或纸颗粒叠加。
+    *   实现：在 body 或主容器上用固定伪元素，配 base64 噪点图案，`mix-blend-mode: multiply`，极低不透明度（3-5%）。
 
-## 3. Component Stylings
+## 3. 组件样式
 
-### Buttons
-*   **Shape**: Fully rounded pills (`rounded-full`) for all variants
-*   **Primary**: Moss Green (#5D7052) background with Pale Mist (#F3F4F1) text. Soft colored shadow: `shadow-[0_4px_20px_-2px_rgba(93,112,82,0.15)]`
-*   **Outline**: 2px Terracotta (#C18C5D) border, transparent background, Terracotta text
-*   **Ghost**: Transparent with Moss Green text, hover fills with Moss/10 background
-*   **Interaction**: `hover:scale-105` with deepened shadow `hover:shadow-[0_6px_24px_-4px_rgba(93,112,82,0.25)]`. Active state: `active:scale-95` for tactile feedback
-*   **Sizes**: Default h-12, sm h-10, lg h-14. Generous horizontal padding (px-8 to px-10)
-*   **Typography**: Bold weight, base to lg sizing
+### 按钮
+*   **形状**：所有变体全圆胶囊（`rounded-full`）
+*   **主**：苔藓绿（#5D7052）背景配淡雾（#F3F4F1）文字。柔和彩色阴影：`shadow-[0_4px_20px_-2px_rgba(93,112,82,0.15)]`
+*   **描边**：2px 赤陶（#C18C5D）边框，透明背景，赤陶文字
+*   **幽灵**：透明配苔藓绿文字，悬停填充 Moss/10 背景
+*   **交互**：`hover:scale-105` 配加深阴影 `hover:shadow-[0_6px_24px_-4px_rgba(93,112,82,0.25)]`。激活状态：`active:scale-95` 作触感反馈
+*   **尺寸**：默认 h-12，sm h-10，lg h-14。慷慨水平内边距（px-8 至 px-10）
+*   **字体**：粗字重，base 至 lg 尺寸
 
-### Cards / Containers
-*   **Background**: Extremely light beige (#FEFEFA) over off-white page background
-*   **Border**: Soft timber border (#DED8CF) at 50% opacity: `border-[#DED8CF]/50`
-*   **Shape**: `rounded-[2rem]` base with asymmetric variations using custom values like `rounded-tl-[4rem]` on specific corners
-*   **Shadows**: Moss-tinted soft shadow: `shadow-[0_4px_20px_-2px_rgba(93,112,82,0.15)]`
-*   **Texture**: Fixed noise overlay layer at 3% opacity with multiply blend mode
-*   **Interaction**: Feature cards lift with `hover:-translate-y-1` and shadow deepens to `hover:shadow-[0_20px_40px_-10px_rgba(93,112,82,0.15)]`
+### 卡片/容器
+*   **背景**：极浅米色（#FEFEFA）于近白页面背景之上
+*   **边框**：柔和原木边框（#DED8CF）50% 不透明度：`border-[#DED8CF]/50`
+*   **形状**：基础 `rounded-[2rem]` 配特定角不对称变化如 `rounded-tl-[4rem]`
+*   **阴影**：苔藓色调柔和阴影：`shadow-[0_4px_20px_-2px_rgba(93,112,82,0.15)]`
+*   **纹理**：固定噪点叠加层 3% 不透明度配 multiply 混合模式
+*   **交互**：特性卡片悬停抬起 `hover:-translate-y-1`，阴影加深至 `hover:shadow-[0_20px_40px_-10px_rgba(93,112,82,0.15)]`
 
-### Inputs
-*   **Shape**: Pill-shaped with `rounded-full`
-*   **Border**: Timber border (#DED8CF)
-*   **Background**: `bg-white/50` (semi-transparent) revealing page grain texture beneath
-*   **Focus State**: `focus-visible:ring-2 ring-[#5D7052]/30` with `ring-offset-2` for soft, natural glow (not sharp outline)
-*   **Typography**: Sans-serif body font, text-sm
-*   **Height**: h-12 for comfortable touch target
+### 输入框
+*   **形状**：胶囊形配 `rounded-full`
+*   **边框**：原木边框（#DED8CF）
+*   **背景**：`bg-white/50`（半透明）透出页面颗粒纹理
+*   **聚焦状态**：`focus-visible:ring-2 ring-[#5D7052]/30` 配 `ring-offset-2` 作柔和自然辉光（非锐利轮廓）
+*   **字体**：无衬线正文字体，text-sm
+*   **高度**：h-12 以舒适触控目标
 
-### Navigation
-*   **Style**: Sticky floating pill (`sticky top-4`) with glassmorphism
-*   **Background**: `bg-white/70` with `backdrop-blur-md` for frosted effect
-*   **Border**: Soft timber border at 50% opacity with subtle shadow
-*   **Shape**: `rounded-full`
-*   **Logo**: Circular moss green container with white icon
-*   **Mobile**: Full menu dropdown with organic rounded borders (`rounded-[2rem]`)
+### 导航
+*   **样式**：粘性浮动胶囊（`sticky top-4`）配玻璃拟态
+*   **背景**：`bg-white/70` 配 `backdrop-blur-md` 作磨砂效果
+*   **边框**：50% 不透明度柔和原木边框配含蓄阴影
+*   **形状**：`rounded-full`
+*   **Logo**：圆形苔藓绿容器配白色图标
+*   **移动端**：完整菜单下拉配有机圆角边框（`rounded-[2rem]`）
 
-## 4. Layout & Spacing
-*   **Container Widths**: Vary by section for visual rhythm
-    *   Primary content: `max-w-7xl` (hero, features, blog, pricing)
-    *   Focused content: `max-w-6xl` (how it works, FAQ)
-    *   Intimate content: `max-w-5xl` (final CTA)
-    *   Text-heavy sections: `max-w-4xl` (hero inner), `max-w-2xl` (product detail text)
-*   **Section Padding**: Consistent `py-32` vertical spacing with `px-4 sm:px-6 lg:px-8` horizontal
-*   **Grid Patterns**:
-    *   Stats: `grid-cols-2 md:grid-cols-4`
-    *   Features/Blog/Testimonials: `md:grid-cols-3` (or `md:grid-cols-2 lg:grid-cols-3`)
-    *   Two-column layouts: `lg:grid-cols-2`
-    *   Grid gaps: Consistent `gap-8` with optional `md:gap-12` for stats
-*   **Whitespace Philosophy**: Use generous gaps (gap-8, gap-12, gap-16) to let design breathe. Space is a design element, not empty canvas.
+## 4. 布局与间距
+*   **容器宽度**：因区块而异以增视觉节奏
+    *   主要内容：`max-w-7xl`（hero、特性、博客、定价）
+    *   聚焦内容：`max-w-6xl`（how it works、FAQ）
+    *   亲密内容：`max-w-5xl`（最终 CTA）
+    *   文字密集区块：`max-w-4xl`（hero 内部）、`max-w-2xl`（产品详情文字）
+*   **区块内边距**：一致 `py-32` 垂直间距配 `px-4 sm:px-6 lg:px-8` 水平
+*   **网格模式**：
+    *   数据：`grid-cols-2 md:grid-cols-4`
+    *   特性/博客/证言：`md:grid-cols-3`（或 `md:grid-cols-2 lg:grid-cols-3`）
+    *   双栏布局：`lg:grid-cols-2`
+    *   网格间隙：一致 `gap-8`，可选 `md:gap-12` 用于数据
+*   **留白哲学**：用慷慨间隙（gap-8, gap-12, gap-16）让设计呼吸。空间是设计元素，非空画布。
 
-## 5. Non-Genericness (The Bold Factors)
-*   **Blob Backgrounds**: Large absolute-positioned blobs with `blur-3xl` create ambient color washes. Multiple shapes (via shapeIndex prop) with varied organic border radii. Used in Hero (2 blobs), Product Detail, Features, and Final CTA sections.
-*   **Rotated Image Frames**: Product detail image rotated `-2deg` with thick 4px white border creates handcrafted photo feel
-*   **Organic Image Masks**: Benefits section image uses complex blob border-radius: `rounded-[30%_70%_70%_30%_/_30%_30%_70%_70%]`
-*   **Asymmetric Card Radii**: Feature cards cycle through 6 different border-radius patterns, mixing large corner curves (4rem, 5rem) with standard (2rem)
-*   **Curved SVG Connectors**: How It Works uses hand-drawn looking curved dashed SVG path instead of straight lines
-*   **Hover Micro-rotations**: Testimonial cards subtly rotate on hover (`hover:rotate-1`) mimicking picking up a physical card
-*   **Varied Section Backgrounds**: Alternating between off-white, stone tint (#F0EBE5/30), sand (#E6DCCD/30), moss green (#5D7052), and terracotta (#C18C5D)
-*   **Dual Texture Layers**: Global grain texture PLUS section-specific noise overlays and blob backgrounds create rich depth
+## 5. 非通用性（大胆要素）
+*   **水滴背景**：大型绝对定位水滴配 `blur-3xl` 创造环境色彩渲染。多个形状（通过 shapeIndex prop）配变化有机 border-radius。用于 Hero（2 水滴）、Product Detail、Features 与 Final CTA 区块。
+*   **旋转图片框**：产品详情图片旋转 `-2deg` 配厚 4px 白边框创造手工艺照片感
+*   **有机图片蒙版**：收益区块图片用复杂水滴 border-radius：`rounded-[30%_70%_70%_30%_/_30%_30%_70%_70%]`
+*   **非对称卡片圆角**：特性卡片循环 6 种不同 border-radius 模式，混合大角曲线（4rem, 5rem）与标准（2rem）
+*   **弯曲 SVG 连接器**：How It Works 用手绘感弯曲虚线 SVG 路径而非直线
+*   **悬停微旋转**：证言卡片悬停时含蓄旋转（`hover:rotate-1`）模仿拾起物理卡片
+*   **变化区块背景**：在近白、石色调（#F0EBE5/30）、沙（#E6DCCD/30）、苔藓绿（#5D7052）与赤陶（#C18C5D）间交替
+*   **双层纹理**：全局颗粒纹理加区块特定噪点叠加与水滴背景创造丰富深度
 
-## 6. Effects & Animation
-*   **Transition Philosophy**: Natural, gentle motion. Use `transition-all duration-300` or `duration-500` for smooth changes
-*   **Hover Animations**:
-    *   Buttons: `hover:scale-105` with shadow increase
-    *   Cards: `hover:-translate-y-1` (lift) or `hover:rotate-1` (subtle tilt)
-    *   Stats: `group-hover:scale-110` on numbers
-    *   Images: `hover:scale-105` with 700ms duration for slow reveal
-    *   Icon containers: Background color fill transition
-*   **Active States**: `active:scale-95` on buttons for tactile press feedback
-*   **Entrance/Exit**: Details accordion uses native `open:` state with chevron rotation
-*   **Image Overlays**: Fade overlays on hover (blog cards) using `group-hover:bg-transparent`
-*   **No Harsh Snaps**: All transitions eased, duration 300-700ms range for organic feel
+## 6. 效果与动画
+*   **过渡哲学**：自然、轻柔运动。用 `transition-all duration-300` 或 `duration-500` 以平滑变化
+*   **悬停动画**：
+    *   按钮：`hover:scale-105` 配阴影增加
+    *   卡片：`hover:-translate-y-1`（抬起）或 `hover:rotate-1`（含蓄倾斜）
+    *   数据：数字 `group-hover:scale-110`
+    *   图片：`hover:scale-105` 配 700ms 时长作缓慢显现
+    *   图标容器：背景色填充过渡
+*   **激活状态**：按钮 `active:scale-95` 作触感按压反馈
+*   **入场/退场**：Details 手风琴用原生 `open:` 状态配 chevron 旋转
+*   **图片叠加**：悬停淡入叠加（博客卡片）用 `group-hover:bg-transparent`
+*   **无刺耳 snap**：所有过渡缓动，时长 300-700ms 范围以增有机感
 
-## 7. Icons (Lucide React)
-*   **Style**: Default stroke width (2px)
-*   **Color**: Moss Green (#5D7052) as default, white on dark backgrounds
-*   **Containers**: Icons sit in `h-14 w-14` rounded-2xl containers with `bg-[#5D7052]/10` background
-*   **Hover Effect**: Container fills completely to solid moss green while icon switches to white
-*   **Sizing**: 28px (size={28}) for feature icons, 24px for benefit checkmarks, responsive sizing for navigation
-*   **Usage**: Social icons in footer, feature icons, benefit checkmarks, navigation menu toggle, arrows in CTAs
+## 7. 图标（Lucide React）
+*   **样式**：默认描边宽度（2px）
+*   **颜色**：默认苔藓绿（#5D7052），深色背景上白
+*   **容器**：图标置于 `h-14 w-14` rounded-2xl 容器中，`bg-[#5D7052]/10` 背景
+*   **悬停效果**：容器完全填充实心苔藓绿，同时图标切换为白
+*   **尺寸**：特性图标 28px（size={28}），收益勾选 24px，导航响应式尺寸
+*   **用法**：页脚社交图标、特性图标、收益勾选、导航菜单切换、CTA 中箭头
 
-## 8. Accessibility
-*   **Contrast Ratios**:
-    *   Primary text (#2C2C24) on background (#FDFCF8): 14.5:1 (AAA)
-    *   Moss (#5D7052) on background: 6.2:1 (AA)
-    *   Muted text (#78786C) on background: 4.8:1 (AA)
-*   **Focus States**: `focus-visible:ring-2 ring-[#5D7052] ring-offset-2` provides clear, soft focus indicator
-*   **Touch Targets**: All interactive elements meet 44px minimum (buttons h-12 = 48px)
-*   **Semantic HTML**: Proper heading hierarchy, nav landmarks, alt text for images, aria-labels where needed
-*   **Keyboard Navigation**: All interactive elements keyboard accessible, details/summary for FAQ accordion
+## 8. 可访问性
+*   **对比比**：
+    *   主要文字（#2C2C24）于背景（#FDFCF8）：14.5:1（AAA）
+    *   苔藓（#5D7052）于背景：6.2:1（AA）
+    *   柔和文字（#78786C）于背景：4.8:1（AA）
+*   **聚焦状态**：`focus-visible:ring-2 ring-[#5D7052] ring-offset-2` 提供清晰柔和聚焦指示器
+*   **触控目标**：所有交互元素满足 44px 最小（按钮 h-12 = 48px）
+*   **语义化 HTML**：正确标题层级、导航地标、图片 alt 文本、按需 aria-label
+*   **键盘导航**：所有交互元素键盘可访问，FAQ 手风琴用 details/summary
 
-## 9. Responsive Strategy
-*   **Mobile-First Approach**: Base styles mobile-optimized, enhanced at breakpoints
-*   **Breakpoint Usage**:
-    *   `sm:` (640px): Horizontal padding increases, some flex-row layouts
-    *   `md:` (768px): Major grid transitions (2-3 columns), nav reveals desktop version
-    *   `lg:` (1024px): 3-column grids, 2-column hero/benefits layouts
-*   **Typography Scaling**: Hero headline `text-5xl md:text-7xl`, sections `text-4xl md:text-5xl`
-*   **Stack Behavior**: All grids collapse to single column on mobile, flex layouts switch to `flex-col`
-*   **Navigation**: Mobile uses hamburger menu with slide-out panel, desktop inline nav
-*   **Blob Simplification**: Blobs remain but overflow hidden on mobile to prevent layout issues
+## 9. 响应式策略
+*   **移动优先方法**：基础样式移动优化，断点处增强
+*   **断点使用**：
+    *   `sm:`（640px）：水平内边距增加，部分 flex-row 布局
+    *   `md:`（768px）：主要网格过渡（2-3 列），导航显现桌面版
+    *   `lg:`（1024px）：3 列网格、2 列 hero/收益布局
+*   **字体缩放**：Hero 标题 `text-5xl md:text-7xl`，区块 `text-4xl md:text-5xl`
+*   **堆叠行为**：所有网格移动端折叠为单列，flex 布局切换为 `flex-col`
+*   **导航**：移动端用汉堡菜单配滑出面板，桌面端行内导航
+*   **水滴简化**：水滴保留但移动端 overflow hidden 以防布局问题

@@ -10,254 +10,254 @@
 | 显示名称 | Playful Geometric |
 | 模式 | ☀️ 浅色模式 (Light) |
 | 字体类型 | sans-serif |
-| 描述 | A vibrant, high-energy aesthetic that combines a stable structural grid with whimsical geometric decorations. It relies on bright solid colors, simple primitive shapes (circles, triangles, squiggles), and tactile interactions to create a friendly, optimistic vibe reminiscent of modern Memphis design. |
+| 描述 | 充满活力、高能量的美学，将稳定的结构网格与俏皮的几何装饰相结合。依靠明亮纯色、简单基本形状（圆、三角、波浪线）与触感交互，营造令人联想到现代 Memphis 设计的友好乐观氛围。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Centralized or split layout where the main headline is framed by floating geometric primitives (3D-looking flat shapes). The CTA button sits on a 'blob' or irregular shape background. Background features a subtle dot pattern.
+居中或分割布局，主标题被浮动几何基本形（3D 感扁平形状）框定。CTA 按钮位于"水滴"或不规则形状背景上。背景含含蓄点阵图案。
 
 ### Stats
 
-Row of colorful distinct shapes (circle, square, triangle, hexagon) acting as containers for the numbers. The containers vibrate or rotate slightly on hover.
+一排彩色独特形状（圆、方、三角、六边形）作数字容器。容器悬停时轻微振动或旋转。
 
 ### Product Detail
 
-Two-column layout. Image side has a 'collage' feel with offset colored rectangles behind the main product image. Text side uses substantial padding and colorful bullets.
+双栏布局。图片侧有"拼贴"感，主产品图后方有偏移彩色矩形。文字侧用厚实内边距与彩色项目符号。
 
 ### Features
 
-Bento-box style grid, but each cell has a different playful background color (very light tints) or border radius strategy (some fully round, some leaf-shaped). Icons are solid, colorful circles.
+Bento-box 风格网格，但每格有不同俏皮背景色（极浅色调）或圆角策略（部分全圆、部分叶形）。图标为实心彩色圆。
 
 ### Blog
 
-Masonry or grid where featured images are clipped into interesting shapes (arch, pill, circle). Titles use a chunky display font. Tags look like little stickers.
+瀑布流或网格，精选图片裁切为有趣形状（拱、胶囊、圆）。标题用粗实展示字体。标签似小贴纸。
 
 ### How It Works
 
-Horizontal or vertical timeline connected by a literal dashed SVG line that loops and squiggles between steps. Step numbers are inside solid colored stars or bursts.
+横向或垂直时间线，由字面虚线 SVG 线连接，线在步骤间循环波浪。步骤编号在实心彩色星或爆发形内。
 
 ### Benefits
 
-Alternating layout. Each benefit text block is paired with a large, abstract geometric composition (e.g., a square balancing on a circle) representing the concept.
+交替布局。每个收益文字块配大型抽象几何构图（如方块平衡于圆上）代表概念。
 
 ### Testimonials
 
-Cards styled like speech bubbles (with the little tail). They scattered slightly (random rotation +/- 2deg) to feel informal. Avatars pop out of the frame.
+卡片样式如对话气泡（带小尾）。它们轻微散布（随机旋转 ±2deg）以显非正式。头像探出框外。
 
 ### Pricing
 
-Three distinct columns. The 'Recommended' tier pops out with a thick dashed border and a floating 'Best Value' badge that looks like a sticker. Prices are massive and colorful.
+三个独特列。"推荐"档位以粗虚线边框与浮动"Best Value"贴纸状徽章突出。价格巨大且彩色。
 
 ### Faq
 
-Accordion items separated by thick distinct borders. When opened, the background fills with a light pattern (dots or lines). The expand icon is a large playful arrow or plus sign.
+手风琴项以粗明确边框分隔。打开时背景填充浅图案（点或线）。展开图标为大型俏皮箭头或加号。
 
 ### Final C T A
 
-A contained box with a 'wavy' top edge or bottom edge. High contrast background (bright yellow or blue). Button shakes slightly to attract attention.
+含"波浪"顶边或底边的容器盒。高对比背景（亮黄或蓝）。按钮轻微摇动以吸引注意。
 
 ### Footer
 
-Background is a dark shape with a 'dripping' paint effect or wave at the top. Large footer links with fun hover underlines (squiggles).
+背景为深色形状，顶部有"滴落"颜料效果或波浪。大型页脚链接配趣味悬停下划线（波浪线）。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Playful Geometric Design System
+# Playful Geometric 设计系统
 
-## Design Philosophy
+## 设计哲学
 
-**Playful Geometric** is the antidote to sterile, corporate minimalism. It creates an emotional connection through **optimism, clarity, and tactile fun**.
+**Playful Geometric** 是对无菌企业极简主义的解药。它通过**乐观、清晰与触感乐趣**创造情感连接。
 
-The core concept is **"Stable Grid, Wild Decoration"**. The content itself (text, forms) lives in clean, readable areas, but the world around it is alive with movement and shape. It references the **Memphis Group** (80s) but cleans it up for modern digital screens—removing the chaos while keeping the energy.
+核心概念是**"稳定网格，狂野装饰"**。内容本身（文字、表单）居于干净可读区域，但其周围世界充满运动与形状。它参考 **Memphis Group**（80 年代）但为现代数字屏幕清理——移除混乱同时保持能量。
 
-### The Vibe
-**Friendly. Tactile. Pop. Energetic.**
-It feels like a playground or a well-organized sticker book. It invites clicking. It smiles at you.
+### 气质
+**友好。触感。波普。活力。**
+感觉如游乐场或组织良好的贴纸书。它邀请点击。它对你微笑。
 
-### Visual Signatures
-- **Primitive Shapes**: Circles, triangles, squares, pill shapes, and squiggles used as background elements, masks, or icons.
-- **Hard Shadows**: Elements often have a hard, offset drop shadow (no blur) giving a sticker or cut-out paper feel.
-- **Pattern Fills**: Polka dots, grid lines, and diagonal stripes used to fill shapes or backgrounds.
-- **Varied Radii**: Mixing fully rounded corners with sharp ones to create "leaf" shapes or asymmetric blobs.
+### 视觉签名
+- **基本形状**：圆、三角、方、胶囊形与波浪线作背景元素、蒙版或图标。
+- **硬阴影**：元素常有硬偏移投影（无模糊）赋予贴纸或剪纸感。
+- **图案填充**：圆点、网格线与对角条纹用于填充形状或背景。
+- **变化圆角**：混合全圆角与锐角以创造"叶"形或非对称水滴。
 
 ---
 
-## Design Token System
+## 设计 Token 系统
 
-### Colors (Light Mode)
-A punchy, high-saturation palette anchored by strong neutrals.
+### 色彩（浅色模式）
+以强中性色锚定的有力高饱和调色板。
 
 ```
-background:        #FFFDF5    // Warm Cream/Off-White (Paper feel)
-foreground:        #1E293B    // Slate 800 (Softer than black)
+background:        #FFFDF5    // 暖奶油/近白（纸张感）
+foreground:        #1E293B    // Slate 800（比黑更柔）
 muted:             #F1F5F9    // Slate 100
 mutedForeground:   #64748B    // Slate 500
-accent:            #8B5CF6    // Vivid Violet (Primary Brand)
-accentForeground:  #FFFFFF    // White
-secondary:         #F472B6    // Hot Pink (Playful pop)
-tertiary:          #FBBF24    // Amber/Yellow (Optimism)
-quaternary:        #34D399    // Emerald/Mint (Freshness)
+accent:            #8B5CF6    // 鲜艳紫（主品牌）
+accentForeground:  #FFFFFF    // 白
+secondary:         #F472B6    // 热粉（俏皮跳跃）
+tertiary:          #FBBF24    // 琥珀/黄（乐观）
+quaternary:        #34D399    // 翡翠/薄荷（清新）
 border:            #E2E8F0    // Slate 200
-input:             #FFFFFF    // White
-card:              #FFFFFF    // White
-ring:              #8B5CF6    // Violet Focus
+input:             #FFFFFF    // 白
+card:              #FFFFFF    // 白
+ring:              #8B5CF6    // 紫聚焦
 ```
 
-**Usage Rule**: Use `accent` for primary actions. Use `secondary`, `tertiary`, and `quaternary` rotationally for decorative shapes, icons, or emphasized words to create a "confetti" effect.
+**用法规则**：`accent` 用于主要操作。`secondary`、`tertiary` 与 `quaternary` 轮换用于装饰形状、图标或强调词以创造"彩纸"效果。
 
-### Typography
+### 字体
 
-**Headings**: `"Outfit", system-ui, sans-serif`
-- A geometric sans with character. Rounded corners on letters make it friendly.
-- **Weights**: Bold (700) or ExtraBold (800).
+**标题**：`"Outfit", system-ui, sans-serif`
+- 有个性的几何无衬线。字母圆角使其友好。
+- **字重**：Bold（700）或 ExtraBold（800）。
 
-**Body**: `"Plus Jakarta Sans", system-ui, sans-serif`
-- Highly legible, modern, geometric but humanist.
-- **Weights**: Regular (400), Medium (500).
+**正文**：`"Plus Jakarta Sans", system-ui, sans-serif`
+- 高可读、现代、几何但人文。
+- **字重**：Regular（400）、Medium（500）。
 
-**Scale Ratio**: 1.25 (Major Third) - melodic and harmonious.
+**字号比例**：1.25（Major Third）— 旋律与和谐。
 
-### Radius & Border
+### 圆角与边框
 
 ```
 radius-sm:   8px
 radius-md:   16px
 radius-lg:   24px
 radius-full: 9999px
-border-width: 2px     // Chunky borders by default
+border-width: 2px     // 默认粗边框
 ```
 
-**Special "Blob" Radius**: `rounded-tl-2xl rounded-tr-2xl rounded-br-2xl rounded-bl-none` (Speech bubble style) or `rounded-t-full rounded-b-none` (Arch).
+**特殊"水滴"圆角**：`rounded-tl-2xl rounded-tr-2xl rounded-br-2xl rounded-bl-none`（对话气泡风格）或 `rounded-t-full rounded-b-none`（拱形）。
 
-### Shadows & Effects
+### 阴影与效果
 
-**The "Pop" Shadow (Hard Shadow)**:
+**"波普"阴影（硬阴影）**：
 ```
-box-shadow: 4px 4px 0px 0px #1E293B;  // Dark hard shadow
-box-shadow-hover: 6px 6px 0px 0px #1E293B; // Lift effect
-box-shadow-active: 2px 2px 0px 0px #1E293B; // Press effect
+box-shadow: 4px 4px 0px 0px #1E293B;  // 深色硬阴影
+box-shadow-hover: 6px 6px 0px 0px #1E293B; // 抬起效果
+box-shadow-active: 2px 2px 0px 0px #1E293B; // 按压效果
 ```
-No blur. Solid offset colors.
+无模糊。实心偏移色。
 
-### Textures & Patterns
-- **Dot Grid**: A background of small dots (`bg-[url(...)]`) in strict formation.
-- **Squiggles**: SVG paths used as section dividers or underlining for headings.
-- **Confetti**: Small SVG shapes (triangles, circles) absolutely positioned behind main content blocks.
+### 纹理与图案
+- **点阵网格**：严格排列的小点背景（`bg-[url(...)]`）。
+- **波浪线**：SVG 路径用作区块分隔符或标题下划线。
+- **彩纸**：小型 SVG 形状（三角、圆）绝对定位于主内容块后方。
 
 ---
 
-## Component Stylings
+## 组件样式
 
-### Buttons
+### 按钮
 
-**Primary Button ("The Candy Button")**:
+**主按钮（"糖果按钮"）**：
 ```
-- Bg: accent (#8B5CF6)
-- Text: white, font-weight: 700
-- Radius: rounded-full (Pill)
-- Border: 2px solid #1E293B (Dark border around color)
-- Shadow: 4px 4px 0px #1E293B (Hard shadow)
-- Hover: translate-x-[-2px] translate-y-[-2px], shadow extends to 6px 6px
-- Active: translate-x-[2px] translate-y-[2px], shadow shrinks to 2px 2px
-- Icon: ArrowRight, circular background (white) inside button
-```
-
-**Secondary Button**:
-```
-- Bg: transparent
-- Text: foreground
-- Border: 2px solid #1E293B
-- Radius: rounded-full
-- Shadow: none
-- Hover: bg-tertiary (#FBBF24) - Fills with yellow on hover
+- 背景：accent (#8B5CF6)
+- 文字：白，font-weight: 700
+- 圆角：rounded-full（胶囊）
+- 边框：2px solid #1E293B（色周围深边框）
+- 阴影：4px 4px 0px #1E293B（硬阴影）
+- 悬停：translate-x-[-2px] translate-y-[-2px]，阴影延伸至 6px 6px
+- 激活：translate-x-[2px] translate-y-[2px]，阴影缩至 2px 2px
+- 图标：ArrowRight，按钮内圆形背景（白）
 ```
 
-### Cards
-
-**The "Sticker" Card**:
+**次按钮**：
 ```
-- Bg: white
-- Border: 2px solid #1E293B
-- Radius: rounded-xl
-- Shadow: 8px 8px 0px #E2E8F0 (Soft hard shadow) or #F472B6 (Pink shadow for featured)
-- Hover: Rotate -1deg, Scale 1.02 (Wiggle effect)
-- Title: Bold Outfit font
-- Icon: Floating circle div with centered icon, sitting half-in/half-out of the top border.
+- 背景：透明
+- 文字：foreground
+- 边框：2px solid #1E293B
+- 圆角：rounded-full
+- 阴影：无
+- 悬停：bg-tertiary (#FBBF24) - 悬停填充黄
 ```
 
-### Inputs
+### 卡片
+
+**"贴纸"卡片**：
+```
+- 背景：白
+- 边框：2px solid #1E293B
+- 圆角：rounded-xl
+- 阴影：8px 8px 0px #E2E8F0（柔和硬阴影）或 #F472B6（精选粉阴影）
+- 悬停：旋转 -1deg，缩放 1.02（摆动效果）
+- 标题：粗 Outfit 字体
+- 图标：浮动圆 div 配居中图标，半入/半出于顶边框。
+```
+
+### 输入框
 
 ```
-- Bg: white
-- Border: 2px solid #CBD5E1
-- Radius: rounded-lg
-- Text: foreground
-- Shadow: 4px 4px 0px transparent (hidden initially)
-- Focus: Border accent, Shadow 4px 4px 0px accent (Hard color shadow on focus)
-- Label: Bold, uppercase, small tracking-wide.
+- 背景：白
+- 边框：2px solid #CBD5E1
+- 圆角：rounded-lg
+- 文字：foreground
+- 阴影：4px 4px 0px transparent（初始隐藏）
+- 聚焦：边框 accent，阴影 4px 4px 0px accent（聚焦时硬色阴影）
+- 标签：粗、大写、小型 tracking-wide。
 ```
 
 ---
 
-## Layout Strategy
+## 布局策略
 
-### General
-- **Container**: `max-w-6xl` (Generous width).
-- **Spacing**: `py-24` (96px). Spacious but not empty; filled with patterns.
-- **Grid**: 12-column logic, but grouped into big blocks (6/6 or 4/4/4).
+### 总体
+- **容器**：`max-w-6xl`（慷慨宽度）。
+- **间距**：`py-24`（96px）。宽敞但不空；以图案填充。
+- **网格**：12 列逻辑，但分组为大块（6/6 或 4/4/4）。
 
-### Unique Section Layouts
-1.  **Hero**:
-    - Text left, Image right.
-    - **Decoration**: A massive yellow circle behind the text. A dotted pattern behind the image. The image itself has a "blob" mask (CSS clip-path or border-radius manipulation).
-2.  **Features**:
-    - Grid of 3.
-    - **Decoration**: Each card is connected by a dashed SVG line drawn in the background.
-    - Alternating colors for card headers (Violet, Pink, Yellow).
-3.  **Pricing**:
-    - The middle card is scaled up (1.1) and has a massive yellow star badge "MOST POPULAR" rotated 15deg.
-
----
-
-## Effects & Animation
-
-**Feel**: Bouncy, Elastic, Fun.
-
-- **Hover**: `transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]` (Overshoot/Bounciness).
-- **Entrance**: Elements shouldn't just fade in; they should **pop** in (Scale 0->1 with bounce).
-- **Marquee**: Use infinite scrolling text for client logos or keywords.
-- **Wiggle**: Keyframe animation `rotate: 0deg -> 3deg -> -3deg -> 0deg` on hover for icons.
+### 独特区块布局
+1.  **Hero**：
+    - 文字左、图片右。
+    - **装饰**：文字后方巨型黄圆。图片后方点阵图案。图片本身有"水滴"蒙版（CSS clip-path 或 border-radius 操作）。
+2.  **Features**：
+    - 3 格网格。
+    - **装饰**：每张卡片由背景中绘制的虚线 SVG 线连接。
+    - 卡片头部交替色（紫、粉、黄）。
+3.  **Pricing**：
+    - 中间卡片放大（1.1）并有旋转 15 度的巨型黄星徽章"MOST POPULAR"。
 
 ---
 
-## Iconography
+## 效果与动画
 
-**Lucide React** settings:
-- **Stroke Width**: `2.5px` (Bold/Chunky).
-- **Style**: Round line caps, round line joins.
-- **Color**: Often white inside a colored circle, or the dark foreground color.
-- **Usage**: Enclosed in shapes. Never floating alone. A "Check" icon isn't just a check; it's a check inside a green circle.
+**质感**：弹跳、弹性、有趣。
 
----
-
-## Responsive Strategy
-
-- **Mobile**:
-  - Stack everything.
-  - Reduce "pop" shadows to 2px to save space.
-  - Turn horizontal squiggle lines into vertical dividers.
-  - Keep buttons big and tappable (min 48px height).
-  - Hide complex background floating shapes that might overlap text.
+- **悬停**：`transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]`（过冲/弹跳）。
+- **入场**：元素不应仅淡入；它们应**pop** 入（缩放 0→1 配弹跳）。
+- **跑马灯**：用无限滚动文字作客户 logo 或关键词。
+- **摆动**：悬停时图标的关键帧动画 `rotate: 0deg -> 3deg -> -3deg -> 0deg`。
 
 ---
 
-## Accessibility & Best Practices
+## 图标
 
-- **Contrast**: The text is slate-800 on off-white/white, which is AAA.
-- **Color**: Never rely *only* on color. Use shapes and text labels.
-- **Motion**: Respect `prefers-reduced-motion`. Disable the "bounce" and "wiggle" effects if preferred.
-- **Focus**: The focus state is high-contrast (thick colored border + hard shadow).
+**Lucide React** 设置：
+- **描边宽度**：`2.5px`（粗/粗实）。
+- **样式**：圆线帽、圆线连接。
+- **颜色**：常为彩色圆内白，或深前景色。
+- **用法**：包裹于形状中。绝不孤立漂浮。一个"勾选"图标不只是勾选；它是绿圆内的勾选。
+
+---
+
+## 响应式策略
+
+- **移动端**：
+  - 一切堆叠。
+  - "pop"阴影减至 2px 以省空间。
+  - 水平波浪线转为垂直分隔符。
+  - 按钮保持大且可点（最小 48px 高）。
+  - 隐藏可能重叠文字的复杂背景浮动形状。
+
+---
+
+## 可访问性与最佳实践
+
+- **对比**：文字为 slate-800 于近白/白上，达 AAA。
+- **色彩**：绝不*仅*靠色彩。用形状与文字标签。
+- **运动**：尊重 `prefers-reduced-motion`。若偏好则禁用"弹跳"与"摆动"效果。
+- **聚焦**：聚焦状态为高对比（粗彩色边框 + 硬阴影）。

@@ -10,142 +10,142 @@
 | 显示名称 | Retro |
 | 模式 | ☀️ 浅色模式 (Light) |
 | 字体类型 | sans-serif |
-| 描述 | Ugly-cool 90s nostalgia aesthetic with Windows 95 beveled UI, system fonts, bright primary colors, marquee scrolling text, and maximum visual chaos. |
+| 描述 | "丑酷"的 90 年代怀旧美学，配 Windows 95 凸凹立体 UI、系统字体、明亮原色、跑马灯滚动文字与最大化的视觉混沌。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Centered layout with animated rainbow text headline (4s color cycle), dual colored horizontal bars as dividers, full-width CTA buttons with arrow decorations, and retro hit counter display at bottom.
+居中布局配动画彩虹文字标题（4s 色彩循环）、双色彩横条分隔线、全宽 CTA 按钮配箭头装饰，以及底部复古访问计数器显示。
 
 ### Stats
 
-Table-style grid (2x2 on mobile, 1x4 on desktop) with visible cell borders, alternating white/gray backgrounds, inset beveled frame container, and monospace labels.
+表格风格网格（移动 2x2，桌面 1x4），可见单元格边框，交替白/灰背景，内凹凸边框容器，等宽标签。
 
 ### Features
 
-Two-column table layout with 80px colored icon cells (alternating navy/teal backgrounds) and text description cells, thick visible borders between rows, alternating row backgrounds.
+双列表格布局，80px 彩色图标单元格（交替海军蓝/青色背景）配文字描述单元格，行间粗可见边框，交替行背景。
 
 ### How It Works
 
-Vertical step list with large beveled yellow numbered badges (48px-64px), gray content panels with outset bevels, groove HR dividers between steps.
+垂直步骤列表配大号凸凹黄色编号徽章（48px-64px），灰色内容面板配外凸斜面，步骤间 groove 风格 HR 分隔线。
 
 ### Benefits
 
-2-column grid of beveled panels on navy background, each with lime green asterisk bullet and gray panel containing title and description.
+海军蓝背景上的双列凸凹面板网格，每项配青柠绿星号项目符号和含标题与描述的灰色面板。
 
 ### Pricing
 
-3-column card grid with highlighted center tier (yellow header, red border, pulsing badge), beveled window-style cards with title bars, feature lists with green asterisk bullets.
+3 列卡片网格，高亮中间档位（黄色标题栏、红色边框、脉冲徽章），凸凹窗口风格卡片配标题栏，特性列表配绿色星号项目符号。
 
 ### Testimonials
 
-Horizontal auto-scrolling marquee (30px/s speed) with fixed-width cards (350px), Windows 95 title bar gradients, yellow inset content panels with 5-star ratings.
+横向自动滚动跑马灯（30px/s 速度）配固定宽度卡片（350px），Windows 95 标题栏渐变，黄色内凹内容面板配 5 星评分。
 
 ### Faq
 
-Accordion panels with gradient title bars (navy to blue), expandable sections, yellow answer panels with inset bevels.
+手风琴面板配渐变标题栏（海军蓝到蓝色），可展开分区，黄色回答面板配内凹斜面。
 
 ### Blog
 
-3-column card grid with thick beveled borders, blog images with inset borders, monospace metadata, underlined blue read-more links.
+3 列卡片网格配粗凸凹边框，博客图片配内凹边框，等宽字体元信息，下划线蓝色"阅读更多"链接。
 
 ### Footer
 
-4-column navigation grid on navy background with yellow headings and cyan links, groove HR divider above company info, centered layout with social buttons.
+海军蓝背景上的 4 列导航网格配黄色标题和青色链接，公司信息上方 groove HR 分隔线，居中布局配社交按钮。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Retro / 90s Nostalgia Design System
+# Retro / 90 年代怀旧设计系统
 
-## Design Philosophy
+## 设计哲学
 
-**Core Principles**: Embrace the raw, unfiltered aesthetic of the early web. This design celebrates the "ugly-cool" charm of 1990s websites—beveled buttons, system fonts, garish colors, and animated elements. It's deliberately anti-modern, rejecting minimalism in favor of maximum visual impact and nostalgic authenticity. Every pixel should feel like it was crafted in 1997 on a Windows 95 machine.
+**核心原则**：拥抱早期网络的原始、未加修饰美学。此设计赞颂 1990 年代网站的"丑酷"魅力——凸凹按钮、系统字体、刺眼色彩与动画元素。它刻意反现代，拒绝极简主义转而追求最大视觉冲击与怀旧真实。每个像素都应感觉在 1997 年用 Windows 95 机器打造。
 
-**Vibe**: Playful, chaotic, nostalgic, and unapologetically loud. Think GeoCities pages, "Under Construction" banners, hit counters, and guestbooks. This isn't about looking dated—it's about capturing the optimistic, experimental spirit of the early internet when everyone was just figuring things out. The aesthetic should feel authentic enough that someone who lived through the era would smile with recognition.
+**气质**：俏皮、混乱、怀旧、毫不掩饰地喧闹。想想 GeoCities 页面、"施工中"横幅、访问计数器与留言簿。这不是关于显得过时——而是捕捉早期互联网的乐观、实验精神，那时每个人都在摸索中前进。美学应足够真实，让经历过那个时代的人会会心一笑。
 
-**Historical Context**: This style peaked between 1995-1999, when personal computers used Windows 95/98, monitors were 800x600 resolution, and web browsers offered limited CSS. Designers worked within severe constraints, which produced a distinctive visual language we're faithfully recreating.
+**历史背景**：此风格鼎盛于 1995-1999 年间，当时个人电脑运行 Windows 95/98，显示器分辨率为 800x600，网页浏览器提供的 CSS 功能有限。设计师在严苛的限制下工作，由此产生了独特的视觉语言，我们正在忠实地还原它。
 
 ---
 
-## Design Token System (The DNA)
+## 设计 Token 系统（DNA）
 
-### Colors (Light Mode Only)
+### 色彩（仅浅色模式）
 
-This palette is pulled directly from Windows 95 system colors and early web hex values.
+此调色板直接取自 Windows 95 系统色和早期网页 hex 值。
 
-| Token | Value | Usage | Notes |
+| Token | 值 | 用法 | 备注 |
 |-------|-------|-------|-------|
-| `background` | `#C0C0C0` | Primary page background | Classic Windows 95 button face gray |
-| `foreground` | `#000000` | Pure black text | Maximum contrast, no grays for body text |
-| `muted` | `#808080` | Secondary elements, metadata | Exactly 50% gray (128,128,128) |
-| `accent` | `#0000FF` | Hyperlinks (unvisited) | Pure blue at maximum saturation |
-| `secondary` | `#FF0000` | Hot red for emphasis | Pure red at maximum saturation |
-| `tertiary` | `#FFFF00` | Bright yellow highlights | Pure yellow, used for badges and highlights |
-| `success` | `#00FF00` | Lime green | Pure green at maximum saturation |
-| `successDark` | `#00AA00` | Darker green for buttons | More readable green variant |
-| `border` | `#000000` | Pure black borders | Used for outer borders |
-| `borderLight` | `#FFFFFF` | White for 3D highlight | Top/left bevel edge |
-| `borderDark` | `#808080` | Gray for 3D shadow | Bottom/right bevel edge |
-| `titleBar` | `#000080` | Windows title bar navy | Pure dark blue (Navy) |
-| `titleBarGradientEnd` | `#1084D0` | Title bar gradient | Windows 98 active window gradient |
-| `panelYellow` | `#FFFFCC` | Light yellow content panels | Authentic Windows notepad/help color |
-| `visitedLink` | `#800080` | Visited hyperlinks | Purple/Maroon |
-| `hoverLink` | `#FF0000` | Link hover state | Red |
+| `background` | `#C0C0C0` | 主页面背景 | 经典 Windows 95 按钮面灰色 |
+| `foreground` | `#000000` | 纯黑文字 | 最大对比，正文不用灰 |
+| `muted` | `#808080` | 次要元素、元数据 | 正好 50% 灰（128,128,128） |
+| `accent` | `#0000FF` | 超链接（未访问） | 最大饱和度的纯蓝 |
+| `secondary` | `#FF0000` | 热红强调 | 最大饱和度的纯红 |
+| `tertiary` | `#FFFF00` | 亮黄高亮 | 纯黄，用于徽章和高亮 |
+| `success` | `#00FF00` | 青柠绿 | 最大饱和度的纯绿 |
+| `successDark` | `#00AA00` | 深绿按钮 | 更可读的绿色变体 |
+| `border` | `#000000` | 纯黑边框 | 用于外边框 |
+| `borderLight` | `#FFFFFF` | 白色 3D 高光 | 上/左凸边边缘 |
+| `borderDark` | `#808080` | 灰色 3D 阴影 | 下/右凸边边缘 |
+| `titleBar` | `#000080` | Windows 标题栏海军蓝 | 纯深蓝（Navy） |
+| `titleBarGradientEnd` | `#1084D0` | 标题栏渐变终点 | Windows 98 活动窗口渐变 |
+| `panelYellow` | `#FFFFCC` | 浅黄内容面板 | 正宗 Windows 记事本/帮助色 |
+| `visitedLink` | `#800080` | 已访问超链接 | 紫色/褐红 |
+| `hoverLink` | `#FF0000` | 链接悬停状态 | 红色 |
 
-**Color Relationships**:
-- All colors are at maximum saturation (pure RGB values with at least one channel at 0 or 255)
-- No gradual grays - only `#000000`, `#808080`, `#C0C0C0`, `#FFFFFF`
-- Links follow the classic progression: Blue → Purple (visited) → Red (hover)
+**色彩关系**：
+- 所有颜色均为最大饱和度（纯 RGB 值，至少一个通道为 0 或 255）
+- 无渐变灰——只有 `#000000`、`#808080`、`#C0C0C0`、`#FFFFFF`
+- 链接遵循经典进程：蓝色 → 紫色（已访问）→ 红色（悬停）
 
-### Typography
+### 字体
 
-**Font Stacks** (System fonts that evoke 1995-1999):
-- **Primary Body**: `"MS Sans Serif", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif`
-- **Headings**: `"Arial Black", Impact, Haettenschweiler, sans-serif` (heavy, bold weights only)
-- **Monospace**: `"Courier New", Courier, monospace` (for dates, stats, counters, code-like elements)
-- **Playful accent** (ultra-sparingly): `"Comic Sans MS", cursive` (only for "fun" decorative elements if needed)
+**字体栈**（唤起 1995-1999 的系统字体）：
+- **主要正文**：`"MS Sans Serif", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif`
+- **标题**：`"Arial Black", Impact, Haettenschweiler, sans-serif`（仅粗体/黑体字重）
+- **等宽**：`"Courier New", Courier, monospace`（用于日期、数据、计数器、代码风格元素）
+- **俏皮点缀**（极少使用）：`"Comic Sans MS", cursive`（仅用于"趣味"装饰元素）
 
-**Type Scale**:
-- **H1 Hero**: 48px-96px (3xl to 6xl), always UPPERCASE or Title Case, Arial Black/Impact
-- **H2 Section**: 32-48px (2xl to 4xl), often UPPERCASE, Arial Black
-- **H3 Subsection**: 20-24px (lg to xl), bold weight
-- **Body**: 14-16px, default weight, readable density
-- **Small/Meta**: 12px (xs), often monospace for dates and metadata
-- **Labels**: 10-12px, UPPERCASE, sometimes monospace
+**字号阶梯**：
+- **H1 Hero**：48px-96px（3xl 至 6xl），始终 UPPERCASE 或 Title Case，Arial Black/Impact
+- **H2 章节**：32-48px（2xl 至 4xl），常 UPPERCASE，Arial Black
+- **H3 子标题**：20-24px（lg 至 xl），粗体字重
+- **正文**：14-16px，默认字重，可读密度
+- **小号/元信息**：12px（xs），日期和元数据常用等宽字体
+- **标签**：10-12px，UPPERCASE，有时用等宽
 
-**Typographic Patterns**:
-- Headings are BOLD or BLACK weight - no thin or light fonts exist in this era
-- Letter-spacing on UPPERCASE headings: `tracking-tight` to `tracking-wide` (not expanded)
-- Line-height: Dense (1.2-1.4 for headings, 1.5-1.6 for body)
-- Text shadows for 3D text: `text-shadow: 2px 2px 0 #808080` (hard-edged, no blur)
+**排印模式**：
+- 标题为 BOLD 或 BLACK 字重——这个时代不存在细体或轻体字
+- UPPERCASE 标题字距：`tracking-tight` 至 `tracking-wide`（不扩展）
+- 行高：密集（标题 1.2-1.4，正文 1.5-1.6）
+- 3D 文字阴影：`text-shadow: 2px 2px 0 #808080`（硬边，无模糊）
 
-### Radius & Borders
+### 圆角与边框
 
-**Border Radius**: `0px` EVERYWHERE. No exceptions. The 90s didn't have border-radius.
+**圆角**：处处 `0px`。无例外。90 年代没有 border-radius。
 
-**Border Widths**:
-- Standard: `2px` for most elements
-- Emphasis: `4px` for section dividers and highlighted elements
-- Minimum: `1px` only for subtle inner detail (rare)
+**边框宽度**：
+- 标准：大多数元素 `2px`
+- 强调：章节分隔符和高亮元素 `4px`
+- 最小：仅用于含蓄内部细节 `1px`（罕见）
 
-**3D Bevel Effect** (THE SIGNATURE):
+**3D 凸凹效果**（签名元素）：
 
-This is the most critical visual element. Windows 95 used a specific 4-value border-color syntax combined with box-shadow for depth.
+这是最关键的视觉元素。Windows 95 使用特定的四值 border-color 语法结合 box-shadow 营造深度。
 
-**Outset (Raised) - Elements that appear to pop out**:
+**外凸（抬起）— 显得突出的元素**：
 ```css
 border: 2px solid;
-border-color: #ffffff #808080 #808080 #ffffff; /* Top Right Bottom Left */
+border-color: #ffffff #808080 #808080 #ffffff; /* 上 右 下 左 */
 box-shadow: inset -1px -1px 0 #404040, inset 1px 1px 0 #dfdfdf;
 ```
-- Top and left edges: white (#ffffff)
-- Bottom and right edges: gray (#808080)
-- Inner shadow adds depth with darker (#404040) and lighter (#dfdfdf) accents
+- 上、左边缘：白（#ffffff）
+- 下、右边缘：灰（#808080）
+- 内阴影以更暗（#404040）与更亮（#dfdfdf）点缀增添深度
 
-**Outset Enhanced (Deeper bevel)**:
+**外凸增强（更深斜面）**：
 ```css
 border: 2px solid;
 border-color: #ffffff #808080 #808080 #ffffff;
@@ -156,35 +156,35 @@ box-shadow:
   inset 4px 4px 0 #dfdfdf;
 ```
 
-**Inset (Sunken) - Elements that appear pressed in**:
+**内凹（下沉）— 显得按入的元素**：
 ```css
 border: 2px solid;
-border-color: #808080 #ffffff #ffffff #808080; /* REVERSED from outset */
+border-color: #808080 #ffffff #ffffff #808080; /* 与外凸相反 */
 box-shadow: inset 1px 1px 0 #404040, inset -1px -1px 0 #dfdfdf;
 ```
-- Top and left edges: gray (#808080)
-- Bottom and right edges: white (#ffffff)
-- Inner shadow creates recessed appearance
+- 上、左边缘：灰（#808080）
+- 下、右边缘：白（#ffffff）
+- 内阴影创造凹陷外观
 
-**Active/Pressed State**:
-When an outset element is clicked, it becomes inset AND translates 1px down and right:
+**激活/按下状态**：
+外凸元素被点击时变内凹且向下右位移 1px：
 ```css
 border-color: #808080 #ffffff #ffffff #808080;
 box-shadow: inset 1px 1px 0 #404040, inset -1px -1px 0 #dfdfdf;
 transform: translate(1px, 1px);
 ```
 
-**Tailwind Implementation**:
-Use arbitrary values with underscores for spaces:
-- `[border-color:#fff_#808080_#808080_#fff]` for outset
-- `[border-color:#808080_#fff_#fff_#808080]` for inset
+**Tailwind 实现**：
+用任意值配下划线代空格：
+- 外凸 `[border-color:#fff_#808080_#808080_#fff]`
+- 内凹 `[border-color:#808080_#fff_#fff_#808080]`
 - `[box-shadow:inset_-1px_-1px_0_#404040,inset_1px_1px_0_#dfdfdf]`
 
-### Textures & Patterns (MANDATORY)
+### 纹理与图案（强制）
 
-The background must NOT be flat. This is critical for authenticity.
+背景绝不扁平。这对真实感至关重要。
 
-**90s Tiled Pattern** (Primary technique):
+**90 年代平铺图案**（主要技术）：
 ```css
 background-color: #c0c0c0;
 background-image:
@@ -195,9 +195,9 @@ background-image:
 background-size: 4px 4px;
 background-position: 0 0, 0 2px, 2px -2px, -2px 0px;
 ```
-This creates a subtle diagonal crosshatch that gives texture without being distracting.
+这创造含蓄对角交叉影，增添纹理而不分散注意。
 
-**Construction Warning Stripes** (For emphasis areas):
+**施工警告条纹**（用于强调区）：
 ```css
 background: repeating-linear-gradient(
   45deg,
@@ -207,9 +207,9 @@ background: repeating-linear-gradient(
   #000000 20px
 );
 ```
-Exactly 10px yellow, 10px black stripes at 45-degree angle.
+正好 10px 黄、10px 黑条纹，45 度角。
 
-**Horizontal Rule (HR) with Groove Effect**:
+**水平线（HR）配 groove 效果**：
 ```css
 border: none;
 height: 4px;
@@ -219,203 +219,177 @@ background: linear-gradient(
   #ffffff 50%, #ffffff 100%
 );
 ```
-Creates the classic "etched" divider look.
+创造经典"蚀刻"分隔符外观。
 
 ---
 
-## Component Styling Principles
+## 组件样式原则
 
-### Buttons
+### 按钮
 
-**Visual Requirements**:
-- Border: 2px with 4-value outset color pattern
-- Background: Subtle gradient or solid color depending on variant
-- Text: Bold, UPPERCASE with `tracking-wide`, centered
-- Padding: 8px vertical, 16px horizontal (comfortable clickable area)
-- NO border-radius
-- NO soft drop shadows
+**视觉要求**：
+- 边框：2px 配四值外凸色模式
+- 背景：视变体微妙渐变或纯色
+- 文字：粗、UPPERCASE 配 `tracking-wide`、居中
+- 内边距：垂直 8px、水平 16px（舒适可点击区）
+- 无 border-radius
+- 无柔和投影
 
-**State Transitions**:
-- **Default**: Outset bevel, slightly lighter background on hover
-- **Hover**: Background lightens by 1-2 shades, maintain outset
-- **Active/Pressed**: Inset bevel (reversed border-color), translate(1px, 1px)
-- **Focus**: Dotted 2px black outline, 2px offset (Windows 95 focus ring)
-- **Transition**: NONE or instant (`transition-none` or 50ms max) - no smooth easing
+**状态过渡**：
+- **默认**：外凸斜面，悬停时略亮背景
+- **悬停**：背景提亮 1-2 级，保持外凸
+- **激活/按下**：内凹斜面（反转 border-color），translate(1px, 1px)
+- **聚焦**：2px 黑色点线轮廓，2px offset（Windows 95 聚焦环）
+- **过渡**：无或即时（`transition-none` 或最大 50ms）— 无平滑缓动
 
-**Variants**:
-1. **Default/Ghost**: `#C0C0C0` background, black text, outset bevel
-2. **Accent/Primary**: `#0000FF` background, white text, blue-tinted bevel edges
-3. **Danger**: `#FF0000` background, white text, red-tinted bevel edges
-4. **Success**: `#00AA00` (readable green) background, white text, green-tinted bevel
-5. **Outline**: White background, black text, outset bevel
+**变体**：
+1. **默认/幽灵**：`#C0C0C0` 背景，黑字，外凸斜面
+2. **点缀/主**：`#0000FF` 背景，白字，蓝色调斜面边缘
+3. **危险**：`#FF0000` 背景，白字，红色调斜面边缘
+4. **成功**：`#00AA00`（可读绿）背景，白字，绿色调斜面
+5. **描边**：白背景，黑字，外凸斜面
 
-**Bevel Color Tinting**:
-For colored buttons, tint the bevel edges to match:
-- Blue button: `border-color: #5555ff #000080 #000080 #5555ff`
-- Red button: `border-color: #ff5555 #800000 #800000 #ff5555`
-- Green button: `border-color: #00ff00 #006600 #006600 #00ff00`
+**斜面色着色**：
+彩色按钮，斜面边缘着色以匹配：
+- 蓝按钮：`border-color: #5555ff #000080 #000080 #5555ff`
+- 红按钮：`border-color: #ff5555 #800000 #800000 #ff5555`
+- 绿按钮：`border-color: #00ff00 #006600 #006600 #00ff00`
 
-**Example Tailwind Classes**:
+### 卡片/容器
+
+**面板/卡片结构**：
+- 容器：2px 外凸斜面，`#C0C0C0` 背景
+- 标题栏：渐变 `linear-gradient(to right, #000080, #1084D0)`，白字，粗，4-8px 内边距
+- 内容区：内凹斜面（下沉），白或 `#FFFFCC`（黄）背景
+
+**窗口风格卡片**（最具辨识度）：
 ```
-border-2
-bg-[#c0c0c0]
-text-black
-[border-color:#fff_#808080_#808080_#fff]
-[box-shadow:inset_-1px_-1px_0_#404040,inset_1px_1px_0_#dfdfdf]
-hover:bg-[#d0d0d0]
-active:[border-color:#808080_#fff_#fff_#808080]
-active:[box-shadow:inset_1px_1px_0_#404040,inset_-1px_-1px_0_#dfdfdf]
-active:translate-x-[1px]
-active:translate-y-[1px]
-focus-visible:outline-dotted
-focus-visible:outline-2
-focus-visible:outline-black
-focus-visible:outline-offset-2
+外层容器：外凸斜面，灰背景
+├── 标题栏：海军蓝渐变（#000080 → #1084D0），白粗字
+└── 内容区：内凹斜面，白背景，内边距 16px
 ```
 
-### Cards/Containers
+**交替行背景**：
+表格状布局交替：
+- 偶数行：`#FFFFFF`（白）
+- 奇数行：`#E8E8E8`（浅灰）
 
-**Panel/Card Structure**:
-- Container: 2px outset bevel, `#C0C0C0` background
-- Title bar: Gradient `linear-gradient(to right, #000080, #1084d0)`, white text, bold, 4-8px padding
-- Content area: Inset bevel (sunken), white or `#FFFFCC` (yellow) background
+这创造经典电子表格/数据库外观。
 
-**Window-Style Card** (Most distinctive):
-```
-Outer container: outset bevel, gray background
-├── Title bar: navy gradient (#000080 → #1084d0), white bold text
-└── Content area: inset bevel, white background, padding 16px
-```
+**单元格间边框**：
+用 `border-right-2` 与 `border-bottom-2` 配 `#808080` 创造可见网格线。
 
-**Alternating Row Backgrounds**:
-For table-like layouts, alternate between:
-- Even rows: `#FFFFFF` (white)
-- Odd rows: `#E8E8E8` (light gray)
+### 表单输入
 
-This creates the classic spreadsheet/database appearance.
+**输入字段**：
+- 边框：2px 内凹（下沉外观）
+- 背景：白
+- 文字：黑，14-16px
+- 内边距：4-8px
+- 聚焦：2px 黑色点线轮廓，2px offset
+- 禁用：`#C0C0C0` 背景，50% 不透明度
 
-**Borders Between Cells**:
-Use `border-right-2` and `border-bottom-2` with `#808080` to create visible grid lines.
+**占位符文字**：`#808080`（灰）
 
-### Form Inputs
+**下拉选择**：同输入的内凹样式
 
-**Input Fields**:
-- Border: 2px inset (sunken appearance)
-- Background: White
-- Text: Black, 14-16px
-- Padding: 4-8px
-- Focus: Dotted 2px black outline, 2px offset
-- Disabled: `#C0C0C0` background, 50% opacity
+**复选框/单选**：90 年代网页不常见（用文字指示或简单方块）
 
-**Placeholder Text**: `#808080` (gray)
+### 链接（超链接）
 
-**Select Dropdowns**: Same inset styling as inputs
+90 年代网络最具标志性的元素。
 
-**Checkboxes/Radio**: Not common in 90s web (use text indicators or simple squares)
+**状态**：
+- **未访问**：`#0000FF`（蓝），始终下划线
+- **已访问**：`#800080`（紫）
+- **悬停**：`#FF0000`（红）
+- **激活**（点击时）：`#FF0000`（红）
 
-### Links (Hyperlinks)
+**规则**：
+- 始终下划线（绝不移除 text-decoration）
+- 色彩变化即时（无过渡）
+- 悬停无背景
+- 无额外样式效果
 
-The most iconic element of the 90s web.
+### 图标
 
-**States**:
-- **Unvisited**: `#0000FF` (blue), underlined always
-- **Visited**: `#800080` (purple)
-- **Hover**: `#FF0000` (red)
-- **Active** (while clicking): `#FF0000` (red)
+**样式**：
+- 描边宽度：`2px` 或 `stroke-[2px]`（粗、粗线）
+- 颜色：匹配区块点缀色（蓝、红、绿）
+- 尺寸：标准 24px（h-6 w-6），特性 32px
+- 无圆角或柔和形状
+- 考虑图标容器周围 2px 黑边框
 
-**Rules**:
-- ALWAYS underlined (never remove text-decoration)
-- Color changes are instant (no transitions)
-- No background on hover
-- No additional styling effects
-
-**Example**:
-```
-text-[#0000ff]
-underline
-hover:text-[#ff0000]
-visited:text-[#800080]
-```
-
-### Icons
-
-**Styling**:
-- Stroke width: `2px` or `stroke-[2px]` (thick, bold lines)
-- Color: Match the accent color of the section (blue, red, green)
-- Size: 24px (h-6 w-6) standard, 32px for features
-- NO rounded corners or soft shapes
-- Consider adding 2px black borders around icon containers
-
-**Icon Containers**:
-If placing icons in colored boxes:
-- Box background: Solid bright color (#000080, #008080, #00AA00)
-- Icon color: White
-- Box style: Outset or flat with borders
+**图标容器**：
+若置于彩色盒中：
+- 盒背景：实心亮色（#000080, #008080, #00AA00）
+- 图标色：白
+- 盒样式：外凸或带边框扁平
 
 ---
 
-## Layout Principles
+## 布局原则
 
-### Page Structure
+### 页面结构
 
-**Maximum Width**: `max-w-5xl` (1024px) - mimics 800x600 monitor content area with browser chrome
+**最大宽度**：`max-w-5xl`（1024px）— 模仿 800x600 显示器内容区配浏览器边框
 
-**Spacing System**:
-- Base unit: 8px
-- Element padding: 16px (generous interior spacing)
-- Element margins: 8-16px (tighter exterior spacing for density)
-- Section padding: 64px vertical (py-16), 16px horizontal (px-4)
+**间距系统**：
+- 基础单位：8px
+- 元素内边距：16px（慷慨内部间距）
+- 元素外边距：8-16px（更紧外部间距以增密度）
+- 区块内边距：垂直 64px（py-16），水平 16px（px-4）
 
-**Section Dividers**:
-Use thick borders (`border-b-4 border-[#808080]`) OR the groove HR effect between major sections.
+**区块分隔符**：
+主要区块间用粗边框（`border-b-4 border-[#808080]`）或 groove HR 效果。
 
-**Grid Layouts**:
-Even though using modern CSS Grid/Flexbox, make it LOOK like tables:
-- Visible cell borders with `border-2` or `border-r-2`/`border-b-2`
-- Alternating row backgrounds
-- Equal column widths where possible
-- Dense, compact spacing
+**网格布局**：
+即使使用现代 CSS Grid/Flexbox，也要看起来像表格：
+- 可见单元格边框配 `border-2` 或 `border-r-2`/`border-b-2`
+- 交替行背景
+- 可能时等列宽
+- 密集紧凑间距
 
-### Responsive Strategy
+### 响应式策略
 
-**Desktop** (768px+):
-- Full table-like layouts with side-by-side columns
-- Multi-column grids (2-4 columns)
-- Visible complex borders
+**桌面**（768px+）：
+- 完整表格状布局配并排列
+- 多列网格（2-4 列）
+- 可见复杂边框
 
-**Tablet** (640-768px):
-- Reduce to 2 columns max
-- Maintain all visual styling (bevels, borders)
-- Stack complex tables if needed
+**平板**（640-768px）：
+- 最多减至 2 列
+- 保持所有视觉样式（斜面、边框）
+- 需要时堆叠复杂表格
 
-**Mobile** (<640px):
-- Single column
-- KEEP beveled effects (essential to the style)
-- Marquee continues to scroll
-- Reduce font sizes slightly but keep bold weights
-- Horizontal scrolling for complex tables is acceptable (authentic!)
+**移动**（<640px）：
+- 单列
+- 保持凸凹效果（风格必需）
+- 跑马灯继续滚动
+- 略减字号但保持粗字重
+- 复杂表格可接受水平滚动（真实！）
 
-**Important**: The aesthetic is more important than perfect responsiveness. It's okay if the mobile experience is slightly janky—that's authentic to the era.
+**重要**：美学比完美响应式更重要。移动体验略 janky 也可——那对那个时代是真实的。
 
 ---
 
-## The "Bold Factor" (Non-Genericness)
+## "大胆要素"（非通用性）
 
-**MANDATORY ELEMENTS** - These must be present or the style fails:
+**强制元素** — 这些必须存在否则风格失败：
 
-### 1. Marquee Scrolling Text
-Use `react-fast-marquee` or pure CSS marquee for:
-- Announcement bars with colorful text
-- Testimonial carousels
-- "Breaking news" style updates
+### 1. 跑马灯滚动文字
+用 `react-fast-marquee` 或纯 CSS 跑马灯作：
+- 彩色文字公告栏
+- 证言轮播
+- "突发新闻"风格更新
 
-**Settings**:
-- Speed: 30-60 (moderate pace)
-- No gradient fade (gradient={false})
-- Multiple spans with different colors
+**设置**：
+- 速度：30-60（中等节奏）
+- 无渐变淡入（gradient={false}）
+- 多个 span 配不同色
 
-### 2. Animated Rainbow Text
-CSS animation cycling through bright colors for hero headlines:
+### 2. 动画彩虹文字
+CSS 动画循环亮色用于 Hero 标题：
 ```css
 @keyframes rainbow {
   0% { color: #ff0000; }
@@ -428,18 +402,18 @@ CSS animation cycling through bright colors for hero headlines:
 }
 animation: rainbow 4s linear infinite;
 ```
-**Duration**: 4 seconds, linear easing (no smoothing)
+**时长**：4 秒，linear 缓动（无平滑）
 
-### 3. Beveled Everything
-Every interactive element and most containers must have the 3D outset/inset effect. This is NON-NEGOTIABLE.
+### 3. 处处凸凹
+每个交互元素和大多数容器必须有 3D 外凸/内凹效果。这不可妥协。
 
-### 4. "Under Construction" Energy
-Add small animated elements:
-- Blinking "NEW!" badges (use `animate-pulse` or CSS blink with step-end)
-- Pulsing call-to-action badges
-- Color-cycling decorative elements
+### 4. "施工中"能量
+添加小型动画元素：
+- 闪烁"NEW!"徽章（用 `animate-pulse` 或 CSS blink 配 step-end）
+- 脉冲 CTA 徽章
+- 色彩循环装饰元素
 
-**Pulse Glow Animation** (for badges):
+**脉冲辉光动画**（用于徽章）：
 ```css
 @keyframes pulse-glow {
   0%, 100% {
@@ -454,140 +428,140 @@ Add small animated elements:
 animation: pulse-glow 1.5s ease-in-out infinite;
 ```
 
-### 5. Horizontal Rules (HR) as Dividers
-Use the 3D groove effect between major content sections. This is a signature 90s pattern.
+### 5. 水平线（HR）作分隔符
+主要内容区块间用 3D groove 效果。这是签名 90 年代模式。
 
-### 6. Hit Counter Aesthetic
-Style at least one stats section like a classic hit counter:
-- Black or navy background
-- Green monospace text (#00FF00)
-- Beveled inset frame
-- Text like "Visitors: 0001234 | Since 1995"
+### 6. 访问计数器美学
+至少一个数据区块样式如经典访问计数器：
+- 黑或海军蓝背景
+- 绿色等宽文字（#00FF00）
+- 凸凹内凹框
+- 文字如 "Visitors: 0001234 | Since 1995"
 
-### 7. Table-Like Visual Layouts
-Even when using modern CSS, create the appearance of HTML tables:
-- Visible cell borders (`border-2 border-[#808080]`)
-- Alternating row backgrounds
-- Grid-like precision
+### 7. 表格状视觉布局
+即使使用现代 CSS，也创造 HTML 表格外观：
+- 可见单元格边框（`border-2 border-[#808080]`）
+- 交替行背景
+- 网格般精准
 
-### 8. Title Bar Windows
-Cards should look like Windows 95 application windows:
-- Navy-to-blue gradient title bar
-- White bold text in title
-- Inset content area below
+### 8. 标题栏窗口
+卡片应看起来如 Windows 95 应用窗口：
+- 海军蓝到蓝渐变标题栏
+- 标题中白粗字
+- 下方内凹内容区
 
-### 9. Decorative Color Squares
-Include at least one section with a grid of bright colored squares (red, green, blue, yellow, magenta, cyan) with beveled edges. This is pure decorative 90s excess.
+### 9. 装饰彩色方块
+至少一个区块含亮色方块网格（红、绿、蓝、黄、品红、青）配凸凹边缘。这是纯装饰性 90 年代过度。
 
-### 10. Construction Stripe Background
-Use the yellow/black diagonal stripe pattern for at least one emphasized section (like final CTA).
-
----
-
-## Animation & Motion
-
-**Motion Philosophy**: Snappy, immediate, digital. No organic easing curves.
-
-**Timing Functions**:
-- **Instant state changes**: `transition-none` or `duration-0`
-- **Color cycling**: `linear` (no easing)
-- **Badges/pulses**: `ease-in-out` (acceptable for attention effects)
-- **Button press**: `transition-none` or max 50ms
-
-**Durations**:
-- Button press: Instant or 50ms
-- Hover color change: 75ms or instant
-- Rainbow text cycle: 3-5 seconds
-- Pulse glow: 1-2 seconds
-- Marquee speed: Moderate (40-60px/second)
-
-**Key Animations**:
-
-1. **Rainbow Text**: 4s linear infinite loop through spectrum
-2. **Pulse Glow**: 1.5s ease-in-out infinite for "NEW!" badges
-3. **Blink** (ultra-sparingly): 1s step-end infinite (harsh on/off, not fade)
-4. **Marquee**: Continuous scroll, pauseOnHover for usability
-
-**Reduced Motion**:
-Respect `prefers-reduced-motion`:
-- Stop rainbow animation (fallback to single bright color)
-- Stop marquee (show static or slower scroll)
-- Stop pulsing badges (static with bright color)
+### 10. 施工条纹背景
+至少一个强调区块（如最终 CTA）用黄/黑对角条纹图案。
 
 ---
 
-## Accessibility
+## 动画与运动
 
-**Color Contrast**:
-- Black (#000000) on silver (#C0C0C0): 7.5:1 (AAA)
-- White on navy (#000080): 8.6:1 (AAA)
-- White on blue (#0000FF): 8.6:1 (AAA)
-- The palette naturally provides excellent contrast
+**运动哲学**：利落、即时、数字。无有机缓动曲线。
 
-**Focus States**:
-- 2px dotted black outline (Windows 95 authentic)
-- 2px offset from element
-- High visibility, matches the aesthetic
-- NEVER remove focus indicators
+**时机函数**：
+- **即时状态变化**：`transition-none` 或 `duration-0`
+- **色彩循环**：`linear`（无缓动）
+- **徽章/脉冲**：`ease-in-out`（注意力效果可接受）
+- **按钮按下**：`transition-none` 或最大 50ms
 
-**Keyboard Navigation**:
-- All interactive elements must be keyboard accessible
-- Tab order should follow visual order
-- Button press on Enter/Space should show active state
+**时长**：
+- 按钮按下：即时或 50ms
+- 悬停色变：75ms 或即时
+- 彩虹文字循环：3-5 秒
+- 脉冲辉光：1-2 秒
+- 跑马灯速度：中等（40-60px/秒）
 
-**Screen Readers**:
-- Marquee text must have static alternative or be aria-live="polite"
-- Decorative animated elements should be aria-hidden
-- Color squares and decorative patterns need no alt text
-- Ensure semantic HTML even with table-like appearance
+**关键动画**：
 
-**Motion Sensitivity**:
-Provide `prefers-reduced-motion` alternatives:
+1. **彩虹文字**：4s linear infinite 循环光谱
+2. **脉冲辉光**：1.5s ease-in-out infinite 用于"NEW!"徽章
+3. **闪烁**（极克制）：1s step-end infinite（硬开关，非淡入）
+4. **跑马灯**：持续滚动，pauseOnHover 以增可用性
+
+**减少运动**：
+尊重 `prefers-reduced-motion`：
+- 停止彩虹动画（回退至单一亮色）
+- 停止跑马灯（显示静态或更慢滚动）
+- 停止脉冲徽章（静态配亮色）
+
+---
+
+## 可访问性
+
+**色彩对比**：
+- 黑（#000000）于银（#C0C0C0）：7.5:1（AAA）
+- 白于海军蓝（#000080）：8.6:1（AAA）
+- 白于蓝（#0000FF）：8.6:1（AAA）
+- 调色板天然提供出色对比
+
+**聚焦状态**：
+- 2px 黑色点线轮廓（Windows 95 真实）
+- 距元素 2px offset
+- 高可见度，匹配美学
+- 绝不移除聚焦指示器
+
+**键盘导航**：
+- 所有交互元素必须键盘可访问
+- Tab 顺序应遵循视觉顺序
+- Enter/Space 按钮按下应显示激活状态
+
+**屏幕阅读器**：
+- 跑马灯文字必须有静态替代或 aria-live="polite"
+- 装饰动画元素应 aria-hidden
+- 色彩方块与装饰图案无需 alt 文本
+- 即使表格状外观也确保语义 HTML
+
+**运动敏感**：
+提供 `prefers-reduced-motion` 替代：
 ```css
 @media (prefers-reduced-motion: reduce) {
   .text-rainbow { animation: none; color: #ff0000; }
   .animate-pulse-glow { animation: none; }
-  /* Marquee handled by library or CSS */
+  /* 跑马灯由库或 CSS 处理 */
 }
 ```
 
 ---
 
-## Anti-Patterns (What to AVOID)
+## 反模式（应避免之事）
 
-### Visual No-Nos:
-1. **NO border-radius** - Not even 1px. Zero. Always.
-2. **NO soft drop shadows** - Only use inset shadows for bevels
-3. **NO gradients** except:
-   - Title bar gradient (navy to blue)
-   - Background patterns (stripes, tiles)
-   - Subtle button backgrounds
-4. **NO semi-transparent overlays** - Colors are always opaque (except white/80 for secondary text on dark backgrounds)
-5. **NO thin fonts** - Everything is bold or black weight
-6. **NO subtle grays** - Only #000000, #808080, #C0C0C0, #FFFFFF, #E8E8E8
-7. **NO smooth easing** - Use linear or instant transitions
-8. **NO removing link underlines** - Always visible
-9. **NO modern minimalist spacing** - Dense, not airy
-10. **NO attempting to "modernize" the aesthetic** - Embrace the cheese
+### 视觉禁忌：
+1. **无 border-radius** — 甚至 1px 也不行。零。始终。
+2. **无柔和投影** — 仅用内嵌阴影作斜面
+3. **无渐变** 除了：
+   - 标题栏渐变（海军蓝到蓝）
+   - 背景图案（条纹、平铺）
+   - 含蓄按钮背景
+4. **无半透明叠加** — 色彩始终不透明（深色背景上次要文字的白/80 除外）
+5. **无细字体** — 一切为粗或黑字重
+6. **无含蓄灰** — 仅 #000000、#808080、#C0C0C0、#FFFFFF、#E8E8E8
+7. **无平滑缓动** — 用 linear 或即时过渡
+8. **无移除链接下划线** — 始终可见
+9. **无现代极简间距** — 密集，非通透
+10. **勿试图"现代化"美学** — 拥抱奶酪感
 
-### Interaction No-Nos:
-1. **DON'T use hover states that scale elements** (except 1.05 for pulse badges)
-2. **DON'T use fade transitions** - Changes should be instant or linear
-3. **DON'T make marquee text essential content** - Keep it decorative/supplemental
-4. **DON'T override browser default selection color** - Actually, DO: use #000080 background, white text
-5. **DON'T use floating action buttons** or modern UI patterns
+### 交互禁忌：
+1. **勿用缩放元素的悬停状态**（脉冲徽章 1.05 除外）
+2. **勿用淡入过渡** — 变化应即时或 linear
+3. **勿使跑马灯文字成必要内容** — 保持装饰/补充
+4. **勿覆盖浏览器默认选择色** — 实际上，要：用 #000080 背景，白字
+5. **勿用浮动操作按钮**或现代 UI 模式
 
-### Content No-Nos:
-1. **DON'T use placeholder text** that doesn't fit the era (no "lorem ipsum")
-2. **DON'T reference modern tech** in decorative text (keep it generic or 90s-themed)
-3. **DON'T be subtle** - This style is LOUD and PROUD
+### 内容禁忌：
+1. **勿用不符时代的占位文字**（无"lorem ipsum"）
+2. **勿在装饰文字中提及现代科技**（保持通用或 90 年代主题）
+3. **勿含蓄** — 此风格大声且自豪
 
 ---
 
-## Implementation Notes
+## 实现说明
 
-### Tailwind Arbitrary Values
-You'll use these constantly:
+### Tailwind 任意值
+你会常用：
 ```
 border-[2px]
 [border-color:#fff_#808080_#808080_#fff]
@@ -595,54 +569,54 @@ border-[2px]
 bg-[#c0c0c0]
 text-[#0000ff]
 ```
-Note: Use underscores for spaces in arbitrary values.
+注意：任意值中用下划线代空格。
 
-### Custom CSS Required
-Some effects need CSS files:
-- `@keyframes` for rainbow, pulse-glow, blink
-- `.hr-groove` for horizontal rule effect
-- `.bg-90s-tile` for tiled background pattern
-- `.bg-construction` for warning stripes
+### 所需自定义 CSS
+部分效果需 CSS 文件：
+- rainbow、pulse-glow、blink 的 `@keyframes`
+- 水平线效果的 `.hr-groove`
+- 平铺背景图案的 `.bg-90s-tile`
+- 警告条纹的 `.bg-construction`
 
-### Dependencies
-- **react-fast-marquee**: Essential for authentic scrolling text
-- Consider creating CSS variables for the complex box-shadow values for reusability
+### 依赖
+- **react-fast-marquee**：真实滚动文字必需
+- 考虑为复杂 box-shadow 值创建 CSS 变量以增可复用性
 
-### Color Layering Strategy
-1. **Base**: Tiled #C0C0C0 background
-2. **Surface**: White or gray (#E8E8E8) panels with bevels
-3. **Accent surfaces**: Navy title bars, colored feature boxes
-4. **Foreground**: Black text, colored icons
-5. **Highlights**: Yellow badges, red "NEW!" tags, rainbow text
-
----
-
-## Signature Visual Checklist
-
-Before considering the design complete, verify these are present:
-
-- [ ] At least one marquee scrolling element with colorful text
-- [ ] Rainbow animated text on hero or major heading
-- [ ] All buttons have 3D outset bevels with proper border-color syntax
-- [ ] At least one card with Windows 95 title bar gradient
-- [ ] Tiled background pattern visible on main body
-- [ ] Hyperlinks are blue/underlined, turn red on hover
-- [ ] At least one section with alternating row backgrounds
-- [ ] Horizontal groove rule divider between major sections
-- [ ] A "hit counter" style stats display with monospace green text
-- [ ] One "NEW!" or "HOT!" badge with pulse animation
-- [ ] Construction stripe background on at least one section
-- [ ] All interactive elements have dotted focus outlines
-- [ ] Active buttons show pressed state (inset + translate)
-- [ ] Icons have 2px stroke width
-- [ ] Zero instances of border-radius anywhere
+### 色彩分层策略
+1. **基础**：平铺 #C0C0C0 背景
+2. **表面**：白或灰（#E8E8E8）面板配斜面
+3. **点缀表面**：海军蓝标题栏、彩色特性盒
+4. **前景**：黑文字、彩色图标
+5. **高亮**：黄徽章、红"NEW!"标签、彩虹文字
 
 ---
 
-## The Secret Sauce
+## 签名视觉清单
 
-What makes this style work is **commitment to authenticity over modernization**. The temptation will be to "clean it up" or "make it more professional." Resist this. The ugliness IS the beauty. The clashing colors, the dense layouts, the aggressive animations—these aren't bugs, they're features.
+设计完成前，验证以下存在：
 
-Someone who lived through 1997 should look at this and immediately feel transported back. The design should be so authentic that it's almost jarring next to modern websites. That contrast IS the point.
+- [ ] 至少一个彩色文字跑马灯滚动元素
+- [ ] Hero 或主要标题有彩虹动画文字
+- [ ] 所有按钮有 3D 外凸斜面配正确 border-color 语法
+- [ ] 至少一张卡片有 Windows 95 标题栏渐变
+- [ ] 主 body 可见平铺背景图案
+- [ ] 超链接为蓝/下划线，悬停变红
+- [ ] 至少一个区块有交替行背景
+- [ ] 主要区块间有水平 groove 规则分隔符
+- [ ] 有"访问计数器"风格数据显示配等宽绿字
+- [ ] 有一个"NEW!"或"HOT!"徽章配脉冲动画
+- [ ] 至少一个区块有施工条纹背景
+- [ ] 所有交互元素有点线聚焦轮廓
+- [ ] 激活按钮显示按下状态（内凹 + 位移）
+- [ ] 图标有 2px 描边宽度
+- [ ] 处处零 border-radius 实例
 
-Embrace the cheese. Celebrate the chaos. Welcome to 1997.
+---
+
+## 秘诀
+
+使此风格生效的是**对真实而非现代化的承诺**。诱惑会是"清理它"或"使其更专业"。抵制此。丑即美。冲突的色彩、密集的布局、激进的动画——这些不是 bug，而是特性。
+
+经历过 1997 年的人应看此并立即感觉穿越回去。设计应如此真实，以至于在现代网站旁几乎令人震撼。那种对比正是要点。
+
+拥抱奶酪感。赞颂混乱。欢迎来到 1997。

@@ -10,248 +10,248 @@
 | 显示名称 | Swiss |
 | 模式 | ☀️ 浅色模式 (Light) |
 | 字体类型 | sans-serif |
-| 描述 | A rigorous implementation of the International Typographic Style (1950s). Characterized by objective typography, sans-serif fonts (Inter), mathematical grids with subtle texture patterns, and a strict black/white/red palette. Prioritizes readability, precision, asymmetrical organization, and visual depth through layered patterns. |
+| 描述 | 对国际字体排印风格（1950 年代）的严谨实现。以客观字体、无衬线字体（Inter）、带细腻纹理图案的数学网格，以及严格的黑/白/红调色板为特征。优先考虑可读性、精准、非对称组织，以及通过分层图案营造的视觉深度。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Split screen composition with asymmetric 8:4 grid ratio. Left: massive typography (text-6xl to text-[10rem]) with geometric accent bar and functional CTAs. Right: geometric abstract composition with grid pattern overlay, featuring basic shapes (circles, rectangles, lines) in black/red on muted background.
+分屏构图配非对称 8:4 网格比例。左：巨型字体（text-6xl 至 text-[10rem]）配几何点缀条与功能性 CTA。右：几何抽象构图配网格图案叠加，含基本形状（圆、矩形、线）以黑/红于柔和背景。
 
 ### Stats
 
-Horizontal strip divided by visible borders. 2x2 grid on mobile, 1x4 on desktop. Massive numbers with hover scale animation, rotating plus icons, and color inversion on hover (black → red). No decorative icons, pure data presentation.
+横向条带由可见边框分隔。移动 2x2 网格，桌面 1x4。巨型数字配悬停缩放动画、旋转 plus 图标，以及悬停色彩反相（黑 → 红）。无装饰图标，纯数据呈现。
 
 ### Product Detail
 
-Split 7:5 grid. Left: 2x2 visual grid of geometric compositions with texture overlays (dots, diagonals, grid patterns). Right: large typographic headline with body text. Mobile stacks vertically.
+7:5 分割网格。左：2x2 几何构图视觉网格配纹理叠加（点、对角、网格图案）。右：大号字体标题配正文。移动垂直堆叠。
 
 ### Features
 
-Asymmetric two-column layout. Left: sticky header with dots pattern overlay and numbered label (01. System). Right: stacked feature cards with thick borders, numbered indicators, diagonal arrow icons, and full hover state color inversion.
+非对称双列布局。左：粘性标题配点阵图案叠加与编号标签（01. System）。右：堆叠特性卡片配粗边框、编号指示器、对角箭头图标，以及完整悬停状态色彩反相。
 
 ### How It Works
 
-Three-column grid with visible borders and black background. Each step features giant watermark numbers (text-8xl at 10% opacity), red accent border on left, and white text on black.
+三列网格配可见边框与黑背景。每步含巨型水印数字（text-8xl 10% 不透明度）、左侧红点缀边框，以及黑底白字。
 
 ### Benefits
 
-Asymmetric 5:7 grid split. Left: diagonal pattern overlay with section header. Right: stacked list items with numbered box indicators, hover state inverts to black background with red accent numbers.
+非对称 5:7 网格分割。左：对角图案叠加配区块标题。右：堆叠列表项配编号盒指示器，悬停状态反相为黑背景配红点缀数字。
 
 ### Testimonials
 
-Three-column responsive grid (1 col mobile, 2 col tablet, 3 col desktop). Large red quotation mark, bold uppercase quote text, thick top border that changes to red on hover, subtle upward translation on hover.
+三列响应式网格（移动 1 列、平板 2 列、桌面 3 列）。大号红引号、粗体大写引文文字、悬停变红的粗顶边框，悬停含蓄上移。
 
 ### Pricing
 
-Three-column card layout with 4px black borders. Highlighted plan uses inverted colors (black bg, white text, red accents). Strict rectangular shapes, no rounded corners.
+三列卡片布局配 4px 黑边框。高亮方案用反相色（黑底、白字、红点缀）。严格矩形形状，无圆角。
 
 ### Faq
 
-Two-column rigid grid (1 col mobile) with 4px black borders and 1px gaps creating visual grid. Each FAQ is a card with numbered label, rotating plus icon, and full hover inversion (white → red bg).
+双列刚性网格（移动 1 列）配 4px 黑边框与 1px 间隙创造视觉网格。每个 FAQ 为卡片配编号标签、旋转 plus 图标，以及完整悬停反相（白 → 红背景）。
 
 ### Blog
 
-Four-column layout: 1 col sidebar with grid pattern (section header + CTA), 3 col article grid. Articles have date, title, read link with arrow. Hover inverts to black background.
+四列布局：1 列侧边栏配网格图案（区块标题 + CTA），3 列文章网格。文章含日期、标题、配箭头的阅读链接。悬停反相为黑背景。
 
 ### Footer
 
-Black background with four-column layout. Large uppercase brand name, underlined email input (not boxed), square social icons with white bg that invert to red on hover.
+黑背景配四列布局。大号大写品牌名、下划线邮箱输入（非方框）、白底方社交图标悬停变红。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Design Style: Swiss International (International Typographic Style)
+# 设计风格：Swiss International（国际字体排印风格）
 
-## Design Philosophy
+## 设计哲学
 
-**The International Typographic Style (Swiss Style)** is not merely a visual trend; it is a philosophy of objective communication born in 1950s Switzerland. It rejects personal expression and subjectivity in favor of universal clarity, mathematical precision, and logical structure.
+**国际字体排印风格（Swiss Style）** 不仅是视觉趋势；它是诞生于 1950 年代瑞士的客观沟通哲学。它拒绝个人表达与主观性，转而追求普遍清晰、数学精准与逻辑结构。
 
-**Core Tenets:**
+**核心信条**：
 
-1.  **Objectivity over Subjectivity**: The design must recede to let the content speak. Every visual decision must be justifiable by the content's needs. Personal ornamentation is eliminated in favor of functional communication. The designer is not an artist expressing themselves, but a conduit for information.
+1.  **客观胜于主观**：设计必须退后让内容说话。每个视觉决策都必须可由内容需求证明。个人装饰被消除以利功能沟通。设计师不是表达自我的艺术家，而是信息的管道。
 
-2.  **The Grid as Law**: The grid is the absolute authority. It is not a guideline; it is the visible skeleton of the information. We generally avoid static center-alignment in favor of **asymmetrical organization** to create dynamic visual rhythm and tension. Grid patterns are made visible through subtle background textures.
+2.  **网格即法律**：网格是绝对权威。它不是指南；它是信息的可见骨架。我们通常避免静态居中对齐，转而拥抱**非对称组织**以创造动态视觉节奏与张力。网格图案通过含蓄背景纹理变得可见。
 
-3.  **Typography is the Interface**: Type is not just for reading; it is the primary structural and graphical element. We use grotesque sans-serif typefaces (Inter, Helvetica) because they are neutral vessels for meaning. Scale, weight, and position are the only tools needed to create hierarchy.
+3.  **字体即界面**：字体不仅为阅读；它是主要结构与图形元素。我们用 grotesque 无衬线字体（Inter、Helvetica）因为它们是意义的中性容器。尺度、字重与位置是创造层级所需的唯一工具。
 
-4.  **Active Negative Space**: White space is not "empty"; it is an active structural element. It defines boundaries, gives weight to the massive typography, and creates breathing room for the intellect.
+4.  **活跃留白**：留白不是"空"；它是活跃结构元素。它定义边界、给巨型字体份量、并为智识创造呼吸空间。
 
-5.  **Layered Texture & Depth**: While maintaining flatness (no shadows or 3D effects), we achieve visual depth through **subtle pattern overlays**: grid lines (24px), dot matrices (16px), diagonal stripes, and noise textures. These patterns add tactile richness without compromising the objective aesthetic.
+5.  **分层纹理与深度**：保持扁平（无阴影或 3D 效果）的同时，我们通过**含蓄图案叠加**实现视觉深度：网格线（24px）、点阵（16px）、对角条纹与噪点纹理。这些图案增添触感丰富而不妥协客观美学。
 
-6.  **Universal Intelligibility**: The design should be understood instantly. It is clean, legible, and undeniably modern.
+6.  **普遍可懂**：设计应被即时理解。它干净、可读、不可否认现代。
 
-**The Vibe**:
-*   **Intellectual & Architectural**: The page should feel like a well-engineered building, a museum exhibition, or a transit map—functional, safe, and efficient.
-*   **Structured yet Organic**: While brutally honest in its geometry, subtle texture patterns provide warmth and visual interest—like fine paper grain or screen printing texture.
-*   **Brutally Precise**: No gradients to hide bad layout. Depth comes from pattern, not shadow. The design is flat yet rich, stark yet nuanced.
-*   **Timeless**: By avoiding ephemeral trends (glassmorphism, neumorphism, soft rounded corners), the design aims for permanence.
+**气质**：
+*   **智识与建筑**：页面应感觉如精心工程的大楼、博物馆展览或交通图——功能、安全、高效。
+*   **结构而有机**：几何上残酷诚实的同时，含蓄纹理图案提供温暖与视觉趣味——如精细纸颗粒或丝网印刷纹理。
+*   **残酷精准**：无渐变可藏糟糕布局。深度来自图案，非阴影。设计扁平而丰富、鲜明而细腻。
+*   **永恒**：通过避免短暂趋势（玻璃拟态、新拟态、柔圆角），设计追求永恒。
 
-**Visual Signatures**:
-*   **Flush-Left, Ragged-Right Text**: Text blocks are strictly left-aligned to the grid.
-*   **Grotesque Sans-Serif**: Neutral, objective fonts with high x-heights (Inter, weight 400-900).
-*   **Mathematical Scales**: Font sizes that relate to each other through clear ratios (responsive scaling from mobile to desktop).
-*   **The "Swiss Red" (#FF3000)**: Used not as decoration, but as a functional signal—a stop sign, a warning, a highlight—piercing the monochrome calm.
-*   **Pattern-Based Texture**: Subtle CSS-generated patterns (grid, dots, diagonals, noise) applied to background surfaces for visual depth without breaking flatness.
-*   **Geometric Abstraction**: Basic shapes (circles, squares, rectangles, lines) arranged in Bauhaus-inspired compositions.
+**视觉签名**：
+*   **左对齐右参差文字**：文字块严格左对齐网格。
+*   **Grotesque 无衬线**：中性、客观字体配高 x-height（Inter，字重 400-900）。
+*   **数学尺度**：字号通过清晰比率相互关联（移动至桌面响应式缩放）。
+*   **"Swiss Red"（#FF3000）**：不作装饰，而作功能信号——停止标志、警告、高亮——穿透单色宁静。
+*   **基于图案的纹理**：含蓄 CSS 生成图案（网格、点、对角、噪点）应用于背景表面以增视觉深度而不破坏扁平。
+*   **几何抽象**：基本形状（圆、方、矩形、线）以 Bauhaus 启发构图排列。
 
-## Design Token System (The DNA)
+## 设计 Token 系统（DNA）
 
-### Colors (Strict Palette)
-*   **Background**: `#FFFFFF` (Pure White) - The canvas must be neutral.
-*   **Foreground**: `#000000` (Pure Black) - Text is absolute.
-*   **Muted**: `#F2F2F2` (Light Gray) - Used for secondary backgrounds to create rhythm.
-*   **Accent**: `#FF3000` (Swiss Red) - The **only** signal color. Used sparingly for CTAs and critical emphasis.
-*   **Border**: `#000000` (Pure Black) - Structure is visible.
+### 色彩（严格调色板）
+*   **Background**：`#FFFFFF`（纯白）— 画布必须中性。
+*   **Foreground**：`#000000`（纯黑）— 文字绝对。
+*   **Muted**：`#F2F2F2`（浅灰）— 用于次级背景以创造节奏。
+*   **Accent**：`#FF3000`（Swiss Red）— **唯一**信号色。克制用于 CTA 与关键强调。
+*   **Border**：`#000000`（纯黑）— 结构可见。
 
-### Typography
-*   **Font Family**: `Inter` (Google Font). Ideally closest to Helvetica/Akzidenz-Grotesk.
-*   **Weights**: Heavy use of **Black (900)** and **Bold (700)** for headings. **Regular (400)** or **Medium (500)** for body.
-*   **Style**: **UPPERCASE** for almost all headings and labels.
-*   **Tracking**: `tracking-tighter` for large headlines, `tracking-widest` for small labels.
-*   **Scale**: Extreme contrast. Headlines should be massive (`text-7xl` to `text-9xl`+). Body text is legible and objective.
+### 字体
+*   **字族**：`Inter`（Google Font）。理想上最接近 Helvetica/Akzidenz-Grotesk。
+*   **字重**：标题大量用 **Black (900)** 与 **Bold (700)**。正文用 **Regular (400)** 或 **Medium (500)**。
+*   **样式**：几乎所有标题与标签**大写**。
+*   **字距**：大标题用 `tracking-tighter`，小标签用 `tracking-widest`。
+*   **尺度**：极端对比。标题应巨大（`text-7xl` 至 `text-9xl`+）。正文可读客观。
 
-### Radius & Border
-*   **Radius**: `0px` (Strictly Rectangular). No rounded corners.
-*   **Borders**: Thick, visible borders (`border-2` or `border-4`). Used to define the grid.
+### 圆角与边框
+*   **圆角**：`0px`（严格矩形）。无圆角。
+*   **边框**：粗、可见边框（`border-2` 或 `border-4`）。用于定义网格。
 
-### Shadows & Effects
-*   **Shadows**: No drop shadows. The design maintains flatness. Only use subtle ring shadows for compositional geometry (e.g., `shadow-[0_0_0_8px_rgba(255,48,0,0.1)]` for accent circles).
-*   **Effects**: Interactive elements use simple color inversion (Black → White, White → Red), scale transforms (1.0 → 1.05), rotation (0deg → 90deg for plus icons), and vertical translation (-1px lift on hover).
+### 阴影与效果
+*   **阴影**：无投影。设计保持扁平。仅用含蓄环阴影作构图几何（如 `shadow-[0_0_0_8px_rgba(255,48,0,0.1)]` 作点缀圆）。
+*   **效果**：交互元素用简单色彩反相（黑 → 白、白 → 红）、缩放变换（1.0 → 1.05）、旋转（plus 图标 0deg → 90deg），以及垂直位移（悬停 -1px 抬起）。
 
-### Textures & Patterns (Critical for Depth)
-These CSS-based patterns add visual richness while maintaining the flat, objective aesthetic:
+### 纹理与图案（对深度至关重要）
+这些基于 CSS 的图案增添视觉丰富同时保持扁平客观美学：
 
-*   **Grid Pattern** (`.swiss-grid-pattern`):
-    - Subtle 24×24px grid lines at 3% opacity
-    - Applied to hero composition area, blog sidebar, muted backgrounds
-    - Creates visible structure without overwhelming content
+*   **网格图案**（`.swiss-grid-pattern`）：
+    - 含蓄 24×24px 网格线，3% 不透明度
+    - 应用于 Hero 构图区、博客侧边栏、柔和背景
+    - 创造可见结构而不压倒内容
 
-*   **Dot Matrix** (`.swiss-dots`):
-    - Radial gradient dots, 16×16px spacing, 4% opacity
-    - Applied to section headers, feature sidebars
-    - Evokes traditional print techniques
+*   **点阵**（`.swiss-dots`）：
+    - 径向渐变点，16×16px 间距，4% 不透明度
+    - 应用于区块标题、特性侧边栏
+    - 唤起传统印刷技术
 
-*   **Diagonal Lines** (`.swiss-diagonal`):
-    - 45-degree repeating lines, 10px spacing, 2% opacity
-    - Applied to benefits sidebar, accent backgrounds
-    - Adds directional energy to static layouts
+*   **对角线**（`.swiss-diagonal`）：
+    - 45 度重复线，10px 间距，2% 不透明度
+    - 应用于收益侧边栏、点缀背景
+    - 为静态布局增添方向能量
 
-*   **Noise Texture** (`.swiss-noise`):
-    - Fractal noise overlay via SVG filter, 1.5% opacity
-    - Applied globally to body background
-    - Simulates paper texture, adds warmth to stark white backgrounds
+*   **噪点纹理**（`.swiss-noise`）：
+    - 通过 SVG 滤镜的分形噪点叠加，1.5% 不透明度
+    - 全局应用于 body 背景
+    - 模拟纸张纹理，为鲜明白背景增添温暖
 
-**Application Strategy**: Use patterns on muted gray backgrounds (`#F2F2F2`) and occasionally on white surfaces. Never apply patterns to pure black backgrounds or red accent areas. Patterns should enhance, not dominate.
+**应用策略**：在柔和灰背景（`#F2F2F2`）上用图案，偶尔在白表面。绝不在纯黑背景或红点缀区应用图案。图案应增强，非主导。
 
-## Component Stylings
+## 组件样式
 
-### Buttons
-*   **Shape**: Strictly rectangular (`rounded-none`).
-*   **Style**: Solid Black background with White text (Primary). White background with Black border (Secondary).
-*   **Hover**: Invert colors or switch to Swiss Red (`#FF3000`).
-*   **Typography**: Uppercase, bold, tracking-wide.
+### 按钮
+*   **形状**：严格矩形（`rounded-none`）。
+*   **样式**：实心黑背景配白字（主）。白背景配黑边框（次）。
+*   **悬停**：反相色或切换至 Swiss Red（`#FF3000`）。
+*   **字体**：大写、粗、tracking-wide。
 
-### Cards / Containers
-*   **Structure**: Defined by their borders (`border-black`).
-*   **Background**: White or Muted Gray (`#F2F2F2`).
-*   **Padding**: Generous and uniform (`p-8`, `p-12`).
-*   **Hover**: Entire card background changes color (e.g., to Swiss Red or Black) with text color inversion.
+### 卡片/容器
+*   **结构**：由边框定义（`border-black`）。
+*   **背景**：白或柔和灰（`#F2F2F2`）。
+*   **内边距**：慷慨均匀（`p-8`、`p-12`）。
+*   **悬停**：整卡背景变色（如至 Swiss Red 或黑）配文字色反相。
 
-### Inputs
-*   **Style**: Underlined (`border-b`) or solid rectangular box with thick border.
-*   **Focus**: Sharp change in border color to Swiss Red. No glow rings.
+### 输入框
+*   **样式**：下划线（`border-b`）或配粗边框的实心矩形盒。
+*   **聚焦**：边框色锐变至 Swiss Red。无辉光环。
 
-## Layout Strategy
+## 布局策略
 
-*   **The Grid**: The grid is God. It should often be **visible** (using borders on elements).
-*   **Asymmetry**: Embrace asymmetrical balance. A large photo on the left balanced by negative space and small text on the right.
-*   **Alignment**: Strict left alignment for text.
-*   **Separators**: Use horizontal and vertical lines to divide sections.
+*   **网格**：网格即上帝。它应常**可见**（用元素边框）。
+*   **非对称**：拥抱非对称平衡。左侧大照片由右侧留白与小文字平衡。
+*   **对齐**：文字严格左对齐。
+*   **分隔符**：用水平与垂直线分隔区块。
 
-## Non-Genericness (The "Bold" Factor)
+## 非通用性（"大胆"要素）
 
-This implementation goes beyond "generic Swiss style" by incorporating:
+此实现超越"通用 Swiss 风格"，融入：
 
-*   **Massive Responsive Typography**: Headlines scale from `text-6xl` (mobile) to `text-[10rem]` (desktop). Let words be images.
-*   **Visible Structure**: The layout grid is made tangible through:
-    - Thick 4px black borders defining sections
-    - Visible grid patterns (24px) on backgrounds
-    - Asymmetric column ratios (8:4, 7:5, 5:7) creating dynamic tension
-*   **Numbered Section Labels**: Every major section has a prefix (01. System, 02. Method, 03. Advantages, 04. Journal) in red accent with uppercase tracking
-*   **Layered Geometric Compositions**:
-    - Hero features abstract Bauhaus-style composition with overlapping shapes
-    - Product detail uses 2×2 grid of geometric elements with different texture patterns
-    - Each composition combines circles, rectangles, lines in purposeful arrangement
-*   **Pattern-Based Texture**: Four distinct CSS patterns (grid, dots, diagonal, noise) applied strategically to create depth without shadows
-*   **Bold Interaction States**:
-    - Full color inversions (not just opacity fades)
-    - Rotating icons (plus signs spin 90°)
-    - Scale transforms on hover
-    - Vertical slide animations in navigation
-*   **Active Negative Space**: Generous padding (p-12, p-24) and asymmetric layouts create breathing room and visual tension
-*   **Functional Color System**: Red is used only for:
-    - Primary CTAs and accents
-    - Hover states as visual feedback
-    - Section number prefixes
-    - Never as decorative fill
+*   **巨型响应式字体**：标题从 `text-6xl`（移动）缩放至 `text-[10rem]`（桌面）。让文字成为图像。
+*   **可见结构**：布局网格通过以下变得有形：
+    - 定义区块的粗 4px 黑边框
+    - 背景上可见网格图案（24px）
+    - 创造动态张力的非对称列比（8:4、7:5、5:7）
+*   **编号区块标签**：每个主要区块有前缀（01. System、02. Method、03. Advantages、04. Journal）配红点缀与大写字距
+*   **分层几何构图**：
+    - Hero 含抽象 Bauhaus 风格构图配重叠形状
+    - 产品详情用 2×2 几何元素网格配不同纹理图案
+    - 每个构图结合圆、矩形、线以有目的的排列
+*   **基于图案的纹理**：四种独特 CSS 图案（网格、点、对角、噪点）战略性应用以创造无阴影深度
+*   **大胆交互状态**：
+    - 完整色彩反相（非仅不透明淡入）
+    - 旋转图标（plus 符号旋转 90°）
+    - 悬停缩放变换
+    - 导航中垂直滑动动画
+*   **活跃留白**：慷慨内边距（p-12, p-24）与非对称布局创造呼吸空间与视觉张力
+*   **功能色彩系统**：红仅用于：
+    - 主 CTA 与点缀
+    - 悬停状态作视觉反馈
+    - 区块编号前缀
+    - 绝不作装饰填充
 
-## Spacing & Iconography
+## 间距与图标
 
-*   **Spacing**: High density in information clusters (tables), but high spaciousness in narrative sections.
-*   **Iconography**: Use `lucide-react` icons, but treat them as functional symbols. Stroke width should match typography. Often enclosed in geometric shapes (squares/circles).
+*   **间距**：信息簇中高密度（表格），但叙述区块高宽敞。
+*   **图标**：用 `lucide-react` 图标，但视它们为功能符号。描边宽度应匹配字体。常包裹于几何形状（方/圆）中。
 
-## Animation
+## 动画
 
-*   **Feel**: Instant, mechanical, snappy, precise. Movement is purposeful and geometric.
-*   **Transitions**: `duration-200 ease-out` or `duration-150 ease-linear` for rapid feedback. No elastic or spring animations.
-*   **Micro-interactions**:
-    - **Navigation Links**: Vertical slide animation with color change (text slides up, red replacement slides in from below)
-    - **Stats Cards**: Scale transform on numbers (1.0 → 1.05), rotating plus icons (0° → 90°), background color snap (black → red)
-    - **Feature Cards**: Color inversion on hover (white → accent red), arrow rotation (-45° → 0°)
-    - **Testimonials**: Subtle upward lift (-1px translateY), border color change (black → red), quote text color change
-    - **FAQ Cards**: Rotating plus icons, full background color inversion (white → red)
-    - **Buttons**: Instant background color changes, no scale transforms
-*   **Hover States**: Always indicate interactivity through color, scale, or position changes—never subtle fades. Swiss style is bold and immediate.
+*   **质感**：即时、机械、利落、精准。运动有目的且几何。
+*   **过渡**：`duration-200 ease-out` 或 `duration-150 ease-linear` 以快速反馈。无弹性或弹簧动画。
+*   **微交互**：
+    - **导航链接**：垂直滑动动画配色变（文字上滑，红替代自下滑入）
+    - **数据卡片**：数字缩放变换（1.0 → 1.05）、旋转 plus 图标（0° → 90°）、背景色 snap（黑 → 红）
+    - **特性卡片**：悬停色彩反相（白 → 点缀红）、箭头旋转（-45° → 0°）
+    - **证言**：含蓄上抬（-1px translateY）、边框色变（黑 → 红）、引文文字色变
+    - **FAQ 卡片**：旋转 plus 图标、完整背景色反相（白 → 红）
+    - **按钮**：即时背景色变，无缩放变换
+*   **悬停状态**：始终通过色彩、缩放或位置变化指示交互性——绝不含蓄淡入。Swiss 风格大胆即時。
 
-## Responsive Strategy
+## 响应式策略
 
-The Swiss style must maintain its bold character across all screen sizes:
+Swiss 风格必须在所有屏幕尺寸保持其大胆特质：
 
-**Mobile (< 768px)**:
-*   Typography scales down but remains bold: `text-6xl` for hero headlines
-*   Single column layouts with vertical stacking
-*   Borders remain 4px thick (never thin out)
-*   CTAs become full-width buttons with consistent height (`h-16`)
-*   Grid patterns and textures maintain same opacity/scale
-*   Stats become 2×2 grid instead of 1×4
-*   Navigation collapses (visible only on desktop)
+**移动（< 768px）**：
+*   字体缩小但保持大胆：Hero 标题 `text-6xl`
+*   单列布局配垂直堆叠
+*   边框保持 4px 厚（绝不减细）
+*   CTA 变全宽按钮配一致高度（`h-16`）
+*   网格图案与纹理保持相同不透明度/尺度
+*   数据变 2×2 网格而非 1×4
+*   导航折叠（仅桌面可见）
 
-**Tablet (768px - 1024px)**:
-*   Two-column layouts for testimonials, FAQ, features
-*   Typography scales to `text-8xl` for headlines
-*   Asymmetric grids start to appear
-*   Touch targets remain minimum 44×44px
+**平板（768px - 1024px）**：
+*   证言、FAQ、特性双列布局
+*   字体缩放至标题 `text-8xl`
+*   非对称网格开始出现
+*   触控目标保持最小 44×44px
 
-**Desktop (1024px+)**:
-*   Full asymmetric grid layouts (8:4, 7:5, 5:7 ratios)
-*   Maximum typography scale (`text-9xl`, `text-[10rem]`)
-*   Multi-column layouts (3-4 columns for blog, footer)
-*   Sticky positioning for section headers
-*   All hover states and micro-interactions active
+**桌面（1024px+）**：
+*   完整非对称网格布局（8:4、7:5、5:7 比例）
+*   最大字体尺度（`text-9xl`、`text-[10rem]`）
+*   多列布局（博客、页脚 3-4 列）
+*   区块标题粘性定位
+*   所有悬停状态与微交互激活
 
-**Key Principles**:
-- Never compromise on border thickness or contrast
-- Maintain uppercase typography and tight tracking
-- Patterns remain visible at all breakpoints
-- Red accent color used consistently across devices
-- Spacing remains generous (reduce from p-24 to p-12 on mobile, but never less)
+**关键原则**：
+- 绝不在边框厚度或对比上妥协
+- 保持大写字体与紧凑字距
+- 图案在所有断点保持可见
+- 红点缀色跨设备一致使用
+- 间距保持慷慨（移动从 p-24 减至 p-12，但绝不更少）
 
-## Accessibility
+## 可访问性
 
-*   **Contrast**: The Black/White/Red scheme naturally offers ultra-high contrast (21:1 for black/white). Ensure red text on white meets AA standards.
-*   **Focus**: High-contrast 2px ring in red (`focus-visible:ring-2 focus-visible:ring-swiss-accent focus-visible:ring-offset-2`)
-*   **Touch Targets**: All interactive elements minimum 44×44px on mobile
-*   **Motion**: All animations are CSS-based and respect `prefers-reduced-motion`
-*   **Semantics**: Proper heading hierarchy, semantic HTML5 elements, ARIA labels where needed
+*   **对比**：黑/白/红方案天然提供超高对比（黑/白 21:1）。确保白上红文字达 AA 标准。
+*   **聚焦**：高对比 2px 红环（`focus-visible:ring-2 focus-visible:ring-swiss-accent focus-visible:ring-offset-2`）
+*   **触控目标**：移动端所有交互元素最小 44×44px
+*   **运动**：所有动画基于 CSS 并尊重 `prefers-reduced-motion`
+*   **语义**：正确标题层级、语义化 HTML5 元素、按需 ARIA 标签

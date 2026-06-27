@@ -10,250 +10,250 @@
 | 显示名称 | Tech Style |
 | 模式 | ☀️ 浅色模式 (Light) |
 | 字体类型 | sans-serif |
-| 描述 | A bold, minimalist-modern visual system combining clean aesthetics with dynamic execution. Features signature Electric Blue gradients, sophisticated dual-font pairing (Calistoga + Inter), animated hero graphics, inverted contrast sections, and micro-interactions throughout. Professional yet design-forward—confidence without clutter. |
+| 描述 | 兼具简洁美学与动感执行的大胆、极简现代视觉系统。标志性的电光蓝渐变、考究的双字体搭配（Calistoga + Inter）、动画首屏图形、反差色区块与贯穿全局的微交互。专业而具设计前瞻性——自信而不杂乱。 |
 
 ## 布局创意 (Layout Ideas)
 
 ### Hero
 
-Asymmetrical two-column grid (1.1fr / 0.9fr). Left: bold headline with gradient text accent on key word, animated badge with pulsing dot, trust indicators with stacked avatars. Right: abstract generative art composition with floating animated cards, rotating outer ring, geometric elements, and bold corner accent block.
+非对称双列网格（1.1fr / 0.9fr）。左：粗体标题配关键词渐变文字点缀、带脉动圆点的动画徽章、堆叠头像的信任指标。右：抽象生成艺术构图，配浮动动画卡片、旋转外环、几何元素与粗体角部点缀块。
 
 ### Stats
 
-INVERTED section with dark background (foreground color). Large display numbers (5xl-6xl), trend badges with arrow icons, dot pattern texture overlay. Vertical dividers between stats on desktop.
+反相区块配深色背景（前景色）。大号展示数字（5xl-6xl）、带箭头图标的趋势徽章、点阵图案纹理叠加。桌面端数据间垂直分隔符。
 
 ### Features
 
-Asymmetric masonry grid where first card spans 2 rows. Gradient icon backgrounds (not translucent). Hover gradient overlays on cards. Featured card has 'Learn more' link and corner glow effect.
+非对称瀑布流网格，首张卡片跨 2 行。渐变图标背景（非半透明）。卡片悬停渐变叠加。精选卡片有 'Learn more' 链接与角部辉光效果。
 
 ### How It Works
 
-Horizontal timeline on desktop. Large circular step numbers (24x24) with inner gradient glow. Cards below each step. Arrow connectors between steps using accent-colored circular badges. Centered header layout.
+桌面端横向时间线。大号圆形步骤编号（24x24）配内渐变辉光。每步下方卡片。步骤间用点缀色圆形徽章配箭头连接器。居中标题布局。
 
 ### Benefits
 
-Two-column asymmetric grid (1.2fr / 0.8fr). Text content with checkmark list items using accent-colored badges. Visual element has asymmetric border-radius (rounded-tl-[4rem] rounded-br-[4rem]) with abstract UI placeholder.
+双栏非对称网格（1.2fr / 0.8fr）。文字内容配勾选标记列表项，使用点缀色徽章。视觉元素有非对称圆角（rounded-tl-[4rem] rounded-br-[4rem]）配抽象 UI 占位符。
 
 ### Pricing
 
-3-column grid with highlighted tier elevated (-translate-y-4) and featuring gradient border effect (2px gradient stroke). Gradient price text on highlighted tier. Badge hangs off top edge. Gradient checkmarks for highlighted features.
+3 列网格，高亮档位抬升（-translate-y-4）并具渐变边框效果（2px 渐变描边）。高亮档位渐变价格文字。徽章悬挂于顶边。高亮特性配渐变勾选标记。
 
 ### Testimonials
 
-3-column grid with center card offset vertically. Large decorative quote mark (120px, 8% opacity). Gradient accent bar at top of each card. Display font for quotes in italic. Larger avatars with accent border.
+3 列网格，中间卡片垂直偏移。大型装饰引号（120px，8% 不透明度）。每张卡片顶部渐变点缀条。引文用展示字体斜体。更大头像配点缀边框。
 
 ### Faq
 
-Clean accordion with rotating Plus icon. Border-bottom dividers. Question text is semibold xl, answer is muted lg with relaxed line-height.
+干净手风琴配旋转 Plus 图标。底边框分隔符。问题文字 semibold xl，回答 muted lg 配宽松行高。
 
 ### Blog
 
-3-column grid with section label badge. Featured badge on first post. Image hover: scale + gradient overlay from bottom. 'Read more' link with arrow icon on each card. Pill-style 'View all' button in header.
+3 列网格配区块标签徽章。首篇文章配精选徽章。图片悬停：缩放 + 底部渐变叠加。每张卡片有 'Read more' 链接配箭头图标。标题中胶囊式 'View all' 按钮。
 
 ### Footer
 
-5-column grid (company spans 2). Social icons as rounded-xl buttons with accent hover. Navigation groups with link lists. Bottom bar with border-top separator.
+5 列网格（公司跨 2 列）。社交图标为 rounded-xl 按钮配点缀悬停。导航组配链接列表。底部栏配 border-top 分隔符。
 
 ---
 
 ## 完整提示词 (Full Prompt)
 
-# Design Style: Minimalist Modern
+# 设计风格：Minimalist Modern
 
-## Design Philosophy
+## 设计哲学
 
-### Core Principle
+### 核心原则
 
-**Clarity through structure, character through bold detail.** This design system embraces modern web layouts and dynamic interactions while honoring minimalist foundations. It operates on a fundamental tension: restraint in quantity, confidence in execution. Every element that appears has earned its place—but those elements are executed with deliberate flair and precision.
+**通过结构清晰，通过大胆细节显个性。** 此设计系统拥抱现代网页布局与动态交互同时致敬极简基础。它运作于根本张力：数量克制，执行自信。每个出现的元素都赢得其位置——但那些元素以刻意风采与精准执行。
 
-Whitespace is not empty space; it's a precision instrument for directing attention. Motion is not decoration; it's communication. Color is not scattered; it's concentrated into a single, electrifying accent that commands the eye wherever it appears.
+留白不是空空间；它是引导注意的精准工具。运动不是装饰；它是沟通。色彩不分散；它集中于单一、令人触电的点缀，在出现处吸引目光。
 
-### The Visual Vibe
+### 视觉气质
 
-**Professional yet design-forward. Confident and artistic. Refined but alive.**
+**专业而具设计前瞻性。自信且艺术。精致但鲜活。**
 
-Imagine the intersection of a high-tech SaaS product's precision with a creative agency's bold portfolio sensibility. This design feels like it was crafted by someone who understands both engineering rigor and artistic expression—someone who knows the rules well enough to break them intentionally.
+想象高科技 SaaS 产品的精准与创意机构大胆作品集敏感性的交汇。此设计感觉由既懂工程严谨又懂艺术表达之人打造——知道规则到足以有意打破之人。
 
-**Emotional Keywords:**
-- *Confident* — Never apologetic. Elements are sized boldly, colors are vibrant, animations are purposeful.
-- *Sophisticated* — The dual-font typography system, the considered color ratios, the layered shadows all whisper "we sweat the details."
-- *Alive* — Subtle animations, pulsing indicators, floating elements, and hover responses create a sense that the interface is breathing.
-- *Premium* — Generous whitespace, elevated surfaces, and accent-tinted shadows evoke quality and care.
-- *Contemporary* — Gradient text, glassmorphic hints, and asymmetric layouts feel undeniably modern without being trendy.
+**情感关键词**：
+- *自信* — 绝不致歉。元素大胆尺寸，色彩鲜艳，动画有目的。
+- *精致* — 双字体系统、考究色彩比、分层阴影都低语"我们抠细节"。
+- *鲜活* — 含蓄动画、脉动指示器、浮动元素与悬停响应创造界面呼吸之感。
+- *高端* — 慷慨留白、抬升表面与点缀色调阴影唤起品质与关怀。
+- *当代* — 渐变文字、玻璃拟态暗示与非对称布局感觉不可否认现代而不潮流。
 
-**What This Design Is NOT:**
-- Not sterile or clinical (despite being "minimal")
-- Not generic or template-like (bold choices prevent this)
-- Not busy or overwhelming (restraint in element count)
-- Not flat or lifeless (texture, shadow, and motion add depth)
-- Not cold or corporate (the warm serif headlines and vibrant blue inject personality)
+**此设计不是什么**：
+- 不无菌或冷漠（尽管"极简"）
+- 不通用或模板化（大胆选择防止此）
+- 不繁忙或压倒（元素数量克制）
+- 不扁平或无生命（纹理、阴影与运动增添深度）
+- 不冷或企业（暖衬线标题与鲜艳蓝注入个性）
 
-### The DNA of This Style
+### 此风格的 DNA
 
-#### 1. The Signature Gradient
+#### 1. 签名渐变
 
-The Electric Blue gradient (`#0052FF` → `#4D7CFF`) is the heartbeat of this design system. It's not just an accent color—it's a visual signature that creates instant recognition.
+电光蓝渐变（`#0052FF` → `#4D7CFF`）是此设计系统的心跳。它不只是点缀色——它是创造即时识别的视觉签名。
 
-**Where it appears:**
-- Primary button backgrounds
-- Text highlights on key headline words
-- Icon container backgrounds
-- Featured card border strokes
-- Testimonial accent bars
-- Trend indicator badges
-- CTA section buttons
-- Pricing tier highlights
+**出现之处**：
+- 主按钮背景
+- 关键标题词的文字高亮
+- 图标容器背景
+- 精选卡片边框描边
+- 证言点缀条
+- 趋势指示器徽章
+- CTA 区块按钮
+- 定价档位高亮
 
-**Why it works:** A gradient feels more alive than a flat color. The subtle shift from deep Electric Blue to a lighter sky blue creates dimensionality and draws the eye along the element. It signals "this is important" without screaming.
+**为何有效**：渐变比扁平色更鲜活。从深电光蓝到较浅天蓝的含蓄偏移创造维度并沿元素吸引目光。它发出"这很重要"的信号而不呐喊。
 
-#### 2. Inverted Contrast Sections
+#### 2. 反相对比区块
 
-Strategic sections flip the color scheme—using the deep slate `foreground` color as a background with light text. This technique:
-- Creates dramatic visual rhythm as users scroll
-- Prevents the light theme from feeling monotonous
-- Provides natural section breaks without heavy dividers
-- Makes statistics and key metrics feel more impactful
-- Adds sophistication through intentional contrast
+战略区块翻转配色——用深石板 `foreground` 色作背景配浅文字。此技巧：
+- 用户滚动时创造戏剧性视觉节奏
+- 防止浅色主题感觉单调
+- 无需重分隔符即提供自然区块断点
+- 使统计与关键指标更有冲击力
+- 通过有意对比增添精致
 
-**Best used for:** Stats sections, final CTAs, or any content that deserves spotlight emphasis.
+**最佳用于**：数据区块、最终 CTA，或任何值得聚光灯强调的内容。
 
-#### 3. Animated Depth & Living Elements
+#### 3. 动画深度与鲜活元素
 
-This design breathes. Micro-animations and transitions create a sense that the interface is responsive and alive:
+此设计呼吸。微动画与过渡创造界面响应且鲜活之感：
 
-- **Pulsing indicators:** Small dots in badges that gently pulse, signaling "live" or "new"
-- **Floating elements:** Cards in the hero that bob gently on a slow sine wave
-- **Rotating decorative rings:** Dashed circles that rotate infinitely at glacial speed (60+ seconds per rotation)
-- **Hover responses:** Elements lift, shadows deepen, icons scale, colors shift
-- **Entrance animations:** Content fades up into view as users scroll, with staggered timing
+- **脉动指示器**：徽章中含蓄脉动的小圆点，发出"实时"或"新"信号
+- **浮动元素**：Hero 中卡片在缓慢正弦波上轻柔起伏
+- **旋转装饰环**：虚线圆以冰川速度无限旋转（每转 60+ 秒）
+- **悬停响应**：元素抬起、阴影加深、图标缩放、色彩偏移
+- **入场动画**：内容随用户滚动淡入上浮，配错峰时机
 
-**The philosophy:** Motion should feel natural, almost subconscious. Users shouldn't think "oh, that's animated"—they should simply feel that the interface is polished and responsive.
+**哲学**：运动应感觉自然，几乎潜意识。用户不应想"哦，那是动画的"——他们应仅感觉界面精致且响应。
 
-#### 4. Sophisticated Dual-Font Typography
+#### 4. 精致双字体排印
 
-The pairing of **Calistoga** (display) with **Inter** (UI/body) creates a memorable typographic identity:
+**Calistoga**（展示）与 **Inter**（UI/正文）的配对创造难忘的排印身份：
 
-- **Calistoga** is warm, characterful, and slightly playful. Its soft serifs and sturdy construction make headlines feel approachable yet substantial. It's the "personality" voice.
-- **Inter** is clean, highly legible, and professional. It handles the workhorse duties of body text, labels, and UI elements. It's the "clarity" voice.
+- **Calistoga** 温暖、有个性、略俏皮。其柔和衬线与坚固构造使标题感觉亲和而实在。它是"个性"之声。
+- **Inter** 干净、高可读、专业。它承担正文、标签与 UI 元素的工作马职责。它是"清晰"之声。
 
-This pairing creates a conversation between personality and precision—headlines grab attention with character, then body text delivers information with crystal clarity.
+此配对在个性与精准间创造对话——标题以个性抓注意，然后正文以水晶清晰传递信息。
 
-**Monospace accents** (JetBrains Mono) appear in section labels and badges, adding a technical, modern touch that reinforces the "high-tech meets high-design" vibe.
+**等宽点缀**（JetBrains Mono）出现于区块标签与徽章，增添技术、现代触感，强化"高科技遇上高设计"气质。
 
-#### 5. Texture Over Flatness
+#### 5. 纹理胜于扁平
 
-Minimalism often fails because it becomes sterile. This design combats flatness through layered texture:
+极简常因变无菌而失败。此设计通过分层纹理对抗扁平：
 
-- **Dot patterns:** Subtle `radial-gradient` dot grids at 2-3% opacity on dark sections
-- **Radial glows:** Large, blurred circles of accent color positioned at section corners, creating ambient warmth
-- **Layered shadows:** Cards don't just have one shadow—they have subtle, diffuse shadows that create realistic depth
-- **Gradient overlays:** Hero sections use radial gradients of the accent color at low opacity for atmospheric depth
+- **点阵图案**：深色区块上 2-3% 不透明度的含蓄 `radial-gradient` 点阵
+- **径向辉光**：点缀色大型模糊圆置于区块角落，创造环境温暖
+- **分层阴影**：卡片不只有一阴影——它们有含蓄弥散阴影创造真实深度
+- **渐变叠加**：Hero 区块用低不透明度点缀色径向渐变以增氛围深度
 
-These textures are felt more than seen. Users won't consciously notice the dot pattern, but they'll feel that the dark section has "something" that makes it feel richer than a flat color.
+这些纹理被感受多于被看见。用户不会自觉注意点阵，但他们会感觉深色区块有"某物"使其比扁平色更丰富。
 
-#### 6. Asymmetry & Visual Tension
+#### 6. 非对称与视觉张力
 
-Strict grid alignment is intentionally broken in key moments:
+关键时刻有意打破严格网格对齐：
 
-- **Hero layout:** The asymmetric `1.1fr / 0.9fr` grid creates visual tension—the text column is subtly dominant
-- **Testimonial offset:** The center card is shifted vertically, breaking the rigid grid rhythm
-- **Pricing elevation:** The highlighted tier floats above its siblings
-- **Benefits visual:** Asymmetric border radii (`rounded-tl-[4rem] rounded-br-[4rem]`) create organic, memorable shapes
+- **Hero 布局**：非对称 `1.1fr / 0.9fr` 网格创造视觉张力——文字列含蓄主导
+- **证言偏移**：中间卡片垂直位移，打破僵硬网格节奏
+- **定价抬升**：高亮档位漂浮于同级之上
+- **收益视觉**：非对称圆角（`rounded-tl-[4rem] rounded-br-[4rem]`）创造有机、难忘形状
 
-**Why this matters:** Perfect symmetry is predictable. Strategic asymmetry creates visual interest and guides the eye in unexpected ways. It's the difference between "correct" and "designed."
+**为何重要**：完美对称可预测。战略性非对称创造视觉趣味并以意外方式引导目光。这是"正确"与"设计"之别。
 
-#### 7. The Section Label System
+#### 7. 区块标签系统
 
-Every major section begins with a consistent badge pattern:
-- Rounded pill shape with subtle accent border and tinted background
-- Small colored dot (optionally animated/pulsing)
-- Uppercase monospace text with wide letter-spacing
-- Positioned above the section headline
+每个主要区块以一致徽章模式开始：
+- 圆角胶囊形配含蓄点缀边框与色调背景
+- 小型彩色圆点（可选动画/脉动）
+- 大写等宽文字配宽字距
+- 置于区块标题上方
 
-This creates a visual rhythm and helps users orient themselves. It also adds a touch of UI sophistication—these feel like carefully designed interface elements, not just text.
+这创造视觉节奏并帮助用户定位。它也增添 UI 精致感——这些感觉如精心设计的界面元素，非仅文字。
 
-### Differentiation: Minimalism With a Pulse
+### 差异化：有脉搏的极简
 
-This style refuses to be "just clean." Many minimal designs strip away so much that they become forgettable—white backgrounds, gray text, safe choices. This design takes the opposite approach:
+此风格拒绝"仅干净"。许多极简设计剥离过多以致被遗忘——白背景、灰文字、安全选择。此设计取相反方法：
 
-**Minimalism through bold choices, not absence.**
+**通过大胆选择而非缺席的极简。**
 
-- Where others use subtle gray, we use Electric Blue
-- Where others use flat backgrounds, we use inverted sections and gradient glows
-- Where others use static layouts, we use floating animations and pulsing indicators
-- Where others use one safe font, we use a memorable dual-font pairing
-- Where others center everything, we embrace asymmetry
+- 他人用含蓄灰，我们用电光蓝
+- 他人用扁平背景，我们用反相区块与渐变辉光
+- 他人用静态布局，我们用浮动动画与脉动指示器
+- 他人用一种安全字体，我们用难忘双字体配对
+- 他人居中一切，我们拥抱非对称
 
-The result is a design that is unmistakably minimal in its restraint (few colors, generous whitespace, clean lines) but unmistakably bold in its execution (vibrant accent, animated hero, gradient flourishes).
+结果是设计在克制上无可错认地极简（少色彩、慷慨留白、干净线条）但在执行上无可错认地大胆（鲜艳点缀、动画 Hero、渐变 flourish）。
 
-**It's minimalism that makes a statement.**
+**这是表态的极简。**
 
-### Sensory Description
+### 感官描述
 
-If this design were a physical space, it would be:
-- A bright, airy gallery with white walls and polished concrete floors
-- One wall painted in deep midnight blue, dramatically lit
-- A single piece of art in electric blue, drawing every eye
-- Soft ambient lighting that makes surfaces glow
-- The faint hum of something technological and precise
-- Clean lines everywhere, but one sculptural element with an unexpected curve
+若此设计为物理空间，它会是：
+- 明亮通透的画廊，白墙与抛光混凝土地板
+- 一面墙漆深午夜蓝，戏剧性照明
+- 一件电光蓝艺术品，吸引每个目光
+- 柔和环境光使表面发光
+- 某种技术精准之物的微弱嗡鸣
+- 处处干净线条，但一个雕塑元素有意想不到曲线
 
-If it were music, it would be:
-- Electronic, but warm—not cold synthwave
-- Mostly minimal beats with generous silence
-- One recurring melodic hook in a bright, clear tone
-- Occasional swells that feel like things floating upward
-- Professional enough for a corporate lobby, interesting enough to actually listen to
+若为音乐，它会是：
+- 电子但温暖——非冷 synthwave
+- 主要是极简节拍配慷慨沉默
+- 一个明亮清晰音调的重复旋律钩
+- 偶尔 swell 感觉如物向上浮
+- 专业到足够企业大堂，有趣到足够实际聆听
 
 ---
 
-## Design Token System (The DNA)
+## 设计 Token 系统（DNA）
 
-### Color Strategy
+### 色彩策略
 
-**Chromatic Focus:** A warm, near-monochrome palette amplified by a dual-tone accent gradient. The accent colors are used sparingly but with maximum impact—they command attention wherever they appear.
+**色彩聚焦**：温暖、近单色调色板，被双色调渐变放大。点缀色克制使用但最大冲击——它们在出现处吸引注意。
 
-| Token | Value | Usage & Context |
+| Token | 值 | 用法与上下文 |
 |:------|:------|:----------------|
-| `background` | `#FAFAFA` | Primary canvas. Warmer off-white that reduces eye strain. |
-| `foreground` | `#0F172A` (Slate-900) | Primary text. Deep slate, not pure black. Also used as inverted section backgrounds. |
-| `muted` | `#F1F5F9` (Slate-100) | Secondary surfaces, card backgrounds, subtle fills. |
-| `muted-foreground` | `#64748B` (Slate-500) | Secondary text, descriptions, metadata. |
-| `accent` | `#0052FF` (Electric Blue) | **Primary action color.** CTAs, links, highlights, icon backgrounds. |
-| `accent-secondary` | `#4D7CFF` | Gradient endpoint. Used with `accent` for gradient effects. |
-| `accent-foreground` | `#FFFFFF` | Text on accent backgrounds. Always white. |
-| `border` | `#E2E8F0` (Slate-200) | Subtle structural borders on cards and dividers. |
-| `card` | `#FFFFFF` | Elevated surfaces. Pure white for maximum lift. |
-| `ring` | `#0052FF` | Focus rings. Matches the primary accent. |
+| `background` | `#FAFAFA` | 主画布。温暖近白减眼疲劳。 |
+| `foreground` | `#0F172A`（Slate-900） | 主要文字。深石板，非纯黑。也用作反相区块背景。 |
+| `muted` | `#F1F5F9`（Slate-100） | 次级表面、卡片背景、含蓄填充。 |
+| `muted-foreground` | `#64748B`（Slate-500） | 次要文字、描述、元信息。 |
+| `accent` | `#0052FF`（电光蓝） | **主操作色。** CTA、链接、高亮、图标背景。 |
+| `accent-secondary` | `#4D7CFF` | 渐变终点。与 `accent` 配合作渐变效果。 |
+| `accent-foreground` | `#FFFFFF` | 点缀背景上文字。始终白。 |
+| `border` | `#E2E8F0`（Slate-200） | 卡片与分隔符上的含蓄结构边框。 |
+| `card` | `#FFFFFF` | 抬升表面。纯白以最大抬升。 |
+| `ring` | `#0052FF` | 聚焦环。匹配主点缀。 |
 
-**The Signature Gradient:**
+**签名渐变**：
 ```css
 background: linear-gradient(to right, #0052FF, #4D7CFF);
-/* Or diagonal: */
+/* 或对角： */
 background: linear-gradient(135deg, #0052FF, #4D7CFF);
 ```
-This gradient appears on: primary buttons, featured badges, icon backgrounds, pricing tier borders, testimonial accent bars, trend indicators, and text highlights.
+此渐变出现于：主按钮、精选徽章、图标背景、定价档位边框、证言点缀条、趋势指示器与文字高亮。
 
 ---
 
-### Typography System
+### 字体系统
 
-**Font Pairing (Dual-Font System):**
-- **Display Font:** `"Calistoga", Georgia, serif` — A warm, characterful serif with personality. Used exclusively for h1/h2 headlines to create memorable anchor points.
-- **UI & Body Font:** `"Inter", system-ui, sans-serif` — Highly legible, clean sans-serif for all body text, UI elements, and smaller headings.
-- **Monospace:** `"JetBrains Mono", monospace` — For section labels, badges, and technical callouts.
+**字体配对（双字体系统）**：
+- **展示字体**：`"Calistoga", Georgia, serif` — 温暖、有个性的衬线。专用于 h1/h2 标题以创造难忘锚点。
+- **UI 与正文字体**：`"Inter", system-ui, sans-serif` — 高可读、干净无衬线作所有正文、UI 元素与较小标题。
+- **等宽**：`"JetBrains Mono", monospace` — 用于区块标签、徽章与技术标注。
 
-**Type Scale & Usage:**
+**字号阶梯与用法**：
 
-| Element | Size | Font | Weight | Tracking | Notes |
+| 元素 | 尺寸 | 字体 | 字重 | 字距 | 备注 |
 |:--------|:-----|:-----|:-------|:---------|:------|
-| Hero Headline | `5xl` → `5.25rem` | Calistoga | Normal | `-0.02em` | Tight leading (1.05). Last word gets gradient text treatment. |
-| Section Headlines | `3xl` → `3.25rem` | Calistoga | Normal | Normal | Leading 1.15. Key word can use gradient text. |
-| Card Titles | `lg` → `2xl` | Inter | Semibold (600) | `-0.01em` | Tight tracking for density. |
-| Body Text | `base` → `lg` | Inter | Normal (400) | Normal | Relaxed line-height (1.625-1.75). |
-| Section Labels | `xs` (12px) | JetBrains Mono | Normal | `0.15em` | UPPERCASE. Used in pill badges with accent dot. |
+| Hero 标题 | `5xl` → `5.25rem` | Calistoga | Normal | `-0.02em` | 紧凑行高（1.05）。末词获渐变文字处理。 |
+| 区块标题 | `3xl` → `3.25rem` | Calistoga | Normal | Normal | 行高 1.15。关键词可用渐变文字。 |
+| 卡片标题 | `lg` → `2xl` | Inter | Semibold (600) | `-0.01em` | 紧凑字距以增密度。 |
+| 正文 | `base` → `lg` | Inter | Normal (400) | Normal | 宽松行高（1.625-1.75）。 |
+| 区块标签 | `xs`（12px） | JetBrains Mono | Normal | `0.15em` | 大写。用于配点缀点的胶囊徽章。 |
 
-**Gradient Text Effect (with Enhanced Underline):**
+**渐变文字效果（配增强下划线）**：
 ```css
 .gradient-text {
   background: linear-gradient(to right, #0052FF, #4D7CFF);
@@ -262,7 +262,7 @@ This gradient appears on: primary buttons, featured badges, icon backgrounds, pr
   color: transparent;
 }
 
-/* Gradient underline bar for hero headline */
+/* Hero 标题渐变下划线条 */
 .gradient-underline {
   position: absolute;
   bottom: -0.25rem; /* md: -0.5rem */
@@ -276,91 +276,91 @@ This gradient appears on: primary buttons, featured badges, icon backgrounds, pr
 
 ---
 
-### Spacing & Layout
+### 间距与布局
 
-**Core Principle:** Generous, intentional whitespace is a primary design tool—but it's balanced by density within components.
+**核心原则**：慷慨、有意留白是主要设计工具——但它被组件内密度平衡。
 
-- **Section Spacing:** Large vertical padding (`py-28` to `py-44`) creates a calm, paced scrolling experience.
-- **Container Width:** `max-w-6xl` (72rem) for primary content. Centered with `mx-auto`.
-- **Component Density:** Within cards and components, spacing is tighter to create cohesive units that float in the generous section whitespace.
-- **Grid Gaps:** `gap-5` to `gap-8` between grid items. Slightly tighter than standard to maintain visual cohesion.
+- **区块间距**：大垂直内边距（`py-28` 至 `py-44`）创造平静、有节奏的滚动体验。
+- **容器宽度**：主要内容 `max-w-6xl`（72rem）。居中配 `mx-auto`。
+- **组件密度**：卡片与组件内间距更紧，创造凝聚单元漂浮于慷慨区块留白中。
+- **网格间隙**：网格项间 `gap-5` 至 `gap-8`。略紧于标准以保视觉凝聚。
 
-**Asymmetry Patterns:**
-- Hero: `grid-cols-[1.1fr_0.9fr]` — Left-heavy for text dominance
-- Benefits: `grid-cols-[1.2fr_0.8fr]` — Content over visual
-- Use negative margins and overlapping elements to create Z-depth
+**非对称模式**：
+- Hero：`grid-cols-[1.1fr_0.9fr]` — 左重以增文字主导
+- 收益：`grid-cols-[1.2fr_0.8fr]` — 内容优先于视觉
+- 用负边距与重叠元素创造 Z 深度
 
 ---
 
-### Borders, Surfaces & Shadows
+### 边框、表面与阴影
 
-**Surfaces:**
-- Cards use pure white (`#FFFFFF`) with `1px` border in `border` color
-- Elevated cards add `shadow-lg` or `shadow-xl` for lift
-- Featured elements use gradient borders (2px stroke effect via nested divs)
+**表面**：
+- 卡片用纯白（`#FFFFFF`）配 `1px` `border` 色边框
+- 抬升卡片加 `shadow-lg` 或 `shadow-xl` 以增抬起
+- 精选元素用渐变边框（通过嵌套 div 的 2px 描边效果）
 
-**Shadow System:**
-| Token | Value | Usage |
+**阴影系统**：
+| Token | 值 | 用法 |
 |:------|:------|:------|
-| `shadow-sm` | `0 1px 3px rgba(0,0,0,0.06)` | Subtle lift |
-| `shadow-md` | `0 4px 6px rgba(0,0,0,0.07)` | Standard cards |
-| `shadow-lg` | `0 10px 15px rgba(0,0,0,0.08)` | Elevated cards |
-| `shadow-xl` | `0 20px 25px rgba(0,0,0,0.1)` | Hero elements |
-| `shadow-accent` | `0 4px 14px rgba(0,82,255,0.25)` | Accent-tinted lift |
-| `shadow-accent-lg` | `0 8px 24px rgba(0,82,255,0.35)` | Featured elements |
+| `shadow-sm` | `0 1px 3px rgba(0,0,0,0.06)` | 含蓄抬升 |
+| `shadow-md` | `0 4px 6px rgba(0,0,0,0.07)` | 标准卡片 |
+| `shadow-lg` | `0 10px 15px rgba(0,0,0,0.08)` | 抬升卡片 |
+| `shadow-xl` | `0 20px 25px rgba(0,0,0,0.1)` | Hero 元素 |
+| `shadow-accent` | `0 4px 14px rgba(0,82,255,0.25)` | 点缀色调抬升 |
+| `shadow-accent-lg` | `0 8px 24px rgba(0,82,255,0.35)` | 精选元素 |
 
-**Textures (Critical for Avoiding Flatness):**
-- **Dot Pattern:** `radial-gradient(circle, white 1px, transparent 1px)` at `32px` intervals, `opacity: 0.03` — Used on dark inverted sections
-- **Radial Glows:** Large blurred circles (`blur-[150px]`) of accent color at `3-6%` opacity — Positioned at section corners
-- **Gradient Overlays:** Subtle `radial-gradient` from accent color, `8%` opacity — Used in hero graphic backgrounds
-
----
-
-## Component Styling & Interactions
-
-### Buttons
-
-**Primary Button:**
-- Background: Gradient from `accent` to `accent-secondary` (`bg-gradient-to-r from-[var(--accent)] to-[#4D7CFF]`)
-- Text: White, medium weight
-- Shadow: `shadow-sm` default, `shadow-accent` on hover (accent-tinted)
-- Border-radius: `rounded-xl` (12px)
-- Hover: Lifts up (`-translate-y-0.5`), `shadow-accent-lg`, brightness increase (`brightness-110`), arrow icon translates right
-- Active: Slight scale down (`scale-[0.98]`) for tactile feedback
-
-**Secondary/Outline Button:**
-- Background: Transparent → `muted` on hover
-- Border: `1px` in `border` color
-- Text: `foreground`
-- Hover: Border shifts to `accent/30`, shadow appears
-
-**Ghost Button:**
-- No background or border
-- Text: `muted-foreground` → `foreground` on hover
-
-**Animation:** All buttons have `transition-all duration-200`. Subtle upward translation on hover (`-translate-y-0.5`). Arrow icons translate right on hover (`group-hover:translate-x-1`).
+**纹理（避免扁平关键）**：
+- **点阵图案**：`radial-gradient(circle, white 1px, transparent 1px)` 配 `32px` 间隔，`opacity: 0.03` — 用于深色反相区块
+- **径向辉光**：点缀色大型模糊圆（`blur-[150px]`）配 `3-6%` 不透明度 — 置于区块角落
+- **渐变叠加**：点缀色含蓄 `radial-gradient`，`8%` 不透明度 — 用于 Hero 图形背景
 
 ---
 
-### Cards
+## 组件样式与交互
 
-**Standard Card:**
-- Background: `card` (white)
-- Border: `1px` in `border` color
-- Border-radius: `rounded-xl` (12px) or `rounded-2xl` (16px)
-- Shadow: `shadow-md` default, `shadow-xl` on hover
-- Padding: `p-6` to `p-10` depending on prominence
+### 按钮
 
-**Elevated Card:**
-- Adds stronger shadow and optional accent tint
-- Used for featured items, highlighted pricing tiers
+**主按钮**：
+- 背景：`accent` 至 `accent-secondary` 渐变（`bg-gradient-to-r from-[var(--accent)] to-[#4D7CFF]`）
+- 文字：白，medium 字重
+- 阴影：默认 `shadow-sm`，悬停 `shadow-accent`（点缀色调）
+- 圆角：`rounded-xl`（12px）
+- 悬停：上抬（`-translate-y-0.5`），`shadow-accent-lg`，亮度提升（`brightness-110`），箭头图标右移
+- 激活：轻微缩小（`scale-[0.98]`）作触感反馈
 
-**Hover Effects:**
-- Gradient overlay fades in: `bg-gradient-to-br from-accent/[0.03] to-transparent`
-- Shadow deepens
-- Optional icon scale: `group-hover:scale-110`
+**次/描边按钮**：
+- 背景：透明 → 悬停 `muted`
+- 边框：`1px` `border` 色
+- 文字：`foreground`
+- 悬停：边框偏移至 `accent/30`，出现阴影
 
-**Featured Card (Gradient Border):**
+**幽灵按钮**：
+- 无背景或边框
+- 文字：`muted-foreground` → 悬停 `foreground`
+
+**动画**：所有按钮有 `transition-all duration-200`。悬停含蓄上移（`-translate-y-0.5`）。箭头图标悬停右移（`group-hover:translate-x-1`）。
+
+---
+
+### 卡片
+
+**标准卡片**：
+- 背景：`card`（白）
+- 边框：`1px` `border` 色
+- 圆角：`rounded-xl`（12px）或 `rounded-2xl`（16px）
+- 阴影：默认 `shadow-md`，悬停 `shadow-xl`
+- 内边距：`p-6` 至 `p-10` 视突出度
+
+**抬升卡片**：
+- 加更强阴影与可选点缀色调
+- 用于精选项、高亮定价档位
+
+**悬停效果**：
+- 渐变叠加淡入：`bg-gradient-to-br from-accent/[0.03] to-transparent`
+- 阴影加深
+- 可选图标缩放：`group-hover:scale-110`
+
+**精选卡片（渐变边框）**：
 ```jsx
 <div className="rounded-xl bg-gradient-to-br from-accent via-accent-secondary to-accent p-[2px]">
   <div className="h-full w-full rounded-[calc(12px-2px)] bg-card">
@@ -371,23 +371,23 @@ This gradient appears on: primary buttons, featured badges, icon backgrounds, pr
 
 ---
 
-### Inputs
+### 输入框
 
-- Height: `h-12` to `h-14`
-- Border: `1px` in `border` color
-- Border-radius: `rounded-lg` or `rounded-xl`
-- Background: Transparent or very subtle `muted/10`
-- Focus: `ring-2 ring-accent ring-offset-2`
-- Placeholder: `text-muted-foreground/50`
+- 高度：`h-12` 至 `h-14`
+- 边框：`1px` `border` 色
+- 圆角：`rounded-lg` 或 `rounded-xl`
+- 背景：透明或极含蓄 `muted/10`
+- 聚焦：`ring-2 ring-accent ring-offset-2`
+- 占位符：`text-muted-foreground/50`
 
 ---
 
-### Section Labels (Badges)
+### 区块标签（徽章）
 
-A consistent badge pattern appears at the start of each section:
+每个区块起始处出现一致徽章模式：
 ```jsx
 <div className="inline-flex items-center gap-3 rounded-full border border-accent/30 bg-accent/5 px-5 py-2">
-  <span className="h-2 w-2 rounded-full bg-accent" /> {/* Can be animated/pulsing */}
+  <span className="h-2 w-2 rounded-full bg-accent" /> {/* 可动画/脉动 */}
   <span className="font-mono text-xs uppercase tracking-[0.15em] text-accent">
     Section Name
   </span>
@@ -396,44 +396,44 @@ A consistent badge pattern appears at the start of each section:
 
 ---
 
-## The "Bold Factor" (Signature Elements)
+## "大胆要素"（签名元素）
 
-These elements define this implementation and prevent generic output:
+这些元素定义此实现并防止通用输出：
 
-1. **Gradient Text Highlights:** Key words in headlines use the signature gradient as text color via `bg-clip-text`.
+1. **渐变文字高亮**：标题中关键词用签名渐变作文字色 via `bg-clip-text`。
 
-2. **Inverted Sections:** At least one section uses `bg-foreground text-background` with dot pattern texture for dramatic contrast.
+2. **反相区块**：至少一个区块用 `bg-foreground text-background` 配点阵图案纹理以增戏剧对比。
 
-3. **Animated Hero Graphic:** Abstract generative composition with:
-   - Rotating outer ring (`animate` with 60s duration, linear)
-   - Floating cards with staggered `y` animations (5s and 4s durations, ±10px movement)
-   - Geometric shapes (circles, rounded rectangles, gradient fills)
-   - Decorative dot grid (3x3)
-   - Corner accent block in solid `accent` with shadow
+3. **动画 Hero 图形**：抽象生成构图配：
+   - 旋转外环（`animate` 配 60s 时长，linear）
+   - 浮动卡片配错峰 `y` 动画（5s 与 4s 时长，±10px 运动）
+   - 几何形状（圆、圆角矩形、渐变填充）
+   - 装饰点阵（3x3）
+   - 实心 `accent` 角部点缀块配阴影
 
-4. **Gradient Icon Backgrounds:** Feature icons use full gradient backgrounds (`from-accent to-accent-secondary`) rather than translucent fills.
+4. **渐变图标背景**：特性图标用完整渐变背景（`from-accent to-accent-secondary`）而非半透明填充。
 
-5. **Gradient Border Effects:** Highlighted elements (pricing tiers, featured cards) use the 2px gradient stroke technique.
+5. **渐变边框效果**：高亮元素（定价档位、精选卡片）用 2px 渐变描边技巧。
 
-6. **Large Decorative Elements:** Quote marks at `120px`, step numbers at `text-4xl`, trend arrows in badges.
+6. **大型装饰元素**：引号 `120px`，步骤编号 `text-4xl`，徽章中趋势箭头。
 
-7. **Pulsing Indicators:** Animated dots in badges using scale/opacity keyframes.
+7. **脉动指示器**：徽章中动画圆点用 scale/opacity 关键帧。
 
-8. **Arrow Connectors:** Timeline steps connected by small accent-colored circular badges with arrow icons.
+8. **箭头连接器**：时间线步骤由小型点缀色圆形徽章配箭头图标连接。
 
 ---
 
-## Effects & Animation
+## 效果与动画
 
-**Motion Philosophy:** Smooth, confident, and purposeful. Animations enhance understanding and add delight without being distracting. All motion follows natural easing curves.
+**运动哲学**：平滑、自信、有目的。动画增强理解并增添愉悦而不分散。所有运动遵循自然缓动曲线。
 
-**Transition Defaults:**
-- Standard: `transition-all duration-200 ease-out`
-- Entrance: `duration-700` with stagger (`0.1s` delay between children)
-- Hover lifts: `duration-300`
-- Button active: `duration-200` with scale down
+**过渡默认**：
+- 标准：`transition-all duration-200 ease-out`
+- 入场：`duration-700` 配错峰（子元素间 `0.1s` 延迟）
+- 悬停抬起：`duration-300`
+- 按钮激活：`duration-200` 配缩小
 
-**Entrance Animations (Framer Motion):**
+**入场动画（Framer Motion）**：
 ```js
 const easeOut = [0.16, 1, 0.3, 1] as const;
 
@@ -453,71 +453,71 @@ const stagger = {
 };
 ```
 
-**Continuous Animations:**
-- Rotating ring: `60s` linear infinite rotation (hero graphic)
-- Floating cards: `4-5s` ease-in-out infinite y-axis bobbing (±10px amplitude)
-- Pulsing dot: `2s` infinite scale/opacity pulse (scale: [1, 1.3, 1], opacity: [1, 0.7, 1])
-- Activity indicators: `3s` infinite scale/opacity pulse (subtle)
+**持续动画**：
+- 旋转环：`60s` linear infinite 旋转（Hero 图形）
+- 浮动卡片：`4-5s` ease-in-out infinite y 轴起伏（±10px 振幅）
+- 脉动圆点：`2s` infinite scale/opacity 脉冲（scale: [1, 1.3, 1], opacity: [1, 0.7, 1]）
+- 活动指示器：`3s` infinite scale/opacity 脉冲（含蓄）
 
 ---
 
-## Responsive Strategy
+## 响应式策略
 
-**Breakpoint Philosophy:** Mobile layouts simplify structure but maintain the bold aesthetic. Touch targets are 44px+ minimum.
+**断点哲学**：移动布局简化结构但保持大胆美学。触控目标 44px+ 最小。
 
-- **Hero:** Single column. Hide abstract graphic on small screens. Stack CTAs vertically with full width (`w-full sm:w-auto`).
-- **Stats:** 2 columns on mobile → 4 columns on desktop with vertical dividers hidden on mobile
-- **Features:** 1 column → 2 columns (md) → 3 columns (lg) with first card spanning on larger screens
-- **How It Works:** Vertical stack on mobile, horizontal timeline with connecting line on desktop (md+)
-- **Pricing:** Stack vertically, highlighted tier maintains elevation and gradient border
-- **Testimonials:** Stack vertically, center card offset removed on mobile
-- **Final CTA:** Input and button stack vertically on mobile, horizontal on sm+, button goes full width on mobile
+- **Hero**：单列。小屏隐藏抽象图形。CTA 垂直堆叠全宽（`w-full sm:w-auto`）。
+- **Stats**：移动 2 列 → 桌面 4 列，移动端隐藏垂直分隔符
+- **Features**：1 列 → 2 列（md）→ 3 列（lg），首张卡片大屏跨行
+- **How It Works**：移动垂直堆叠，桌面（md+）横向时间线配连接线
+- **Pricing**：垂直堆叠，高亮档位保持抬升与渐变边框
+- **Testimonials**：垂直堆叠，移动端移除中间卡片偏移
+- **Final CTA**：移动端输入与按钮垂直堆叠，sm+ 水平，移动端按钮全宽
 
-**Key Adaptations:**
-- Reduce headline sizes: `text-[2.75rem]` mobile → `text-6xl` → `text-[5.25rem]` desktop
-- Maintain generous section padding: `py-28` → `py-44` (reduce slightly, not dramatically)
-- Hide decorative elements on mobile: rotating rings, complex graphics (use `hidden lg:block`)
-- Keep gradient accents and color inversions—these define the style
-- Button heights: `h-12` to `h-14` for primary CTAs (44px-56px touch targets)
-
----
-
-## Accessibility & Best Practices
-
-**Color Contrast:** All text meets WCAG AA. The `accent` blue (#0052FF) on white background passes at 4.5:1+. Inverted sections use near-white text (#FFFFFF or rgba(255,255,255,0.9)) on deep slate (#0F172A) for maximum contrast.
-
-**Focus States:**
-- Visible focus rings using `ring-2 ring-accent ring-offset-2` with `ring-offset-background`
-- Focus rings match the gradient accent aesthetic
-- Interactive elements have clear hover/focus differentiation (lift, shadow, color shift)
-- Buttons have `active:scale-[0.98]` for tactile feedback
-
-**Touch Targets:**
-- Minimum 44px height on all interactive elements
-- Buttons use `h-12` (48px) to `h-14` (56px) for primary CTAs
-- Adequate spacing between tap targets (gap-4 minimum)
-
-**Motion:**
-- Respect `prefers-reduced-motion` for continuous animations
-- Entrance animations are subtle enough to not cause issues (0.7s duration, 28px vertical movement)
-- No flashing or rapid movements
-- Continuous animations are slow and gentle (4-5s duration, ±10px movement)
+**关键适配**：
+- 缩减标题尺寸：移动 `text-[2.75rem]` → `text-6xl` → 桌面 `text-[5.25rem]`
+- 保持慷慨区块内边距：`py-28` → `py-44`（略减，非戏剧性）
+- 移动端隐藏装饰元素：旋转环、复杂图形（用 `hidden lg:block`）
+- 保持渐变点缀与色彩反转——这些定义风格
+- 按钮高度：主 CTA `h-12` 至 `h-14`（44px-56px 触控目标）
 
 ---
 
-## Implementation Notes
+## 可访问性与最佳实践
 
-**Component Structure:**
-All components (Button, Card, Input) are built locally using `cva` and `tailwind-merge`, following Shadcn API patterns but tailored to this design system.
+**色彩对比**：所有文字达 WCAG AA。`accent` 蓝（#0052FF）于白背景通过 4.5:1+。反相区块用近白文字（#FFFFFF 或 rgba(255,255,255,0.9)）于深石板（#0F172A）以最大对比。
 
-**CSS Custom Properties:**
-The StyleWrapper component injects all design tokens as CSS custom properties, allowing for consistent theming across all components.
+**聚焦状态**：
+- 可见聚焦环用 `ring-2 ring-accent ring-offset-2` 配 `ring-offset-background`
+- 聚焦环匹配渐变点缀美学
+- 交互元素有清晰悬停/聚焦区分（抬起、阴影、色偏）
+- 按钮有 `active:scale-[0.98]` 作触感反馈
 
-**Font Loading:**
-Fonts are loaded via Google Fonts:
-- Inter: weights 400, 500, 600, 700
-- Calistoga: default weight
-- JetBrains Mono: weights 400, 500
+**触控目标**：
+- 所有交互元素最小 44px 高
+- 按钮用 `h-12`（48px）至 `h-14`（56px）作主 CTA
+- 触控目标间充足间距（最小 gap-4）
 
-**Animation Library:**
-Framer Motion is used for all entrance animations and continuous motion. Viewport options are set to `{ once: true, amount: 0.15, margin: "-60px" }` for optimal performance and timing.
+**运动**：
+- 尊重 `prefers-reduced-motion` 用于持续动画
+- 入场动画含蓄到不致问题（0.7s 时长，28px 垂直运动）
+- 无闪烁或快速运动
+- 持续动画缓慢轻柔（4-5s 时长，±10px 运动）
+
+---
+
+## 实现说明
+
+**组件结构**：
+所有组件（Button、Card、Input）用 `cva` 与 `tailwind-merge` 本地构建，遵循 Shadcn API 模式但为此设计系统定制。
+
+**CSS 自定义属性**：
+StyleWrapper 组件注入所有设计 token 作 CSS 自定义属性，允许跨所有组件一致主题化。
+
+**字体加载**：
+字体通过 Google Fonts 加载：
+- Inter：字重 400、500、600、700
+- Calistoga：默认字重
+- JetBrains Mono：字重 400、500
+
+**动画库**：
+Framer Motion 用于所有入场动画与持续运动。视口选项设为 `{ once: true, amount: 0.15, margin: "-60px" }` 以获最佳性能与时机。
