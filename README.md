@@ -2,7 +2,7 @@
 
 A curated collection of beautiful HTML landing page templates, each exploring a distinct web design style.
 
-> **Source of original design prompts:** All templates are based on original design prompts from [designprompts.dev](https://www.designprompts.dev).
+> **Source of original design prompts:** Some of the templates are based on original design prompts from [designprompts.dev](https://www.designprompts.dev). Other are collections of beautiful web templates by myself.
 
 Browse, preview, and copy the templates in the interactive home page, or explore the gallery below.
 
