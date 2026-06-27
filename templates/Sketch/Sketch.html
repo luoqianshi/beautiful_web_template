@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scribble — Hand-Drawn / Sketch Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --background:#fdfbf7;
+    --foreground:#2d2d2d;
+    --muted:#e5e0d8;
+    --accent:#ff4d4d;
+    --border:#2d2d2d;
+    --secondary:#2d5da1;
+    --postit:#fff9c4;
+    --shadow:4px 4px 0px 0px #2d2d2d;
+    --shadow-sm:3px 3px 0px 0px rgba(45,45,45,0.4);
+    --shadow-lg:8px 8px 0px 0px #2d2d2d;
+    --wobbly:255px 15px 225px 15px / 15px 225px 15px 255px;
+    --wobbly-md:15px 225px 15px 255px / 255px 15px 225px 15px;
+    --wobbly-sm:105px 15px 105px 15px / 15px 105px 15px 105px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Patrick Hand",cursive,sans-serif;
+    background:var(--background);
+    background-image:radial-gradient(#e5e0d8 1px,transparent 1px);
+    background-size:24px 24px;
+    color:var(--foreground);
+    font-size:18px;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:"Kalam",cursive;font-weight:700;line-height:1.15}
+  .container{max-width:64rem;margin:0 auto;padding:0 1.5rem;position:relative}
+  .wobbly{border-radius:var(--wobbly)}
+  .wobbly-md{border-radius:var(--wobbly-md)}
+  .wobbly-sm{border-radius:var(--wobbly-sm)}
+
+  /* Paper texture lines overlay for notebook feel */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+    background-image:
+      repeating-linear-gradient(0deg,transparent,transparent 31px,rgba(45,93,161,0.04) 31px,rgba(45,93,161,0.04) 32px);
+    opacity:0.6;
+  }
+
+  /* Navigation */
+  nav{
+    position:sticky;top:0;z-index:100;
+    background:var(--background);
+    border-bottom:3px dashed var(--border);
+    padding:0.75rem 0;
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .logo{
+    font-family:"Kalam",cursive;
+    font-weight:700;
+    font-size:1.875rem;
+    color:var(--foreground);
+    text-decoration:none;
+    display:flex;align-items:center;gap:0.5rem;
+    transform:rotate(-2deg);
+    transition:transform 100ms ease-out;
+  }
+  .logo:hover{transform:rotate(0deg) scale(1.05)}
+  .logo .mark{
+    display:inline-block;
+    width:2.25rem;height:2.25rem;
+    border:3px solid var(--border);
+    border-radius:50% 48% 52% 50% / 48% 52% 48% 52%;
+    background:var(--accent);
+    box-shadow:var(--shadow-sm);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;
+    font-size:1.25rem;
+  }
+  .nav-links{display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap}
+  .nav-links a{
+    font-family:"Patrick Hand",cursive;
+    font-size:1.125rem;
+    color:var(--foreground);
+    text-decoration:none;
+    position:relative;
+    padding:0.25rem 0;
+    transition:color 100ms ease-out;
+  }
+  .nav-links a::after{
+    content:"";
+    position:absolute;
+    left:-2px;right:-2px;bottom:-2px;
+    height:6px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6'><path d='M0 3 Q 12.5 0 25 3 T 50 3 T 75 3 T 100 3' fill='none' stroke='%23ff4d4d' stroke-width='2'/></svg>");
+    background-repeat:repeat-x;
+    background-size:50px 6px;
+    opacity:0;
+    transition:opacity 100ms ease-out;
+  }
+  .nav-links a:hover{color:var(--accent)}
+  .nav-links a:hover::after{opacity:1}
+  .nav-cta{
+    padding:0.5rem 1.25rem;
+    background:#fff;
+    border:3px solid var(--border);
+    border-radius:var(--wobbly-sm);
+    box-shadow:var(--shadow);
+    color:var(--foreground);
+    font-family:"Patrick Hand",cursive;
+    font-size:1.125rem;
+    text-decoration:none;
+    transition:transform 100ms ease-out,box-shadow 100ms ease-out;
+    display:inline-flex;align-items:center;gap:0.375rem;
+  }
+  .nav-cta:hover{
+    transform:translate(2px,2px);
+    box-shadow:2px 2px 0px 0px #2d2d2d;
+  }
+  .nav-cta:active{transform:translate(4px,4px);box-shadow:none}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;
+    padding:0.625rem 1.5rem;
+    background:#fff;
+    border:3px solid var(--border);
+    border-radius:var(--wobbly-sm);
+    box-shadow:var(--shadow);
+    color:var(--foreground);
+    font-family:"Patrick Hand",cursive;
+    font-size:1.25rem;
+    text-decoration:none;
+    cursor:pointer;
+    transition:transform 100ms ease-out,box-shadow 100ms ease-out,background 100ms ease-out,color 100ms ease-out;
+    min-height:48px;
+  }
+  .btn:hover{
+    background:var(--accent);
+    color:#fff;
+    transform:translate(2px,2px);
+    box-shadow:2px 2px 0px 0px #2d2d2d;
+  }
+  .btn:active{transform:translate(4px,4px);box-shadow:none}
+  .btn-secondary{background:var(--muted)}
+  .btn-secondary:hover{background:var(--secondary);color:#fff}
+
+  /* Hero */
+  .hero{padding:4rem 0 5rem;position:relative}
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:2.5rem;
+    align-items:center;
+  }
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:0.5rem;
+    background:var(--postit);
+    border:2px solid var(--border);
+    border-radius:var(--wobbly-sm);
+    padding:0.375rem 0.875rem;
+    font-size:1rem;
+    transform:rotate(-3deg);
+    box-shadow:var(--shadow-sm);
+    margin-bottom:1.5rem;
+    position:relative;
+  }
+  .hero-badge::before{
+    content:"";
+    position:absolute;
+    top:-8px;left:50%;
+    transform:translateX(-50%) rotate(3deg);
+    width:40px;height:14px;
+    background:rgba(45,45,45,0.15);
+    border:1px dashed rgba(45,45,45,0.3);
+  }
+  .hero h1{
+    font-size:clamp(2.5rem,6vw,4.5rem);
+    line-height:1.05;
+    margin-bottom:1.25rem;
+    position:relative;
+  }
+  .hero h1 .exclaim{
+    display:inline-block;
+    color:var(--accent);
+    animation:wobble 3s ease-in-out infinite;
+    transform-origin:bottom center;
+  }
+  @keyframes wobble{
+    0%,100%{transform:rotate(-5deg)}
+    50%{transform:rotate(8deg)}
+  }
+  .hero h1 .underline{
+    position:relative;
+    display:inline-block;
+  }
+  .hero h1 .underline::after{
+    content:"";
+    position:absolute;
+    left:-4px;right:-4px;bottom:-8px;
+    height:10px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'><path d='M0 5 Q 12.5 1 25 5 T 50 5 T 75 5 T 100 5' fill='none' stroke='%23ff4d4d' stroke-width='3' stroke-linecap='round'/></svg>");
+    background-repeat:repeat-x;
+    background-size:60px 10px;
+  }
+  .hero-sub{
+    font-size:1.25rem;
+    color:var(--foreground);
+    line-height:1.55;
+    max-width:32rem;
+    margin-bottom:2rem;
+  }
+  .hero-ctas{
+    display:flex;gap:1rem;flex-wrap:wrap;align-items:center;
+    position:relative;
+    margin-bottom:2rem;
+  }
+  /* Hand-drawn arrow pointing to CTA */
+  .hero-arrow{
+    position:absolute;
+    top:-30px;right:-20px;
+    width:80px;height:60px;
+    pointer-events:none;
+    transform:rotate(15deg);
+  }
+  .hero-trust{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap}
+  .avatars{display:flex}
+  .avatars .av{
+    width:2.5rem;height:2.5rem;
+    border-radius:50% 48% 52% 50% / 48% 52% 48% 52%;
+    border:2.5px solid var(--border);
+    margin-left:-0.625rem;
+    background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Kalam",cursive;font-weight:700;font-size:0.9rem;
+    box-shadow:var(--shadow-sm);
+  }
+  .avatars .av:first-child{margin-left:0}
+  .avatars .av:nth-child(1){background:#ffd6d6}
+  .avatars .av:nth-child(2){background:#d6e4ff}
+  .avatars .av:nth-child(3){background:#fff9c4}
+  .hero-trust-text{font-size:1.0625rem}
+
+  /* Polaroid mockup */
+  .polaroid{
+    background:#fff;
+    border:3px solid var(--border);
+    border-radius:var(--wobbly-sm);
+    box-shadow:var(--shadow-lg);
+    padding:0.875rem 0.875rem 2.5rem;
+    transform:rotate(3deg);
+    transition:transform 200ms ease-out;
+    position:relative;
+    max-width:24rem;
+    margin:0 auto;
+  }
+  .polaroid:hover{transform:rotate(0deg) scale(1.02)}
+  .polaroid::before{
+    content:"";
+    position:absolute;
+    top:-12px;left:50%;
+    transform:translateX(-50%) rotate(-5deg);
+    width:60px;height:20px;
+    background:rgba(45,45,45,0.12);
+    border:1px dashed rgba(45,45,45,0.25);
+    border-radius:2px;
+  }
+  .polaroid-screen{
+    aspect-ratio:4/3;
+    background:
+      repeating-linear-gradient(45deg,#fdfbf7,#fdfbf7 10px,var(--muted) 10px,var(--muted) 20px);
+    border:2px solid var(--border);
+    border-radius:var(--wobbly-sm);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .polaroid-screen .doodle{
+    font-family:"Kalam",cursive;
+    font-weight:700;
+    font-size:1.5rem;
+    color:var(--secondary);
+    transform:rotate(-5deg);
+    text-align:center;
+  }
+  .polaroid-screen .star{
+    position:absolute;
+    color:var(--accent);
+    font-size:1.5rem;
+  }
+  .polaroid-caption{
+    position:absolute;
+    bottom:0.5rem;left:0;right:0;
+    text-align:center;
+    font-family:"Kalam",cursive;
+    font-style:italic;
+    color:var(--foreground);
+    font-size:1.125rem;
+  }
+  /* Bouncing decorative circle */
+  .bounce-circle{
+    position:absolute;
+    top:-20px;right:-15px;
+    width:3rem;height:3rem;
+    border:3px solid var(--accent);
+    border-radius:50% 48% 52% 50%;
+    background:rgba(255,77,77,0.1);
+    animation:bounce 3s ease-in-out infinite;
+    z-index:2;
+  }
+  @keyframes bounce{
+    0%,100%{transform:translateY(0) rotate(0)}
+    50%{transform:translateY(-15px) rotate(15deg)}
+  }
+
+  /* Stats - wobbly circles */
+  .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1.5rem;
+  }
+  .stat{
+    text-align:center;
+    padding:1.5rem 1rem;
+    background:#fff;
+    border:3px solid var(--border);
+    box-shadow:var(--shadow);
+  }
+  .stat:nth-child(1){border-radius:50% 48% 52% 50% / 48% 52% 48% 52%;transform:rotate(-2deg)}
+  .stat:nth-child(2){border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;transform:rotate(2deg)}
+  .stat:nth-child(3){border-radius:15px 225px 15px 255px / 225px 15px 255px 15px;transform:rotate(-1deg)}
+  .stat:nth-child(4){border-radius:225px 15px 255px 15px / 15px 225px 15px 255px;transform:rotate(1deg)}
+  .stat:hover{transform:rotate(0) scale(1.05);transition:transform 100ms ease-out}
+  .stat-num{
+    font-family:"Kalam",cursive;
+    font-weight:700;
+    font-size:2.5rem;
+    color:var(--accent);
+    line-height:1;
+    margin-bottom:0.25rem;
+  }
+  .stat-label{font-size:1rem;color:var(--foreground)}
+
+  /* Section base */
+  section{padding:4rem 0;position:relative;z-index:2}
+  .section-header{text-align:center;max-width:42rem;margin:0 auto 3rem;position:relative}
+  .section-header h2{
+    font-size:clamp(2rem,4.5vw,3rem);
+    margin-bottom:0.75rem;
+    display:inline-block;
+    position:relative;
+  }
+  .section-header h2::after{
+    content:"";
+    position:absolute;
+    left:-4px;right:-4px;bottom:-10px;
+    height:10px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'><path d='M0 5 Q 12.5 1 25 5 T 50 5 T 75 5 T 100 5' fill='none' stroke='%23ff4d4d' stroke-width='3' stroke-linecap='round'/></svg>");
+    background-repeat:repeat-x;
+    background-size:60px 10px;
+  }
+  .section-header p{font-size:1.1875rem;color:var(--foreground)}
+  .sticky-tag{
+    display:inline-block;
+    background:var(--postit);
+    border:2px solid var(--border);
+    padding:0.375rem 1rem;
+    font-family:"Patrick Hand",cursive;
+    font-size:1.0625rem;
+    transform:rotate(-2deg);
+    box-shadow:var(--shadow-sm);
+    margin-bottom:1.25rem;
+    border-radius:var(--wobbly-sm);
+  }
+
+  /* Features - post-it cards with tape */
+  .features-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.5rem;
+  }
+  .feature-card{
+    background:var(--postit);
+    border:3px solid var(--border);
+    border-radius:var(--wobbly-md);
+    padding:1.75rem 1.5rem 1.5rem;
+    box-shadow:var(--shadow);
+    position:relative;
+    transition:transform 100ms ease-out,box-shadow 100ms ease-out;
+  }
+  .feature-card:nth-child(1){transform:rotate(-2deg)}
+  .feature-card:nth-child(2){transform:rotate(1deg)}
+  .feature-card:nth-child(3){transform:rotate(-1deg)}
+  .feature-card:nth-child(4){transform:rotate(2deg)}
+  .feature-card:nth-child(5){transform:rotate(-1.5deg)}
+  .feature-card:nth-child(6){transform:rotate(1.5deg)}
+  .feature-card:hover{transform:rotate(0) translateY(-4px);box-shadow:var(--shadow-lg)}
+  .feature-card .tape{
+    position:absolute;
+    top:-10px;left:50%;
+    transform:translateX(-50%) rotate(-3deg);
+    width:50px;height:18px;
+    background:rgba(45,45,45,0.15);
+    border:1px dashed rgba(45,45,45,0.3);
+  }
+  .feature-icon{
+    width:3.25rem;height:3.25rem;
+    border:3px solid var(--border);
+    border-radius:50% 48% 52% 50% / 48% 52% 48% 52%;
+    background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:1rem;
+    color:var(--accent);
+    box-shadow:var(--shadow-sm);
+  }
+  .feature-card h3{
+    font-size:1.5rem;
+    margin-bottom:0.5rem;
+  }
+  .feature-card p{font-size:1.0625rem;line-height:1.5}
+
+  /* How it works - squiggly connecting line */
+  .how-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:2rem;
+    position:relative;
+  }
+  .squiggle{
+    position:absolute;
+    top:2rem;left:20%;right:20%;
+    height:40px;
+    pointer-events:none;
+    z-index:0;
+  }
+  .step{text-align:center;position:relative;z-index:1}
+  .step-num{
+    width:4rem;height:4rem;
+    border:3px solid var(--border);
+    border-radius:50% 48% 52% 50% / 48% 52% 48% 52%;
+    background:var(--accent);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 1rem;
+    font-family:"Kalam",cursive;
+    font-weight:700;
+    font-size:1.75rem;
+    box-shadow:var(--shadow);
+    transition:transform 100ms ease-out;
+  }
+  .step:hover .step-num{transform:rotate(-10deg) scale(1.05)}
+  .step-card{
+    background:#fff;
+    border:3px solid var(--border);
+    border-radius:var(--wobbly-md);
+    padding:1.25rem;
+    box-shadow:var(--shadow-sm);
+  }
+  .step-card h3{font-size:1.375rem;margin-bottom:0.375rem}
+  .step-card p{font-size:1.0625rem}
+
+  /* Benefits */
+  .benefits-box{
+    background:#fff;
+    border:4px solid var(--border);
+    border-radius:var(--wobbly);
+    box-shadow:var(--shadow-lg);
+    padding:2.5rem;
+    position:relative;
+  }
+  .benefits-box .corner-tag{
+    position:absolute;
+    top:-15px;left:50%;
+    transform:translateX(-50%) rotate(-2deg);
+    background:var(--postit);
+    border:2px solid var(--border);
+    padding:0.375rem 1rem;
+    border-radius:var(--wobbly-sm);
+    box-shadow:var(--shadow-sm);
+    font-family:"Kalam",cursive;font-weight:700;
+  }
+  .benefits-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.5rem 2.5rem;
+  }
+  .benefit-item{
+    display:flex;align-items:flex-start;gap:0.75rem;
+    font-size:1.125rem;
+  }
+  .benefit-item .bullet{
+    flex-shrink:0;
+    width:1.25rem;height:1.25rem;
+    margin-top:0.25rem;
+    background:var(--accent);
+    border:2px solid var(--border);
+    border-radius:50% 48% 52% 50% / 48% 52% 48% 52%;
+  }
+
+  /* Pricing */
+  .pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.5rem;
+    align-items:start;
+  }
+  .price-card{
+    background:#fff;
+    border:3px solid var(--border);
+    border-radius:var(--wobbly-md);
+    padding:1.75rem;
+    box-shadow:var(--shadow);
+    position:relative;
+    transition:transform 100ms ease-out,box-shadow 100ms ease-out;
+  }
+  .price-card:nth-child(1){transform:rotate(-1deg)}
+  .price-card:nth-child(3){transform:rotate(1deg)}
+  .price-card:hover{transform:rotate(0) translateY(-4px);box-shadow:var(--shadow-lg)}
+  .price-card.featured{
+    transform:scale(1.05) rotate(0deg);
+    border-color:var(--accent);
+    border-width:4px;
+    z-index:2;
+  }
+  .price-card.featured:hover{transform:scale(1.08) rotate(0deg)}
+  .price-card.featured .dashed-circle{
+    position:absolute;
+    top:-12px;right:-12px;
+    width:3.5rem;height:3.5rem;
+    border:3px dashed var(--accent);
+    border-radius:50% 48% 52% 50% / 48% 52% 48% 52%;
+    background:var(--postit);
+    display:flex;align-items:center;justify-content:center;
+    transform:rotate(15deg);
+    font-family:"Kalam",cursive;font-weight:700;
+    font-size:0.875rem;
+    color:var(--accent);
+    text-align:center;
+    line-height:1;
+    box-shadow:var(--shadow-sm);
+  }
+  .price-tier{
+    font-family:"Patrick Hand",cursive;
+    font-size:1.0625rem;
+    color:var(--secondary);
+    margin-bottom:0.25rem;
+  }
+  .price-name{
+    font-size:1.875rem;
+    margin-bottom:0.75rem;
+  }
+  .price-amount{
+    font-family:"Kalam",cursive;
+    font-weight:700;
+    font-size:3rem;
+    line-height:1;
+    margin-bottom:0.5rem;
+  }
+  .price-amount .cur{font-size:1.5rem;vertical-align:top}
+  .price-amount .period{font-size:1rem;font-family:"Patrick Hand",cursive;color:var(--foreground)}
+  .price-desc{
+    font-size:1.0625rem;
+    margin-bottom:1.25rem;
+    padding-bottom:1.25rem;
+    border-bottom:2px dashed var(--border);
+  }
+  .price-features{list-style:none;margin-bottom:1.5rem}
+  .price-features li{
+    display:flex;align-items:center;gap:0.625rem;
+    padding:0.375rem 0;
+    font-size:1.0625rem;
+  }
+  .price-features li::before{
+    content:"";
+    flex-shrink:0;
+    width:0.875rem;height:0.875rem;
+    background:var(--accent);
+    border:2px solid var(--border);
+    border-radius:50% 48% 52% 50%;
+  }
+  .price-card .btn{width:100%}
+
+  /* Testimonials - speech bubbles */
+  .testimonials-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:2rem;
+  }
+  .testimonial{
+    position:relative;
+    padding-top:1.5rem;
+  }
+  .speech-bubble{
+    background:#fff;
+    border:3px solid var(--border);
+    border-radius:var(--wobbly-md);
+    padding:1.5rem;
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  .speech-bubble::after{
+    content:"";
+    position:absolute;
+    bottom:-18px;left:30px;
+    width:0;height:0;
+    border:18px solid transparent;
+    border-top-color:var(--border);
+    border-bottom:0;
+  }
+  .speech-bubble::before{
+    content:"";
+    position:absolute;
+    bottom:-13px;left:33px;
+    width:0;height:0;
+    border:14px solid transparent;
+    border-top-color:#fff;
+    border-bottom:0;
+    z-index:1;
+  }
+  .quote-icon{
+    font-family:"Kalam",cursive;
+    font-weight:700;
+    font-size:2rem;
+    color:var(--accent);
+    line-height:0.8;
+    margin-bottom:0.5rem;
+    display:inline-block;
+  }
+  .testimonial blockquote{
+    font-family:"Patrick Hand",cursive;
+    font-style:italic;
+    font-size:1.125rem;
+    line-height:1.5;
+    margin-bottom:1rem;
+  }
+  .testimonial-author{
+    display:flex;align-items:center;gap:0.625rem;
+    margin-top:1rem;
+  }
+  .testimonial-avatar{
+    width:2.5rem;height:2.5rem;
+    border:2.5px solid var(--border);
+    border-radius:50% 48% 52% 50%;
+    background:var(--postit);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Kalam",cursive;font-weight:700;font-size:0.9rem;
+  }
+  .testimonial-name{font-family:"Kalam",cursive;font-weight:700;font-size:1.0625rem}
+  .testimonial-role{font-size:0.9375rem;color:var(--secondary)}
+
+  /* FAQ */
+  .faq-list{max-width:48rem;margin:0 auto}
+  .faq-item{border-bottom:2px dashed var(--border)}
+  .faq-q{
+    width:100%;
+    background:none;border:none;cursor:pointer;
+    padding:1.25rem 0;
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    text-align:left;
+    font-family:"Kalam",cursive;
+    font-weight:700;
+    font-size:1.375rem;
+    color:var(--foreground);
+    transition:color 100ms ease-out;
+  }
+  .faq-q:hover{color:var(--accent)}
+  .faq-toggle{
+    flex-shrink:0;
+    font-family:"Kalam",cursive;
+    font-weight:700;
+    font-size:1.5rem;
+    color:var(--accent);
+    transition:transform 100ms ease-out;
+  }
+  .faq-item.open .faq-toggle{transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height 200ms ease-out}
+  .faq-item.open .faq-a{max-height:200px}
+  .faq-a p{padding:0 0 1.25rem;font-size:1.125rem;line-height:1.55}
+
+  /* Blog - polaroid frames */
+  .blog-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.5rem;
+  }
+  .blog-card{
+    background:#fff;
+    border:3px solid var(--border);
+    border-radius:var(--wobbly-md);
+    box-shadow:var(--shadow);
+    padding:0.75rem 0.75rem 1.25rem;
+    transition:transform 100ms ease-out,box-shadow 100ms ease-out;
+  }
+  .blog-card:nth-child(1){transform:rotate(-1.5deg)}
+  .blog-card:nth-child(2){transform:rotate(1deg)}
+  .blog-card:nth-child(3){transform:rotate(-1deg)}
+  .blog-card:hover{transform:rotate(0) translateY(-4px);box-shadow:var(--shadow-lg)}
+  .blog-img{
+    width:100%;
+    aspect-ratio:16/10;
+    border:2px dashed var(--border);
+    border-radius:var(--wobbly-sm);
+    background:var(--muted);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:0.75rem;
+    font-size:2.5rem;
+  }
+  .blog-meta{font-size:0.9375rem;color:var(--secondary);margin-bottom:0.25rem}
+  .blog-title{
+    font-size:1.375rem;
+    margin-bottom:0.375rem;
+    line-height:1.2;
+  }
+  .blog-excerpt{font-size:1.0625rem;margin-bottom:0.625rem}
+  .blog-read{
+    font-family:"Patrick Hand",cursive;
+    color:var(--secondary);
+    text-decoration:underline;
+    font-size:1.0625rem;
+    text-decoration-style:wavy;
+    text-underline-offset:4px;
+  }
+  .blog-read:hover{color:var(--accent)}
+
+  /* Final CTA */
+  .final-cta{
+    text-align:center;
+    padding:5rem 0;
+    position:relative;
+  }
+  .final-cta-box{
+    background:var(--postit);
+    border:4px solid var(--border);
+    border-radius:var(--wobbly);
+    box-shadow:var(--shadow-lg);
+    padding:3rem 2rem;
+    position:relative;
+    max-width:36rem;
+    margin:0 auto;
+    transform:rotate(-1deg);
+  }
+  .final-cta-box:hover{transform:rotate(0)}
+  .final-cta-box .tack{
+    position:absolute;
+    top:-12px;left:50%;
+    transform:translateX(-50%);
+    width:1.5rem;height:1.5rem;
+    background:var(--accent);
+    border:2.5px solid var(--border);
+    border-radius:50%;
+    box-shadow:var(--shadow-sm);
+  }
+  .final-cta h2{
+    font-size:clamp(2rem,5vw,3rem);
+    margin-bottom:0.75rem;
+  }
+  .final-cta p{font-size:1.1875rem;margin-bottom:1.75rem}
+  .final-cta .btn{font-size:1.375rem}
+
+  /* Footer */
+  footer{
+    border-top:3px dashed var(--border);
+    padding:3rem 0 2rem;
+    margin-top:2rem;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:2rem;
+    margin-bottom:2.5rem;
+  }
+  .footer-brand .logo{margin-bottom:0.75rem}
+  .footer-brand p{font-size:1.0625rem;max-width:22rem;line-height:1.5}
+  .footer-social{display:flex;gap:0.625rem;margin-top:1rem}
+  .footer-social a{
+    width:2.5rem;height:2.5rem;
+    border:2.5px solid var(--border);
+    border-radius:50% 48% 52% 50% / 48% 52% 48% 52%;
+    background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--foreground);
+    box-shadow:var(--shadow-sm);
+    transition:transform 100ms ease-out;
+  }
+  .footer-social a:hover{transform:rotate(10deg) scale(1.1);background:var(--accent);color:#fff}
+  .footer-col h4{
+    font-size:1.25rem;
+    margin-bottom:0.75rem;
+    display:inline-block;
+    position:relative;
+  }
+  .footer-col h4::after{
+    content:"";
+    position:absolute;
+    left:-2px;right:-2px;bottom:-4px;
+    height:6px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6'><path d='M0 3 Q 12.5 0 25 3 T 50 3 T 75 3 T 100 3' fill='none' stroke='%23ff4d4d' stroke-width='2'/></svg>");
+    background-repeat:repeat-x;
+    background-size:50px 6px;
+  }
+  .footer-col ul{list-style:none}
+  .footer-col li{margin-bottom:0.375rem}
+  .footer-col a{
+    color:var(--foreground);
+    text-decoration:none;
+    font-size:1.0625rem;
+    transition:color 100ms ease-out;
+    position:relative;
+  }
+  .footer-col a:hover{color:var(--accent);text-decoration:line-through;text-decoration-color:var(--accent)}
+  .footer-bottom{
+    border-top:2px dashed var(--border);
+    padding-top:1.5rem;
+    display:flex;align-items:center;justify-content:space-between;
+    flex-wrap:wrap;gap:1rem;
+  }
+  .footer-bottom p{font-size:1rem;color:var(--foreground)}
+  .footer-bottom .legal{display:flex;gap:1.25rem}
+  .footer-bottom .legal a{font-size:1rem;color:var(--foreground);text-decoration:none;transition:color 100ms ease-out}
+  .footer-bottom .legal a:hover{color:var(--accent);text-decoration:line-through}
+
+  /* Drop cap */
+  .drop-cap::first-letter{
+    font-family:"Kalam",cursive;
+    font-weight:700;
+    font-size:4rem;
+    float:left;
+    line-height:0.85;
+    padding:0.25rem 0.5rem 0 0;
+    color:var(--accent);
+  }
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity 600ms ease-out,transform 600ms ease-out}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+
+  /* Responsive */
+  @media (max-width:768px){
+    .nav-links{display:none}
+    .hero-grid{grid-template-columns:1fr;gap:2.5rem}
+    .polaroid{max-width:18rem}
+    .hero-arrow,.bounce-circle{display:none}
+    .stats-grid,.features-grid,.how-grid,.pricing-grid,.testimonials-grid,.blog-grid,.benefits-grid,.footer-grid{grid-template-columns:1fr}
+    .price-card.featured{transform:none}
+    .price-card.featured:hover{transform:translateY(-4px)}
+    .squiggle{display:none}
+    section{padding:2.5rem 0}
+    .footer-grid{gap:1.5rem}
+    .footer-brand{grid-column:1/-1}
+  }
+  @media (max-width:480px){
+    .footer-bottom{flex-direction:column;text-align:center}
+    .hero-ctas{flex-direction:column;align-items:stretch}
+    .hero-ctas .btn{width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important}
+    .reveal{transition:none;opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="logo"><span class="mark">S</span>Scribble</a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <a href="#pricing" class="nav-cta">Try it free →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <span class="hero-badge">★ Doodled with love since 2024</span>
+        <h1>Where ideas get <span class="underline">scribbled</span><br>into reality<span class="exclaim">!</span></h1>
+        <p class="hero-sub">The brainstorming tool that feels like a napkin and a marker — wobbly borders, hand-drawn doodles, and playful imperfection baked right in. No more sterile whiteboards.</p>
+        <div class="hero-ctas">
+          <a href="#pricing" class="btn">Start scribbling ✏️</a>
+          <a href="#how" class="btn btn-secondary">See how it works</a>
+          <svg class="hero-arrow" viewBox="0 0 80 60" fill="none" stroke="#ff4d4d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 50 Q 25 5 70 15" stroke-dasharray="3 5"/>
+            <path d="M60 8 L 72 14 L 64 24"/>
+          </svg>
+        </div>
+        <div class="hero-trust">
+          <div class="avatars">
+            <div class="av">M</div>
+            <div class="av">J</div>
+            <div class="av">K</div>
+          </div>
+          <span class="hero-trust-text">Loved by <strong>8,200+ messy thinkers</strong></span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="polaroid">
+          <div class="polaroid-screen">
+            <div class="doodle">~ your big idea ~<br>lives here!</div>
+            <span class="star" style="top:10%;left:10%">★</span>
+            <span class="star" style="bottom:15%;right:12%">✦</span>
+          </div>
+          <div class="polaroid-caption">"the next big thing"</div>
+          <div class="bounce-circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Stats -->
+<section style="padding:3rem 0">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat reveal">
+        <div class="stat-num">8.2K</div>
+        <div class="stat-label">Messy thinkers</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-num">340K</div>
+        <div class="stat-label">Doodles drawn</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-num">99%</div>
+        <div class="stat-label">Felt creative</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-num">42</div>
+        <div class="stat-label">Countries scribbling</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="sticky-tag">★ the good stuff</span>
+      <h2>Features that feel handcrafted</h2>
+      <p>Every tool built to keep your brain in that messy, generative flow state.</p>
+    </div>
+    <div class="features-grid">
+      <article class="feature-card reveal">
+        <span class="tape"></span>
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+        </div>
+        <h3>Wobbly Canvas</h3>
+        <p>An infinite canvas with organic, hand-drawn grid lines. Draw, erase, smudge — everything wobbles just a little.</p>
+      </article>
+      <article class="feature-card reveal">
+        <span class="tape"></span>
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+        </div>
+        <h3>Marker Tools</h3>
+        <p>Eight marker styles that feel like the real thing — felt-tip, pencil, highlighter, ballpoint. Each with authentic texture.</p>
+      </article>
+      <article class="feature-card reveal">
+        <span class="tape"></span>
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
+        </div>
+        <h3>Sticky Notes</h3>
+        <p>Drag, drop, stack, and crumple digital Post-its. Color-code your chaos. Tape them anywhere on the board.</p>
+      </article>
+      <article class="feature-card reveal">
+        <span class="tape"></span>
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Co-Doodling</h3>
+        <p>Invite the whole team. Everyone's cursor leaves a little colored trail. It's chaotic in the best way.</p>
+      </article>
+      <article class="feature-card reveal">
+        <span class="tape"></span>
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <h3>Export Anywhere</h3>
+        <p>Turn your scribbles into PNGs, PDFs, or shareable links. Keep the wobble or clean it up — your call.</p>
+      </article>
+      <article class="feature-card reveal">
+        <span class="tape"></span>
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Autosave Magic</h3>
+        <p>Your doodles save themselves every few seconds. Close the laptop, open it tomorrow, chaos preserved.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section id="how" style="background:rgba(229,224,216,0.4)">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="sticky-tag">★ super easy</span>
+      <h2>How it works</h2>
+      <p>Three little steps from blank page to big idea.</p>
+    </div>
+    <div class="how-grid">
+      <svg class="squiggle" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M10 20 Q 60 5 110 20 T 210 20 T 310 20 T 390 20" fill="none" stroke="#ff4d4d" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 6"/>
+      </svg>
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div class="step-card">
+          <h3>Grab a marker</h3>
+          <p>Pick your weapon — felt-tip, pencil, or highlighter. The canvas is your napkin.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <div class="step-card">
+          <h3>Scribble it out</h3>
+          <p>Draw, erase, smudge, sticky-note. Let the mess happen. That's where ideas live.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <div class="step-card">
+          <h3>Share the wobble</h3>
+          <p>Export, embed, or invite collaborators. Keep the handmade charm intact.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits -->
+<section>
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="sticky-tag">★ why scribble?</span>
+      <h2>Imperfection is the point</h2>
+    </div>
+    <div class="benefits-box reveal">
+      <span class="corner-tag">★ the manifesto ★</span>
+      <div class="benefits-grid">
+        <div class="benefit-item"><span class="bullet"></span><span>Wobbly borders reject the cold perfection of modern UI — your brain relaxes.</span></div>
+        <div class="benefit-item"><span class="bullet"></span><span>Hand-drawn doodles lower the barrier to putting ideas down fast.</span></div>
+        <div class="benefit-item"><span class="bullet"></span><span>Paper textures and tape strips make the digital feel physical.</span></div>
+        <div class="benefit-item"><span class="bullet"></span><span>Playful rotation breaks rigid grids and invites creative chaos.</span></div>
+        <div class="benefit-item"><span class="bullet"></span><span>Hard offset shadows give every element a cut-paper, collage feel.</span></div>
+        <div class="benefit-item"><span class="bullet"></span><span>Limited palette — pencil, paper, red marker, post-it — keeps focus on ideas.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing" style="background:rgba(229,224,216,0.4)">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="sticky-tag">★ pick a plan</span>
+      <h2>Pricing, scribbled out</h2>
+      <p>Three plans. No fine print. Cancel anytime, no drama.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-tier">For tinkerers</div>
+        <div class="price-name">Doodle</div>
+        <div class="price-amount"><span class="cur">$</span>0<span class="period">/mo</span></div>
+        <p class="price-desc">For solo scribblers getting started.</p>
+        <ul class="price-features">
+          <li>3 active canvases</li>
+          <li>Basic marker tools</li>
+          <li>PNG export</li>
+          <li>Community support</li>
+        </ul>
+        <a href="#" class="btn">Start free</a>
+      </div>
+      <div class="price-card featured reveal">
+        <div class="dashed-circle">most<br>picked!</div>
+        <div class="price-tier">For teams</div>
+        <div class="price-name">Scribble Pro</div>
+        <div class="price-amount"><span class="cur">$</span>12<span class="period">/mo</span></div>
+        <p class="price-desc">For messy-thinking teams who ship.</p>
+        <ul class="price-features">
+          <li>Unlimited canvases</li>
+          <li>All marker tools</li>
+          <li>Co-doodling (10 people)</li>
+          <li>Sticky notes &amp; tape</li>
+          <li>PDF &amp; embed export</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#" class="btn">Get Pro ✏️</a>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-tier">For studios</div>
+        <div class="price-name">Studio</div>
+        <div class="price-amount"><span class="cur">$</span>49<span class="period">/mo</span></div>
+        <p class="price-desc">For agencies and creative studios.</p>
+        <ul class="price-features">
+          <li>Everything in Pro</li>
+          <li>Unlimited collaborators</li>
+          <li>Custom marker styles</li>
+          <li>Brand kits &amp; templates</li>
+          <li>SSO &amp; admin controls</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Talk to us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="sticky-tag">★ real talk</span>
+      <h2>What people are saying</h2>
+      <p>Quotes from messy thinkers who switched to Scribble.</p>
+    </div>
+    <div class="testimonials-grid">
+      <article class="testimonial reveal">
+        <div class="speech-bubble">
+          <span class="quote-icon">"</span>
+          <blockquote>My team's standups went from boring spreadsheets to actual doodles. We remember everything now. It's wild.</blockquote>
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MK</div>
+          <div>
+            <div class="testimonial-name">Maya Kapoor</div>
+            <div class="testimonial-role">Product Lead · Doodle Inc.</div>
+          </div>
+        </div>
+      </article>
+      <article class="testimonial reveal">
+        <div class="speech-bubble">
+          <span class="quote-icon">"</span>
+          <blockquote>The wobbly borders alone made our brainstorm sessions 10x more productive. Something about the imperfection unlocks ideas.</blockquote>
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JT</div>
+          <div>
+            <div class="testimonial-name">Jonas Tan</div>
+            <div class="testimonial-role">Creative Director · Sketch Co.</div>
+          </div>
+        </div>
+      </article>
+      <article class="testimonial reveal">
+        <div class="speech-bubble">
+          <span class="quote-icon">"</span>
+          <blockquote>I sketch every customer interview here now. The tape and post-its make me feel like I'm at a real whiteboard, not a screen.</blockquote>
+        </div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RL</div>
+          <div>
+            <div class="testimonial-name">Rosa Lin</div>
+            <div class="testimonial-role">UX Researcher · Wobble</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:rgba(229,224,216,0.4)">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="sticky-tag">★ questions?</span>
+      <h2>Frequently asked</h2>
+      <p>The stuff people doodle us about most.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q">Do I need to know how to draw?<span class="faq-toggle">+</span></button>
+        <div class="faq-a"><p>Not at all! The whole point is that scribbles don't have to be pretty. Stick figures and wobbly arrows are encouraged. The messier, the better — that's where the ideas hide.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Can I use Scribble offline?<span class="faq-toggle">+</span></button>
+        <div class="faq-a"><p>Yes. The Pro and Studio plans include a progressive web app that works offline. Your doodles sync automatically once you're back online. No connection, no problem.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">How many people can doodle together?<span class="faq-toggle">+</span></button>
+        <div class="faq-a"><p>The Doodle plan is solo. Scribble Pro supports up to 10 simultaneous collaborators per canvas. Studio is unlimited. Everyone's cursor leaves a colored trail — it's gloriously chaotic.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Can I export my scribbles?<span class="faq-toggle">+</span></button>
+        <div class="faq-a"><p>Absolutely. Export to PNG, PDF, SVG, or get a shareable link. You can keep the handmade wobble or toggle on "clean mode" for slightly straighter lines if you must.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Is there a free trial of Pro?<span class="faq-toggle">+</span></button>
+        <div class="faq-a"><p>Yes — 14 days of Scribble Pro, no credit card required. Doodle around with all the features, and if it's not your vibe, you keep the free plan forever. No hard feelings.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog -->
+<section id="blog">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="sticky-tag">★ from the blog</span>
+      <h2>Latest scribbles</h2>
+      <p>Notes, how-tos, and doodle inspiration from the team.</p>
+    </div>
+    <div class="blog-grid">
+      <article class="blog-card reveal">
+        <div class="blog-img">✏️</div>
+        <div class="blog-meta">Mar 12, 2026 · 4 min</div>
+        <h3 class="blog-title">Why wobbly borders make better brainstorming</h3>
+        <p class="blog-excerpt">The science behind why imperfect UI unlocks creative thinking...</p>
+        <a href="#" class="blog-read">read more →</a>
+      </article>
+      <article class="blog-card reveal">
+        <div class="blog-img">🎨</div>
+        <div class="blog-meta">Feb 28, 2026 · 6 min</div>
+        <h3 class="blog-title">10 marker techniques for messy thinkers</h3>
+        <p class="blog-excerpt">From cross-hatching to highlight layering, master the doodle arts...</p>
+        <a href="#" class="blog-read">read more →</a>
+      </article>
+      <article class="blog-card reveal">
+        <div class="blog-img">📐</div>
+        <div class="blog-meta">Feb 14, 2026 · 3 min</div>
+        <h3 class="blog-title">How we built the wobble engine</h3>
+        <p class="blog-excerpt">A peek under the hood at the math behind our organic borders...</p>
+        <a href="#" class="blog-read">read more →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+  <div class="container">
+    <div class="final-cta-box reveal">
+      <span class="tack"></span>
+      <h2>Grab a marker.<br>Let's doodle.</h2>
+      <p>14 days of Pro, no credit card. Your first canvas is one click away.</p>
+      <a href="#" class="btn">Start scribbling free ✏️</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo"><span class="mark">S</span>Scribble</a>
+        <p>The brainstorming tool that feels like a napkin and a marker. Built for messy thinkers, by messy thinkers.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.8c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1-1.5-1.6-4-1.7-5.6-.2-1 1-1.5 2.5-1.1 3.9-3.3-.2-6.4-1.7-8.4-4.3-1.1 1.9-.5 4.3 1.3 5.5-.7 0-1.3-.2-1.9-.5 0 2 1.4 3.7 3.3 4.1-.6.2-1.2.2-1.9.1.5 1.7 2.1 2.9 3.9 2.9-1.7 1.3-3.8 2-6 1.7 2 1.3 4.2 1.9 6.5 1.9 7.8 0 12.1-6.5 12.1-12.1v-.6c.8-.6 1.5-1.3 2.1-2.1z"/></svg></a>
+          <a href="#" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.2 6.8 9.5.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.2-.3-4.5-1.1-4.5-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1 .8-.2 1.7-.3 2.5-.3s1.7.1 2.5.3c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.5 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5C19.1 20.2 22 16.4 22 12c0-5.5-4.5-10-10-10z"/></svg></a>
+          <a href="#" aria-label="Dribbble"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 2c1.9 0 3.6.6 5 1.7-.5.7-2 2.5-5 3.3-1.4-2.5-3-4.5-3.3-4.9.6-.1 1.2-.1 3.3-.1zM6.4 6.7c.4.5 2 2.6 3.4 5-3.9 1-7.4.9-7.8.9.6-2.6 2.4-4.8 4.4-5.9zM2 12c.3 0 4.4.1 8.6-1 .2.5.5 1 .7 1.5-3.6 1.2-6 4-6.4 4.5C3.1 15.5 2 13.9 2 12zm10 8c-1.7 0-3.3-.5-4.6-1.5.3-.5 2.2-3.3 6.1-4.7 1.2 3.1 1.6 5.7 1.7 6.4-1 .4-2 .6-3.2.6zm4.9-1.7c-.1-.6-.5-3-1.6-6 2.8-.4 5.2.3 5.5.4-.4 2.4-1.9 4.4-3.9 5.6z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Changelog</a></li>
+          <li><a href="#">Templates</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Tutorials</a></li>
+          <li><a href="#">Help center</a></li>
+          <li><a href="#">Community</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Scribble Labs. Doodled with love.</p>
+      <div class="legal">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const item=btn.parentElement;
+      const isOpen=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!isOpen)item.classList.add('open');
+    });
+  });
+
+  // Reveal on scroll
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}
+    });
+  },{threshold:0.15,rootMargin:'-40px'});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  // Stagger reveal children
+  document.querySelectorAll('.features-grid, .how-grid, .testimonials-grid, .pricing-grid, .blog-grid, .stats-grid, .faq-list').forEach(grid=>{
+    [...grid.children].forEach((child,i)=>{child.style.transitionDelay=(i*0.08)+'s'});
+  });
+</script>
+</body>
+</html>

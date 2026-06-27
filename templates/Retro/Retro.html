@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SURFIN' USA.NET — Retro 90s Nostalgia Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Pixelify+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#C0C0C0;
+    --fg:#000000;
+    --muted:#808080;
+    --accent:#0000FF;
+    --secondary:#FF0000;
+    --tertiary:#FFFF00;
+    --success:#00FF00;
+    --successDark:#00AA00;
+    --border:#000000;
+    --borderLight:#FFFFFF;
+    --borderDark:#808080;
+    --titleBar:#000080;
+    --titleBarEnd:#1084D0;
+    --panelYellow:#FFFFCC;
+    --visitedLink:#800080;
+    --hoverLink:#FF0000;
+    --rowAlt:#E8E8E8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;border-radius:0!important}
+  html{scroll-behavior:auto}
+  body{
+    font-family:"MS Sans Serif","Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+    background-color:var(--bg);
+    background-image:
+      linear-gradient(45deg,#b8b8b8 25%,transparent 25%),
+      linear-gradient(-45deg,#b8b8b8 25%,transparent 25%),
+      linear-gradient(45deg,transparent 75%,#b8b8b8 75%),
+      linear-gradient(-45deg,transparent 75%,#b8b8b8 75%);
+    background-size:4px 4px;
+    background-position:0 0,0 2px,2px -2px,-2px 0px;
+    color:var(--fg);
+    font-size:14px;
+    line-height:1.5;
+    overflow-x:auto;
+  }
+  /* Bevel utilities */
+  .bevel-out{
+    border:2px solid;
+    border-color:#ffffff #808080 #808080 #ffffff;
+    box-shadow:inset -1px -1px 0 #404040,inset 1px 1px 0 #dfdfdf;
+  }
+  .bevel-out-deep{
+    border:2px solid;
+    border-color:#ffffff #808080 #808080 #ffffff;
+    box-shadow:inset -2px -2px 0 #808080,inset 2px 2px 0 #fff,inset -4px -4px 0 #404040,inset 4px 4px 0 #dfdfdf;
+  }
+  .bevel-in{
+    border:2px solid;
+    border-color:#808080 #ffffff #ffffff #808080;
+    box-shadow:inset 1px 1px 0 #404040,inset -1px -1px 0 #dfdfdf;
+  }
+  /* Groove HR */
+  .hr-groove{
+    border:none;
+    height:4px;
+    background:linear-gradient(to bottom,#808080 0%,#808080 50%,#ffffff 50%,#ffffff 100%);
+    margin:0;
+  }
+  /* Construction stripes */
+  .bg-construction{
+    background:repeating-linear-gradient(45deg,#ffff00,#ffff00 10px,#000000 10px,#000000 20px)!important;
+  }
+  .bg-tile{
+    background-color:#c0c0c0;
+    background-image:
+      linear-gradient(45deg,#b8b8b8 25%,transparent 25%),
+      linear-gradient(-45deg,#b8b8b8 25%,transparent 25%),
+      linear-gradient(45deg,transparent 75%,#b8b8b8 75%),
+      linear-gradient(-45deg,transparent 75%,#b8b8b8 75%);
+    background-size:4px 4px;
+    background-position:0 0,0 2px,2px -2px,-2px 0px;
+  }
+
+  /* Animations */
+  @keyframes rainbow{
+    0%{color:#ff0000}
+    17%{color:#ff8000}
+    33%{color:#ffff00}
+    50%{color:#00ff00}
+    67%{color:#0080ff}
+    83%{color:#8000ff}
+    100%{color:#ff0000}
+  }
+  .rainbow{animation:rainbow 4s linear infinite}
+  @keyframes pulse-glow{
+    0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,0,0,0.7)}
+    50%{transform:scale(1.05);box-shadow:0 0 10px 2px rgba(255,0,0,0.5)}
+  }
+  .pulse-glow{animation:pulse-glow 1.5s ease-in-out infinite}
+  @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+  .blink{animation:blink 1s step-end infinite}
+  /* Marquee */
+  @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  @keyframes marquee-rev{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+  .marquee{overflow:hidden;white-space:nowrap}
+  .marquee-track{display:inline-block;white-space:nowrap;animation:marquee 25s linear infinite}
+  .marquee-track.reverse{animation:marquee-rev 30s linear infinite}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+
+  .container{max-width:1024px;margin:0 auto;padding:8px}
+
+  /* Top marquee bar */
+  .top-bar{
+    background:#000080;
+    color:#FFFF00;
+    border:2px solid;
+    border-color:#000080 #000000 #000000 #000080;
+    padding:4px 0;
+    font-weight:bold;
+    font-size:13px;
+  }
+  .top-bar .marquee-track span{margin:0 2rem}
+
+  /* Nav / title bar window */
+  .titlebar{
+    background:linear-gradient(to right,var(--titleBar),var(--titleBarEnd));
+    color:#fff;
+    font-weight:bold;
+    padding:4px 6px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size:13px;
+  }
+  .titlebar .controls{display:flex;gap:2px}
+  .titlebar .ctrl{
+    width:16px;height:14px;
+    background:#c0c0c0;
+    border:1px solid;
+    border-color:#ffffff #808080 #808080 #ffffff;
+    box-shadow:inset -1px -1px 0 #404040,inset 1px 1px 0 #dfdfdf;
+    color:#000;
+    font-size:10px;
+    font-weight:bold;
+    line-height:12px;
+    text-align:center;
+    font-family:"MS Sans Serif",sans-serif;
+  }
+
+  /* Nav window */
+  .nav-window{background:var(--bg);margin:8px 0}
+  .nav-content{padding:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:space-between}
+  .nav-content .brand{
+    font-family:"Pixelify Sans",monospace;
+    font-weight:700;
+    font-size:22px;
+    color:#000080;
+    text-shadow:2px 2px 0 #808080;
+  }
+  .nav-links{display:flex;gap:4px;flex-wrap:wrap}
+  .nav-links a{
+    color:#0000ff;
+    text-decoration:underline;
+    font-size:13px;
+    padding:2px 4px;
+    font-weight:bold;
+  }
+  .nav-links a:visited{color:#800080}
+  .nav-links a:hover{color:#ff0000}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:#c0c0c0;
+    color:#000;
+    font-family:"MS Sans Serif",Tahoma,sans-serif;
+    font-weight:bold;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    padding:6px 16px;
+    border:2px solid;
+    border-color:#ffffff #808080 #808080 #ffffff;
+    box-shadow:inset -1px -1px 0 #404040,inset 1px 1px 0 #dfdfdf;
+    cursor:pointer;
+    text-decoration:none;
+    transition:none;
+    min-height:36px;
+  }
+  .btn:hover{background:#d0d0d0}
+  .btn:active{
+    border-color:#808080 #ffffff #ffffff #808080;
+    box-shadow:inset 1px 1px 0 #404040,inset -1px -1px 0 #dfdfdf;
+    transform:translate(1px,1px);
+  }
+  .btn:focus-visible{outline:2px dotted #000;outline-offset:2px}
+  .btn-primary{background:#0000ff;color:#fff;border-color:#5555ff #000080 #000080 #5555ff}
+  .btn-primary:hover{background:#1a1aff}
+  .btn-primary:active{border-color:#000080 #5555ff #5555ff #000080}
+  .btn-danger{background:#ff0000;color:#fff;border-color:#ff5555 #800000 #800000 #ff5555}
+  .btn-success{background:#00aa00;color:#fff;border-color:#00ff00 #006600 #006600 #00ff00}
+
+  /* Section wrapper (window) */
+  .win{background:var(--bg);border:2px solid;border-color:#ffffff #808080 #808080 #ffffff;box-shadow:inset -1px -1px 0 #404040,inset 1px 1px 0 #dfdfdf;margin:12px 0}
+  .win-body{padding:12px}
+
+  /* Hero */
+  .hero{text-align:center;padding:24px 12px;position:relative}
+  .hero h1{
+    font-family:"Arial Black",Impact,Haettenschweiler,sans-serif;
+    font-size:clamp(40px,9vw,88px);
+    text-transform:uppercase;
+    line-height:1;
+    letter-spacing:-1px;
+    text-shadow:4px 4px 0 #808080;
+    margin-bottom:8px;
+    font-weight:900;
+  }
+  .hero .sub{
+    font-family:"Arial Black",Impact,sans-serif;
+    font-size:clamp(18px,3vw,28px);
+    color:#000080;
+    text-transform:uppercase;
+    margin-bottom:16px;
+    text-shadow:2px 2px 0 #c0c0c0;
+  }
+  .color-bar{height:8px;margin:12px 0;display:flex}
+  .color-bar div{flex:1}
+  .hero-ctas{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 0}
+  .arrow-deco{color:#ff0000;font-weight:bold;font-size:18px}
+
+  /* Hit counter */
+  .hit-counter{
+    display:inline-block;
+    background:#000;
+    border:2px solid;
+    border-color:#808080 #ffffff #ffffff #808080;
+    box-shadow:inset 1px 1px 0 #404040,inset -1px -1px 0 #dfdfdf;
+    padding:4px 8px;
+    font-family:"VT323",monospace;
+    color:#00ff00;
+    font-size:24px;
+    letter-spacing:2px;
+    margin-top:8px;
+  }
+  .counter-label{
+    font-family:"Courier New",monospace;
+    font-size:12px;
+    color:#000;
+    margin-top:4px;
+    display:block;
+  }
+
+  /* Section heading */
+  .section-h{
+    font-family:"Arial Black",Impact,sans-serif;
+    font-size:clamp(24px,4vw,40px);
+    text-transform:uppercase;
+    color:#000080;
+    text-shadow:2px 2px 0 #c0c0c0;
+    text-align:center;
+    margin:8px 0 12px;
+  }
+
+  /* Stats table */
+  .stats-table{
+    width:100%;
+    border-collapse:collapse;
+    border:2px solid;
+    border-color:#808080 #ffffff #ffffff #808080;
+    box-shadow:inset 1px 1px 0 #404040,inset -1px -1px 0 #dfdfdf;
+    background:#fff;
+  }
+  .stats-table td{
+    border:2px solid #808080;
+    padding:14px 10px;
+    text-align:center;
+    vertical-align:middle;
+  }
+  .stats-table tr:nth-child(odd) td{background:#E8E8E8}
+  .stats-table .stat-num{
+    font-family:"VT323",monospace;
+    font-size:40px;
+    color:#ff0000;
+    line-height:1;
+  }
+  .stats-table .stat-lbl{
+    font-family:"Courier New",monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:#000;
+    margin-top:4px;
+  }
+
+  /* Features table */
+  .features-table{width:100%;border-collapse:collapse;background:#fff;border:2px solid #000}
+  .features-table tr{border-bottom:2px solid #808080}
+  .features-table tr:nth-child(even){background:#E8E8E8}
+  .features-table td{padding:10px;vertical-align:middle}
+  .features-table .icon-cell{
+    width:80px;
+    text-align:center;
+    font-family:"Arial Black",sans-serif;
+    font-size:32px;
+    color:#fff;
+    border-right:2px solid #808080;
+  }
+  .features-table .icon-cell.navy{background:#000080}
+  .features-table .icon-cell.teal{background:#008080}
+  .features-table .icon-cell.red{background:#ff0000}
+  .features-table .icon-cell.green{background:#00aa00}
+  .features-table .feat-title{
+    font-family:"Arial Black",sans-serif;
+    font-size:16px;
+    text-transform:uppercase;
+    color:#000080;
+    margin-bottom:2px;
+  }
+  .features-table .feat-desc{font-size:13px;color:#000}
+
+  /* How it works - vertical steps */
+  .step{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    padding:12px;
+    background:var(--bg);
+    border:2px solid;
+    border-color:#ffffff #808080 #808080 #ffffff;
+    box-shadow:inset -1px -1px 0 #404040,inset 1px 1px 0 #dfdfdf;
+    margin-bottom:8px;
+  }
+  .step-num{
+    flex-shrink:0;
+    width:56px;height:56px;
+    background:#ffff00;
+    border:2px solid;
+    border-color:#ffffff #808080 #808080 #ffffff;
+    box-shadow:inset -1px -1px 0 #404040,inset 1px 1px 0 #dfdfdf;
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Arial Black",sans-serif;
+    font-size:28px;
+    color:#000080;
+  }
+  .step-body{
+    flex:1;
+    background:#c0c0c0;
+    border:2px solid;
+    border-color:#808080 #ffffff #ffffff #808080;
+    box-shadow:inset 1px 1px 0 #404040,inset -1px -1px 0 #dfdfdf;
+    padding:10px;
+  }
+  .step-body h3{
+    font-family:"Arial Black",sans-serif;
+    font-size:16px;
+    text-transform:uppercase;
+    color:#ff0000;
+    margin-bottom:4px;
+  }
+  .step-body p{font-size:13px;color:#000}
+
+  /* Benefits - beveled panels on navy */
+  .benefits-wrap{background:#000080;padding:16px;border:2px solid #000}
+  .benefits-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .benefit-panel{
+    background:#c0c0c0;
+    border:2px solid;
+    border-color:#ffffff #808080 #808080 #ffffff;
+    box-shadow:inset -1px -1px 0 #404040,inset 1px 1px 0 #dfdfdf;
+    padding:12px;
+    color:#000;
+  }
+  .benefit-panel h3{
+    font-family:"Arial Black",sans-serif;
+    font-size:15px;
+    text-transform:uppercase;
+    color:#000080;
+    margin-bottom:6px;
+  }
+  .benefit-panel p{font-size:13px}
+  .benefit-panel .bullet{color:#00ff00;font-weight:bold;margin-right:6px}
+
+  /* Pricing */
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:start}
+  .price-card{
+    background:#c0c0c0;
+    border:2px solid;
+    border-color:#ffffff #808080 #808080 #ffffff;
+    box-shadow:inset -1px -1px 0 #404040,inset 1px 1px 0 #dfdfdf;
+  }
+  .price-card .ptitle{
+    background:linear-gradient(to right,#000080,#1084d0);
+    color:#fff;
+    font-family:"Arial Black",sans-serif;
+    font-size:16px;
+    text-transform:uppercase;
+    padding:6px 10px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .price-card .pbody{padding:12px;background:#c0c0c0}
+  .price-card.featured{border:4px solid #ff0000;position:relative}
+  .price-card.featured .ptitle{background:linear-gradient(to right,#ff0000,#ff8000)}
+  .price-card.featured .pbody{background:#FFFFCC}
+  .price-badge{
+    position:absolute;
+    top:-12px;right:-8px;
+    background:#ff0000;
+    color:#ffff00;
+    font-family:"Arial Black",sans-serif;
+    font-size:12px;
+    padding:4px 8px;
+    border:2px solid #000;
+    text-transform:uppercase;
+  }
+  .price-amt{
+    font-family:"VT323",monospace;
+    font-size:42px;
+    color:#000080;
+    line-height:1;
+    margin:8px 0;
+  }
+  .price-amt .cur{font-size:20px;vertical-align:top}
+  .price-feat{list-style:none;margin:8px 0 12px;font-size:13px}
+  .price-feat li{padding:2px 0;color:#000}
+  .price-feat li::before{content:"* ";color:#00aa00;font-weight:bold}
+
+  /* Testimonials marquee */
+  .testimonials-marquee{padding:12px 0;background:#000080;border:2px solid #000}
+  .tm-track{display:flex;gap:16px;width:max-content}
+  .tm-card{
+    width:350px;
+    flex-shrink:0;
+    background:#c0c0c0;
+    border:2px solid;
+    border-color:#ffffff #808080 #808080 #ffffff;
+    box-shadow:inset -1px -1px 0 #404040,inset 1px 1px 0 #dfdfdf;
+  }
+  .tm-card .tm-title{
+    background:linear-gradient(to right,#000080,#1084d0);
+    color:#fff;font-weight:bold;font-size:13px;padding:4px 8px;
+    display:flex;justify-content:space-between;
+  }
+  .tm-card .tm-body{background:#FFFFCC;padding:10px;border:2px solid;border-color:#808080 #ffffff #ffffff #808080;box-shadow:inset 1px 1px 0 #404040,inset -1px -1px 0 #dfdfdf;margin:6px}
+  .tm-stars{color:#ff0000;font-size:16px;letter-spacing:2px;margin-bottom:6px}
+  .tm-quote{font-size:13px;color:#000;font-style:italic;margin-bottom:8px}
+  .tm-author{font-family:"Courier New",monospace;font-size:12px;color:#000080;font-weight:bold}
+
+  /* FAQ */
+  .faq-item{margin-bottom:6px}
+  .faq-q{
+    width:100%;
+    background:linear-gradient(to right,#000080,#1084d0);
+    color:#fff;
+    font-family:"Arial Black",sans-serif;
+    font-size:14px;
+    text-transform:uppercase;
+    text-align:left;
+    padding:8px 10px;
+    border:2px solid;
+    border-color:#ffffff #808080 #808080 #ffffff;
+    box-shadow:inset -1px -1px 0 #404040,inset 1px 1px 0 #dfdfdf;
+    cursor:pointer;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .faq-q:active{border-color:#808080 #ffffff #ffffff #808080;box-shadow:inset 1px 1px 0 #404040,inset -1px -1px 0 #dfdfdf}
+  .faq-q .ind{font-family:"Courier New",monospace;font-weight:bold}
+  .faq-a{
+    background:#FFFFCC;
+    border:2px solid;
+    border-color:#808080 #ffffff #ffffff #808080;
+    box-shadow:inset 1px 1px 0 #404040,inset -1px -1px 0 #dfdfdf;
+    padding:10px;
+    font-size:13px;
+    color:#000;
+    max-height:0;overflow:hidden;
+    transition:none;
+  }
+  .faq-item.open .faq-a{max-height:200px;padding:10px}
+
+  /* Blog */
+  .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .blog-card{
+    background:#c0c0c0;
+    border:2px solid;
+    border-color:#ffffff #808080 #808080 #ffffff;
+    box-shadow:inset -1px -1px 0 #404040,inset 1px 1px 0 #dfdfdf;
+    padding:8px;
+  }
+  .blog-img{
+    width:100%;
+    aspect-ratio:16/10;
+    background:#000080;
+    border:2px solid;
+    border-color:#808080 #ffffff #ffffff #808080;
+    box-shadow:inset 1px 1px 0 #404040,inset -1px -1px 0 #dfdfdf;
+    display:flex;align-items:center;justify-content:center;
+    color:#ffff00;
+    font-family:"Arial Black",sans-serif;
+    font-size:14px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+    background-image:repeating-linear-gradient(45deg,#000080,#000080 10px,#1084d0 10px,#1084d0 20px);
+  }
+  .blog-meta{font-family:"Courier New",monospace;font-size:11px;color:#000;margin-bottom:4px}
+  .blog-title{font-family:"Arial Black",sans-serif;font-size:14px;color:#000080;text-transform:uppercase;margin-bottom:6px;line-height:1.2}
+  .blog-read{color:#0000ff;text-decoration:underline;font-size:13px;font-weight:bold}
+  .blog-read:visited{color:#800080}
+  .blog-read:hover{color:#ff0000}
+
+  /* Color squares decorative */
+  .color-squares{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:12px 0}
+  .color-squares div{
+    aspect-ratio:1;
+    border:2px solid;
+    border-color:#ffffff #808080 #808080 #ffffff;
+    box-shadow:inset -1px -1px 0 #404040,inset 1px 1px 0 #dfdfdf;
+  }
+
+  /* Construction CTA */
+  .construction-cta{padding:24px 12px;text-align:center;position:relative}
+  .construction-cta .inner{
+    background:#FFFFCC;
+    border:4px solid #000;
+    padding:20px;
+    position:relative;
+    box-shadow:6px 6px 0 #000;
+  }
+
+  /* Footer */
+  footer{background:#000080;color:#fff;padding:16px 0;margin-top:16px;border-top:4px solid #000}
+  .footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:0 12px}
+  .footer-col h4{
+    color:#FFFF00;
+    font-family:"Arial Black",sans-serif;
+    font-size:14px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+    text-shadow:1px 1px 0 #000;
+  }
+  .footer-col ul{list-style:none}
+  .footer-col li{margin-bottom:4px}
+  .footer-col a{color:#00ffff;text-decoration:underline;font-size:13px}
+  .footer-col a:visited{color:#800080}
+  .footer-col a:hover{color:#ff0000}
+  .footer-bottom{
+    border:none;
+    height:4px;
+    background:linear-gradient(to bottom,#808080 0%,#808080 50%,#ffffff 50%,#ffffff 100%);
+    margin:12px 0;
+  }
+  .footer-copy{text-align:center;padding:8px 12px;font-family:"Courier New",monospace;font-size:12px;color:#FFFF00}
+
+  /* NEW badge */
+  .new-badge{
+    display:inline-block;
+    background:#ff0000;
+    color:#ffff00;
+    font-family:"Arial Black",sans-serif;
+    font-size:11px;
+    padding:2px 6px;
+    border:2px solid #000;
+    text-transform:uppercase;
+    margin-left:6px;
+    vertical-align:middle;
+  }
+
+  /* Responsive */
+  @media (max-width:768px){
+    .pricing-grid,.blog-grid,.benefits-grid,.footer-grid{grid-template-columns:1fr}
+    .stats-table .stat-num{font-size:28px}
+    .features-table .icon-cell{width:60px;font-size:24px}
+    .nav-content{flex-direction:column;align-items:flex-start}
+    .hero h1{font-size:42px}
+    body{font-size:13px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .rainbow{animation:none;color:#ff0000}
+    .pulse-glow{animation:none}
+    .blink{animation:none}
+    .marquee-track,.marquee-track.reverse{animation:none}
+  }
+  ::selection{background:#000080;color:#fff}
+</style>
+</head>
+<body>
+
+<!-- Top scrolling marquee bar -->
+<div class="top-bar">
+  <div class="marquee">
+    <div class="marquee-track">
+      <span style="color:#00ff00">★ WELCOME TO SURFIN' USA.NET ★</span>
+      <span style="color:#ffff00">>>> BEST VIEWED IN NETSCAPE NAVIGATOR 4.0 <<<</span>
+      <span style="color:#ff0000">!! 800x600 RESOLUTION RECOMMENDED !!</span>
+      <span style="color:#00ffff">SIGN OUR GUESTBOOK!!!</span>
+      <span style="color:#ffffff">UNDER CONSTRUCTION SINCE 1996</span>
+      <span style="color:#00ff00">★ WELCOME TO SURFIN' USA.NET ★</span>
+      <span style="color:#ffff00">>>> BEST VIEWED IN NETSCAPE NAVIGATOR 4.0 <<<</span>
+      <span style="color:#ff0000">!! 800x600 RESOLUTION RECOMMENDED !!</span>
+      <span style="color:#00ffff">SIGN OUR GUESTBOOK!!!</span>
+      <span style="color:#ffffff">UNDER CONSTRUCTION SINCE 1996</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Navigation window -->
+  <div class="win">
+    <div class="titlebar">
+      <span>★ SURFIN' USA.NET — Main Menu ★</span>
+      <div class="controls"><span class="ctrl">_</span><span class="ctrl">□</span><span class="ctrl">×</span></div>
+    </div>
+    <div class="nav-content">
+      <div class="brand">~ SURFIN' USA.NET ~</div>
+      <nav class="nav-links">
+        <a href="#features">[ Features ]</a>
+        <a href="#how">[ How It Works ]</a>
+        <a href="#pricing">[ Pricing ]</a>
+        <a href="#testimonials">[ Reviews ]</a>
+        <a href="#faq">[ FAQ ]</a>
+        <a href="#blog">[ Blog ]</a>
+      </nav>
+      <a href="#pricing" class="btn btn-primary">SIGN UP NOW!!!</a>
+    </div>
+  </div>
+
+  <hr class="hr-groove">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="win" style="display:inline-block;text-align:left;width:100%">
+      <div class="titlebar">
+        <span>★ WELCOME.HTM — Internet Explorer</span>
+        <div class="controls"><span class="ctrl">_</span><span class="ctrl">□</span><span class="ctrl">×</span></div>
+      </div>
+      <div class="win-body" style="text-align:center">
+        <h1 class="rainbow">SURFIN' USA.NET</h1>
+        <div class="sub">>>> THE COOLEST HOMEPAGE ON THE INFORMATION SUPERHIGHWAY! <<<</div>
+        <div class="color-bar">
+          <div style="background:#ff0000"></div>
+          <div style="background:#ff8000"></div>
+          <div style="background:#ffff00"></div>
+          <div style="background:#00ff00"></div>
+          <div style="background:#0080ff"></div>
+          <div style="background:#8000ff"></div>
+        </div>
+        <p style="font-size:15px;margin:12px 0;max-width:600px;margin-left:auto;margin-right:auto">
+          The original 90s portal for everything RAD! <span class="new-badge pulse-glow">NEW!</span>
+          Download our exclusive MIDI collection, sign the guestbook, and join 1,337,420 happy surfers worldwide!
+        </p>
+        <div class="hero-ctas">
+          <a href="#pricing" class="btn btn-success">▶ DOWNLOAD FREE!!! <span class="arrow-deco">>>></span></a>
+          <a href="#features" class="btn">VIEW FEATURES</a>
+          <a href="#" class="btn btn-danger">SIGN GUESTBOOK</a>
+        </div>
+        <div>
+          <span class="hit-counter">00133742</span>
+          <span class="counter-label">VISITORS SINCE 11/14/1996 | POWERED BY GEOCITIES</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hr-groove">
+
+  <!-- Stats -->
+  <section>
+    <h2 class="section-h">★ OUR TOTALLY RAD STATS ★</h2>
+    <div class="win">
+      <div class="titlebar">
+        <span>STATS.DAT — Notepad</span>
+        <div class="controls"><span class="ctrl">_</span><span class="ctrl">□</span><span class="ctrl">×</span></div>
+      </div>
+      <div class="win-body">
+        <table class="stats-table">
+          <tr>
+            <td><div class="stat-num">1,337,420</div><div class="stat-lbl">Happy Surfers</div></td>
+            <td><div class="stat-num">56K</div><div class="stat-lbl">Modem Speeds</div></td>
+            <td><div class="stat-num">100%</div><div class="stat-lbl">Pure HTML</div></td>
+            <td><div class="stat-num">∞</div><div class="stat-lbl">GIF Animations</div></td>
+          </tr>
+          <tr>
+            <td><div class="stat-num">42</div><div class="stat-lbl">MIDI Tunes</div></td>
+            <td><div class="stat-num">99.9%</div><div class="stat-lbl">Uptime</div></td>
+            <td><div class="stat-num">7</div><div class="stat-lbl">Color Themes</div></td>
+            <td><div class="stat-num">1996</div><div class="stat-lbl">Established</div></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hr-groove">
+
+  <!-- Features -->
+  <section id="features">
+    <h2 class="section-h">★★★ AWESOME FEATURES ★★★</h2>
+    <div class="win">
+      <div class="titlebar">
+        <span>FEATURES.HTM</span>
+        <div class="controls"><span class="ctrl">_</span><span class="ctrl">□</span><span class="ctrl">×</span></div>
+      </div>
+      <div class="win-body">
+        <table class="features-table">
+          <tr>
+            <td class="icon-cell navy">@</td>
+            <td><div class="feat-title">FREE EMAIL!!! <span class="new-badge pulse-glow">HOT!</span></div><div class="feat-desc">Get your very own @surfin-usa.net email address. Forward to AOL if you must.</div></td>
+          </tr>
+          <tr>
+            <td class="icon-cell teal">♪</td>
+            <td><div class="feat-title">MIDI MUSIC LIBRARY</div><div class="feat-desc">42 hand-crafted MIDI tunes. Loads in seconds on your 14.4K modem!</div></td>
+          </tr>
+          <tr>
+            <td class="icon-cell red">★</td>
+            <td><div class="feat-title">ANIMATED GIF GALLERY</div><div class="feat-desc">Hundreds of spinning skulls, flaming logos, and dancing babies. Add them to YOUR page!</div></td>
+          </tr>
+          <tr>
+            <td class="icon-cell green">✉</td>
+            <td><div class="feat-title">GUESTBOOK <span class="new-badge blink">NEW!</span></div><div class="feat-desc">Sign our digital guestbook. Read what other surfers said in 1997!</div></td>
+          </tr>
+          <tr>
+            <td class="icon-cell navy">⌂</td>
+            <td><div class="feat-title">HOMEPAGE BUILDER</div><div class="feat-desc">Build your own GeoCities-style homepage with our revolutionary drag-and-drop tool!</div></td>
+          </tr>
+          <tr>
+            <td class="icon-cell teal">☎</td>
+            <td><div class="feat-title">CHAT ROOMS</div><div class="feat-desc">Meet new friends in #teens, #grunge, and #xfiles. ASL anyone?</div></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hr-groove">
+
+  <!-- Decorative color squares -->
+  <section>
+    <h2 class="section-h">★ COLOR EXPLOSION!!! ★</h2>
+    <div class="win">
+      <div class="titlebar"><span>DECORATE.EXE</span><div class="controls"><span class="ctrl">_</span><span class="ctrl">□</span><span class="ctrl">×</span></div></div>
+      <div class="win-body">
+        <div class="color-squares">
+          <div style="background:#ff0000"></div>
+          <div style="background:#00ff00"></div>
+          <div style="background:#0000ff"></div>
+          <div style="background:#ffff00"></div>
+          <div style="background:#ff00ff"></div>
+          <div style="background:#00ffff"></div>
+          <div style="background:#ff8000"></div>
+          <div style="background:#8000ff"></div>
+          <div style="background:#008000"></div>
+          <div style="background:#800000"></div>
+          <div style="background:#008080"></div>
+          <div style="background:#ffffff"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hr-groove">
+
+  <!-- How It Works -->
+  <section id="how">
+    <h2 class="section-h">★ HOW IT WORKS! ★</h2>
+    <div class="win">
+      <div class="titlebar"><span>SETUP.TXT — WordPad</span><div class="controls"><span class="ctrl">_</span><span class="ctrl">□</span><span class="ctrl">×</span></div></div>
+      <div class="win-body">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h3>STEP ONE: DOWNLOAD</h3>
+            <p>Click the big DOWNLOAD button. Insert floppy disks as prompted. Estimated install time: 45 minutes on 14.4K modem.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h3>STEP TWO: INSTALL</h3>
+            <p>Run SETUP.EXE. Restart your computer when prompted (twice, for some reason). Make sure Windows 95 is fully updated.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h3>STEP THREE: SURF!!!</h3>
+            <p>Launch SURFIN' USA.NET and start shredding the Information Superhighway. Tell your friends! (Use ICQ for best results.)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hr-groove">
+
+  <!-- Benefits -->
+  <section>
+    <h2 class="section-h rainbow">★ WHY CHOOSE US??? ★</h2>
+    <div class="benefits-wrap win">
+      <div class="titlebar"><span>BENEFITS.SYS</span><div class="controls"><span class="ctrl">_</span><span class="ctrl">□</span><span class="ctrl">×</span></div></div>
+      <div class="win-body">
+        <div class="benefits-grid">
+          <div class="benefit-panel">
+            <h3><span class="bullet">*</span>TOTALLY FREE!!!</h3>
+            <p>100% free, forever. No hidden fees. We make money from banner ads and pop-ups (sorry not sorry).</p>
+          </div>
+          <div class="benefit-panel">
+            <h3><span class="bullet">*</span>WORKS ON ANY PC</h3>
+            <p>Runs great on 486DX2/66 with 8MB RAM. Pentium recommended for full multimedia experience!</p>
+          </div>
+          <div class="benefit-panel">
+            <h3><span class="bullet">*</span>NO REGISTRATION</h3>
+            <p>Just type a username and go. We promise not to sell your data to anyone (yet).</p>
+          </div>
+          <div class="benefit-panel">
+            <h3><span class="bullet">*</span>24/7 DIAL-UP</h3>
+            <p>Our BBS is staffed around the clock. Page the sysop if things get weird at 3 AM.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hr-groove">
+
+  <!-- Pricing -->
+  <section id="pricing">
+    <h2 class="section-h">★ PRICING PLANS!!! ★</h2>
+    <div class="win">
+      <div class="titlebar"><span>ORDER.FRM — Buy Now</span><div class="controls"><span class="ctrl">_</span><span class="ctrl">□</span><span class="ctrl">×</span></div></div>
+      <div class="win-body">
+        <div class="pricing-grid">
+          <div class="price-card">
+            <div class="ptitle"><span>FREESHARE</span><span>FREE</span></div>
+            <div class="pbody">
+              <div class="price-amt"><span class="cur">$</span>0</div>
+              <p style="font-size:13px">For casual surfers.</p>
+              <ul class="price-feat">
+                <li>5MB homepage space</li>
+                <li>1 email account</li>
+                <li>3 MIDI downloads/day</li>
+                <li>Guestbook access</li>
+              </ul>
+              <a href="#" class="btn" style="width:100%;justify-content:center">GET IT FREE</a>
+            </div>
+          </div>
+          <div class="price-card featured">
+            <div class="price-badge pulse-glow">BEST VALUE!!!</div>
+            <div class="ptitle"><span>POWER USER</span><span>$9.99</span></div>
+            <div class="pbody">
+              <div class="price-amt"><span class="cur">$</span>9.99<span style="font-size:18px">/mo</span></div>
+              <p style="font-size:13px">For serious netizens. <span class="new-badge">HOT!</span></p>
+              <ul class="price-feat">
+                <li>50MB homepage space</li>
+                <li>5 email accounts</li>
+                <li>Unlimited MIDI downloads</li>
+                <li>Custom animated GIFs</li>
+                <li>Priority chat access</li>
+                <li>NO banner ads!!!</li>
+              </ul>
+              <a href="#" class="btn btn-primary" style="width:100%;justify-content:center">ORDER NOW!!!</a>
+            </div>
+          </div>
+          <div class="price-card">
+            <div class="ptitle"><span>SYSOP ELITE</span><span>$29.99</span></div>
+            <div class="pbody">
+              <div class="price-amt"><span class="cur">$</span>29.99<span style="font-size:18px">/mo</span></div>
+              <p style="font-size:13px">For power SysOps.</p>
+              <ul class="price-feat">
+                <li>500MB homepage space</li>
+                <li>Unlimited email accounts</li>
+                <li>Full MIDI library + WAVs</li>
+                <li>Custom domain (*.usa.net)</li>
+                <li>ISDN acceleration</li>
+                <li>Direct line to the SysOp</li>
+              </ul>
+              <a href="#" class="btn btn-success" style="width:100%;justify-content:center">GO ELITE!</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hr-groove">
+
+  <!-- Testimonials marquee -->
+  <section id="testimonials">
+    <h2 class="section-h">★ WHAT PEOPLE ARE SAYING!!! ★</h2>
+    <div class="testimonials-marquee">
+      <div class="marquee">
+        <div class="marquee-track">
+          <div class="tm-track">
+            <div class="tm-card">
+              <div class="tm-title"><span>★ RAD DUDE</span><span>1997</span></div>
+              <div class="tm-body">
+                <div class="tm-stars">★★★★★</div>
+                <div class="tm-quote">"This site is TOTALLY RAD!!! I spend like 6 hours a day here. My mom is so mad lol."</div>
+                <div class="tm-author">— Sk8erBoi_92, AOL</div>
+              </div>
+            </div>
+            <div class="tm-card">
+              <div class="tm-title"><span>★ MIDI LOVER</span><span>1996</span></div>
+              <div class="tm-body">
+                <div class="tm-stars">★★★★★</div>
+                <div class="tm-quote">"Best MIDI collection on the web! The Final Fantasy theme is DA BOMB. 10/10 would surf again."</div>
+                <div class="tm-author">— ZeldaFan4ever, Compuserve</div>
+              </div>
+            </div>
+            <div class="tm-card">
+              <div class="tm-title"><span>★ HAPPY CUSTOMER</span><span>1998</span></div>
+              <div class="tm-body">
+                <div class="tm-stars">★★★★☆</div>
+                <div class="tm-quote">"Signed up for POWER USER and never looked back. The dancing baby GIF alone is worth $9.99!"</div>
+                <div class="tm-author">— GroovyChick77, Prodigy</div>
+              </div>
+            </div>
+            <div class="tm-card">
+              <div class="tm-title"><span>★ WEBMASTER</span><span>1999</span></div>
+              <div class="tm-body">
+                <div class="tm-stars">★★★★★</div>
+                <div class="tm-quote">"Built my whole homepage with their builder. Got 200 hits in my first week!!! W00T!"</div>
+                <div class="tm-author">— HTMLninja, GeoCities</div>
+              </div>
+            </div>
+            <!-- duplicate for seamless loop -->
+            <div class="tm-card">
+              <div class="tm-title"><span>★ RAD DUDE</span><span>1997</span></div>
+              <div class="tm-body">
+                <div class="tm-stars">★★★★★</div>
+                <div class="tm-quote">"This site is TOTALLY RAD!!! I spend like 6 hours a day here. My mom is so mad lol."</div>
+                <div class="tm-author">— Sk8erBoi_92, AOL</div>
+              </div>
+            </div>
+            <div class="tm-card">
+              <div class="tm-title"><span>★ MIDI LOVER</span><span>1996</span></div>
+              <div class="tm-body">
+                <div class="tm-stars">★★★★★</div>
+                <div class="tm-quote">"Best MIDI collection on the web! The Final Fantasy theme is DA BOMB. 10/10 would surf again."</div>
+                <div class="tm-author">— ZeldaFan4ever, Compuserve</div>
+              </div>
+            </div>
+            <div class="tm-card">
+              <div class="tm-title"><span>★ HAPPY CUSTOMER</span><span>1998</span></div>
+              <div class="tm-body">
+                <div class="tm-stars">★★★★☆</div>
+                <div class="tm-quote">"Signed up for POWER USER and never looked back. The dancing baby GIF alone is worth $9.99!"</div>
+                <div class="tm-author">— GroovyChick77, Prodigy</div>
+              </div>
+            </div>
+            <div class="tm-card">
+              <div class="tm-title"><span>★ WEBMASTER</span><span>1999</span></div>
+              <div class="tm-body">
+                <div class="tm-stars">★★★★★</div>
+                <div class="tm-quote">"Built my whole homepage with their builder. Got 200 hits in my first week!!! W00T!"</div>
+                <div class="tm-author">— HTMLninja, GeoCities</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hr-groove">
+
+  <!-- FAQ -->
+  <section id="faq">
+    <h2 class="section-h">★ FREQUENTLY ASKED ??? ★</h2>
+    <div class="win">
+      <div class="titlebar"><span>FAQ.TXT — Help</span><div class="controls"><span class="ctrl">_</span><span class="ctrl">□</span><span class="ctrl">×</span></div></div>
+      <div class="win-body">
+        <div class="faq-item">
+          <button class="faq-q"><span>Q: IS THIS SITE REALLY FREE???</span><span class="ind">+</span></button>
+          <div class="faq-a">A: YES!!! The FREESHARE plan costs $0.00 forever. We pay the bills with banner ads at the top of every page. Power users can pay to remove them!</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>Q: WILL IT WORK ON MY MAC???</span><span class="ind">+</span></button>
+          <div class="faq-a">A: Probably! We tested it in Netscape Navigator 3.0 on a Power Mac 6100. Internet Explorer for Mac is iffy. Best experienced on Windows 95.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>Q: HOW DO I ADD A MIDI TO MY PAGE???</span><span class="ind">+</span></button>
+          <div class="faq-a">A: Use this tag: &lt;BGSOUND SRC="tune.mid" LOOP=INFINITE&gt;. Your visitors will LOVE it. (Or hate it. Mostly hate it. But that's the 90s way!)</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>Q: WHY IS THE BACKGROUND GRAY???</span><span class="ind">+</span></button>
+          <div class="faq-a">A: Because that's how Windows 95 looks, silly! The crosshatch pattern is a tribute to the classic button-face gray (#C0C0C0). It's authentic!</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>Q: CAN I EMAIL THE SYSOP???</span><span class="ind">+</span></button>
+          <div class="faq-a">A: Absolutely! Send mail to sysop@surfin-usa.net. Please allow 3-5 business days for a reply. (He's busy playing Quake.)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hr-groove">
+
+  <!-- Blog -->
+  <section id="blog">
+    <h2 class="section-h">★ FROM OUR BLOG!!! ★</h2>
+    <div class="win">
+      <div class="titlebar"><span>BLOG.HTM — What's New</span><div class="controls"><span class="ctrl">_</span><span class="ctrl">□</span><span class="ctrl">×</span></div></div>
+      <div class="win-body">
+        <div class="blog-grid">
+          <div class="blog-card">
+            <div class="blog-img">[ IMAGE ]</div>
+            <div class="blog-meta">11/14/1996 | SYSOP</div>
+            <div class="blog-title">WE'RE LIVE!!! <span class="new-badge pulse-glow">NEW!</span></div>
+            <p style="font-size:13px;margin-bottom:6px">After 6 months of coding in Notepad, the site is finally online! Tell your friends!</p>
+            <a href="#" class="blog-read">>> READ MORE <<</a>
+          </div>
+          <div class="blog-card">
+            <div class="blog-img">[ IMAGE ]</div>
+            <div class="blog-meta">03/22/1997 | WEBMASTER</div>
+            <div class="blog-title">NEW MIDI COLLECTION!</div>
+            <p style="font-size:13px;margin-bottom:6px">Added 12 new MIDI files including the hottest hits from the radio. Download them all!</p>
+            <a href="#" class="blog-read">>> READ MORE <<</a>
+          </div>
+          <div class="blog-card">
+            <div class="blog-img">[ IMAGE ]</div>
+            <div class="blog-meta">08/09/1998 | ADMIN</div>
+            <div class="blog-title">Y2K READY!!!</div>
+            <p style="font-size:13px;margin-bottom:6px">We've tested all our systems. The year 2000 will NOT break our guestbook. Probably.</p>
+            <a href="#" class="blog-read">>> READ MORE <<</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hr-groove">
+
+  <!-- Construction CTA -->
+  <section class="construction-cta">
+    <div class="bg-construction" style="padding:8px;border:4px solid #000">
+      <div class="inner">
+        <h2 class="section-h" style="color:#000080;text-shadow:2px 2px 0 #ffff00">★ JOIN NOW!!! ★</h2>
+        <p style="font-size:16px;margin:8px 0 16px;font-weight:bold;color:#000">
+          ⚠ THIS PAGE IS UNDER CONSTRUCTION — BUT YOU CAN STILL SIGN UP! ⚠
+        </p>
+        <div class="hero-ctas">
+          <a href="#" class="btn btn-primary pulse-glow">▶ SIGN UP FREE!!! <<</a>
+          <a href="#" class="btn btn-danger">EMAIL THE SYSOP</a>
+        </div>
+        <div style="margin-top:12px">
+          <span class="hit-counter">0000042</span>
+          <span class="counter-label">PEOPLE SIGNED UP THIS WEEK!!!</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>~ SURFIN' USA.NET ~</h4>
+        <p style="font-size:13px;color:#c0c0c0">The raddest portal on the World Wide Web! Established November 14, 1996. Best viewed at 800x600 in Netscape Navigator 4.0.</p>
+        <div style="margin-top:8px">
+          <a href="#" class="btn" style="background:#c0c0c0;color:#000;padding:4px 8px;font-size:11px">SIGN GUESTBOOK</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>>> NAVIGATE</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>>> COOL LINKS</h4>
+        <ul>
+          <li><a href="#">GeoCities</a></li>
+          <li><a href="#">Angelfire</a></li>
+          <li><a href="#">Tripod</a></li>
+          <li><a href="#">WebRing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>>> CONTACT</h4>
+        <ul>
+          <li><a href="#">sysop@surfin-usa.net</a></li>
+          <li><a href="#">ICQ: 1337420</a></li>
+          <li><a href="#">AOL: SurfinUSA</a></li>
+          <li><a href="#">Sign Guestbook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom"></div>
+    <div class="footer-copy">
+      © 1996-1999 SURFIN' USA.NET | ALL RIGHTS RESERVED | MADE WITH NOTEPAD &amp; ☕
+    </div>
+  </div>
+</footer>
+
+<script>
+  // FAQ accordion - instant (90s style, no smooth)
+  document.querySelectorAll('.faq-q').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const item=btn.parentElement;
+      const isOpen=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!isOpen)item.classList.add('open');
+    });
+  });
+
+  // Random hit counter increment for fun
+  const counters=document.querySelectorAll('.hit-counter');
+  setInterval(()=>{
+    counters.forEach(c=>{
+      let n=parseInt(c.textContent.replace(/[^0-9]/g,''))||0;
+      n+=Math.floor(Math.random()*3);
+      c.textContent=String(n).padStart(8,'0');
+    });
+  },3000);
+</script>
+</body>
+</html>

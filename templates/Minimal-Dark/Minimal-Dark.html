@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Minimal Dark — Atmospheric Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --background:#0A0A0F;
+    --backgroundAlt:#12121A;
+    --foreground:#FAFAFA;
+    --muted:#1A1A24;
+    --mutedForeground:#71717A;
+    --accent:#F59E0B;
+    --accentForeground:#0A0A0F;
+    --accentMuted:rgba(245,158,11,0.15);
+    --border:rgba(255,255,255,0.08);
+    --borderHover:rgba(255,255,255,0.15);
+    --card:rgba(26,26,36,0.6);
+    --cardSolid:#1A1A24;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Inter",system-ui,sans-serif;
+    background:var(--background);
+    color:var(--foreground);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* Ambient noise + orbs */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:0.02;
+  }
+  .orb{position:fixed;border-radius:50%;filter:blur(140px);z-index:0;pointer-events:none}
+  .orb-1{width:600px;height:600px;background:rgba(245,158,11,0.10);top:-200px;left:50%;transform:translateX(-50%)}
+  .orb-2{width:500px;height:500px;background:rgba(245,158,11,0.05);bottom:-100px;right:-100px}
+  .orb-3{width:400px;height:400px;background:rgba(245,158,11,0.04);top:40%;left:-150px}
+  .container{max-width:72rem;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1}
+  section{position:relative;z-index:1}
+  .section-pad{padding:6rem 0}
+  @media(min-width:768px){.section-pad{padding:8rem 0}}
+  @media(min-width:1024px){.section-pad{padding:10rem 0}}
+
+  /* Typography */
+  .display{font-family:"Space Grotesk",system-ui,sans-serif;letter-spacing:-0.025em;font-weight:600;line-height:1.05}
+  .mono{font-family:"JetBrains Mono",monospace;letter-spacing:0.025em}
+
+  /* Nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(12px);background:rgba(10,10,15,0.6);border-bottom:1px solid var(--border)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:72rem;margin:0 auto;padding:0 1.5rem}
+  .logo{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.25rem;letter-spacing:-0.025em;display:flex;align-items:center;gap:.5rem}
+  .logo-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(245,158,11,0.6)}
+  .nav-links{display:none;gap:2rem;align-items:center}
+  @media(min-width:768px){.nav-links{display:flex}}
+  .nav-links a{color:var(--mutedForeground);text-decoration:none;font-size:.875rem;transition:color .2s}
+  .nav-links a:hover{color:var(--foreground)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:500;border-radius:12px;cursor:pointer;border:none;font-family:inherit;font-size:.95rem;transition:all .2s ease-out;text-decoration:none;line-height:1;white-space:nowrap}
+  .btn-primary{background:var(--accent);color:var(--accentForeground);padding:.75rem 1.5rem;height:44px}
+  .btn-primary:hover{filter:brightness(1.1);box-shadow:0 0 20px rgba(245,158,11,0.4)}
+  .btn-primary:active{transform:scale(.98)}
+  .btn-outline{background:transparent;color:var(--foreground);border:1px solid var(--borderHover);padding:.75rem 1.5rem;height:44px}
+  .btn-outline:hover{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.25)}
+  .btn-outline:active{transform:scale(.98)}
+  .btn-ghost{background:transparent;color:var(--foreground);padding:.75rem 1.5rem;height:44px}
+  .btn-ghost:hover{background:rgba(255,255,255,0.05)}
+
+  /* Hero */
+  .hero{text-align:center;padding:9rem 0 6rem;position:relative}
+  @media(min-width:768px){.hero{padding:11rem 0 8rem}}
+  .badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--card);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:9999px;padding:.4rem .9rem;font-size:.8rem;color:var(--mutedForeground);margin-bottom:2rem}
+  .badge-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px rgba(245,158,11,0.7);animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
+  .hero h1{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(2.75rem,7vw,6rem);letter-spacing:-0.03em;line-height:1;max-width:14ch;margin:0 auto 1.5rem}
+  .hero h1 .amber{color:var(--accent)}
+  .hero-sub{font-size:1.125rem;color:var(--mutedForeground);max-width:38rem;margin:0 auto 2.5rem}
+  @media(min-width:768px){.hero-sub{font-size:1.25rem}}
+  .hero-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .trust{margin-top:3rem;display:flex;flex-direction:column;align-items:center;gap:.75rem}
+  .avatars{display:flex}
+  .avatars span{width:36px;height:36px;border-radius:50%;border:2px solid var(--background);margin-left:-10px;background:linear-gradient(135deg,#1A1A24,#2a2a3a)}
+  .avatars span:first-child{margin-left:0}
+  .avatars span:nth-child(1){background:linear-gradient(135deg,#F59E0B,#B45309)}
+  .avatars span:nth-child(2){background:linear-gradient(135deg,#6366F1,#4338CA)}
+  .avatars span:nth-child(3){background:linear-gradient(135deg,#10B981,#047857)}
+  .avatars span:nth-child(4){background:linear-gradient(135deg,#EC4899,#9D174D)}
+  .trust-text{font-size:.8rem;color:var(--mutedForeground)}
+
+  /* Stats */
+  .stats{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(18,18,26,0.4);backdrop-filter:blur(8px)}
+  .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+  @media(min-width:768px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+  .stat{padding:2.5rem 1.5rem;text-align:center;border-right:1px solid var(--border)}
+  .stat:last-child{border-right:none}
+  @media(max-width:767px){.stat:nth-child(2n){border-right:none}.stat{border-bottom:1px solid var(--border)}}
+  .stat-num{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:2.5rem;color:var(--accent);letter-spacing:-0.025em}
+  @media(min-width:768px){.stat-num{font-size:3.5rem}}
+  .stat-label{font-size:.8rem;color:var(--mutedForeground);margin-top:.5rem;letter-spacing:0.05em}
+
+  /* Section header */
+  .sec-head{text-align:center;max-width:42rem;margin:0 auto 4rem}
+  .sec-tag{font-family:"JetBrains Mono",monospace;font-size:.75rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;display:inline-block}
+  .sec-title{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-0.025em;line-height:1.1;margin-bottom:1rem}
+  .sec-desc{color:var(--mutedForeground);font-size:1.125rem}
+
+  /* Glass card */
+  .glass{background:var(--card);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:12px;transition:all .3s ease-out}
+  .glass-interactive{cursor:pointer}
+  .glass-interactive:hover{border-color:var(--borderHover);background:rgba(26,26,36,0.8);transform:scale(1.02);box-shadow:0 10px 15px rgba(0,0,0,0.3)}
+
+  /* Features */
+  .features-grid{display:grid;grid-template-columns:1fr;gap:1.5rem}
+  @media(min-width:768px){.features-grid{grid-template-columns:repeat(3,1fr)}}
+  .feature{padding:2rem}
+  .feature.wide{grid-column:1/-1}
+  @media(min-width:768px){.feature.wide{grid-column:span 2}}
+  .feat-icon{width:48px;height:48px;border-radius:50%;background:var(--accentMuted);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
+  .feat-icon svg{width:22px;height:22px;stroke:var(--accent);stroke-width:1.5;fill:none}
+  .feature h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.25rem;margin-bottom:.5rem}
+  .feature p{color:var(--mutedForeground);font-size:.95rem}
+
+  /* Product detail */
+  .product{display:grid;grid-template-columns:1fr;gap:3rem;align-items:center}
+  @media(min-width:1024px){.product{grid-template-columns:1fr 1fr}}
+  .product-left{position:relative}
+  .glow-orb{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,0.15),transparent 70%);top:50%;left:-50px;transform:translateY(-50%);filter:blur(40px);z-index:-1}
+  .product-left .sec-tag{display:block}
+  .product-left h2{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.025em;line-height:1.1;margin-bottom:1.5rem;text-align:left}
+  .product-left p{color:var(--mutedForeground);margin-bottom:1.5rem;font-size:1.05rem}
+  .product-list{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+  .product-list li{display:flex;align-items:center;gap:.75rem;color:var(--foreground);font-size:.95rem}
+  .check{width:20px;height:20px;border-radius:50%;background:var(--accentMuted);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+  .check svg{width:12px;height:12px;stroke:var(--accent);stroke-width:2.5;fill:none}
+  .mock-card{padding:1.5rem;min-height:340px;position:relative;overflow:hidden}
+  .mock-bar{display:flex;gap:.4rem;margin-bottom:1.5rem}
+  .mock-bar span{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.15)}
+  .mock-bar span:nth-child(1){background:#F87171}
+  .mock-bar span:nth-child(2){background:#FBBF24}
+  .mock-bar span:nth-child(3){background:#34D399}
+  .mock-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1rem}
+  .mock-box{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:1rem;height:80px;display:flex;align-items:end}
+  .mock-box.tall{height:120px}
+  .mock-line{height:6px;border-radius:3px;background:rgba(255,255,255,0.08);width:60%}
+  .mock-line.amber{background:var(--accent);width:40%;box-shadow:0 0 8px rgba(245,158,11,0.5)}
+  .mock-chart{display:flex;align-items:end;gap:6px;height:80px}
+  .mock-chart span{flex:1;background:linear-gradient(to top,var(--accent),rgba(245,158,11,0.3));border-radius:3px 3px 0 0;opacity:.7}
+
+  /* Pricing */
+  .pricing-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;align-items:center}
+  @media(min-width:768px){.pricing-grid{grid-template-columns:repeat(3,1fr)}}
+  .price-card{padding:2rem;position:relative}
+  .price-card.popular{border:1px solid rgba(245,158,11,0.2);box-shadow:0 0 0 1px rgba(245,158,11,0.2),0 0 30px rgba(245,158,11,0.15)}
+  @media(min-width:768px){.price-card.popular{transform:scale(1.05) translateY(1rem)}}
+  .popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--accentForeground);font-size:.7rem;font-weight:600;padding:.3rem .8rem;border-radius:9999px;letter-spacing:0.05em;text-transform:uppercase}
+  .price-name{font-family:"JetBrains Mono",monospace;font-size:.75rem;color:var(--mutedForeground);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:.5rem}
+  .price-amount{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:3rem;letter-spacing:-0.025em;margin-bottom:.25rem}
+  .price-amount span{font-size:1rem;color:var(--mutedForeground);font-weight:400}
+  .price-desc{color:var(--mutedForeground);font-size:.9rem;margin-bottom:1.5rem;min-height:2.5em}
+  .price-features{list-style:none;margin-bottom:1.5rem;display:flex;flex-direction:column;gap:.75rem}
+  .price-features li{display:flex;align-items:center;gap:.6rem;font-size:.9rem;color:var(--foreground)}
+  .price-features .check svg{stroke:var(--accent)}
+  .price-card .btn{width:100%}
+
+  /* Testimonials */
+  .test-grid{display:grid;grid-template-columns:1fr;gap:1.5rem}
+  @media(min-width:768px){.test-grid{grid-template-columns:repeat(3,1fr)}}
+  .test-card{padding:2rem;position:relative;border-left:2px solid var(--accent);border-radius:12px}
+  .test-card::before{content:"";position:absolute;left:-2px;top:0;width:2px;height:40px;background:var(--accent);box-shadow:0 0 12px rgba(245,158,11,0.5)}
+  .test-quote{font-style:italic;color:var(--foreground);font-size:.95rem;margin-bottom:1.5rem;line-height:1.6}
+  .test-author{display:flex;align-items:center;gap:.75rem}
+  .test-avatar{width:40px;height:40px;border-radius:50%;border:2px solid var(--borderHover)}
+  .test-name{font-weight:500;font-size:.9rem}
+  .test-role{font-size:.75rem;color:var(--mutedForeground)}
+
+  /* FAQ */
+  .faq{max-width:48rem;margin:0 auto}
+  .faq-item{border-bottom:1px solid var(--border)}
+  .faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0;cursor:pointer;font-weight:500;font-size:1.05rem;color:var(--foreground)}
+  .faq-icon{width:20px;height:20px;flex-shrink:0;position:relative}
+  .faq-icon::before,.faq-icon::after{content:"";position:absolute;background:var(--mutedForeground);transition:all .3s ease-out}
+  .faq-icon::before{width:14px;height:2px;top:9px;left:3px}
+  .faq-icon::after{width:2px;height:14px;top:3px;left:9px}
+  .faq-item.open .faq-icon::after{transform:rotate(90deg);opacity:0}
+  .faq-item.open .faq-icon::before{background:var(--accent)}
+  .faq-a{max-height:0;overflow:hidden;opacity:0;transition:max-height .4s ease-out,opacity .3s ease-out;color:var(--mutedForeground);font-size:.95rem}
+  .faq-item.open .faq-a{max-height:200px;opacity:1;padding-bottom:1.5rem}
+
+  /* Footer */
+  footer{border-top:1px solid var(--border);padding:4rem 0 2rem;margin-top:4rem}
+  .footer-grid{display:grid;grid-template-columns:1fr;gap:2.5rem;margin-bottom:3rem}
+  @media(min-width:768px){.footer-grid{grid-template-columns:2fr 1fr 1fr 1fr}}
+  .footer-brand p{color:var(--mutedForeground);font-size:.9rem;margin-top:1rem;max-width:24rem}
+  .footer-col h4{font-family:"JetBrains Mono",monospace;font-size:.75rem;color:var(--mutedForeground);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem}
+  .footer-col a{display:block;color:var(--foreground);text-decoration:none;font-size:.9rem;margin-bottom:.6rem;transition:color .2s}
+  .footer-col a:hover{color:var(--accent)}
+  .socials{display:flex;gap:.75rem;margin-top:1.5rem}
+  .social{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .2s;cursor:pointer}
+  .social:hover{background:rgba(255,255,255,0.05);border-color:var(--borderHover)}
+  .social svg{width:16px;height:16px;stroke:var(--mutedForeground);stroke-width:1.5;fill:none}
+  .footer-bottom{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+  .footer-bottom p{font-size:.8rem;color:var(--mutedForeground)}
+  .footer-bottom .mono{font-size:.75rem;color:var(--mutedForeground)}
+
+  /* Reveal animation */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><span class="logo-dot"></span>NOCTURNE</div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#" class="btn btn-primary">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="badge reveal"><span class="badge-dot"></span>Now with ambient AI workflows</div>
+    <h1 class="reveal">Build at the speed of <span class="amber">midnight</span></h1>
+    <p class="hero-sub reveal">A premium workspace for teams who ship after dark. Ambient, calm, and obsessively crafted — like a beautifully lit app you'd use at 2am.</p>
+    <div class="hero-ctas reveal">
+      <a href="#" class="btn btn-primary">Start building free</a>
+      <a href="#" class="btn btn-outline">View demo</a>
+    </div>
+    <div class="trust reveal">
+      <div class="avatars"><span></span><span></span><span></span><span></span></div>
+      <p class="trust-text">Trusted by 12,000+ nocturnal builders</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat reveal"><div class="stat-num">12k+</div><div class="stat-label">ACTIVE TEAMS</div></div>
+      <div class="stat reveal"><div class="stat-num">99.99%</div><div class="stat-label">UPTIME SLA</div></div>
+      <div class="stat reveal"><div class="stat-num">240ms</div><div class="stat-label">MEDIAN LATENCY</div></div>
+      <div class="stat reveal"><div class="stat-num">4.9/5</div><div class="stat-label">CUSTOMER RATING</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT DETAIL -->
+<section class="section-pad">
+  <div class="container">
+    <div class="product">
+      <div class="product-left reveal">
+        <div class="glow-orb"></div>
+        <span class="sec-tag">THE WORKSPACE</span>
+        <h2>A focused surface for deep work</h2>
+        <p>Nocturne wraps your tools in a calm, ambient interface. Glass panels, warm accents, and generous breathing room keep your attention exactly where it belongs — on the work.</p>
+        <ul class="product-list">
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Command palette with fuzzy search</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Ambient focus mode at sundown</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Keyboard-first navigation</li>
+        </ul>
+      </div>
+      <div class="product-right reveal">
+        <div class="glass mock-card">
+          <div class="mock-bar"><span></span><span></span><span></span></div>
+          <div class="mock-grid">
+            <div class="mock-box"><div class="mock-line"></div></div>
+            <div class="mock-box"><div class="mock-line amber"></div></div>
+          </div>
+          <div class="mock-chart">
+            <span style="height:40%"></span><span style="height:65%"></span><span style="height:50%"></span><span style="height:80%"></span><span style="height:60%"></span><span style="height:90%"></span><span style="height:70%"></span><span style="height:100%"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section-pad" id="features">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">FEATURES</span>
+      <h2 class="sec-title">Everything glows, nothing shouts</h2>
+      <p class="sec-desc">A refined toolkit built for the quiet hours — every detail tuned for calm focus.</p>
+    </div>
+    <div class="features-grid">
+      <div class="glass glass-interactive feature wide reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h3>Ambient command center</h3>
+        <p>Control every part of your workspace from a single, beautifully lit command palette. Fuzzy search, instant actions, and warm amber highlights guide you home.</p>
+      </div>
+      <div class="glass glass-interactive feature reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <h3>Focus scheduling</h3>
+        <p>Automatically dims distractions as the sun sets, wrapping your screen in calm.</p>
+      </div>
+      <div class="glass glass-interactive feature reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3>Whisper sync</h3>
+        <p>Real-time collaboration that feels like a quiet conversation, not a loud room.</p>
+      </div>
+      <div class="glass glass-interactive feature reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Secure by default</h3>
+        <p>SOC 2 Type II, end-to-end encryption, and ambient threat monitoring.</p>
+      </div>
+      <div class="glass glass-interactive feature reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg></div>
+        <h3>Modular surfaces</h3>
+        <p>Compose your own layout from glass panels that float in dark space.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section-pad" id="pricing">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">PRICING</span>
+      <h2 class="sec-title">Pricing that glows brighter as you grow</h2>
+      <p class="sec-desc">Start free. Upgrade when the night gets busy.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="glass price-card reveal">
+        <div class="price-name">Starter</div>
+        <div class="price-amount">$0<span>/mo</span></div>
+        <p class="price-desc">For solo builders finding their rhythm.</p>
+        <ul class="price-features">
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Up to 3 projects</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Community support</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>1GB ambient storage</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Get started</a>
+      </div>
+      <div class="glass price-card popular reveal">
+        <div class="popular-badge">Popular</div>
+        <div class="price-name">Pro</div>
+        <div class="price-amount">$24<span>/mo</span></div>
+        <p class="price-desc">For teams who ship after midnight.</p>
+        <ul class="price-features">
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Unlimited projects</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Priority support</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>100GB storage</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Focus scheduling</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Start Pro trial</a>
+      </div>
+      <div class="glass price-card reveal">
+        <div class="price-name">Enterprise</div>
+        <div class="price-amount">$99<span>/mo</span></div>
+        <p class="price-desc">For organizations that never sleep.</p>
+        <ul class="price-features">
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>SSO &amp; SAML</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Dedicated manager</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Unlimited storage</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Contact sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section-pad" id="testimonials">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">TESTIMONIALS</span>
+      <h2 class="sec-title">Loved in the quiet hours</h2>
+      <p class="sec-desc">What teams say when the work is finally done.</p>
+    </div>
+    <div class="test-grid">
+      <div class="glass test-card reveal">
+        <p class="test-quote">"Nocturne feels like the room dims around me when I need to focus. It's the first tool that actually respects deep work."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:linear-gradient(135deg,#F59E0B,#B45309)"></div>
+          <div><div class="test-name">Mira Chen</div><div class="test-role">Staff Engineer, Lumen</div></div>
+        </div>
+      </div>
+      <div class="glass test-card reveal">
+        <p class="test-quote">"The amber glow on hover is a small thing, but it makes the whole product feel alive. Obsessively crafted, exactly our taste."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:linear-gradient(135deg,#6366F1,#4338CA)"></div>
+          <div><div class="test-name">Devon Park</div><div class="test-role">Design Lead, Arcadia</div></div>
+        </div>
+      </div>
+      <div class="glass test-card reveal">
+        <p class="test-quote">"We migrated our whole team. Productivity went up, eye strain went down. The atmospheric quality is no joke."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:linear-gradient(135deg,#10B981,#047857)"></div>
+          <div><div class="test-name">Aria Volkov</div><div class="test-role">CTO, Nightshift</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-pad" id="faq">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">FAQ</span>
+      <h2 class="sec-title">Questions, answered calmly</h2>
+    </div>
+    <div class="faq">
+      <div class="faq-item reveal">
+        <div class="faq-q">Is Nocturne only for night owls?<span class="faq-icon"></span></div>
+        <div class="faq-a">Not at all. The ambient design adapts to your environment. Many teams use it during the day for its calm, focused aesthetic — the dark palette simply reduces eye strain at any hour.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Does the glass effect impact performance?<span class="faq-icon"></span></div>
+        <div class="faq-a">Backdrop blur is GPU-accelerated and highly optimized on modern devices. We carefully tune ambient orbs and blur radius to maintain a smooth 60fps even on mid-range hardware.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Can I customize the amber accent?<span class="faq-icon"></span></div>
+        <div class="faq-a">Pro and Enterprise plans unlock accent theming. You can choose from a curated palette of warm tones, all tuned to glow beautifully against the deep slate background.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">What about data security?<span class="faq-icon"></span></div>
+        <div class="faq-a">We're SOC 2 Type II certified with end-to-end encryption. Your data sleeps as soundly as you do — ambient monitoring watches over it 24/7 without ever compromising privacy.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><span class="logo-dot"></span>NOCTURNE</div>
+        <p>The atmospheric workspace for teams who ship after dark. Calm, focused, and obsessively crafted.</p>
+        <div class="socials">
+          <a href="#" class="social" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="#" class="social" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+          <a href="#" class="social" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#">Features</a><a href="#">Pricing</a><a href="#">Changelog</a><a href="#">Roadmap</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a><a href="#">Blog</a><a href="#">Careers</a><a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#">Documentation</a><a href="#">API Reference</a><a href="#">Status</a><a href="#">Security</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Nocturne Labs. Crafted in the dark.</p>
+      <span class="mono">v2.4.0 — ambient build</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+  },{threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q=>{
+    q.addEventListener('click',()=>{
+      const item=q.parentElement;
+      const wasOpen=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen)item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Modern Dark — Cinematic Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#020203;
+    --bg-base:#050506;
+    --bg-elevated:#0a0a0c;
+    --surface:rgba(255,255,255,0.05);
+    --surface-hover:rgba(255,255,255,0.08);
+    --foreground:#EDEDEF;
+    --muted:#8A8F98;
+    --subtle:rgba(255,255,255,0.60);
+    --accent:#5E6AD2;
+    --accent-bright:#6872D9;
+    --accent-glow:rgba(94,106,210,0.3);
+    --border:rgba(255,255,255,0.06);
+    --border-hover:rgba(255,255,255,0.10);
+    --border-accent:rgba(94,106,210,0.30);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Inter",system-ui,sans-serif;
+    background:var(--bg-base);
+    color:var(--foreground);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(ellipse at top,#0a0a0f 0%,#050506 50%,#020203 100%);
+    background-attachment:fixed;
+  }
+  /* Noise + grid overlay */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:0.015;
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
+    background-size:64px 64px;
+  }
+  /* Animated ambient blobs */
+  .blob{position:fixed;border-radius:50%;filter:blur(120px);z-index:0;pointer-events:none}
+  .blob-1{width:900px;height:600px;background:rgba(94,106,210,0.25);top:-200px;left:50%;transform:translateX(-50%);animation:float1 10s ease-in-out infinite}
+  .blob-2{width:600px;height:600px;background:rgba(139,92,246,0.15);top:30%;left:-200px;animation:float2 9s ease-in-out infinite}
+  .blob-3{width:500px;height:500px;background:rgba(79,70,229,0.12);top:50%;right:-150px;animation:float3 11s ease-in-out infinite}
+  @keyframes float1{0%,100%{transform:translateX(-50%) translateY(0) rotate(0deg)}50%{transform:translateX(-50%) translateY(-30px) rotate(2deg)}}
+  @keyframes float2{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-20px) rotate(-1deg)}}
+  @keyframes float3{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-25px) rotate(1deg)}}
+  .container{max-width:72rem;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1}
+  section{position:relative;z-index:1}
+  .section-pad{padding:6rem 0}
+  @media(min-width:768px){.section-pad{padding:8rem 0}}
+
+  /* Nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(16px);background:rgba(5,5,6,0.7);border-bottom:1px solid var(--border)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:72rem;margin:0 auto;padding:0 1.5rem}
+  .logo{font-weight:600;font-size:1.1rem;letter-spacing:-0.02em;display:flex;align-items:center;gap:.5rem}
+  .logo-mark{width:24px;height:24px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#8B5CF6);box-shadow:0 0 12px var(--accent-glow)}
+  .nav-links{display:none;gap:2rem;align-items:center}
+  @media(min-width:768px){.nav-links{display:flex}}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:.875rem;transition:color .2s}
+  .nav-links a:hover{color:var(--foreground)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:500;border-radius:8px;cursor:pointer;border:none;font-family:inherit;font-size:.9rem;transition:all .2s cubic-bezier(0.16,1,0.3,1);text-decoration:none;line-height:1;white-space:nowrap;position:relative;overflow:hidden}
+  .btn-primary{background:var(--accent);color:#fff;padding:.7rem 1.3rem;height:40px;box-shadow:0 0 0 1px rgba(94,106,210,0.5),0 4px 12px rgba(94,106,210,0.3),inset 0 1px 0 0 rgba(255,255,255,0.2)}
+  .btn-primary:hover{background:var(--accent-bright);box-shadow:0 0 0 1px rgba(94,106,210,0.7),0 6px 20px rgba(94,106,210,0.45),inset 0 1px 0 0 rgba(255,255,255,0.25)}
+  .btn-primary:active{transform:scale(0.98)}
+  .btn-secondary{background:rgba(255,255,255,0.05);color:var(--foreground);padding:.7rem 1.3rem;height:40px;box-shadow:inset 0 1px 0 0 rgba(255,255,255,0.1),0 0 0 1px var(--border)}
+  .btn-secondary:hover{background:rgba(255,255,255,0.08);box-shadow:inset 0 1px 0 0 rgba(255,255,255,0.15),0 0 0 1px var(--border-hover)}
+  .btn-secondary:active{transform:scale(0.98)}
+
+  /* Gradient text */
+  .grad-text{background:linear-gradient(to bottom,#fff,rgba(255,255,255,0.7));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .accent-grad{background:linear-gradient(90deg,#5E6AD2,#818CF8,#5E6AD2);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shimmer 4s linear infinite}
+  @keyframes shimmer{to{background-position:200% center}}
+
+  /* Hero with parallax */
+  .hero{text-align:center;padding:10rem 0 6rem;position:relative;transition:transform .1s linear}
+  @media(min-width:768px){.hero{padding:12rem 0 8rem}}
+  .hero-badge{display:inline-flex;align-items:center;gap:.6rem;background:rgba(255,255,255,0.04);backdrop-filter:blur(12px);border:1px solid var(--border-accent);border-radius:9999px;padding:.4rem .9rem .4rem .5rem;font-size:.8rem;color:var(--foreground);margin-bottom:2rem;box-shadow:0 0 0 1px rgba(94,106,210,0.1),0 0 20px rgba(94,106,210,0.1)}
+  .ping{position:relative;width:8px;height:8px}
+  .ping::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--accent)}
+  .ping::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--accent);animation:ping 1.8s cubic-bezier(0,0,0.2,1) infinite}
+  @keyframes ping{75%,100%{transform:scale(2.5);opacity:0}}
+  .hero h1{font-weight:600;font-size:clamp(2.75rem,8vw,6.5rem);letter-spacing:-0.03em;line-height:1;max-width:16ch;margin:0 auto 1.5rem}
+  .hero-sub{font-size:1.125rem;color:var(--muted);max-width:40rem;margin:0 auto 2.5rem;line-height:1.6}
+  @media(min-width:768px){.hero-sub{font-size:1.25rem}}
+  .hero-ctas{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+  .trust{margin-top:3rem;display:flex;flex-direction:column;align-items:center;gap:.75rem}
+  .avatars{display:flex}
+  .avatars span{width:34px;height:34px;border-radius:50%;border:2px solid var(--bg-base);margin-left:-10px;background:linear-gradient(135deg,#5E6AD2,#8B5CF6)}
+  .avatars span:first-child{margin-left:0}
+  .avatars span:nth-child(2){background:linear-gradient(135deg,#EC4899,#8B5CF6)}
+  .avatars span:nth-child(3){background:linear-gradient(135deg,#06B6D4,#5E6AD2)}
+  .avatars span:nth-child(4){background:linear-gradient(135deg,#F59E0B,#EC4899)}
+  .trust-text{font-size:.8rem;color:var(--muted)}
+
+  /* Card base */
+  .card{background:linear-gradient(to bottom,rgba(255,255,255,0.08),rgba(255,255,255,0.02));border:1px solid var(--border);border-radius:16px;position:relative;overflow:hidden;transition:all .3s cubic-bezier(0.16,1,0.3,1);box-shadow:0 0 0 1px rgba(255,255,255,0.06),0 2px 20px rgba(0,0,0,0.4),0 0 40px rgba(0,0,0,0.2)}
+  .card-spotlight{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(94,106,210,0.15),transparent 60%);pointer-events:none;opacity:0;transition:opacity .3s;transform:translate(-50%,-50%)}
+  .card:hover .card-spotlight{opacity:1}
+  .card:hover{border-color:var(--border-hover);box-shadow:0 0 0 1px rgba(255,255,255,0.1),0 8px 40px rgba(0,0,0,0.5),0 0 80px rgba(94,106,210,0.1);transform:translateY(-4px)}
+
+  /* Stats */
+  .stats{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(2,2,3,0.4);backdrop-filter:blur(8px)}
+  .stats-grid{display:grid;grid-template-columns:repeat(2,1fr)}
+  @media(min-width:768px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+  .stat{padding:2.5rem 1.5rem;text-align:center;border-right:1px solid var(--border);transition:all .3s cubic-bezier(0.16,1,0.3,1)}
+  .stat:last-child{border-right:none}
+  @media(max-width:767px){.stat:nth-child(2n){border-right:none}.stat{border-bottom:1px solid var(--border)}}
+  .stat:hover{background:rgba(94,106,210,0.05)}
+  .stat-num{font-weight:600;font-size:clamp(2.5rem,5vw,3.75rem);letter-spacing:-0.03em;background:linear-gradient(to bottom,#fff,rgba(255,255,255,0.6));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .stat-label{font-size:.75rem;color:var(--muted);margin-top:.5rem;letter-spacing:0.05em}
+  .stat-trend{display:inline-flex;align-items:center;gap:.25rem;font-size:.7rem;color:#34D399;margin-top:.4rem;font-family:"JetBrains Mono",monospace}
+
+  /* Section header */
+  .sec-head{text-align:center;max-width:42rem;margin:0 auto 4rem}
+  .sec-tag{font-family:"JetBrains Mono",monospace;font-size:.7rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem;display:inline-block;padding:.3rem .7rem;border:1px solid var(--border-accent);border-radius:9999px;background:rgba(94,106,210,0.05)}
+  .sec-title{font-weight:600;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-0.025em;line-height:1.1;margin-bottom:1rem}
+  .sec-desc{color:var(--muted);font-size:1.125rem}
+
+  /* Product detail */
+  .product{display:grid;grid-template-columns:1fr;gap:3rem;align-items:center}
+  @media(min-width:1024px){.product{grid-template-columns:1fr 1.1fr}}
+  .product h2{font-weight:600;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.025em;line-height:1.1;margin-bottom:1.5rem;text-align:left}
+  .product p{color:var(--muted);margin-bottom:1.5rem;font-size:1.05rem}
+  .product-list{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+  .product-list li{display:flex;align-items:center;gap:.75rem;color:var(--foreground);font-size:.95rem}
+  .check{width:22px;height:22px;border-radius:8px;background:rgba(94,106,210,0.15);border:1px solid var(--border-accent);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+  .check svg{width:12px;height:12px;stroke:var(--accent-bright);stroke-width:3;fill:none}
+  .mock-ui{padding:0;overflow:hidden;min-height:380px}
+  .mock-titlebar{display:flex;align-items:center;gap:.4rem;padding:.85rem 1rem;background:rgba(255,255,255,0.03);border-bottom:1px solid var(--border)}
+  .mock-titlebar span{width:11px;height:11px;border-radius:50%}
+  .mock-titlebar span:nth-child(1){background:#FF5F57}
+  .mock-titlebar span:nth-child(2){background:#FEBC2E}
+  .mock-titlebar span:nth-child(3){background:#28C840}
+  .mock-titlebar .title{margin-left:.5rem;font-size:.75rem;color:var(--muted);font-family:"JetBrains Mono",monospace}
+  .mock-body{padding:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+  .mock-panel{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:1rem}
+  .mock-panel.accent{border-color:var(--border-accent);background:rgba(94,106,210,0.08)}
+  .mock-h{height:8px;border-radius:4px;background:rgba(255,255,255,0.1);width:50%;margin-bottom:.6rem}
+  .mock-h.short{width:30%}
+  .mock-bar{height:24px;border-radius:6px;background:rgba(255,255,255,0.06);margin-bottom:.4rem}
+  .mock-bar.fill{background:linear-gradient(90deg,var(--accent),#818CF8);box-shadow:0 0 12px var(--accent-glow)}
+  .mock-chart{display:flex;align-items:end;gap:5px;height:70px;margin-top:.5rem}
+  .mock-chart span{flex:1;background:linear-gradient(to top,var(--accent),rgba(94,106,210,0.2));border-radius:3px 3px 0 0}
+
+  /* Bento features */
+  .bento{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;grid-auto-rows:minmax(180px,auto)}
+  @media(min-width:1024px){.bento{grid-template-columns:repeat(6,1fr)}}
+  .bento-card{padding:1.75rem;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer}
+  .bento-card.hero-feat{grid-column:span 2}
+  @media(min-width:1024px){.bento-card.hero-feat{grid-column:span 4;grid-row:span 2}}
+  .bento-card.span2{grid-column:span 2}
+  .feat-ic{width:40px;height:40px;border-radius:12px;background:rgba(94,106,210,0.1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+  .feat-ic svg{width:20px;height:20px;stroke:var(--accent-bright);stroke-width:1.5;fill:none}
+  .bento-card h3{font-weight:600;font-size:1.125rem;margin-bottom:.4rem;letter-spacing:-0.01em}
+  .bento-card p{color:var(--muted);font-size:.9rem}
+  .bento-viz{margin-top:1rem;height:90px;display:flex;align-items:end;gap:6px}
+  .bento-viz span{flex:1;background:linear-gradient(to top,var(--accent),rgba(94,106,210,0.1));border-radius:4px 4px 0 0;opacity:.6;transition:opacity .3s}
+  .bento-card:hover .bento-viz span{opacity:1}
+
+  /* Pricing */
+  .pricing-grid{display:grid;grid-template-columns:1fr;gap:1.25rem;align-items:center}
+  @media(min-width:768px){.pricing-grid{grid-template-columns:repeat(3,1fr)}}
+  .price-card{padding:2rem;position:relative}
+  .price-card.highlight{border-color:var(--border-accent);box-shadow:0 0 0 1px var(--border-accent),0 8px 40px rgba(0,0,0,0.5),0 0 60px rgba(94,106,210,0.2)}
+  @media(min-width:768px){.price-card.highlight{transform:scale(1.04)}}
+  .price-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:.7rem;font-weight:600;padding:.3rem .8rem;border-radius:9999px;letter-spacing:0.05em;text-transform:uppercase;box-shadow:0 0 20px var(--accent-glow)}
+  .price-name{font-family:"JetBrains Mono",monospace;font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:.5rem}
+  .price-amount{font-weight:600;font-size:3rem;letter-spacing:-0.03em;margin-bottom:.25rem}
+  .price-amount span{font-size:1rem;color:var(--muted);font-weight:400}
+  .price-desc{color:var(--muted);font-size:.9rem;margin-bottom:1.5rem;min-height:2.5em}
+  .price-features{list-style:none;margin-bottom:1.5rem;display:flex;flex-direction:column;gap:.6rem}
+  .price-features li{display:flex;align-items:center;gap:.6rem;font-size:.875rem}
+  .price-features .check svg{stroke:var(--accent-bright)}
+  .price-card .btn{width:100%}
+
+  /* Testimonials */
+  .test-grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
+  @media(min-width:768px){.test-grid{grid-template-columns:repeat(3,1fr)}}
+  .test-card{padding:1.75rem}
+  .stars{color:#FBBF24;font-size:.9rem;letter-spacing:2px;margin-bottom:1rem}
+  .test-quote{color:var(--foreground);font-size:.95rem;margin-bottom:1.25rem;line-height:1.6}
+  .test-author{display:flex;align-items:center;gap:.75rem}
+  .test-avatar{width:38px;height:38px;border-radius:50%}
+  .test-name{font-weight:500;font-size:.875rem}
+  .test-role{font-size:.75rem;color:var(--muted)}
+
+  /* FAQ */
+  .faq{max-width:48rem;margin:0 auto}
+  .faq-item{border:1px solid var(--border);border-radius:12px;margin-bottom:.75rem;background:rgba(255,255,255,0.02);overflow:hidden;transition:border-color .3s}
+  .faq-item.open{border-color:var(--border-accent)}
+  .faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 1.5rem;cursor:pointer;font-weight:500;font-size:1rem;color:var(--foreground)}
+  .faq-chev{width:18px;height:18px;flex-shrink:0;transition:transform .3s cubic-bezier(0.16,1,0.3,1)}
+  .faq-chev svg{width:100%;height:100%;stroke:var(--muted);stroke-width:2;fill:none}
+  .faq-item.open .faq-chev{transform:rotate(180deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(0.16,1,0.3,1)}
+  .faq-item.open .faq-a{max-height:200px}
+  .faq-a-inner{padding:0 1.5rem 1.25rem;color:var(--muted);font-size:.9rem;line-height:1.6}
+
+  /* Footer */
+  footer{border-top:1px solid var(--border);padding:4rem 0 2rem;margin-top:6rem;background:rgba(2,2,3,0.5)}
+  .footer-grid{display:grid;grid-template-columns:1fr;gap:2.5rem;margin-bottom:3rem}
+  @media(min-width:768px){.footer-grid{grid-template-columns:2fr 1fr 1fr 1fr 1fr}}
+  .footer-brand p{color:var(--muted);font-size:.875rem;margin-top:1rem;max-width:22rem}
+  .footer-col h4{font-family:"JetBrains Mono",monospace;font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:1rem}
+  .footer-col a{display:block;color:var(--foreground);text-decoration:none;font-size:.875rem;margin-bottom:.5rem;transition:color .2s}
+  .footer-col a:hover{color:var(--accent-bright)}
+  .socials{display:flex;gap:.5rem;margin-top:1.5rem}
+  .social{width:36px;height:36px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .2s;cursor:pointer;background:rgba(255,255,255,0.02)}
+  .social:hover{background:var(--surface-hover);border-color:var(--border-hover)}
+  .social svg{width:15px;height:15px;stroke:var(--muted);stroke-width:1.5;fill:none}
+  .footer-bottom{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+  .footer-bottom p{font-size:.8rem;color:var(--muted)}
+  .footer-bottom .mono{font-size:.75rem;color:var(--muted);font-family:"JetBrains Mono",monospace}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(0.16,1,0.3,1),transform .6s cubic-bezier(0.16,1,0.3,1)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  @media(prefers-reduced-motion:reduce){.blob{animation:none}.reveal{transition:none;opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><span class="logo-mark"></span>Linearis</div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#testimonials">Customers</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#" class="btn btn-primary">Get started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-badge reveal"><span class="ping"></span>New: Real-time collaboration 2.0</div>
+    <h1 class="reveal"><span class="grad-text">The issue tracker</span><br><span class="accent-grad">built for velocity</span></h1>
+    <p class="hero-sub reveal">Linearis is a cinematic, high-precision planning tool for modern product teams. Track work, ship faster, and feel the difference of software crafted with obsessive attention to detail.</p>
+    <div class="hero-ctas reveal">
+      <a href="#" class="btn btn-primary">Start for free</a>
+      <a href="#" class="btn btn-secondary">Book a demo</a>
+    </div>
+    <div class="trust reveal">
+      <div class="avatars"><span></span><span></span><span></span><span></span></div>
+      <p class="trust-text">Trusted by 8,000+ high-velocity teams</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat reveal"><div class="stat-num">8M+</div><div class="stat-label">ISSUES TRACKED</div><div class="stat-trend">↑ 42% YoY</div></div>
+      <div class="stat reveal"><div class="stat-num">99.99%</div><div class="stat-label">UPTIME</div><div class="stat-trend">↑ SLA met</div></div>
+      <div class="stat reveal"><div class="stat-num">50ms</div><div class="stat-label">P99 LATENCY</div><div class="stat-trend">↓ 18ms</div></div>
+      <div class="stat reveal"><div class="stat-num">4.9</div><div class="stat-label">G2 RATING</div><div class="stat-trend">↑ 0.2</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT DETAIL -->
+<section class="section-pad">
+  <div class="container">
+    <div class="product">
+      <div class="reveal">
+        <span class="sec-tag">THE PLATFORM</span>
+        <h2>Plan, track, and ship in one fluid surface</h2>
+        <p>Every interaction is instant. Every transition is precise. Linearis feels like a native app — keyboard-first, lightning fast, and beautifully responsive to your every move.</p>
+        <ul class="product-list">
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Sub-50ms interactions, everywhere</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Keyboard shortcuts for every action</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Real-time multiplayer editing</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Git &amp; Slack integrations built in</li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <div class="card mock-ui">
+          <div class="card-spotlight"></div>
+          <div class="mock-titlebar"><span></span><span></span><span></span><span class="title">linearis.app/projects/atlas</span></div>
+          <div class="mock-body">
+            <div class="mock-panel">
+              <div class="mock-h"></div>
+              <div class="mock-h short"></div>
+              <div class="mock-bar"></div>
+              <div class="mock-bar fill"></div>
+              <div class="mock-bar"></div>
+            </div>
+            <div class="mock-panel accent">
+              <div class="mock-h"></div>
+              <div class="mock-chart">
+                <span style="height:30%"></span><span style="height:60%"></span><span style="height:45%"></span><span style="height:85%"></span><span style="height:55%"></span><span style="height:95%"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES BENTO -->
+<section class="section-pad" id="features">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">FEATURES</span>
+      <h2 class="sec-title">Crafted down to the last pixel</h2>
+      <p class="sec-desc">A bento of capabilities, each obsessively refined for the teams who notice the details.</p>
+    </div>
+    <div class="bento">
+      <div class="card bento-card hero-feat reveal">
+        <div class="card-spotlight"></div>
+        <div>
+          <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
+          <h3>Cycles &amp; velocity analytics</h3>
+          <p>Plan sprints with predictive velocity charts. See bottlenecks before they form, and keep your team in flow with auto-rolling cycles.</p>
+        </div>
+        <div class="bento-viz">
+          <span style="height:40%"></span><span style="height:65%"></span><span style="height:50%"></span><span style="height:80%"></span><span style="height:60%"></span><span style="height:90%"></span><span style="height:70%"></span><span style="height:100%"></span>
+        </div>
+      </div>
+      <div class="card bento-card span2 reveal">
+        <div class="card-spotlight"></div>
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <div>
+          <h3>Native speed</h3>
+          <p>Optimistic UI updates everywhere.</p>
+        </div>
+      </div>
+      <div class="card bento-card span2 reveal">
+        <div class="card-spotlight"></div>
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div>
+        <div>
+          <h3>Git sync</h3>
+          <p>Branches, PRs, auto-linked.</p>
+        </div>
+      </div>
+      <div class="card bento-card span2 reveal">
+        <div class="card-spotlight"></div>
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div>
+          <h3>Real-time</h3>
+          <p>Multiplayer, conflict-free.</p>
+        </div>
+      </div>
+      <div class="card bento-card span2 reveal">
+        <div class="card-spotlight"></div>
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+        <div>
+          <h3>Command menu</h3>
+          <p>Navigate everything by keyboard.</p>
+        </div>
+      </div>
+      <div class="card bento-card span2 reveal">
+        <div class="card-spotlight"></div>
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div>
+          <h3>SOC 2 secure</h3>
+          <p>Enterprise-grade by default.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section-pad" id="pricing">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">PRICING</span>
+      <h2 class="sec-title">Pricing that scales with precision</h2>
+      <p class="sec-desc">Start free. Upgrade when your team's velocity demands it.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="card price-card reveal">
+        <div class="price-name">Free</div>
+        <div class="price-amount">$0<span>/mo</span></div>
+        <p class="price-desc">For small teams getting started.</p>
+        <ul class="price-features">
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Up to 250 issues</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>3 collaborators</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Community support</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Get started</a>
+      </div>
+      <div class="card price-card highlight reveal">
+        <div class="price-badge">Most popular</div>
+        <div class="price-name">Business</div>
+        <div class="price-amount">$12<span>/user/mo</span></div>
+        <p class="price-desc">For growing teams shipping fast.</p>
+        <ul class="price-features">
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Unlimited issues</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Cycles &amp; analytics</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Priority support</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Git &amp; Slack sync</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Start trial</a>
+      </div>
+      <div class="card price-card reveal">
+        <div class="price-name">Enterprise</div>
+        <div class="price-amount">Custom</div>
+        <p class="price-desc">For organizations at scale.</p>
+        <ul class="price-features">
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>SSO &amp; SCIM</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Audit logs</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Dedicated CSM</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Contact sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section-pad" id="testimonials">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">CUSTOMERS</span>
+      <h2 class="sec-title">Loved by fast-moving teams</h2>
+    </div>
+    <div class="test-grid">
+      <div class="card test-card reveal">
+        <div class="card-spotlight"></div>
+        <div class="stars">★★★★★</div>
+        <p class="test-quote">"Linearis replaced three tools for us. The speed is unreal — it feels like the cursor reads my mind. Our planning velocity doubled in a month."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:linear-gradient(135deg,#5E6AD2,#8B5CF6)"></div>
+          <div><div class="test-name">Sasha Kim</div><div class="test-role">VP Engineering, Vela</div></div>
+        </div>
+      </div>
+      <div class="card test-card reveal">
+        <div class="card-spotlight"></div>
+        <div class="stars">★★★★★</div>
+        <p class="test-quote">"The mouse-tracking spotlight on cards is a tiny detail that makes the whole thing feel alive. This is what premium software should feel like."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:linear-gradient(135deg,#EC4899,#8B5CF6)"></div>
+          <div><div class="test-name">Marcus Reid</div><div class="test-role">Founder, Quartz Labs</div></div>
+        </div>
+      </div>
+      <div class="card test-card reveal">
+        <div class="card-spotlight"></div>
+        <div class="stars">★★★★★</div>
+        <p class="test-quote">"We measured a 3x reduction in context switching. The ambient lighting and instant interactions keep the whole team in flow state."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:linear-gradient(135deg,#06B6D4,#5E6AD2)"></div>
+          <div><div class="test-name">Lena Ortiz</div><div class="test-role">Head of Product, Nimbus</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-pad" id="faq">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">FAQ</span>
+      <h2 class="sec-title">Frequently asked</h2>
+    </div>
+    <div class="faq">
+      <div class="faq-item reveal">
+        <div class="faq-q">How fast is Linearis, really?<span class="faq-chev"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a-inner">Every interaction targets sub-50ms with optimistic UI updates. We benchmark continuously against a baseline of native desktop apps, so the web interface feels instant — no spinners, no waiting, just response.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Can I migrate from Jira or Linear?<span class="faq-chev"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a-inner">Yes. Our one-click importer pulls in projects, issues, labels, and history from Jira, Linear, Asana, and GitHub Projects. Most teams complete migration in under an hour with zero data loss.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Is my data secure?<span class="faq-chev"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a-inner">We're SOC 2 Type II certified, GDPR compliant, and encrypt all data at rest and in transit. Enterprise plans add SSO, SCIM, and granular audit logs for full organizational control.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Do you offer a discount for startups?<span class="faq-chev"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></div>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely. Seed and Series A companies get 50% off the Business plan for the first year. Reach out to our team with your funding details and we'll get you set up.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><span class="logo-mark"></span>Linearis</div>
+        <p>The cinematic issue tracker for high-velocity teams. Precise, fast, and obsessively crafted.</p>
+        <div class="socials">
+          <a href="#" class="social" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="#" class="social" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+          <a href="#" class="social" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Product</h4><a href="#">Features</a><a href="#">Integrations</a><a href="#">Changelog</a><a href="#">Pricing</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="#">About</a><a href="#">Blog</a><a href="#">Careers</a><a href="#">Customers</a></div>
+      <div class="footer-col"><h4>Resources</h4><a href="#">Docs</a><a href="#">API</a><a href="#">Community</a><a href="#">Status</a></div>
+      <div class="footer-col"><h4>Legal</h4><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Security</a><a href="#">DPA</a></div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Linearis Inc. Crafted with precision.</p>
+      <span class="mono">all systems operational ●</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+  },{threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  // FAQ accordion with smooth height
+  document.querySelectorAll('.faq-q').forEach(q=>{
+    q.addEventListener('click',()=>{
+      const item=q.parentElement;
+      const wasOpen=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen)item.classList.add('open');
+    });
+  });
+
+  // Mouse-tracking spotlight on cards
+  document.querySelectorAll('.card').forEach(card=>{
+    const spot=card.querySelector('.card-spotlight');
+    if(!spot)return;
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      spot.style.left=(e.clientX-r.left)+'px';
+      spot.style.top=(e.clientY-r.top)+'px';
+    });
+  });
+
+  // Parallax hero on scroll
+  const hero=document.getElementById('hero');
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(hero&&!reduce){
+    window.addEventListener('scroll',()=>{
+      const y=window.scrollY;
+      if(y<800){
+        hero.style.opacity=Math.max(0,1-y/600);
+        hero.style.transform=`translateY(${y*0.3}px) scale(${1-y/4000})`;
+      }
+    },{passive:true});
+  }
+</script>
+</body>
+</html>

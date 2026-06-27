@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neumorphism — Soft UI Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* ===== Design Tokens ===== */
+  :root{
+    --bg:#E0E5EC;
+    --fg:#3D4852;
+    --muted:#6B7280;
+    --accent:#6C63FF;
+    --accent-light:#8B84FF;
+    --accent-2:#38B2AC;
+    --shadow-light:rgba(255,255,255,0.55);
+    --shadow-dark:rgb(163,177,198,0.6);
+    --shadow-light-hi:rgba(255,255,255,0.6);
+    --shadow-dark-hi:rgb(163,177,198,0.7);
+    --shadow-light-deep:rgba(255,255,255,0.6);
+    --shadow-dark-deep:rgb(163,177,198,0.7);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:'DM Sans',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  .font-display{font-family:'Plus Jakarta Sans',sans-serif;}
+
+  /* ===== Shadow Utilities ===== */
+  .sh-extruded{box-shadow:9px 9px 16px var(--shadow-dark),-9px -9px 16px var(--shadow-light);}
+  .sh-extruded-hover{box-shadow:12px 12px 20px var(--shadow-dark-hi),-12px -12px 20px var(--shadow-light-hi);}
+  .sh-extruded-sm{box-shadow:5px 5px 10px var(--shadow-dark),-5px -5px 10px var(--shadow-light);}
+  .sh-inset{box-shadow:inset 6px 6px 10px var(--shadow-dark),inset -6px -6px 10px var(--shadow-light);}
+  .sh-inset-deep{box-shadow:inset 10px 10px 20px var(--shadow-dark-deep),inset -10px -10px 20px var(--shadow-light-deep);}
+  .sh-inset-sm{box-shadow:inset 3px 3px 6px var(--shadow-dark),inset -3px -3px 6px var(--shadow-light);}
+
+  /* ===== Layout ===== */
+  .container{max-width:1200px;margin:0 auto;padding:0 24px;}
+  section{padding:96px 0;}
+  a{color:inherit;text-decoration:none;}
+
+  /* ===== Header ===== */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(224,229,236,0.8);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid transparent;
+    transition:box-shadow .3s ease;
+  }
+  header.scrolled{box-shadow:0 4px 20px rgba(163,177,198,0.25);}
+  .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 0;}
+  .logo{
+    display:flex;align-items:center;gap:12px;
+    font-family:'Plus Jakarta Sans';font-weight:800;font-size:1.35rem;
+    letter-spacing:-0.02em;color:var(--fg);
+  }
+  .logo-mark{
+    width:44px;height:44px;border-radius:14px;background:var(--bg);
+    display:grid;place-items:center;
+  }
+  .logo-mark .dot{width:16px;height:16px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(108,99,255,0.5);}
+  nav ul{display:flex;gap:8px;list-style:none;align-items:center;}
+  nav a{
+    display:inline-flex;align-items:center;padding:10px 18px;border-radius:12px;
+    font-weight:500;font-size:.95rem;color:var(--muted);
+    transition:all .3s ease;
+  }
+  nav a:hover{color:var(--fg);background:var(--bg);box-shadow:inset 3px 3px 6px var(--shadow-dark),inset -3px -3px 6px var(--shadow-light);}
+  .nav-cta{background:var(--bg);box-shadow:5px 5px 10px var(--shadow-dark),-5px -5px 10px var(--shadow-light);color:var(--fg)!important;}
+  .nav-cta:hover{box-shadow:inset 3px 3px 6px var(--shadow-dark),inset -3px -3px 6px var(--shadow-light);}
+  .menu-toggle{display:none;width:48px;height:48px;border-radius:14px;background:var(--bg);border:none;cursor:pointer;align-items:center;justify-content:center;box-shadow:5px 5px 10px var(--shadow-dark),-5px -5px 10px var(--shadow-light);}
+  .menu-toggle span{display:block;width:20px;height:2px;background:var(--fg);position:relative;transition:.3s;}
+  .menu-toggle span::before,.menu-toggle span::after{content:"";position:absolute;width:20px;height:2px;background:var(--fg);transition:.3s;}
+  .menu-toggle span::before{top:-6px;} .menu-toggle span::after{top:6px;}
+  .menu-toggle.open span{background:transparent;}
+  .menu-toggle.open span::before{transform:rotate(45deg);} .menu-toggle.open span::after{transform:rotate(-45deg);}
+
+  /* ===== Buttons ===== */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 28px;border-radius:16px;font-family:'DM Sans';font-weight:700;font-size:.98rem;
+    cursor:pointer;border:none;transition:all .3s ease;background:var(--bg);
+    box-shadow:5px 5px 10px var(--shadow-dark),-5px -5px 10px var(--shadow-light);
+    color:var(--fg);
+  }
+  .btn:hover{transform:translateY(-1px);box-shadow:7px 7px 14px var(--shadow-dark-hi),-7px -7px 14px var(--shadow-light-hi);}
+  .btn:active{transform:translateY(0.5px);box-shadow:inset 3px 3px 6px var(--shadow-dark),inset -3px -3px 6px var(--shadow-light);}
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:5px 5px 10px rgba(108,99,255,0.4),-5px -5px 10px var(--shadow-light);}
+  .btn-primary:hover{background:var(--accent-light);box-shadow:7px 7px 14px rgba(108,99,255,0.5),-7px -7px 14px var(--shadow-light-hi);}
+  .btn-primary:active{box-shadow:inset 3px 3px 6px rgba(108,99,255,0.5),inset -3px -3px 6px rgba(255,255,255,0.3);}
+
+  /* ===== Hero ===== */
+  .hero{padding:80px 0 100px;}
+  .hero-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:64px;align-items:center;}
+  .badge-pill{
+    display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:999px;
+    background:var(--bg);box-shadow:inset 3px 3px 6px var(--shadow-dark),inset -3px -3px 6px var(--shadow-light);
+    font-size:.8rem;font-weight:600;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;margin-bottom:28px;
+  }
+  .badge-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 8px var(--accent-2);}
+  .hero h1{
+    font-family:'Plus Jakarta Sans';font-weight:800;font-size:clamp(2.5rem,5.5vw,4.5rem);
+    line-height:1.05;letter-spacing:-0.03em;color:var(--fg);margin-bottom:24px;
+  }
+  .hero h1 .grad{background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .hero p{font-size:1.15rem;color:var(--muted);max-width:540px;margin-bottom:36px;}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px;}
+  .hero-stats{display:flex;gap:24px;flex-wrap:wrap;}
+  .hero-stat{display:flex;flex-direction:column;}
+  .hero-stat .num{font-family:'Plus Jakarta Sans';font-weight:800;font-size:1.8rem;color:var(--fg);letter-spacing:-0.02em;}
+  .hero-stat .lbl{font-size:.82rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;}
+
+  /* Hero visual - nested depth */
+  .hero-visual{position:relative;height:440px;display:grid;place-items:center;}
+  .depth-stage{
+    width:320px;height:320px;border-radius:50%;background:var(--bg);
+    box-shadow:12px 12px 24px var(--shadow-dark-hi),-12px -12px 24px var(--shadow-light-hi);
+    display:grid;place-items:center;position:relative;
+    animation:float 6s ease-in-out infinite;
+  }
+  .depth-stage .ring2{
+    width:230px;height:230px;border-radius:50%;
+    box-shadow:inset 8px 8px 16px var(--shadow-dark-hi),inset -8px -8px 16px var(--shadow-light-hi);
+    display:grid;place-items:center;
+  }
+  .depth-stage .ring3{
+    width:160px;height:160px;border-radius:50%;background:var(--bg);
+    box-shadow:8px 8px 16px var(--shadow-dark),-8px -8px 16px var(--shadow-light);
+    display:grid;place-items:center;
+    transition:transform .5s ease;
+  }
+  .depth-stage:hover .ring3{transform:scale(1.08) rotate(180deg);}
+  .depth-stage .core{
+    width:80px;height:80px;border-radius:50%;
+    background:linear-gradient(135deg,var(--accent),var(--accent-light));
+    box-shadow:0 0 30px rgba(108,99,255,0.4),inset 2px 2px 6px rgba(255,255,255,0.4);
+  }
+  .float-card{
+    position:absolute;background:var(--bg);border-radius:18px;padding:16px 20px;
+    box-shadow:6px 6px 14px var(--shadow-dark),-6px -6px 14px var(--shadow-light);
+    display:flex;align-items:center;gap:12px;font-weight:600;font-size:.9rem;
+  }
+  .float-card .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--bg);box-shadow:inset 3px 3px 6px var(--shadow-dark),inset -3px -3px 6px var(--shadow-light);color:var(--accent);}
+  .float-card.fc1{top:20px;right:-10px;animation:float 4s ease-in-out infinite;}
+  .float-card.fc2{bottom:40px;left:-20px;animation:float 5s ease-in-out infinite .5s;}
+  .float-card.fc3{bottom:90px;right:10px;animation:float 4.5s ease-in-out infinite 1s;}
+  @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+
+  /* ===== Section Header ===== */
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 56px;}
+  .sec-tag{
+    display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:999px;
+    background:var(--bg);box-shadow:inset 3px 3px 6px var(--shadow-dark),inset -3px -3px 6px var(--shadow-light);
+    font-size:.78rem;font-weight:700;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px;
+  }
+  .sec-head h2{font-family:'Plus Jakarta Sans';font-weight:800;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.02em;line-height:1.1;margin-bottom:16px;}
+  .sec-head p{color:var(--muted);font-size:1.1rem;}
+
+  /* ===== Stats Section ===== */
+  .stats-inset{
+    background:var(--bg);border-radius:40px;padding:48px;
+    box-shadow:inset 10px 10px 24px var(--shadow-dark-deep),inset -10px -10px 24px var(--shadow-light-deep);
+  }
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .stat-card{
+    background:var(--bg);border-radius:24px;padding:32px 24px;text-align:center;
+    box-shadow:9px 9px 16px var(--shadow-dark),-9px -9px 16px var(--shadow-light);
+    transition:all .3s ease;
+  }
+  .stat-card:hover{transform:translateY(-4px) scale(1.03);box-shadow:12px 12px 20px var(--shadow-dark-hi),-12px -12px 20px var(--shadow-light-hi);}
+  .stat-card .num{font-family:'Plus Jakarta Sans';font-weight:800;font-size:2.6rem;letter-spacing:-0.03em;background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .stat-card .lbl{color:var(--muted);font-size:.92rem;margin-top:6px;}
+
+  /* ===== Features Bento ===== */
+  .bento{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:minmax(220px,auto);gap:24px;}
+  .feat-card{
+    background:var(--bg);border-radius:32px;padding:36px;
+    box-shadow:9px 9px 16px var(--shadow-dark),-9px -9px 16px var(--shadow-light);
+    transition:all .3s ease;display:flex;flex-direction:column;gap:16px;
+  }
+  .feat-card:hover{transform:translateY(-3px);box-shadow:12px 12px 20px var(--shadow-dark-hi),-12px -12px 20px var(--shadow-light-hi);}
+  .feat-card.large{grid-column:span 2;grid-row:span 2;}
+  .icon-well{
+    width:64px;height:64px;border-radius:18px;background:var(--bg);
+    box-shadow:inset 6px 6px 12px var(--shadow-dark-hi),inset -6px -6px 12px var(--shadow-light-hi);
+    display:grid;place-items:center;color:var(--accent);
+  }
+  .feat-card h3{font-family:'Plus Jakarta Sans';font-weight:700;font-size:1.35rem;letter-spacing:-0.02em;}
+  .feat-card p{color:var(--muted);font-size:.98rem;}
+  .feat-card.large h3{font-size:1.8rem;}
+  .feat-card.large p{font-size:1.05rem;max-width:480px;}
+  .feat-visual{margin-top:auto;display:flex;gap:12px;flex-wrap:wrap;}
+  .chip{padding:8px 16px;border-radius:999px;background:var(--bg);box-shadow:inset 3px 3px 6px var(--shadow-dark),inset -3px -3px 6px var(--shadow-light);font-size:.82rem;font-weight:600;color:var(--muted);}
+
+  /* ===== How It Works ===== */
+  .stepper{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+  .rail{position:absolute;top:48px;left:12%;right:12%;height:8px;border-radius:999px;background:var(--bg);box-shadow:inset 3px 3px 6px var(--shadow-dark),inset -3px -3px 6px var(--shadow-light);z-index:0;}
+  .rail::after{content:"";position:absolute;left:0;top:0;height:100%;width:60%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 0 12px rgba(108,99,255,0.4);}
+  .step{position:relative;z-index:1;text-align:center;}
+  .step-num{
+    width:96px;height:96px;border-radius:50%;margin:0 auto 24px;background:var(--bg);
+    box-shadow:9px 9px 16px var(--shadow-dark),-9px -9px 16px var(--shadow-light);
+    display:grid;place-items:center;font-family:'Plus Jakarta Sans';font-weight:800;font-size:2rem;color:var(--accent);
+    transition:transform .5s ease;
+  }
+  .step:hover .step-num{transform:scale(1.08) rotate(180deg);}
+  .step h3{font-family:'Plus Jakarta Sans';font-weight:700;font-size:1.25rem;margin-bottom:10px;}
+  .step p{color:var(--muted);font-size:.95rem;max-width:280px;margin:0 auto;}
+
+  /* ===== Pricing ===== */
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:center;}
+  .price-card{
+    background:var(--bg);border-radius:32px;padding:40px 32px;
+    box-shadow:9px 9px 16px var(--shadow-dark),-9px -9px 16px var(--shadow-light);
+    transition:all .3s ease;position:relative;display:flex;flex-direction:column;gap:20px;
+  }
+  .price-card:hover{transform:translateY(-3px);box-shadow:12px 12px 20px var(--shadow-dark-hi),-12px -12px 20px var(--shadow-light-hi);}
+  .price-card.featured{transform:scale(1.05);box-shadow:12px 12px 22px var(--shadow-dark-hi),-12px -12px 22px var(--shadow-light-hi);}
+  .price-card.featured:hover{transform:scale(1.05) translateY(-3px);}
+  .price-badge{
+    position:absolute;top:-18px;left:50%;transform:translateX(-50%);
+    padding:8px 20px;border-radius:999px;background:var(--accent);color:#fff;font-size:.78rem;font-weight:700;
+    letter-spacing:.06em;text-transform:uppercase;box-shadow:0 6px 16px rgba(108,99,255,0.4);
+  }
+  .price-card h3{font-family:'Plus Jakarta Sans';font-weight:700;font-size:1.3rem;}
+  .price-card .price{font-family:'Plus Jakarta Sans';font-weight:800;font-size:3rem;letter-spacing:-0.03em;}
+  .price-card .price small{font-size:1rem;font-weight:500;color:var(--muted);}
+  .price-card ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+  .price-card li{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.95rem;}
+  .price-card li .ck{width:24px;height:24px;border-radius:8px;background:var(--bg);box-shadow:inset 2px 2px 4px var(--shadow-dark),inset -2px -2px 4px var(--shadow-light);display:grid;place-items:center;color:var(--accent-2);flex-shrink:0;}
+  .price-card .btn{margin-top:auto;justify-content:center;}
+
+  /* ===== Testimonials ===== */
+  .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;grid-auto-rows:minmax(180px,auto);}
+  .test-card{
+    background:var(--bg);border-radius:28px;padding:32px;
+    box-shadow:9px 9px 16px var(--shadow-dark),-9px -9px 16px var(--shadow-light);
+    transition:all .3s ease;display:flex;flex-direction:column;gap:16px;
+  }
+  .test-card:hover{transform:translateY(-3px);box-shadow:12px 12px 20px var(--shadow-dark-hi),-12px -12px 20px var(--shadow-light-hi);}
+  .test-card.big{grid-column:span 2;grid-row:span 2;}
+  .stars{display:inline-flex;gap:4px;padding:6px 14px;border-radius:999px;background:var(--bg);box-shadow:inset 3px 3px 6px var(--shadow-dark),inset -3px -3px 6px var(--shadow-light);width:fit-content;color:#FBBF24;font-size:.85rem;}
+  .test-card p{color:var(--fg);font-size:1rem;line-height:1.6;}
+  .test-card.big p{font-size:1.25rem;font-family:'Plus Jakarta Sans';font-weight:500;}
+  .test-author{display:flex;align-items:center;gap:12px;margin-top:auto;}
+  .avatar{width:48px;height:48px;border-radius:50%;background:var(--bg);box-shadow:inset 3px 3px 6px var(--shadow-dark),inset -3px -3px 6px var(--shadow-light);display:grid;place-items:center;color:var(--accent);font-family:'Plus Jakarta Sans';font-weight:700;}
+  .test-author .name{font-weight:700;font-size:.92rem;}
+  .test-author .role{font-size:.82rem;color:var(--muted);}
+
+  /* ===== FAQ ===== */
+  .faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  .faq-card{
+    background:var(--bg);border-radius:24px;padding:28px;
+    box-shadow:9px 9px 16px var(--shadow-dark),-9px -9px 16px var(--shadow-light);
+    transition:all .3s ease;cursor:pointer;
+  }
+  .faq-card:hover{box-shadow:12px 12px 20px var(--shadow-dark-hi),-12px -12px 20px var(--shadow-light-hi);}
+  .faq-q{display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:'Plus Jakarta Sans';font-weight:700;font-size:1.05rem;}
+  .faq-q .ic{width:32px;height:32px;border-radius:10px;background:var(--bg);box-shadow:inset 2px 2px 4px var(--shadow-dark),inset -2px -2px 4px var(--shadow-light);display:grid;place-items:center;color:var(--accent);flex-shrink:0;transition:transform .3s ease;}
+  .faq-card.open .faq-q .ic{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;color:var(--muted);font-size:.95rem;transition:max-height .4s ease,padding .4s ease;padding-top:0;}
+  .faq-card.open .faq-a{max-height:200px;padding-top:14px;}
+
+  /* ===== CTA ===== */
+  .cta-box{
+    background:var(--bg);border-radius:40px;padding:64px 48px;text-align:center;
+    box-shadow:inset 12px 12px 28px var(--shadow-dark-deep),inset -12px -12px 28px var(--shadow-light-deep);
+  }
+  .cta-box h2{font-family:'Plus Jakarta Sans';font-weight:800;font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.02em;margin-bottom:16px;}
+  .cta-box p{color:var(--muted);font-size:1.1rem;max-width:520px;margin:0 auto 32px;}
+
+  /* ===== Footer ===== */
+  footer{padding:80px 0 32px;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+  .footer-brand p{color:var(--muted);font-size:.95rem;max-width:320px;margin:20px 0;}
+  .footer-col h4{font-family:'Plus Jakarta Sans';font-weight:700;font-size:.95rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:18px;}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+  .footer-col a{color:var(--muted);font-size:.92rem;transition:color .3s;}
+  .footer-col a:hover{color:var(--accent);}
+  .social-row{display:flex;gap:12px;}
+  .social{width:44px;height:44px;border-radius:14px;background:var(--bg);box-shadow:5px 5px 10px var(--shadow-dark),-5px -5px 10px var(--shadow-light);display:grid;place-items:center;color:var(--muted);transition:all .3s;cursor:pointer;}
+  .social:hover{color:var(--accent);box-shadow:inset 3px 3px 6px var(--shadow-dark),inset -3px -3px 6px var(--shadow-light);}
+  .copyright{
+    text-align:center;padding:18px 32px;border-radius:999px;max-width:fit-content;margin:0 auto;
+    background:var(--bg);box-shadow:inset 3px 3px 6px var(--shadow-dark),inset -3px -3px 6px var(--shadow-light);
+    font-size:.85rem;color:var(--muted);
+  }
+
+  /* ===== Responsive ===== */
+  @media(max-width:1024px){
+    .hero-grid{grid-template-columns:1fr;gap:48px;}
+    .hero-visual{height:360px;}
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+    .bento{grid-template-columns:repeat(2,1fr);}
+    .feat-card.large{grid-column:span 2;grid-row:span 1;}
+    .stepper{grid-template-columns:1fr;gap:48px;}
+    .rail{display:none;}
+    .pricing-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto;}
+    .price-card.featured{transform:none;}
+    .price-card.featured:hover{transform:translateY(-3px);}
+    .test-grid{grid-template-columns:repeat(2,1fr);}
+    .test-card.big{grid-column:span 2;grid-row:span 1;}
+    .faq-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:640px){
+    section{padding:64px 0;}
+    .nav-links{display:none;}
+    .nav-links.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--bg);padding:24px;gap:12px;box-shadow:0 12px 24px rgba(163,177,198,0.3);}
+    .menu-toggle{display:flex;}
+    .stats-grid{grid-template-columns:1fr;}
+    .bento{grid-template-columns:1fr;}
+    .feat-card.large{grid-column:span 1;}
+    .test-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .hero-visual{height:300px;}
+    .depth-stage{width:240px;height:240px;}
+    .depth-stage .ring2{width:170px;height:170px;}
+    .depth-stage .ring3{width:120px;height:120px;}
+    .depth-stage .core{width:60px;height:60px;}
+    .float-card{font-size:.8rem;padding:12px 14px;}
+    .cta-box{padding:40px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+  <div class="container">
+    <div class="nav-wrap">
+      <a href="#" class="logo">
+        <span class="logo-mark sh-extruded-sm"><span class="dot"></span></span>
+        Neuvo<span style="color:var(--accent)">.</span>
+      </a>
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#" class="nav-cta sh-extruded-sm">Get Started</a></li>
+        </ul>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <span class="badge-pill"><span class="dot"></span>Soft UI Design System</span>
+        <h1>Design that feels <span class="grad">tactile</span> and physically grounded.</h1>
+        <p>Neumorphism creates the illusion of depth through balanced dual shadows on monochromatic surfaces. Every element feels molded from the same soft, pillowed material—calm, modern, and satisfyingly tangible.</p>
+        <div class="hero-cta">
+          <a href="#pricing" class="btn btn-primary">Start Free Trial
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#how" class="btn">Watch Demo</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="num">50K+</span><span class="lbl">Designers</span></div>
+          <div class="hero-stat"><span class="num">4.9/5</span><span class="lbl">User Rating</span></div>
+          <div class="hero-stat"><span class="num">120+</span><span class="lbl">Components</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="depth-stage">
+          <div class="ring2">
+            <div class="ring3">
+              <div class="core"></div>
+            </div>
+          </div>
+        </div>
+        <div class="float-card fc1">
+          <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
+          4.9 Rating
+        </div>
+        <div class="float-card fc2">
+          <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+          WCAG AAA
+        </div>
+        <div class="float-card fc3">
+          <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+          Soft Shadows
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="stats-inset">
+      <div class="stats-grid">
+        <div class="stat-card"><div class="num">99.9%</div><div class="lbl">Uptime Guarantee</div></div>
+        <div class="stat-card"><div class="num">2.3M+</div><div class="lbl">Components Shipped</div></div>
+        <div class="stat-card"><div class="num">48ms</div><div class="lbl">Avg Render Time</div></div>
+        <div class="stat-card"><div class="num">7.5:1</div><div class="lbl">Contrast Ratio</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-tag">Features</span>
+      <h2>Built for depth and clarity</h2>
+      <p>A bento grid of tactile components, each carved from the same cool grey surface with precise shadow physics.</p>
+    </div>
+    <div class="bento">
+      <div class="feat-card large">
+        <div class="icon-well"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <h3>Dual Shadow Physics Engine</h3>
+        <p>Our proprietary shadow system uses RGBA transparency for both the top-left light source and bottom-right dark shadow. This creates realistic, smooth blending that mimics soft ceramic lighting—never flat, always grounded.</p>
+        <div class="feat-visual">
+          <span class="chip">Extruded</span>
+          <span class="chip">Inset Deep</span>
+          <span class="chip">Hover Lift</span>
+          <span class="chip">Active Press</span>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="icon-well"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <h3>Nested Depth</h3>
+        <p>Layer extruded and inset states to build complex tactile compositions that feel carved into a single surface.</p>
+      </div>
+      <div class="feat-card">
+        <div class="icon-well"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+        <h3>Hyper-Rounded</h3>
+        <p>32px container corners and 16px button radii reinforce a pillowed, organic aesthetic across every surface.</p>
+      </div>
+      <div class="feat-card">
+        <div class="icon-well"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3>Smooth Motion</h3>
+        <p>300ms ease-out transitions with scale, lift, and rotation create satisfying micro-interactions.</p>
+      </div>
+      <div class="feat-card">
+        <div class="icon-well"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h3>WCAG AAA</h3>
+        <p>Foreground #3D4852 on #E0E5EC achieves a 7.5:1 contrast ratio for optimal accessibility.</p>
+      </div>
+      <div class="feat-card">
+        <div class="icon-well"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h3>Responsive First</h3>
+        <p>Mobile-first design with 44px touch targets, hamburger menu, and maintained neumorphic aesthetics.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section id="how">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-tag">Process</span>
+      <h2>How it works</h2>
+      <p>Three tactile steps connected by an inset rail with a gradient progress indicator.</p>
+    </div>
+    <div class="stepper">
+      <div class="rail"></div>
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Choose Your Surface</h3>
+        <p>Start with the monochromatic cool grey base. Everything is molded from this single material.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Apply Shadow Physics</h3>
+        <p>Layer extruded and inset states using RGBA dual shadows for realistic depth and lighting.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Ship Accessible UI</h3>
+        <p>Deliver tactile, WCAG-compliant interfaces with smooth 300ms micro-interactions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-tag">Pricing</span>
+      <h2>Plans carved for every team</h2>
+      <p>Transparent pricing with the highlighted tier lifted via enhanced shadow depth.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>Starter</h3>
+        <div class="price">$0<small>/mo</small></div>
+        <p style="color:var(--muted);font-size:.92rem;">For individuals exploring soft UI.</p>
+        <ul>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>20 components</li>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Basic shadows</li>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Community support</li>
+        </ul>
+        <a href="#" class="btn">Get Started</a>
+      </div>
+      <div class="price-card featured">
+        <span class="price-badge">Most Popular</span>
+        <h3>Pro</h3>
+        <div class="price">$29<small>/mo</small></div>
+        <p style="color:var(--muted);font-size:.92rem;">For designers shipping production UI.</p>
+        <ul>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>120+ components</li>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Dual shadow physics</li>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Nested depth library</li>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Priority support</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Start Free Trial</a>
+      </div>
+      <div class="price-card">
+        <h3>Enterprise</h3>
+        <div class="price">$99<small>/mo</small></div>
+        <p style="color:var(--muted);font-size:.92rem;">For teams scaling soft UI at scale.</p>
+        <ul>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Unlimited components</li>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Custom shadow tokens</li>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Dedicated manager</li>
+        </ul>
+        <a href="#" class="btn">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-tag">Testimonials</span>
+      <h2>Loved by tactile designers</h2>
+      <p>Avatars in deep inset circles, star ratings in inset pills.</p>
+    </div>
+    <div class="test-grid">
+      <div class="test-card big">
+        <span class="stars">★★★★★</span>
+        <p>"Neuvo transformed our entire design system. The dual-shadow approach gives every interface a grounded, premium feel that our users immediately noticed. It's the most satisfying UI toolkit we've ever adopted."</p>
+        <div class="test-author">
+          <span class="avatar">AK</span>
+          <div><div class="name">Aria Kovač</div><div class="role">Head of Design, Lumen Labs</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <span class="stars">★★★★★</span>
+        <p>"The accessibility is unmatched. WCAG AAA contrast with soft aesthetics—finally."</p>
+        <div class="test-author">
+          <span class="avatar">JM</span>
+          <div><div class="name">Jonas Müller</div><div class="role">UX Lead, Nordhaus</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <span class="stars">★★★★☆</span>
+        <p>"Nested depth circles are mesmerizing. Our users keep hovering just to watch them rotate."</p>
+        <div class="test-author">
+          <span class="avatar">SP</span>
+          <div><div class="name">Sana Patel</div><div class="role">Product Designer, Drift</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <span class="stars">★★★★★</span>
+        <p>"Shipped our entire dashboard in a weekend. The shadow tokens just work."</p>
+        <div class="test-author">
+          <span class="avatar">RC</span>
+          <div><div class="name">Rafael Costa</div><div class="role">Founder, Pebble</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <span class="stars">★★★★★</span>
+        <p>"Cool grey palette feels fresh. Distinct from every other 'warm' neumorphism library."</p>
+        <div class="test-author">
+          <span class="avatar">EW</span>
+          <div><div class="name">Emma Walsh</div><div class="role">Creative Director, Form</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-tag">FAQ</span>
+      <h2>Questions, carved in</h2>
+      <p>Answers feel pressed into the surface of each card.</p>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-card" onclick="this.classList.toggle('open')">
+        <div class="faq-q">What makes Neumorphism accessible? <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+        <div class="faq-a">Our foreground color #3D4852 on the #E0E5EC background achieves a 7.5:1 contrast ratio (WCAG AAA). Muted text at #6B7280 still meets 4.6:1 (WCAG AA). All interactive elements have visible 2px accent focus rings.</div>
+      </div>
+      <div class="faq-card" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Why RGBA shadows instead of hex? <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+        <div class="faq-a">RGBA transparency allows the light and dark shadows to blend smoothly with the background, creating realistic, soft lighting. Solid hex shadows produce harsh, unnatural edges that break the molded-surface illusion.</div>
+      </div>
+      <div class="faq-card" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Can I customize the accent color? <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+        <div class="faq-a">Yes. The default soft violet (#6C63FF) and teal (#38B2AC) are CSS custom properties. Override them globally or per-component. Keep the monochromatic background discipline—shadows do the visual heavy lifting.</div>
+      </div>
+      <div class="faq-card" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Is it responsive on mobile? <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+        <div class="faq-a">Fully mobile-first. Touch targets meet 44px minimums, grids collapse gracefully, and the neumorphic aesthetic is maintained across all breakpoints with a hamburger menu below the md breakpoint.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="container">
+    <div class="cta-box">
+      <h2>Ready to mold your UI?</h2>
+      <p>Join 50,000+ designers building tactile, accessible interfaces with Neuvo's shadow physics engine.</p>
+      <a href="#" class="btn btn-primary">Start Building Free
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <span class="logo-mark sh-extruded-sm"><span class="dot"></span></span>
+          Neuvo<span style="color:var(--accent)">.</span>
+        </a>
+        <p>The soft UI design system built on dual-shadow physics. Tactile, accessible, and physically grounded.</p>
+        <div class="social-row">
+          <a class="social" href="#" aria-label="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a class="social" href="#" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+          <a class="social" href="#" aria-label="Dribbble"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6 6 9.42 8 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.72 0"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">Components</a></li>
+          <li><a href="#">Shadow Tokens</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">© 2026 Neuvo Design Systems. Crafted with soft shadows.</div>
+  </div>
+</footer>
+
+<script>
+  // Header scroll shadow
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menuToggle.classList.remove('open');
+    navLinks.classList.remove('open');
+  }));
+</script>
+</body>
+</html>

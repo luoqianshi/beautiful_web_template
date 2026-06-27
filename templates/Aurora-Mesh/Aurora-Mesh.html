@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurora Mesh — Living Color, Floating UI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#09090b;
+    --bg-elevated:#18181b;
+    --bg-surface:#27272a;
+    --fg:#fafafa;
+    --fg-secondary:#a1a1aa;
+    --fg-muted:#71717a;
+    --violet:#8b5cf6;
+    --purple:#a855f7;
+    --fuchsia:#d946ef;
+    --pink:#ec4899;
+    --cyan:#22d3ee;
+    --teal:#2dd4bf;
+    --accent:#a855f7;
+    --accent-hover:#c084fc;
+    --border-subtle:#27272a;
+    --border:#3f3f46;
+    --success:#34d399;
+    --warning:#fbbf24;
+    --error:#f87171;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    overflow-x:hidden;
+    position:relative;
+  }
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
+  .container-wide{max-width:1280px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
+
+  h1,h2,h3,h4{font-family:'Instrument Sans',sans-serif;font-weight:600;line-height:1.1;color:var(--fg);letter-spacing:-.02em}
+  .gradient-text{
+    background:linear-gradient(135deg,#a855f7 0%,#ec4899 50%,#22d3ee 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+
+  /* Mesh gradient background — fixed, animated */
+  .mesh-bg{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-color:#09090b;
+    background-image:
+      radial-gradient(at 40% 20%,rgba(139,92,246,.3) 0px,transparent 50%),
+      radial-gradient(at 80% 0%,rgba(34,211,238,.2) 0px,transparent 50%),
+      radial-gradient(at 0% 50%,rgba(217,70,239,.2) 0px,transparent 50%),
+      radial-gradient(at 80% 50%,rgba(45,212,191,.15) 0px,transparent 50%),
+      radial-gradient(at 0% 100%,rgba(236,72,153,.2) 0px,transparent 50%),
+      radial-gradient(at 80% 100%,rgba(139,92,246,.15) 0px,transparent 50%);
+    animation:meshShift 20s ease-in-out infinite alternate;
+  }
+  @keyframes meshShift{
+    0%{background-position:0% 0%,0% 0%,0% 0%,0% 0%,0% 0%,0% 0%}
+    100%{background-position:10% 10%,-10% 5%,5% -10%,-5% 10%,-10% -5%,10% -10%}
+  }
+  /* Noise overlay */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.025;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:'Inter',sans-serif;font-weight:600;font-size:14px;
+    padding:0 24px;height:44px;border-radius:9999px;cursor:pointer;border:none;
+    transition:all .2s ease;position:relative;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,#8b5cf6 0%,#d946ef 50%,#ec4899 100%);
+    color:#fff;box-shadow:0 8px 24px rgba(168,85,247,.4);
+  }
+  .btn-primary:hover{transform:scale(1.04);box-shadow:0 12px 32px rgba(168,85,247,.55)}
+  .btn-primary:active{transform:scale(.97)}
+  .btn-secondary{
+    background:rgba(255,255,255,.05);backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.1);color:#fff;
+  }
+  .btn-secondary:hover{background:rgba(255,255,255,.1);border-color:rgba(168,85,247,.5)}
+  .btn-ghost{background:transparent;color:var(--fg-secondary);padding:0 12px;height:auto}
+  .btn-ghost:hover{color:var(--fg)}
+
+  /* Navigation */
+  nav.topbar{position:sticky;top:0;z-index:100;background:rgba(9,9,11,.7);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.05)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:17px;color:var(--fg)}
+  .logo-mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#8b5cf6,#d946ef,#22d3ee);display:grid;place-items:center;box-shadow:0 0 16px rgba(168,85,247,.5)}
+  .logo-mark span{width:14px;height:14px;border-radius:4px;background:#09090b}
+  .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+  .nav-links a{font-size:14px;color:var(--fg-secondary);transition:color .2s ease}
+  .nav-links a:hover{color:var(--fg)}
+  .menu-toggle{display:none;background:none;border:none;color:var(--fg);font-size:22px;cursor:pointer}
+
+  /* Hero */
+  .hero{padding:80px 0 120px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:9999px;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);font-size:13px;color:var(--accent-hover);margin-bottom:24px;font-weight:500}
+  .hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--success);box-shadow:0 0 8px var(--success);animation:glowPulse 2s ease-in-out infinite}
+  @keyframes glowPulse{0%,100%{opacity:1}50%{opacity:.5}}
+  .hero h1{font-size:clamp(40px,6vw,76px);font-weight:700;letter-spacing:-.03em;line-height:1.05;margin-bottom:24px}
+  .hero-sub{font-size:18px;color:var(--fg-secondary);max-width:520px;margin-bottom:36px;line-height:1.6}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .hero-mock{position:relative}
+  .mock-card{
+    background:rgba(24,24,27,.7);backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:28px;
+    box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 60px rgba(168,85,247,.2);
+    position:relative;z-index:2;
+  }
+  .mock-glow{position:absolute;inset:-40px;border-radius:40px;background:linear-gradient(135deg,rgba(139,92,246,.4),rgba(217,70,239,.3),rgba(34,211,238,.3));filter:blur(60px);z-index:1;animation:glowFloat 6s ease-in-out infinite}
+  @keyframes glowFloat{0%,100%{transform:translateY(0) scale(1);opacity:.7}50%{transform:translateY(-16px) scale(1.05);opacity:1}}
+  .mock-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+  .mock-title{font-size:14px;color:var(--fg-secondary);font-weight:500}
+  .mock-badge{padding:4px 10px;border-radius:9999px;background:rgba(52,211,153,.15);color:var(--success);font-size:12px;font-weight:600}
+  .mock-chart{height:160px;display:flex;align-items:flex-end;gap:8px;margin-bottom:20px}
+  .mock-bar{flex:1;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#a855f7,#8b5cf6);opacity:.85;transition:opacity .3s ease}
+  .mock-bar:hover{opacity:1}
+  .mock-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .mock-stat{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:14px}
+  .mock-stat .v{font-size:20px;font-weight:700;color:var(--fg);font-family:'Instrument Sans',sans-serif}
+  .mock-stat .l{font-size:11px;color:var(--fg-muted);margin-top:4px}
+
+  /* Stats */
+  .stats{position:relative;padding:40px 0}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .stat-card{
+    background:rgba(24,24,27,.5);backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px 24px;
+    position:relative;overflow:hidden;transition:transform .3s ease,border-color .3s ease;
+  }
+  .stat-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--bar-color,linear-gradient(90deg,#8b5cf6,#d946ef));opacity:.8}
+  .stat-card:hover{transform:translateY(-4px);border-color:rgba(168,85,247,.4)}
+  .stat-num{font-family:'Instrument Sans',sans-serif;font-size:40px;font-weight:700;color:var(--fg);line-height:1;letter-spacing:-.02em}
+  .stat-label{font-size:13px;color:var(--fg-muted);margin-top:10px;font-weight:500}
+
+  /* Section */
+  .section{padding:96px 0;position:relative}
+  .section-head{text-align:center;margin-bottom:64px;max-width:640px;margin-left:auto;margin-right:auto}
+  .section-eyebrow{display:inline-block;font-size:13px;font-weight:600;color:var(--accent-hover);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+  .section-head h2{font-size:clamp(32px,4.5vw,52px);font-weight:700;margin-bottom:16px}
+  .section-head .sub{font-size:17px;color:var(--fg-secondary);line-height:1.6}
+
+  /* Features — bento grid */
+  .bento{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:minmax(220px,auto);gap:20px}
+  .bento-card{
+    background:rgba(24,24,27,.5);backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:32px;
+    position:relative;overflow:hidden;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+  }
+  .bento-card:hover{transform:translateY(-4px);border-color:rgba(168,85,247,.4);box-shadow:0 0 40px rgba(168,85,247,.15)}
+  .bento-card.large{grid-column:span 2;grid-row:span 2}
+  .bento-card.wide{grid-column:span 2}
+  .bento-icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;margin-bottom:20px;color:#fff}
+  .bento-icon.v{background:linear-gradient(135deg,#8b5cf6,#a855f7);box-shadow:0 0 20px rgba(168,85,247,.4)}
+  .bento-icon.f{background:linear-gradient(135deg,#d946ef,#ec4899);box-shadow:0 0 20px rgba(217,70,239,.4)}
+  .bento-icon.c{background:linear-gradient(135deg,#22d3ee,#2dd4bf);box-shadow:0 0 20px rgba(34,211,238,.4)}
+  .bento-icon svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2}
+  .bento-card h3{font-size:20px;font-weight:600;margin-bottom:10px}
+  .bento-card p{color:var(--fg-secondary);font-size:14px;line-height:1.6}
+  .bento-card.large h3{font-size:28px}
+  .bento-card.large p{font-size:16px;max-width:480px}
+  .bento-visual{position:absolute;right:-20px;bottom:-20px;width:200px;height:200px;border-radius:50%;background:conic-gradient(from 0deg,#8b5cf6,#d946ef,#22d3ee,#2dd4bf,#8b5cf6);filter:blur(40px);opacity:.3;animation:spin 12s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* Timeline */
+  .timeline{position:relative;max-width:760px;margin:0 auto;padding-left:40px}
+  .timeline::before{content:"";position:absolute;left:15px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,#8b5cf6,#d946ef,#22d3ee);border-radius:2px}
+  .tl-step{position:relative;margin-bottom:40px}
+  .tl-step:last-child{margin-bottom:0}
+  .tl-dot{position:absolute;left:-33px;top:0;width:32px;height:32px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);display:grid;place-items:center;font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:13px;color:var(--accent-hover);box-shadow:0 0 16px rgba(168,85,247,.5)}
+  .tl-card{background:rgba(24,24,27,.5);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px 28px;position:relative;overflow:hidden;transition:border-color .3s ease}
+  .tl-card::before{content:"";position:absolute;top:0;right:0;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,.15),transparent 70%);pointer-events:none}
+  .tl-card:hover{border-color:rgba(168,85,247,.4)}
+  .tl-card h3{font-size:18px;margin-bottom:8px}
+  .tl-card p{color:var(--fg-secondary);font-size:14px;line-height:1.6}
+
+  /* Pricing */
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+  .price-card{
+    background:rgba(24,24,27,.6);backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:36px 32px;
+    position:relative;display:flex;flex-direction:column;transition:transform .3s ease,border-color .3s ease;
+  }
+  .price-card:hover{transform:translateY(-6px);border-color:rgba(168,85,247,.5)}
+  .price-card.featured{transform:scale(1.03)}
+  .price-card.featured:hover{transform:scale(1.03) translateY(-6px)}
+  .gradient-border{position:relative;background:rgba(9,9,11,.9);border-radius:24px}
+  .gradient-border::before{
+    content:"";position:absolute;inset:-2px;border-radius:26px;z-index:-1;
+    background:conic-gradient(from var(--angle,0deg),#8b5cf6,#d946ef,#22d3ee,#2dd4bf,#8b5cf6);
+    animation:rotateBorder 6s linear infinite;
+  }
+  @property --angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+  @keyframes rotateBorder{to{--angle:360deg}}
+  .price-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:5px 16px;border-radius:9999px;background:linear-gradient(135deg,#8b5cf6,#d946ef);color:#fff;font-size:12px;font-weight:600;box-shadow:0 4px 12px rgba(168,85,247,.4)}
+  .price-tier{font-size:13px;color:var(--accent-hover);font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+  .price-card h3{font-size:22px;margin-bottom:20px}
+  .price-amount{font-family:'Instrument Sans',sans-serif;font-size:48px;font-weight:700;line-height:1;margin-bottom:6px}
+  .price-amount.gradient-text{display:block}
+  .price-amount .per{font-size:15px;color:var(--fg-muted);font-weight:400}
+  .price-desc{color:var(--fg-secondary);font-size:14px;margin-bottom:28px;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:24px}
+  .price-features{list-style:none;flex:1;margin-bottom:28px}
+  .price-features li{display:flex;align-items:center;gap:10px;padding:8px 0;color:var(--fg);font-size:14px}
+  .price-features li svg{width:18px;height:18px;stroke:var(--success);fill:none;stroke-width:2.5;flex-shrink:0}
+  .price-card .btn{width:100%}
+
+  /* Testimonials */
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .testi-card{background:rgba(24,24,27,.5);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:32px;position:relative;transition:border-color .3s ease,transform .3s ease}
+  .testi-card:hover{border-color:rgba(168,85,247,.4);transform:translateY(-4px)}
+  .testi-quote{font-family:'Instrument Sans',sans-serif;font-size:80px;line-height:.5;height:36px;background:linear-gradient(135deg,#a855f7,#ec4899,#22d3ee);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;opacity:.6}
+  .testi-card blockquote{font-size:15px;color:var(--fg);line-height:1.6;margin-bottom:24px}
+  .testi-author{display:flex;align-items:center;gap:12px}
+  .testi-avatar{width:44px;height:44px;border-radius:50%;padding:2px;background:linear-gradient(135deg,#8b5cf6,#d946ef,#22d3ee)}
+  .testi-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;border:2px solid var(--bg-elevated)}
+  .testi-name{font-size:14px;font-weight:600;color:var(--fg)}
+  .testi-role{font-size:12px;color:var(--fg-muted)}
+
+  /* FAQ */
+  .faq-list{max-width:760px;margin:0 auto}
+  .faq-item{border-bottom:1px solid rgba(255,255,255,.08);position:relative}
+  .faq-item::before{content:"";position:absolute;left:-16px;top:24px;width:3px;height:20px;background:linear-gradient(180deg,#8b5cf6,#d946ef);border-radius:2px;opacity:0;transition:opacity .3s ease}
+  .faq-item.open::before{opacity:1}
+  .faq-q{width:100%;background:none;border:none;text-align:left;cursor:pointer;padding:22px 0;display:flex;align-items:center;gap:16px;color:var(--fg);font-family:'Inter',sans-serif;font-size:16px;font-weight:500}
+  .faq-toggle{margin-left:auto;width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#8b5cf6,#d946ef);display:grid;place-items:center;flex-shrink:0;transition:transform .3s ease}
+  .faq-toggle svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.5}
+  .faq-item.open .faq-toggle{transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+  .faq-a-inner{padding:0 0 24px 0;color:var(--fg-secondary);font-size:14px;line-height:1.7}
+
+  /* CTA */
+  .cta-section{padding:96px 0;text-align:center;position:relative}
+  .cta-box{background:rgba(24,24,27,.6);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.1);border-radius:32px;padding:64px 48px;position:relative;overflow:hidden}
+  .cta-box::before{content:"";position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:500px;height:300px;background:radial-gradient(circle,rgba(168,85,247,.3),transparent 70%);pointer-events:none}
+  .cta-box h2{font-size:clamp(32px,4.5vw,48px);margin-bottom:16px;position:relative}
+  .cta-box p{color:var(--fg-secondary);max-width:480px;margin:0 auto 32px;position:relative}
+  .cta-form{display:flex;gap:12px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center;position:relative}
+  .cta-form input{flex:1;min-width:220px;height:44px;background:rgba(9,9,11,.8);border:1px solid var(--border);border-radius:12px;padding:0 16px;color:var(--fg);font-family:'Inter',sans-serif;font-size:14px}
+  .cta-form input::placeholder{color:var(--fg-muted)}
+  .cta-form input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(168,85,247,.2)}
+
+  /* Footer */
+  footer{border-top:1px solid rgba(255,255,255,.06);padding:64px 0 32px;position:relative;overflow:hidden}
+  footer::before{content:"";position:absolute;top:0;left:0;right:0;height:200px;background:linear-gradient(180deg,rgba(139,92,246,.08),transparent);pointer-events:none}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;position:relative}
+  .footer-brand .logo{margin-bottom:16px}
+  .footer-brand p{color:var(--fg-secondary);font-size:14px;max-width:300px;line-height:1.6}
+  .footer-col h4{font-size:13px;font-weight:600;color:var(--fg);margin-bottom:16px;text-transform:uppercase;letter-spacing:.08em}
+  .footer-col ul{list-style:none}
+  .footer-col li{margin-bottom:10px}
+  .footer-col a{color:var(--fg-secondary);font-size:14px;transition:color .2s ease;background-image:linear-gradient(90deg,var(--accent-hover),var(--accent-hover));background-size:0 1px;background-repeat:no-repeat;background-position:0 100%;padding-bottom:2px}
+  .footer-col a:hover{color:var(--fg);background-size:100% 1px}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;position:relative}
+  .footer-bottom p{font-size:13px;color:var(--fg-muted)}
+  .footer-social{display:flex;gap:10px}
+  .footer-social a{width:36px;height:36px;border-radius:50%;padding:2px;background:linear-gradient(135deg,#8b5cf6,#d946ef,#22d3ee);display:grid;place-items:center;transition:transform .2s ease}
+  .footer-social a:hover{transform:scale(1.1)}
+  .footer-social .inner{width:100%;height:100%;border-radius:50%;background:var(--bg-elevated);display:grid;place-items:center}
+  .footer-social svg{width:15px;height:15px;fill:var(--fg-secondary)}
+  .footer-social a:hover svg{fill:var(--fg)}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+
+  /* Responsive */
+  @media(max-width:1024px){
+    .hero-grid{grid-template-columns:1fr;gap:48px}
+    .bento{grid-template-columns:repeat(2,1fr)}
+    .bento-card.large,.bento-card.wide{grid-column:span 2;grid-row:auto}
+    .pricing-grid,.testi-grid{grid-template-columns:repeat(2,1fr)}
+    .price-card.featured{transform:none}
+    .price-card.featured:hover{transform:translateY(-6px)}
+    .footer-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:768px){
+    .nav-links{display:none}
+    .menu-toggle{display:block}
+    .nav-links.open{display:flex;position:absolute;top:64px;left:0;right:0;flex-direction:column;background:rgba(9,9,11,.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08);padding:24px;gap:18px}
+    .section{padding:64px 0}
+    .hero{padding:48px 0 80px}
+    .stats-grid{grid-template-columns:repeat(2,1fr)}
+    .bento{grid-template-columns:1fr}
+    .bento-card.large,.bento-card.wide{grid-column:span 1}
+    .pricing-grid,.testi-grid{grid-template-columns:1fr}
+    .cta-box{padding:40px 24px}
+    .footer-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+    .mesh-bg{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="mesh-bg"></div>
+
+<nav class="topbar">
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-mark"><span></span></span>
+      <span>Aurora</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#testimonials">Customers</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div style="display:flex;gap:10px;align-items:center">
+      <a href="#cta" class="btn btn-primary">Start Free</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">&#9776;</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-left reveal">
+        <div class="hero-eyebrow"><span class="dot"></span> New: Aurora Flow v3 is live</div>
+        <h1>Build interfaces that <span class="gradient-text">breathe</span> with color</h1>
+        <p class="hero-sub">The design system that brings living mesh gradients, glass surfaces, and dimensional depth to modern products. Ship interfaces that feel like touching the future.</p>
+        <div class="hero-ctas">
+          <a href="#pricing" class="btn btn-primary">Start building free</a>
+          <a href="#features" class="btn btn-secondary">View features</a>
+        </div>
+      </div>
+      <div class="hero-right reveal">
+        <div class="hero-mock">
+          <div class="mock-glow"></div>
+          <div class="mock-card">
+            <div class="mock-header">
+              <div class="mock-title">Revenue overview</div>
+              <div class="mock-badge">+24.5%</div>
+            </div>
+            <div class="mock-chart">
+              <div class="mock-bar" style="height:40%"></div>
+              <div class="mock-bar" style="height:65%"></div>
+              <div class="mock-bar" style="height:50%"></div>
+              <div class="mock-bar" style="height:80%"></div>
+              <div class="mock-bar" style="height:70%"></div>
+              <div class="mock-bar" style="height:95%"></div>
+              <div class="mock-bar" style="height:85%"></div>
+            </div>
+            <div class="mock-stats">
+              <div class="mock-stat"><div class="v gradient-text">$48.2K</div><div class="l">This month</div></div>
+              <div class="mock-stat"><div class="v">1,284</div><div class="l">Active users</div></div>
+              <div class="mock-stat"><div class="v">98.4%</div><div class="l">Uptime</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Stats -->
+<section class="stats">
+  <div class="container-wide">
+    <div class="stats-grid">
+      <div class="stat-card reveal" style="--bar-color:linear-gradient(90deg,#8b5cf6,#a855f7)">
+        <div class="stat-num" data-target="120">0</div>
+        <div class="stat-label">Components shipped</div>
+      </div>
+      <div class="stat-card reveal" style="--bar-color:linear-gradient(90deg,#d946ef,#ec4899)">
+        <div class="stat-num"><span data-target="45">0</span>K</div>
+        <div class="stat-label">Active developers</div>
+      </div>
+      <div class="stat-card reveal" style="--bar-color:linear-gradient(90deg,#22d3ee,#2dd4bf)">
+        <div class="stat-num"><span data-target="99.9">0</span>%</div>
+        <div class="stat-label">Uptime SLA</div>
+      </div>
+      <div class="stat-card reveal" style="--bar-color:linear-gradient(90deg,#2dd4bf,#8b5cf6)">
+        <div class="stat-num"><span data-target="4.9">0</span>/5</div>
+        <div class="stat-label">Developer rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features bento -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Features</div>
+      <h2>Everything you need to <span class="gradient-text">ship beautiful UI</span></h2>
+      <p class="sub">A complete system of components, primitives, and design tokens that work together to create interfaces with dimensional depth.</p>
+    </div>
+    <div class="bento">
+      <div class="bento-card large reveal">
+        <div class="bento-visual"></div>
+        <div class="bento-icon v"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <h3>Living mesh gradients</h3>
+        <p>Backgrounds that flow and morph with organic movement. Built on layered radial gradients with GPU-accelerated animation, our mesh system creates the ethereal aurora effect that makes your product feel alive.</p>
+      </div>
+      <div class="bento-card reveal">
+        <div class="bento-icon f"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg></div>
+        <h3>Glass surfaces</h3>
+        <p>Backdrop blur with saturation creates true depth and dimension.</p>
+      </div>
+      <div class="bento-card reveal">
+        <div class="bento-icon c"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <h3>Gradient text</h3>
+        <p>Headlines that glow with multi-stop color transitions.</p>
+      </div>
+      <div class="bento-card wide reveal">
+        <div class="bento-icon v"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h3>Micro-interactions that feel alive</h3>
+        <p>Every element responds with smooth, considered motion. Hover states glow, cards lift with colored shadows, and transitions flow like water through space. Never jarring, always elegant.</p>
+      </div>
+      <div class="bento-card reveal">
+        <div class="bento-icon f"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <h3>Design tokens</h3>
+        <p>A complete token system for colors, radius, shadows.</p>
+      </div>
+      <div class="bento-card reveal">
+        <div class="bento-icon c"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3>Dark by default</h3>
+        <p>Near-black canvas makes aurora colors truly sing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Timeline -->
+<section class="section" style="border-top:1px solid rgba(255,255,255,.05)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">How it works</div>
+      <h2>From install to <span class="gradient-text">production</span> in minutes</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-step">
+        <div class="tl-dot">1</div>
+        <div class="tl-card"><h3>Install the package</h3><p>Add Aurora to your project with a single command. Works with React, Vue, and Svelte out of the box.</p></div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">2</div>
+        <div class="tl-card"><h3>Import the mesh provider</h3><p>Wrap your app in the Aurora provider to enable mesh backgrounds, glass surfaces, and gradient utilities globally.</p></div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">3</div>
+        <div class="tl-card"><h3>Compose with primitives</h3><p>Build complex interfaces from 120+ primitives, each with sensible defaults and full customization via tokens.</p></div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot">4</div>
+        <div class="tl-card"><h3>Ship to production</h3><p>Deploy with confidence. Every component is accessible, responsive, and performance-optimized from the start.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section" id="pricing" style="border-top:1px solid rgba(255,255,255,.05)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Pricing</div>
+      <h2>Simple pricing that <span class="gradient-text">scales with you</span></h2>
+      <p class="sub">Start free, upgrade when you are ready. No hidden fees, cancel anytime.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-tier">Starter</div>
+        <h3>Hobby</h3>
+        <div class="price-amount">$0<span class="per"> /month</span></div>
+        <p class="price-desc">For personal projects and learning.</p>
+        <ul class="price-features">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>20 components</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Community support</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1 project</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Basic mesh gradients</li>
+        </ul>
+        <a href="#cta" class="btn btn-secondary">Get started</a>
+      </div>
+      <div class="price-card featured gradient-border reveal" style="background:rgba(9,9,11,.9)">
+        <div class="price-badge">Most popular</div>
+        <div class="price-tier">Pro</div>
+        <h3>Developer</h3>
+        <div class="price-amount gradient-text">$29<span class="per"> /month</span></div>
+        <p class="price-desc">For professional developers shipping production apps.</p>
+        <ul class="price-features">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Everything in Hobby</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>120+ components</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Unlimited projects</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Advanced mesh system</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Priority support</li>
+        </ul>
+        <a href="#cta" class="btn btn-primary">Start Pro trial</a>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-tier">Enterprise</div>
+        <h3>Team</h3>
+        <div class="price-amount">$99<span class="per"> /month</span></div>
+        <p class="price-desc">For teams building at scale.</p>
+        <ul class="price-features">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Everything in Pro</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Team workspaces</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Custom tokens</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>SSO &amp; SAML</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dedicated support</li>
+        </ul>
+        <a href="#cta" class="btn btn-secondary">Contact sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section" id="testimonials" style="border-top:1px solid rgba(255,255,255,.05)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Customers</div>
+      <h2>Loved by developers <span class="gradient-text">everywhere</span></h2>
+    </div>
+    <div class="testi-grid">
+      <article class="testi-card reveal">
+        <div class="testi-quote">&ldquo;</div>
+        <blockquote>Aurora completely changed how our team thinks about interface design. The mesh gradient system alone makes our product look like it was built by a team twice our size.</blockquote>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" alt="Portrait of Marcus Chen"></div>
+          <div><div class="testi-name">Marcus Chen</div><div class="testi-role">CTO, Flowbase</div></div>
+        </div>
+      </article>
+      <article class="testi-card reveal">
+        <div class="testi-quote">&ldquo;</div>
+        <blockquote>The attention to detail is unreal. Every micro-interaction feels considered, every gradient flows perfectly. This is what a modern design system should feel like.</blockquote>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&q=80" alt="Portrait of Priya Sharma"></div>
+          <div><div class="testi-name">Priya Sharma</div><div class="testi-role">Design Lead, Linear</div></div>
+        </div>
+      </article>
+      <article class="testi-card reveal">
+        <div class="testi-quote">&ldquo;</div>
+        <blockquote>We shipped our new dashboard in a week using Aurora. The glass surfaces and gradient text gave it an instant premium feel that would have taken months to build ourselves.</blockquote>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" alt="Portrait of James Okoro"></div>
+          <div><div class="testi-name">James Okoro</div><div class="testi-role">Founder, Nebula</div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq" style="border-top:1px solid rgba(255,255,255,.05)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">FAQ</div>
+      <h2>Frequently asked <span class="gradient-text">questions</span></h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q"><span>Do I need to know Tailwind to use Aurora?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">No. While Aurora is built on Tailwind v4 primitives, every component ships with a framework-agnostic API. You can use the React, Vue, or Svelte wrappers without ever touching a Tailwind class. Power users can drop down to the token layer for full customization.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Are the mesh gradients performant?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. All mesh backgrounds use GPU-accelerated radial gradients with optimized blend modes. On modern hardware we sustain 60fps even with full-page meshes. We also provide reduced-motion fallbacks and a simplified mesh variant for low-powered devices.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Can I customize the aurora color palette?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely. The entire color system is tokenized. Override the six aurora stops, the accent color, or the full neutral ramp via CSS custom properties or your theme config. Every component picks up your changes automatically.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>What about accessibility?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Accessibility is a first-class concern. All text passes WCAG AAA contrast on the default dark canvas. Focus rings match the aurora accent and are never removed. We respect prefers-reduced-motion, provide static fallbacks for every animation, and ship ARIA-correct primitives throughout.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="container">
+    <div class="cta-box reveal">
+      <h2>Start building <span class="gradient-text">tomorrow's interfaces</span> today</h2>
+      <p>Join 45,000+ developers shipping beautiful, living UI with Aurora. Free to start, no credit card required.</p>
+      <form class="cta-form" onsubmit="event.preventDefault();alert('Welcome to Aurora! Check your email to verify your account.')">
+        <input type="email" placeholder="you@company.com" required aria-label="Email">
+        <button type="submit" class="btn btn-primary">Start free</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo"><span class="logo-mark"><span></span></span><span>Aurora</span></a>
+        <p>The design system that brings living mesh gradients and dimensional depth to modern products.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul><li><a href="#">Components</a></li><li><a href="#">Tokens</a></li><li><a href="#">Templates</a></li><li><a href="#">Changelog</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul><li><a href="#">Docs</a></li><li><a href="#">Blog</a></li><li><a href="#">Examples</a></li><li><a href="#">Community</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Aurora Systems. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Twitter"><span class="inner"><svg viewBox="0 0 24 24"><path d="M22 5.8c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1-.7-.8-1.8-1.3-3-1.3-2.3 0-4.1 1.8-4.1 4.1 0 .3 0 .6.1.9-3.4-.2-6.4-1.8-8.4-4.3-.4.6-.6 1.3-.6 2.1 0 1.4.7 2.7 1.8 3.4-.7 0-1.3-.2-1.9-.5v.1c0 2 1.4 3.6 3.3 4-.3.1-.7.1-1 .1-.3 0-.5 0-.8-.1.5 1.6 2 2.8 3.8 2.8-1.4 1.1-3.1 1.7-5 1.7H2c1.8 1.2 4 1.9 6.3 1.9 7.5 0 11.7-6.3 11.7-11.7v-.5c.8-.6 1.5-1.3 2-2.1z"/></svg></span></a>
+        <a href="#" aria-label="GitHub"><span class="inner"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.1 6.8 9.4.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1 .8-.2 1.7-.3 2.5-.3.9 0 1.7.1 2.5.3 1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.8v2.6c0 .3.2.6.7.5C19.1 20.1 22 16.4 22 12c0-5.5-4.5-10-10-10z"/></svg></span></a>
+        <a href="#" aria-label="Discord"><span class="inner"><svg viewBox="0 0 24 24"><path d="M20 4.4c-1.5-.7-3-1.2-4.6-1.5-.2.4-.4.8-.6 1.1-1.7-.3-3.4-.3-5.1 0-.2-.3-.4-.7-.6-1.1-1.6.3-3.2.8-4.6 1.5C1.4 9.1.6 13.7 1 18.2c1.8 1.3 3.5 2.1 5.3 2.6.4-.5.8-1.1 1.1-1.7-.6-.2-1.2-.5-1.7-.8.1-.1.3-.2.4-.3 3.3 1.5 6.8 1.5 10.1 0 .1.1.3.2.4.3-.5.3-1.1.6-1.7.8.3.6.7 1.2 1.1 1.7 1.8-.5 3.5-1.3 5.3-2.6.5-5.2-.8-9.7-3.3-13.8zM8.5 15.6c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1zm7 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1z"/></svg></span></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menuToggle=document.getElementById('menuToggle');
+  const navLinks=document.getElementById('navLinks');
+  menuToggle.addEventListener('click',()=>navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    const q=item.querySelector('.faq-q');
+    const a=item.querySelector('.faq-a');
+    q.addEventListener('click',()=>{
+      const open=item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o=>{o.classList.remove('open');o.querySelector('.faq-a').style.maxHeight=null});
+      if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px'}
+    });
+  });
+
+  const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Count-up stats
+  const animateNum=(el)=>{
+    const target=parseFloat(el.dataset.target);
+    const isFloat=target%1!==0;
+    let cur=0;const steps=40;const inc=target/steps;let i=0;
+    const tick=()=>{i++;cur+=inc;if(i>=steps){el.textContent=isFloat?target.toFixed(1):target;return}el.textContent=isFloat?cur.toFixed(1):Math.round(cur);requestAnimationFrame(tick)};
+    tick();
+  };
+  const statIO=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){animateNum(e.target);statIO.unobserve(e.target)}})},{threshold:.5});
+  document.querySelectorAll('[data-target]').forEach(n=>statIO.observe(n));
+
+  // Animated hero bars
+  const bars=document.querySelectorAll('.mock-bar');
+  bars.forEach((b,i)=>{b.style.height='0%';setTimeout(()=>{b.style.transition='height 1s ease-out';b.style.height=b.dataset.h||b.style.height},100+i*80)});
+</script>
+</body>
+</html>

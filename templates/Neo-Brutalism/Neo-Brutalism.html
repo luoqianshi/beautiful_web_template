@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Neo-Brutalism — Raw High-Contrast Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFDF5;
+    --fg:#000000;
+    --accent:#FF6B6B;
+    --secondary:#FFD93D;
+    --muted:#C4B5FD;
+    --white:#FFFFFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Space Grotesk",sans-serif;
+    background:var(--bg);
+    color:var(--fg);
+    line-height:1.5;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* Global grid texture */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(to right,rgba(0,0,0,0.04) 1px,transparent 1px),linear-gradient(to bottom,rgba(0,0,0,0.04) 1px,transparent 1px);
+    background-size:40px 40px;
+  }
+  .container{max-width:80rem;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1}
+  section{position:relative;z-index:1}
+  .section-pad{padding:5rem 0}
+  @media(min-width:768px){.section-pad{padding:6rem 0}}
+
+  /* Borders & shadows */
+  .b4{border:4px solid var(--fg)}
+  .b2{border:2px solid var(--fg)}
+  .sh4{box-shadow:4px 4px 0 0 var(--fg)}
+  .sh8{box-shadow:8px 8px 0 0 var(--fg)}
+  .sh12{box-shadow:12px 12px 0 0 var(--fg)}
+  .sh16{box-shadow:16px 16px 0 0 var(--fg)}
+
+  /* Nav */
+  nav{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:4px solid var(--fg)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px;max-width:80rem;margin:0 auto;padding:0 1.5rem}
+  .logo{background:var(--secondary);border:4px solid var(--fg);padding:.4rem .9rem;font-weight:700;font-size:1.1rem;text-transform:uppercase;letter-spacing:-0.02em;transform:rotate(-2deg);box-shadow:4px 4px 0 0 var(--fg)}
+  .nav-links{display:none;gap:.5rem;align-items:center}
+  @media(min-width:768px){.nav-links{display:flex}}
+  .nav-links a{color:var(--fg);text-decoration:none;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;padding:.5rem .75rem;transition:all .1s ease-out;border:2px solid transparent}
+  .nav-links a:hover{background:var(--accent);color:var(--white);border-color:var(--fg);box-shadow:4px 4px 0 0 var(--fg)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-family:"Space Grotesk",sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;font-size:.85rem;cursor:pointer;font-size:.85rem;transition:all .1s ease-out;text-decoration:none;line-height:1;white-space:nowrap}
+  .btn-accent{background:var(--accent);color:var(--white);border:4px solid var(--fg);padding:1rem 1.5rem;box-shadow:6px 6px 0 0 var(--fg)}
+  .btn-accent:hover{box-shadow:8px 8px 0 0 var(--fg);transform:translate(-2px,-2px)}
+  .btn-accent:active{transform:translate(2px,2px);box-shadow:2px 2px 0 0 var(--fg)}
+  .btn-yellow{background:var(--secondary);color:var(--fg);border:4px solid var(--fg);padding:1rem 1.5rem;box-shadow:6px 6px 0 0 var(--fg)}
+  .btn-yellow:hover{box-shadow:8px 8px 0 0 var(--fg);transform:translate(-2px,-2px)}
+  .btn-yellow:active{transform:translate(2px,2px);box-shadow:2px 2px 0 0 var(--fg)}
+  .btn-outline{background:var(--white);color:var(--fg);border:4px solid var(--fg);padding:1rem 1.5rem;box-shadow:6px 6px 0 0 var(--fg)}
+  .btn-outline:hover{box-shadow:8px 8px 0 0 var(--fg);transform:translate(-2px,-2px)}
+  .btn-outline:active{transform:translate(2px,2px);box-shadow:2px 2px 0 0 var(--fg)}
+
+  /* HERO */
+  .hero{padding:3rem 0 5rem;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1fr;gap:3rem;align-items:center}
+  @media(min-width:1024px){.hero-grid{grid-template-columns:1.1fr 1fr}}
+  .hero h1{font-weight:700;font-size:clamp(3rem,10vw,7rem);line-height:.85;letter-spacing:-0.04em;text-transform:uppercase}
+  .hero h1 .stroke{-webkit-text-stroke:2px var(--fg);color:transparent}
+  .hero h1 .red{color:var(--accent);-webkit-text-stroke:2px var(--fg)}
+  .hero h1 .blk-box{background:var(--fg);color:var(--secondary);padding:0 .2em;display:inline-block;transform:rotate(-2deg)}
+  .hero-blocks{margin-top:1.5rem;display:flex;flex-direction:column;gap:1rem;max-width:32rem}
+  .hero-block{padding:.75rem 1.25rem;font-weight:700;text-transform:uppercase;font-size:.9rem;letter-spacing:0.05em;box-shadow:4px 4px 0 0 var(--fg)}
+  .hero-block.r1{background:var(--secondary);transform:rotate(-1deg);align-self:flex-start}
+  .hero-block.r2{background:var(--muted);transform:rotate(1deg);align-self:flex-start;margin-left:1.5rem}
+  .hero-block.r3{background:var(--white);transform:rotate(-1deg);align-self:flex-start}
+  .hero-sub{font-size:1.15rem;font-weight:500;margin-top:1.5rem;max-width:28rem}
+  .hero-ctas{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap}
+  .hero-chaos{position:relative;min-height:360px;display:none}
+  @media(min-width:1024px){.hero-chaos{display:block}}
+  .chaos-card{position:absolute;border:4px solid var(--fg);box-shadow:8px 8px 0 0 var(--fg)}
+  .chaos-1{width:200px;height:200px;background:var(--accent);top:20px;left:40px;transform:rotate(-5deg);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:5rem;color:var(--white);text-shadow:4px 4px 0 var(--fg)}
+  .chaos-2{width:160px;height:160px;background:var(--secondary);top:140px;right:20px;transform:rotate(6deg);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;text-transform:uppercase;text-align:center}
+  .chaos-3{width:140px;height:90px;background:var(--muted);bottom:20px;left:120px;transform:rotate(-3deg);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;text-transform:uppercase}
+  .chaos-star{position:absolute;top:-20px;right:60px;width:60px;height:60px;background:var(--white);border:4px solid var(--fg);transform:rotate(15deg);display:flex;align-items:center;justify-content:center;font-size:1.8rem;box-shadow:4px 4px 0 0 var(--fg);animation:spin-slow 10s linear infinite}
+  @keyframes spin-slow{to{transform:rotate(375deg)}}
+  .hero-trust{margin-top:2.5rem;font-weight:700;text-transform:uppercase;font-size:.8rem;letter-spacing:0.1em;display:flex;align-items:center;gap:.75rem}
+  .hero-trust .stars{color:var(--fg);font-size:1.1rem}
+
+  /* Marquee trust bar */
+  .marquee{background:var(--fg);color:var(--bg);border-top:4px solid var(--fg);border-bottom:4px solid var(--fg);overflow:hidden;padding:1rem 0}
+  .marquee-track{display:flex;gap:3rem;white-space:nowrap;animation:scroll 20s linear infinite;font-weight:700;text-transform:uppercase;font-size:1.25rem;letter-spacing:0.05em}
+  .marquee-track span{display:flex;align-items:center;gap:3rem}
+  .marquee-track span::after{content:"★";color:var(--secondary)}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  /* Section header */
+  .sec-head{text-align:center;max-width:44rem;margin:0 auto 3.5rem}
+  .sec-tag{display:inline-block;background:var(--secondary);border:4px solid var(--fg);padding:.4rem 1rem;font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:0.1em;box-shadow:4px 4px 0 0 var(--fg);transform:rotate(-1deg);margin-bottom:1.5rem}
+  .sec-title{font-weight:700;font-size:clamp(2.25rem,6vw,4rem);letter-spacing:-0.03em;line-height:.95;text-transform:uppercase}
+  .sec-title .red{color:var(--accent);-webkit-text-stroke:2px var(--fg)}
+  .sec-desc{font-size:1.1rem;font-weight:500;margin-top:1rem;max-width:36rem;margin-left:auto;margin-right:auto}
+
+  /* Stats - black bg */
+  .stats{background:var(--fg);border-top:4px solid var(--fg);border-bottom:4px solid var(--fg);padding:3rem 0}
+  .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+  @media(min-width:768px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+  .stat{background:var(--bg);color:var(--fg);border:4px solid var(--white);padding:1.75rem 1rem;text-align:center;transition:all .15s ease-out}
+  .stat:hover{background:var(--accent);color:var(--white);transform:translate(-3px,-3px);box-shadow:6px 6px 0 0 var(--white)}
+  .stat-num{font-weight:700;font-size:clamp(2.5rem,6vw,4rem);line-height:1;letter-spacing:-0.03em}
+  .stat-label{font-weight:700;font-size:.7rem;text-transform:uppercase;letter-spacing:0.1em;margin-top:.5rem}
+  .stat-bar{height:6px;background:var(--fg);margin-top:.75rem;width:60%;margin-left:auto;margin-right:auto}
+  .stat:hover .stat-bar{background:var(--white)}
+
+  /* Features */
+  .feat-grid{display:grid;grid-template-columns:1fr;gap:1.5rem}
+  @media(min-width:768px){.feat-grid{grid-template-columns:repeat(3,1fr)}}
+  .feat-card{background:var(--white);border:4px solid var(--fg);box-shadow:8px 8px 0 0 var(--fg);padding:1.75rem;transition:all .2s ease-out}
+  .feat-card:hover{transform:translate(-4px,-4px);box-shadow:12px 12px 0 0 var(--fg)}
+  .feat-head{display:flex;align-items:center;justify-content:space-between;border-bottom:4px solid var(--fg);padding-bottom:1rem;margin-bottom:1rem}
+  .feat-ic{width:48px;height:48px;border:4px solid var(--fg);display:flex;align-items:center;justify-content:center}
+  .feat-ic.r{background:var(--accent)}
+  .feat-ic.y{background:var(--secondary)}
+  .feat-ic.v{background:var(--muted)}
+  .feat-ic svg{width:24px;height:24px;stroke:var(--fg);stroke-width:3;fill:none}
+  .feat-num{background:var(--fg);color:var(--bg);font-weight:700;font-size:.8rem;padding:.25rem .6rem;text-transform:uppercase}
+  .feat-card h3{font-weight:700;font-size:1.4rem;text-transform:uppercase;letter-spacing:-0.01em;margin-bottom:.5rem}
+  .feat-card p{font-weight:500;font-size:.95rem}
+
+  /* How it works */
+  .how-grid{display:grid;grid-template-columns:1fr;gap:2rem;position:relative}
+  @media(min-width:768px){.how-grid{grid-template-columns:repeat(3,1fr)}}
+  .how-dash{display:none;position:absolute;top:40px;left:20%;right:20%;border-top:4px dashed var(--fg);z-index:0}
+  @media(min-width:768px){.how-dash{display:block}}
+  .how-step{text-align:center;position:relative;z-index:1}
+  .how-badge{width:80px;height:80px;background:var(--accent);border:4px solid var(--fg);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-weight:700;font-size:2rem;color:var(--white);text-shadow:3px 3px 0 var(--fg);transform:rotate(-5deg);transition:transform .2s ease-out;box-shadow:6px 6px 0 0 var(--fg)}
+  .how-step:nth-child(2) .how-badge{background:var(--secondary);color:var(--fg);text-shadow:none;transform:rotate(3deg)}
+  .how-step:nth-child(3) .how-badge{background:var(--muted);transform:rotate(-3deg)}
+  .how-step:hover .how-badge{transform:rotate(12deg)}
+  .how-step h3{font-weight:700;font-size:1.5rem;text-transform:uppercase;margin-bottom:.5rem}
+  .how-step p{font-weight:500;font-size:.95rem;max-width:18rem;margin:0 auto}
+
+  /* Benefits */
+  .benefits-grid{display:grid;grid-template-columns:1fr;gap:2rem}
+  @media(min-width:1024px){.benefits-grid{grid-template-columns:1fr 1fr}}
+  .ben-left{background:var(--accent);border:4px solid var(--fg);box-shadow:12px 12px 0 0 var(--fg);padding:3rem;position:relative;overflow:hidden;color:var(--white)}
+  .ben-left::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.25) 2px,transparent 2.5px);background-size:24px 24px;pointer-events:none}
+  .ben-left h3{font-weight:700;font-size:clamp(2rem,5vw,3rem);text-transform:uppercase;line-height:.95;position:relative;text-shadow:4px 4px 0 var(--fg)}
+  .ben-sub-card{background:var(--white);color:var(--fg);border:4px solid var(--fg);box-shadow:6px 6px 0 0 var(--fg);padding:1rem 1.25rem;margin-top:1.5rem;transform:rotate(-2deg);font-weight:700;text-transform:uppercase;font-size:.85rem;position:relative}
+  .ben-right{background:var(--bg);padding:1rem 0}
+  .ben-list{list-style:none;display:flex;flex-direction:column;gap:1.25rem}
+  .ben-item{display:flex;gap:1rem;align-items:start;font-weight:700;font-size:1.1rem}
+  .ben-bullet{width:18px;height:18px;background:var(--fg);flex-shrink:0;margin-top:.25rem;transition:background .1s}
+  .ben-item:hover .ben-bullet{background:var(--accent)}
+  .ben-item p{font-weight:500;font-size:.95rem;margin-top:.2rem}
+
+  /* Pricing */
+  .price-grid{display:grid;grid-template-columns:1fr;gap:2rem;align-items:start}
+  @media(min-width:768px){.price-grid{grid-template-columns:repeat(3,1fr)}}
+  .price-card{background:var(--white);border:4px solid var(--fg);box-shadow:12px 12px 0 0 var(--fg);transition:all .2s ease-out;position:relative}
+  .price-card:hover{transform:translate(-4px,-4px);box-shadow:16px 16px 0 0 var(--fg)}
+  .price-card.highlight{transform:scale(1.03)}
+  @media(min-width:768px){.price-card.highlight{transform:scale(1.05) translateY(-1rem)}}
+  .price-card.highlight:hover{transform:scale(1.05) translate(-4px,-1rem)}
+  .price-top{background:var(--secondary);border-bottom:4px solid var(--fg);padding:1.25rem 1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;display:flex;justify-content:space-between;align-items:center}
+  .price-card.highlight .price-top{background:var(--fg);color:var(--bg)}
+  .price-badge{background:var(--accent);color:var(--white);border:2px solid var(--fg);padding:.2rem .5rem;font-size:.65rem}
+  .price-card.highlight .price-badge{background:var(--secondary);color:var(--fg)}
+  .price-body{padding:1.75rem 1.5rem}
+  .price-amount{font-weight:700;font-size:clamp(2.5rem,5vw,3.75rem);line-height:1;letter-spacing:-0.03em}
+  .price-amount span{font-size:1rem;font-weight:500}
+  .price-desc{font-weight:500;font-size:.95rem;margin:.75rem 0 1.25rem}
+  .price-features{list-style:none;margin-bottom:1.5rem;display:flex;flex-direction:column;gap:.6rem}
+  .price-features li{display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:.9rem}
+  .price-check{width:20px;height:20px;background:var(--fg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .price-check svg{width:12px;height:12px;stroke:var(--bg);stroke-width:3;fill:none}
+  .price-card .btn{width:100%}
+
+  /* Testimonials marquee */
+  .tests{overflow:hidden;padding:3rem 0;position:relative}
+  .tests::before,.tests::after{content:"";position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none}
+  .tests::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
+  .tests::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
+  .test-track{display:flex;gap:1.5rem;width:max-content;animation:scroll2 30s linear infinite}
+  @keyframes scroll2{to{transform:translateX(-50%)}}
+  .tests:hover .test-track{animation-play-state:paused}
+  .test-card{width:340px;background:var(--white);border:4px solid var(--fg);box-shadow:8px 8px 0 0 var(--fg);padding:1.75rem;flex-shrink:0}
+  .test-stars{font-size:1.4rem;color:var(--secondary);-webkit-text-stroke:1px var(--fg);letter-spacing:3px;margin-bottom:1rem}
+  .test-quote{font-weight:700;font-size:1rem;line-height:1.4;margin-bottom:1.25rem}
+  .test-author{border-top:4px solid var(--fg);padding-top:.75rem;display:flex;align-items:center;gap:.75rem}
+  .test-avatar{width:42px;height:42px;border:4px solid var(--fg);flex-shrink:0}
+  .test-avatar.r{background:var(--accent)}
+  .test-avatar.y{background:var(--secondary)}
+  .test-avatar.v{background:var(--muted)}
+  .test-name{font-weight:700;font-size:.9rem;text-transform:uppercase}
+  .test-role{font-weight:500;font-size:.75rem}
+
+  /* FAQ */
+  .faq{max-width:52rem;margin:0 auto}
+  .faq-item{background:var(--white);border:4px solid var(--fg);box-shadow:6px 6px 0 0 var(--fg);margin-bottom:1rem;transition:box-shadow .2s}
+  .faq-item.open{box-shadow:8px 8px 0 0 var(--fg)}
+  .faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 1.5rem;cursor:pointer;font-weight:700;font-size:1.05rem;text-transform:uppercase;letter-spacing:-0.01em}
+  .faq-ic{width:28px;height:28px;background:var(--secondary);border:3px solid var(--fg);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.2rem;flex-shrink:0;transition:transform .2s}
+  .faq-item.open .faq-ic{transform:rotate(45deg);background:var(--accent);color:var(--white)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease-out}
+  .faq-item.open .faq-a{max-height:200px}
+  .faq-a-inner{padding:0 1.5rem 1.25rem;background:var(--muted);border-top:4px solid var(--fg);margin:0 -1.5rem;padding:1.25rem 1.5rem;font-weight:500;font-size:.95rem}
+
+  /* Footer - yellow */
+  footer{background:var(--secondary);border-top:8px solid var(--fg);padding:4rem 0 2rem;position:relative}
+  .footer-grid{display:grid;grid-template-columns:1fr;gap:2.5rem;margin-bottom:3rem}
+  @media(min-width:768px){.footer-grid{grid-template-columns:2fr 1fr 1fr 1fr}}
+  .footer-logo{background:var(--fg);color:var(--secondary);border:4px solid var(--fg);padding:.5rem 1rem;font-weight:700;font-size:1.5rem;text-transform:uppercase;display:inline-block;transform:rotate(-2deg);box-shadow:6px 6px 0 0 var(--fg)}
+  .footer-brand p{font-weight:500;font-size:.95rem;margin-top:1.25rem;max-width:22rem}
+  .footer-col h4{font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:4px solid var(--fg)}
+  .footer-col a{display:block;color:var(--fg);text-decoration:none;font-weight:700;font-size:.9rem;text-transform:uppercase;margin-bottom:.6rem;padding:.3rem .5rem;transition:all .1s;border:2px solid transparent}
+  .footer-col a:hover{background:var(--fg);color:var(--bg)}
+  .socials{display:flex;gap:.75rem;margin-top:1.5rem}
+  .social{width:42px;height:42px;background:var(--white);border:4px solid var(--fg);display:flex;align-items:center;justify-content:center;transition:all .1s;box-shadow:4px 4px 0 0 var(--fg)}
+  .social:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 0 var(--fg)}
+  .social:active{transform:translate(2px,2px);box-shadow:2px 2px 0 0 var(--fg)}
+  .social svg{width:18px;height:18px;stroke:var(--fg);stroke-width:2.5;fill:none}
+  .footer-bottom{border-top:4px solid var(--fg);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+  .footer-bottom p{font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:0.05em}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease-out,transform .5s ease-out}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  @media(prefers-reduced-motion:reduce){.chaos-star,.marquee-track,.test-track{animation:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">RAW/CO</div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#" class="btn btn-accent">Get raw →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="reveal">
+        <div class="hero-blocks">
+          <span class="hero-block r1 b4">★ New drop — v3.0</span>
+          <span class="hero-block r2 b4">No fluff. All punch.</span>
+          <span class="hero-block r3 b4">Built loud, on purpose.</span>
+        </div>
+        <h1>MAKE<br><span class="red">LOUD</span><br><span class="blk-box">WEBSITES</span></h1>
+        <p class="hero-sub">The design system that refuses to be subtle. Thick borders, hard shadows, clashing colors, and zero apologies. Built for people who'd rather scream than whisper.</p>
+        <div class="hero-ctas">
+          <a href="#" class="btn btn-accent">Start building →</a>
+          <a href="#" class="btn btn-yellow">See examples</a>
+        </div>
+        <div class="hero-trust"><span class="stars">★★★★★</span> Loved by 9,000+ chaos-friendly devs</div>
+      </div>
+      <div class="hero-chaos reveal">
+        <div class="chaos-card chaos-1">★</div>
+        <div class="chaos-card chaos-2">100%<br>BORDER</div>
+        <div class="chaos-card chaos-3">0 BLUR</div>
+        <div class="chaos-star">✦</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>BORDER-4 FOREVER</span><span>HARD SHADOWS ONLY</span><span>NO BLUR NO PROBLEM</span><span>RAW HTML ENERGY</span><span>STICKER AESTHETIC</span><span>BORDER-4 FOREVER</span><span>HARD SHADOWS ONLY</span><span>NO BLUR NO PROBLEM</span><span>RAW HTML ENERGY</span><span>STICKER AESTHETIC</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat reveal"><div class="stat-num">9K+</div><div class="stat-label">BUILT LOUD</div><div class="stat-bar"></div></div>
+      <div class="stat reveal"><div class="stat-num">4PX</div><div class="stat-label">DEFAULT BORDER</div><div class="stat-bar"></div></div>
+      <div class="stat reveal"><div class="stat-num">0</div><div class="stat-label">BLUR RADIUS</div><div class="stat-bar"></div></div>
+      <div class="stat reveal"><div class="stat-num">100%</div><div class="stat-label">UNAPOLOGETIC</div><div class="stat-bar"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section-pad" id="features">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">★ The Toolkit</span>
+      <h1 class="sec-title">BUILT TO BE<br><span class="red">SEEN</span>.</h1>
+      <p class="sec-desc">Every element demands attention. Every border is 4px. Every shadow is solid ink. This is design with the volume turned all the way up.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card reveal">
+        <div class="feat-head">
+          <div class="feat-ic r"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <span class="feat-num">01</span>
+        </div>
+        <h3>Hard Shadows</h3>
+        <p>Solid offset shadows with zero blur. Every card casts a block of ink, not a soft glow. Real, physical, mechanical.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-head">
+          <div class="feat-ic y"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18"/><path d="M9 9h6v6H9z"/></svg></div>
+          <span class="feat-num">02</span>
+        </div>
+        <h3>Thick Borders</h3>
+        <p>If it doesn't have a border, it doesn't exist. 4px solid black on every visible element, no exceptions, no compromise.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-head">
+          <div class="feat-ic v"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></div>
+          <span class="feat-num">03</span>
+        </div>
+        <h3>Clashing Colors</h3>
+        <p>Hot red, vivid yellow, soft violet. High-saturation primary colors that feel like unmixed paint straight from the tube.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-head">
+          <div class="feat-ic r"><svg viewBox="0 0 24 24"><path d="M16 4l4 4-12 12H4v-4z"/></svg></div>
+          <span class="feat-num">04</span>
+        </div>
+        <h3>Sticker Layering</h3>
+        <p>Rotated text blocks, overlapping badges, and absolutely positioned elements. The screen is a collage board, not a glass surface.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-head">
+          <div class="feat-ic y"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg></div>
+          <span class="feat-num">05</span>
+        </div>
+        <h3>Texture Overload</h3>
+        <p>Halftone dots, graph-paper grids, and noise textures. Backgrounds are never flat — visual density creates energy.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-head">
+          <div class="feat-ic v"><svg viewBox="0 0 24 24"><path d="M6 4l12 8-12 8z"/></svg></div>
+          <span class="feat-num">06</span>
+        </div>
+        <h3>Push Buttons</h3>
+        <p>Clicks feel mechanical. Buttons press down to cover their shadow, cards lift up as shadow grows. Satisfying, arcade-game snap.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section-pad" style="background:var(--bg)">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">★ The Process</span>
+      <h1 class="sec-title">THREE STEPS,<br>ZERO SUBTLETY.</h1>
+    </div>
+    <div class="how-grid">
+      <div class="how-dash"></div>
+      <div class="how-step reveal">
+        <div class="how-badge">1</div>
+        <h3>Border it</h3>
+        <p>Wrap every element in 4px of solid black. Structure is not implied — it is enforced with hard-edged lines.</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-badge">2</div>
+        <h3>Shadow it</h3>
+        <p>Offset a solid block of ink at 45 degrees. No blur, no spread, no diffusion. Just weight and presence.</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-badge">3</div>
+        <h3>Rotate it</h3>
+        <p>Tilt your stickers a few degrees. Break the grid on purpose. Organized chaos is the whole point.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section-pad" style="padding-top:0">
+  <div class="container">
+    <div class="benefits-grid">
+      <div class="ben-left reveal">
+        <h3>STAND OUT<br>OR GET<br>IGNORED.</h3>
+        <div class="ben-sub-card">★ Loud is a feature, not a bug</div>
+      </div>
+      <div class="ben-right reveal">
+        <ul class="ben-list">
+          <li class="ben-item"><span class="ben-bullet"></span><div><div>Instantly recognizable</div><p>Nobody confuses a brutalist site with a generic template. You look like nothing else.</p></div></li>
+          <li class="ben-item"><span class="ben-bullet"></span><div><div>Memorable by design</div><p>High contrast and bold geometry stick in the mind long after the tab closes.</p></div></li>
+          <li class="ben-item"><span class="ben-bullet"></span><div><div>Fast to build</div><p>No complex shadows, no gradient systems, no blur math. Borders and offsets, done.</p></div></li>
+          <li class="ben-item"><span class="ben-bullet"></span><div><div>Anti-corporate energy</div><p>Reject the polished SaaS uniform. Show personality, humor, and a little rebellion.</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section-pad" id="pricing" style="background:var(--bg)">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">★ Pricing</span>
+      <h1 class="sec-title">PAY LOUD,<br><span class="red">BUILD LOUD</span>.</h1>
+      <p class="sec-desc">Pick a plan. Get building. Make something that refuses to blend in.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card reveal">
+        <div class="price-top"><span>Starter</span></div>
+        <div class="price-body">
+          <div class="price-amount">$0<span>/mo</span></div>
+          <p class="price-desc">For solo chaos-makers getting started.</p>
+          <ul class="price-features">
+            <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>3 projects</li>
+            <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Community components</li>
+            <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Basic textures</li>
+          </ul>
+          <a href="#" class="btn btn-outline">Start free</a>
+        </div>
+      </div>
+      <div class="price-card highlight reveal">
+        <div class="price-top"><span>Pro</span><span class="price-badge">★ POPULAR</span></div>
+        <div class="price-body">
+          <div class="price-amount">$19<span>/mo</span></div>
+          <p class="price-desc">For builders shipping loud, daily.</p>
+          <ul class="price-features">
+            <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Unlimited projects</li>
+            <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>All components &amp; textures</li>
+            <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Priority support</li>
+            <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Custom color packs</li>
+          </ul>
+          <a href="#" class="btn btn-accent">Go Pro →</a>
+        </div>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-top"><span>Studio</span></div>
+        <div class="price-body">
+          <div class="price-amount">$49<span>/mo</span></div>
+          <p class="price-desc">For agencies making noise at scale.</p>
+          <ul class="price-features">
+            <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Everything in Pro</li>
+            <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Team workspace</li>
+            <li><span class="price-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>White-label license</li>
+          </ul>
+          <a href="#" class="btn btn-outline">Get Studio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS MARQUEE -->
+<section class="tests" id="testimonials">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">★ Reviews</span>
+      <h1 class="sec-title">PEOPLE ARE<br><span class="red">YELLING</span>.</h1>
+    </div>
+  </div>
+  <div class="test-track">
+    <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-quote">"Switched my whole portfolio to RAW/CO overnight. Got three client leads in a week because the site actually got noticed. Loud works."</p><div class="test-author"><div class="test-avatar r"></div><div><div class="test-name">Pia Stokes</div><div class="test-role">Freelance Designer</div></div></div></div>
+    <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-quote">"My SaaS looked like every other SaaS. Now it looks like a punk zine and conversions went UP. The push-button hovers are stupidly satisfying."</p><div class="test-author"><div class="test-avatar y"></div><div><div class="test-name">Theo Ng</div><div class="test-role">Indie Hacker</div></div></div></div>
+    <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-quote">"Finally a design system with a personality. Thick borders and hard shadows only sounds simple until you see how good it looks in motion."</p><div class="test-author"><div class="test-avatar v"></div><div><div class="test-name">Mira Costa</div><div class="test-role">Creative Director</div></div></div></div>
+    <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-quote">"Built my agency site in an afternoon. The marquee, the rotated badges, the clashing yellow footer — clients keep asking who designed it."</p><div class="test-author"><div class="test-avatar r"></div><div><div class="test-name">Rex Bauer</div><div class="test-role">Agency Owner</div></div></div></div>
+    <!-- duplicate for seamless loop -->
+    <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-quote">"Switched my whole portfolio to RAW/CO overnight. Got three client leads in a week because the site actually got noticed. Loud works."</p><div class="test-author"><div class="test-avatar r"></div><div><div class="test-name">Pia Stokes</div><div class="test-role">Freelance Designer</div></div></div></div>
+    <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-quote">"My SaaS looked like every other SaaS. Now it looks like a punk zine and conversions went UP. The push-button hovers are stupidly satisfying."</p><div class="test-author"><div class="test-avatar y"></div><div><div class="test-name">Theo Ng</div><div class="test-role">Indie Hacker</div></div></div></div>
+    <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-quote">"Finally a design system with a personality. Thick borders and hard shadows only sounds simple until you see how good it looks in motion."</p><div class="test-author"><div class="test-avatar v"></div><div><div class="test-name">Mira Costa</div><div class="test-role">Creative Director</div></div></div></div>
+    <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-quote">"Built my agency site in an afternoon. The marquee, the rotated badges, the clashing yellow footer — clients keep asking who designed it."</p><div class="test-author"><div class="test-avatar r"></div><div><div class="test-name">Rex Bauer</div><div class="test-role">Agency Owner</div></div></div></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-pad" id="faq">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">★ FAQ</span>
+      <h1 class="sec-title">QUESTIONS,<br>ANSWERED LOUD.</h1>
+    </div>
+    <div class="faq">
+      <div class="faq-item reveal">
+        <div class="faq-q">Isn't this just ugly on purpose?<span class="faq-ic">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">It's "ugly-cool" — ugly by traditional polished standards, cool by rebellious intention. Neo-brutalism celebrates rawness as honesty. It requires confidence to pull off, but when it works, it's unforgettable. There's no room for timidity here.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Will it work for my serious business?<span class="faq-ic">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Depends on your brand. Creative agencies, indie products, dev tools, and personal portfolios thrive with it. A bank or law firm? Maybe not. But plenty of "serious" companies use brutalism to signal they're different. The contrast is the point.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Is it accessible?<span class="faq-ic">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Yes. High contrast is built in — black on cream, white on black, black on yellow all pass WCAG AA easily. We use thick focus rings and clear interactive states. The loud aesthetic doesn't sacrifice usability; it enhances visibility.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Do I need to know Tailwind?<span class="faq-ic">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Nope. RAW/CO ships as plain HTML and CSS that works anywhere. No build step, no framework lock-in. Copy the components, tweak the colors, ship the site. The whole philosophy is raw and default — web 1.0 energy, modern execution.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">RAW/CO</div>
+        <p>The design system that refuses to be subtle. Thick borders, hard shadows, clashing colors. Built loud, on purpose, since 2024.</p>
+        <div class="socials">
+          <a href="#" class="social" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="#" class="social" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+          <a href="#" class="social" aria-label="Dribbble"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 2c4 4 6 8 6 14M2 12c6-2 12-2 18 2M3 18c5-4 12-4 18 0"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Product</h4><a href="#">Components</a><a href="#">Templates</a><a href="#">Textures</a><a href="#">Changelog</a></div>
+      <div class="footer-col"><h4>Resources</h4><a href="#">Docs</a><a href="#">Showcase</a><a href="#">Community</a><a href="#">Blog</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="#">About</a><a href="#">Manifesto</a><a href="#">Contact</a><a href="#">Legal</a></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 RAW/CO — Built loud, on purpose.</p>
+      <p>v3.0 ★ NO BLUR EDITION</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  document.querySelectorAll('.faq-q').forEach(q=>{
+    q.addEventListener('click',()=>{
+      const item=q.parentElement;
+      const wasOpen=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen)item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>

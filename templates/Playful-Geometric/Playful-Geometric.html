@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Playful Geometric — Stable Grid, Wild Decoration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ===== Design Tokens ===== */
+  :root{
+    --bg:#FFFDF5;
+    --fg:#1E293B;
+    --muted:#F1F5F9;
+    --muted-fg:#64748B;
+    --accent:#8B5CF6;
+    --accent-fg:#FFFFFF;
+    --secondary:#F472B6;
+    --tertiary:#FBBF24;
+    --quaternary:#34D399;
+    --border:#E2E8F0;
+    --card:#FFFFFF;
+    --ring:#8B5CF6;
+    --pop:4px 4px 0px 0px #1E293B;
+    --pop-lg:6px 6px 0px 0px #1E293B;
+    --pop-sm:2px 2px 0px 0px #1E293B;
+    --bounce:cubic-bezier(0.34,1.56,0.64,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    background-image:radial-gradient(#1E293B 0.8px,transparent 0.8px);
+    background-size:24px 24px;
+    background-position:0 0;
+    color:var(--fg);
+    font-family:'Plus Jakarta Sans',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  .font-display{font-family:'Outfit',sans-serif;}
+
+  /* ===== Layout ===== */
+  .container{max-width:1150px;margin:0 auto;padding:0 24px;}
+  section{padding:96px 0;}
+  a{color:inherit;text-decoration:none;}
+
+  /* ===== Header ===== */
+  header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:2px solid var(--fg);}
+  .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
+  .logo{display:flex;align-items:center;gap:12px;font-family:'Outfit';font-weight:800;font-size:1.4rem;}
+  .logo-mark{
+    width:44px;height:44px;border-radius:50%;background:var(--tertiary);
+    border:2px solid var(--fg);box-shadow:var(--pop-sm);
+    display:grid;place-items:center;color:var(--fg);
+  }
+  nav ul{display:flex;list-style:none;gap:8px;align-items:center;}
+  nav a{padding:10px 18px;border-radius:999px;font-weight:600;font-size:.92rem;color:var(--fg);transition:all .3s var(--bounce);}
+  nav a:hover{background:var(--tertiary);transform:translateY(-2px);}
+  .menu-toggle{display:none;width:48px;height:48px;border-radius:16px;background:var(--accent);border:2px solid var(--fg);cursor:pointer;color:#fff;font-size:1.4rem;box-shadow:var(--pop-sm);}
+
+  /* ===== Buttons ===== */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 28px;border-radius:999px;font-family:'Outfit';font-weight:700;font-size:1rem;
+    cursor:pointer;border:2px solid var(--fg);transition:all .3s var(--bounce);
+    box-shadow:var(--pop);position:relative;
+  }
+  .btn-primary{background:var(--accent);color:#fff;}
+  .btn-primary:hover{transform:translate(-2px,-2px);box-shadow:var(--pop-lg);background:#9d6fff;}
+  .btn-primary:active{transform:translate(2px,2px);box-shadow:var(--pop-sm);}
+  .btn-secondary{background:transparent;color:var(--fg);box-shadow:none;}
+  .btn-secondary:hover{background:var(--tertiary);transform:translateY(-2px);}
+  .btn .btn-ic{width:28px;height:28px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--accent);}
+
+  /* ===== Hero ===== */
+  .hero{position:relative;padding:80px 0 100px;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;position:relative;}
+  .hero-deco-circle{position:absolute;width:340px;height:340px;border-radius:50%;background:var(--tertiary);top:-40px;left:-80px;z-index:0;opacity:0.6;}
+  .hero-deco-tri{position:absolute;width:0;height:0;border-left:40px solid transparent;border-right:40px solid transparent;border-bottom:70px solid var(--secondary);top:30%;right:8%;z-index:0;opacity:0.5;transform:rotate(15deg);animation:wiggle 4s ease-in-out infinite;}
+  .hero-deco-sq{position:absolute;width:50px;height:50px;background:var(--quaternary);border:2px solid var(--fg);bottom:10%;left:42%;z-index:0;transform:rotate(20deg);animation:wiggle 5s ease-in-out infinite .5s;}
+  .hero-content{position:relative;z-index:1;}
+  .hero h1{font-family:'Outfit';font-weight:800;font-size:clamp(2.6rem,5.5vw,4.5rem);line-height:1.05;letter-spacing:-0.02em;margin-bottom:24px;}
+  .hero h1 .hl{position:relative;display:inline-block;}
+  .hero h1 .hl::after{content:"";position:absolute;left:-4px;right:-4px;bottom:4px;height:14px;background:var(--tertiary);z-index:-1;transform:skewX(-8deg);}
+  .hero h1 .pop-pink{color:var(--secondary);}
+  .hero p{font-size:1.15rem;color:var(--muted-fg);max-width:500px;margin-bottom:36px;}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:40px;}
+  .hero-stats{display:flex;gap:20px;flex-wrap:wrap;}
+  .hero-stat{display:flex;align-items:center;gap:10px;font-weight:600;font-size:.95rem;}
+  .hero-stat .num{font-family:'Outfit';font-weight:800;font-size:1.5rem;color:var(--accent);}
+
+  .hero-visual{position:relative;z-index:1;}
+  .hero-img-box{
+    width:100%;aspect-ratio:1;border-radius:30% 70% 70% 30% / 30% 30% 70% 70%;
+    background:var(--card);border:2px solid var(--fg);box-shadow:var(--pop-lg);
+    display:grid;place-items:center;position:relative;overflow:hidden;
+  }
+  .hero-img-box .dots{position:absolute;inset:0;background-image:radial-gradient(#1E293B 1px,transparent 1px);background-size:16px 16px;opacity:0.08;}
+  .hero-img-box .emoji{font-size:7rem;position:relative;z-index:1;}
+  .float-shape{position:absolute;border:2px solid var(--fg);}
+  .float-shape.s1{width:60px;height:60px;border-radius:50%;background:var(--accent);top:-20px;right:-10px;box-shadow:var(--pop-sm);animation:float 3s ease-in-out infinite;}
+  .float-shape.s2{width:50px;height:50px;background:var(--secondary);bottom:30px;left:-20px;box-shadow:var(--pop-sm);transform:rotate(45deg);animation:float 4s ease-in-out infinite .5s;}
+  .float-shape.s3{width:0;height:0;border-left:25px solid transparent;border-right:25px solid transparent;border-bottom:44px solid var(--quaternary);border-top:0;border-left-width:25px;border-right-width:25px;background:transparent;bottom:-15px;right:60px;animation:float 3.5s ease-in-out infinite 1s;}
+  @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-16px);}}
+  @keyframes wiggle{0%,100%{transform:rotate(0deg);}25%{transform:rotate(5deg);}75%{transform:rotate(-5deg);}}
+
+  /* ===== Section Header ===== */
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 56px;position:relative;}
+  .sec-head .squiggle{display:block;margin:0 auto 12px;}
+  .sec-tag{
+    display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:999px;
+    background:var(--accent);color:#fff;font-size:.78rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    border:2px solid var(--fg);box-shadow:var(--pop-sm);margin-bottom:20px;
+  }
+  .sec-head h2{font-family:'Outfit';font-weight:800;font-size:clamp(2rem,4.5vw,3.2rem);letter-spacing:-0.02em;line-height:1.05;margin-bottom:16px;}
+  .sec-head p{color:var(--muted-fg);font-size:1.1rem;}
+
+  /* ===== Stats (colorful shapes) ===== */
+  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .stat-shape{
+    border:2px solid var(--fg);box-shadow:var(--pop);padding:32px 20px;text-align:center;
+    transition:all .3s var(--bounce);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  }
+  .stat-shape:hover{transform:translate(-2px,-2px) rotate(-2deg);box-shadow:var(--pop-lg);}
+  .stat-shape.circle{border-radius:50%;aspect-ratio:1;background:var(--accent);color:#fff;}
+  .stat-shape.square{border-radius:16px;background:var(--secondary);color:#fff;}
+  .stat-shape.triangle{
+    background:transparent;border:none;position:relative;
+  }
+  .stat-shape.triangle .tri-inner{
+    width:100%;aspect-ratio:1;background:var(--tertiary);clip-path:polygon(50% 0%,0% 100%,100% 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:20%;
+    filter:drop-shadow(4px 4px 0 #1E293B);transition:all .3s var(--bounce);
+  }
+  .stat-shape.triangle:hover .tri-inner{transform:translate(-2px,-2px);filter:drop-shadow(6px 6px 0 #1E293B);}
+  .stat-shape.hexagon{background:transparent;border:none;}
+  .stat-shape.hexagon .hex-inner{
+    width:100%;aspect-ratio:1;background:var(--quaternary);
+    clip-path:polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    filter:drop-shadow(4px 4px 0 #1E293B);transition:all .3s var(--bounce);
+  }
+  .stat-shape.hexagon:hover .hex-inner{transform:translate(-2px,-2px);filter:drop-shadow(6px 6px 0 #1E293B);}
+  .stat-shape .num{font-family:'Outfit';font-weight:800;font-size:2rem;}
+  .stat-shape .lbl{font-size:.85rem;font-weight:600;}
+
+  /* ===== Features (bento with dashed connectors) ===== */
+  .feat-wrap{position:relative;}
+  .feat-svg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative;z-index:1;}
+  .feat-card{
+    background:var(--card);border:2px solid var(--fg);border-radius:16px;padding:32px 24px;
+    box-shadow:var(--pop);transition:all .3s var(--bounce);display:flex;flex-direction:column;gap:14px;position:relative;
+  }
+  .feat-card:hover{transform:rotate(-1deg) scale(1.02);box-shadow:var(--pop-lg);}
+  .feat-card .feat-icon{
+    width:56px;height:56px;border-radius:50%;border:2px solid var(--fg);
+    display:grid;place-items:center;color:#fff;margin-bottom:8px;
+    position:absolute;top:-28px;left:24px;box-shadow:var(--pop-sm);
+  }
+  .feat-card.violet .feat-icon{background:var(--accent);}
+  .feat-card.pink .feat-icon{background:var(--secondary);}
+  .feat-card.yellow .feat-icon{background:var(--tertiary);color:var(--fg);}
+  .feat-card.green .feat-icon{background:var(--quaternary);}
+  .feat-card.violet{background:#F5F0FF;}
+  .feat-card.pink{background:#FDF2F8;}
+  .feat-card.yellow{background:#FFFBEB;}
+  .feat-card.green{background:#ECFDF5;}
+  .feat-card h3{font-family:'Outfit';font-weight:700;font-size:1.25rem;margin-top:24px;}
+  .feat-card p{color:var(--muted-fg);font-size:.95rem;}
+
+  /* ===== How It Works (squiggly timeline) ===== */
+  .how-wrap{position:relative;}
+  .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;position:relative;z-index:1;}
+  .how-svg-line{position:absolute;top:30px;left:8%;right:8%;height:60px;z-index:0;pointer-events:none;}
+  .how-step{text-align:center;position:relative;}
+  .how-burst{
+    width:80px;height:80px;margin:0 auto 20px;position:relative;
+    background:var(--tertiary);
+    clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+    display:grid;place-items:center;
+    transition:all .3s var(--bounce);
+    filter:drop-shadow(3px 3px 0 #1E293B);
+  }
+  .how-step:nth-child(2) .how-burst{background:var(--secondary);}
+  .how-step:nth-child(3) .how-burst{background:var(--quaternary);}
+  .how-step:hover .how-burst{transform:scale(1.1) rotate(15deg);}
+  .how-burst .num{font-family:'Outfit';font-weight:800;font-size:1.6rem;color:var(--fg);}
+  .how-step h3{font-family:'Outfit';font-weight:700;font-size:1.25rem;margin-bottom:10px;}
+  .how-step p{color:var(--muted-fg);max-width:280px;margin:0 auto;font-size:.95rem;}
+
+  /* ===== Testimonials (speech bubbles) ===== */
+  .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .test-bubble{
+    background:var(--card);border:2px solid var(--fg);border-radius:24px 24px 24px 4px;
+    padding:32px;box-shadow:var(--pop);transition:all .3s var(--bounce);position:relative;
+    display:flex;flex-direction:column;gap:16px;
+  }
+  .test-bubble:nth-child(2){transform:rotate(1deg);background:#FFFBEB;}
+  .test-bubble:nth-child(3){transform:rotate(-1deg);background:#ECFDF5;}
+  .test-bubble:nth-child(4){transform:rotate(1deg);background:#FDF2F8;}
+  .test-bubble:nth-child(5){transform:rotate(-1deg);background:#F5F0FF;}
+  .test-bubble:nth-child(6){transform:rotate(1deg);}
+  .test-bubble:hover{transform:rotate(0deg) translate(-2px,-2px);box-shadow:var(--pop-lg);}
+  .test-bubble p{font-family:'Outfit';font-weight:500;font-size:1.1rem;line-height:1.5;}
+  .test-author{display:flex;align-items:center;gap:12px;margin-top:auto;}
+  .test-author .avatar{width:44px;height:44px;border-radius:50%;border:2px solid var(--fg);display:grid;place-items:center;font-family:'Outfit';font-weight:700;color:#fff;box-shadow:var(--pop-sm);}
+  .test-author .name{font-weight:700;font-size:.92rem;}
+  .test-author .role{font-size:.82rem;color:var(--muted-fg);}
+
+  /* ===== Pricing ===== */
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:center;}
+  .price-card{
+    background:var(--card);border:2px solid var(--fg);border-radius:24px;padding:36px 28px;
+    box-shadow:var(--pop);transition:all .3s var(--bounce);display:flex;flex-direction:column;gap:20px;position:relative;
+  }
+  .price-card:hover{transform:translate(-2px,-2px);box-shadow:var(--pop-lg);}
+  .price-card.featured{
+    transform:scale(1.08);border-style:dashed;border-width:3px;
+    background:#FFFBEB;box-shadow:6px 6px 0 var(--accent);
+  }
+  .price-card.featured:hover{transform:scale(1.08) translate(-2px,-2px);}
+  .price-star{
+    position:absolute;top:-26px;right:-12px;
+    width:90px;height:90px;background:var(--tertiary);
+    clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+    display:grid;place-items:center;text-align:center;
+    transform:rotate(15deg);
+    filter:drop-shadow(3px 3px 0 #1E293B);
+    font-family:'Outfit';font-weight:800;font-size:.65rem;color:var(--fg);line-height:1.1;padding-top:18px;
+  }
+  .price-card h3{font-family:'Outfit';font-weight:700;font-size:1.3rem;}
+  .price-card .price{font-family:'Outfit';font-weight:800;font-size:3rem;line-height:1;color:var(--accent);}
+  .price-card.featured .price{color:var(--secondary);}
+  .price-card .price small{font-size:1rem;font-weight:500;color:var(--muted-fg);}
+  .price-card > p{color:var(--muted-fg);font-size:.92rem;}
+  .price-card ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+  .price-card li{display:flex;align-items:center;gap:10px;font-size:.95rem;}
+  .price-card li .ck{width:26px;height:26px;border-radius:50%;background:var(--quaternary);border:2px solid var(--fg);display:grid;place-items:center;color:#fff;flex-shrink:0;box-shadow:var(--pop-sm);}
+  .price-card .btn{margin-top:auto;justify-content:center;}
+
+  /* ===== FAQ ===== */
+  .faq-wrap{max-width:780px;margin:0 auto;}
+  .faq-item{border:2px solid var(--fg);border-radius:16px;margin-bottom:16px;background:var(--card);box-shadow:var(--pop-sm);overflow:hidden;transition:all .3s var(--bounce);}
+  .faq-item:hover{box-shadow:var(--pop);}
+  .faq-item.open{background:#FFFBEB;}
+  .faq-item.open .faq-a{background-image:radial-gradient(#1E293B 0.8px,transparent 0.8px);background-size:16px 16px;background-position:0 0;}
+  .faq-q{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 26px;cursor:pointer;font-family:'Outfit';font-weight:700;font-size:1.1rem;}
+  .faq-q .arrow{transition:transform .3s var(--bounce);color:var(--accent);font-size:1.4rem;}
+  .faq-item.open .faq-q .arrow{transform:rotate(90deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .faq-item.open .faq-a{max-height:220px;}
+  .faq-a p{padding:0 26px 24px;color:var(--muted-fg);font-size:.98rem;line-height:1.7;}
+
+  /* ===== Final CTA (wavy edge) ===== */
+  .cta-section{position:relative;padding:0;}
+  .cta-wave{display:block;width:100%;height:60px;}
+  .cta-box{background:var(--tertiary);border-top:2px solid var(--fg);border-bottom:2px solid var(--fg);padding:80px 0;text-align:center;position:relative;overflow:hidden;}
+  .cta-box .confetti{position:absolute;border:2px solid var(--fg);}
+  .cta-box .confetti.c1{width:30px;height:30px;border-radius:50%;background:var(--accent);top:20%;left:10%;animation:float 3s ease-in-out infinite;}
+  .cta-box .confetti.c2{width:24px;height:24px;background:var(--secondary);top:60%;left:15%;transform:rotate(45deg);animation:float 4s ease-in-out infinite .5s;}
+  .cta-box .confetti.c3{width:0;height:0;border-left:15px solid transparent;border-right:15px solid transparent;border-bottom:26px solid var(--quaternary);border-top:0;background:transparent;top:30%;right:12%;animation:float 3.5s ease-in-out infinite 1s;}
+  .cta-box .confetti.c4{width:28px;height:28px;border-radius:50%;background:var(--quaternary);bottom:20%;right:18%;animation:float 4.5s ease-in-out infinite .3s;}
+  .cta-box h2{font-family:'Outfit';font-weight:800;font-size:clamp(2.2rem,5vw,3.8rem);line-height:1;margin-bottom:16px;position:relative;z-index:1;}
+  .cta-box p{font-size:1.15rem;max-width:500px;margin:0 auto 32px;position:relative;z-index:1;font-weight:500;}
+  .cta-box .btn{position:relative;z-index:1;animation:shake 3s ease-in-out infinite;}
+  @keyframes shake{0%,90%,100%{transform:rotate(0deg);}92%{transform:rotate(-2deg);}94%{transform:rotate(2deg);}96%{transform:rotate(-1deg);}98%{transform:rotate(1deg);}}
+
+  /* ===== Footer (dripping wave top) ===== */
+  footer{background:var(--fg);color:#E2E8F0;padding:0;position:relative;}
+  .footer-wave{display:block;width:100%;height:50px;background:var(--bg);}
+  .footer-inner{padding:64px 0 32px;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+  .footer-brand .logo{color:#fff;margin-bottom:16px;}
+  .footer-brand .logo-mark{background:var(--tertiary);}
+  .footer-brand p{font-size:.95rem;max-width:320px;margin-bottom:24px;color:#94A3B8;}
+  .social-row{display:flex;gap:12px;}
+  .social{width:44px;height:44px;border-radius:50%;border:2px solid #475569;display:grid;place-items:center;color:#E2E8F0;transition:all .3s var(--bounce);cursor:pointer;}
+  .social:hover{background:var(--tertiary);color:var(--fg);border-color:var(--tertiary);transform:translateY(-3px);}
+  .footer-col h4{font-family:'Outfit';font-weight:700;font-size:1rem;margin-bottom:18px;color:#fff;}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+  .footer-col a{color:#94A3B8;font-size:.92rem;transition:all .3s;display:inline-block;}
+  .footer-col a:hover{color:var(--tertiary);transform:translateX(4px);}
+  .copyright{text-align:center;padding-top:32px;border-top:1px solid #334155;font-size:.85rem;color:#64748B;font-family:'Outfit';font-weight:600;}
+
+  /* ===== Responsive ===== */
+  @media(max-width:1024px){
+    .hero-grid{grid-template-columns:1fr;gap:48px;}
+    .stats-row{grid-template-columns:repeat(2,1fr);}
+    .feat-grid{grid-template-columns:repeat(2,1fr);}
+    .feat-svg{display:none;}
+    .how-grid{grid-template-columns:1fr;gap:56px;}
+    .how-svg-line{display:none;}
+    .test-grid{grid-template-columns:repeat(2,1fr);}
+    .price-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto;}
+    .price-card.featured{transform:none;}
+    .price-card.featured:hover{transform:translate(-2px,-2px);}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:640px){
+    section{padding:64px 0;}
+    nav ul{display:none;}
+    nav ul.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--bg);padding:20px;border-bottom:2px solid var(--fg);gap:8px;}
+    .menu-toggle{display:grid;place-items:center;}
+    .stats-row{grid-template-columns:1fr;}
+    .feat-grid{grid-template-columns:1fr;}
+    .test-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .hero-deco-circle,.hero-deco-tri,.hero-deco-sq{opacity:0.3;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition-duration:.01ms!important;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <div class="nav-wrap">
+      <a href="#" class="logo">
+        <span class="logo-mark"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></span>
+        Bloop!
+      </a>
+      <nav>
+        <ul id="navLinks">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#" class="btn btn-primary" style="padding:10px 22px;">Get Started</a></li>
+        </ul>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-deco-circle"></div>
+  <div class="hero-deco-tri"></div>
+  <div class="hero-deco-sq"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <h1>Design that <span class="hl">pops</span>, <span class="pop-pink">wiggles</span>, and smiles.</h1>
+        <p>A vibrant, high-energy aesthetic combining a stable structural grid with whimsical geometric decorations. Bright solid colors, primitive shapes, and tactile interactions create a friendly, optimistic vibe—like a well-organized sticker book.</p>
+        <div class="hero-cta">
+          <a href="#pricing" class="btn btn-primary">Start Playing
+            <span class="btn-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </a>
+          <a href="#features" class="btn btn-secondary">See Features</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="num">25K+</span> Happy Makers</div>
+          <div class="hero-stat"><span class="num">4.9★</span> Fun Rating</div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-img-box">
+          <div class="dots"></div>
+          <span class="emoji">🎨</span>
+          <div class="float-shape s1"></div>
+          <div class="float-shape s2"></div>
+          <div class="float-shape s3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="stats-row">
+      <div class="stat-shape circle">
+        <div class="num">99%</div>
+        <div class="lbl">Joy Delivered</div>
+      </div>
+      <div class="stat-shape square">
+        <div class="num">2.1M</div>
+        <div class="lbl">Stickers Placed</div>
+      </div>
+      <div class="stat-shape triangle">
+        <div class="tri-inner">
+          <div class="num">48ms</div>
+          <div class="lbl">Bounce Time</div>
+        </div>
+      </div>
+      <div class="stat-shape hexagon">
+        <div class="hex-inner">
+          <div class="num">120+</div>
+          <div class="lbl">Shapes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features">
+  <div class="container">
+    <div class="sec-head">
+      <svg class="squiggle" width="120" height="16" viewBox="0 0 120 16" fill="none"><path d="M2 8 Q 15 -2, 30 8 T 60 8 T 90 8 T 118 8" stroke="#8B5CF6" stroke-width="3" stroke-linecap="round"/></svg>
+      <span class="sec-tag">Features</span>
+      <h2>A playground of components</h2>
+      <p>Each sticker card connected by dashed lines, with alternating violet, pink, and yellow icon headers.</p>
+    </div>
+    <div class="feat-wrap">
+      <svg class="feat-svg" viewBox="0 0 1000 400" fill="none" preserveAspectRatio="none">
+        <path d="M180 80 Q 350 20, 500 80 T 820 80" stroke="#1E293B" stroke-width="2" stroke-dasharray="8 8" opacity="0.3"/>
+        <path d="M180 240 Q 350 320, 500 240 T 820 240" stroke="#1E293B" stroke-width="2" stroke-dasharray="8 8" opacity="0.3"/>
+      </svg>
+      <div class="feat-grid">
+        <div class="feat-card violet">
+          <div class="feat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M16 12l-4-4-4 4M12 16V8"/></svg></div>
+          <h3>Hard Pop Shadows</h3>
+          <p>Solid offset drop shadows with zero blur give every element a sticker, cut-out paper feel that begs to be clicked.</p>
+        </div>
+        <div class="feat-card pink">
+          <div class="feat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 22 22 22 12 2"/></svg></div>
+          <h3>Primitive Shapes</h3>
+          <p>Circles, triangles, squares, and squiggles used as backgrounds, masks, and icons. Simple, bold, and unmistakably fun.</p>
+        </div>
+        <div class="feat-card yellow">
+          <div class="feat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/></svg></div>
+          <h3>Pattern Fills</h3>
+          <p>Polka dots, grid lines, and diagonal stripes fill shapes and backgrounds with texture and energy.</p>
+        </div>
+        <div class="feat-card green">
+          <div class="feat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12c0-5 4-9 9-9s9 4 9 9-4 9-9 9"/><path d="M3 12c0 5 4 9 9 9"/></svg></div>
+          <h3>Bouncy Motion</h3>
+          <p>Cubic-bezier overshoot easing makes elements pop in, wiggle on hover, and feel alive. Never flat, never boring.</p>
+        </div>
+        <div class="feat-card violet">
+          <div class="feat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 9h6v6H9z"/></svg></div>
+          <h3>Varied Radii</h3>
+          <p>Mixing fully rounded corners with sharp ones creates leaf shapes and asymmetric blobs. Uniformity is the enemy.</p>
+        </div>
+        <div class="feat-card pink">
+          <div class="feat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <h3>Tactile Fun</h3>
+          <p>Every interaction feels physical—buttons press down, cards wiggle, badges rotate. It smiles at you.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section id="how" style="background:#F5F0FF;">
+  <div class="container">
+    <div class="sec-head">
+      <svg class="squiggle" width="120" height="16" viewBox="0 0 120 16" fill="none"><path d="M2 8 Q 15 -2, 30 8 T 60 8 T 90 8 T 118 8" stroke="#F472B6" stroke-width="3" stroke-linecap="round"/></svg>
+      <span class="sec-tag">Process</span>
+      <h2>How the fun happens</h2>
+      <p>Three steps connected by a literal squiggly SVG line that loops between bursts.</p>
+    </div>
+    <div class="how-wrap">
+      <svg class="how-svg-line" viewBox="0 0 900 60" fill="none" preserveAspectRatio="none">
+        <path d="M60 30 Q 150 -10, 250 30 T 450 30 T 650 30 T 840 30" stroke="#1E293B" stroke-width="2.5" stroke-dasharray="6 10" stroke-linecap="round" opacity="0.4"/>
+      </svg>
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="how-burst"><span class="num">1</span></div>
+          <h3>Set the Grid</h3>
+          <p>Establish a clean, stable structural grid. Content lives in readable areas—the wild decoration comes later.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-burst"><span class="num">2</span></div>
+          <h3>Scatter Shapes</h3>
+          <p>Add circles, triangles, and squiggles around the content. Apply hard pop shadows and pattern fills generously.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-burst"><span class="num">3</span></div>
+          <h3>Add the Bounce</h3>
+          <p>Wire up wiggles, rotations, and overshoot easing. Ship an interface that invites clicking and smiles back.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section>
+  <div class="container">
+    <div class="sec-head">
+      <svg class="squiggle" width="120" height="16" viewBox="0 0 120 16" fill="none"><path d="M2 8 Q 15 -2, 30 8 T 60 8 T 90 8 T 118 8" stroke="#34D399" stroke-width="3" stroke-linecap="round"/></svg>
+      <span class="sec-tag">Testimonials</span>
+      <h2>Happy little reviews</h2>
+      <p>Speech bubble cards with tails, scattered at random rotations to feel informal and fun.</p>
+    </div>
+    <div class="test-grid">
+      <div class="test-bubble">
+        <p>"Bloop! made our onboarding feel like a game. Completion rates jumped 40%. Users actually smile using our app now."</p>
+        <div class="test-author">
+          <span class="avatar" style="background:var(--accent);">MK</span>
+          <div><div class="name">Maya Klein</div><div class="role">PM, Playstack</div></div>
+        </div>
+      </div>
+      <div class="test-bubble">
+        <p>"The hard pop shadows are addictive. Every button feels like a sticker I want to peel off and collect."</p>
+        <div class="test-author">
+          <span class="avatar" style="background:var(--secondary);">JR</span>
+          <div><div class="name">Jonas Reyes</div><div class="role">Designer, Doodle</div></div>
+        </div>
+      </div>
+      <div class="test-bubble">
+        <p>"We shipped our entire kids' education platform in two weeks. The bouncy animations keep students engaged."</p>
+        <div class="test-author">
+          <span class="avatar" style="background:var(--quaternary);">AP</span>
+          <div><div class="name">Aisha Patel</div><div class="role">Founder, SproutLearn</div></div>
+        </div>
+      </div>
+      <div class="test-bubble">
+        <p>"Finally a design system that doesn't take itself too seriously. Our brand feels approachable and warm."</p>
+        <div class="test-author">
+          <span class="avatar" style="background:var(--tertiary);color:var(--fg);">LC</span>
+          <div><div class="name">Luca Conti</div><div class="role">CMO, Bumblebee</div></div>
+        </div>
+      </div>
+      <div class="test-bubble">
+        <p>"The squiggly connectors and star badges are pure joy. Our users send screenshots just to show friends."</p>
+        <div class="test-author">
+          <span class="avatar" style="background:var(--accent);">SH</span>
+          <div><div class="name">Sara Holm</div><div class="role">Design Lead, Confetti</div></div>
+        </div>
+      </div>
+      <div class="test-bubble">
+        <p>"Stable grid, wild decoration—exactly the philosophy we needed. Structure without sterility."</p>
+        <div class="test-author">
+          <span class="avatar" style="background:var(--secondary);">TN</span>
+          <div><div class="name">Tomás Núñez</div><div class="role">CTO, Wiggle</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing" style="background:#FFFBEB;">
+  <div class="container">
+    <div class="sec-head">
+      <svg class="squiggle" width="120" height="16" viewBox="0 0 120 16" fill="none"><path d="M2 8 Q 15 -2, 30 8 T 60 8 T 90 8 T 118 8" stroke="#FBBF24" stroke-width="3" stroke-linecap="round"/></svg>
+      <span class="sec-tag">Pricing</span>
+      <h2>Pick your play level</h2>
+      <p>The recommended tier pops out with a dashed border and a floating star sticker badge.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card">
+        <h3>Tinkerer</h3>
+        <div class="price">$0<small>/mo</small></div>
+        <p>For curious creators just starting out.</p>
+        <ul>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>10 sticker components</li>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Basic shapes</li>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Community support</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Start Free</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-star">MOST<br>POPULAR</div>
+        <h3>Maker</h3>
+        <div class="price">$29<small>/mo</small></div>
+        <p>For designers shipping playful products.</p>
+        <ul>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>120+ components</li>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Full shape library</li>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Pattern fills</li>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Bounce animations</li>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Priority support</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Start Making</a>
+      </div>
+      <div class="price-card">
+        <h3>Playground</h3>
+        <div class="price">$99<small>/mo</small></div>
+        <p>For teams building entire playgrounds.</p>
+        <ul>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Everything in Maker</li>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Custom shapes</li>
+          <li><span class="ck"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Dedicated playmate</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="sec-head">
+      <svg class="squiggle" width="120" height="16" viewBox="0 0 120 16" fill="none"><path d="M2 8 Q 15 -2, 30 8 T 60 8 T 90 8 T 118 8" stroke="#8B5CF6" stroke-width="3" stroke-linecap="round"/></svg>
+      <span class="sec-tag">FAQ</span>
+      <h2>Curious questions</h2>
+      <p>Accordion items with thick borders. When opened, the background fills with a playful dot pattern.</p>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">What is the "stable grid, wild decoration" philosophy? <span class="arrow">›</span></div>
+        <div class="faq-a"><p>Content (text, forms) lives in clean, readable areas, but the world around it is alive with movement and shape. We reference the Memphis Group but clean it up for modern screens—removing chaos while keeping the energy.</p></div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Why hard shadows instead of soft blur? <span class="arrow">›</span></div>
+        <div class="faq-a"><p>Hard, offset drop shadows (4px 4px 0px with zero blur) give elements a sticker or cut-out paper feel. Soft blurs feel corporate and sterile—hard shadows feel tactile and fun, like physical objects on a desk.</p></div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">How do the bouncy animations work? <span class="arrow">›</span></div>
+        <div class="faq-a"><p>We use cubic-bezier(0.34, 1.56, 0.64, 1) for overshoot easing. Elements don't just fade in—they pop in with a bounce. Hover states wiggle and rotate. All motion respects prefers-reduced-motion for accessibility.</p></div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Is it accessible? <span class="arrow">›</span></div>
+        <div class="faq-a"><p>Yes. Slate-800 text on warm cream achieves AAA contrast. We never rely on color alone—shapes and text labels always accompany it. Focus states use thick colored borders plus hard shadows for high visibility.</p></div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Can I use this for serious products? <span class="arrow">›</span></div>
+        <div class="faq-a"><p>Absolutely. Playful doesn't mean unprofessional. The stable grid ensures readability and structure, while the decorations add warmth and approachability. Many education, consumer, and creative tools thrive with this aesthetic.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA (wavy edge) -->
+<section class="cta-section">
+  <svg class="cta-wave" viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="#FBBF24"/></svg>
+  <div class="cta-box">
+    <div class="confetti c1"></div>
+    <div class="confetti c2"></div>
+    <div class="confetti c3"></div>
+    <div class="confetti c4"></div>
+    <div class="container">
+      <h2>Ready to make something fun?</h2>
+      <p>Join 25,000+ makers building vibrant, tactile, smile-inducing interfaces with Bloop!</p>
+      <a href="#" class="btn btn-primary">Start Playing Free
+        <span class="btn-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer (dripping wave) -->
+<footer>
+  <svg class="footer-wave" viewBox="0 0 1440 50" preserveAspectRatio="none"><path d="M0,20 C180,50 360,0 540,20 C720,40 900,5 1080,20 C1260,35 1380,15 1440,20 L1440,0 L0,0 Z" fill="#FFFDF5"/></svg>
+  <div class="footer-inner">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <span class="logo-mark"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></span>
+            Bloop!
+          </a>
+          <p>The playful geometric design system. Stable grid, wild decoration. Built for makers who want their products to smile.</p>
+          <div class="social-row">
+            <a class="social" href="#" aria-label="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+            <a class="social" href="#" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+            <a class="social" href="#" aria-label="Dribbble"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6 6 9.42 8 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.72 0"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#">Changelog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">Shape Library</a></li>
+            <li><a href="#">Pattern Pack</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">© 2026 Bloop! Design Systems. Made with stickers and sunshine.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    menuToggle.textContent = navLinks.classList.contains('open') ? '✕' : '≡';
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuToggle.textContent = '≡';
+  }));
+</script>
+</body>
+</html>

@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Botanical — Organic Serif</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #F9F8F4;
+    --fg: #2D3A31;
+    --primary: #8C9A84;
+    --primary-dark: #6E7D66;
+    --muted: #DCCFC2;
+    --muted-soft: #F2F0EB;
+    --border: #E6E2DA;
+    --interactive: #C27B66;
+    --interactive-dark: #A8624F;
+    --white: #FFFFFF;
+    --shadow-sm: 0 4px 6px -1px rgba(45, 58, 49, 0.05);
+    --shadow-md: 0 10px 15px -3px rgba(45, 58, 49, 0.05);
+    --shadow-lg: 0 20px 40px -10px rgba(45, 58, 49, 0.08);
+    --shadow-xl: 0 25px 50px -12px rgba(45, 58, 49, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Source Sans 3", system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Paper grain texture (mandatory) */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0.015;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+
+  ::selection { background: var(--primary); color: var(--white); }
+
+  a { color: inherit; text-decoration: none; }
+
+  h1, h2, h3, h4 { font-family: "Playfair Display", Georgia, serif; font-weight: 600; line-height: 1.1; }
+  .italic { font-style: italic; }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  @media (min-width: 768px) { .container { padding: 0 40px; } }
+  @media (min-width: 1024px) { .container { padding: 0 56px; } }
+
+  .eyebrow {
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-weight: 600;
+    color: var(--primary-dark);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .eyebrow::before { content: ""; width: 32px; height: 1px; background: var(--primary); }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: "Source Sans 3", sans-serif;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    border: none;
+    border-radius: 999px;
+    padding: 0 2rem;
+    height: 52px;
+    transition: all 300ms ease;
+    white-space: nowrap;
+  }
+  .btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+
+  .btn-primary { background: var(--fg); color: var(--white); }
+  .btn-primary:hover { background: var(--interactive); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+  .btn-secondary { background: transparent; color: var(--primary-dark); border: 1px solid var(--primary); }
+  .btn-secondary:hover { background: var(--primary); color: var(--white); transform: translateY(-2px); }
+
+  .btn-terra { background: var(--interactive); color: var(--white); }
+  .btn-terra:hover { background: var(--interactive-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 1.25rem; left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 2rem);
+    max-width: 1280px;
+    z-index: 40;
+    background: rgba(249, 248, 244, 0.8);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    box-shadow: var(--shadow-sm);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    padding: 0 1.5rem;
+  }
+  @media (min-width: 768px) { .nav-inner { height: 72px; padding: 0 2rem; } }
+  .brand {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .brand .leaf { color: var(--primary); font-style: italic; }
+  .nav-links { display: none; gap: 2rem; align-items: center; }
+  .nav-links a { font-size: 0.9375rem; color: var(--fg); font-weight: 500; transition: color 300ms; position: relative; }
+  .nav-links a::after { content: ""; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--interactive); transition: width 300ms ease; }
+  .nav-links a:hover { color: var(--interactive); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta { display: none; }
+  .nav-burger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+  .nav-burger span { width: 24px; height: 2px; background: var(--fg); border-radius: 2px; transition: all 300ms; }
+  @media (min-width: 1024px) {
+    .nav-links { display: flex; }
+    .nav-cta { display: inline-flex; }
+    .nav-burger { display: none; }
+  }
+
+  /* HERO */
+  .hero { padding: 9rem 0 5rem; position: relative; }
+  @media (min-width: 768px) { .hero { padding: 10rem 0 6rem; } }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1.1fr 0.9fr; gap: 4rem; } }
+  .hero-text .eyebrow { margin-bottom: 2rem; }
+  .hero h1 {
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.75rem;
+  }
+  .hero h1 .it { font-style: italic; color: var(--primary-dark); }
+  .hero p { font-size: 1.1875rem; color: #5a6b5f; max-width: 480px; margin-bottom: 2.5rem; line-height: 1.7; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+  .hero-image-wrap { position: relative; }
+  .hero-image {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(160deg, #b9c4ae 0%, #8c9a84 45%, #6e7d66 100%);
+    border-radius: 200px 200px 32px 32px;
+    box-shadow: var(--shadow-xl);
+    position: relative;
+    overflow: hidden;
+    transition: transform 700ms ease;
+  }
+  @media (min-width: 768px) { .hero-image { aspect-ratio: 1 / 1; max-height: 560px; } }
+  .hero-image::after {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(255,255,255,0.35) 0%, transparent 40%),
+      radial-gradient(circle at 70% 80%, rgba(45,58,49,0.25) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 280'%3E%3Cg fill='none' stroke='%232D3A31' stroke-width='1.2' stroke-linecap='round' opacity='0.55'%3E%3Cpath d='M100 280 C100 200, 60 160, 70 100 C78 60, 100 40, 100 10'/%3E%3Cpath d='M100 250 C100 200, 130 170, 125 130 C120 90, 100 70, 100 30'/%3E%3Cpath d='M100 220 Q70 190 60 150'/%3E%3Cpath d='M100 220 Q130 190 140 150'/%3E%3Cpath d='M100 180 Q80 160 75 130'/%3E%3Cpath d='M100 180 Q120 160 125 130'/%3E%3Cellipse cx='60' cy='150' rx='18' ry='9' transform='rotate(-35 60 150)'/%3E%3Cellipse cx='140' cy='150' rx='18' ry='9' transform='rotate(35 140 150)'/%3E%3Cellipse cx='75' cy='130' rx='15' ry='8' transform='rotate(-30 75 130)'/%3E%3Cellipse cx='125' cy='130' rx='15' ry='8' transform='rotate(30 125 130)'/%3E%3Cellipse cx='70' cy='100' rx='14' ry='7' transform='rotate(-25 70 100)'/%3E%3Cellipse cx='130' cy='100' rx='14' ry='7' transform='rotate(25 130 100)'/%3E%3Cellipse cx='100' cy='80' rx='13' ry='7'/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat;
+  }
+  .hero-image-wrap:hover .hero-image { transform: scale(1.02); }
+  .hero-quote {
+    position: absolute;
+    bottom: -1.5rem; left: -1.5rem;
+    background: rgba(249, 248, 244, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 1.5rem 1.75rem;
+    max-width: 260px;
+    box-shadow: var(--shadow-lg);
+  }
+  .hero-quote p { font-family: "Playfair Display", serif; font-style: italic; font-size: 1.0625rem; line-height: 1.4; margin-bottom: 0.5rem; }
+  .hero-quote span { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--primary-dark); }
+
+  .hero-deco-icon {
+    position: absolute;
+    color: var(--primary);
+    opacity: 0.5;
+    animation: sway 6s ease-in-out infinite;
+  }
+  .hero-deco-1 { top: 8%; right: 8%; }
+  .hero-deco-2 { bottom: 12%; left: 2%; animation-delay: 2s; }
+  @keyframes sway { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+
+  /* STATS */
+  .stats {
+    background: linear-gradient(180deg, #eef0ea 0%, #e6ece2 100%);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 4rem 0;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  @media (min-width: 768px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+  .stat { text-align: left; padding: 0 0.5rem; }
+  .stat .num {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-size: clamp(2.5rem, 5vw, 3.75rem);
+    line-height: 1;
+    color: var(--fg);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+  }
+  .stat .num .it { font-style: italic; color: var(--interactive); }
+  .stat .lbl { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--primary-dark); font-weight: 600; }
+
+  /* SECTION */
+  .section { padding: 5rem 0; }
+  @media (min-width: 768px) { .section { padding: 7rem 0; } }
+  @media (min-width: 1024px) { .section { padding: 8rem 0; } }
+
+  .section-head { max-width: 640px; margin-bottom: 4rem; }
+  .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+  .section-head.center .eyebrow { justify-content: center; }
+  .section-head .eyebrow { margin-bottom: 1.5rem; }
+  .section-head h2 {
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .section-head h2 .it { font-style: italic; color: var(--primary-dark); }
+  .section-head p { margin-top: 1.5rem; font-size: 1.125rem; color: #5a6b5f; line-height: 1.7; }
+
+  /* FEATURES (staggered) */
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) { .features-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; } }
+  .feature-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    transition: all 500ms ease;
+  }
+  @media (min-width: 768px) {
+    .feature-card:nth-child(2) { transform: translateY(3rem); }
+  }
+  .feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+  @media (min-width: 768px) {
+    .feature-card:nth-child(2):hover { transform: translateY(calc(3rem - 6px)); }
+  }
+  .feature-icon-wrap {
+    width: 64px; height: 64px;
+    border-radius: 999px;
+    background: var(--muted-soft);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.75rem;
+    color: var(--primary-dark);
+    transition: all 500ms ease;
+  }
+  .feature-card:hover .feature-icon-wrap { background: var(--primary); color: var(--white); transform: rotate(-6deg); }
+  .feature-card h3 { font-size: 1.5rem; margin-bottom: 0.75rem; letter-spacing: -0.01em; }
+  .feature-card p { color: #5a6b5f; font-size: 1rem; line-height: 1.65; }
+
+  /* HOW IT WORKS (dark forest) */
+  .how {
+    background: linear-gradient(165deg, #2D3A31 0%, #1f2a23 100%);
+    color: #F9F8F4;
+    border-radius: 48px 48px 0 0;
+    margin-top: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .how::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 20% 20%, rgba(140,154,132,0.15) 0%, transparent 40%), radial-gradient(circle at 80% 80%, rgba(194,123,102,0.1) 0%, transparent 40%);
+    pointer-events: none;
+  }
+  .how .container { position: relative; z-index: 1; }
+  .how .eyebrow { color: #b9c4ae; }
+  .how .eyebrow::before { background: #b9c4ae; }
+  .how .section-head h2 { color: #F9F8F4; }
+  .how .section-head h2 .it { color: var(--interactive); }
+  .how .section-head p { color: #b9c4ae; }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    position: relative;
+  }
+  @media (min-width: 768px) { .steps-grid { grid-template-columns: repeat(3, 1fr); } }
+  .steps-grid::before {
+    content: "";
+    position: absolute;
+    top: 40px; left: 10%; right: 10%;
+    height: 0;
+    border-top: 2px dashed rgba(185, 196, 174, 0.4);
+    display: none;
+  }
+  @media (min-width: 768px) { .steps-grid::before { display: block; } }
+  .step-card {
+    background: rgba(249, 248, 244, 0.06);
+    border: 1px solid rgba(185, 196, 174, 0.15);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    backdrop-filter: blur(4px);
+    transition: all 500ms ease;
+    position: relative;
+  }
+  .step-card:hover { background: rgba(249, 248, 244, 0.1); transform: translateY(-4px); }
+  .step-badge {
+    width: 56px; height: 56px;
+    border-radius: 999px;
+    background: var(--interactive);
+    color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-size: 1.375rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 20px rgba(194,123,102,0.4);
+  }
+  .step-card h3 { font-size: 1.5rem; color: #F9F8F4; margin-bottom: 0.75rem; }
+  .step-card p { color: #b9c4ae; font-size: 1rem; line-height: 1.65; }
+
+  /* BENEFITS (zig-zag) */
+  .benefit-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 5rem;
+  }
+  @media (min-width: 1024px) { .benefit-row { grid-template-columns: 1fr 1fr; gap: 5rem; } }
+  .benefit-row:last-child { margin-bottom: 0; }
+  .benefit-row.reverse .benefit-image { order: -1; }
+  @media (min-width: 1024px) { .benefit-row.reverse .benefit-image { order: 1; } }
+  .benefit-text .eyebrow { margin-bottom: 1.25rem; }
+  .benefit-text h3 { font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .benefit-text h3 .it { font-style: italic; color: var(--interactive); }
+  .benefit-text > p { color: #5a6b5f; font-size: 1.0625rem; line-height: 1.7; margin-bottom: 1.75rem; }
+  .benefit-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .benefit-list li { display: flex; align-items: flex-start; gap: 0.875rem; font-size: 1rem; color: var(--fg); }
+  .check-circle {
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    border-radius: 999px;
+    background: var(--interactive);
+    color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+  }
+  .benefit-image {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+  }
+  .benefit-image.b1 { background: linear-gradient(135deg, #c27b66 0%, #8c9a84 100%); transform: rotate(-2deg); }
+  .benefit-image.b2 { background: linear-gradient(135deg, #8c9a84 0%, #2d3a31 100%); transform: rotate(2deg); }
+  .benefit-image::after {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3) 0%, transparent 45%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cg fill='none' stroke='%23F9F8F4' stroke-width='1.5' stroke-linecap='round' opacity='0.4'%3E%3Ccircle cx='150' cy='150' r='80'/%3E%3Ccircle cx='150' cy='150' r='60'/%3E%3Ccircle cx='150' cy='150' r='40'/%3E%3Cpath d='M150 70 C150 110, 130 130, 150 150'/%3E%3Cpath d='M150 230 C150 190, 170 170, 150 150'/%3E%3Cellipse cx='100' cy='120' rx='22' ry='11' transform='rotate(-30 100 120)'/%3E%3Cellipse cx='200' cy='120' rx='22' ry='11' transform='rotate(30 200 120)'/%3E%3Cellipse cx='100' cy='180' rx='22' ry='11' transform='rotate(30 100 180)'/%3E%3Cellipse cx='200' cy='180' rx='22' ry='11' transform='rotate(-30 200 180)'/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat;
+  }
+
+  /* PRICING */
+  .pricing-wrap { position: relative; }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  @media (min-width: 1024px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; } }
+  .price-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    padding: 2.5rem 2rem;
+    transition: all 500ms ease;
+    display: flex;
+    flex-direction: column;
+  }
+  @media (min-width: 1024px) {
+    .price-card.featured { transform: scale(1.06); z-index: 2; box-shadow: var(--shadow-xl); background: var(--fg); color: var(--white); border-color: var(--fg); }
+  }
+  .price-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+  @media (min-width: 1024px) {
+    .price-card.featured:hover { transform: scale(1.06) translateY(-6px); }
+  }
+  .price-card.featured .price-tier { color: var(--interactive); }
+  .price-card.featured h3, .price-card.featured .price, .price-card.featured .price-features li { color: #F9F8F4; }
+  .price-card.featured .price-features li { border-color: rgba(249,248,244,0.15); }
+  .price-card.featured .price-features li svg { color: var(--interactive); }
+  .price-badge {
+    display: inline-block;
+    background: var(--interactive);
+    color: var(--white);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    padding: 0.375rem 1rem;
+    border-radius: 999px;
+    margin-bottom: 1.25rem;
+    align-self: flex-start;
+  }
+  .price-tier { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--primary-dark); font-weight: 600; margin-bottom: 0.75rem; }
+  .price-card h3 { font-size: 1.75rem; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+  .price-card .desc { font-size: 0.9375rem; color: #5a6b5f; margin-bottom: 1.5rem; }
+  .price-card.featured .desc { color: #b9c4ae; }
+  .price {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-size: clamp(2.5rem, 4vw, 3.25rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+  }
+  .price .cur { font-size: 1.25rem; vertical-align: super; color: var(--primary-dark); font-weight: 500; }
+  .price-card.featured .price .cur { color: #b9c4ae; }
+  .price-period { font-size: 0.875rem; color: #5a6b5f; margin-bottom: 2rem; }
+  .price-card.featured .price-period { color: #b9c4ae; }
+  .price-features { list-style: none; margin-bottom: 2rem; flex-grow: 1; }
+  .price-features li { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; font-size: 0.9375rem; border-bottom: 1px solid var(--border); }
+  .price-features li svg { color: var(--primary); flex-shrink: 0; }
+  .price-card .btn { width: 100%; }
+  .price-card.featured .btn-primary { background: var(--interactive); }
+  .price-card.featured .btn-primary:hover { background: var(--white); color: var(--fg); }
+
+  /* TESTIMONIALS */
+  .testimonials {
+    background: var(--muted-soft);
+    border-radius: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .testimonials::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, var(--muted) 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .testimonials .container { position: relative; z-index: 1; }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+  .testimonial-card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    box-shadow: var(--shadow-sm);
+    transition: all 500ms ease;
+  }
+  .testimonial-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+  .quote-mark { font-family: "Playfair Display", serif; font-size: 3.5rem; line-height: 0.6; color: var(--interactive); display: block; margin-bottom: 1rem; }
+  .testimonial-card blockquote { font-family: "Playfair Display", serif; font-style: italic; font-size: 1.125rem; line-height: 1.5; color: var(--fg); margin-bottom: 1.75rem; }
+  .testimonial-author { display: flex; align-items: center; gap: 1rem; border-top: 1px solid var(--border); padding-top: 1.25rem; }
+  .avatar {
+    width: 48px; height: 48px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--primary), var(--interactive));
+    flex-shrink: 0;
+  }
+  .author-name { font-weight: 600; font-size: 0.9375rem; }
+  .author-role { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--primary-dark); }
+
+  /* FAQ */
+  .faq-wrap { max-width: 760px; margin: 0 auto; }
+  .faq-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: all 300ms ease;
+  }
+  .faq-item.open { box-shadow: var(--shadow-md); }
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 1.5rem 1.75rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    font-family: "Playfair Display", serif;
+    font-weight: 600;
+    font-size: 1.1875rem;
+    color: var(--fg);
+    transition: color 300ms;
+  }
+  .faq-q:hover { color: var(--interactive); }
+  .faq-q .chev { transition: transform 300ms ease; color: var(--primary); flex-shrink: 0; }
+  .faq-item.open .faq-q .chev { transform: rotate(180deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 400ms ease, padding 400ms ease;
+    padding: 0 1.75rem;
+  }
+  .faq-item.open .faq-a { max-height: 240px; padding: 0 1.75rem 1.5rem; }
+  .faq-a p { color: #5a6b5f; font-size: 1rem; line-height: 1.65; }
+
+  /* CTA */
+  .cta-band {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius: 40px;
+    padding: 4rem 2rem;
+    text-align: center;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) { .cta-band { padding: 5rem 3rem; } }
+  .cta-band::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12) 0%, transparent 50%);
+  }
+  .cta-band .container { position: relative; z-index: 1; }
+  .cta-band h2 { font-size: clamp(2.25rem, 5vw, 3.5rem); color: var(--white); margin-bottom: 1.25rem; letter-spacing: -0.02em; }
+  .cta-band h2 .it { font-style: italic; color: #f0d9d0; }
+  .cta-band p { color: rgba(255,255,255,0.85); font-size: 1.125rem; margin-bottom: 2.5rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .cta-form { display: flex; flex-direction: column; gap: 1rem; max-width: 480px; margin: 0 auto; }
+  @media (min-width: 640px) { .cta-form { flex-direction: row; } }
+  .cta-input {
+    flex: 1;
+    height: 56px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1);
+    color: var(--white);
+    padding: 0 1.5rem;
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: all 300ms ease;
+  }
+  .cta-input::placeholder { color: rgba(255,255,255,0.6); }
+  .cta-input:focus { background: rgba(255,255,255,0.2); border-color: var(--white); }
+  .cta-band .btn { background: var(--fg); color: var(--white); }
+  .cta-band .btn:hover { background: var(--interactive); }
+
+  /* FOOTER */
+  footer {
+    background: linear-gradient(180deg, #2D3A31 0%, #1f2a23 100%);
+    color: #b9c4ae;
+    border-radius: 60px 60px 0 0;
+    margin-top: 5rem;
+    padding: 5rem 0 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  footer::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 80% 0%, rgba(140,154,132,0.12) 0%, transparent 40%);
+    pointer-events: none;
+  }
+  footer .container { position: relative; z-index: 1; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin-bottom: 3.5rem;
+  }
+  @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+  .footer-brand .brand { color: #F9F8F4; margin-bottom: 1.25rem; font-size: 1.75rem; }
+  .footer-brand .brand .leaf { color: #b9c4ae; }
+  .footer-brand p { color: #9aa895; font-size: 0.9375rem; line-height: 1.6; max-width: 300px; }
+  .footer-col h4 { font-family: "Source Sans 3", sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: #F9F8F4; margin-bottom: 1.25rem; font-weight: 600; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-col a { font-size: 0.9375rem; color: #b9c4ae; transition: color 300ms; }
+  .footer-col a:hover { color: var(--interactive); }
+  .footer-bottom {
+    border-top: 1px solid rgba(185, 196, 174, 0.15);
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .footer-bottom .copyright { font-size: 0.8125rem; color: #9aa895; }
+  .footer-social { display: flex; gap: 0.75rem; }
+  .footer-social a {
+    width: 40px; height: 40px;
+    border-radius: 999px;
+    border: 1px solid rgba(185, 196, 174, 0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: #b9c4ae;
+    transition: all 300ms ease;
+  }
+  .footer-social a:hover { background: var(--interactive); border-color: var(--interactive); color: var(--white); transform: translateY(-3px); }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 700ms ease, transform 700ms ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="brand">Verdant<span class="leaf italic">.</span></a>
+    <div class="nav-links">
+      <a href="#features">Collection</a>
+      <a href="#how">Ritual</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">Journal</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#cta" class="btn btn-terra">Begin Trial</a>
+    </div>
+    <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <svg class="hero-deco-icon hero-deco-1" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2 C8 6, 6 12, 12 22 C18 12, 16 6, 12 2 Z"/><path d="M12 2 L12 22"/></svg>
+  <svg class="hero-deco-icon hero-deco-2" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 22 C12 16, 6 14, 6 8 C10 8, 12 12, 12 16"/><path d="M12 22 C12 16, 18 14, 18 8 C14 8, 12 12, 12 16"/></svg>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text reveal">
+        <span class="eyebrow">Botanical · Est. 2024</span>
+        <h1>Where <span class="it">nature</span> meets the page.</h1>
+        <p>A digital ode to nature — soft, sophisticated, and deeply intentional. We craft experiences that breathe warmth and natural luxury, rejecting the rigid sharpness of modern tech in favor of organic, sun-warmed beauty.</p>
+        <div class="hero-actions">
+          <a href="#pricing" class="btn btn-primary">Explore Collections</a>
+          <a href="#how" class="btn btn-secondary">Our Ritual</a>
+        </div>
+      </div>
+      <div class="hero-image-wrap reveal">
+        <div class="hero-image"></div>
+        <div class="hero-quote">
+          <p>"Every leaf whispers a story of patience."</p>
+          <span>— Field Notes, Vol. I</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat reveal">
+        <div class="num">200<span class="it">+</span></div>
+        <div class="lbl">Curated Species</div>
+      </div>
+      <div class="stat reveal">
+        <div class="num">12<span class="it">k</span></div>
+        <div class="lbl">Gardens Tended</div>
+      </div>
+      <div class="stat reveal">
+        <div class="num">98<span class="it">%</span></div>
+        <div class="lbl">Organic Sourced</div>
+      </div>
+      <div class="stat reveal">
+        <div class="num">4.9<span class="it">★</span></div>
+        <div class="lbl">Member Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">The Collection</span>
+      <h2>Crafted with <span class="it">intention</span>, grown with care.</h2>
+      <p>Every element feels hand-touched and sun-warmed. Hard angles are purposefully rare — every corner is rounded, every shape flows like water-smoothed stones.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+        </div>
+        <h3>Organic Softness</h3>
+        <p>Every corner is rounded, every shape flows. The 200px arch radius on images creates iconic architectural moments borrowed from Roman architecture.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 16c0-3.5 2.5-6 6-6s6 2.5 6 6"/><path d="M12 10V4"/><path d="M10 6l2-2 2 2"/></svg>
+        </div>
+        <h3>Typographic Elegance</h3>
+        <p>Playfair Display's high-contrast strokes command attention while maintaining grace. Italics add a handwritten, personal touch to every headline.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </div>
+        <h3>Tactile Texture</h3>
+        <p>The subtle paper grain overlay transforms cold digital pixels into warm, touchable surfaces. This is the secret ingredient that prevents flatness.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">The Ritual</span>
+      <h2>A slow, <span class="it">graceful</span> practice.</h2>
+      <p>Animations move like plants swaying in a gentle breeze. Nothing snaps or jerks. Everything is suspended in honey, eased out significantly.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-badge">01</div>
+        <h3>Sow the seed</h3>
+        <p>Begin with whitespace as sacred ground. Sections have generous vertical padding and cards float with ample gaps — every element has room to breathe.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-badge">02</div>
+        <h3>Tend the form</h3>
+        <p>Stagger the rhythm. Break the grid with vertical offsets on alternating cards. Images rotate subtly. The design breathes asymmetry within structure.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-badge">03</div>
+        <h3>Harvest the calm</h3>
+        <p>Layer diffused shadows and grain texture. The interface whispers rather than shouts — refined elegance that feels naturally crafted, never engineered.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section">
+  <div class="container">
+    <div class="benefit-row reveal">
+      <div class="benefit-text">
+        <span class="eyebrow">The Essence</span>
+        <h3>Earthy palette, <span class="it">grounded</span> in nature.</h3>
+        <p>Every color derives from nature — forest floors, clay pottery, sage gardens, terracotta tiles. No artificial brights. Muted, sophisticated, grounded in the earth.</p>
+        <ul class="benefit-list">
+          <li><span class="check-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Sage green for buttons, highlights, and icons</li>
+          <li><span class="check-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Terracotta for call-to-action pops</li>
+          <li><span class="check-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Soft clay backgrounds for warmth</li>
+        </ul>
+      </div>
+      <div class="benefit-image b1"></div>
+    </div>
+    <div class="benefit-row reverse reveal">
+      <div class="benefit-text">
+        <span class="eyebrow">The Movement</span>
+        <h3>Slow, fluid, <span class="it">suspended</span> in honey.</h3>
+        <p>Cards lift with -translate-y on hover, images scale to 105% over 700ms for a luxurious feel, and elements gently fade up and float into place. Every motion is graceful.</p>
+        <ul class="benefit-list">
+          <li><span class="check-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Duration 500–700ms with ease-out curves</li>
+          <li><span class="check-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Soft bloom of shadow on hover</li>
+          <li><span class="check-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Sage green focus rings for accessibility</li>
+        </ul>
+      </div>
+      <div class="benefit-image b2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Membership</span>
+      <h2>Tend a garden of your <span class="it">own.</span></h2>
+      <p>Three tiers, each rooted in the same organic philosophy. The center plan is elevated — literally.</p>
+    </div>
+    <div class="pricing-grid pricing-wrap">
+      <div class="price-card reveal">
+        <div class="price-tier">Seedling</div>
+        <h3>For the curious</h3>
+        <p class="desc">Begin tending your first collection.</p>
+        <div class="price"><span class="cur">$</span>24</div>
+        <div class="price-period">per month</div>
+        <ul class="price-features">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>50 curated species</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Weekly field notes</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Community garden access</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Plant Seedling</a>
+      </div>
+      <div class="price-card featured reveal">
+        <span class="price-badge">Most Loved</span>
+        <div class="price-tier">Bloom</div>
+        <h3>For the devoted</h3>
+        <p class="desc">A flourishing, full-spectrum garden.</p>
+        <div class="price"><span class="cur">$</span>58</div>
+        <div class="price-period">per month</div>
+        <ul class="price-features">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>200+ curated species</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Daily journal entries</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Botanist consultations</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Priority seed deliveries</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Cultivate Bloom</a>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-tier">Sanctuary</div>
+        <h3>For the connoisseur</h3>
+        <p class="desc">A private botanical sanctuary.</p>
+        <div class="price"><span class="cur">$</span>128</div>
+        <div class="price-period">per month</div>
+        <ul class="price-features">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Unlimited species access</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Private greenhouse tours</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Personal curator</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Rare botanical archive</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Enter Sanctuary</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="container">
+    <div class="testimonials">
+      <div class="container">
+        <div class="section-head reveal" style="padding-top:5rem;">
+          <span class="eyebrow">From the Garden</span>
+          <h2>Whispers from <span class="it">our members.</span></h2>
+        </div>
+        <div class="testimonials-grid" style="padding-bottom:5rem;">
+          <div class="testimonial-card reveal">
+            <span class="quote-mark">&ldquo;</span>
+            <blockquote>The texture alone made me feel like I was holding a hand-pressed invitation, not browsing a website. It's the calmest corner of the internet.</blockquote>
+            <div class="testimonial-author">
+              <div class="avatar"></div>
+              <div>
+                <div class="author-name">Lena Hartwell</div>
+                <div class="author-role">Ceramicist</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card reveal">
+            <span class="quote-mark">&ldquo;</span>
+            <blockquote>I came for the plants and stayed for the typography. The italic emphasis on a single word in every headline is a small act of devotion.</blockquote>
+            <div class="testimonial-author">
+              <div class="avatar"></div>
+              <div>
+                <div class="author-name">Theodore Marsh</div>
+                <div class="author-role">Editor, Verdant Press</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card reveal">
+            <span class="quote-mark">&ldquo;</span>
+            <blockquote>The staggered feature cards feel like a garden path — each one slightly offset, leading you naturally forward. Genius restraint.</blockquote>
+            <div class="testimonial-author">
+              <div class="avatar"></div>
+              <div>
+                <div class="author-name">Mira Okafor</div>
+                <div class="author-role">Landscape Designer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Field Notes</span>
+      <h2>Questions, <span class="it">gently</span> answered.</h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item reveal">
+        <button class="faq-q">Why warm alabaster instead of pure white?<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><p>Pure white feels sterile and digital. Warm alabaster (#F9F8F4) is rice-paper soft — it absorbs light gently and creates the tactile warmth that defines the botanical aesthetic.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Is the paper grain texture really necessary?<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><p>Absolutely. It is the defining element that transforms the design from flat digital pixels into warm, touchable surfaces. Without it, the design loses its soul and feels cold.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">How do the staggered cards work on mobile?<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><p>The vertical offset on alternating cards only applies at the md breakpoint and above. On mobile, cards stack cleanly to prevent awkward gaps and maintain readability.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">What makes the animations feel organic?<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><p>Long durations (500–700ms) with ease-out curves, gentle translate-y lifts, and image scales that feel like a slow inhale. Nothing snaps — everything sways like a plant in a breeze.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" id="cta" style="padding-top:0;">
+  <div class="container">
+    <div class="cta-band reveal">
+      <h2>Plant something <span class="it">beautiful</span> today.</h2>
+      <p>Join a community tending digital gardens with patience and care. Your first month grows free.</p>
+      <form class="cta-form" onsubmit="event.preventDefault(); this.querySelector('input').value=''; this.querySelector('input').placeholder='Welcome to the garden.';">
+        <input class="cta-input" type="email" placeholder="your@garden.com" required />
+        <button type="submit" class="btn">Begin Trial</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="brand">Verdant<span class="leaf italic">.</span></a>
+        <p>A digital ode to nature. Soft, sophisticated, deeply intentional — crafting experiences that breathe warmth and natural luxury.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Collection</h4>
+        <ul>
+          <li><a href="#features">Species</a></li>
+          <li><a href="#how">Ritual</a></li>
+          <li><a href="#pricing">Membership</a></li>
+          <li><a href="#faq">Journal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Greenhouse</a></li>
+          <li><a href="#">Field Notes</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Pinterest</a></li>
+          <li><a href="#">Newsletter</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="copyright">© 2024 Verdant Studio — Grown with care</span>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" aria-label="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+        <a href="#" aria-label="Pinterest"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="7" x2="12" y2="22"/><path d="M8 14c1-2 3-2 4-2"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 3) * 100 + 'ms';
+    observer.observe(el);
+  });
+
+  document.querySelectorAll('.faq-q').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach((i) => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>

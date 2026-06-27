@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SATOSHI — Bitcoin DeFi Protocol</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #030304;
+    --surface: #0F1115;
+    --fg: #FFFFFF;
+    --muted: #94A3B8;
+    --border: #1E293B;
+    --orange: #F7931A;
+    --burnt: #EA580C;
+    --gold: #FFD600;
+    --grad-orange: linear-gradient(to right, #EA580C, #F7931A);
+    --grad-gold: linear-gradient(to right, #F7931A, #FFD600);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+
+  /* Global grid pattern with radial mask */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+      linear-gradient(to right, rgba(30, 41, 59, 0.5) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(30, 41, 59, 0.5) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(circle at center, black 30%, transparent 90%);
+    -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 90%);
+  }
+
+  /* Ambient orange glow blobs */
+  .glow-blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .glow-blob.b1 {
+    top: -10%;
+    right: -5%;
+    width: 500px;
+    height: 500px;
+    background: var(--orange);
+    opacity: 0.08;
+  }
+  .glow-blob.b2 {
+    bottom: 10%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: var(--burnt);
+    opacity: 0.06;
+  }
+
+  ::selection { background: var(--orange); color: #000; }
+
+  a { color: inherit; text-decoration: none; }
+
+  h1, h2, h3, h4, h5 { font-family: 'Space Grotesk', sans-serif; }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 2;
+  }
+  section { position: relative; z-index: 2; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(3, 3, 4, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+  .logo-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--grad-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(247,147,26,0.5);
+    position: relative;
+  }
+  .logo-mark::after {
+    content: "₿";
+    color: #000;
+    font-weight: 700;
+    font-size: 1.2rem;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+  }
+  .nav-link {
+    color: var(--muted);
+    transition: color 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .nav-link:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--grad-orange);
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 9999px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px -5px rgba(234,88,12,0.5);
+  }
+  .nav-cta:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px -5px rgba(247,147,26,0.7);
+  }
+  .menu-toggle { display: none; }
+  @media (max-width: 900px) {
+    .nav-links, .nav-cta { display: none; }
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .menu-toggle span { width: 26px; height: 2px; background: var(--fg); }
+  }
+
+  /* ---------- BUTTONS ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border-radius: 9999px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--grad-orange);
+    color: #fff;
+    box-shadow: 0 0 20px -5px rgba(234,88,12,0.5);
+  }
+  .btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px -5px rgba(247,147,26,0.7);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--fg);
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+  .btn-outline:hover {
+    border-color: #fff;
+    background: rgba(255,255,255,0.1);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 96px 0 80px;
+    position: relative;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 6fr 4fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 18px;
+    border-radius: 9999px;
+    border: 1px solid rgba(247,147,26,0.3);
+    background: rgba(247,147,26,0.05);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--orange);
+    margin-bottom: 32px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hero-badge .ping {
+    position: relative;
+    width: 8px;
+    height: 8px;
+  }
+  .hero-badge .ping::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--orange);
+    border-radius: 50%;
+  }
+  .hero-badge .ping::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--orange);
+    border-radius: 50%;
+    animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  @keyframes ping {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(2.5); opacity: 0; }
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+  }
+  .hero h1 .grad {
+    background: var(--grad-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 540px;
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .hero-trust {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .trust-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--fg);
+  }
+  .trust-val .orange { color: var(--orange); }
+  .trust-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Hero right — animated orb */
+  .orb-container {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .orb {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--gold), var(--orange) 50%, var(--burnt) 100%);
+    box-shadow: 0 0 80px rgba(247,147,26,0.4), inset -20px -20px 60px rgba(0,0,0,0.4);
+    position: relative;
+    z-index: 2;
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  .orb::before {
+    content: "₿";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 6rem;
+    font-weight: 700;
+    color: rgba(0,0,0,0.4);
+  }
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(247,147,26,0.3);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .ring-1 {
+    width: 320px; height: 320px;
+    border-style: dashed;
+    animation: spin 12s linear infinite;
+  }
+  .ring-2 {
+    width: 380px; height: 380px;
+    border-color: rgba(255,214,0,0.2);
+    animation: spin 18s linear infinite reverse;
+  }
+  .ring-3 {
+    width: 440px; height: 440px;
+    border-color: rgba(234,88,12,0.15);
+    animation: spin 24s linear infinite;
+  }
+  @keyframes spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+  .float-card {
+    position: absolute;
+    background: rgba(15, 17, 21, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(247,147,26,0.2);
+    border-radius: 12px;
+    padding: 12px 16px;
+    z-index: 3;
+    box-shadow: 0 0 30px -10px rgba(247,147,26,0.3);
+  }
+  .float-card .fc-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2px;
+  }
+  .float-card .fc-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--orange);
+  }
+  .float-card .fc-val.gold { color: var(--gold); }
+  .fc-1 { top: 12%; right: 5%; animation: float 4s ease-in-out infinite; }
+  .fc-2 { bottom: 18%; left: 0%; animation: float 5s ease-in-out infinite 0.5s; }
+  .fc-3 { top: 45%; right: -5%; animation: float 4.5s ease-in-out infinite 1s; }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .orb-container { height: 380px; order: -1; }
+    .orb { width: 160px; height: 160px; }
+    .orb::before { font-size: 4.5rem; }
+    .ring-1 { width: 260px; height: 260px; }
+    .ring-2 { width: 310px; height: 310px; }
+    .ring-3 { width: 360px; height: 360px; }
+  }
+
+  /* ---------- STATS (ticker) ---------- */
+  .stats {
+    padding: 24px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .stat {
+    text-align: center;
+    border-right: 1px solid var(--border);
+    padding: 12px 16px;
+  }
+  .stat:last-child { border-right: none; }
+  .stat-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+  }
+  .stat-val .orange { color: var(--orange); }
+  .stat-val .gold { color: var(--gold); }
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+  .stat-trend {
+    font-size: 0.7rem;
+    color: var(--orange);
+    margin-top: 2px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  @media (max-width: 768px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+    .stat:nth-child(3), .stat:nth-child(4) { padding-top: 16px; }
+  }
+
+  /* ---------- SECTION HEADER ---------- */
+  .section-head {
+    text-align: center;
+    margin-bottom: 64px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 24px;
+  }
+  .section-head .label {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 16px;
+    padding: 6px 16px;
+    border: 1px solid rgba(247,147,26,0.3);
+    border-radius: 9999px;
+    background: rgba(247,147,26,0.05);
+  }
+  .section-head h2 {
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .section-head h2 .grad {
+    background: var(--grad-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .section-head p {
+    color: var(--muted);
+    font-size: 1.05rem;
+  }
+
+  /* ---------- FEATURES ---------- */
+  .features {
+    padding: 96px 0;
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+  }
+  .feature-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(247,147,26,0.5);
+    box-shadow: 0 0 30px -10px rgba(247,147,26,0.3);
+  }
+  .feature-watermark {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 5rem;
+    opacity: 0.08;
+    color: var(--orange);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    transition: opacity 0.3s;
+    line-height: 1;
+  }
+  .feature-card:hover .feature-watermark { opacity: 0.2; }
+  .feature-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: rgba(234,88,12,0.15);
+    border: 1px solid rgba(234,88,12,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    color: var(--orange);
+    font-size: 1.5rem;
+    transition: all 0.3s;
+  }
+  .feature-card:hover .feature-icon {
+    box-shadow: 0 0 20px rgba(234,88,12,0.4);
+    background: rgba(234,88,12,0.25);
+  }
+  .feature-card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .feature-card p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  @media (max-width: 900px) {
+    .features-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- HOW IT WORKS (blockchain timeline) ---------- */
+  .how {
+    padding: 96px 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .timeline {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    padding: 32px 0;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--orange), var(--gold), var(--orange), transparent);
+    transform: translateX(-50%);
+  }
+  .tl-step {
+    position: relative;
+    width: 50%;
+    padding: 0 40px 48px;
+  }
+  .tl-step:nth-child(odd) { left: 0; text-align: right; }
+  .tl-step:nth-child(even) { left: 50%; }
+  .tl-node {
+    position: absolute;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    color: var(--orange);
+    box-shadow: 0 0 20px rgba(247,147,26,0.4);
+    z-index: 2;
+  }
+  .tl-step:nth-child(odd) .tl-node { right: -20px; }
+  .tl-step:nth-child(even) .tl-node { left: -20px; }
+  .tl-card {
+    background: rgba(15,17,21,0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .tl-card:hover {
+    border-color: rgba(247,147,26,0.4);
+    box-shadow: 0 0 25px -5px rgba(247,147,26,0.3);
+  }
+  /* corner accents */
+  .tl-card::before, .tl-card::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--orange);
+  }
+  .tl-card::before { top: -1px; left: -1px; border-right: none; border-bottom: none; border-top-left-radius: 16px; }
+  .tl-card::after { bottom: -1px; right: -1px; border-left: none; border-top: none; border-bottom-right-radius: 16px; }
+  .tl-step:nth-child(odd) .tl-card { text-align: left; }
+  .tl-num {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--orange);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .tl-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .tl-card p { color: var(--muted); font-size: 0.9rem; }
+  @media (max-width: 768px) {
+    .timeline::before { left: 20px; }
+    .tl-step { width: 100%; left: 0 !important; text-align: left !important; padding-left: 56px; padding-right: 0; }
+    .tl-step .tl-node { left: 0 !important; right: auto !important; }
+    .tl-step:nth-child(odd) .tl-card { text-align: left; }
+  }
+
+  /* ---------- BENEFITS ---------- */
+  .benefits {
+    padding: 96px 0;
+  }
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .benefit {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: var(--surface);
+    transition: all 0.3s;
+  }
+  .benefit:hover {
+    border-color: rgba(247,147,26,0.4);
+    transform: translateY(-2px);
+  }
+  .benefit-check {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(247,147,26,0.15);
+    border: 1px solid rgba(247,147,26,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--orange);
+    font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 0 15px rgba(247,147,26,0.2);
+  }
+  .benefit h4 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .benefit p { color: var(--muted); font-size: 0.9rem; }
+  @media (max-width: 900px) {
+    .benefits-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- PRICING ---------- */
+  .pricing {
+    padding: 96px 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .price-card {
+    background: var(--bg);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 40px 32px;
+    transition: all 0.3s;
+    position: relative;
+  }
+  .price-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(247,147,26,0.5);
+    box-shadow: 0 0 40px -10px rgba(247,147,26,0.3);
+  }
+  .price-card.featured {
+    border-color: var(--orange);
+    transform: scale(1.05);
+    box-shadow: 0 0 50px -10px rgba(247,147,26,0.3);
+    z-index: 2;
+  }
+  .price-card.featured:hover { transform: scale(1.05) translateY(-6px); }
+  .price-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--grad-orange);
+    color: #fff;
+    padding: 6px 18px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    box-shadow: 0 0 20px rgba(247,147,26,0.5);
+    white-space: nowrap;
+  }
+  .price-tier {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--orange);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .price-amt {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--fg);
+    margin-bottom: 4px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .price-amt .currency { font-size: 1.5rem; color: var(--muted); vertical-align: super; }
+  .price-per {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 32px;
+  }
+  .price-list {
+    list-style: none;
+    margin-bottom: 32px;
+  }
+  .price-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.85);
+  }
+  .price-list li::before {
+    content: "✓";
+    color: var(--orange);
+    font-weight: 700;
+  }
+  .price-list li.no { color: var(--muted); }
+  .price-list li.no::before { content: "—"; color: var(--muted); }
+  .price-card .btn { width: 100%; }
+  .price-card.featured .btn-primary { background: var(--grad-gold); box-shadow: 0 0 25px -5px rgba(255,214,0,0.5); }
+  @media (max-width: 900px) {
+    .pricing-grid { grid-template-columns: 1fr; }
+    .price-card.featured { transform: scale(1); }
+    .price-card.featured:hover { transform: translateY(-6px); }
+  }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testimonials {
+    padding: 96px 0;
+  }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .testimonial {
+    background: rgba(15,17,21,0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.3s;
+  }
+  .testimonial:hover {
+    border-color: rgba(247,147,26,0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 0 30px -10px rgba(247,147,26,0.3);
+  }
+  .quote-mark {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 4rem;
+    line-height: 0.6;
+    background: var(--grad-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+  .testimonial blockquote {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    color: rgba(255,255,255,0.9);
+  }
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .t-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--grad-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    color: #000;
+    box-shadow: 0 0 15px rgba(247,147,26,0.4);
+    border: 2px solid rgba(247,147,26,0.5);
+  }
+  .t-name { font-weight: 600; font-size: 0.95rem; }
+  .t-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  @media (max-width: 900px) {
+    .testimonials-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq {
+    padding: 96px 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+  .faq-container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .faq-item {
+    background: rgba(3,3,4,0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .faq-item:hover { border-color: rgba(247,147,26,0.3); }
+  .faq-item.open { border-color: rgba(247,147,26,0.5); }
+  .faq-q {
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 1.02rem;
+  }
+  .faq-chevron {
+    color: var(--orange);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+  }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 24px;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .faq-item.open .faq-a { max-height: 300px; padding: 0 24px 24px; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    padding: 80px 0 32px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 56px;
+  }
+  .footer-brand .logo { margin-bottom: 20px; }
+  .footer-brand p {
+    color: var(--muted);
+    font-size: 0.92rem;
+    max-width: 320px;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  .footer-social { display: flex; gap: 12px; }
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .social-icon:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+    box-shadow: 0 0 15px rgba(247,147,26,0.3);
+  }
+  .footer-col h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 12px; }
+  .footer-col a {
+    color: var(--muted);
+    font-size: 0.92rem;
+    transition: color 0.2s, padding-left 0.2s;
+  }
+  .footer-col a:hover { color: var(--orange); padding-left: 4px; }
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .footer-bottom .orange { color: var(--orange); }
+  @media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="glow-blob b1"></div>
+<div class="glow-blob b2"></div>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="logo"><span class="logo-mark"></span>SATOSHI</a>
+    <ul class="nav-links">
+      <li><a class="nav-link" href="#features">Features</a></li>
+      <li><a class="nav-link" href="#how">Protocol</a></li>
+      <li><a class="nav-link" href="#pricing">Pricing</a></li>
+      <li><a class="nav-link" href="#faq">Docs</a></li>
+    </ul>
+    <button class="nav-cta">Connect Wallet</button>
+    <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="hero-badge"><span class="ping"></span>MAINNET LIVE · BLOCK #847,392</div>
+        <h1>Decentralized finance, forged in <span class="grad">digital gold</span>.</h1>
+        <p class="hero-sub">A bold, futuristic protocol inspired by Bitcoin and decentralized finance. Deep void backgrounds with Bitcoin orange accents, golden highlights, glowing elements, and precision data visualization. Your assets, engineered to perfection.</p>
+        <div class="hero-cta">
+          <button class="btn btn-primary">Start Earning →</button>
+          <button class="btn btn-outline">Read Whitepaper</button>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-item">
+            <div class="trust-val"><span class="orange">$</span>2.4B</div>
+            <div class="trust-label">Total Value Locked</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-val">184K+</div>
+            <div class="trust-label">Active Wallets</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-val"><span class="gold">AAA</span></div>
+            <div class="trust-label">Security Audit</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="orb-container">
+          <div class="ring ring-3"></div>
+          <div class="ring ring-2"></div>
+          <div class="ring ring-1"></div>
+          <div class="orb"></div>
+          <div class="float-card fc-1">
+            <div class="fc-label">BTC Price</div>
+            <div class="fc-val">$67,432</div>
+          </div>
+          <div class="float-card fc-2">
+            <div class="fc-label">APY</div>
+            <div class="fc-val gold">8.42%</div>
+          </div>
+          <div class="float-card fc-3">
+            <div class="fc-label">Gas</div>
+            <div class="fc-val">12 gwei</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-val"><span class="orange">$</span>2.4B</div>
+        <div class="stat-label">TVL</div>
+        <div class="stat-trend">▲ 12.4% / 7d</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">184K</div>
+        <div class="stat-label">Wallets</div>
+        <div class="stat-trend">▲ 3,210 / 24h</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"><span class="gold">8.42</span>%</div>
+        <div class="stat-label">Avg APY</div>
+        <div class="stat-trend">▲ 0.3% / 30d</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">99.99<span class="orange">%</span></div>
+        <div class="stat-label">Uptime</div>
+        <div class="stat-trend">▲ 5y streak</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">PROTOCOL FEATURES</span>
+      <h2>Engineered for <span class="grad">precision & trust</span></h2>
+      <p>Mathematical precision, layered depth, and luminescent energy. Every element follows strict geometric rules.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-watermark">₿</div>
+        <div class="feature-icon">⚡</div>
+        <h3>Lightning Settlement</h3>
+        <p>Sub-second finality on Layer 2. Transactions confirm before the next block propagates. No more waiting.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-watermark">⛓</div>
+        <div class="feature-icon">🔒</div>
+        <h3>Cold Storage Audits</h3>
+        <p>Multi-signature vaults with time-locked recovery. AAA-rated by three independent security firms.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-watermark">◈</div>
+        <div class="feature-icon">📊</div>
+        <h3>On-Chain Analytics</h3>
+        <p>Real-time dashboards with monospace precision. Every satoshi traceable. Every position auditable.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-watermark">⟁</div>
+        <div class="feature-icon">🌐</div>
+        <h3>Cross-Chain Bridges</h3>
+        <p>Move assets across 14 chains with zero-wrap technology. Native settlement, no synthetic tokens.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-watermark">∞</div>
+        <div class="feature-icon">💧</div>
+        <h3>Liquidity Pools</h3>
+        <p>Concentrated liquidity with dynamic fees. Earn yield on idle assets. Impermanent loss protection built in.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-watermark">◆</div>
+        <div class="feature-icon">🛡</div>
+        <h3>Insurance Fund</h3>
+        <p>Self-replenishing treasury backs every position. $480M in reserves. No user has ever lost principal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">HOW IT WORKS</span>
+      <h2>From wallet to <span class="grad">yield</span>, in 4 blocks</h2>
+      <p>Each step is a block in the chain. Immutable. Auditable. Trustless.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="tl-node">01</div>
+        <div class="tl-card">
+          <div class="tl-num">BLOCK_01</div>
+          <h3>Connect Wallet</h3>
+          <p>Link any EVM-compatible wallet. No KYC for deposits under threshold. Your keys, your coins.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-node">02</div>
+        <div class="tl-card">
+          <div class="tl-num">BLOCK_02</div>
+          <h3>Deposit Collateral</h3>
+          <p>BTC, ETH, or stablecoins. Auto-routed to the highest-yield vault. Insurance activates instantly.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-node">03</div>
+        <div class="tl-card">
+          <div class="tl-num">BLOCK_03</div>
+          <h3>Earn Yield</h3>
+          <p>Strategies auto-compound every block. Watch your balance grow in real-time on the dashboard.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-node">04</div>
+        <div class="tl-card">
+          <div class="tl-num">BLOCK_04</div>
+          <h3>Withdraw Anytime</h3>
+          <p>No lockups. No penalties. Withdraw to your wallet in under 60 seconds. Finality guaranteed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">WHY SATOSHI</span>
+      <h2>Built for <span class="grad">digital value</span></h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit">
+        <div class="benefit-check">✓</div>
+        <div>
+          <h4>Non-Custodial</h4>
+          <p>Your private keys never leave your device. We cannot access your funds, even if compelled.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-check">✓</div>
+        <div>
+          <h4>Transparent Reserves</h4>
+          <p>Proof-of-reserves published on-chain every block. Verify your balance is backed 1:1, anytime.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-check">✓</div>
+        <div>
+          <h4>AAA Security Rating</h4>
+          <p>Audited by Trail of Bits, OpenZeppelin, and Certora. $480M insurance fund backs every position.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-check">✓</div>
+        <div>
+          <h4>Sub-Second Finality</h4>
+          <p>Layer 2 settlement means deposits and withdrawals confirm in under one second, not minutes.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-check">✓</div>
+        <div>
+          <h4>Auto-Compounding</h4>
+          <p>Yield reinvests every block. No manual claiming. No gas spent on reinvestment. Just growth.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-check">✓</div>
+        <div>
+          <h4>24/7 Human Support</h4>
+          <p>Real engineers, not chatbots. Median response time under 4 minutes. Available in 12 languages.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">FEE TIERS</span>
+      <h2>Choose your <span class="grad">tier</span></h2>
+      <p>Transparent fees. No hidden costs. Higher tiers unlock lower rates and premium features.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">— STARTER —</div>
+        <div class="price-amt"><span class="currency">$</span>0</div>
+        <div class="price-per">/ MONTH · 0.30% FEE</div>
+        <ul class="price-list">
+          <li>Up to $10K TVL</li>
+          <li>Basic strategies</li>
+          <li>Community support</li>
+          <li class="no">Advanced analytics</li>
+          <li class="no">Priority withdrawals</li>
+        </ul>
+        <button class="btn btn-outline">Start Free</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">★ Most Popular</div>
+        <div class="price-tier">— PRO —</div>
+        <div class="price-amt"><span class="currency">$</span>29</div>
+        <div class="price-per">/ MONTH · 0.15% FEE</div>
+        <ul class="price-list">
+          <li>Up to $1M TVL</li>
+          <li>All strategies</li>
+          <li>Priority support</li>
+          <li>Advanced analytics</li>
+          <li>Priority withdrawals</li>
+        </ul>
+        <button class="btn btn-primary">Upgrade to Pro</button>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">— WHALE —</div>
+        <div class="price-amt"><span class="currency">$</span>499</div>
+        <div class="price-per">/ MONTH · 0.05% FEE</div>
+        <ul class="price-list">
+          <li>Unlimited TVL</li>
+          <li>Custom strategies</li>
+          <li>Dedicated manager</li>
+          <li>OTC desk access</li>
+          <li>API rate limits lifted</li>
+        </ul>
+        <button class="btn btn-outline">Contact Sales</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">FROM THE COMMUNITY</span>
+      <h2>Trusted by <span class="grad">184,000+</span> wallets</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <blockquote>Migrated six figures here from a centralized exchange. Sub-second withdrawals actually work. Proof-of-reserves is verifiable on-chain. This is how DeFi should feel.</blockquote>
+        <div class="testimonial-author">
+          <div class="t-avatar">V</div>
+          <div>
+            <div class="t-name">Vera Nakamoto</div>
+            <div class="t-role">Whale · 4 yrs</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <blockquote>The auto-compounding is unreal. I set it and forgot it. Six months later my position is up 38% with zero gas spent on reinvestment. The dashboard alone is worth the pro tier.</blockquote>
+        <div class="testimonial-author">
+          <div class="t-avatar">M</div>
+          <div>
+            <div class="t-name">Marcus Chen</div>
+            <div class="t-role">Pro Trader · 2 yrs</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <blockquote>AAA audit, $480M insurance fund, transparent reserves. I actually slept at night during the last market crash. Withdrawals never paused. That is trust earned, not promised.</blockquote>
+        <div class="testimonial-author">
+          <div class="t-avatar">A</div>
+          <div>
+            <div class="t-name">Aisha Patel</div>
+            <div class="t-role">Treasury Manager · 3 yrs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">DOCUMENTATION</span>
+      <h2>Frequently <span class="grad">asked</span></h2>
+    </div>
+    <div class="faq-container">
+      <div class="faq-item">
+        <div class="faq-q">Is Satoshi non-custodial?<span class="faq-chevron">▾</span></div>
+        <div class="faq-a">Yes. Your private keys never leave your wallet. We use smart contracts that you interact with directly. We cannot move your funds, freeze your account, or access your collateral — even if legally compelled. Your keys, your coins.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How are yields generated?<span class="faq-chevron">▾</span></div>
+        <div class="faq-a">Yield comes from on-chain strategies: lending to blue-chip borrowers, providing concentrated liquidity to audited pools, and staking to validated validators. Every strategy is documented, audited, and visible on-chain. No opaque off-chain activity.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What happens during a market crash?<span class="faq-chevron">▾</span></div>
+        <div class="faq-a">Positions are over-collateralized by default. If your collateral ratio drops, you receive notifications at 80%, 75%, and 70%. Liquidation only triggers at 65%, and the $480M insurance fund covers any shortfall. No user has lost principal in 5 years.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I verify the reserves myself?<span class="faq-chevron">▾</span></div>
+        <div class="faq-a">Yes. Proof-of-reserves is published on-chain every block. We use Merkle tree attestations — you can cryptographically verify your specific balance is included in the total, without revealing your identity. Tools and guides are in our docs.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What chains are supported?<span class="faq-chevron">▾</span></div>
+        <div class="faq-a">14 chains including Ethereum, Bitcoin (via wrapping), Arbitrum, Optimism, Base, Polygon, Avalanche, Solana, and BNB Chain. Cross-chain deposits settle natively — no synthetic tokens, no wrapped intermediaries held by us.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo"><span class="logo-mark"></span>SATOSHI</a>
+        <p>Decentralized finance, forged in digital gold. Engineered for precision, security, and digital value. Not your keys, not your coins — and these are your keys.</p>
+        <div class="footer-social">
+          <a class="social-icon" href="#" aria-label="X">X</a>
+          <a class="social-icon" href="#" aria-label="GH">GH</a>
+          <a class="social-icon" href="#" aria-label="DC">DC</a>
+          <a class="social-icon" href="#" aria-label="TG">TG</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>// PROTOCOL</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#pricing">Fee Tiers</a></li>
+          <li><a href="#faq">Documentation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>// RESOURCES</h4>
+        <ul>
+          <li><a href="#">Whitepaper</a></li>
+          <li><a href="#">Audit Reports</a></li>
+          <li><a href="#">Proof of Reserves</a></li>
+          <li><a href="#">API Reference</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>// COMMUNITY</h4>
+        <ul>
+          <li><a href="#">Discord</a></li>
+          <li><a href="#">Forum</a></li>
+          <li><a href="#">Governance</a></li>
+          <li><a href="#">Bug Bounty</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SATOSHI PROTOCOL · <span class="orange">BLOCK #847,392</span></span>
+      <span>BUILT ON THE VOID</span>
+      <span>SECURED BY DIGITAL GOLD</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Mobile menu
+  const toggle = document.querySelector('.menu-toggle');
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const links = document.querySelector('.nav-links');
+      if (links.style.display === 'flex') {
+        links.style.display = '';
+      } else {
+        links.style.display = 'flex';
+        links.style.flexDirection = 'column';
+        links.style.position = 'absolute';
+        links.style.top = '72px';
+        links.style.left = '0';
+        links.style.right = '0';
+        links.style.background = 'rgba(3,3,4,0.95)';
+        links.style.padding = '24px';
+        links.style.borderBottom = '1px solid #1E293B';
+      }
+    });
+  }
+
+  // Animate stat numbers count-up on scroll
+  const statVals = document.querySelectorAll('.stat-val');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '0';
+        e.target.style.transform = 'translateY(10px)';
+        e.target.style.transition = 'opacity 0.6s, transform 0.6s';
+        setTimeout(() => {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }, 100);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  statVals.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>

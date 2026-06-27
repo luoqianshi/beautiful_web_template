@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newsprint — All the News That's Fit to Print</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ===== Design Tokens ===== */
+  :root{
+    --bg:#F9F9F7;
+    --fg:#111111;
+    --muted:#737373;
+    --muted-dark:#525252;
+    --accent:#CC0000;
+    --divider:#E5E5E0;
+    --hover:#F5F5F5;
+    --n100:#F5F5F5;
+    --n200:#E5E5E5;
+    --n400:#A3A3A3;
+    --n500:#737373;
+    --n600:#525252;
+    --n700:#404040;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  *{border-radius:0!important;}
+  html{scroll-behavior:smooth;}
+  body{
+    background-color:var(--bg);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23111111' fill-opacity='0.04' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    color:var(--fg);
+    font-family:'Lora',Georgia,serif;
+    line-height:1.625;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  .font-display{font-family:'Playfair Display',serif;}
+  .font-body{font-family:'Lora',serif;}
+  .font-ui{font-family:'Inter',sans-serif;}
+  .font-mono{font-family:'JetBrains Mono',monospace;}
+
+  /* ===== Layout ===== */
+  .container{max-width:1280px;margin:0 auto;padding:0 24px;}
+  section{padding:64px 0;}
+  a{color:inherit;text-decoration:none;}
+  .ornament{padding:32px 0;text-align:center;font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--n400);letter-spacing:1em;}
+
+  /* ===== Texture ===== */
+  .newsprint-texture{position:relative;}
+  .newsprint-texture::before{
+    content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background-image:linear-gradient(0deg,transparent 98%,rgba(0,0,0,0.02) 100%),linear-gradient(90deg,transparent 98%,rgba(0,0,0,0.02) 100%);
+    background-size:3px 3px;
+  }
+
+  /* ===== Header / Masthead ===== */
+  header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--fg);}
+  .masthead-top{border-bottom:1px solid var(--fg);padding:8px 0;font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--n600);}
+  .masthead-top .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+  .masthead-main{padding:20px 0;border-bottom:4px solid var(--fg);}
+  .masthead-main .container{display:flex;align-items:center;justify-content:space-between;gap:24px;}
+  .brand{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.02em;line-height:1;}
+  .brand span{color:var(--accent);}
+  nav ul{display:flex;list-style:none;gap:4px;}
+  nav a{display:inline-block;padding:10px 16px;font-family:'Inter',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fg);transition:color .2s;}
+  nav a:hover{color:var(--accent);}
+  .menu-toggle{display:none;width:44px;height:44px;background:var(--fg);color:var(--bg);border:none;cursor:pointer;font-size:1.2rem;}
+
+  /* ===== Buttons ===== */
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 28px;border:1px solid var(--fg);font-family:'Inter',sans-serif;font-weight:700;font-size:.85rem;
+    letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s ease;min-height:48px;
+  }
+  .btn-primary{background:var(--fg);color:var(--bg);border-color:var(--fg);}
+  .btn-primary:hover{background:var(--bg);color:var(--fg);}
+  .btn-outline{background:transparent;color:var(--fg);border-color:var(--fg);}
+  .btn-outline:hover{background:var(--fg);color:var(--bg);}
+  .btn-accent{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .btn-accent:hover{background:var(--fg);border-color:var(--fg);}
+
+  /* ===== Hero ===== */
+  .hero-grid{display:grid;grid-template-columns:1fr;gap:32px;}
+  .hero-main{}
+  .sec-label{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+  .sec-label::before{content:"";display:inline-block;width:10px;height:10px;background:var(--accent);}
+  .hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.8rem,8vw,6.5rem);line-height:.92;letter-spacing:-.03em;margin-bottom:24px;}
+  .hero h1 em{font-style:italic;font-weight:400;}
+  .hero-intro{font-family:'Lora',serif;font-size:1.15rem;line-height:1.7;color:var(--n600);max-width:680px;margin-bottom:32px;}
+  .hero-intro::first-letter{
+    float:left;font-family:'Playfair Display',serif;font-weight:900;font-size:4.5rem;line-height:.85;
+    padding:6px 12px 0 0;color:var(--fg);
+  }
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:40px;}
+  .hero-meta{display:flex;gap:24px;flex-wrap:wrap;padding-top:24px;border-top:1px solid var(--fg);font-family:'JetBrains Mono',monospace;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--n600);}
+  .hero-meta span strong{color:var(--fg);}
+
+  .hero-side{display:flex;flex-direction:column;gap:24px;}
+  .stats-box{border:1px solid var(--fg);padding:24px;background:var(--bg);}
+  .stats-box h3{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);border-bottom:1px solid var(--fg);padding-bottom:12px;margin-bottom:16px;}
+  .stat-row{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--divider);}
+  .stat-row:last-child{border-bottom:none;}
+  .stat-row .lbl{font-family:'JetBrains Mono',monospace;font-size:.78rem;text-transform:uppercase;color:var(--n600);letter-spacing:.05em;}
+  .stat-row .val{font-family:'Playfair Display',serif;font-weight:700;font-size:1.6rem;}
+  .ad-box{border:1px solid var(--fg);padding:32px;text-align:center;background:var(--n200);position:relative;}
+  .ad-box .ad-label{position:absolute;top:-1px;left:-1px;background:var(--fg);color:var(--bg);font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:4px 10px;letter-spacing:.1em;text-transform:uppercase;}
+  .ad-box .ad-content{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;line-height:1.2;margin-top:16px;}
+  .ad-box .ad-sub{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--n600);margin-top:8px;text-transform:uppercase;letter-spacing:.1em;}
+
+  /* ===== Marquee Ticker ===== */
+  .ticker{background:var(--fg);color:var(--bg);overflow:hidden;border-top:1px solid var(--fg);border-bottom:1px solid var(--fg);}
+  .ticker-track{display:flex;gap:48px;padding:16px 0;white-space:nowrap;animation:marquee 30s linear infinite;font-family:'JetBrains Mono',monospace;font-size:.88rem;}
+  .ticker-item{display:flex;align-items:center;gap:12px;}
+  .ticker-item .badge{background:var(--accent);color:#fff;padding:3px 10px;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;}
+  .ticker-item .val{font-weight:700;}
+  .ticker-item .chg.up{color:#34D399;} .ticker-item .chg.down{color:#F87171;}
+  @keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+  /* ===== Section Header ===== */
+  .sec-head{margin-bottom:40px;border-bottom:4px solid var(--fg);padding-bottom:16px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;}
+  .sec-head h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.02em;line-height:1;}
+  .sec-head .meta{font-family:'JetBrains Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--n600);}
+
+  /* ===== Features ===== */
+  .feat-grid-top{display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid var(--fg);border-top:1px solid var(--fg);}
+  .feat-cell{border-right:1px solid var(--fg);border-bottom:1px solid var(--fg);padding:28px;background:var(--bg);transition:background .2s;}
+  .feat-cell:hover{background:var(--n100);}
+  .feat-icon-box{width:48px;height:48px;border:1px solid var(--fg);display:grid;place-items:center;margin-bottom:20px;transition:all .2s;}
+  .feat-cell:hover .feat-icon-box{background:var(--fg);color:var(--bg);}
+  .feat-cell h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;margin-bottom:10px;}
+  .feat-cell p{font-family:'Lora',serif;font-size:.92rem;color:var(--n600);line-height:1.5;}
+  .feat-grid-bottom{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--fg);border-top:1px solid var(--fg);margin-top:32px;}
+  .feat-bullet{border-right:1px solid var(--fg);border-bottom:1px solid var(--fg);padding:28px;background:var(--bg);}
+  .feat-bullet h4{font-family:'Inter',sans-serif;font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--divider);}
+  .feat-bullet ul{list-style:none;}
+  .feat-bullet li{display:flex;gap:10px;padding:6px 0;font-family:'Lora',serif;font-size:.92rem;color:var(--n600);}
+  .feat-bullet li::before{content:"■";color:var(--accent);font-size:.7rem;flex-shrink:0;margin-top:4px;}
+
+  /* ===== How It Works (Inverted) ===== */
+  .inverted{background:var(--fg);color:var(--bg);}
+  .inverted .sec-head{border-bottom-color:var(--bg);}
+  .inverted .sec-head h2{color:var(--bg);}
+  .inverted .sec-head .meta{color:var(--n400);}
+  .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;}
+  .how-grid::before{content:"";position:absolute;top:36px;left:16%;right:16%;height:1px;background:var(--n600);}
+  .how-step{padding:0 24px;text-align:center;position:relative;}
+  .how-num{width:72px;height:72px;background:var(--accent);color:#fff;display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:900;font-size:2rem;margin:0 auto 24px;position:relative;z-index:1;}
+  .how-step h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;margin-bottom:12px;}
+  .how-step p{font-family:'Lora',serif;color:var(--n400);font-size:.95rem;}
+
+  /* ===== Benefits ===== */
+  .benefit-grid{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:start;}
+  .benefit-visual{border:1px solid var(--fg);background:var(--n200);aspect-ratio:5/4;display:grid;place-items:center;position:relative;overflow:hidden;}
+  .benefit-visual .halftone{position:absolute;inset:0;background-image:radial-gradient(#000 1px,transparent 1px);background-size:16px 16px;opacity:.1;}
+  .benefit-visual .fig{position:relative;font-family:'Playfair Display',serif;font-weight:900;font-size:6rem;line-height:1;text-align:center;}
+  .benefit-visual .caption{position:absolute;bottom:12px;left:12px;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--n600);text-transform:uppercase;letter-spacing:.1em;}
+  .benefit-text h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.8rem,3.5vw,2.8rem);line-height:1.05;margin-bottom:24px;}
+  .benefit-text > p{font-family:'Lora',serif;color:var(--n600);margin-bottom:32px;font-size:1.05rem;}
+  .benefit-list{counter-reset:b;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:20px 32px;}
+  .benefit-list li{counter-increment:b;padding-left:48px;position:relative;font-family:'Lora',serif;color:var(--n600);font-size:.95rem;}
+  .benefit-list li::before{content:counter(b,decimal-leading-zero);position:absolute;left:0;top:0;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.1rem;color:var(--accent);}
+  .benefit-list li strong{display:block;font-family:'Inter',sans-serif;font-weight:700;color:var(--fg);font-size:.9rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;}
+
+  /* ===== Testimonials ===== */
+  .test-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-left:1px solid var(--fg);border-top:1px solid var(--fg);}
+  .test-card{border-right:1px solid var(--fg);border-bottom:1px solid var(--fg);padding:36px;background:var(--bg);position:relative;transition:all .2s;}
+  .test-card:hover{background:var(--n100);}
+  .test-card .qmark{font-family:'Playfair Display',serif;font-weight:900;font-size:5rem;line-height:.7;color:var(--accent);position:absolute;top:20px;right:24px;opacity:.15;}
+  .test-card blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:1.25rem;line-height:1.4;margin-bottom:24px;padding-right:40px;}
+  .test-author{display:flex;align-items:center;gap:16px;padding-top:20px;border-top:1px solid var(--divider);}
+  .test-author .avatar{width:48px;height:48px;background:var(--n200);border:1px solid var(--fg);display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:700;}
+  .test-author .name{font-family:'Inter',sans-serif;font-weight:700;font-size:.9rem;}
+  .test-author .role{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--n600);text-transform:uppercase;letter-spacing:.05em;}
+
+  /* ===== Pricing ===== */
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--fg);}
+  .price-col{border-right:1px solid var(--fg);padding:0;background:var(--bg);display:flex;flex-direction:column;}
+  .price-col:last-child{border-right:none;}
+  .price-col.featured{background:var(--n100);}
+  .price-head{padding:32px;border-bottom:1px solid var(--fg);}
+  .price-head .tier{font-family:'JetBrains Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--n600);margin-bottom:8px;}
+  .price-head .tier span{background:var(--accent);color:#fff;padding:2px 8px;}
+  .price-head h3{font-family:'Playfair Display',serif;font-weight:900;font-size:1.8rem;margin-bottom:12px;}
+  .price-head .price{font-family:'Playfair Display',serif;font-weight:900;font-size:3.5rem;line-height:1;}
+  .price-head .price small{font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:400;color:var(--n600);}
+  .price-body{padding:32px;flex:1;display:flex;flex-direction:column;}
+  .price-body p{font-family:'Lora',serif;color:var(--n600);font-size:.92rem;margin-bottom:24px;}
+  .price-feats{list-style:none;margin-bottom:32px;flex:1;}
+  .price-feats li{display:flex;gap:10px;padding:10px 0;border-bottom:1px dashed var(--divider);font-family:'Lora',serif;font-size:.92rem;color:var(--n600);}
+  .price-feats li::before{content:"+";font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:700;}
+
+  /* ===== FAQ ===== */
+  .faq-grid{display:grid;grid-template-columns:4fr 8fr;gap:48px;}
+  .faq-side{position:sticky;top:120px;}
+  .faq-side .box{border:1px solid var(--fg);padding:28px;background:var(--bg);}
+  .faq-side .box h3{font-family:'JetBrains Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:12px;}
+  .faq-side .box p{font-family:'Lora',serif;color:var(--n600);font-size:.95rem;margin-bottom:16px;}
+  .faq-side .box .btn{width:100%;justify-content:center;}
+  .faq-main{}
+  .faq-item{border-bottom:1px solid var(--fg);}
+  .faq-item:first-child{border-top:1px solid var(--fg);}
+  .faq-q{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px 0;cursor:pointer;font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;}
+  .faq-q .ic{width:32px;height:32px;border:1px solid var(--fg);display:grid;place-items:center;flex-shrink:0;transition:transform .3s;}
+  .faq-item.open .faq-q .ic{transform:rotate(45deg);background:var(--fg);color:var(--bg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease,opacity .3s ease;opacity:0;}
+  .faq-item.open .faq-a{max-height:300px;opacity:1;}
+  .faq-a-inner{padding:0 48px 24px 0;font-family:'Lora',serif;color:var(--n600);font-size:1rem;line-height:1.7;}
+
+  /* ===== CTA ===== */
+  .cta-section{background:var(--fg);color:var(--bg);padding:80px 0;text-align:center;border-top:1px solid var(--fg);}
+  .cta-section h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.2rem,5vw,4rem);line-height:1;margin-bottom:20px;}
+  .cta-section p{font-family:'Lora',serif;color:var(--n400);font-size:1.1rem;max-width:560px;margin:0 auto 32px;}
+
+  /* ===== Footer ===== */
+  footer{border-top:4px solid var(--fg);padding:64px 0 32px;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:32px;margin-bottom:48px;}
+  .footer-brand .brand{font-size:1.8rem;margin-bottom:16px;display:block;}
+  .footer-brand p{font-family:'Lora',serif;color:var(--n600);font-size:.92rem;margin-bottom:24px;max-width:320px;}
+  .social-row{display:flex;gap:0;}
+  .social{width:44px;height:44px;border:1px solid var(--fg);display:grid;place-items:center;margin-right:-1px;color:var(--fg);transition:all .2s;}
+  .social:hover{background:var(--fg);color:var(--bg);z-index:1;}
+  .footer-col h4{font-family:'JetBrains Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fg);}
+  .footer-col ul{list-style:none;}
+  .footer-col li{margin-bottom:10px;}
+  .footer-col a{font-family:'Inter',sans-serif;font-size:.88rem;color:var(--n600);transition:color .2s;}
+  .footer-col a:hover{color:var(--accent);}
+  .footer-bottom{border-top:1px solid var(--fg);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-family:'JetBrains Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--n600);}
+
+  /* ===== Responsive ===== */
+  @media(max-width:1024px){
+    .hero-grid{grid-template-columns:1fr;}
+    .feat-grid-top{grid-template-columns:repeat(2,1fr);}
+    .feat-grid-bottom{grid-template-columns:1fr;}
+    .how-grid{grid-template-columns:1fr;gap:48px;}
+    .how-grid::before{display:none;}
+    .benefit-grid{grid-template-columns:1fr;}
+    .test-grid{grid-template-columns:1fr;}
+    .price-grid{grid-template-columns:1fr;}
+    .price-col{border-right:none;border-bottom:1px solid var(--fg);}
+    .price-col:last-child{border-bottom:none;}
+    .faq-grid{grid-template-columns:1fr;}
+    .faq-side{position:static;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:640px){
+    section{padding:48px 0;}
+    nav ul{display:none;}
+    nav ul.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--fg);padding:16px;}
+    .menu-toggle{display:block;}
+    .feat-grid-top{grid-template-columns:1fr;}
+    .benefit-list{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .masthead-main .container{flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Masthead -->
+<header>
+  <div class="masthead-top">
+    <div class="container">
+      <span>Vol. 1 | No. 27 | June 27, 2026</span>
+      <span>New York Edition | $0.00 Digital</span>
+    </div>
+  </div>
+  <div class="masthead-main">
+    <div class="container">
+      <a href="#" class="brand">The Newsprint<span>.</span></a>
+      <nav>
+        <ul id="navLinks">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how">Process</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#" class="btn btn-primary" style="padding:10px 20px;">Subscribe</a></li>
+        </ul>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="newsprint-texture">
+  <div class="container">
+    <div class="hero-grid" style="grid-template-columns:8fr 4fr;">
+      <div class="hero-main">
+        <div class="sec-label">Front Page · Editorial</div>
+        <h1>Clarity in <em>black</em> and white, structure you can <em>feel</em>.</h1>
+        <p class="hero-intro">An ode to the golden age of print journalism, reimagined for the web. Absolute clarity, hierarchy, and structure through high-contrast typography, grid-based layouts, and sharp geometric precision. Every element is a perfect rectangle with zero compromise.</p>
+        <div class="hero-cta">
+          <a href="#pricing" class="btn btn-primary">Read the Brief</a>
+          <a href="#features" class="btn btn-outline">View Sections</a>
+        </div>
+        <div class="hero-meta">
+          <span>By <strong>The Editors</strong></span>
+          <span>Filed <strong>June 27, 2026</strong></span>
+          <span>Read Time <strong>4 min</strong></span>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="stats-box">
+          <h3>By the Numbers</h3>
+          <div class="stat-row"><span class="lbl">Readers</span><span class="val">2.4M</span></div>
+          <div class="stat-row"><span class="lbl">Articles</span><span class="val">1,847</span></div>
+          <div class="stat-row"><span class="lbl">Contrast Ratio</span><span class="val">17:1</span></div>
+          <div class="stat-row"><span class="lbl">Border Radius</span><span class="val">0px</span></div>
+        </div>
+        <div class="ad-box">
+          <span class="ad-label">Advertisement</span>
+          <div class="ad-content">Sharp. Authoritative. Timeless.</div>
+          <div class="ad-sub">— Sponsored Placement —</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee Ticker -->
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="badge">Breaking</span><span>Readership</span><span class="val">2.4M</span><span class="chg up">+12.4%</span></div>
+    <div class="ticker-item"><span class="badge">Live</span><span>Articles Published</span><span class="val">1,847</span><span class="chg up">+8.1%</span></div>
+    <div class="ticker-item"><span class="badge">Update</span><span>Contrast Ratio</span><span class="val">17:1</span><span class="chg up">AAA</span></div>
+    <div class="ticker-item"><span class="badge">Breaking</span><span>Page Load</span><span class="val">0.3s</span><span class="chg down">-2.1%</span></div>
+    <div class="ticker-item"><span class="badge">Live</span><span>Subscribers</span><span class="val">48K</span><span class="chg up">+24.7%</span></div>
+    <div class="ticker-item"><span class="badge">Breaking</span><span>Readership</span><span class="val">2.4M</span><span class="chg up">+12.4%</span></div>
+    <div class="ticker-item"><span class="badge">Live</span><span>Articles Published</span><span class="val">1,847</span><span class="chg up">+8.1%</span></div>
+    <div class="ticker-item"><span class="badge">Update</span><span>Contrast Ratio</span><span class="val">17:1</span><span class="chg up">AAA</span></div>
+    <div class="ticker-item"><span class="badge">Breaking</span><span>Page Load</span><span class="val">0.3s</span><span class="chg down">-2.1%</span></div>
+    <div class="ticker-item"><span class="badge">Live</span><span>Subscribers</span><span class="val">48K</span><span class="chg up">+24.7%</span></div>
+  </div>
+</div>
+
+<!-- Features -->
+<section id="features">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label" style="margin-bottom:8px;">Section A · Features</div>
+        <h2>The Editorial Toolkit</h2>
+      </div>
+      <div class="meta">Page 2 of 8</div>
+    </div>
+    <div class="feat-grid-top">
+      <div class="feat-cell">
+        <div class="feat-icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg></div>
+        <h3>Stark Geometry</h3>
+        <p>Zero border radius. Every element is a perfect rectangle with sharp 90-degree corners. No exceptions.</p>
+      </div>
+      <div class="feat-cell">
+        <div class="feat-icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg></div>
+        <h3>Typographic Drama</h3>
+        <p>Massive serif headlines up to 128px paired with highly legible body text create extreme hierarchy.</p>
+      </div>
+      <div class="feat-cell">
+        <div class="feat-icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+        <h3>Visible Structure</h3>
+        <p>Grid lines are not hidden—they are celebrated. Borders between columns are explicit and prominent.</p>
+      </div>
+      <div class="feat-cell">
+        <div class="feat-icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></div>
+        <h3>Paper Texture</h3>
+        <p>Subtle dot-grid overlays and halftone patterns simulate the tactile quality of fresh newsprint.</p>
+      </div>
+    </div>
+    <div class="feat-grid-bottom">
+      <div class="feat-bullet">
+        <h4>Typography Stack</h4>
+        <ul>
+          <li>Playfair Display — Headlines</li>
+          <li>Lora — Body &amp; long-form</li>
+          <li>Inter — UI &amp; labels</li>
+          <li>JetBrains Mono — Data</li>
+        </ul>
+      </div>
+      <div class="feat-bullet">
+        <h4>Layout Principles</h4>
+        <ul>
+          <li>12-column grid system</li>
+          <li>Collapsed border logic</li>
+          <li>Asymmetric 8/4 splits</li>
+          <li>High information density</li>
+        </ul>
+      </div>
+      <div class="feat-bullet">
+        <h4>Editorial Details</h4>
+        <ul>
+          <li>Drop caps on intros</li>
+          <li>Marquee news ticker</li>
+          <li>Edition metadata</li>
+          <li>Ornamental dividers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ornament">&#x2727; &#x2727; &#x2727;</div>
+
+<!-- How It Works (Inverted) -->
+<section id="how" class="inverted">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label" style="margin-bottom:8px;color:var(--accent);">Section B · Process</div>
+        <h2>How the Press Runs</h2>
+      </div>
+      <div class="meta">Inverted · Dark Edition</div>
+    </div>
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="how-num">1</div>
+        <h3>Set the Grid</h3>
+        <p>Establish a 12-column grid with explicit vertical dividers. Borders define structure and create visual rhythm across every section.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-num">2</div>
+        <h3>Compose Type</h3>
+        <p>Layer massive Playfair Display headlines over Lora body text. Apply drop caps, uppercase labels, and monospace metadata for editorial authority.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-num">3</div>
+        <h3>Print &amp; Publish</h3>
+        <p>Add texture overlays, inverted sections, and a marquee ticker. Ship a design that feels serious, timeless, and worthy of record.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits -->
+<section>
+  <div class="container">
+    <div class="benefit-grid">
+      <div class="benefit-visual">
+        <div class="halftone"></div>
+        <div class="fig">Aa</div>
+        <div class="caption">Fig. 1.1 — Typographic specimen</div>
+      </div>
+      <div class="benefit-text">
+        <div class="sec-label">Section C · Benefits</div>
+        <h2>Editorial authority, engineered for the web.</h2>
+        <p>The newsprint aesthetic rejects modern soft-shadows and blurred backgrounds in favor of structure that commands attention. It feels like holding a fresh morning newspaper—crisp, organized, and information-rich.</p>
+        <ol class="benefit-list">
+          <li><strong>AAA Contrast</strong>Ink black #111 on off-white #F9F9F7 exceeds 17:1 contrast ratio for optimal readability.</li>
+          <li><strong>Zero Radius</strong>Every component enforces sharp 90-degree corners. No exceptions, no softening.</li>
+          <li><strong>Dense Grids</strong>Tight padding and collapsed borders mimic newspaper column layouts efficiently.</li>
+          <li><strong>Hard Shadows</strong>4px offset shadows on hover create a cut-out newspaper lift effect—no blur.</li>
+          <li><strong>Texture Layering</strong>Dot-grid patterns and halftone fills add depth without skeuomorphism.</li>
+          <li><strong>Timeless Authority</strong>Editorial design feels serious, credible, and built to outlast trends.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="newsprint-texture">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label" style="margin-bottom:8px;">Section D · Opinions</div>
+        <h2>Letters to the Editor</h2>
+      </div>
+      <div class="meta">Verified Readership</div>
+    </div>
+    <div class="test-grid">
+      <div class="test-card">
+        <span class="qmark">"</span>
+        <blockquote>Newsprint gave our publication the gravitas we were missing. The grid system and typographic hierarchy are unmatched. Readers trust it instantly.</blockquote>
+        <div class="test-author">
+          <span class="avatar">HC</span>
+          <div><div class="name">Helena Cross</div><div class="role">Editor-in-Chief, The Meridian</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <span class="qmark">"</span>
+        <blockquote>The zero-radius discipline forced us to think structurally. Our content finally reads like a publication of record, not a blog.</blockquote>
+        <div class="test-author">
+          <span class="avatar">MO</span>
+          <div><div class="name">Marcus Okafor</div><div class="role">Creative Director, Folio Press</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <span class="qmark">"</span>
+        <blockquote>Hard offset shadows and collapsed borders—we've never shipped a design this sharp. The inverted section alone doubled our engagement.</blockquote>
+        <div class="test-author">
+          <span class="avatar">LR</span>
+          <div><div class="name">Lena Roy</div><div class="role">Founder, Broadside Media</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <span class="qmark">"</span>
+        <blockquote>17:1 contrast ratio with zero compromise on aesthetics. Accessibility and editorial beauty in one package. Remarkable.</blockquote>
+        <div class="test-author">
+          <span class="avatar">DT</span>
+          <div><div class="name">Devon Tate</div><div class="role">UX Lead, Gazette Digital</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label" style="margin-bottom:8px;">Section E · Subscriptions</div>
+        <h2>Choose Your Edition</h2>
+      </div>
+      <div class="meta">Three Tiers · Cancel Anytime</div>
+    </div>
+    <div class="price-grid">
+      <div class="price-col">
+        <div class="price-head">
+          <div class="tier">Daily Reader</div>
+          <h3>Standard</h3>
+          <div class="price">$0<small>/mo</small></div>
+        </div>
+        <div class="price-body">
+          <p>For individuals exploring editorial design.</p>
+          <ul class="price-feats">
+            <li>5 article templates</li>
+            <li>Standard grid system</li>
+            <li>Community support</li>
+            <li>Dot-grid texture</li>
+          </ul>
+          <a href="#" class="btn btn-outline" style="justify-content:center;">Start Reading</a>
+        </div>
+      </div>
+      <div class="price-col featured">
+        <div class="price-head">
+          <div class="tier">Most Popular <span>Best Value</span></div>
+          <h3>Editor</h3>
+          <div class="price">$29<small>/mo</small></div>
+        </div>
+        <div class="price-body">
+          <p>For designers shipping publications.</p>
+          <ul class="price-feats">
+            <li>Unlimited templates</li>
+            <li>Full typography stack</li>
+            <li>Collapsed border engine</li>
+            <li>Marquee ticker module</li>
+            <li>Inverted section builder</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="#" class="btn btn-primary" style="justify-content:center;">Subscribe Now</a>
+        </div>
+      </div>
+      <div class="price-col">
+        <div class="price-head">
+          <div class="tier">Newsroom</div>
+          <h3>Publisher</h3>
+          <div class="price">$99<small>/mo</small></div>
+        </div>
+        <div class="price-body">
+          <p>For teams running publications at scale.</p>
+          <ul class="price-feats">
+            <li>Everything in Editor</li>
+            <li>Custom grid systems</li>
+            <li>Multi-edition support</li>
+            <li>Dedicated editor</li>
+            <li>SLA guarantee</li>
+          </ul>
+          <a href="#" class="btn btn-outline" style="justify-content:center;">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="newsprint-texture">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label" style="margin-bottom:8px;">Section F · Inquiry</div>
+        <h2>Frequently Asked</h2>
+      </div>
+      <div class="meta">Submit Questions Anytime</div>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-side">
+        <div class="box">
+          <h3>Help Center</h3>
+          <p>Can't find what you're looking for? Our editorial team responds to every inquiry within one business day.</p>
+          <a href="#" class="btn btn-primary">Contact Editors</a>
+        </div>
+      </div>
+      <div class="faq-main">
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+          <div class="faq-q">Why zero border radius everywhere? <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+          <div class="faq-a"><div class="faq-a-inner">Sharp 90-degree corners are the cornerstone of the newsprint aesthetic. They reinforce the editorial, authoritative feel and distinguish it from modern soft designs. The `.sharp-corners` utility enforces zero radius on every component.</div></div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+          <div class="faq-q">How does the collapsed border system work? <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+          <div class="faq-a"><div class="faq-a-inner">Adjacent grid cells share borders to avoid double lines. Apply `border-l` and `border-t` to the container, then `border-r` and `border-b` to children. Remove the right border on the last column and bottom border on the last row.</div></div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+          <div class="faq-q">What is the hard shadow hover effect? <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+          <div class="faq-a"><div class="faq-a-inner">Instead of soft blurred shadows, we use `box-shadow: 4px 4px 0px 0px #111111` with `translate(-2px,-2px)` on hover. This creates a "lifted" newspaper cutout effect—snappy and mechanical, never organic.</div></div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+          <div class="faq-q">Is the design accessible? <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+          <div class="faq-a"><div class="faq-a-inner">Yes. Ink black #111111 on off-white #F9F9F7 achieves a 17:1 contrast ratio (WCAG AAA). Red #CC0000 on off-white meets AA at 5:1. Focus states use thick 2px black rings with 2px offsets.</div></div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+          <div class="faq-q">Can I use color beyond black and white? <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+          <div class="faq-a"><div class="faq-a-inner">Editorial red (#CC0000) is used extremely sparingly—only for breaking news badges, CTAs, and hover states. 99% of the design remains pure black and white to maintain its stark authority.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Put it in print.</h2>
+    <p>Join 48,000+ editors and designers building authoritative, high-contrast publications with The Newsprint system.</p>
+    <a href="#" class="btn btn-accent">Start Your Edition</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="brand">The Newsprint<span>.</span></a>
+        <p>An ode to the golden age of print journalism, reimagined for the web. Authoritative, intellectual, urgent, timeless.</p>
+        <div class="social-row">
+          <a class="social" href="#" aria-label="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a class="social" href="#" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+          <a class="social" href="#" aria-label="RSS"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg></a>
+          <a class="social" href="#" aria-label="Mail"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Sections</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how">Process</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Newsroom</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Masthead</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press Kit</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Style Guide</a></li>
+          <li><a href="#">Type Specimen</a></li>
+          <li><a href="#">Grid Manual</a></li>
+          <li><a href="#">Archive</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 The Newsprint. All rights reserved.</span>
+      <span>Edition: Vol 1.0 | Printed in NYC</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    menuToggle.textContent = navLinks.classList.contains('open') ? '✕' : '≡';
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuToggle.textContent = '≡';
+  }));
+</script>
+</body>
+</html>

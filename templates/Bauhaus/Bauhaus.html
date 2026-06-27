@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bauhaus — Form Follows Function</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F0F0F0;
+    --fg:#121212;
+    --red:#D02020;
+    --blue:#1040C0;
+    --yellow:#F0C020;
+    --muted:#E0E0E0;
+    --shadow-s:4px 4px 0px 0px #121212;
+    --shadow-m:6px 6px 0px 0px #121212;
+    --shadow-l:8px 8px 0px 0px #121212;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:'Outfit',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1280px;margin:0 auto;padding:0 24px}
+
+  /* Typography */
+  h1,h2,h3,h4{font-family:'Outfit',sans-serif;font-weight:900;line-height:.9;letter-spacing:-.02em;color:var(--fg);text-transform:uppercase}
+  .label{font-family:'Outfit',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2em;font-size:13px}
+
+  /* Geometric shapes */
+  .shape-circle{border-radius:50%}
+  .shape-square{border-radius:0}
+  .shape-triangle{width:0;height:0;background:transparent!important;border-style:solid}
+  .tri-red{border-width:0 30px 52px 30px;border-color:transparent transparent var(--red) transparent}
+  .tri-blue{border-width:0 30px 52px 30px;border-color:transparent transparent var(--blue) transparent}
+  .tri-yellow{border-width:0 30px 52px 30px;border-color:transparent transparent var(--yellow) transparent}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.05em;
+    padding:0 28px;height:48px;border-radius:0;cursor:pointer;border:2px solid var(--fg);
+    box-shadow:var(--shadow-s);transition:transform .15s ease-out,box-shadow .15s ease-out;
+  }
+  .btn:active{transform:translate(2px,2px);box-shadow:0 0 0 0 var(--fg)}
+  .btn-red{background:var(--red);color:#fff}
+  .btn-red:hover{background:#B81A1A}
+  .btn-blue{background:var(--blue);color:#fff}
+  .btn-blue:hover{background:#0C33A0}
+  .btn-yellow{background:var(--yellow);color:var(--fg)}
+  .btn-yellow:hover{background:#D9AC18}
+  .btn-outline{background:#fff;color:var(--fg)}
+  .btn-outline:hover{background:var(--muted)}
+  .btn-pill{border-radius:9999px}
+  .btn-lg{height:56px;padding:0 36px;font-size:15px}
+
+  /* Navigation */
+  nav.topbar{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:4px solid var(--fg)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Outfit',sans-serif;font-weight:900;font-size:20px;text-transform:uppercase;letter-spacing:-.02em}
+  .logo-mark{display:flex;gap:4px;align-items:center}
+  .logo-mark .s1{width:16px;height:16px;background:var(--red);border-radius:50%}
+  .logo-mark .s2{width:16px;height:16px;background:var(--blue)}
+  .logo-mark .s3{width:0;height:0;border-style:solid;border-width:0 8px 14px 8px;border-color:transparent transparent var(--yellow) transparent}
+  .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+  .nav-links a{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.1em;transition:color .2s ease}
+  .nav-links a:hover{color:var(--red)}
+  .menu-toggle{display:none;background:none;border:2px solid var(--fg);box-shadow:var(--shadow-s);color:var(--fg);font-size:20px;cursor:pointer;width:44px;height:44px;display:none;align-items:center;justify-content:center}
+
+  /* Hero — split 50/50 */
+  .hero{display:grid;grid-template-columns:1fr 1fr;min-height:560px;border-bottom:4px solid var(--fg)}
+  .hero-left{background:var(--bg);padding:80px 48px;display:flex;flex-direction:column;justify-content:center;position:relative}
+  .hero-left::before{content:"";position:absolute;left:0;top:48px;width:6px;height:80px;background:var(--red)}
+  .hero-eyebrow{font-weight:700;text-transform:uppercase;letter-spacing:.2em;font-size:13px;color:var(--red);margin-bottom:20px}
+  .hero h1{font-size:clamp(48px,7vw,96px);font-weight:900;line-height:.9;margin-bottom:24px}
+  .hero h1 .blue{color:var(--blue)}
+  .hero h1 .yellow{background:var(--yellow);padding:0 8px;display:inline-block}
+  .hero-sub{font-size:18px;font-weight:500;max-width:480px;margin-bottom:36px;line-height:1.5}
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+  .hero-right{background:var(--blue);position:relative;overflow:hidden;display:grid;place-items:center}
+  .hero-comp{position:relative;width:100%;height:100%;min-height:480px}
+  .hero-comp .c1{position:absolute;width:200px;height:200px;border-radius:50%;background:var(--yellow);top:12%;left:12%;border:4px solid var(--fg);box-shadow:var(--shadow-l)}
+  .hero-comp .sq1{position:absolute;width:160px;height:160px;background:var(--red);bottom:14%;right:14%;border:4px solid var(--fg);transform:rotate(45deg);box-shadow:var(--shadow-l)}
+  .hero-comp .sq2{position:absolute;width:120px;height:120px;background:var(--bg);top:38%;right:30%;border:4px solid var(--fg);box-shadow:var(--shadow-m);display:grid;place-items:center}
+  .hero-comp .sq2 .tri{width:0;height:0;border-style:solid;border-width:0 35px 60px 35px;border-color:transparent transparent var(--fg) transparent}
+  .hero-comp .c2{position:absolute;width:60px;height:60px;border-radius:50%;background:var(--red);top:18%;right:18%;border:4px solid var(--fg)}
+
+  /* Stats — yellow bg */
+  .stats{background:var(--yellow);border-bottom:4px solid var(--fg);padding:64px 0}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .stat{padding:24px 32px;text-align:center;border-right:4px solid var(--fg);position:relative;display:flex;flex-direction:column;align-items:center;gap:16px}
+  .stat:last-child{border-right:none}
+  .stat-shape{width:56px;height:56px;border:4px solid var(--fg);background:#fff;box-shadow:var(--shadow-s);display:grid;place-items:center;font-family:'Outfit',sans-serif;font-weight:900;font-size:24px}
+  .stat-num{font-family:'Outfit',sans-serif;font-size:56px;font-weight:900;line-height:1;letter-spacing:-.03em}
+  .stat-label{font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:13px}
+
+  /* Section */
+  .section{padding:96px 0;border-bottom:4px solid var(--fg)}
+  .section-head{text-align:center;margin-bottom:64px}
+  .section-head .label{display:inline-block;background:var(--fg);color:var(--bg);padding:6px 16px;margin-bottom:20px}
+  .section-head h2{font-size:clamp(36px,5vw,64px);font-weight:900;line-height:.95}
+  .section-head .sub{font-size:17px;font-weight:500;max-width:560px;margin:20px auto 0}
+
+  /* Features */
+  .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  .feature-card{background:#fff;border:4px solid var(--fg);box-shadow:var(--shadow-l);padding:36px 28px;position:relative;transition:transform .2s ease-out}
+  .feature-card:hover{transform:translateY(-4px)}
+  .feat-corner{position:absolute;top:12px;right:12px;width:16px;height:16px;border:2px solid var(--fg)}
+  .feat-corner.c-red{background:var(--red);border-radius:50%}
+  .feat-corner.c-blue{background:var(--blue)}
+  .feat-corner.c-yellow{background:var(--yellow);transform:rotate(45deg)}
+  .feat-icon{width:64px;height:64px;border:4px solid var(--fg);background:var(--bg);box-shadow:var(--shadow-s);display:grid;place-items:center;margin-bottom:24px}
+  .feat-icon svg{width:30px;height:30px;stroke:var(--fg);fill:none;stroke-width:2.5}
+  .feat-icon.bg-red{background:var(--red)} .feat-icon.bg-red svg{stroke:#fff}
+  .feat-icon.bg-blue{background:var(--blue)} .feat-icon.bg-blue svg{stroke:#fff}
+  .feat-icon.bg-yellow{background:var(--yellow)}
+  .feat-num{font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.15em;margin-bottom:8px}
+  .feature-card h3{font-size:24px;font-weight:900;margin-bottom:12px}
+  .feature-card p{font-weight:500;font-size:15px;line-height:1.6}
+
+  /* How it works — horizontal timeline */
+  .how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+  .how-grid::before{content:"";position:absolute;top:36px;left:12%;right:12%;height:4px;background:var(--fg);z-index:0}
+  .how-step{padding:0 20px;text-align:center;position:relative;z-index:1}
+  .how-marker{width:72px;height:72px;margin:0 auto 24px;background:#fff;border:4px solid var(--fg);box-shadow:var(--shadow-m);display:grid;place-items:center;font-family:'Outfit',sans-serif;font-weight:900;font-size:32px;position:relative}
+  .how-marker.circle{border-radius:50%;background:var(--red);color:#fff}
+  .how-marker.square{background:var(--blue);color:#fff}
+  .how-marker.diamond{transform:rotate(45deg);background:var(--yellow)}
+  .how-marker.diamond span{transform:rotate(-45deg);display:block}
+  .how-step h3{font-size:18px;margin-bottom:8px}
+  .how-step p{font-weight:500;font-size:14px;line-height:1.5}
+
+  /* Benefits — red bg */
+  .benefits{background:var(--red);color:#fff;border-bottom:4px solid var(--fg)}
+  .benefits .section-head h2{color:#fff}
+  .benefits .section-head .sub{color:rgba(255,255,255,.85)}
+  .benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .benefit-card{background:#fff;color:var(--fg);border:4px solid var(--fg);box-shadow:var(--shadow-l);padding:32px 28px;transition:transform .2s ease-out}
+  .benefit-card:hover{transform:translateY(-4px)}
+  .benefit-icon{width:48px;height:48px;border-radius:50%;background:var(--yellow);border:3px solid var(--fg);box-shadow:var(--shadow-s);display:grid;place-items:center;margin-bottom:20px}
+  .benefit-icon svg{width:24px;height:24px;stroke:var(--fg);fill:none;stroke-width:3}
+  .benefit-card h3{font-size:20px;margin-bottom:10px}
+  .benefit-card p{font-weight:500;font-size:14px;line-height:1.6}
+
+  /* Pricing */
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+  .price-card{background:#fff;border:4px solid var(--fg);box-shadow:var(--shadow-l);padding:36px 32px;position:relative;display:flex;flex-direction:column;transition:transform .2s ease-out}
+  .price-card:hover{transform:translateY(-6px)}
+  .price-card.featured{background:var(--yellow);transform:translateY(-12px)}
+  .price-card.featured:hover{transform:translateY(-16px)}
+  .price-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:20px;border-bottom:4px solid var(--fg)}
+  .price-header .marker{width:32px;height:32px;border:3px solid var(--fg);box-shadow:2px 2px 0 0 var(--fg)}
+  .price-header .marker.c-red{background:var(--red);border-radius:50%}
+  .price-header .marker.c-blue{background:var(--blue)}
+  .price-header .marker.c-yellow{background:var(--yellow);transform:rotate(45deg)}
+  .price-tier{font-weight:900;font-size:13px;text-transform:uppercase;letter-spacing:.1em}
+  .price-card h3{font-size:24px;margin-bottom:16px}
+  .price-amount{font-family:'Outfit',sans-serif;font-size:56px;font-weight:900;line-height:1;letter-spacing:-.03em;margin-bottom:6px}
+  .price-amount .per{font-size:16px;font-weight:500}
+  .price-desc{font-weight:500;font-size:14px;margin-bottom:24px;padding-bottom:24px;border-bottom:2px solid var(--fg)}
+  .price-features{list-style:none;flex:1;margin-bottom:28px}
+  .price-features li{display:flex;align-items:center;gap:12px;padding:8px 0;font-weight:500;font-size:14px}
+  .price-features li::before{content:"";width:10px;height:10px;background:var(--fg);flex-shrink:0}
+  .price-card .btn{width:100%}
+
+  /* Testimonials */
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  .testi-card{background:#fff;border:4px solid var(--fg);box-shadow:var(--shadow-l);padding:36px 28px;position:relative;margin-top:40px;transition:transform .2s ease-out}
+  .testi-card:hover{transform:translateY(-4px)}
+  .testi-avatar{position:absolute;top:-40px;left:32px;width:72px;height:72px;border-radius:50%;border:4px solid var(--fg);box-shadow:var(--shadow-s);overflow:hidden;background:var(--muted)}
+  .testi-avatar img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:filter .3s ease}
+  .testi-card:hover .testi-avatar img{filter:grayscale(0)}
+  .testi-quote{font-family:'Outfit',sans-serif;font-size:48px;font-weight:900;line-height:.5;height:32px;color:var(--red);margin-top:20px;margin-bottom:12px}
+  .testi-card blockquote{font-weight:500;font-size:15px;line-height:1.6;margin-bottom:24px}
+  .testi-name{font-weight:900;font-size:15px;text-transform:uppercase;letter-spacing:.05em}
+  .testi-role{font-weight:500;font-size:13px;color:#666}
+  .testi-corner{position:absolute;top:12px;right:12px;width:16px;height:16px;border:2px solid var(--fg)}
+  .testi-corner.c-red{background:var(--red);border-radius:50%}
+  .testi-corner.c-blue{background:var(--blue)}
+  .testi-corner.c-yellow{background:var(--yellow);transform:rotate(45deg)}
+
+  /* FAQ */
+  .faq-list{max-width:896px;margin:0 auto}
+  .faq-item{background:#fff;border:4px solid var(--fg);box-shadow:var(--shadow-s);margin-bottom:16px;transition:transform .15s ease-out,box-shadow .15s ease-out}
+  .faq-item.open{background:var(--red);color:#fff;box-shadow:var(--shadow-m)}
+  .faq-q{width:100%;background:none;border:none;text-align:left;cursor:pointer;padding:20px 24px;display:flex;align-items:center;gap:16px;font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:.03em;color:inherit}
+  .faq-num{font-weight:900;font-size:14px;min-width:24px}
+  .faq-toggle{margin-left:auto;width:28px;height:28px;display:grid;place-items:center;flex-shrink:0;transition:transform .2s ease}
+  .faq-toggle svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:3}
+  .faq-item.open .faq-toggle{transform:rotate(180deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .faq-a-inner{padding:0 24px 20px 64px;font-weight:500;font-size:15px;line-height:1.6}
+  .faq-item.open .faq-a-inner{background:var(--yellow);color:var(--fg);border-top:4px solid var(--fg);padding-top:20px;margin-top:0}
+
+  /* Blog — blue bg */
+  .blog-section{background:var(--blue);color:#fff;border-bottom:4px solid var(--fg)}
+  .blog-section .section-head h2{color:#fff}
+  .blog-section .section-head .sub{color:rgba(255,255,255,.85)}
+  .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  .blog-card{background:#fff;color:var(--fg);border:4px solid var(--fg);box-shadow:var(--shadow-l);overflow:hidden;cursor:pointer;transition:transform .2s ease-out}
+  .blog-card:hover{transform:translateY(-6px)}
+  .blog-img{height:200px;overflow:hidden;background:var(--muted)}
+  .blog-img.circle{border-radius:50% 50% 0 0/40% 40% 0 0}
+  .blog-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:filter .3s ease,transform .3s ease}
+  .blog-card:hover .blog-img img{filter:grayscale(0);transform:scale(1.05)}
+  .blog-body{padding:24px}
+  .blog-meta{display:flex;align-items:center;gap:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:11px;margin-bottom:10px}
+  .blog-meta .dot{width:6px;height:6px;background:var(--fg)}
+  .blog-card h3{font-size:20px;margin-bottom:8px}
+  .blog-card p{font-weight:500;font-size:14px;line-height:1.5}
+
+  /* CTA — yellow bg */
+  .cta-section{background:var(--yellow);border-bottom:4px solid var(--fg);padding:96px 0;position:relative;overflow:hidden}
+  .cta-section::before{content:"";position:absolute;top:-60px;left:-60px;width:240px;height:240px;border-radius:50%;background:var(--red);border:4px solid var(--fg);opacity:.5}
+  .cta-section::after{content:"";position:absolute;bottom:-80px;right:-40px;width:200px;height:200px;background:var(--blue);border:4px solid var(--fg);transform:rotate(45deg);opacity:.5}
+  .cta-inner{position:relative;z-index:1;text-align:center;max-width:640px;margin:0 auto}
+  .cta-section h2{font-size:clamp(36px,5vw,64px);font-weight:900;margin-bottom:20px}
+  .cta-section p{font-weight:500;font-size:18px;margin-bottom:36px}
+  .cta-form{display:flex;gap:12px;max-width:480px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+  .cta-form input{flex:1;min-width:220px;height:48px;background:#fff;border:4px solid var(--fg);box-shadow:var(--shadow-s);padding:0 16px;font-family:'Outfit',sans-serif;font-weight:500;font-size:15px;color:var(--fg)}
+  .cta-form input::placeholder{color:#999}
+  .cta-form input:focus{outline:none;border-color:var(--red)}
+
+  /* Footer — near black */
+  footer{background:#121212;color:#fff;padding:72px 0 32px}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+  .footer-brand .logo{color:#fff;margin-bottom:16px}
+  .footer-brand p{color:#999;font-weight:500;font-size:14px;max-width:300px;line-height:1.6}
+  .footer-col h4{font-weight:900;font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--yellow);margin-bottom:18px}
+  .footer-col ul{list-style:none}
+  .footer-col li{margin-bottom:10px}
+  .footer-col a{color:#ccc;font-weight:500;font-size:14px;transition:color .2s ease}
+  .footer-col a:hover{color:var(--red)}
+  .footer-bottom{border-top:2px solid #333;padding-top:32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  .footer-bottom p{font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:12px;color:#999}
+  .footer-social{display:flex;gap:10px}
+  .footer-social a{width:40px;height:40px;border:2px solid #555;display:grid;place-items:center;color:#ccc;transition:all .2s ease}
+  .footer-social a:hover{border-color:var(--yellow);color:var(--yellow);transform:translateY(-2px)}
+  .footer-social svg{width:16px;height:16px;fill:currentColor}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .5s ease-out,transform .5s ease-out}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+
+  /* Responsive */
+  @media(max-width:1024px){
+    .hero{grid-template-columns:1fr}
+    .hero-right{min-height:400px}
+    .features-grid,.pricing-grid,.blog-grid,.testi-grid,.benefits-grid{grid-template-columns:repeat(2,1fr)}
+    .how-grid{grid-template-columns:repeat(2,1fr);gap:32px 0}
+    .how-grid::before{display:none}
+    .price-card.featured{transform:none}
+    .price-card.featured:hover{transform:translateY(-6px)}
+    .footer-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:768px){
+    .nav-links{display:none}
+    .menu-toggle{display:flex}
+    .nav-links.open{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;background:var(--bg);border-bottom:4px solid var(--fg);padding:24px;gap:18px}
+    .section{padding:64px 0}
+    .hero-left{padding:48px 24px}
+    .stats-grid{grid-template-columns:repeat(2,1fr)}
+    .stat{border-bottom:4px solid var(--fg)}
+    .stat:nth-child(odd){border-right:4px solid var(--fg)}
+    .stat:nth-child(even){border-right:none}
+    .stat:nth-last-child(-n+2){border-bottom:none}
+    .features-grid,.pricing-grid,.blog-grid,.testi-grid,.benefits-grid,.how-grid{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .price-card{padding:28px 24px}
+    .testi-card{margin-top:0}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-mark"><span class="s1"></span><span class="s2"></span><span class="s3"></span></span>
+      <span>Bauhaus</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#testimonials">Voices</a></li>
+      <li><a href="#blog">Journal</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div style="display:flex;gap:12px;align-items:center">
+      <a href="#cta" class="btn btn-red btn-pill">Get Started</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">&#9776;</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Form Follows Function</div>
+    <h1>Design<br>With <span class="blue">Purpose</span>,<br>Build With <span class="yellow">Intent</span></h1>
+    <p class="hero-sub">A design system built on the radical principle that beauty emerges from function. Every shape is deliberate, every color is primary, every line has a reason.</p>
+    <div class="hero-ctas">
+      <a href="#pricing" class="btn btn-red btn-lg">Start Building</a>
+      <a href="#features" class="btn btn-outline btn-lg">Explore</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-comp">
+      <div class="c1"></div>
+      <div class="sq1"></div>
+      <div class="sq2"><div class="tri"></div></div>
+      <div class="c2"></div>
+    </div>
+  </div>
+</header>
+
+<!-- Stats -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-shape shape-circle">1</div>
+        <div class="stat-num" data-target="100">0</div>
+        <div class="stat-label">Components</div>
+      </div>
+      <div class="stat">
+        <div class="stat-shape shape-square">2</div>
+        <div class="stat-num"><span data-target="50">0</span>K</div>
+        <div class="stat-label">Designers</div>
+      </div>
+      <div class="stat">
+        <div class="stat-shape" style="transform:rotate(45deg)">3</div>
+        <div class="stat-num"><span data-target="12">0</span></div>
+        <div class="stat-label">Awards Won</div>
+      </div>
+      <div class="stat">
+        <div class="stat-shape shape-circle">4</div>
+        <div class="stat-num"><span data-target="99">0</span>%</div>
+        <div class="stat-label">Satisfaction</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="label">The System</span>
+      <h2>Three Primary<br>Principles</h2>
+      <p class="sub">Every element of the Bauhaus system derives from three foundational principles, each as essential as the primary colors themselves.</p>
+    </div>
+    <div class="features-grid">
+      <article class="feature-card reveal">
+        <span class="feat-corner c-red"></span>
+        <div class="feat-icon bg-red"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></div>
+        <div class="feat-num">01 / Red</div>
+        <h3>Geometric Purity</h3>
+        <p>All decorative elements derive from circles, squares, and triangles. No ornaments, no flourish &mdash; only the purest forms, composed with intention.</p>
+      </article>
+      <article class="feature-card reveal">
+        <span class="feat-corner c-blue"></span>
+        <div class="feat-icon bg-blue"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/></svg></div>
+        <div class="feat-num">02 / Blue</div>
+        <h3>Functional Honesty</h3>
+        <p>No gradients, no subtle effects, no decoration for its own sake. Everything is direct, declarative, and honest about what it does.</p>
+      </article>
+      <article class="feature-card reveal">
+        <span class="feat-corner c-yellow"></span>
+        <div class="feat-icon bg-yellow"><svg viewBox="0 0 24 24"><path d="M12 3L2 21h20L12 3z"/></svg></div>
+        <div class="feat-num">03 / Yellow</div>
+        <h3>Color Blocking</h3>
+        <p>Entire sections use solid primary colors as backgrounds. Red, blue, and yellow define space and create rhythm through bold contrast.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="section" style="background:var(--muted)">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="label">The Method</span>
+      <h2>How It Works</h2>
+    </div>
+    <div class="how-grid reveal">
+      <div class="how-step">
+        <div class="how-marker circle">1</div>
+        <h3>Compose</h3>
+        <p>Begin with primary shapes. Arrange them with intention, not accident.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-marker square">2</div>
+        <h3>Color</h3>
+        <p>Apply primaries boldly. Red for action, blue for depth, yellow for energy.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-marker diamond"><span>3</span></div>
+        <h3>Border</h3>
+        <p>Define every element with thick black borders. Structure equals beauty.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-marker circle" style="background:var(--yellow);color:var(--fg)">4</div>
+        <h3>Ship</h3>
+        <p>Deploy with confidence. Functional, honest, and unapologetically bold.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits -->
+<section class="section benefits">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="label" style="background:#fff;color:var(--red)">The Benefits</span>
+      <h2>Why Bauhaus?</h2>
+      <p class="sub">A design philosophy that has shaped a century of modernist thinking, distilled into a practical system.</p>
+    </div>
+    <div class="benefits-grid">
+      <article class="benefit-card reveal">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h3>Instant Clarity</h3>
+        <p>Bold shapes and primary colors communicate meaning faster than any subtle gradient ever could.</p>
+      </article>
+      <article class="benefit-card reveal">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h3>Timeless Aesthetic</h3>
+        <p>The Bauhaus has looked modern for over a hundred years. It will still look modern in a hundred more.</p>
+      </article>
+      <article class="benefit-card reveal">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h3>Universal Language</h3>
+        <p>Circles, squares, and triangles are understood everywhere. Your design speaks every language.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="label">The Tiers</span>
+      <h2>Choose Your Plan</h2>
+      <p class="sub">Three plans, three primary colors. Pick the one that matches your ambition.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-header">
+          <div class="marker c-red"></div>
+          <div class="price-tier">Red / Starter</div>
+        </div>
+        <h3>The Builder</h3>
+        <div class="price-amount">$0<span class="per"> /mo</span></div>
+        <p class="price-desc">For individuals and small projects getting started.</p>
+        <ul class="price-features">
+          <li>20 components</li>
+          <li>1 project</li>
+          <li>Community support</li>
+          <li>Basic shapes library</li>
+        </ul>
+        <a href="#cta" class="btn btn-outline">Start Free</a>
+      </div>
+      <div class="price-card featured reveal">
+        <div class="price-header">
+          <div class="marker c-yellow"></div>
+          <div class="price-tier">Yellow / Pro</div>
+        </div>
+        <h3>The Designer</h3>
+        <div class="price-amount">$29<span class="per"> /mo</span></div>
+        <p class="price-desc">For professionals shipping production work.</p>
+        <ul class="price-features">
+          <li>Everything in Builder</li>
+          <li>100+ components</li>
+          <li>Unlimited projects</li>
+          <li>Priority support</li>
+          <li>Custom shapes</li>
+        </ul>
+        <a href="#cta" class="btn btn-red">Go Pro</a>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-header">
+          <div class="marker c-blue"></div>
+          <div class="price-tier">Blue / Team</div>
+        </div>
+        <h3>The Studio</h3>
+        <div class="price-amount">$99<span class="per"> /mo</span></div>
+        <p class="price-desc">For teams building at scale together.</p>
+        <ul class="price-features">
+          <li>Everything in Designer</li>
+          <li>Team workspaces</li>
+          <li>SSO &amp; SAML</li>
+          <li>Dedicated support</li>
+          <li>Custom theming</li>
+        </ul>
+        <a href="#cta" class="btn btn-blue">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section" id="testimonials" style="background:var(--muted)">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="label">The Voices</span>
+      <h2>What They Say</h2>
+    </div>
+    <div class="testi-grid">
+      <article class="testi-card reveal">
+        <span class="testi-corner c-red"></span>
+        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" alt="Portrait of Hans Müller"></div>
+        <div class="testi-quote">&ldquo;</div>
+        <blockquote>Bauhaus gave our product a visual identity that feels both radical and timeless. Users notice the difference immediately.</blockquote>
+        <div class="testi-name">Hans Müller</div>
+        <div class="testi-role">Creative Director, Form Studio</div>
+      </article>
+      <article class="testi-card reveal">
+        <span class="testi-corner c-blue"></span>
+        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&q=80" alt="Portrait of Anika Schmidt"></div>
+        <div class="testi-quote">&ldquo;</div>
+        <blockquote>The constraint of three primaries and three shapes made our team more creative, not less. Limitations breed invention.</blockquote>
+        <div class="testi-name">Anika Schmidt</div>
+        <div class="testi-role">Lead Designer, Werkstatt</div>
+      </article>
+      <article class="testi-card reveal">
+        <span class="testi-corner c-yellow"></span>
+        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" alt="Portrait of Klaus Weber"></div>
+        <div class="testi-quote">&ldquo;</div>
+        <blockquote>We rebuilt our entire dashboard in a week. The hard shadows and thick borders gave it instant presence.</blockquote>
+        <div class="testi-name">Klaus Weber</div>
+        <div class="testi-role">Founder, Dreieck</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="label">The Questions</span>
+      <h2>Frequently Asked</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-num">01</span><span>Is Bauhaus only for art projects?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Not at all. While the aesthetic draws from the 1920s art movement, the system is fully functional for modern SaaS, dashboards, e-commerce, and marketing sites. The principles of clarity, honesty, and bold communication work everywhere.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-num">02</span><span>Can I use colors beyond the primaries?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">The system is built on red, blue, yellow, black, and white. We recommend sticking to these for authenticity, but the token system allows you to swap any primary for a different hue. The structural principles remain the same regardless of palette.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-num">03</span><span>Is it accessible?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. The high contrast between primary colors and stark black borders exceeds WCAG AAA requirements. Focus states use thick black rings, touch targets meet 44px minimums, and all components are keyboard navigable with visible focus indicators.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-num">04</span><span>Does it work on mobile?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely. The system is mobile-first. Border widths scale down from 4px to 2px on small screens, shadow offsets reduce from 8px to 4px, and all grids collapse to single columns. The bold aesthetic actually reads better on small screens than subtle alternatives.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog -->
+<section class="section blog-section" id="blog">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="label" style="background:#fff;color:var(--blue)">The Journal</span>
+      <h2>From The Workshop</h2>
+    </div>
+    <div class="blog-grid">
+      <article class="blog-card reveal">
+        <div class="blog-img circle"><img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=600&q=80" alt="Geometric sculpture"></div>
+        <div class="blog-body">
+          <div class="blog-meta"><span>Oct 12</span><span class="dot"></span><span>By H. Müller</span></div>
+          <h3>Why Three Colors Are Enough</h3>
+          <p>The case for constraint, and how limitation produces more inventive design.</p>
+        </div>
+      </article>
+      <article class="blog-card reveal">
+        <div class="blog-img"><img src="https://images.unsplash.com/photo-1507680434567-71b596d5c5e5?w=600&q=80" alt="Modernist building"></div>
+        <div class="blog-body">
+          <div class="blog-meta"><span>Sep 28</span><span class="dot"></span><span>By A. Schmidt</span></div>
+          <h3>The Architecture of UI</h3>
+          <p>What 1920s buildings can teach us about interface hierarchy.</p>
+        </div>
+      </article>
+      <article class="blog-card reveal">
+        <div class="blog-img circle"><img src="https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=600&q=80" alt="Abstract composition"></div>
+        <div class="blog-body">
+          <div class="blog-meta"><span>Sep 14</span><span class="dot"></span><span>By K. Weber</span></div>
+          <h3>Hard Shadows, Soft Ideas</h3>
+          <p>How offset shadows create depth without sacrificing clarity.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <h2>Start Building<br>With Purpose</h2>
+      <p>Join 50,000+ designers and developers who chose clarity over clutter. Free to start, no credit card required.</p>
+      <form class="cta-form" onsubmit="event.preventDefault();alert('Welcome to Bauhaus! Check your email to verify.')">
+        <input type="email" placeholder="you@studio.com" required aria-label="Email">
+        <button type="submit" class="btn btn-red btn-lg">Get Started</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo"><span class="logo-mark"><span class="s1"></span><span class="s2"></span><span class="s3"></span></span><span>Bauhaus</span></a>
+        <p>A design system built on the radical principle that form follows function. Modernist thinking for modern interfaces.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul><li><a href="#">Components</a></li><li><a href="#">Shapes</a></li><li><a href="#">Tokens</a></li><li><a href="#">Templates</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul><li><a href="#">Docs</a></li><li><a href="#">Journal</a></li><li><a href="#">Examples</a></li><li><a href="#">Community</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Studio</h4>
+        <ul><li><a href="#">About</a></li><li><a href="#">Manifesto</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Bauhaus Systems</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.8c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1-.7-.8-1.8-1.3-3-1.3-2.3 0-4.1 1.8-4.1 4.1 0 .3 0 .6.1.9-3.4-.2-6.4-1.8-8.4-4.3-.4.6-.6 1.3-.6 2.1 0 1.4.7 2.7 1.8 3.4-.7 0-1.3-.2-1.9-.5v.1c0 2 1.4 3.6 3.3 4-.3.1-.7.1-1 .1-.3 0-.5 0-.8-.1.5 1.6 2 2.8 3.8 2.8-1.4 1.1-3.1 1.7-5 1.7H2c1.8 1.2 4 1.9 6.3 1.9 7.5 0 11.7-6.3 11.7-11.7v-.5c.8-.6 1.5-1.3 2-2.1z"/></svg></a>
+        <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.1 6.8 9.4.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1 .8-.2 1.7-.3 2.5-.3.9 0 1.7.1 2.5.3 1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.8v2.6c0 .3.2.6.7.5C19.1 20.1 22 16.4 22 12c0-5.5-4.5-10-10-10z"/></svg></a>
+        <a href="#" aria-label="Dribbble"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm6.6 4.6c1.2 1.5 1.9 3.3 2 5.3-.3-.1-3.2-.7-6.2-.3-.1-.3-.2-.5-.3-.8 3.2-1.3 4.6-3.2 4.5-4.2zM12 3.5c2.1 0 4 .8 5.4 2.1.1.8-1.1 2.5-4.2 3.6-1.4-2.6-3-4.7-3.2-5 2-.7 2-.7 2-.7zM8.3 5c.2.3 1.7 2.4 3.1 5-4 1.1-7.5 1-7.9 1 .6-2.6 2.4-4.8 4.8-6zM3.5 12v-.3c.4 0 4.5.1 8.8-1.2.2.5.5 1 .7 1.4-3.8 1.1-6.9 4.4-7.6 5.3C4.3 15.8 3.5 14 3.5 12zm8.5 8.5c-1.9 0-3.6-.6-5-1.7.5-1 3-4 7.3-5.4 1.2 3.2 1.7 5.9 1.8 6.7-1.2.3-2.6.4-4.1.4zm5.6-1.2c-.1-.6-.5-3.1-1.6-6.2 2.8-.4 5.2.3 5.5.4-.4 2.4-1.9 4.5-3.9 5.8z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menuToggle=document.getElementById('menuToggle');
+  const navLinks=document.getElementById('navLinks');
+  menuToggle.addEventListener('click',()=>navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    const q=item.querySelector('.faq-q');
+    const a=item.querySelector('.faq-a');
+    q.addEventListener('click',()=>{
+      const open=item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o=>{o.classList.remove('open');o.querySelector('.faq-a').style.maxHeight=null});
+      if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px'}
+    });
+  });
+
+  const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  const animateNum=(el)=>{
+    const target=parseInt(el.dataset.target);let cur=0;const step=Math.max(1,Math.ceil(target/30));let i=0;
+    const tick=()=>{i++;cur+=step;if(cur>=target){el.textContent=target;return}el.textContent=cur;requestAnimationFrame(tick)};
+    tick();
+  };
+  const statIO=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){animateNum(e.target);statIO.unobserve(e.target)}})},{threshold:.5});
+  document.querySelectorAll('[data-target]').forEach(n=>statIO.observe(n));
+</script>
+</body>
+</html>

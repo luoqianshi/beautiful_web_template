@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beautiful Web Template — A curated HTML template gallery</title>
+  <meta name="description" content="Browse 33 beautiful single-page HTML landing page templates, each showcasing a unique web design style. Original prompts from designprompts.dev.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --bg-elevated: #ffffff;
+      --surface: #f3f4f6;
+      --surface-2: #e5e7eb;
+      --border: #e5e7eb;
+      --text: #111827;
+      --text-muted: #6b7280;
+      --accent: #4f46e5;
+      --accent-hover: #4338ca;
+      --accent-soft: #eef2ff;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.08);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 10px 18px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600;
+      border: 1px solid transparent; cursor: pointer; transition: all 0.15s ease;
+      text-decoration: none; background: var(--surface); color: var(--text);
+    }
+    .btn:hover { background: var(--surface-2); }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-outline { background: transparent; border-color: var(--border); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(250, 250, 250, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+    .logo {
+      font-size: 18px; font-weight: 800; letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--text), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .header-links { display: flex; gap: 12px; }
+    .header-links a { font-size: 14px; font-weight: 500; color: var(--text-muted); }
+    .header-links a:hover { color: var(--accent); }
+
+    .hero {
+      padding: 96px 0 64px; text-align: center;
+      background: radial-gradient(ellipse at 50% 0%, var(--accent-soft) 0%, transparent 55%);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: 999px; background: #fff;
+      border: 1px solid var(--border); font-size: 12px; font-weight: 600;
+      color: var(--text-muted); margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px); font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.03em; margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      max-width: 640px; margin: 0 auto 28px;
+      font-size: 18px; color: var(--text-muted); line-height: 1.7;
+    }
+    .hero-cta { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .source-note {
+      margin-top: 20px; font-size: 13px; color: var(--text-muted);
+    }
+    .source-note a { color: var(--accent); text-decoration: underline; }
+
+    .controls {
+      display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap;
+    }
+    .search-input {
+      flex: 1; min-width: 240px; padding: 12px 16px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: var(--bg-elevated);
+      font-size: 15px; outline: none; transition: border-color 0.15s ease;
+    }
+    .search-input:focus { border-color: var(--accent); }
+
+    .gallery { padding: 40px 0 80px; }
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; transition: all 0.2s ease;
+      display: flex; flex-direction: column; cursor: pointer;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: #d1d5db; }
+    .card-media { position: relative; aspect-ratio: 16/10; overflow: hidden; background: var(--surface); }
+    .card-media img {
+      width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;
+    }
+    .card:hover .card-media img { transform: scale(1.03); }
+    .card-thumbs {
+      position: absolute; bottom: 10px; right: 10px;
+      display: flex; gap: 6px;
+    }
+    .card-thumb {
+      width: 40px; height: 26px; border-radius: 4px; border: 2px solid #fff;
+      overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .card-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .card-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+    .card-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .card-desc {
+      font-size: 14px; color: var(--text-muted); line-height: 1.6;
+      flex: 1; margin-bottom: 16px;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .card-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .tag {
+      font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
+      background: var(--accent-soft); color: var(--accent);
+    }
+    .card-actions { display: flex; gap: 8px; }
+    .card-actions .btn { flex: 1; justify-content: center; }
+
+    .modal-backdrop {
+      position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      display: none; align-items: center; justify-content: center; padding: 24px;
+    }
+    .modal-backdrop.active { display: flex; }
+    .modal {
+      width: 100%; max-width: 1200px; height: 90vh; max-height: 900px;
+      background: var(--bg-elevated); border-radius: var(--radius);
+      box-shadow: var(--shadow-lg); overflow: hidden; display: flex; flex-direction: column;
+    }
+    .modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+    }
+    .modal-title { font-size: 16px; font-weight: 700; }
+    .modal-title span { color: var(--text-muted); font-weight: 400; font-size: 14px; margin-left: 8px; }
+    .modal-close {
+      width: 34px; height: 34px; border-radius: 8px; border: none; background: var(--surface);
+      cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center;
+    }
+    .modal-close:hover { background: var(--surface-2); }
+    .modal-body { display: flex; flex: 1; overflow: hidden; }
+    .modal-preview { flex: 1; position: relative; background: var(--surface); }
+    .modal-preview iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: none; background: #fff;
+    }
+    .modal-sidebar {
+      width: 320px; border-left: 1px solid var(--border); padding: 20px;
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .modal-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6; }
+    .modal-actions { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+    .modal-actions .btn { width: 100%; justify-content: center; }
+    .modal-tabs {
+      display: flex; gap: 8px; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 16px;
+    }
+    .modal-tab {
+      font-size: 13px; font-weight: 600; color: var(--text-muted); cursor: pointer;
+      padding: 6px 10px; border-radius: 6px;
+    }
+    .modal-tab:hover { background: var(--surface); }
+    .modal-tab.active { color: var(--accent); background: var(--accent-soft); }
+    .modal-panel { flex: 1; overflow-y: auto; display: none; }
+    .modal-panel.active { display: block; }
+    .shots-strip { display: flex; flex-direction: column; gap: 12px; }
+    .shots-strip img { border-radius: var(--radius-sm); border: 1px solid var(--border); }
+    .md-content { font-size: 13px; line-height: 1.7; color: var(--text); }
+    .md-content h1, .md-content h2, .md-content h3 { margin: 16px 0 8px; font-size: 14px; }
+    .md-content p { margin-bottom: 10px; color: var(--text-muted); }
+    .md-content pre { background: var(--surface); padding: 12px; border-radius: 8px; overflow-x: auto; font-size: 12px; }
+    .md-content code { background: var(--surface); padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+    .copy-hint { font-size: 12px; color: var(--accent); margin-top: 8px; display: none; }
+    .copy-hint.visible { display: block; }
+
+    .md-reader {
+      max-width: 720px; margin: 0 auto; padding: 16px 0;
+      font-size: 15px; line-height: 1.8; color: var(--text);
+    }
+    .md-reader h1 { font-size: 28px; font-weight: 700; margin: 24px 0 12px; line-height: 1.3; }
+    .md-reader h2 { font-size: 22px; font-weight: 600; margin: 20px 0 10px; line-height: 1.35; }
+    .md-reader h3 { font-size: 18px; font-weight: 600; margin: 16px 0 8px; line-height: 1.4; }
+    .md-reader p { margin-bottom: 14px; }
+    .md-reader ul, .md-reader ol { margin-bottom: 14px; padding-left: 24px; }
+    .md-reader li { margin-bottom: 6px; }
+    .md-reader code { background: var(--surface); padding: 2px 8px; border-radius: 4px; font-size: 13px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .md-reader pre { background: var(--surface); padding: 16px; border-radius: 10px; overflow-x: auto; margin-bottom: 14px; }
+    .md-reader pre code { padding: 0; background: none; }
+    .md-reader blockquote { border-left: 3px solid var(--accent); padding-left: 16px; margin: 16px 0; color: var(--text-muted); }
+    .md-reader a { color: var(--accent); text-decoration: underline; }
+    .md-reader hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+    .md-reader img { border-radius: var(--radius-sm); border: 1px solid var(--border); }
+    .md-reader table { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
+    .md-reader th, .md-reader td { padding: 10px 12px; border: 1px solid var(--border); text-align: left; }
+    .md-reader th { background: var(--surface); font-weight: 600; }
+    .md-modal .modal { max-width: 900px; height: 86vh; }
+    .md-modal .modal-body { padding: 24px; display: block; overflow-y: auto; }
+
+    footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; }
+    footer p { font-size: 14px; color: var(--text-muted); }
+
+    @media (max-width: 768px) {
+      .hero { padding: 64px 0 40px; }
+      .grid { grid-template-columns: 1fr; }
+      .modal-body { flex-direction: column; }
+      .modal-sidebar { width: 100%; border-left: none; border-top: 1px solid var(--border); }
+      .modal-preview { height: 50%; }
+      .modal { height: 95vh; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <div class="logo">Beautiful Web Template</div>
+      <nav class="header-links">
+        <a href="#gallery">Gallery</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">33 free HTML templates</div>
+      <h1>Beautiful web templates<br><span>for every style</span></h1>
+      <p>A curated collection of single-page HTML landing pages. Each template explores a distinct design language — from brutalist pixel art to glassmorphism and editorial academia.</p>
+      <div class="hero-cta">
+        <a href="#gallery" class="btn btn-primary">Browse the gallery</a>
+        <a href="https://www.designprompts.dev" class="btn btn-outline" target="_blank">Visit designprompts.dev</a>
+      </div>
+      <div class="source-note">All design prompts are originally from <a href="https://www.designprompts.dev" target="_blank">designprompts.dev</a>.</div>
+    </div>
+  </section>
+
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <div class="controls">
+        <input type="text" class="search-input" id="search" placeholder="Search styles, e.g. glassmorphism, cyberpunk...">
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Beautiful Web Template — Built with prompts from <a href="https://www.designprompts.dev" target="_blank">designprompts.dev</a>.</p>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title" id="modal-title">Template</div>
+        <button class="modal-close" id="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-preview">
+          <iframe id="preview-frame" src="about:blank"></iframe>
+        </div>
+        <div class="modal-sidebar">
+          <div class="modal-desc" id="modal-desc"></div>
+          <div class="modal-actions">
+            <a id="modal-html" href="#" class="btn btn-primary" target="_blank">查看原始 HTML</a>
+            <button id="modal-copy" class="btn btn-outline">复制设计说明</button>
+          </div>
+          <div class="modal-tabs">
+            <div class="modal-tab active" data-panel="shots">Screenshots</div>
+            <div class="modal-tab" data-panel="md">Design Prompt</div>
+          </div>
+          <div class="modal-panel active" id="panel-shots">
+            <div class="shots-strip" id="shots-strip"></div>
+          </div>
+          <div class="modal-panel" id="panel-md">
+            <div class="md-content" id="md-content"></div>
+            <div class="copy-hint" id="copy-hint">已复制到剪贴板</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop md-modal" id="md-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title" id="md-modal-title">Design Prompt</div>
+        <button class="modal-close" id="md-modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="md-reader" id="md-reader"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const templates = [
+      {"name": "Academia", "display": "Academia", "description": "University aesthetic, old libraries, warm paper textures, traditional serifs, gold/crimson accents.", "tags": ["Dark", "serif"], "htmlPath": "./templates/Academia/Academia.html", "mdPath": "./templates/Academia/Academia.md", "shots": ["./assets/screenshots/Academia-01.png", "./assets/screenshots/Academia-02.png", "./assets/screenshots/Academia-03.png"]},
+      {"name": "Art-Deco", "display": "Art Deco", "description": "1920s Gatsby elegance, geometric precision, metallic gold accents, architectural symmetry, luxury heritage.", "tags": ["Dark", "serif"], "htmlPath": "./templates/Art-Deco/Art-Deco.html", "mdPath": "./templates/Art-Deco/Art-Deco.md", "shots": ["./assets/screenshots/Art-Deco-01.png", "./assets/screenshots/Art-Deco-02.png", "./assets/screenshots/Art-Deco-03.png"]},
+      {"name": "Aurora-Mesh", "display": "Aurora Mesh", "description": "Flowing mesh gradients, aurora effects, vibrant color transitions, modern startup aesthetic inspired by Stripe and Vercel.", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Aurora-Mesh/Aurora-Mesh.html", "mdPath": "./templates/Aurora-Mesh/Aurora-Mesh.md", "shots": ["./assets/screenshots/Aurora-Mesh-01.png", "./assets/screenshots/Aurora-Mesh-02.png", "./assets/screenshots/Aurora-Mesh-03.png"]},
+      {"name": "Bauhaus", "display": "Bauhaus", "description": "Bold geometric modernism with circles, squares, and triangles. Primary color palette (Red/Blue/Yellow) with stark black borders and hard shadows. Functional yet artistic with constructivist asymmetry.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Bauhaus/Bauhaus.html", "mdPath": "./templates/Bauhaus/Bauhaus.md", "shots": ["./assets/screenshots/Bauhaus-01.png", "./assets/screenshots/Bauhaus-02.png", "./assets/screenshots/Bauhaus-03.png"]},
+      {"name": "Bold-Typography", "display": "Bold Typography", "description": "Type-driven design that treats massive typography as the primary visual element. Ultra-large headlines, extreme contrast, and dramatic negative space create poster-like compositions where words become art.", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Bold-Typography/Bold-Typography.html", "mdPath": "./templates/Bold-Typography/Bold-Typography.md", "shots": ["./assets/screenshots/Bold-Typography-01.png", "./assets/screenshots/Bold-Typography-02.png", "./assets/screenshots/Bold-Typography-03.png"]},
+      {"name": "Botanical", "display": "Botanical / Organic Serif", "description": "Soft, earthy, elegant design inspired by nature. Features organic shapes, generous rounded corners, paper grain texture, muted earth tones, and sophisticated serif typography that breathes warmth and natural luxury.", "tags": ["Light", "serif"], "htmlPath": "./templates/Botanical/Botanical.html", "mdPath": "./templates/Botanical/Botanical.md", "shots": ["./assets/screenshots/Botanical-01.png", "./assets/screenshots/Botanical-02.png", "./assets/screenshots/Botanical-03.png"]},
+      {"name": "Brutalist-Pixel", "display": "Brutalist Pixel", "description": "Brutalist pixel art aesthetic combining raw typography with 8-bit/16-bit pixel elements, grid backgrounds, and high-contrast blocky visuals.", "tags": ["Dark", "mono"], "htmlPath": "./templates/Brutalist-Pixel/Brutalist-Pixel.html", "mdPath": "./templates/Brutalist-Pixel/Brutalist-Pixel.md", "shots": ["./assets/screenshots/Brutalist-Pixel-01.png", "./assets/screenshots/Brutalist-Pixel-02.png", "./assets/screenshots/Brutalist-Pixel-03.png"]},
+      {"name": "Claymorphism", "display": "Clay", "description": "A hyper-realistic 3D aesthetic simulating soft, inflatable clay objects with multi-layered shadow stacks, vibrant candy-store colors, tactile micro-interactions, and organic floating ambient elements that create a premium, playful digital toy experience.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Claymorphism/Claymorphism.html", "mdPath": "./templates/Claymorphism/Claymorphism.md", "shots": ["./assets/screenshots/Claymorphism-01.png", "./assets/screenshots/Claymorphism-02.png", "./assets/screenshots/Claymorphism-03.png"]},
+      {"name": "Cyberpunk", "display": "Cyberpunk", "description": "High contrast neon on black, glitch animations, terminal/monospace fonts, tech-oriented decorations. A dystopian digital aesthetic inspired by 80s sci-fi and hacker culture.", "tags": ["Dark", "mono"], "htmlPath": "./templates/Cyberpunk/Cyberpunk.html", "mdPath": "./templates/Cyberpunk/Cyberpunk.md", "shots": ["./assets/screenshots/Cyberpunk-01.png", "./assets/screenshots/Cyberpunk-02.png", "./assets/screenshots/Cyberpunk-03.png"]},
+      {"name": "Enterprise", "display": "Corporate Trust", "description": "Modern SaaS aesthetic balancing professionalism with approachability. Vibrant indigo/violet gradients, soft colored shadows, isometric depth, and clean geometric sans-serif typography.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Enterprise/Enterprise.html", "mdPath": "./templates/Enterprise/Enterprise.md", "shots": ["./assets/screenshots/Enterprise-01.png", "./assets/screenshots/Enterprise-02.png", "./assets/screenshots/Enterprise-03.png"]},
+      {"name": "Flat-Design", "display": "Flat Design", "description": "A design philosophy centered on removing depth cues (shadows, bevels, gradients) in favor of pure color, typography, and layout. Crisp, two-dimensional, and geometric with bold color blocking.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Flat-Design/Flat-Design.html", "mdPath": "./templates/Flat-Design/Flat-Design.md", "shots": ["./assets/screenshots/Flat-Design-01.png", "./assets/screenshots/Flat-Design-02.png", "./assets/screenshots/Flat-Design-03.png"]},
+      {"name": "Glassmorphism", "display": "Glassmorphism", "description": "Apple-inspired aesthetic with rich mesh gradients, premium blur, and constrained layouts.", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Glassmorphism/Glassmorphism.html", "mdPath": "./templates/Glassmorphism/Glassmorphism.md", "shots": ["./assets/screenshots/Glassmorphism-01.png", "./assets/screenshots/Glassmorphism-02.png", "./assets/screenshots/Glassmorphism-03.png"]},
+      {"name": "Industrial", "display": "Industrial", "description": "A high-fidelity industrial skeuomorphism aesthetic inspired by Dieter Rams and Teenage Engineering. Features tactile neumorphic elements, matte plastic surfaces, and safety-orange accents. Every component mimics physical hardware with realistic lighting, mechanical interactions, and manufacturing details like screws, vents, and LED indicators.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Industrial/Industrial.html", "mdPath": "./templates/Industrial/Industrial.md", "shots": ["./assets/screenshots/Industrial-01.png", "./assets/screenshots/Industrial-02.png", "./assets/screenshots/Industrial-03.png"]},
+      {"name": "Kinetic", "display": "Kinetic", "description": "Motion-first design where typography is the primary visual medium. Features infinite marquees, viewport-scaled text, scroll-triggered animations, and aggressive uppercase styling. High contrast, brutalist energy with rhythmic movement.", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Kinetic/Kinetic.html", "mdPath": "./templates/Kinetic/Kinetic.md", "shots": ["./assets/screenshots/Kinetic-01.png", "./assets/screenshots/Kinetic-02.png", "./assets/screenshots/Kinetic-03.png"]},
+      {"name": "Luxury", "display": "Luxury", "description": "Elegant serif typography with monochromatic palette and gold accents. Ultra-slow animations, generous white space, and architectural precision. High-end fashion magazine editorial aesthetic with depth through subtle shadows and layering.", "tags": ["Light", "serif"], "htmlPath": "./templates/Luxury/Luxury.html", "mdPath": "./templates/Luxury/Luxury.md", "shots": ["./assets/screenshots/Luxury-01.png", "./assets/screenshots/Luxury-02.png", "./assets/screenshots/Luxury-03.png"]},
+      {"name": "Material-Design", "display": "Material", "description": "Playful, dynamic color extraction, pill-shaped buttons, and distinct elevation states. Based on Google's Material Design 3 with enhanced depth and micro-interactions.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Material-Design/Material-Design.html", "mdPath": "./templates/Material-Design/Material-Design.md", "shots": ["./assets/screenshots/Material-Design-01.png", "./assets/screenshots/Material-Design-02.png", "./assets/screenshots/Material-Design-03.png"]},
+      {"name": "Maximalism", "display": "Maximalism", "description": "Clashing patterns, dense layouts, oversaturated colors, intentional visual clutter. MORE IS MORE.", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Maximalism/Maximalism.html", "mdPath": "./templates/Maximalism/Maximalism.md", "shots": ["./assets/screenshots/Maximalism-01.png", "./assets/screenshots/Maximalism-02.png", "./assets/screenshots/Maximalism-03.png"]},
+      {"name": "Minimal-Dark", "display": "Simple Dark", "description": "An atmospheric dark mode design system built on deep slate tones with warm amber accents. Features ambient glow effects, glass-like translucent cards, geometric typography, and generous breathing room. Ethereal yet grounded—like a premium app at midnight.", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Minimal-Dark/Minimal-Dark.html", "mdPath": "./templates/Minimal-Dark/Minimal-Dark.md", "shots": ["./assets/screenshots/Minimal-Dark-01.png", "./assets/screenshots/Minimal-Dark-02.png", "./assets/screenshots/Minimal-Dark-03.png"]},
+      {"name": "Modern-Dark", "display": "Modern Dark", "description": "A cinematic, high-precision dark mode design featuring layered ambient lighting through animated gradient blobs, mouse-tracking spotlight effects, and meticulously crafted micro-interactions that feel like premium software.", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Modern-Dark/Modern-Dark.html", "mdPath": "./templates/Modern-Dark/Modern-Dark.md", "shots": ["./assets/screenshots/Modern-Dark-01.png", "./assets/screenshots/Modern-Dark-02.png", "./assets/screenshots/Modern-Dark-03.png"]},
+      {"name": "Monochrome", "display": "Monochrome", "description": "A stark, editorial design system built on pure black and white. No accent colors—just dramatic contrast, oversized serif typography, and precise geometric layouts. Evokes high-end fashion editorials and architectural portfolios. Austere, sophisticated, unapologetically bold.", "tags": ["Light", "serif"], "htmlPath": "./templates/Monochrome/Monochrome.html", "mdPath": "./templates/Monochrome/Monochrome.md", "shots": ["./assets/screenshots/Monochrome-01.png", "./assets/screenshots/Monochrome-02.png", "./assets/screenshots/Monochrome-03.png"]},
+      {"name": "Neo-Brutalism", "display": "Neo-brutalism", "description": "A raw, high-contrast aesthetic that mimics print design and DIY punk culture. Characterized by cream backgrounds, thick black borders (4px), hard offset shadows with zero blur, clashing vibrant colors (Hot Red, Vivid Yellow, Soft Violet), and Space Grotesk typography at heavy weights. Embraces asymmetry, rotation, sticker-like layering, and organized visual chaos.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Neo-Brutalism/Neo-Brutalism.html", "mdPath": "./templates/Neo-Brutalism/Neo-Brutalism.md", "shots": ["./assets/screenshots/Neo-Brutalism-01.png", "./assets/screenshots/Neo-Brutalism-02.png", "./assets/screenshots/Neo-Brutalism-03.png"]},
+      {"name": "Neumorphism", "display": "Neumorphism", "description": "Extruded and inset elements via dual shadows on monochromatic backgrounds. Soft, tactile, and physically grounded with excellent accessibility.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Neumorphism/Neumorphism.html", "mdPath": "./templates/Neumorphism/Neumorphism.md", "shots": ["./assets/screenshots/Neumorphism-01.png", "./assets/screenshots/Neumorphism-02.png", "./assets/screenshots/Neumorphism-03.png"]},
+      {"name": "Newsprint", "display": "Newsprint", "description": "Stark black and white, high contrast, tight grids, newspaper aesthetic, sharp lines, editorial depth.", "tags": ["Light", "serif"], "htmlPath": "./templates/Newsprint/Newsprint.html", "mdPath": "./templates/Newsprint/Newsprint.md", "shots": ["./assets/screenshots/Newsprint-01.png", "./assets/screenshots/Newsprint-02.png", "./assets/screenshots/Newsprint-03.png"]},
+      {"name": "Organic", "display": "Organic / Natural", "description": "Earth-inspired palette with moss greens, terracotta, and sand tones. Features organic blob shapes, grain texture overlays, asymmetric rounded corners, and soft shadows. Embraces wabi-sabi philosophy with warmth and natural imperfection.", "tags": ["Light", "serif"], "htmlPath": "./templates/Organic/Organic.html", "mdPath": "./templates/Organic/Organic.md", "shots": ["./assets/screenshots/Organic-01.png", "./assets/screenshots/Organic-02.png", "./assets/screenshots/Organic-03.png"]},
+      {"name": "Playful-Geometric", "display": "Playful Geometric", "description": "A vibrant, high-energy aesthetic that combines a stable structural grid with whimsical geometric decorations. It relies on bright solid colors, simple primitive shapes (circles, triangles, squiggles), and tactile interactions to create a friendly, optimistic vibe reminiscent of modern Memphis design.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Playful-Geometric/Playful-Geometric.html", "mdPath": "./templates/Playful-Geometric/Playful-Geometric.md", "shots": ["./assets/screenshots/Playful-Geometric-01.png", "./assets/screenshots/Playful-Geometric-02.png", "./assets/screenshots/Playful-Geometric-03.png"]},
+      {"name": "Professional", "display": "Business Style", "description": "An editorial-inspired minimalist design system centered on elegant serif typography. Warm ivory backgrounds with subtle paper texture, refined spacing, rule lines, and classical proportions create a timeless, literary aesthetic. Enhanced depth through layered gradients and multi-toned shadows. The design whispers sophistication through restraint and typographic excellence.", "tags": ["Light", "serif"], "htmlPath": "./templates/Professional/Professional.html", "mdPath": "./templates/Professional/Professional.md", "shots": ["./assets/screenshots/Professional-01.png", "./assets/screenshots/Professional-02.png", "./assets/screenshots/Professional-03.png"]},
+      {"name": "Retro", "display": "Retro", "description": "Ugly-cool 90s nostalgia aesthetic with Windows 95 beveled UI, system fonts, bright primary colors, marquee scrolling text, and maximum visual chaos.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Retro/Retro.html", "mdPath": "./templates/Retro/Retro.md", "shots": ["./assets/screenshots/Retro-01.png", "./assets/screenshots/Retro-02.png", "./assets/screenshots/Retro-03.png"]},
+      {"name": "SaaS", "display": "Tech Style", "description": "A bold, minimalist-modern visual system combining clean aesthetics with dynamic execution. Features signature Electric Blue gradients, sophisticated dual-font pairing (Calistoga + Inter), animated hero graphics, inverted contrast sections, and micro-interactions throughout. Professional yet design-forward—confidence without clutter.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/SaaS/SaaS.html", "mdPath": "./templates/SaaS/SaaS.md", "shots": ["./assets/screenshots/SaaS-01.png", "./assets/screenshots/SaaS-02.png", "./assets/screenshots/SaaS-03.png"]},
+      {"name": "Sketch", "display": "Hand-Drawn / Sketch", "description": "Organic wobbly borders, handwritten typography, paper textures, and playful imperfection. Every element feels sketched with markers and pencils on textured paper.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Sketch/Sketch.html", "mdPath": "./templates/Sketch/Sketch.md", "shots": ["./assets/screenshots/Sketch-01.png", "./assets/screenshots/Sketch-02.png", "./assets/screenshots/Sketch-03.png"]},
+      {"name": "Swiss-Minimalist", "display": "Swiss", "description": "A rigorous implementation of the International Typographic Style (1950s). Characterized by objective typography, sans-serif fonts (Inter), mathematical grids with subtle texture patterns, and a strict black/white/red palette. Prioritizes readability, precision, asymmetrical organization, and visual depth through layered patterns.", "tags": ["Light", "sans-serif"], "htmlPath": "./templates/Swiss-Minimalist/Swiss-Minimalist.html", "mdPath": "./templates/Swiss-Minimalist/Swiss-Minimalist.md", "shots": ["./assets/screenshots/Swiss-Minimalist-01.png", "./assets/screenshots/Swiss-Minimalist-02.png", "./assets/screenshots/Swiss-Minimalist-03.png"]},
+      {"name": "Terminal", "display": "Terminal CLI", "description": "A raw, functional, and retro-futuristic command-line interface aesthetic. High contrast, monospaced precision, and blinking cursors.", "tags": ["Dark", "mono"], "htmlPath": "./templates/Terminal/Terminal.html", "mdPath": "./templates/Terminal/Terminal.md", "shots": ["./assets/screenshots/Terminal-01.png", "./assets/screenshots/Terminal-02.png", "./assets/screenshots/Terminal-03.png"]},
+      {"name": "Vaporwave", "display": "Vaporwave", "description": "A nostalgic, neon-drenched journey into 80s retro-futurism. High-contrast neon pinks and cyans against deep void purples. Digital grids, glowing horizons, surreal sunset gradients, and CRT scanline overlays create an immersive synthetic world.", "tags": ["Dark", "mono"], "htmlPath": "./templates/Vaporwave/Vaporwave.html", "mdPath": "./templates/Vaporwave/Vaporwave.md", "shots": ["./assets/screenshots/Vaporwave-01.png", "./assets/screenshots/Vaporwave-02.png", "./assets/screenshots/Vaporwave-03.png"]},
+      {"name": "Web3", "display": "Crypto", "description": "A bold, futuristic aesthetic inspired by Bitcoin and decentralized finance. Deep void backgrounds with Bitcoin orange accents, golden highlights, glowing elements, and precision data visualization.", "tags": ["Dark", "sans-serif"], "htmlPath": "./templates/Web3/Web3.html", "mdPath": "./templates/Web3/Web3.md", "shots": ["./assets/screenshots/Web3-01.png", "./assets/screenshots/Web3-02.png", "./assets/screenshots/Web3-03.png"]}
+    ];
+
+    const grid = document.getElementById('grid');
+    const search = document.getElementById('search');
+    const modal = document.getElementById('modal');
+    const modalClose = document.getElementById('modal-close');
+    const previewFrame = document.getElementById('preview-frame');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalHtml = document.getElementById('modal-html');
+    const modalCopy = document.getElementById('modal-copy');
+    const mdContent = document.getElementById('md-content');
+    const shotsStrip = document.getElementById('shots-strip');
+    const copyHint = document.getElementById('copy-hint');
+    const tabs = document.querySelectorAll('.modal-tab');
+    const panels = document.querySelectorAll('.modal-panel');
+    const mdModal = document.getElementById('md-modal');
+    const mdModalTitle = document.getElementById('md-modal-title');
+    const mdModalClose = document.getElementById('md-modal-close');
+    const mdReader = document.getElementById('md-reader');
+
+    let currentMd = '';
+
+    function renderCards(items) {
+      grid.innerHTML = items.map(t => `
+        <article class="card" data-name="${t.name}">
+          <div class="card-media">
+            <img src="${t.shots[0]}" alt="${t.display} preview" loading="lazy">
+            <div class="card-thumbs">
+              <div class="card-thumb"><img src="${t.shots[1]}" alt="${t.display} 02"></div>
+              <div class="card-thumb"><img src="${t.shots[2]}" alt="${t.display} 03"></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">${t.display}</h3>
+            <p class="card-desc">${t.description}</p>
+            <div class="card-meta">
+              ${t.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-primary preview-btn" data-name="${t.name}">Preview</button>
+              <a href="${t.htmlPath}" class="btn btn-outline" target="_blank">HTML</a>
+              <button class="btn btn-outline md-btn" data-name="${t.name}">MD</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    renderCards(templates);
+
+    search.addEventListener('input', () => {
+      const q = search.value.toLowerCase();
+      const filtered = templates.filter(t =>
+        t.display.toLowerCase().includes(q) ||
+        t.description.toLowerCase().includes(q) ||
+        t.tags.some(tag => tag.toLowerCase().includes(q))
+      );
+      renderCards(filtered);
+    });
+
+    function openModal(name) {
+      const t = templates.find(x => x.name === name);
+      if (!t) return;
+      currentMd = '';
+
+      modalTitle.innerHTML = `${t.display} <span>${t.name}</span>`;
+      modalDesc.textContent = t.description;
+      modalHtml.href = t.htmlPath;
+      previewFrame.src = t.htmlPath;
+      shotsStrip.innerHTML = t.shots.map((src, i) =>
+        `<img src="${src}" alt="${t.display} screenshot ${i + 1}">`
+      ).join('');
+      mdContent.innerHTML = '';
+      copyHint.classList.remove('visible');
+
+      fetch(t.mdPath)
+        .then(r => r.text())
+        .then(md => {
+          currentMd = md;
+          if (document.getElementById('panel-md').classList.contains('active')) {
+            mdContent.innerHTML = marked.parse(md);
+          }
+        });
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+
+    function closeModal() {
+      modal.classList.remove('active');
+      previewFrame.src = 'about:blank';
+      document.body.style.overflow = '';
+    }
+
+    async function openMdModal(name) {
+      const t = templates.find(x => x.name === name);
+      if (!t) return;
+      mdModalTitle.textContent = `${t.display} — Design Prompt`;
+      mdReader.innerHTML = '<p style="color: var(--text-muted);">Loading...</p>';
+      mdModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      try {
+        const res = await fetch(t.mdPath);
+        const md = await res.text();
+        mdReader.innerHTML = marked.parse(md);
+      } catch (err) {
+        mdReader.innerHTML = `<p style="color: #dc2626;">Failed to load markdown: ${err.message}</p>`;
+      }
+    }
+
+    function closeMdModal() {
+      mdModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+
+    grid.addEventListener('click', (e) => {
+      const card = e.target.closest('.card');
+      const previewBtn = e.target.closest('.preview-btn');
+      const mdBtn = e.target.closest('.md-btn');
+      if (mdBtn) {
+        e.stopPropagation();
+        openMdModal(mdBtn.dataset.name);
+      } else if (previewBtn) {
+        openModal(previewBtn.dataset.name);
+      } else if (card && !e.target.closest('a')) {
+        openModal(card.dataset.name);
+      }
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    mdModalClose.addEventListener('click', closeMdModal);
+    mdModal.addEventListener('click', (e) => { if (e.target === mdModal) closeMdModal(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      if (mdModal.classList.contains('active')) {
+        closeMdModal();
+      } else if (modal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        const panel = document.getElementById('panel-' + tab.dataset.panel);
+        panel.classList.add('active');
+        if (tab.dataset.panel === 'md' && currentMd) {
+          mdContent.innerHTML = marked.parse(currentMd);
+        }
+      });
+    });
+
+    modalCopy.addEventListener('click', async () => {
+      if (!currentMd) return;
+      try {
+        await navigator.clipboard.writeText(currentMd);
+        copyHint.classList.add('visible');
+        setTimeout(() => copyHint.classList.remove('visible'), 2000);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+    });
+  </script>
+</body>
+</html>

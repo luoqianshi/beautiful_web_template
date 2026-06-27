@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Clay — High-Fidelity Claymorphism</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --canvas: #F4F1FA;
+    --fg: #332F3A;
+    --muted: #635F69;
+    --accent: #7C3AED;
+    --accent-light: #A78BFA;
+    --accent-alt: #DB2777;
+    --accent-tert: #0EA5E9;
+    --success: #10B981;
+    --warning: #F59E0B;
+    --card-bg: rgba(255, 255, 255, 0.65);
+    --input-bg: #EFEBF5;
+
+    --shadow-clay-card: 16px 16px 32px rgba(160, 150, 180, 0.2), -10px -10px 24px rgba(255, 255, 255, 0.9), inset 6px 6px 12px rgba(139, 92, 246, 0.03), inset -6px -6px 12px rgba(255, 255, 255, 1);
+    --shadow-clay-card-hover: 22px 22px 44px rgba(160, 150, 180, 0.28), -14px -14px 32px rgba(255, 255, 255, 0.95), inset 6px 6px 12px rgba(139, 92, 246, 0.05), inset -6px -6px 12px rgba(255, 255, 255, 1);
+    --shadow-clay-button: 12px 12px 24px rgba(139, 92, 246, 0.3), -8px -8px 16px rgba(255, 255, 255, 0.4), inset 4px 4px 8px rgba(255, 255, 255, 0.4), inset -4px -4px 8px rgba(0, 0, 0, 0.1);
+    --shadow-clay-button-hover: 16px 16px 32px rgba(139, 92, 246, 0.4), -10px -10px 20px rgba(255, 255, 255, 0.5), inset 4px 4px 8px rgba(255, 255, 255, 0.5), inset -4px -4px 8px rgba(0, 0, 0, 0.1);
+    --shadow-clay-pressed: inset 10px 10px 20px #d9d4e3, inset -10px -10px 20px #ffffff;
+    --shadow-clay-surface: 30px 30px 60px #cdc6d9, -30px -30px 60px #ffffff, inset 10px 10px 20px rgba(139, 92, 246, 0.05), inset -10px -10px 20px rgba(255, 255, 255, 0.8);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--canvas);
+    color: var(--fg);
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  h1, h2, h3, h4, .num, .nunito { font-family: "Nunito", sans-serif; }
+
+  ::selection { background: var(--accent); color: #fff; }
+  a { color: inherit; text-decoration: none; }
+
+  /* Floating background blobs */
+  .blobs {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+  }
+  .blob-1 { width: 50vh; height: 50vh; background: #8B5CF6; top: -10%; left: -10%; animation: clay-float 8s ease-in-out infinite; }
+  .blob-2 { width: 45vh; height: 45vh; background: #EC4899; top: 20%; right: -10%; animation: clay-float-delayed 10s ease-in-out infinite; }
+  .blob-3 { width: 55vh; height: 55vh; background: #0EA5E9; bottom: -10%; left: 20%; animation: clay-float 12s ease-in-out infinite; animation-delay: 2s; }
+  .blob-4 { width: 40vh; height: 40vh; background: #10B981; bottom: 10%; right: 15%; animation: clay-float-delayed 9s ease-in-out infinite; animation-delay: 4s; }
+
+  @keyframes clay-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(2deg); }
+  }
+  @keyframes clay-float-delayed {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(-2deg); }
+  }
+  @keyframes clay-float-slow {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-30px) rotate(5deg); }
+  }
+  @keyframes clay-breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  @media (min-width: 768px) { .container { padding: 0 40px; } }
+
+  .eyebrow {
+    font-family: "Nunito", sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+    padding: 0 1.75rem;
+    height: 56px;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+  }
+  .btn:focus-visible { outline: 3px solid rgba(124, 58, 237, 0.4); outline-offset: 3px; }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent-light), var(--accent));
+    color: #fff;
+    box-shadow: var(--shadow-clay-button);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: var(--shadow-clay-button-hover); }
+  .btn-primary:active { transform: scale(0.92); box-shadow: var(--shadow-clay-pressed); }
+
+  .btn-secondary {
+    background: #fff;
+    color: var(--fg);
+    box-shadow: var(--shadow-clay-button);
+  }
+  .btn-secondary:hover { transform: translateY(-3px); color: var(--accent); }
+  .btn-secondary:active { transform: scale(0.92); box-shadow: var(--shadow-clay-pressed); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid rgba(124, 58, 237, 0.2);
+  }
+  .btn-outline:hover { border-color: var(--accent); background: rgba(124, 58, 237, 0.05); transform: translateY(-2px); }
+
+  .btn-ghost { background: transparent; color: var(--fg); }
+  .btn-ghost:hover { background: rgba(124, 58, 237, 0.1); color: var(--accent); }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 1rem; left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 1.5rem);
+    max-width: 1100px;
+    z-index: 40;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(20px);
+    border-radius: 32px;
+    box-shadow: 0 8px 24px rgba(160, 150, 180, 0.15), inset 4px 4px 8px rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.6);
+  }
+  @media (min-width: 640px) { nav { top: 1.5rem; border-radius: 40px; } }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 1.25rem; }
+  @media (min-width: 640px) { .nav-inner { height: 72px; padding: 0 2rem; } }
+  .brand {
+    font-family: "Nunito", sans-serif;
+    font-weight: 900;
+    font-size: 1.375rem;
+    letter-spacing: -0.03em;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .brand .orb {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-light), var(--accent));
+    box-shadow: 4px 4px 8px rgba(139,92,246,0.4), inset 2px 2px 4px rgba(255,255,255,0.5);
+    animation: clay-breathe 6s ease-in-out infinite;
+  }
+  .nav-links { display: none; gap: 1.75rem; align-items: center; }
+  .nav-links a { font-family: "Nunito", sans-serif; font-weight: 600; font-size: 0.9375rem; color: var(--muted); transition: color 200ms; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta { display: none; }
+  .nav-burger { display: flex; flex-direction: column; gap: 5px; background: rgba(255,255,255,0.6); border: none; cursor: pointer; padding: 10px; border-radius: 14px; box-shadow: var(--shadow-clay-pressed); }
+  .nav-burger span { width: 22px; height: 2px; background: var(--fg); border-radius: 2px; }
+  @media (min-width: 1024px) {
+    .nav-links { display: flex; }
+    .nav-cta { display: inline-flex; }
+    .nav-burger { display: none; }
+  }
+
+  /* HERO */
+  .hero { padding: 8rem 0 4rem; text-align: center; position: relative; }
+  @media (min-width: 768px) { .hero { padding: 9rem 0 5rem; } }
+  .hero-orbit-1, .hero-orbit-2, .hero-orbit-3 {
+    position: absolute;
+    border-radius: 24px;
+    z-index: 0;
+    opacity: 0.9;
+  }
+  .hero-orbit-1 {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, #A78BFA, #7C3AED);
+    top: 25%; left: 12%;
+    box-shadow: var(--shadow-clay-button);
+    animation: clay-float-slow 12s ease-in-out infinite;
+  }
+  .hero-orbit-2 {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, #F472B6, #DB2777);
+    top: 30%; right: 14%;
+    border-radius: 50%;
+    box-shadow: 8px 8px 16px rgba(219,39,119,0.3), -6px -6px 12px rgba(255,255,255,0.4);
+    animation: clay-float-slow 10s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+  .hero-orbit-3 {
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, #38BDF8, #0EA5E9);
+    top: 55%; left: 8%;
+    border-radius: 28px 28px 28px 8px;
+    box-shadow: 8px 8px 16px rgba(14,165,233,0.3), -6px -6px 12px rgba(255,255,255,0.4);
+    animation: clay-float-slow 11s ease-in-out infinite;
+    animation-delay: 4s;
+  }
+  @media (max-width: 767px) { .hero-orbit-1, .hero-orbit-2, .hero-orbit-3 { display: none; } }
+
+  .hero-inner { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; }
+  .trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 999px;
+    padding: 0.5rem 1.125rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-clay-pressed);
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+  .pulse-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--success); position: relative; }
+  .pulse-dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--success); animation: pulse 2s ease-out infinite; }
+  @keyframes pulse { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(2.5); opacity: 0; } }
+
+  .hero h1 {
+    font-weight: 900;
+    font-size: clamp(3rem, 9vw, 6rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.75rem;
+  }
+  .hero h1 .gradient {
+    background: linear-gradient(120deg, var(--fg) 30%, var(--accent) 60%, var(--accent-alt) 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p { font-size: clamp(1rem, 1.5vw, 1.25rem); color: var(--muted); max-width: 600px; margin: 0 auto 2.5rem; line-height: 1.7; }
+  .hero-actions { display: flex; flex-direction: column; gap: 1rem; justify-content: center; align-items: center; }
+  @media (min-width: 640px) { .hero-actions { flex-direction: row; } }
+
+  /* STATS */
+  .stats-section { padding: 2rem 0 4rem; }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) { .stats-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; } }
+  .stat-orb {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-clay-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 300ms ease;
+    animation: clay-breathe 6s ease-in-out infinite;
+  }
+  .stat-orb:nth-child(2) { animation-delay: 1.5s; }
+  .stat-orb:nth-child(3) { animation-delay: 3s; }
+  .stat-orb:nth-child(4) { animation-delay: 4.5s; }
+  .stat-orb:hover { transform: scale(1.1); box-shadow: var(--shadow-clay-card-hover); }
+  .stat-orb .num {
+    font-weight: 900;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.375rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .stat-orb .lbl { font-family: "Nunito", sans-serif; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+
+  /* SECTION */
+  .section { padding: 4rem 0; }
+  @media (min-width: 768px) { .section { padding: 6rem 0; } }
+  .section-head { text-align: center; max-width: 680px; margin: 0 auto 3.5rem; }
+  .section-head .eyebrow { margin-bottom: 1rem; }
+  .section-head h2 {
+    font-weight: 900;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+  .section-head p { color: var(--muted); font-size: 1.0625rem; line-height: 1.7; }
+
+  /* FEATURES (Bento) */
+  .bento {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) { .bento { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .bento { grid-template-columns: repeat(3, 1fr); } }
+  .feature-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 32px;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.6);
+    padding: 2.25rem;
+    box-shadow: var(--shadow-clay-card);
+    transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+  }
+  @media (min-width: 1024px) {
+    .feature-card.hero-card { grid-column: span 2; grid-row: span 2; padding: 3rem; }
+  }
+  .feature-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-clay-card-hover); }
+  .feature-card.hero-card:hover { transform: translateY(-8px) scale(1.01); }
+  .feature-icon {
+    width: 56px; height: 56px;
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    box-shadow: 6px 6px 12px rgba(0,0,0,0.15), inset 2px 2px 4px rgba(255,255,255,0.4);
+  }
+  .icon-violet { background: linear-gradient(135deg, #A78BFA, #7C3AED); }
+  .icon-pink { background: linear-gradient(135deg, #F472B6, #DB2777); }
+  .icon-blue { background: linear-gradient(135deg, #38BDF8, #0EA5E9); }
+  .icon-green { background: linear-gradient(135deg, #34D399, #10B981); }
+  .icon-amber { background: linear-gradient(135deg, #FBBF24, #F59E0B); }
+  .icon-cyan { background: linear-gradient(135deg, #22D3EE, #06B6D4); }
+  .feature-card h3 {
+    font-weight: 800;
+    font-size: 1.375rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.625rem;
+  }
+  .feature-card.hero-card h3 { font-size: 2rem; }
+  .feature-card p { color: var(--muted); font-size: 0.9375rem; line-height: 1.65; }
+  .feature-card.hero-card p { font-size: 1.0625rem; }
+  .feature-deco {
+    position: absolute;
+    bottom: -2rem; right: -2rem;
+    width: 120px; height: 120px;
+    border-radius: 32px;
+    background: linear-gradient(135deg, rgba(167,139,250,0.2), rgba(219,39,119,0.2));
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 500ms ease;
+  }
+  .feature-card:hover .feature-deco { opacity: 1; transform: translateY(0); }
+
+  /* HOW IT WORKS */
+  .how-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    position: relative;
+  }
+  @media (min-width: 768px) { .how-grid { grid-template-columns: repeat(3, 1fr); } }
+  .how-grid::before {
+    content: "";
+    position: absolute;
+    top: 60px; left: 15%; right: 15%;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.6);
+    box-shadow: var(--shadow-clay-pressed);
+    display: none;
+  }
+  @media (min-width: 768px) { .how-grid::before { display: block; } }
+  .how-step { text-align: center; position: relative; }
+  .how-circle {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Nunito", sans-serif;
+    font-weight: 900;
+    font-size: 2.5rem;
+    color: #fff;
+    box-shadow: var(--shadow-clay-button);
+    transition: transform 300ms ease;
+  }
+  @media (min-width: 768px) { .how-circle { width: 128px; height: 128px; } }
+  .how-step:hover .how-circle { transform: scale(1.1); }
+  .how-circle.c1 { background: linear-gradient(135deg, #A78BFA, #7C3AED); }
+  .how-circle.c2 { background: linear-gradient(135deg, #F472B6, #DB2777); }
+  .how-circle.c3 { background: linear-gradient(135deg, #38BDF8, #0EA5E9); }
+  .how-step h3 { font-weight: 800; font-size: 1.375rem; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+  .how-step p { color: var(--muted); font-size: 0.9375rem; line-height: 1.6; max-width: 280px; margin: 0 auto; }
+
+  /* BENEFITS */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  @media (min-width: 1024px) { .benefits-grid { grid-template-columns: 1fr 1fr; gap: 4rem; } }
+  .clay-composition {
+    aspect-ratio: 1;
+    position: relative;
+    border-radius: 48px;
+    background: rgba(255,255,255,0.4);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-clay-card);
+    overflow: hidden;
+  }
+  .clay-shape {
+    position: absolute;
+    border-radius: 32px;
+    box-shadow: var(--shadow-clay-button);
+  }
+  .cs1 { width: 45%; height: 45%; top: 12%; left: 12%; background: linear-gradient(135deg, #A78BFA, #7C3AED); border-radius: 50%; animation: clay-float 8s ease-in-out infinite; }
+  .cs2 { width: 35%; height: 35%; bottom: 15%; right: 12%; background: linear-gradient(135deg, #F472B6, #DB2777); border-radius: 24px; transform: rotate(15deg); animation: clay-float-delayed 10s ease-in-out infinite; }
+  .cs3 { width: 28%; height: 28%; bottom: 18%; left: 18%; background: linear-gradient(135deg, #38BDF8, #0EA5E9); border-radius: 50%; animation: clay-float 9s ease-in-out infinite; animation-delay: 2s; }
+  .cs4 { width: 22%; height: 22%; top: 20%; right: 22%; background: linear-gradient(135deg, #34D399, #10B981); border-radius: 16px; transform: rotate(-10deg); animation: clay-float-delayed 11s ease-in-out infinite; animation-delay: 3s; }
+
+  .benefit-list { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; }
+  .benefit-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(8px);
+    border-radius: 24px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--shadow-clay-card);
+    transition: all 300ms ease;
+  }
+  .benefit-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-clay-card-hover); }
+  .benefit-check {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #34D399, #10B981);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 4px 4px 8px rgba(16,185,129,0.3), inset 2px 2px 4px rgba(255,255,255,0.4);
+  }
+  .benefit-item h4 { font-family: "Nunito", sans-serif; font-weight: 800; font-size: 1.0625rem; margin-bottom: 0.25rem; }
+  .benefit-item p { color: var(--muted); font-size: 0.9rem; line-height: 1.55; }
+
+  /* PRICING */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  @media (min-width: 768px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; } }
+  .price-card {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.7);
+    border-radius: 32px;
+    padding: 2.5rem 2rem;
+    box-shadow: var(--shadow-clay-card);
+    transition: all 400ms ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  @media (min-width: 768px) {
+    .price-card.popular { transform: scale(1.08); z-index: 2; box-shadow: var(--shadow-clay-card-hover); }
+    .price-card.popular:hover { transform: scale(1.08) translateY(-6px); }
+  }
+  .price-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-clay-card-hover); }
+  .price-badge {
+    position: absolute;
+    top: -14px; left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--accent-light), var(--accent));
+    color: #fff;
+    font-family: "Nunito", sans-serif;
+    font-weight: 800;
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    box-shadow: 4px 4px 8px rgba(139,92,246,0.4);
+    white-space: nowrap;
+  }
+  .price-tier { font-family: "Nunito", sans-serif; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+  .price-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .price {
+    font-family: "Nunito", sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 4vw, 3.25rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 0.25rem;
+  }
+  .price .cur { font-size: 1.25rem; vertical-align: super; color: var(--muted); font-weight: 700; }
+  .price-period { color: var(--muted); font-size: 0.875rem; margin-bottom: 1.75rem; }
+  .price-features { list-style: none; margin-bottom: 2rem; flex-grow: 1; display: flex; flex-direction: column; gap: 0.75rem; }
+  .price-features li { display: flex; align-items: center; gap: 0.75rem; font-size: 0.9375rem; color: var(--fg); }
+  .price-check { flex-shrink: 0; width: 24px; height: 24px; border-radius: 8px; background: linear-gradient(135deg, #34D399, #10B981); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 2px 2px 4px rgba(16,185,129,0.3); }
+  .price-card .btn { width: 100%; }
+  .price-card.popular .btn-primary { background: linear-gradient(135deg, var(--accent-light), var(--accent)); }
+
+  /* TESTIMONIALS */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+  .testimonial-card {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(16px);
+    border-radius: 32px;
+    padding: 2rem;
+    box-shadow: var(--shadow-clay-card);
+    transition: all 400ms ease;
+  }
+  .testimonial-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-clay-card-hover); }
+  .stars { display: flex; gap: 0.25rem; margin-bottom: 1rem; color: var(--warning); }
+  .testimonial-card blockquote { font-size: 1rem; line-height: 1.6; color: var(--fg); margin-bottom: 1.5rem; font-weight: 500; }
+  .testimonial-author { display: flex; align-items: center; gap: 0.875rem; }
+  .avatar-ring {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: #fff;
+    padding: 3px;
+    box-shadow: var(--shadow-clay-button);
+  }
+  .avatar-inner { width: 100%; height: 100%; border-radius: 50%; background: linear-gradient(135deg, var(--accent-light), var(--accent-alt)); }
+  .author-name { font-family: "Nunito", sans-serif; font-weight: 800; font-size: 0.9375rem; }
+  .author-role { font-size: 0.75rem; color: var(--muted); }
+
+  /* FAQ */
+  .faq-wrap { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+  .faq-item {
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    box-shadow: var(--shadow-clay-card);
+    overflow: hidden;
+    transition: box-shadow 300ms ease;
+  }
+  .faq-item.open { box-shadow: var(--shadow-clay-pressed); }
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 1.5rem 1.75rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    font-family: "Nunito", sans-serif;
+    font-weight: 800;
+    font-size: 1.0625rem;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+  }
+  .faq-chevron { transition: transform 300ms ease; color: var(--accent); flex-shrink: 0; }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 400ms ease;
+    padding: 0 1.75rem;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding: 0 1.75rem 1.5rem; }
+  .faq-a p { color: var(--muted); font-size: 0.9375rem; line-height: 1.65; }
+
+  /* CTA */
+  .cta-band {
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(20px);
+    border-radius: 48px;
+    padding: 4rem 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-clay-card);
+    position: relative;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) { .cta-band { padding: 5rem 3rem; } }
+  .cta-band h2 { font-weight: 900; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1rem; }
+  .cta-band h2 .gradient { background: linear-gradient(120deg, var(--accent), var(--accent-alt)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .cta-band p { color: var(--muted); font-size: 1.0625rem; margin-bottom: 2.5rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .cta-form { display: flex; flex-direction: column; gap: 1rem; max-width: 480px; margin: 0 auto; }
+  @media (min-width: 640px) { .cta-form { flex-direction: row; } }
+  .cta-input {
+    flex: 1;
+    height: 56px;
+    border-radius: 20px;
+    border: none;
+    background: var(--input-bg);
+    color: var(--fg);
+    padding: 0 1.5rem;
+    font-family: "DM Sans", sans-serif;
+    font-size: 1rem;
+    outline: none;
+    box-shadow: var(--shadow-clay-pressed);
+    transition: all 200ms ease;
+  }
+  .cta-input::placeholder { color: var(--muted); }
+  .cta-input:focus { background: #fff; box-shadow: var(--shadow-clay-card), 0 0 0 4px rgba(124,58,237,0.2); }
+
+  /* FOOTER */
+  footer {
+    margin-top: 6rem;
+    background: rgba(255,255,255,0.4);
+    backdrop-filter: blur(20px);
+    border-radius: 48px 48px 0 0;
+    padding: 4rem 0 2rem;
+    box-shadow: 0 -10px 40px rgba(160,150,180,0.15);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+  }
+  @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+  .footer-brand .brand { margin-bottom: 1rem; font-size: 1.5rem; }
+  .footer-brand p { color: var(--muted); font-size: 0.9375rem; line-height: 1.6; max-width: 280px; }
+  .footer-col h4 { font-family: "Nunito", sans-serif; font-weight: 800; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg); margin-bottom: 1.25rem; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-col a { font-size: 0.9375rem; color: var(--muted); transition: color 200ms; }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-bottom {
+    border-top: 1px solid rgba(160,150,180,0.2);
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .footer-bottom .copyright { font-size: 0.8125rem; color: var(--muted); }
+  .footer-social { display: flex; gap: 0.75rem; }
+  .footer-social a {
+    width: 44px; height: 44px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.6);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    box-shadow: var(--shadow-clay-button);
+    transition: all 200ms ease;
+  }
+  .footer-social a:hover { transform: translateY(-4px); box-shadow: var(--shadow-clay-button-hover); }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 600ms ease, transform 600ms ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Background blobs -->
+<div class="blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="brand"><span class="orb"></span>Clayworks</a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#cta" class="btn btn-primary">Get Started</a>
+    </div>
+    <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-orbit-1"></div>
+  <div class="hero-orbit-2"></div>
+  <div class="hero-orbit-3"></div>
+  <div class="container hero-inner reveal">
+    <div class="trust-badge">
+      <span class="pulse-dot"></span>
+      <span>Trusted by 12,000+ creators worldwide</span>
+    </div>
+    <h1>Design that feels <span class="gradient">touchably real.</span></h1>
+    <p>A hyper-realistic 3D aesthetic simulating soft, inflatable clay objects with multi-layered shadow stacks, vibrant candy-store colors, and tactile micro-interactions that create a premium, playful digital toy experience.</p>
+    <div class="hero-actions">
+      <a href="#cta" class="btn btn-primary">Start Building Free</a>
+      <a href="#features" class="btn btn-secondary">Explore Features</a>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-orb reveal">
+        <div class="num">12k+</div>
+        <div class="lbl">Creators</div>
+      </div>
+      <div class="stat-orb reveal">
+        <div class="num">4.9</div>
+        <div class="lbl">Avg Rating</div>
+      </div>
+      <div class="stat-orb reveal">
+        <div class="num">98%</div>
+        <div class="lbl">Satisfaction</div>
+      </div>
+      <div class="stat-orb reveal">
+        <div class="num">350+</div>
+        <div class="lbl">Components</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES (Bento) -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Features</span>
+      <h2>Every element <em style="font-style:normal;color:var(--accent)">bulges</em> with life.</h2>
+      <p>Premium digital clay with complex, multi-layered lighting simulation. Surfaces absorb light rather than reflecting it sharply, creating a warm, inviting aesthetic.</p>
+    </div>
+    <div class="bento">
+      <div class="feature-card hero-card reveal">
+        <div class="feature-icon icon-violet">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>High-Fidelity Shadow Stacks</h3>
+        <p>Every element uses carefully crafted 4-layer shadow stacks: outer drop shadows, top-left highlights, inner reflections, and active-state insets. This renders objects that feel dense, substantial, and interactive — not hollow decorations.</p>
+        <div class="feature-deco"></div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon icon-pink">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+        </div>
+        <h3>Candy-Store Palette</h3>
+        <p>Vivid violets, hot pinks, sky blues, and emerald greens radiate joy and optimism through saturated, harmonious color relationships.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon icon-blue">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Zero Sharp Corners</h3>
+        <p>Every edge is aggressively rounded — 20px minimum, up to 60px for large containers — signaling safety and approachability without words.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon icon-green">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3>Tactile Micro-Physics</h3>
+        <p>Buttons actively squish (scale 0.92 + pressed shadow) and cards lift towards you. Every interaction provides satisfying visual feedback.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon icon-amber">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3>Buoyant Animation</h3>
+        <p>The interface exists in zero gravity with high air resistance. Background blobs drift slowly, cards hover effortlessly — everything breathes and moves subtly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Process</span>
+      <h2>Three steps to <em style="font-style:normal;color:var(--accent-alt)">tangible</em> interfaces.</h2>
+      <p>Convexity, concavity, and buoyancy — the clay physics engine in three movements.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-step reveal">
+        <div class="how-circle c1">1</div>
+        <h3>The Bulge</h3>
+        <p>Primary elements bulge out with convex shadows, capturing light on top-left edges and casting soft colored shadows below.</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-circle c2">2</div>
+        <h3>The Press</h3>
+        <p>Secondary surfaces press into the clay with inset shadows, casting internal shadows on top edges and catching light on bottom lips.</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-circle c3">3</div>
+        <h3>The Float</h3>
+        <p>Everything exists in zero gravity. Cards hover with amplified float effects on hover — nothing feels statically stuck to the grid.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section">
+  <div class="container">
+    <div class="benefits-grid">
+      <div class="clay-composition reveal">
+        <div class="clay-shape cs1"></div>
+        <div class="clay-shape cs2"></div>
+        <div class="clay-shape cs3"></div>
+        <div class="clay-shape cs4"></div>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Why Clayworks</span>
+        <h2 style="font-weight:900;font-size:clamp(2rem,4vw,2.75rem);line-height:1.1;letter-spacing:-0.03em;margin:1rem 0 1rem;">Premium craft, <em style="font-style:normal;color:var(--accent)">playful</em> soul.</h2>
+        <p style="color:var(--muted);font-size:1.0625rem;line-height:1.7;">Despite the playfulness, this aesthetic maintains quality through careful attention to detail: consistent border radii, precise shadow layering, and smooth micro-interactions that feel like holding a high-end vinyl toy.</p>
+        <div class="benefit-list">
+          <div class="benefit-item">
+            <div class="benefit-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><h4>4-Layer Shadow Stacks</h4><p>Outer, highlight, inner, and active shadows for true depth.</p></div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><h4>Glass-Clay Hybrid</h4><p>Semi-transparent white with backdrop blur reveals ambient blobs.</p></div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><h4>Pronounced Squish</h4><p>Active scale 0.92 with pressed shadow for satisfying clicks.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Pricing</span>
+      <h2>Pick your <em style="font-style:normal;color:var(--accent)">shape.</em></h2>
+      <p>Three tiers. The popular one scales up — literally — on desktop.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-tier">Starter</div>
+        <div class="price-desc">For first-time sculptors</div>
+        <div class="price"><span class="cur">$</span>0</div>
+        <div class="price-period">free forever</div>
+        <ul class="price-features">
+          <li><span class="price-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>20 core components</li>
+          <li><span class="price-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Basic shadow tokens</li>
+          <li><span class="price-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Community support</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Start Free</a>
+      </div>
+      <div class="price-card popular reveal">
+        <span class="price-badge">Most Popular</span>
+        <div class="price-tier">Studio</div>
+        <div class="price-desc">For professional teams</div>
+        <div class="price"><span class="cur">$</span>32</div>
+        <div class="price-period">per month</div>
+        <ul class="price-features">
+          <li><span class="price-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>350+ components</li>
+          <li><span class="price-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Full shadow library</li>
+          <li><span class="price-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Animation presets</li>
+          <li><span class="price-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Priority support</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Choose Studio</a>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-tier">Atelier</div>
+        <div class="price-desc">For enterprise studios</div>
+        <div class="price"><span class="cur">$</span>89</div>
+        <div class="price-period">per month</div>
+        <ul class="price-features">
+          <li><span class="price-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Everything in Studio</li>
+          <li><span class="price-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Custom shadow design</li>
+          <li><span class="price-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>White-label license</li>
+          <li><span class="price-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Dedicated designer</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Testimonials</span>
+      <h2>Loved by <em style="font-style:normal;color:var(--accent-alt)">creators.</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"The squish on click is addictive. Our users keep tapping buttons just to feel them compress. Engagement metrics went through the roof."</blockquote>
+        <div class="testimonial-author">
+          <div class="avatar-ring"><div class="avatar-inner"></div></div>
+          <div><div class="author-name">Sofia Marchetti</div><div class="author-role">Product Lead, Playlab</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Finally a soft UI that doesn't feel like 2020 neumorphism. The 4-layer shadows give real weight. It feels like holding a premium vinyl toy."</blockquote>
+        <div class="testimonial-author">
+          <div class="avatar-ring"><div class="avatar-inner"></div></div>
+          <div><div class="author-name">Daniel Okoye</div><div class="author-role">Design Director, Mould</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"The floating background blobs through the glass cards are genius. It's the first design system that made our team smile while building."</blockquote>
+        <div class="testimonial-author">
+          <div class="avatar-ring"><div class="avatar-inner"></div></div>
+          <div><div class="author-name">Yuki Tanaka</div><div class="author-role">Founder, Softworks</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>Common <em style="font-style:normal;color:var(--accent)">questions.</em></h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item reveal">
+        <button class="faq-q">What makes this different from neumorphism?<svg class="faq-chevron" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><p>Unlike neumorphism's extruded plastic, High-Fidelity Claymorphism uses 4-layer shadow stacks that simulate complex lighting. Objects feel dense and substantial, not hollow — with real convex bulges and concave presses.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Are the squish animations accessible?<svg class="faq-chevron" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><p>Yes. We respect prefers-reduced-motion to disable all animations. The depth comes from static shadows, so the aesthetic holds even without motion. Focus rings remain visible with 3px accent outlines.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">How does it perform on mobile?<svg class="faq-chevron" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><p>We keep full shadow stacks and backdrop blur — they're essential. Background blobs scale with viewport units. Some decorative floating shapes hide on mobile. The candy colors and generous radii never flatten.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Can I customize the candy palette?<svg class="faq-chevron" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><p>Absolutely. All colors are CSS variables. Swap the accent tokens and the gradient buttons, icon orbs, and text highlights update everywhere. The shadow tints update automatically with the accent hue.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" id="cta" style="padding-top:0;">
+  <div class="container">
+    <div class="cta-band reveal">
+      <h2>Start sculpting <span class="gradient">today.</span></h2>
+      <p>Join 12,000+ creators building interfaces that feel touchably real. Your first project is free.</p>
+      <form class="cta-form" onsubmit="event.preventDefault(); this.querySelector('input').value=''; this.querySelector('input').placeholder='Welcome to Clayworks!';">
+        <input class="cta-input" type="email" placeholder="your@studio.com" required />
+        <button type="submit" class="btn btn-primary">Get Started</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="brand"><span class="orb"></span>Clayworks</a>
+        <p>A high-fidelity claymorphism design system for premium, playful digital experiences. Soft-touch matte silicone meets candy-store joy.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#how">Process</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Studio</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Docs</a></li>
+          <li><a href="#">Components</a></li>
+          <li><a href="#">Tokens</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="copyright">© 2024 Clayworks Studio — Sculpted with care</span>
+      <div class="footer-social">
+        <a href="#" aria-label="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+        <a href="#" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+        <a href="#" aria-label="Dribbble"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 3) * 90 + 'ms';
+    observer.observe(el);
+  });
+
+  document.querySelectorAll('.faq-q').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach((i) => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>

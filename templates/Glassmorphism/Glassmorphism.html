@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Glassmorphism — Premium Ethereal Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#000000;
+    --fg:#F5F5F7;
+    --muted:rgba(255,255,255,0.6);
+    --muted-2:rgba(255,255,255,0.45);
+    --glass:rgba(255,255,255,0.08);
+    --glass-hover:rgba(255,255,255,0.12);
+    --glass-dark:rgba(255,255,255,0.04);
+    --border:rgba(255,255,255,0.1);
+    --border-strong:rgba(255,255,255,0.18);
+    --accent:#2997FF;
+    --accent-2:#BF5AF2;
+    --accent-3:#FF375F;
+    --r-outer:32px;
+    --r-inner:20px;
+    --r-pill:9999px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--bg);
+    color:var(--fg);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    letter-spacing:-0.01em;
+  }
+  a{text-decoration:none;color:inherit}
+
+  /* Mesh gradient background — the main source of color */
+  .mesh-bg{
+    position:fixed;inset:0;z-index:-2;overflow:hidden;background:#000;
+  }
+  .mesh-blob{
+    position:absolute;border-radius:50%;filter:blur(80px);opacity:0.55;
+    will-change:transform;
+    animation:blob 18s ease-in-out infinite;
+  }
+  .mesh-blob.b1{width:560px;height:560px;background:#2997FF;top:-10%;left:-8%;}
+  .mesh-blob.b2{width:520px;height:520px;background:#BF5AF2;top:30%;right:-10%;animation-delay:-4s;}
+  .mesh-blob.b3{width:480px;height:480px;background:#FF375F;bottom:-12%;left:25%;animation-delay:-8s;}
+  .mesh-blob.b4{width:420px;height:420px;background:#FF9F0A;top:55%;left:5%;animation-delay:-12s;opacity:0.4;}
+  .mesh-blob.b5{width:380px;height:380px;background:#30D158;bottom:10%;right:15%;animation-delay:-6s;opacity:0.35;}
+  @keyframes blob{
+    0%,100%{transform:translate(0,0) scale(1)}
+    33%{transform:translate(40px,-30px) scale(1.1)}
+    66%{transform:translate(-30px,40px) scale(0.95)}
+  }
+  .animation-delay-2000{animation-delay:-2s}
+  .animation-delay-4000{animation-delay:-4s}
+  .animation-delay-6000{animation-delay:-6s}
+
+  /* Subtle grain/noise for premium texture */
+  .mesh-bg::after{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size:3px 3px;opacity:0.5;
+  }
+
+  .container{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+  /* Glass material */
+  .glass{
+    background:var(--glass);
+    backdrop-filter:blur(50px) saturate(180%);
+    -webkit-backdrop-filter:blur(50px) saturate(180%);
+    border:1px solid var(--border);
+    border-radius:var(--r-inner);
+  }
+  .glass-outer{border-radius:var(--r-outer)}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-weight:600;font-size:15px;padding:13px 26px;border-radius:var(--r-pill);
+    cursor:pointer;border:none;transition:all .4s ease;white-space:nowrap;line-height:1;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,rgba(41,151,255,0.9),rgba(191,90,242,0.9));
+    color:#fff;box-shadow:0 8px 24px rgba(41,151,255,0.35);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(41,151,255,0.5);background:linear-gradient(135deg,rgba(41,151,255,1),rgba(191,90,242,1))}
+  .btn-glass{
+    background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    color:var(--fg);border:1px solid var(--border-strong);
+  }
+  .btn-glass:hover{background:var(--glass-hover);transform:translateY(-2px)}
+  .btn-glass-dark{background:var(--glass-dark);color:var(--fg);border:1px solid var(--border)}
+  .btn-glass-dark:hover{background:var(--glass)}
+
+  /* Navbar */
+  .nav{position:sticky;top:16px;z-index:50;padding:0 24px}
+  .nav-inner{
+    max-width:1100px;margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 20px;
+    background:rgba(255,255,255,0.06);
+    backdrop-filter:blur(40px) saturate(180%);
+    -webkit-backdrop-filter:blur(40px) saturate(180%);
+    border:1px solid var(--border);
+    border-radius:var(--r-pill);
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-0.02em}
+  .brand-logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#2997FF,#BF5AF2);display:flex;align-items:center;justify-content:center;color:#fff}
+  .nav-links{display:none;align-items:center;gap:28px}
+  .nav-links a{font-weight:500;font-size:14px;color:var(--muted);transition:color .3s}
+  .nav-links a:hover{color:var(--fg)}
+  .nav-cta{display:flex;align-items:center;gap:10px}
+  .nav-cta .signin{display:none}
+  @media(min-width:1024px){.nav-links{display:flex}.nav-cta .signin{display:inline-flex}}
+
+  /* Hero */
+  .hero{padding:96px 0 80px;text-align:center}
+  @media(min-width:768px){.hero{padding:120px 0 100px}}
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:var(--r-pill);
+    background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--border);font-size:13px;font-weight:500;color:var(--fg);margin-bottom:28px;
+  }
+  .hero-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#30D158;box-shadow:0 0 10px #30D158}
+  .hero h1{
+    font-size:clamp(40px,7vw,76px);font-weight:700;line-height:1.05;letter-spacing:-0.04em;
+    margin-bottom:24px;max-width:900px;margin-left:auto;margin-right:auto;
+  }
+  .hero h1 .grad{
+    background:linear-gradient(135deg,#2997FF 0%,#BF5AF2 50%,#FF375F 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .hero p.lead{
+    font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:600px;margin:0 auto 36px;
+    font-weight:400;line-height:1.6;
+  }
+  .hero-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:48px}
+  .hero-trust{display:flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap;color:var(--muted-2);font-size:13px}
+  .hero-trust .stars{color:#FFD60A;letter-spacing:1px}
+
+  /* Hero glass showcase */
+  .hero-showcase{margin-top:24px;display:grid;gap:16px;grid-template-columns:1fr}
+  @media(min-width:768px){.hero-showcase{grid-template-columns:2fr 1fr}}
+  .show-main{padding:28px;display:flex;flex-direction:column;justify-content:space-between;min-height:240px}
+  .show-main .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+  .show-main .tag{font-size:12px;font-weight:600;color:var(--accent);background:rgba(41,151,255,0.15);padding:5px 12px;border-radius:var(--r-pill)}
+  .show-main .dots{display:flex;gap:6px}
+  .show-main .dots i{width:9px;height:9px;border-radius:50%;background:var(--muted-2)}
+  .show-main h3{font-size:22px;font-weight:600;margin-bottom:10px}
+  .show-main .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:auto}
+  .show-main .stat-mini{background:var(--glass-dark);border-radius:14px;padding:14px}
+  .show-main .stat-mini .n{font-size:22px;font-weight:700;letter-spacing:-0.02em}
+  .show-main .stat-mini .l{font-size:11px;color:var(--muted-2);margin-top:2px}
+  .show-side{display:grid;gap:16px}
+  .show-card{padding:20px;display:flex;flex-direction:column;justify-content:space-between;min-height:112px}
+  .show-card .ico{width:36px;height:36px;border-radius:10px;background:var(--glass-dark);display:flex;align-items:center;justify-content:center;margin-bottom:auto}
+  .show-card .label{font-size:12px;color:var(--muted-2)}
+  .show-card .val{font-size:20px;font-weight:700;letter-spacing:-0.02em}
+
+  /* Stats strip */
+  .stats{padding:24px 0 64px}
+  .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media(min-width:768px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+  .stat{padding:28px 20px;text-align:center}
+  .stat .num{font-size:clamp(32px,5vw,44px);font-weight:700;line-height:1;letter-spacing:-0.03em;background:linear-gradient(135deg,#2997FF,#BF5AF2);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .stat .lbl{margin-top:10px;font-size:13px;color:var(--muted)}
+
+  section{position:relative}
+  .section{padding:72px 0}
+  @media(min-width:768px){.section{padding:96px 0}}
+  .section-head{text-align:center;max-width:680px;margin:0 auto 56px}
+  .section-eyebrow{display:inline-block;font-size:13px;font-weight:600;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px}
+  .section-title{font-size:clamp(30px,4.5vw,46px);font-weight:600;line-height:1.1;letter-spacing:-0.03em;margin-bottom:16px}
+  .section-sub{font-size:17px;color:var(--muted)}
+
+  /* Product detail */
+  .product{display:grid;gap:32px;align-items:center}
+  @media(min-width:768px){.product{grid-template-columns:1fr 1fr;gap:48px}}
+  .product-text h2{font-size:clamp(28px,4vw,40px);font-weight:600;line-height:1.1;letter-spacing:-0.03em;margin-bottom:18px}
+  .product-text p{color:var(--muted);font-size:16px;margin-bottom:24px}
+  .product-list{list-style:none;display:grid;gap:14px;margin-bottom:28px}
+  .product-list li{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--fg)}
+  .product-list .check{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#2997FF,#BF5AF2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700}
+  .product-visual{padding:24px;min-height:280px;position:relative;overflow:hidden}
+  .product-visual .pv-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+  .product-visual .pv-title{font-weight:600;font-size:15px}
+  .product-visual .pv-tag{font-size:11px;font-weight:600;color:#30D158;background:rgba(48,209,88,0.15);padding:4px 10px;border-radius:var(--r-pill)}
+  .product-visual .pv-bars{display:flex;align-items:flex-end;gap:10px;height:140px}
+  .product-visual .pv-bars .bar{flex:1;border-radius:8px 8px 0 0;background:linear-gradient(180deg,rgba(41,151,255,0.7),rgba(191,90,242,0.5));transition:opacity .3s}
+  .product-visual .pv-bars .bar:hover{opacity:0.8}
+
+  /* Features — Bento grid */
+  .bento{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:640px){.bento{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:1024px){.bento{grid-template-columns:repeat(3,1fr);grid-auto-rows:200px}}
+  .bento-card{padding:28px;display:flex;flex-direction:column;justify-content:space-between;transition:all .5s ease;cursor:default}
+  .bento-card:hover{background:var(--glass-hover);transform:translateY(-4px)}
+  .bento-card.large{grid-column:span 1;grid-row:span 2}
+  @media(min-width:640px){.bento-card.large{grid-column:span 2}}
+  @media(min-width:1024px){.bento-card.large{grid-column:span 2;grid-row:span 2}}
+  .bento-card.wide{grid-column:span 2}
+  @media(max-width:639px){.bento-card.wide,.bento-card.large{grid-column:span 1;grid-row:span 1}}
+  .bento-icon{width:48px;height:48px;border-radius:14px;background:var(--glass-dark);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+  .bento-card h3{font-size:20px;font-weight:600;letter-spacing:-0.02em;margin-bottom:8px}
+  .bento-card.large h3{font-size:26px}
+  .bento-card p{font-size:14px;color:var(--muted)}
+  .bento-card.large p{font-size:15px}
+  .bento-visual{margin-top:20px;flex:1;display:flex;align-items:center;justify-content:center;min-height:120px}
+  .bento-orb{width:120px;height:120px;border-radius:50%;background:conic-gradient(from 0deg,#2997FF,#BF5AF2,#FF375F,#FF9F0A,#2997FF);filter:blur(2px);animation:spin 8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .bento-bars{display:flex;gap:6px;width:100%;align-items:flex-end;height:80px}
+  .bento-bars .b{flex:1;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#2997FF,#BF5AF2)}
+  .bento-grid-vis{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;width:100%}
+  .bento-grid-vis i{height:24px;border-radius:4px;background:var(--glass-dark)}
+  .bento-grid-vis i:nth-child(odd){background:linear-gradient(135deg,rgba(41,151,255,0.4),rgba(191,90,242,0.4))}
+
+  /* How it works */
+  .steps{display:grid;gap:20px}
+  @media(min-width:768px){.steps{grid-template-columns:repeat(3,1fr)}}
+  .step{padding:28px;text-align:center;transition:all .5s ease}
+  .step:hover{background:var(--glass-hover);transform:translateY(-4px)}
+  .step-num{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#2997FF,#BF5AF2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;margin:0 auto 20px;color:#fff;box-shadow:0 8px 24px rgba(41,151,255,0.3)}
+  .step h4{font-size:18px;font-weight:600;margin-bottom:8px}
+  .step p{color:var(--muted);font-size:14px}
+
+  /* Benefits */
+  .benefits{display:grid;gap:20px}
+  @media(min-width:768px){.benefits{grid-template-columns:1fr 1fr}}
+  .ben-checklist{padding:32px}
+  .ben-checklist h3{font-size:22px;font-weight:600;margin-bottom:20px;letter-spacing:-0.02em}
+  .ben-checklist ul{list-style:none;display:grid;gap:16px}
+  .ben-checklist li{display:flex;gap:12px;align-items:flex-start;font-size:15px}
+  .ben-checklist .check{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#30D158,#2997FF);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700}
+  .ben-visual{padding:32px;min-height:260px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .ben-orb{width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.4),rgba(41,151,255,0.3) 40%,rgba(191,90,242,0.2) 70%,transparent);filter:blur(8px);animation:blob 12s ease-in-out infinite}
+  .ben-orb-2{position:absolute;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,rgba(255,55,95,0.5),transparent 70%);filter:blur(6px);top:20%;right:15%;animation:blob 10s ease-in-out infinite reverse}
+
+  /* Pricing */
+  .price-grid{display:grid;gap:16px;align-items:stretch}
+  @media(min-width:768px){.price-grid{grid-template-columns:repeat(3,1fr)}}
+  .price-card{padding:32px;display:flex;flex-direction:column;transition:all .5s ease;position:relative}
+  .price-card:hover{background:var(--glass-hover);transform:translateY(-6px)}
+  .price-card.featured{border-color:var(--border-strong);background:rgba(41,151,255,0.08)}
+  .pop-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#2997FF,#BF5AF2);color:#fff;font-weight:600;font-size:12px;padding:6px 16px;border-radius:var(--r-pill);box-shadow:0 4px 16px rgba(41,151,255,0.4)}
+  .price-name{font-weight:600;font-size:18px;margin-bottom:6px}
+  .price-desc{font-size:13px;color:var(--muted);margin-bottom:24px;min-height:36px}
+  .price-amt{display:flex;align-items:flex-end;gap:4px;margin-bottom:28px}
+  .price-amt .cur{font-size:20px;font-weight:600}
+  .price-amt .val{font-size:44px;font-weight:700;line-height:1;letter-spacing:-0.03em}
+  .price-amt .per{font-size:13px;color:var(--muted);margin-bottom:5px}
+  .price-feats{list-style:none;display:grid;gap:12px;margin-bottom:28px;flex:1}
+  .price-feats li{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted)}
+  .price-feats .check{flex-shrink:0;width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#2997FF,#BF5AF2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700;margin-top:1px}
+  .price-card .btn{width:100%}
+
+  /* Testimonials */
+  .test-grid{display:grid;gap:16px}
+  @media(min-width:768px){.test-grid{grid-template-columns:repeat(3,1fr)}}
+  .test-card{padding:26px;transition:all .5s ease}
+  .test-card:hover{background:var(--glass-hover);transform:translateY(-4px)}
+  .stars{display:flex;gap:2px;margin-bottom:14px;color:#FFD60A}
+  .test-quote{font-size:14px;line-height:1.6;margin-bottom:18px;color:var(--fg)}
+  .test-user{display:flex;align-items:center;gap:10px}
+  .test-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#2997FF,#BF5AF2);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:13px}
+  .test-user .name{font-weight:600;font-size:13px}
+  .test-user .role{font-size:11px;color:var(--muted-2)}
+
+  /* FAQ */
+  .faq-wrap{max-width:760px;margin:0 auto}
+  .faq-item{margin-bottom:12px;overflow:hidden;transition:all .5s ease}
+  .faq-item[open]{background:var(--glass-hover)}
+  .faq-item summary{list-style:none;cursor:pointer;padding:20px 24px;font-weight:500;font-size:15px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-chev{flex-shrink:0;width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:var(--accent);transition:transform .4s ease}
+  .faq-item[open] .faq-chev{transform:rotate(180deg)}
+  .faq-body{padding:0 24px 20px;color:var(--muted);font-size:14px;line-height:1.6}
+
+  /* Blog */
+  .blog-grid{display:grid;gap:16px}
+  @media(min-width:768px){.blog-grid{grid-template-columns:repeat(3,1fr)}}
+  .blog-card{overflow:hidden;transition:all .5s ease;cursor:pointer}
+  .blog-card:hover{transform:translateY(-6px);background:var(--glass-hover)}
+  .blog-img{height:160px;position:relative;overflow:hidden;background:linear-gradient(135deg,#2997FF,#BF5AF2)}
+  .blog-img.b2{background:linear-gradient(135deg,#FF375F,#FF9F0A)}
+  .blog-img.b3{background:linear-gradient(135deg,#30D158,#2997FF)}
+  .blog-img .deco{position:absolute;border-radius:50%;background:rgba(255,255,255,0.2);filter:blur(4px)}
+  .blog-img.b1 .d1{width:100px;height:100px;top:-20px;right:-20px}
+  .blog-img.b2 .d1{width:80px;height:80px;bottom:-20px;left:-10px}
+  .blog-img.b3 .d1{width:90px;height:90px;top:30%;right:-20px}
+  .blog-body{padding:22px}
+  .blog-meta{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:0.05em;margin-bottom:10px}
+  .blog-card h4{font-size:17px;font-weight:600;line-height:1.3;margin-bottom:10px;letter-spacing:-0.02em}
+  .blog-card .read{font-size:13px;font-weight:500;color:var(--muted);display:inline-flex;align-items:center;gap:6px;transition:gap .3s}
+  .blog-card:hover .read{gap:12px;color:var(--fg)}
+
+  /* Final CTA */
+  .final-cta{padding:80px 0;text-align:center}
+  .final-cta-inner{padding:64px 32px;max-width:680px;margin:0 auto;position:relative;overflow:hidden}
+  .final-cta-inner::before{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(41,151,255,0.3),transparent 70%);top:-100px;left:-50px;filter:blur(40px)}
+  .final-cta-inner::after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(191,90,242,0.3),transparent 70%);bottom:-100px;right:-50px;filter:blur(40px)}
+  .final-cta h2{position:relative;font-size:clamp(30px,5vw,44px);font-weight:600;line-height:1.1;letter-spacing:-0.03em;margin-bottom:16px}
+  .final-cta p{position:relative;color:var(--muted);font-size:17px;margin-bottom:32px}
+  .final-cta .hero-cta{position:relative}
+
+  /* Footer */
+  .footer{padding:64px 0 32px;border-top:1px solid var(--border);margin-top:48px}
+  .footer-grid{display:grid;gap:40px;grid-template-columns:1fr;margin-bottom:48px}
+  @media(min-width:640px){.footer-grid{grid-template-columns:2fr 1fr 1fr}}
+  @media(min-width:1024px){.footer-grid{grid-template-columns:2fr 1fr 1fr 1fr}}
+  .footer-brand p{font-size:14px;color:var(--muted);max-width:300px;margin-top:16px}
+  .footer-col h5{font-weight:600;font-size:14px;margin-bottom:16px;color:var(--fg)}
+  .footer-col ul{list-style:none;display:grid;gap:10px}
+  .footer-col a{font-size:13px;color:var(--muted);transition:color .3s}
+  .footer-col a:hover{color:var(--fg)}
+  .footer-bottom{display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:space-between;padding-top:28px;border-top:1px solid var(--border)}
+  @media(min-width:640px){.footer-bottom{flex-direction:row}}
+  .footer-bottom small{font-size:12px;color:var(--muted-2)}
+  .footer-social{display:flex;gap:10px}
+  .footer-social a{width:34px;height:34px;border-radius:50%;background:var(--glass);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .4s}
+  .footer-social a:hover{background:var(--glass-hover);color:var(--fg);transform:translateY(-2px)}
+
+  /* utility */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+    .mesh-blob{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- Animated mesh gradient background -->
+<div class="mesh-bg" aria-hidden="true">
+  <div class="mesh-blob b1"></div>
+  <div class="mesh-blob b2 animation-delay-4000"></div>
+  <div class="mesh-blob b3 animation-delay-2000"></div>
+  <div class="mesh-blob b4 animation-delay-6000"></div>
+  <div class="mesh-blob b5"></div>
+</div>
+
+<!-- Navbar -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="brand">
+      <span class="brand-logo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
+      Aura
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#" class="btn btn-glass-dark signin">Sign in</a>
+      <a href="#pricing" class="btn btn-primary">Get started</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="container">
+    <span class="hero-eyebrow"><span class="dot"></span> VisionOS-inspired · Now in public beta</span>
+    <h1>Design that feels <span class="grad">weightless</span></h1>
+    <p class="lead">Aura is a premium, ethereal design system built on glass, light, and motion. Content-forward, exclusive, and fluid — less sci-fi, more luxury tech.</p>
+    <div class="hero-cta">
+      <a href="#pricing" class="btn btn-primary">Start free trial</a>
+      <a href="#features" class="btn btn-glass">Explore features</a>
+    </div>
+    <div class="hero-trust">
+      <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span>Loved by 8,000+ design teams</span>
+    </div>
+
+    <!-- Hero glass showcase -->
+    <div class="hero-showcase">
+      <div class="glass glass-outer show-main reveal">
+        <div class="top">
+          <span class="tag">LIVE OVERVIEW</span>
+          <div class="dots"><i></i><i></i><i></i></div>
+        </div>
+        <h3>Real-time workspace analytics</h3>
+        <div class="stats-row">
+          <div class="stat-mini"><div class="n">$128k</div><div class="l">Revenue</div></div>
+          <div class="stat-mini"><div class="n">+34%</div><div class="l">Growth</div></div>
+          <div class="stat-mini"><div class="n">2.4k</div><div class="l">Active users</div></div>
+        </div>
+      </div>
+      <div class="show-side">
+        <div class="glass show-card reveal">
+          <div class="ico" style="color:#2997FF"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <div><div class="label">Latency</div><div class="val">12ms</div></div>
+        </div>
+        <div class="glass show-card reveal">
+          <div class="ico" style="color:#BF5AF2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div><div class="label">Uptime</div><div class="val">99.99%</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Stats -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="glass stat reveal"><div class="num">8,000+</div><div class="lbl">Design teams</div></div>
+      <div class="glass stat reveal"><div class="num">1.2M</div><div class="lbl">Glass components</div></div>
+      <div class="glass stat reveal"><div class="num">99.99%</div><div class="lbl">Uptime SLA</div></div>
+      <div class="glass stat reveal"><div class="num">4.9/5</div><div class="lbl">Avg. rating</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Product Detail -->
+<section class="section" id="product">
+  <div class="container product">
+    <div class="product-text reveal">
+      <span class="section-eyebrow">Product</span>
+      <h2>One surface for everything</h2>
+      <p>Aura brings dashboards, analytics, and collaboration into a single translucent surface. The mesh bleeds through the glass, creating depth without clutter.</p>
+      <ul class="product-list">
+        <li><span class="check">&#10003;</span> Premium 50px backdrop blur with 180% saturation</li>
+        <li><span class="check">&#10003;</span> Constrained layouts that make content feel precious</li>
+        <li><span class="check">&#10003;</span> Animated mesh gradients as the primary color source</li>
+      </ul>
+      <a href="#features" class="btn btn-glass">Learn more</a>
+    </div>
+    <div class="glass glass-outer product-visual reveal">
+      <div class="pv-head">
+        <div class="pv-title">Performance · Last 7 days</div>
+        <span class="pv-tag">LIVE</span>
+      </div>
+      <div class="pv-bars">
+        <div class="bar" style="height:45%"></div>
+        <div class="bar" style="height:70%"></div>
+        <div class="bar" style="height:55%"></div>
+        <div class="bar" style="height:88%"></div>
+        <div class="bar" style="height:62%"></div>
+        <div class="bar" style="height:95%"></div>
+        <div class="bar" style="height:78%"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Bento -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Features</span>
+      <h2 class="section-title">A bento of capabilities</h2>
+      <p class="section-sub">Strict, rounded grid layouts make every feature feel intentional and curated.</p>
+    </div>
+    <div class="bento">
+      <div class="glass bento-card large reveal">
+        <div>
+          <div class="bento-icon" style="color:#2997FF"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+          <h3>Dynamic mesh backgrounds</h3>
+          <p>The background is the main source of color. Animated blobs of blue, purple, pink, and orange bleed through the glass, creating an ever-shifting atmosphere that feels alive.</p>
+        </div>
+        <div class="bento-visual"><div class="bento-orb"></div></div>
+      </div>
+      <div class="glass bento-card reveal">
+        <div class="bento-icon" style="color:#BF5AF2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <h3>Bento grids</h3>
+        <p>Strict rounded grids for feature layouts.</p>
+      </div>
+      <div class="glass bento-card reveal">
+        <div class="bento-icon" style="color:#FF375F"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h3>Premium blur</h3>
+        <p>50px blur, 180% saturation — luxury tech.</p>
+      </div>
+      <div class="glass bento-card wide reveal">
+        <div>
+          <div class="bento-icon" style="color:#FF9F0A"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg></div>
+          <h3>Live analytics</h3>
+          <p>Beautiful bars and stats that update in real time.</p>
+        </div>
+        <div class="bento-bars">
+          <div class="b" style="height:40%"></div>
+          <div class="b" style="height:65%"></div>
+          <div class="b" style="height:50%"></div>
+          <div class="b" style="height:80%"></div>
+          <div class="b" style="height:60%"></div>
+          <div class="b" style="height:95%"></div>
+        </div>
+      </div>
+      <div class="glass bento-card reveal">
+        <div class="bento-icon" style="color:#30D158"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+        <h3>Modular cards</h3>
+        <p>Compose platters freely.</p>
+        <div class="bento-grid-vis"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="section" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">How it works</span>
+      <h2 class="section-title">Three steps to ethereal</h2>
+      <p class="section-sub">From blank canvas to a weightless interface.</p>
+    </div>
+    <div class="steps">
+      <div class="glass step reveal">
+        <div class="step-num">1</div>
+        <h4>Layer the mesh</h4>
+        <p>Drop in animated gradient blobs behind a black canvas. Color comes from the background.</p>
+      </div>
+      <div class="glass step reveal">
+        <div class="step-num">2</div>
+        <h4>Add the glass</h4>
+        <p>Apply 50px blur and 180% saturation to translucent cards. Let the mesh bleed through.</p>
+      </div>
+      <div class="glass step reveal">
+        <div class="step-num">3</div>
+        <h4>Constrain and ship</h4>
+        <p>Use tight max-widths to make content feel precious. Add slow, smooth transitions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits -->
+<section class="section" id="benefits">
+  <div class="container benefits">
+    <div class="glass glass-outer ben-checklist reveal">
+      <span class="section-eyebrow">Benefits</span>
+      <h3>Why teams choose glass</h3>
+      <ul>
+        <li><span class="check">&#10003;</span> Premium, exclusive aesthetic that elevates any product</li>
+        <li><span class="check">&#10003;</span> Content-forward — the mesh provides mood, glass provides focus</li>
+        <li><span class="check">&#10003;</span> Constrained layouts reduce cognitive load</li>
+        <li><span class="check">&#10003;</span> Smooth, slow transitions feel luxurious, never jarring</li>
+        <li><span class="check">&#10003;</span> Works beautifully in dark mode by default</li>
+      </ul>
+    </div>
+    <div class="glass glass-outer ben-visual reveal">
+      <div class="ben-orb"></div>
+      <div class="ben-orb-2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Pricing</span>
+      <h2 class="section-title">Pricing as refined as the glass</h2>
+      <p class="section-sub">Start free. Upgrade when you need more depth.</p>
+    </div>
+    <div class="price-grid">
+      <div class="glass price-card reveal">
+        <div class="price-name">Starter</div>
+        <div class="price-desc">For individuals exploring glass design.</div>
+        <div class="price-amt"><span class="cur">$</span><span class="val">0</span><span class="per">/mo</span></div>
+        <ul class="price-feats">
+          <li><span class="check">&#10003;</span> 3 projects</li>
+          <li><span class="check">&#10003;</span> Basic glass components</li>
+          <li><span class="check">&#10003;</span> Community support</li>
+        </ul>
+        <a href="#" class="btn btn-glass-dark">Get started</a>
+      </div>
+      <div class="glass price-card featured reveal">
+        <span class="pop-badge">MOST POPULAR</span>
+        <div class="price-name">Pro</div>
+        <div class="price-desc">For teams building premium products.</div>
+        <div class="price-amt"><span class="cur">$</span><span class="val">39</span><span class="per">/mo</span></div>
+        <ul class="price-feats">
+          <li><span class="check">&#10003;</span> Unlimited projects</li>
+          <li><span class="check">&#10003;</span> Full component library</li>
+          <li><span class="check">&#10003;</span> Animated mesh backgrounds</li>
+          <li><span class="check">&#10003;</span> Priority support</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Start free trial</a>
+      </div>
+      <div class="glass price-card reveal">
+        <div class="price-name">Studio</div>
+        <div class="price-desc">For agencies and large teams.</div>
+        <div class="price-amt"><span class="cur">$</span><span class="val">89</span><span class="per">/mo</span></div>
+        <ul class="price-feats">
+          <li><span class="check">&#10003;</span> Everything in Pro</li>
+          <li><span class="check">&#10003;</span> Custom mesh themes</li>
+          <li><span class="check">&#10003;</span> Dedicated manager</li>
+          <li><span class="check">&#10003;</span> SSO & SAML</li>
+        </ul>
+        <a href="#" class="btn btn-glass-dark">Contact sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section" id="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Testimonials</span>
+      <h2 class="section-title">Trusted by premium teams</h2>
+      <p class="section-sub">What designers say when they go ethereal.</p>
+    </div>
+    <div class="test-grid">
+      <div class="glass test-card reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="test-quote">"Aura made our product feel like a luxury object. The mesh bleeding through the glass is genuinely mesmerizing."</p>
+        <div class="test-user"><div class="test-avatar">EW</div><div><div class="name">Elena Wright</div><div class="role">Design Director, Lumen</div></div></div>
+      </div>
+      <div class="glass test-card reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="test-quote">"The constrained layouts forced us to be editorial. Our conversion went up because we said less, better."</p>
+        <div class="test-user"><div class="test-avatar" style="background:linear-gradient(135deg,#BF5AF2,#FF375F)">KM</div><div><div class="name">Kai Mori</div><div class="role">Founder, Halcyon</div></div></div>
+      </div>
+      <div class="glass test-card reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="test-quote">"Finally a dark-mode-first system that doesn't feel like a developer made it. It feels designed."</p>
+        <div class="test-user"><div class="test-avatar" style="background:linear-gradient(135deg,#FF9F0A,#FF375F)">SA</div><div><div class="name">Sofia Alvarez</div><div class="role">Head of Design, Nebula</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog -->
+<section class="section" id="blog">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Journal</span>
+      <h2 class="section-title">Notes on glass</h2>
+      <p class="section-sub">Essays on ethereal, premium interface design.</p>
+    </div>
+    <div class="blog-grid">
+      <article class="glass blog-card reveal">
+        <div class="blog-img b1"><div class="deco d1"></div></div>
+        <div class="blog-body">
+          <div class="blog-meta">Guide · 5 min</div>
+          <h4>The art of backdrop blur</h4>
+          <span class="read">Read article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </article>
+      <article class="glass blog-card reveal">
+        <div class="blog-img b2"><div class="deco d1"></div></div>
+        <div class="blog-body">
+          <div class="blog-meta" style="color:#FF375F">Essay · 4 min</div>
+          <h4>Why constraints create luxury</h4>
+          <span class="read">Read article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </article>
+      <article class="glass blog-card reveal">
+        <div class="blog-img b3"><div class="deco d1"></div></div>
+        <div class="blog-body">
+          <div class="blog-meta" style="color:#30D158">Field note · 3 min</div>
+          <h4>Mesh gradients done right</h4>
+          <span class="read">Read article <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">FAQ</span>
+      <h2 class="section-title">Frequently asked</h2>
+      <p class="section-sub">Everything you need to know about going ethereal.</p>
+    </div>
+    <div class="faq-wrap">
+      <details class="glass faq-item reveal" open>
+        <summary>Does glassmorphism hurt performance?<span class="faq-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+        <div class="faq-body">Modern browsers handle backdrop-filter efficiently with GPU acceleration. We recommend limiting blur to above-the-fold glass elements and using simpler backgrounds deeper in the page. Aura is optimized for 60fps on mid-range hardware.</div>
+      </details>
+      <details class="glass faq-item reveal">
+        <summary>Is it accessible?<span class="faq-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+        <div class="faq-body">Yes, when done carefully. We ensure sufficient contrast for text on glass by using off-white (#F5F5F7) on dark mesh backgrounds. All interactive elements have visible focus rings. The mesh is decorative and hidden from screen readers.</div>
+      </details>
+      <details class="glass faq-item reveal">
+        <summary>Can I customize the mesh colors?<span class="faq-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+        <div class="faq-body">Absolutely. The mesh is built from five independently animated blobs. You can change their colors, sizes, positions, and animation delays. Studio plan includes a visual mesh theme builder.</div>
+      </details>
+      <details class="glass faq-item reveal">
+        <summary>Does it work in light mode?<span class="faq-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+        <div class="faq-body">Aura is dark-mode-first by design — the mesh glows most beautifully against black. A light variant is possible by using darker mesh blobs and lighter glass tints, but we recommend embracing the dark canvas.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+  <div class="container">
+    <div class="glass glass-outer final-cta-inner reveal">
+      <h2>Ready to go ethereal?</h2>
+      <p>Join 8,000+ teams building weightless, premium interfaces with Aura.</p>
+      <div class="hero-cta">
+        <a href="#pricing" class="btn btn-primary">Start free trial</a>
+        <a href="#" class="btn btn-glass">Talk to us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="brand">
+          <span class="brand-logo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
+          Aura
+        </a>
+        <p>The premium, ethereal design system for teams building luxury tech.</p>
+      </div>
+      <div class="footer-col"><h5>Product</h5><ul><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#how">How it works</a></li><li><a href="#">Changelog</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#blog">Blog</a></li></ul></div>
+      <div class="footer-col"><h5>Resources</h5><ul><li><a href="#">Docs</a></li><li><a href="#faq">FAQ</a></li><li><a href="#">Status</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <small>&copy; 2026 Aura Design Systems. Crafted in the dark.</small>
+      <div class="footer-social">
+        <a href="#" aria-label="Twitter"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="#" aria-label="GitHub"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        <a href="#" aria-label="Dribbble"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm9.568 5.302c1.4 1.498 2.252 3.504 2.332 5.71-.34-.07-3.76-.764-7.204-.332-.078-.18-.15-.36-.233-.542-.21-.496-.44-.99-.686-1.47 3.842-1.566 5.59-3.815 5.79-4.366zM12 1.555c2.61 0 4.998.98 6.81 2.59-.168.24-1.74 2.346-5.45 3.746-1.7-3.118-3.582-5.672-3.872-6.068.8-.176 1.632-.268 2.512-.268zM7.4 2.61c.276.378 2.124 2.94 3.846 5.99-4.846 1.29-9.118 1.27-9.586 1.266.674-3.214 2.85-5.876 5.74-7.256zM1.42 12.004c0-.106.002-.21.006-.316.454.01 5.466.07 10.648-1.466.296.578.578 1.166.838 1.756-.135.04-.27.08-.402.122-5.364 1.732-8.22 6.464-8.46 6.856-1.628-1.812-2.63-4.196-2.63-6.952zM12 22.446c-2.496 0-4.79-.838-6.626-2.246.186-.386 2.296-4.45 8.156-6.486l.07-.022c1.466 3.806 2.066 6.996 2.22 7.91-1.144.49-2.396.844-3.82.844zm5.296-1.704c-.106-.626-.66-3.686-2.014-7.44 3.246-.518 6.086.33 6.44.444-.446 2.794-2.052 5.2-4.426 6.996z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:0.1});
+  reveals.forEach(el=>io.observe(el));
+
+  const faqs = document.querySelectorAll('.faq-item');
+  faqs.forEach(item=>{
+    item.addEventListener('toggle',()=>{ if(item.open){ faqs.forEach(o=>{ if(o!==item) o.open=false; }); } });
+  });
+
+  // Subtle parallax on mesh blobs based on scroll
+  const blobs = document.querySelectorAll('.mesh-blob');
+  let ticking = false;
+  window.addEventListener('scroll',()=>{
+    if(!ticking){
+      requestAnimationFrame(()=>{
+        const y = window.scrollY;
+        blobs.forEach((b,i)=>{ b.style.translate = `0 ${y * (0.03 + i*0.01)}px`; });
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+</script>
+</body>
+</html>

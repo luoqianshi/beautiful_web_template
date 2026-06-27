@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Industrial — Tactile Precision Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --chassis:#e0e5ec;
+    --panel:#f0f2f5;
+    --recessed:#d1d9e6;
+    --text:#2d3436;
+    --text-muted:#4a5568;
+    --accent:#ff4757;
+    --accent-d:#e02f3f;
+    --shadow-dark:#babecc;
+    --shadow-light:#ffffff;
+    --shadow-deep:#a3b1c6;
+    --dark-panel:#2d3436;
+    --dark-panel-2:#2c3e50;
+    --dark-text-light:#e0e5ec;
+    --green:#22c55e;
+    /* neumorphic shadows */
+    --sh-card:8px 8px 16px #babecc, -8px -8px 16px #ffffff;
+    --sh-floating:12px 12px 24px #babecc, -12px -12px 24px #ffffff;
+    --sh-pressed:inset 6px 6px 12px #babecc, inset -6px -6px 12px #ffffff;
+    --sh-recessed:inset 4px 4px 8px #babecc, inset -4px -4px 8px #ffffff;
+    --sh-glow-red:0 0 10px 2px rgba(255,71,87,0.6);
+    --sh-glow-green:0 0 10px 2px rgba(34,197,94,0.6);
+    --sh-accent:4px 4px 8px rgba(166,50,60,0.4), -4px -4px 8px rgba(255,100,110,0.4);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--chassis);
+    color:var(--text);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    /* subtle noise texture simulating matte plastic */
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.04 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  a{text-decoration:none;color:inherit}
+  .mono{font-family:'JetBrains Mono',monospace}
+  .container{max-width:1152px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+  @media(min-width:768px){.container{padding:0 48px}}
+
+  /* Buttons — physical keys */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:'Inter',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;
+    padding:16px 28px;border-radius:12px;cursor:pointer;border:none;
+    transition:all 150ms cubic-bezier(0.175,0.885,0.32,1.275);white-space:nowrap;line-height:1;
+  }
+  .btn-primary{
+    background:var(--accent);color:#fff;
+    box-shadow:var(--sh-accent);
+    border:1px solid rgba(255,255,255,0.2);
+  }
+  .btn-primary:hover{filter:brightness(1.08)}
+  .btn-primary:active{transform:translateY(2px);box-shadow:var(--sh-pressed)}
+  .btn-secondary{
+    background:var(--chassis);color:var(--text);box-shadow:var(--sh-card);
+  }
+  .btn-secondary:hover{color:var(--accent)}
+  .btn-secondary:active{transform:translateY(2px);box-shadow:var(--sh-pressed)}
+  .btn:focus-visible{outline:none;box-shadow:var(--sh-card),0 0 0 3px var(--accent)}
+
+  /* Navbar */
+  .nav{position:sticky;top:0;z-index:50;background:var(--chassis);border-bottom:1px solid var(--shadow-deep);padding:14px 0}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:19px;letter-spacing:-0.02em}
+  .brand-logo{
+    width:40px;height:40px;border-radius:10px;background:var(--chassis);
+    box-shadow:var(--sh-card);display:flex;align-items:center;justify-content:center;color:var(--accent);
+    position:relative;
+  }
+  .brand-logo::after{content:"";position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:var(--sh-glow-green)}
+  .nav-links{display:none;align-items:center;gap:28px}
+  .nav-links a{font-weight:500;font-size:14px;color:var(--text-muted);transition:color .2s}
+  .nav-links a:hover{color:var(--accent)}
+  .nav-cta{display:flex;align-items:center;gap:12px}
+  .nav-status{display:none;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em}
+  .nav-status .led{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:var(--sh-glow-green);animation:ledpulse 2s ease-in-out infinite}
+  @keyframes ledpulse{0%,100%{opacity:1}50%{opacity:0.5}}
+  @media(min-width:1024px){.nav-links{display:flex}.nav-cta .signin{display:inline-flex}.nav-status{display:flex}}
+
+  /* Hero — asymmetric split with device visualization */
+  .hero{padding:64px 0 80px;position:relative}
+  @media(min-width:1024px){.hero{padding:80px 0 96px}}
+  .hero-grid{display:grid;gap:48px;align-items:center}
+  @media(min-width:1024px){.hero-grid{grid-template-columns:1.2fr 1fr;gap:64px}}
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border-radius:8px;
+    background:var(--chassis);box-shadow:var(--sh-recessed);
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--text-muted);
+    text-transform:uppercase;letter-spacing:0.1em;margin-bottom:28px;
+  }
+  .hero-eyebrow .led{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:var(--sh-glow-red);animation:ledpulse 2s ease-in-out infinite}
+  .hero h1{
+    font-size:clamp(34px,5.5vw,68px);font-weight:800;line-height:1.05;letter-spacing:-0.03em;margin-bottom:24px;
+    filter:drop-shadow(0 1px 0 #fff);
+  }
+  .hero h1 .accent{color:var(--accent)}
+  .hero p.lead{font-size:clamp(16px,2vw,19px);color:var(--text-muted);max-width:520px;margin-bottom:32px;line-height:1.7}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:36px}
+  .hero-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:480px}
+  .hero-spec{padding:14px;border-radius:10px;background:var(--chassis);box-shadow:var(--sh-recessed);text-align:center}
+  .hero-spec .num{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--text)}
+  .hero-spec .lbl{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:2px}
+
+  /* Hero Device — CSS 3D device mockup */
+  .device{
+    position:relative;border-radius:24px;padding:20px;
+    background:var(--dark-panel);
+    box-shadow:var(--sh-floating), inset 0 1px 0 rgba(255,255,255,0.1);
+    border:2px solid #1a1f20;
+  }
+  /* carbon fiber texture overlay */
+  .device::before{
+    content:"";position:absolute;inset:0;border-radius:22px;pointer-events:none;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 4px),
+      repeating-linear-gradient(-45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 4px);
+    opacity:0.6;
+  }
+  .device-screen{
+    position:relative;border-radius:14px;background:#0a0e0f;overflow:hidden;
+    box-shadow:inset 0 0 0 2px #1a1f20, inset 4px 4px 12px rgba(0,0,0,0.6);
+    padding:20px;color:var(--dark-text-light);min-height:280px;
+  }
+  /* CRT scanlines */
+  .device-screen::before{
+    content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+    background:linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.25) 50%);
+    background-size:100% 4px;opacity:0.4;
+  }
+  .device-screen::after{
+    content:"";position:absolute;inset:0;pointer-events:none;z-index:3;
+    background:radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.4) 100%);
+  }
+  .ds-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;position:relative;z-index:1}
+  .ds-title{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.1em;color:var(--accent)}
+  .ds-led{display:flex;gap:6px;align-items:center}
+  .ds-led .l{width:8px;height:8px;border-radius:50%}
+  .ds-led .l.on{background:var(--green);box-shadow:var(--sh-glow-green);animation:ledpulse 2s ease-in-out infinite}
+  .ds-led .l.warn{background:#f59e0b;box-shadow:0 0 8px rgba(245,158,11,0.6)}
+  .ds-led .lbl{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:0.1em}
+  .ds-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:relative;z-index:1;margin-bottom:14px}
+  .ds-cell{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px}
+  .ds-cell .k{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.5);letter-spacing:0.1em;text-transform:uppercase}
+  .ds-cell .v{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:#fff;margin-top:4px}
+  .ds-cell .v.green{color:var(--green)}
+  .ds-cell .v.red{color:var(--accent)}
+  .ds-bar{height:8px;border-radius:4px;background:rgba(255,255,255,0.08);overflow:hidden;margin-bottom:8px;position:relative;z-index:1}
+  .ds-bar span{display:block;height:100%;background:linear-gradient(90deg,var(--green),#16a34a);border-radius:4px}
+  .ds-bar.b2 span{background:linear-gradient(90deg,var(--accent),#dc2626);width:64%}
+  .ds-bar.b1 span{width:78%}
+  /* physical side buttons */
+  .device-btn{position:absolute;background:var(--dark-panel);border-radius:4px 2px 2px 4px;box-shadow:-2px 2px 4px rgba(0,0,0,0.4), inset 1px 0 0 rgba(255,255,255,0.1)}
+  .device-btn.b1{right:-6px;top:30%;width:6px;height:36px}
+  .device-btn.b2{right:-6px;top:46%;width:6px;height:24px}
+  .device-btn.b3{left:-6px;top:40%;width:6px;height:48px;border-radius:2px 4px 4px 2px;box-shadow:2px 2px 4px rgba(0,0,0,0.4), inset -1px 0 0 rgba(255,255,255,0.1)}
+  .device-power{position:absolute;top:14px;right:14px;display:flex;align-items:center;gap:6px;z-index:5}
+  .device-power .led{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:var(--sh-glow-red);animation:ledpulse 2s ease-in-out infinite}
+  .device-power .lbl{font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.6);letter-spacing:0.1em}
+
+  /* Stats — LED readout strip */
+  .stats{padding:0 0 64px}
+  .stats-strip{
+    background:var(--dark-panel);border-radius:20px;padding:36px 32px;
+    box-shadow:var(--sh-floating), inset 0 2px 4px rgba(0,0,0,0.3);
+    border:1px solid #1a1f20;position:relative;overflow:hidden;
+  }
+  .stats-strip::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse at top left, rgba(255,255,255,0.04), transparent 60%);
+  }
+  .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;position:relative}
+  @media(min-width:768px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+  .stat{padding:12px 0;border-right:1px solid rgba(255,255,255,0.08)}
+  .stat:last-child{border-right:none}
+  @media(max-width:767px){.stat:nth-child(2){border-right:none}}
+  .stat .num{font-family:'JetBrains Mono',monospace;font-size:clamp(28px,4vw,40px);font-weight:700;line-height:1;letter-spacing:-0.02em;color:#fff;text-shadow:0 0 12px rgba(41,151,255,0.4)}
+  .stat:nth-child(1) .num{color:#22c55e;text-shadow:0 0 12px rgba(34,197,94,0.5)}
+  .stat:nth-child(2) .num{color:#2997ff;text-shadow:0 0 12px rgba(41,151,255,0.5)}
+  .stat:nth-child(3) .num{color:#f59e0b;text-shadow:0 0 12px rgba(245,158,11,0.5)}
+  .stat:nth-child(4) .num{color:var(--accent);text-shadow:0 0 12px rgba(255,71,87,0.5)}
+  .stat .lbl{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.15em;margin-top:10px}
+
+  section{position:relative}
+  .section{padding:80px 0}
+  @media(min-width:768px){.section{padding:96px 0}}
+  .section-head{text-align:center;max-width:680px;margin:0 auto 56px}
+  .section-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:16px;padding:6px 14px;border-radius:6px;background:var(--chassis);box-shadow:var(--sh-recessed)}
+  .section-title{font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px;filter:drop-shadow(0 1px 0 #fff)}
+  .section-sub{font-size:16px;color:var(--text-muted)}
+
+  /* Features — ventilated hardware modules */
+  .feat-grid{display:grid;gap:24px}
+  @media(min-width:768px){.feat-grid{grid-template-columns:repeat(3,1fr)}}
+  .feat-card{
+    background:var(--chassis);border-radius:16px;padding:32px;box-shadow:var(--sh-card);
+    transition:all 300ms cubic-bezier(0.175,0.885,0.32,1.275);position:relative;
+    /* corner screws */
+    background-image:
+      radial-gradient(circle at 16px 16px, rgba(0,0,0,0.18) 1.5px, transparent 2.5px),
+      radial-gradient(circle at calc(100% - 16px) 16px, rgba(0,0,0,0.18) 1.5px, transparent 2.5px),
+      radial-gradient(circle at 16px calc(100% - 16px), rgba(0,0,0,0.18) 1.5px, transparent 2.5px),
+      radial-gradient(circle at calc(100% - 16px) calc(100% - 16px), rgba(0,0,0,0.18) 1.5px, transparent 2.5px);
+  }
+  .feat-card:hover{transform:translateY(-4px);box-shadow:var(--sh-floating)}
+  .feat-vents{position:absolute;top:18px;right:32px;display:flex;gap:4px}
+  .feat-vents i{width:2px;height:22px;border-radius:2px;background:var(--recessed);box-shadow:inset 1px 1px 2px rgba(0,0,0,0.15);display:block}
+  .feat-icon{
+    width:60px;height:60px;border-radius:50%;background:var(--chassis);box-shadow:var(--sh-floating);
+    display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:22px;
+    transition:transform 200ms cubic-bezier(0.175,0.885,0.32,1.275);
+  }
+  .feat-card:hover .feat-icon{transform:scale(1.1) rotate(12deg)}
+  .feat-card h3{font-size:20px;font-weight:700;margin-bottom:10px;letter-spacing:-0.01em}
+  .feat-card p{font-size:14px;color:var(--text-muted);line-height:1.6}
+  .feat-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:16px;padding:4px 8px;border-radius:4px;background:var(--recessed);box-shadow:var(--sh-recessed)}
+
+  /* How it works — neumorphic steps + pipe */
+  .how{padding:80px 0}
+  .steps{display:grid;gap:32px;position:relative}
+  @media(min-width:768px){.steps{grid-template-columns:repeat(3,1fr)}}
+  .pipe{position:absolute;top:36px;left:16%;right:16%;height:12px;border-radius:6px;background:var(--recessed);box-shadow:inset 0 1px 3px rgba(0,0,0,0.2);z-index:0}
+  @media(max-width:767px){.pipe{display:none}}
+  .step{text-align:center;position:relative;z-index:1}
+  .step-circle{
+    width:72px;height:72px;border-radius:50%;background:var(--chassis);box-shadow:var(--sh-floating);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 22px;
+    font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;color:var(--accent);
+    transition:transform 200ms cubic-bezier(0.175,0.885,0.32,1.275);
+  }
+  .step:hover .step-circle{transform:scale(1.08)}
+  .step h4{font-size:19px;font-weight:700;margin-bottom:8px}
+  .step p{color:var(--text-muted);font-size:14px;max-width:260px;margin:0 auto}
+
+  /* Benefits — control board with radar */
+  .benefits{padding:80px 0}
+  .ben-panel{display:grid;gap:0;background:var(--dark-panel);border-radius:24px;overflow:hidden;box-shadow:var(--sh-floating);border:1px solid #1a1f20}
+  @media(min-width:768px){.ben-panel{grid-template-columns:1fr 1fr}}
+  .ben-left{padding:40px;color:var(--dark-text-light)}
+  @media(min-width:768px){.ben-left{padding:48px}}
+  .ben-left h3{font-size:24px;font-weight:700;margin-bottom:16px;letter-spacing:-0.02em}
+  .ben-left p{font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:24px}
+  .ben-toggles{display:grid;gap:14px}
+  .ben-toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;background:rgba(255,255,255,0.04);border-radius:10px;border:1px solid rgba(255,255,255,0.06)}
+  .ben-toggle .label{font-size:14px;font-weight:500}
+  .ben-toggle .label small{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:0.1em;margin-top:2px}
+  .switch{width:44px;height:24px;border-radius:12px;background:rgba(255,255,255,0.1);position:relative;cursor:pointer;transition:all 200ms;flex-shrink:0;border:1px solid rgba(255,255,255,0.1)}
+  .switch::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,0.3);transition:all 200ms cubic-bezier(0.175,0.885,0.32,1.275)}
+  .switch.on{background:var(--accent);box-shadow:var(--sh-glow-red)}
+  .switch.on::after{left:22px}
+  .ben-right{padding:40px;display:flex;align-items:center;justify-content:center;min-height:280px;position:relative;background:radial-gradient(circle at center, rgba(34,197,94,0.05), transparent 70%)}
+  @media(min-width:768px){.ben-right{padding:48px}}
+  /* radar screen */
+  .radar{width:240px;height:240px;border-radius:50%;background:radial-gradient(circle, rgba(34,197,94,0.08), rgba(0,0,0,0.4));border:2px solid rgba(34,197,94,0.3);position:relative;box-shadow:inset 0 0 40px rgba(34,197,94,0.15), 0 0 20px rgba(34,197,94,0.2)}
+  .radar::before{content:"";position:absolute;inset:20%;border-radius:50%;border:1px solid rgba(34,197,94,0.2)}
+  .radar::after{content:"";position:absolute;inset:40%;border-radius:50%;border:1px solid rgba(34,197,94,0.2)}
+  .radar-cross{position:absolute;inset:0}
+  .radar-cross::before,.radar-cross::after{content:"";position:absolute;background:rgba(34,197,94,0.2)}
+  .radar-cross::before{left:50%;top:0;bottom:0;width:1px;transform:translateX(-50%)}
+  .radar-cross::after{top:50%;left:0;right:0;height:1px;transform:translateY(-50%)}
+  .radar-sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg, rgba(34,197,94,0.4), transparent 60deg);animation:spin 4s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .radar-blip{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:var(--sh-glow-red);animation:ledpulse 2s ease-in-out infinite}
+  .radar-blip.b1{top:30%;left:60%}
+  .radar-blip.b2{top:55%;left:35%;background:var(--green);box-shadow:var(--sh-glow-green);animation-delay:0.5s}
+  .radar-blip.b3{top:70%;left:65%;background:#f59e0b;box-shadow:0 0 8px rgba(245,158,11,0.6);animation-delay:1s}
+
+  /* Pricing — metal dog tags */
+  .price-grid{display:grid;gap:24px;align-items:stretch}
+  @media(min-width:768px){.price-grid{grid-template-columns:repeat(3,1fr)}}
+  .price-card{
+    background:var(--panel);border-radius:16px;padding:36px 28px 28px;box-shadow:var(--sh-card);
+    transition:all 300ms cubic-bezier(0.175,0.885,0.32,1.275);position:relative;display:flex;flex-direction:column;
+  }
+  .price-card:hover{transform:translateY(-6px);box-shadow:var(--sh-floating)}
+  .price-card.featured{box-shadow:var(--sh-floating), 0 0 0 3px var(--accent)}
+  /* hanging hole */
+  .price-card::before{
+    content:"";position:absolute;top:16px;left:50%;transform:translateX(-50%);
+    width:18px;height:18px;border-radius:50%;background:var(--recessed);box-shadow:inset 2px 2px 4px rgba(0,0,0,0.3), inset -1px -1px 2px rgba(255,255,255,0.5);
+  }
+  .pop-badge{position:absolute;top:48px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:10px;padding:5px 12px;border-radius:4px;letter-spacing:0.1em;box-shadow:var(--sh-glow-red)}
+  .price-name{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.15em;margin-top:36px;margin-bottom:6px;text-align:center}
+  .price-desc{font-size:13px;color:var(--text-muted);margin-bottom:24px;text-align:center;min-height:36px}
+  .price-amt{display:flex;align-items:flex-end;justify-content:center;gap:4px;margin-bottom:28px}
+  .price-amt .cur{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700}
+  .price-amt .val{font-family:'JetBrains Mono',monospace;font-size:48px;font-weight:700;line-height:1;letter-spacing:-0.02em}
+  .price-amt .per{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-muted);margin-bottom:6px}
+  .price-feats{list-style:none;display:grid;gap:12px;margin-bottom:28px;flex:1}
+  .price-feats li{display:flex;gap:10px;align-items:center;font-size:14px}
+  .price-feats .check{flex-shrink:0;width:22px;height:22px;border-radius:6px;background:var(--chassis);box-shadow:var(--sh-recessed);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+  .price-card .btn{width:100%}
+
+  /* Testimonials — pinned notes */
+  .test-grid{display:grid;gap:24px}
+  @media(min-width:768px){.test-grid{grid-template-columns:repeat(3,1fr)}}
+  .test-card{
+    background:#fdfbf7;border-radius:4px;padding:32px 24px 24px;box-shadow:4px 6px 16px rgba(0,0,0,0.12);
+    transition:transform 300ms cubic-bezier(0.175,0.885,0.32,1.275);position:relative;
+    transform:rotate(-1deg);
+  }
+  .test-card:nth-child(2){transform:rotate(1deg)}
+  .test-card:nth-child(3){transform:rotate(-0.5deg)}
+  .test-card:hover{transform:rotate(0) translateY(-4px)}
+  /* push pin */
+  .test-card::before{
+    content:"";position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+    width:20px;height:20px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, #ff6b78, var(--accent) 60%, #c0253a);
+    box-shadow:0 4px 8px rgba(0,0,0,0.3), inset -2px -2px 4px rgba(0,0,0,0.2);
+  }
+  .test-card::after{
+    content:"";position:absolute;top:6px;left:50%;transform:translateX(-50%);
+    width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,0.2);
+  }
+  .test-quote{font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.6;margin-bottom:20px;color:var(--text);font-style:italic}
+  .test-user{display:flex;align-items:center;gap:12px}
+  .test-avatar{width:44px;height:44px;border-radius:50%;background:var(--recessed);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-weight:700;font-size:15px;filter:grayscale(1)}
+  .test-user .name{font-weight:700;font-size:14px}
+  .test-user .role{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em}
+
+  /* Blog — field log cards */
+  .blog-grid{display:grid;gap:24px}
+  @media(min-width:768px){.blog-grid{grid-template-columns:repeat(3,1fr)}}
+  .blog-card{background:var(--chassis);border-radius:16px;overflow:hidden;box-shadow:var(--sh-card);transition:all 300ms cubic-bezier(0.175,0.885,0.32,1.275);cursor:pointer;position:relative}
+  .blog-card:hover{transform:translateY(-4px);box-shadow:var(--sh-floating)}
+  .blog-img{height:160px;background:var(--dark-panel);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .blog-img .glyph{font-family:'JetBrains Mono',monospace;font-size:48px;font-weight:700;color:rgba(255,255,255,0.15);letter-spacing:-0.05em;filter:grayscale(1);transition:all 500ms}
+  .blog-card:hover .blog-img .glyph{color:var(--accent);filter:grayscale(0)}
+  .blog-img .label{position:absolute;top:12px;left:12px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#fff;background:rgba(0,0,0,0.4);padding:4px 8px;border-radius:4px;letter-spacing:0.1em;text-transform:uppercase;backdrop-filter:blur(4px)}
+  .blog-body{padding:24px}
+  .blog-meta{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px}
+  .blog-card h4{font-size:17px;font-weight:700;line-height:1.3;margin-bottom:10px;letter-spacing:-0.01em}
+  .blog-card .read{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;display:inline-flex;align-items:center;gap:6px;transition:gap .2s,color .2s}
+  .blog-card:hover .read{gap:12px;color:var(--accent)}
+
+  /* FAQ — neumorphic drawers */
+  .faq-wrap{max-width:760px;margin:0 auto}
+  .faq-item{background:var(--chassis);border-radius:12px;box-shadow:var(--sh-card);margin-bottom:14px;overflow:hidden;transition:all 300ms cubic-bezier(0.175,0.885,0.32,1.275)}
+  .faq-item[open]{box-shadow:var(--sh-floating)}
+  .faq-item summary{list-style:none;cursor:pointer;padding:20px 24px;font-weight:600;font-size:15px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-chev{flex-shrink:0;width:32px;height:32px;border-radius:8px;background:var(--chassis);box-shadow:var(--sh-recessed);display:flex;align-items:center;justify-content:center;color:var(--accent);transition:all 200ms cubic-bezier(0.175,0.885,0.32,1.275)}
+  .faq-item[open] .faq-chev{transform:rotate(180deg);box-shadow:var(--sh-card)}
+  .faq-body{padding:0 24px 22px;color:var(--text-muted);font-size:14px;line-height:1.7;background:var(--recessed);margin:0 16px 16px;border-radius:8px;padding:16px;box-shadow:var(--sh-recessed)}
+
+  /* Final CTA */
+  .final-cta{padding:80px 0}
+  .final-panel{background:var(--chassis);border-radius:24px;padding:56px 32px;text-align:center;box-shadow:var(--sh-floating);position:relative;overflow:hidden}
+  .final-panel::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent)}
+  .final-panel h2{font-size:clamp(28px,4vw,40px);font-weight:800;line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px;filter:drop-shadow(0 1px 0 #fff)}
+  .final-panel p{font-size:16px;color:var(--text-muted);margin-bottom:32px;max-width:520px;margin-left:auto;margin-right:auto}
+  .final-panel .led-row{display:flex;justify-content:center;gap:8px;margin-top:28px}
+  .final-panel .led-row .l{width:8px;height:8px;border-radius:50%;animation:ledpulse 2s ease-in-out infinite}
+  .final-panel .led-row .l.g{background:var(--green);box-shadow:var(--sh-glow-green)}
+  .final-panel .led-row .l.r{background:var(--accent);box-shadow:var(--sh-glow-red);animation-delay:0.3s}
+  .final-panel .led-row .l.y{background:#f59e0b;box-shadow:0 0 8px rgba(245,158,11,0.6);animation-delay:0.6s}
+
+  /* Footer — base plate */
+  .footer{background:var(--dark-panel);color:rgba(255,255,255,0.6);padding:64px 0 32px;position:relative;border-top:2px solid #1a1f20}
+  .footer::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:1px;
+    background:repeating-linear-gradient(90deg, rgba(255,255,255,0.1) 0 8px, transparent 8px 16px);
+  }
+  .footer-grid{display:grid;gap:40px;grid-template-columns:1fr;margin-bottom:48px}
+  @media(min-width:640px){.footer-grid{grid-template-columns:2fr 1fr 1fr}}
+  @media(min-width:1024px){.footer-grid{grid-template-columns:2fr 1fr 1fr 1fr}}
+  .footer-brand .brand{color:#fff;margin-bottom:16px}
+  .footer-brand .brand-logo{background:rgba(255,255,255,0.05);box-shadow:inset 2px 2px 4px rgba(0,0,0,0.3), inset -1px -1px 2px rgba(255,255,255,0.1)}
+  .footer-brand p{font-size:13px;max-width:300px;margin-bottom:18px}
+  .footer-status{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.1em;padding:6px 12px;border-radius:6px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08)}
+  .footer-status .led{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:var(--sh-glow-green);animation:ledpulse 2s ease-in-out infinite}
+  .footer-col h5{color:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11px;margin-bottom:18px;letter-spacing:0.15em;text-transform:uppercase}
+  .footer-col ul{list-style:none;display:grid;gap:12px}
+  .footer-col a{font-size:13px;transition:color .2s}
+  .footer-col a:hover{color:var(--accent)}
+  .footer-bottom{display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:space-between;padding-top:28px;border-top:1px solid rgba(255,255,255,0.08)}
+  @media(min-width:640px){.footer-bottom{flex-direction:row}}
+  .footer-bottom small{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.05em}
+  .footer-social{display:flex;gap:10px}
+  .footer-social a{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.6);transition:all 200ms cubic-bezier(0.175,0.885,0.32,1.275)}
+  .footer-social a:hover{background:var(--accent);color:#fff;transform:translateY(-2px);border-color:var(--accent)}
+
+  /* utility */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="brand">
+      <span class="brand-logo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+      </span>
+      Forge OS
+    </a>
+    <div class="nav-links">
+      <a href="#features">Modules</a>
+      <a href="#how">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#blog">Field logs</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <span class="nav-status"><span class="led"></span> SYSTEM OPERATIONAL</span>
+      <a href="#" class="btn btn-secondary signin">Sign in</a>
+      <a href="#pricing" class="btn btn-primary">Power on</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <span class="hero-eyebrow"><span class="led"></span> UNIT 04 · READY TO DEPLOY</span>
+      <h1>Tactile precision for <span class="accent">industrial-grade</span> software</h1>
+      <p class="lead">Forge OS is a skeuomorphic design system inspired by Dieter Rams and Teenage Engineering. Every component feels like physical hardware — screws, vents, LEDs, and matte plastic included.</p>
+      <div class="hero-cta">
+        <a href="#pricing" class="btn btn-primary">Power on</a>
+        <a href="#features" class="btn btn-secondary">Inspect modules</a>
+      </div>
+      <div class="hero-specs">
+        <div class="hero-spec"><div class="num">12ms</div><div class="lbl">Latency</div></div>
+        <div class="hero-spec"><div class="num">99.9%</div><div class="lbl">Uptime</div></div>
+        <div class="hero-spec"><div class="num">240V</div><div class="lbl">Throughput</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="device">
+        <div class="device-power"><span class="led"></span><span class="lbl">PWR</span></div>
+        <div class="device-btn b1"></div>
+        <div class="device-btn b2"></div>
+        <div class="device-btn b3"></div>
+        <div class="device-screen">
+          <div class="ds-head">
+            <span class="ds-title">// FORGE_OS · v4.2</span>
+            <div class="ds-led"><span class="l on"></span><span class="lbl">LIVE</span></div>
+          </div>
+          <div class="ds-grid">
+            <div class="ds-cell"><div class="k">CPU LOAD</div><div class="v green">42%</div></div>
+            <div class="ds-cell"><div class="k">MEMORY</div><div class="v">8.2GB</div></div>
+            <div class="ds-cell"><div class="k">NETWORK</div><div class="v green">1.2Gbps</div></div>
+            <div class="ds-cell"><div class="k">ALERTS</div><div class="v red">03</div></div>
+          </div>
+          <div class="ds-bar b1"><span></span></div>
+          <div class="ds-bar b2"><span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Stats LED strip -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-strip reveal">
+      <div class="stats-grid">
+        <div class="stat"><div class="num">24,580</div><div class="lbl">Units deployed</div></div>
+        <div class="stat"><div class="num">99.9%</div><div class="lbl">Uptime SLA</div></div>
+        <div class="stat"><div class="num">12ms</div><div class="lbl">Avg response</div></div>
+        <div class="stat"><div class="num">A+</div><div class="lbl">Security grade</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">// MODULES</span>
+      <h2 class="section-title">Bolted-on hardware modules</h2>
+      <p class="section-sub">Each module ships with corner screws, ventilation slots, and recessed icon housings.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card reveal">
+        <div class="feat-vents"><i></i><i></i><i></i></div>
+        <div class="feat-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h3>Real-time engine</h3>
+        <p>A deterministic processing core that responds in 12ms or less. Built for systems that cannot afford to drift.</p>
+        <span class="feat-tag">CORE · 240V</span>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-vents"><i></i><i></i><i></i></div>
+        <div class="feat-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Hardened security</h3>
+        <p>End-to-end encryption, hardware-key support, and audit logging stamped into every transaction.</p>
+        <span class="feat-tag">GRADE · A+</span>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-vents"><i></i><i></i><i></i></div>
+        <div class="feat-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg></div>
+        <h3>Telemetry dashboards</h3>
+        <p>Live readouts with CRT-grade scanlines and glowing monospace numerics. See your system breathe.</p>
+        <span class="feat-tag">DISPLAY · CRT</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="how section" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">// PROCESS</span>
+      <h2 class="section-title">Assembly line in three stations</h2>
+      <p class="section-sub">Neumorphic step indicators connected by a physical cylindrical pipe.</p>
+    </div>
+    <div class="steps">
+      <div class="pipe"></div>
+      <div class="step reveal">
+        <div class="step-circle">01</div>
+        <h4>Mount the chassis</h4>
+        <p>Drop in the base system. Everything bolts onto the matte plastic surface.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-circle">02</div>
+        <h4>Wire the modules</h4>
+        <p>Connect modules through the recessed channels. Power flows through the pipe.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-circle">03</div>
+        <h4>Power on</h4>
+        <p>Flip the safety-orange switch. LEDs light up. The system is operational.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits -->
+<section class="benefits section" id="benefits">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">// CONTROL BOARD</span>
+      <h2 class="section-title">A control board, not a webpage</h2>
+      <p class="section-sub">Toggle switches, a radar sweep, and tactile feedback throughout.</p>
+    </div>
+    <div class="ben-panel reveal">
+      <div class="ben-left">
+        <h3>System configuration</h3>
+        <p>Every setting feels like flipping a physical switch. Tap to toggle — the LED glows when active.</p>
+        <div class="ben-toggles">
+          <div class="ben-toggle">
+            <div class="label">Real-time monitoring<small>STATUS · ENABLED</small></div>
+            <div class="switch on" data-toggle></div>
+          </div>
+          <div class="ben-toggle">
+            <div class="label">Auto-failover<small>STATUS · ENABLED</small></div>
+            <div class="switch on" data-toggle></div>
+          </div>
+          <div class="ben-toggle">
+            <div class="label">Audit logging<small>STATUS · DISABLED</small></div>
+            <div class="switch" data-toggle></div>
+          </div>
+          <div class="ben-toggle">
+            <div class="label">Threat detection<small>STATUS · ENABLED</small></div>
+            <div class="switch on" data-toggle></div>
+          </div>
+        </div>
+      </div>
+      <div class="ben-right">
+        <div class="radar">
+          <div class="radar-cross"></div>
+          <div class="radar-sweep"></div>
+          <div class="radar-blip b1"></div>
+          <div class="radar-blip b2"></div>
+          <div class="radar-blip b3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">// PRICE TAGS</span>
+      <h2 class="section-title">Metal dog-tag pricing</h2>
+      <p class="section-sub">Hanging-hole cards with monospace pricing. The featured unit is ringed in safety orange.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card reveal">
+        <div class="price-name">BASIC UNIT</div>
+        <div class="price-desc">For solo operators and small rigs.</div>
+        <div class="price-amt"><span class="cur">$</span><span class="val">0</span><span class="per">/mo</span></div>
+        <ul class="price-feats">
+          <li><span class="check">&#10003;</span> 1 operator seat</li>
+          <li><span class="check">&#10003;</span> 3 modules</li>
+          <li><span class="check">&#10003;</span> Community support</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Request unit</a>
+      </div>
+      <div class="price-card featured reveal">
+        <span class="pop-badge">RECOMMENDED</span>
+        <div class="price-name">PRO UNIT</div>
+        <div class="price-desc">For teams running production rigs.</div>
+        <div class="price-amt"><span class="cur">$</span><span class="val">49</span><span class="per">/mo</span></div>
+        <ul class="price-feats">
+          <li><span class="check">&#10003;</span> 10 operator seats</li>
+          <li><span class="check">&#10003;</span> Unlimited modules</li>
+          <li><span class="check">&#10003;</span> Telemetry dashboards</li>
+          <li><span class="check">&#10003;</span> Priority support</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Power on</a>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-name">FACTORY UNIT</div>
+        <div class="price-desc">For large-scale industrial deployment.</div>
+        <div class="price-amt"><span class="cur">$</span><span class="val">199</span><span class="per">/mo</span></div>
+        <ul class="price-feats">
+          <li><span class="check">&#10003;</span> Unlimited seats</li>
+          <li><span class="check">&#10003;</span> Dedicated hardware</li>
+          <li><span class="check">&#10003;</span> On-site engineer</li>
+          <li><span class="check">&#10003;</span> 99.9% uptime SLA</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Contact sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section" id="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">// FIELD REPORTS</span>
+      <h2 class="section-title">Pinned to the board</h2>
+      <p class="section-sub">Notes from operators in the field, pinned with red push-pins.</p>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <p class="test-quote">"Forge OS feels like operating real machinery. Our engineers actually enjoy checking the dashboards now."</p>
+        <div class="test-user"><div class="test-avatar">HW</div><div><div class="name">Hans Weber</div><div class="role">PLANT MGR · BRAUN</div></div></div>
+      </div>
+      <div class="test-card reveal">
+        <p class="test-quote">"The tactile feedback is uncanny. Toggling a switch feels physical. Conversion on our config page doubled."</p>
+        <div class="test-user"><div class="test-avatar">MT</div><div><div class="name">Mika Tanaka</div><div class="role">DESIGN LEAD · TE</div></div></div>
+      </div>
+      <div class="test-card reveal">
+        <p class="test-quote">"We replaced three monitoring tools with Forge OS. The radar sweep alone sold the whole team."</p>
+        <div class="test-user"><div class="test-avatar">RC</div><div><div class="name">Rosa Cardoso</div><div class="role">OPS · NORDHAUS</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog -->
+<section class="section" id="blog">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">// FIELD LOGS</span>
+      <h2 class="section-title">Field log entries</h2>
+      <p class="section-sub">Cassette-style cards with label badges. Glyphs colorize on hover.</p>
+    </div>
+    <div class="blog-grid">
+      <article class="blog-card reveal">
+        <div class="blog-img">
+          <span class="label">LOG 042</span>
+          <span class="glyph">01</span>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">Engineering · 8 min</div>
+          <h4>Designing tactile buttons in CSS</h4>
+          <span class="read">Read log <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </article>
+      <article class="blog-card reveal">
+        <div class="blog-img">
+          <span class="label">LOG 041</span>
+          <span class="glyph">02</span>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">Design · 5 min</div>
+          <h4>The Dieter Rams principle</h4>
+          <span class="read">Read log <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </article>
+      <article class="blog-card reveal">
+        <div class="blog-img">
+          <span class="label">LOG 040</span>
+          <span class="glyph">03</span>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">Field note · 3 min</div>
+          <h4>Why screws and vents matter</h4>
+          <span class="read">Read log <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">// MANUAL</span>
+      <h2 class="section-title">Operating manual</h2>
+      <p class="section-sub">Neumorphic drawers with recessed arrow indicators.</p>
+    </div>
+    <div class="faq-wrap">
+      <details class="faq-item reveal" open>
+        <summary>What makes this different from flat design?<span class="faq-chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+        <div class="faq-body">Industrial skeuomorphism embraces physicality. Every element exists in 3D space with consistent top-left lighting, dual neumorphic shadows, and manufacturing details (screws, vents, LEDs, scanlines). Flat design removes depth; this style celebrates it.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>How do the physical interactions work?<span class="faq-chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+        <div class="faq-body">Buttons depress with translate-y and shadow inversion (150ms). Cards elevate on hover with shadow upgrade (300ms). Icons rotate and scale. Toggles slide physically. All easing uses a mechanical spring curve: cubic-bezier(0.175, 0.885, 0.32, 1.275).</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>Is the safety orange required?<span class="faq-chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+        <div class="faq-body">Yes — the safety orange (#ff4757) is the signature accent, reserved exclusively for interactive elements, status indicators, and critical alerts. It appears sparingly, like an emergency stop button. The rest of the palette stays neutral grey.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>Does it stay tactile on mobile?<span class="faq-chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+        <div class="faq-body">Absolutely. The physical metaphor persists across all breakpoints. Touch targets are minimum 48px, buttons expand to full width, and the neumorphic shadows are pure CSS (no JS) for GPU-accelerated performance.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+  <div class="container">
+    <div class="final-panel reveal">
+      <h2>Ready to power on?</h2>
+      <p>Join 24,000+ operators running Forge OS in production. Flip the switch — the LEDs are already blinking.</p>
+      <div class="hero-cta" style="justify-content:center">
+        <a href="#pricing" class="btn btn-primary">Power on</a>
+        <a href="#" class="btn btn-secondary">Request demo</a>
+      </div>
+      <div class="led-row"><span class="l g"></span><span class="l r"></span><span class="l y"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="brand">
+          <span class="brand-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></span>
+          <span style="color:#fff">Forge OS</span>
+        </a>
+        <p>The industrial skeuomorphic design system for teams building tactile, hardware-grade software.</p>
+        <span class="footer-status"><span class="led"></span> SYSTEM OPERATIONAL</span>
+      </div>
+      <div class="footer-col"><h5>// Product</h5><ul><li><a href="#features">Modules</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#how">Process</a></li><li><a href="#">Changelog</a></li></ul></div>
+      <div class="footer-col"><h5>// Company</h5><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#blog">Field logs</a></li><li><a href="#">Press</a></li></ul></div>
+      <div class="footer-col"><h5>// Resources</h5><ul><li><a href="#">Docs</a></li><li><a href="#faq">Manual</a></li><li><a href="#">Status</a></li><li><a href="#">Support</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <small>&copy; 2026 FORGE_OS · UNIT 04 · ALL RIGHTS RESERVED</small>
+      <div class="footer-social">
+        <a href="#" aria-label="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="#" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:0.12});
+  reveals.forEach(el=>io.observe(el));
+
+  // FAQ single-open
+  const faqs = document.querySelectorAll('.faq-item');
+  faqs.forEach(item=>{
+    item.addEventListener('toggle',()=>{ if(item.open){ faqs.forEach(o=>{ if(o!==item) o.open=false; }); } });
+  });
+
+  // Toggle switches — physical interaction
+  document.querySelectorAll('[data-toggle]').forEach(sw=>{
+    sw.addEventListener('click',()=>{
+      sw.classList.toggle('on');
+      const label = sw.parentElement.querySelector('.label small');
+      if(label){ label.textContent = sw.classList.contains('on') ? 'STATUS · ENABLED' : 'STATUS · DISABLED'; }
+    });
+  });
+</script>
+</body>
+</html>

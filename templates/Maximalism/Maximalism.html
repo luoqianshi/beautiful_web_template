@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAXIMAL — MORE IS MORE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800;900&family=DM+Sans:wght@400;500;700&family=Bungee&display=swap" rel="stylesheet">
+<style>
+  /* ============ RESET & TOKENS ============ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0D0D1A;
+    --fg: #FFFFFF;
+    --muted: #2D1B4E;
+    --c1: #FF3AF2; /* magenta */
+    --c2: #00F5D4; /* cyan */
+    --c3: #FFE600; /* yellow */
+    --c4: #FF6B35; /* orange */
+    --c5: #7B2FFF; /* purple */
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "DM Sans", system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--c1); color: var(--bg); }
+
+  .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  @media (min-width: 768px) { .container { padding: 0 32px; } }
+
+  section { padding: 96px 0; position: relative; }
+  @media (min-width: 768px) { section { padding: 128px 0; } }
+
+  .heading-font { font-family: "Outfit", sans-serif; }
+  .display-font { font-family: "Bungee", sans-serif; }
+
+  /* ============ GLOBAL PATTERNS ============ */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: radial-gradient(circle, rgba(255,58,242,0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(255,58,242,0.12) 0%, transparent 45%),
+      radial-gradient(ellipse at 80% 60%, rgba(0,245,212,0.1) 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 90%, rgba(123,47,255,0.1) 0%, transparent 50%);
+  }
+
+  /* section pattern helpers */
+  .pattern-stripes { background-image: repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(255,230,0,0.06) 12px, rgba(255,230,0,0.06) 24px); }
+  .pattern-dots-cyan { background-image: radial-gradient(circle, rgba(0,245,212,0.1) 1.5px, transparent 1.5px); background-size: 28px 28px; }
+  .pattern-checker { background-image: conic-gradient(from 90deg at 1px 1px, transparent 90deg, rgba(255,107,53,0.05) 0); background-size: 36px 36px; }
+
+  /* ============ FLOATING SHAPES ============ */
+  .float-shape { position: absolute; pointer-events: none; z-index: 3; }
+  @keyframes float { 0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-24px) rotate(8deg);} }
+  @keyframes float-rev { 0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(20px) rotate(-8deg);} }
+  @keyframes spin-slow { from{transform:rotate(0);} to{transform:rotate(360deg);} }
+  @keyframes wiggle { 0%,100%{transform:rotate(-4deg);} 50%{transform:rotate(4deg);} }
+  @keyframes bounce-sub { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+  @keyframes pulse-glow { 0%,100%{box-shadow:0 0 20px rgba(255,58,242,0.5);} 50%{box-shadow:0 0 40px rgba(255,58,242,0.8),0 0 60px rgba(0,245,212,0.5);} }
+  @keyframes gradient-shift { 0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;} }
+  .anim-float { animation: float 6s ease-in-out infinite; }
+  .anim-float-rev { animation: float-rev 5s ease-in-out infinite; }
+  .anim-spin { animation: spin-slow 20s linear infinite; }
+  .anim-wiggle { animation: wiggle 1.5s ease-in-out infinite; }
+  .anim-bounce { animation: bounce-sub 2s ease-in-out infinite; }
+
+  /* ============ SHADOWS ============ */
+  .shadow-hard-2 { box-shadow: 8px 8px 0 var(--c3), 16px 16px 0 var(--c1); }
+  .shadow-hard-3 { box-shadow: 12px 12px 0 var(--c2), 24px 24px 0 var(--c1), 36px 36px 0 var(--c3); }
+  .shadow-glow { box-shadow: 0 0 24px rgba(255,58,242,0.5), 0 0 48px rgba(0,245,212,0.3); }
+  .shadow-mix { box-shadow: 0 0 30px rgba(255,58,242,0.6), 8px 8px 0 var(--c3), 16px 16px 0 var(--c1); }
+
+  /* ============ TEXT SHADOWS ============ */
+  .ts-single { text-shadow: 3px 3px 0 var(--c5); }
+  .ts-double { text-shadow: 3px 3px 0 var(--c5), 6px 6px 0 var(--c1); }
+  .ts-triple { text-shadow: 3px 3px 0 var(--c5), 6px 6px 0 var(--c1), 9px 9px 0 var(--c2); }
+  .ts-mega { text-shadow: 4px 4px 0 var(--c5), 8px 8px 0 var(--c1), 12px 12px 0 var(--c2); }
+
+  .grad-text {
+    background: linear-gradient(90deg, var(--c1), var(--c2), var(--c3), var(--c1));
+    background-size: 300% 100%;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 4s ease infinite;
+  }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed; top: 16px; left: 16px; right: 16px; z-index: 100;
+    background: rgba(13,13,26,0.8); backdrop-filter: blur(12px);
+    border: 4px solid var(--c3); border-radius: 9999px;
+    box-shadow: 0 0 20px rgba(255,230,0,0.4), 6px 6px 0 var(--c1);
+  }
+  .nav-inner { max-width: 1280px; margin: 0 auto; padding: 8px 16px 8px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-family: "Bungee", sans-serif; font-size: 1.25rem; background: linear-gradient(90deg, var(--c1), var(--c3), var(--c2)); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: gradient-shift 3s ease infinite; }
+  .nav-links { display: flex; gap: 8px; align-items: center; }
+  .nav-links a {
+    color: var(--fg); text-decoration: none; font-family: "Outfit", sans-serif; font-size: 0.875rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 8px 16px; border-radius: 9999px; border: 2px dashed transparent;
+    transition: all 300ms ease-out;
+  }
+  .nav-links a:hover { background: var(--c2); color: var(--bg); border-color: var(--c1); transform: scale(1.05); }
+  .nav-toggle { display: none; background: var(--c3); border: 3px solid var(--c1); color: var(--bg); width: 44px; height: 44px; border-radius: 9999px; cursor: pointer; font-size: 1.25rem; font-weight: 900; }
+  @media (max-width: 768px) {
+    .nav-toggle { display: block; }
+    .nav-links { display: none; position: absolute; top: 60px; left: 0; right: 0; flex-direction: column; background: var(--bg); border: 4px solid var(--c3); border-radius: 24px; padding: 16px; gap: 8px; }
+    .nav-links.open { display: flex; }
+  }
+
+  /* ============ BUTTONS ============ */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: "Outfit", sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em;
+    cursor: pointer; text-decoration: none; border-radius: 9999px;
+    transition: all 300ms ease-out; font-size: 0.9375rem; height: 56px; padding: 0 32px;
+  }
+  .btn:active { transform: scale(0.95); }
+  .btn-primary {
+    background: linear-gradient(90deg, var(--c1), var(--c5), var(--c2)); background-size: 200% 100%;
+    border: 4px solid var(--c3); color: var(--fg);
+    box-shadow: 0 0 24px rgba(255,58,242,0.5), 6px 6px 0 var(--c3), 12px 12px 0 var(--c1);
+    animation: gradient-shift 4s ease infinite;
+  }
+  .btn-primary:hover { transform: scale(1.08); box-shadow: 0 0 40px rgba(255,58,242,0.7), 8px 8px 0 var(--c3), 16px 16px 0 var(--c1); }
+  .btn-secondary { background: transparent; color: var(--fg); border: 4px dashed var(--c2); }
+  .btn-secondary:hover { background: var(--c2); color: var(--bg); border-style: solid; transform: scale(1.05); }
+  .btn-large { height: 64px; padding: 0 40px; font-size: 1.0625rem; }
+
+  /* ============ HERO ============ */
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 0 64px; position: relative; overflow: hidden; }
+  .hero-bg-text {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-family: "Bungee", sans-serif; font-size: clamp(8rem, 28vw, 20rem);
+    color: rgba(255,58,242,0.08); white-space: nowrap; z-index: 1; pointer-events: none; letter-spacing: -0.05em;
+  }
+  .hero-content { position: relative; z-index: 4; text-align: center; max-width: 900px; margin: 0 auto; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--c3); color: var(--bg); padding: 8px 20px; border-radius: 9999px; border: 3px solid var(--c1); font-family: "Outfit", sans-serif; font-weight: 700; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 32px; box-shadow: 4px 4px 0 var(--c5); transform: rotate(-2deg); }
+  .hero h1 {
+    font-family: "Outfit", sans-serif; font-weight: 900; font-size: clamp(3.5rem, 12vw, 9rem);
+    line-height: 0.9; letter-spacing: -0.03em; text-transform: uppercase; margin-bottom: 24px;
+  }
+  .hero h1 .line { display: block; }
+  .hero p { font-size: clamp(1.125rem, 2.5vw, 1.5rem); color: rgba(255,255,255,0.85); max-width: 640px; margin: 0 auto 40px; line-height: 1.5; }
+  .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  /* hero floating shapes */
+  .fs-1 { top: 12%; left: 6%; font-size: 3rem; }
+  .fs-2 { top: 18%; right: 8%; font-size: 2.5rem; }
+  .fs-3 { bottom: 18%; left: 10%; font-size: 4rem; }
+  .fs-4 { bottom: 22%; right: 6%; font-size: 3.5rem; }
+  .fs-5 { top: 45%; left: 4%; width: 60px; height: 60px; background: var(--c2); border-radius: 50%; border: 4px solid var(--c3); }
+  .fs-6 { top: 30%; right: 5%; width: 80px; height: 80px; background: var(--c4); border: 4px dashed var(--c2); border-radius: 24px; }
+
+  /* ============ STATS ============ */
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (min-width: 1024px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+  .stat-card {
+    padding: 32px 24px; border-radius: 24px; border: 4px solid; text-align: center; position: relative;
+    transition: all 300ms ease-out; overflow: hidden;
+  }
+  .stat-card:nth-child(1) { background: var(--c1); border-color: var(--c3); }
+  .stat-card:nth-child(2) { background: var(--c2); border-color: var(--c4); color: var(--bg); }
+  .stat-card:nth-child(3) { background: var(--c3); border-color: var(--c5); color: var(--bg); }
+  .stat-card:nth-child(4) { background: var(--c5); border-color: var(--c2); }
+  .stat-card:hover { transform: scale(1.04) rotate(2deg); }
+  .stat-num { font-family: "Outfit", sans-serif; font-weight: 900; font-size: clamp(2.5rem, 5vw, 3.5rem); line-height: 1; margin-bottom: 8px; text-shadow: 3px 3px 0 rgba(0,0,0,0.15); }
+  .stat-label { font-family: "Outfit", sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  .stat-star { position: absolute; top: 8px; right: 12px; font-size: 1.5rem; }
+
+  /* ============ SECTION HEAD ============ */
+  .section-head { text-align: center; margin-bottom: 64px; position: relative; z-index: 2; }
+  .section-head .eyebrow { display: inline-block; font-family: "Outfit", sans-serif; font-weight: 700; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.15em; padding: 6px 16px; border-radius: 9999px; margin-bottom: 20px; border: 3px solid; }
+  .section-head h2 { font-family: "Outfit", sans-serif; font-weight: 900; font-size: clamp(2.5rem, 7vw, 5rem); line-height: 0.95; letter-spacing: -0.03em; text-transform: uppercase; }
+
+  /* ============ FEATURES ============ */
+  .features-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width: 768px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .features-grid { grid-template-columns: repeat(3, 1fr); } }
+  .feature-card {
+    background: rgba(45,27,78,0.8); backdrop-filter: blur(8px); border-radius: 24px; padding: 32px;
+    border: 4px solid; transition: all 300ms ease-out; position: relative; overflow: hidden;
+  }
+  .feature-card:nth-child(1) { border-color: var(--c1); box-shadow: 8px 8px 0 var(--c3), 16px 16px 0 var(--c5); }
+  .feature-card:nth-child(2) { border-color: var(--c2); box-shadow: 8px 8px 0 var(--c4), 16px 16px 0 var(--c1); margin-top: 48px; }
+  .feature-card:nth-child(3) { border-color: var(--c3); box-shadow: 8px 8px 0 var(--c5), 16px 16px 0 var(--c2); }
+  .feature-card:nth-child(4) { border-color: var(--c4); box-shadow: 8px 8px 0 var(--c2), 16px 16px 0 var(--c3); margin-top: 48px; }
+  .feature-card:nth-child(5) { border-color: var(--c5); box-shadow: 8px 8px 0 var(--c1), 16px 16px 0 var(--c3); }
+  .feature-card:nth-child(6) { border-color: var(--c1); box-shadow: 8px 8px 0 var(--c5), 16px 16px 0 var(--c2); margin-top: 48px; }
+  .feature-card:hover { transform: scale(1.03) rotate(1deg); }
+  .feature-card:nth-child(1):hover { box-shadow: 10px 10px 0 var(--c3), 20px 20px 0 var(--c5); }
+  .feature-icon-box {
+    width: 64px; height: 64px; border-radius: 18px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.75rem; margin-bottom: 24px; border: 4px solid; transition: all 300ms ease-out;
+  }
+  .feature-card:hover .feature-icon-box { transform: rotate(90deg) scale(1.1); }
+  .feature-card h3 { font-family: "Outfit", sans-serif; font-weight: 900; font-size: 1.5rem; text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 12px; line-height: 1.1; }
+  .feature-card p { color: rgba(255,255,255,0.8); font-size: 1rem; line-height: 1.6; }
+
+  /* ============ HOW IT WORKS ============ */
+  .how { position: relative; }
+  .how-line { position: absolute; top: 60px; left: 10%; right: 10%; height: 4px; background: linear-gradient(90deg, var(--c1), var(--c3), var(--c2), var(--c4), var(--c5)); z-index: 1; display: none; }
+  @media (min-width: 768px) { .how-line { display: block; } }
+  .steps { display: grid; grid-template-columns: 1fr; gap: 32px; position: relative; z-index: 2; }
+  @media (min-width: 768px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+  .step-card { text-align: center; padding: 0 16px; }
+  .step-card:nth-child(2) { margin-top: 48px; }
+  .step-badge {
+    width: 88px; height: 88px; border-radius: 50%; margin: 0 auto 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Outfit", sans-serif; font-weight: 900; font-size: 2rem; color: var(--bg);
+    border: 5px solid var(--bg);
+  }
+  .step-card:nth-child(1) .step-badge { background: var(--c1); box-shadow: 0 0 30px rgba(255,58,242,0.6); }
+  .step-card:nth-child(2) .step-badge { background: var(--c3); box-shadow: 0 0 30px rgba(255,230,0,0.6); }
+  .step-card:nth-child(3) .step-badge { background: var(--c2); box-shadow: 0 0 30px rgba(0,245,212,0.6); }
+  .step-card h3 { font-family: "Outfit", sans-serif; font-weight: 900; font-size: 1.5rem; text-transform: uppercase; margin-bottom: 12px; }
+  .step-card p { color: rgba(255,255,255,0.8); font-size: 1rem; line-height: 1.6; }
+
+  /* ============ BENEFITS ============ */
+  .benefits-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width: 768px) { .benefits-grid { grid-template-columns: 5fr 7fr; gap: 32px; align-items: start; } }
+  .benefits-left { position: sticky; top: 100px; }
+  .benefits-left h2 { font-family: "Outfit", sans-serif; font-weight: 900; font-size: clamp(2.5rem, 6vw, 4rem); line-height: 0.95; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 24px; }
+  .benefits-left p { color: rgba(255,255,255,0.85); font-size: 1.125rem; line-height: 1.6; margin-bottom: 32px; }
+  .benefit-cards { display: flex; flex-direction: column; gap: 16px; }
+  .benefit-card {
+    background: rgba(45,27,78,0.7); backdrop-filter: blur(6px); border-radius: 20px; padding: 24px;
+    border: 4px solid; display: flex; align-items: flex-start; gap: 20px; transition: all 300ms ease-out;
+  }
+  .benefit-card:nth-child(1) { border-color: var(--c1); }
+  .benefit-card:nth-child(2) { border-color: var(--c3); }
+  .benefit-card:nth-child(3) { border-color: var(--c2); }
+  .benefit-card:nth-child(4) { border-color: var(--c4); }
+  .benefit-card:hover { transform: translateX(8px) scale(1.02); }
+  .benefit-icon { width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; border: 3px solid var(--bg); }
+  .benefit-card:nth-child(1) .benefit-icon { background: var(--c1); }
+  .benefit-card:nth-child(2) .benefit-icon { background: var(--c3); color: var(--bg); }
+  .benefit-card:nth-child(3) .benefit-icon { background: var(--c2); color: var(--bg); }
+  .benefit-card:nth-child(4) .benefit-icon { background: var(--c4); }
+  .benefit-card h3 { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 1.25rem; text-transform: uppercase; margin-bottom: 6px; }
+  .benefit-card p { color: rgba(255,255,255,0.8); font-size: 0.9375rem; line-height: 1.5; }
+
+  /* ============ TESTIMONIALS ============ */
+  .testi-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width: 768px) { .testi-grid { grid-template-columns: repeat(3, 1fr); } }
+  .testi-card {
+    background: rgba(45,27,78,0.8); backdrop-filter: blur(8px); border-radius: 24px; padding: 28px;
+    border: 4px solid; transition: all 300ms ease-out; transform: rotate(-1deg);
+  }
+  .testi-card:nth-child(1) { border-color: var(--c1); }
+  .testi-card:nth-child(2) { border-color: var(--c3); transform: rotate(1deg) translateY(24px); }
+  .testi-card:nth-child(3) { border-color: var(--c2); transform: rotate(-1.5deg); }
+  .testi-card:hover { transform: rotate(0) scale(1.03); }
+  .testi-stars { font-size: 1.125rem; margin-bottom: 16px; letter-spacing: 2px; }
+  .testi-card:nth-child(1) .testi-stars { color: var(--c3); }
+  .testi-card:nth-child(2) .testi-stars { color: var(--c1); }
+  .testi-card:nth-child(3) .testi-stars { color: var(--c4); }
+  .testi-quote { font-family: "Outfit", sans-serif; font-weight: 700; font-size: 1.0625rem; line-height: 1.5; margin-bottom: 20px; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar { width: 44px; height: 44px; border-radius: 50%; border: 3px solid; flex-shrink: 0; }
+  .testi-card:nth-child(1) .testi-avatar { background: var(--c1); border-color: var(--c3); }
+  .testi-card:nth-child(2) .testi-avatar { background: var(--c3); border-color: var(--c5); }
+  .testi-card:nth-child(3) .testi-avatar { background: var(--c2); border-color: var(--c4); }
+  .testi-name { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 0.9375rem; }
+  .testi-role { font-size: 0.75rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* ============ PRICING ============ */
+  .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center; }
+  @media (min-width: 768px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
+  .price-card {
+    background: rgba(45,27,78,0.85); backdrop-filter: blur(8px); border-radius: 24px; padding: 36px 28px;
+    border: 4px solid; transition: all 300ms ease-out; position: relative;
+  }
+  .price-card:nth-child(1) { border-color: var(--c2); }
+  .price-card:nth-child(2) { border-color: var(--c1); transform: scale(1.08); box-shadow: 0 0 40px rgba(255,58,242,0.4); z-index: 2; }
+  .price-card:nth-child(3) { border-color: var(--c3); }
+  .price-card:hover { transform: scale(1.04); }
+  .price-card:nth-child(2):hover { transform: scale(1.12); }
+  .price-badge { position: absolute; top: -16px; left: 50%; transform: translateX(-50%); background: var(--c1); color: var(--fg); padding: 6px 18px; border-radius: 9999px; border: 3px solid var(--c3); font-family: "Outfit", sans-serif; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; box-shadow: 4px 4px 0 var(--c5); }
+  .price-tier { font-family: "Outfit", sans-serif; font-weight: 900; font-size: 1.5rem; text-transform: uppercase; margin-bottom: 12px; }
+  .price-card:nth-child(1) .price-tier { color: var(--c2); }
+  .price-card:nth-child(2) .price-tier { color: var(--c1); }
+  .price-card:nth-child(3) .price-tier { color: var(--c3); }
+  .price-amount { font-family: "Outfit", sans-serif; font-weight: 900; font-size: 3rem; line-height: 1; margin-bottom: 20px; text-shadow: 3px 3px 0 var(--c5); }
+  .price-amount span { font-size: 1rem; color: rgba(255,255,255,0.6); }
+  .price-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+  .price-features li { display: flex; align-items: center; gap: 10px; font-size: 0.9375rem; }
+  .price-features li::before { content: "✦"; font-weight: 700; }
+  .price-card:nth-child(1) .price-features li::before { color: var(--c2); }
+  .price-card:nth-child(2) .price-features li::before { color: var(--c1); }
+  .price-card:nth-child(3) .price-features li::before { color: var(--c3); }
+
+  /* ============ FAQ ============ */
+  .faq-list { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+  .faq-item { background: rgba(45,27,78,0.7); backdrop-filter: blur(6px); border-radius: 20px; border: 4px solid var(--c5); overflow: hidden; transition: all 300ms ease-out; }
+  .faq-item.open { border-color: var(--c1); box-shadow: 0 0 24px rgba(255,58,242,0.3); }
+  .faq-item:nth-child(2) { border-color: var(--c3); }
+  .faq-item:nth-child(2).open { border-color: var(--c2); }
+  .faq-item:nth-child(3) { border-color: var(--c2); }
+  .faq-item:nth-child(3).open { border-color: var(--c4); }
+  .faq-item:nth-child(4) { border-color: var(--c4); }
+  .faq-item:nth-child(4).open { border-color: var(--c3); }
+  .faq-q {
+    width: 100%; background: none; border: none; color: var(--fg); text-align: left; cursor: pointer;
+    padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    font-family: "Outfit", sans-serif; font-weight: 800; font-size: 1.125rem; text-transform: uppercase;
+  }
+  .faq-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--c5); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.25rem; font-weight: 900; transition: all 300ms ease-out; }
+  .faq-item.open .faq-icon { transform: rotate(180deg); background: var(--c1); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 300ms ease-out; }
+  .faq-item.open .faq-a { max-height: 300px; }
+  .faq-a p { padding: 0 28px 24px; color: rgba(255,255,255,0.85); font-size: 1rem; line-height: 1.6; }
+
+  /* ============ FOOTER ============ */
+  footer { background: linear-gradient(135deg, rgba(123,47,255,0.15), rgba(255,58,242,0.1)); border-top: 4px solid var(--c1); padding: 80px 0 40px; position: relative; overflow: hidden; }
+  .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr 1fr; } }
+  .footer-brand .logo { font-size: 2rem; margin-bottom: 16px; }
+  .footer-brand p { color: rgba(255,255,255,0.8); font-size: 0.9375rem; line-height: 1.6; max-width: 280px; }
+  .footer-col h4 { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px; }
+  .footer-col:nth-child(2) h4 { color: var(--c1); }
+  .footer-col:nth-child(3) h4 { color: var(--c3); }
+  .footer-col:nth-child(4) h4 { color: var(--c2); }
+  .footer-col:nth-child(5) h4 { color: var(--c4); }
+  .footer-col a { display: block; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9375rem; margin-bottom: 12px; transition: all 300ms ease-out; }
+  .footer-col a:hover { color: var(--c3); transform: translateX(4px); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding-top: 32px; border-top: 2px dashed var(--c5); font-size: 0.8125rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.08em; }
+  .social-row { display: flex; gap: 12px; }
+  .social-icon { width: 40px; height: 40px; border-radius: 50%; border: 3px solid; display: flex; align-items: center; justify-content: center; font-size: 1rem; cursor: pointer; transition: all 300ms ease-out; text-decoration: none; color: var(--fg); }
+  .social-icon:nth-child(1) { border-color: var(--c1); }
+  .social-icon:nth-child(2) { border-color: var(--c3); }
+  .social-icon:nth-child(3) { border-color: var(--c2); }
+  .social-icon:nth-child(4) { border-color: var(--c4); }
+  .social-icon:hover { transform: scale(1.15) rotate(10deg); }
+  .social-icon:nth-child(1):hover { background: var(--c1); }
+  .social-icon:nth-child(2):hover { background: var(--c3); color: var(--bg); }
+  .social-icon:nth-child(3):hover { background: var(--c2); color: var(--bg); }
+  .social-icon:nth-child(4):hover { background: var(--c4); }
+
+  /* ============ REVEAL ============ */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 500ms ease-out, transform 500ms ease-out; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">MAXIMAL★</div>
+    <div class="nav-links" id="navLinks">
+      <a href="#features">Features</a>
+      <a href="#how">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg-text" aria-hidden="true">WOW</div>
+  <span class="float-shape fs-1 anim-bounce" aria-hidden="true">✨</span>
+  <span class="float-shape fs-2 anim-float" aria-hidden="true">🚀</span>
+  <span class="float-shape fs-3 anim-float-rev" aria-hidden="true">⚡</span>
+  <span class="float-shape fs-4 anim-bounce" aria-hidden="true">💫</span>
+  <span class="float-shape fs-5 anim-spin" aria-hidden="true"></span>
+  <span class="float-shape fs-6 anim-wiggle" aria-hidden="true"></span>
+  <div class="container">
+    <div class="hero-content reveal">
+      <span class="hero-badge">⚡ MORE IS MORE — DOPAMINE DESIGN</span>
+      <h1>
+        <span class="line ts-triple">VISUAL</span>
+        <span class="line grad-text">EXPLOSION</span>
+        <span class="line ts-double">GUARANTEED</span>
+      </h1>
+      <p>Clashing patterns, dense layouts, oversaturated colors, and intentional visual clutter. Every pixel sparks joy. Empty space is wasted space. MORE IS MORE.</p>
+      <div class="hero-cta">
+        <a href="#pricing" class="btn btn-primary btn-large">Explode Now 🎯</a>
+        <a href="#features" class="btn btn-secondary btn-large">See the Chaos</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<section class="pattern-checker">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="background:var(--c2);color:var(--bg);border-color:var(--c1);">📊 By The Numbers</span>
+      <h2 class="ts-double">MAXIMUM<br><span class="grad-text">METRICS</span></h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <span class="stat-star anim-spin" aria-hidden="true">★</span>
+        <div class="stat-num">5M+</div>
+        <div class="stat-label">Sparks of Joy</div>
+      </div>
+      <div class="stat-card reveal">
+        <span class="stat-star anim-wiggle" aria-hidden="true">★</span>
+        <div class="stat-num">500%</div>
+        <div class="stat-label">Dopamine Boost</div>
+      </div>
+      <div class="stat-card reveal">
+        <span class="stat-star anim-bounce" aria-hidden="true">★</span>
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Patterns Stacked</div>
+      </div>
+      <div class="stat-card reveal">
+        <span class="stat-star anim-spin" aria-hidden="true">★</span>
+        <div class="stat-num">10/10</div>
+        <div class="stat-label">Visual Chaos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="pattern-stripes">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="background:var(--c1);color:var(--fg);border-color:var(--c3);">🎨 The Arsenal</span>
+      <h2 class="ts-triple">CHAOS<br><span class="grad-text">TOOLS</span></h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon-box" style="background:var(--c1);border-color:var(--c3);">🌈</div>
+        <h3 class="ts-single">Color Overload</h3>
+        <p>Five screaming accent colors rotate systematically through every section. Magenta, cyan, yellow, orange, purple — never matching, always clashing.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon-box" style="background:var(--c2);border-color:var(--c4);color:var(--bg);">✦</div>
+        <h3 class="ts-single">Pattern Stacking</h3>
+        <p>Dots over stripes, checker over gradient mesh. Every section layers 2-3 patterns minimum. Empty backgrounds are forbidden.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon-box" style="background:var(--c3);border-color:var(--c5);color:var(--bg);">⬛</div>
+        <h3 class="ts-single">Multi Shadows</h3>
+        <p>Glow shadows meet hard stacked shadows. Each layer uses a different accent, doubling offsets 8px to 16px to 32px. Depth through layering.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon-box" style="background:var(--c4);border-color:var(--c2);">⟳</div>
+        <h3 class="ts-single">Constant Motion</h3>
+        <p>30-40% of elements float, wiggle, spin, or bounce continuously. Nothing is static. The page literally cannot sit still.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon-box" style="background:var(--c5);border-color:var(--c1);">★</div>
+        <h3 class="ts-single">Floating Shapes</h3>
+        <p>Stars, sparkles, emoji, and geometric shapes scattered everywhere. 5-10 per section, intentionally inconsistent sizes, always animated.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon-box" style="background:var(--c1);border-color:var(--c2);">A</div>
+        <h3 class="ts-single">Mega Typography</h3>
+        <p>Massive background text bleeds off edges at 20rem. Triple-stacked text shadows in rotating accent colors. Headlines scream at 9xl.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="pattern-dots-cyan">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="background:var(--c3);color:var(--bg);border-color:var(--c5);">⚙️ The Process</span>
+      <h2 class="ts-double">HOW THE<br><span class="grad-text">MAGIC</span> HAPPENS</h2>
+    </div>
+    <div class="how-line" aria-hidden="true"></div>
+    <div class="steps">
+      <div class="step-card reveal">
+        <div class="step-badge">1</div>
+        <h3 class="ts-single">Stack It</h3>
+        <p>Layer patterns, colors, and shapes until it feels overwhelming in a joyful way. If it looks like too much — it's just right.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-badge">2</div>
+        <h3 class="ts-single">Clash It</h3>
+        <p>Make borders fight backgrounds. Magenta meets yellow meets cyan. Controlled chaos is the whole point.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-badge">3</div>
+        <h3 class="ts-single">Animate It</h3>
+        <p>Add float, wiggle, spin, and bounce to everything. The result: a page that sparks joy and refuses to be ignored.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section>
+  <div class="container">
+    <div class="benefits-grid">
+      <div class="benefits-left reveal">
+        <span class="eyebrow" style="display:inline-block;background:var(--c4);color:var(--fg);padding:6px 16px;border-radius:9999px;border:3px solid var(--c2);font-family:'Outfit';font-weight:700;font-size:0.8125rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:20px;">🔥 Why Maximal</span>
+        <h2 class="ts-triple">MORE<br><span class="grad-text">IS MORE</span></h2>
+        <p>Restraint is not welcome here. Every element is an opportunity for color, pattern, shadow, animation, and delight. The design should make people FEEL something immediately.</p>
+        <a href="#pricing" class="btn btn-primary">Go Maximal 🚀</a>
+      </div>
+      <div class="benefit-cards reveal">
+        <div class="benefit-card">
+          <div class="benefit-icon">💥</div>
+          <div><h3>Sensory Overload</h3><p>Visual abundance and unapologetic excess. Every pixel sparks joy in a joyful, overwhelming way.</p></div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">⚡</div>
+          <div><h3>Instant Energy</h3><p>Hyperpop aesthetic meets Y2K nostalgia. The vibe is eating Skittles while watching fireworks.</p></div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🌈</div>
+          <div><h3>Color Dopamine</h3><p>Five rotating accents ensure no two sections feel the same. More colors means more dopamine.</p></div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">✨</div>
+          <div><h3>Joyful Chaos</h3><p>Controlled chaos with asymmetric positioning, rotations, and overlaps. Never boring, always alive.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="pattern-stripes">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="background:var(--c5);color:var(--fg);border-color:var(--c3);">💰 Pick Your Dose</span>
+      <h2 class="ts-double">CHAOS<br><span class="grad-text">PRICING</span></h2>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-tier">Spark</div>
+        <div class="price-amount">$9<span>/mo</span></div>
+        <p style="color:rgba(255,255,255,0.8);font-size:0.9375rem;margin-bottom:20px;">A taste of the chaos.</p>
+        <ul class="price-features">
+          <li>2 accent colors</li>
+          <li>Basic patterns</li>
+          <li>3 floating shapes</li>
+          <li>Community access</li>
+        </ul>
+        <a href="#contact" class="btn btn-secondary" style="width:100%;">Start Sparking</a>
+      </div>
+      <div class="price-card reveal">
+        <span class="price-badge">★ Most Chaos</span>
+        <div class="price-tier">Explosion</div>
+        <div class="price-amount">$29<span>/mo</span></div>
+        <p style="color:rgba(255,255,255,0.8);font-size:0.9375rem;margin-bottom:20px;">Full dopamine hit.</p>
+        <ul class="price-features">
+          <li>All 5 accent colors</li>
+          <li>Unlimited patterns</li>
+          <li>Unlimited shapes</li>
+          <li>Animated gradients</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" style="width:100%;">Explode Now</a>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-tier">Supernova</div>
+        <div class="price-amount">$99<span>/mo</span></div>
+        <p style="color:rgba(255,255,255,0.8);font-size:0.9375rem;margin-bottom:20px;">Maximum overload.</p>
+        <ul class="price-features">
+          <li>Everything in Explosion</li>
+          <li>Custom color systems</li>
+          <li>White-label chaos</li>
+          <li>Dedicated designer</li>
+          <li>SLA guarantee</li>
+        </ul>
+        <a href="#contact" class="btn btn-secondary" style="width:100%;">Go Supernova</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="pattern-dots-cyan">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="background:var(--c1);color:var(--fg);border-color:var(--c2);">💬 Loud Praise</span>
+      <h2 class="ts-triple">PEOPLE ARE<br><span class="grad-text">SCREAMING</span></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"My eyes have never been happier. It's like a party exploded on my screen and I never want it to stop."</p>
+        <div class="testi-author">
+          <div class="testi-avatar"></div>
+          <div><div class="testi-name">Zoe Bright</div><div class="testi-role">Creative Director</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Restraint is dead. Long live MORE. Our engagement metrics went through the roof — people can't look away."</p>
+        <div class="testi-author">
+          <div class="testi-avatar"></div>
+          <div><div class="testi-name">Kai Riot</div><div class="testi-role">Brand Strategist</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"It's chaotic, clashing, and completely over the top. Exactly what our brand needed. Pure dopamine."</p>
+        <div class="testi-author">
+          <div class="testi-avatar"></div>
+          <div><div class="testi-name">Nova Flash</div><div class="testi-role">Founder</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="pattern-checker">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="background:var(--c4);color:var(--fg);border-color:var(--c5);">❓ Questions</span>
+      <h2 class="ts-double">CURIOUS<br><span class="grad-text">MINDS</span></h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q">Isn't this too much?<span class="faq-icon">⌄</span></button>
+        <div class="faq-a"><p>No. If it looks "too much" — it's probably just right. Maximalism is about abundance, joy, and visual stimulation. Restraint is not welcome here.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How many colors should I use?<span class="faq-icon">⌄</span></button>
+        <div class="faq-a"><p>Five distinct accents minimum: magenta, cyan, yellow, orange, and purple. Rotate them systematically through sections using modulo arithmetic. More colors = more dopamine.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do patterns really need to clash?<span class="faq-icon">⌄</span></button>
+        <div class="faq-a"><p>Absolutely. Borders should clash with backgrounds. If background is magenta, border might be yellow or cyan. Controlled chaos is the entire aesthetic.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is it accessible?<span class="faq-icon">⌄</span></button>
+        <div class="faq-a"><p>Yes. Despite the chaos, we maintain white on dark for all critical text (19.5:1 contrast). Accent colors are decorative only. We respect prefers-reduced-motion and provide double-ring focus states.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">MAXIMAL★</div>
+        <p>Clashing patterns, dense layouts, oversaturated colors, and intentional visual clutter. MORE IS MORE. Always.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#">Showcase</a>
+        <a href="#">Changelog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#">Docs</a>
+        <a href="#">Patterns</a>
+        <a href="#">Color Kit</a>
+        <a href="#">Support</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+        <a href="#">Security</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>MAXIMAL © 2024 — MORE IS MORE</span>
+      <div class="social-row">
+        <a href="#" class="social-icon" aria-label="Social">★</a>
+        <a href="#" class="social-icon" aria-label="Social">✦</a>
+        <a href="#" class="social-icon" aria-label="Social">◆</a>
+        <a href="#" class="social-icon" aria-label="Social">⚡</a>
+      </div>
+      <span>Made With Maximum Energy</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>

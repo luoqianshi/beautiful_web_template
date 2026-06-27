@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KINETIC — Motion-First Typography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ RESET & TOKENS ============ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #09090B;
+    --fg: #FAFAFA;
+    --muted: #27272A;
+    --muted-fg: #A1A1AA;
+    --accent: #DFE104;
+    --accent-fg: #000000;
+    --border: #3F3F46;
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+    font-weight: 500;
+    line-height: 1.4;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--accent); color: var(--accent-fg); }
+
+  /* Noise texture overlay */
+  .noise {
+    position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+    opacity: 0.03; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ============ LAYOUT ============ */
+  .container { width: 100%; max-width: 95vw; margin: 0 auto; padding: 0 24px; }
+  .container-narrow { max-width: 672px; margin: 0 auto; padding: 0 24px; }
+
+  section { padding: 128px 0; position: relative; }
+
+  /* ============ TYPOGRAPHY ============ */
+  .eyebrow {
+    font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.2em; color: var(--muted-fg);
+  }
+  .display { text-transform: uppercase; font-weight: 700; line-height: 0.85; letter-spacing: -0.03em; }
+  .accent-text { color: var(--accent); }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(9, 9, 11, 0.85); backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 95vw; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+  }
+  .logo { font-size: 1.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: -0.03em; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    color: var(--fg); text-decoration: none; font-size: 0.875rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    transition: color 200ms var(--ease);
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ============ BUTTONS ============ */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: inherit; font-weight: 700; text-transform: uppercase;
+    letter-spacing: -0.02em; cursor: pointer; border: none;
+    transition: all 200ms var(--ease); text-decoration: none;
+    border-radius: 0;
+  }
+  .btn-primary {
+    background: var(--accent); color: var(--accent-fg);
+    padding: 0 32px; height: 56px; font-size: 1rem;
+  }
+  .btn-primary:hover { transform: scale(1.05); }
+  .btn-primary:active { transform: scale(0.95); }
+  .btn-outline {
+    background: transparent; color: var(--fg);
+    border: 2px solid var(--border);
+    padding: 0 32px; height: 56px; font-size: 1rem;
+  }
+  .btn-outline:hover { background: var(--fg); color: var(--accent-fg); border-color: var(--fg); }
+  .btn-ghost {
+    background: transparent; color: var(--fg); padding: 0; height: auto;
+    font-size: 0.875rem;
+  }
+  .btn-ghost:hover { color: var(--accent); }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 90vh; display: flex; align-items: center; justify-content: center;
+    padding: 160px 0 80px; position: relative; overflow: hidden;
+  }
+  .hero-content { text-align: center; max-width: 95vw; will-change: transform, opacity; }
+  .hero h1 {
+    font-size: clamp(3rem, 12vw, 14rem);
+    font-weight: 700; text-transform: uppercase;
+    line-height: 0.8; letter-spacing: -0.04em;
+  }
+  .hero h1 .line { display: block; }
+  .hero-sub {
+    margin-top: 32px; font-size: clamp(1.125rem, 2vw, 1.5rem);
+    color: var(--muted-fg); max-width: 640px; margin-left: auto; margin-right: auto;
+    line-height: 1.5;
+  }
+  .hero-cta { margin-top: 48px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  .scroll-hint {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.3em;
+    color: var(--muted-fg); animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(8px);} }
+
+  /* ============ MARQUEE ============ */
+  .marquee {
+    overflow: hidden; width: 100%; position: relative;
+    border-top: 2px solid var(--border); border-bottom: 2px solid var(--border);
+  }
+  .marquee-track {
+    display: flex; width: max-content; gap: 64px; align-items: center;
+    animation: scroll-left 40s linear infinite;
+  }
+  .marquee.fast .marquee-track { animation-duration: 25s; }
+  .marquee.slow .marquee-track { animation-duration: 60s; }
+  .marquee.reverse .marquee-track { animation-direction: reverse; }
+  @keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .stats-marquee { background: var(--accent); padding: 32px 0; border-color: var(--accent); }
+  .stats-marquee .marquee-track { gap: 80px; }
+  .stat-item { display: flex; align-items: center; gap: 24px; color: var(--accent-fg); }
+  .stat-num { font-size: clamp(3.75rem, 8vw, 6rem); font-weight: 700; line-height: 0.85; letter-spacing: -0.04em; text-transform: uppercase; }
+  .stat-label { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+  .stat-star { font-size: 2rem; }
+
+  /* ============ SECTION HEADER ============ */
+  .section-head { margin-bottom: 80px; }
+  .section-head h2 {
+    font-size: clamp(2.5rem, 8vw, 6rem); font-weight: 700; text-transform: uppercase;
+    line-height: 0.85; letter-spacing: -0.03em;
+  }
+
+  /* ============ PRODUCT DETAIL ============ */
+  .product-grid { display: grid; grid-template-columns: 1fr; gap: 64px; }
+  @media (min-width: 900px) { .product-grid { grid-template-columns: 1fr 1fr; } }
+  .product-col { border-left: 4px solid var(--border); padding-left: 32px; position: relative; }
+  .product-col:hover { border-left-color: var(--accent); }
+  .product-col h3 {
+    font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 700; text-transform: uppercase;
+    line-height: 0.9; letter-spacing: -0.02em; margin-bottom: 24px;
+  }
+  .product-col p { color: var(--muted-fg); font-size: 1.125rem; line-height: 1.6; margin-bottom: 16px; }
+  .bg-number {
+    position: absolute; top: -20px; right: 0;
+    font-size: clamp(6rem, 12vw, 8rem); font-weight: 700; line-height: 0.8;
+    color: var(--muted); z-index: -1; letter-spacing: -0.05em;
+    transition: color 300ms var(--ease);
+  }
+  .product-col:hover .bg-number { color: var(--accent); }
+
+  /* ============ FEATURES (sticky) ============ */
+  .features-wrap { display: flex; flex-direction: column; gap: 0; }
+  .feature-card {
+    position: sticky; top: 128px;
+    border: 2px solid var(--border); background: var(--bg);
+    padding: 48px; margin-bottom: 0;
+    display: flex; align-items: flex-start; gap: 32px;
+    transition: all 300ms var(--ease); z-index: 1;
+  }
+  @media (max-width: 768px) { .feature-card { flex-direction: column; padding: 32px; } .feature-card:nth-child(n){position:relative;top:auto;} }
+  .feature-num {
+    font-size: clamp(3.75rem, 8vw, 6rem); font-weight: 700; line-height: 0.85;
+    color: var(--muted); letter-spacing: -0.04em; flex-shrink: 0;
+    transition: color 300ms var(--ease);
+  }
+  .feature-body { flex: 1; }
+  .feature-card h3 {
+    font-size: clamp(1.875rem, 4vw, 3.75rem); font-weight: 700; text-transform: uppercase;
+    line-height: 0.9; letter-spacing: -0.02em; margin-bottom: 16px; color: var(--accent);
+  }
+  .feature-card p { color: var(--muted-fg); font-size: 1.125rem; line-height: 1.6; }
+  .feature-card:hover { border-color: var(--accent); background: var(--accent); }
+  .feature-card:hover .feature-num,
+  .feature-card:hover h3,
+  .feature-card:hover p { color: var(--accent-fg); }
+
+  /* ============ HOW IT WORKS ============ */
+  .steps-grid {
+    display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--border);
+    border: 2px solid var(--border);
+  }
+  @media (min-width: 900px) { .steps-grid { grid-template-columns: 1fr 1fr 1fr; } }
+  .step {
+    background: var(--bg); padding: 48px; min-height: 500px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    transition: all 300ms var(--ease); cursor: pointer;
+  }
+  .step-num {
+    font-size: clamp(8rem, 16vw, 12rem); font-weight: 700; line-height: 0.8;
+    letter-spacing: -0.05em; color: var(--muted);
+    transition: color 300ms var(--ease);
+  }
+  .step h3 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 700; text-transform: uppercase;
+    line-height: 0.95; margin-bottom: 16px; margin-top: 32px;
+  }
+  .step p { color: var(--muted-fg); font-size: 1.125rem; line-height: 1.6; }
+  .step:hover { background: var(--accent); }
+  .step:hover .step-num, .step:hover h3, .step:hover p { color: var(--accent-fg); }
+
+  /* ============ BENEFITS ============ */
+  .benefits-list { border-top: 2px solid var(--border); }
+  .benefit {
+    border-bottom: 2px solid var(--border); padding: 32px 0;
+    display: grid; grid-template-columns: 1fr; gap: 8px; align-items: center;
+    transition: all 300ms var(--ease);
+  }
+  @media (min-width: 768px) { .benefit { grid-template-columns: 1fr 1fr; gap: 48px; } }
+  .benefit h3 {
+    font-size: clamp(2.25rem, 6vw, 4.5rem); font-weight: 700; text-transform: uppercase;
+    line-height: 0.9; letter-spacing: -0.03em;
+    transition: transform 300ms var(--ease);
+  }
+  .benefit p {
+    color: var(--muted-fg); font-size: 1.125rem; line-height: 1.6;
+    opacity: 0; transition: opacity 300ms var(--ease);
+  }
+  @media (max-width: 767px) { .benefit p { opacity: 1; } }
+  .benefit:hover h3 { transform: translateX(32px); color: var(--accent); }
+  .benefit:hover p { opacity: 1; }
+
+  /* ============ PRICING ============ */
+  .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--border); border: 2px solid var(--border); }
+  @media (min-width: 768px) { .pricing-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .pricing-grid { grid-template-columns: 1fr 1fr 1fr; } }
+  .price-card {
+    background: var(--bg); padding: 48px; border: 2px solid var(--border); margin: -2px 0 0 -2px;
+    display: flex; flex-direction: column; gap: 24px;
+    transition: all 300ms var(--ease);
+  }
+  .price-card.featured { background: var(--muted); }
+  .price-tier { font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted-fg); }
+  .price-amount { font-size: clamp(3.75rem, 6vw, 4.5rem); font-weight: 700; line-height: 0.85; letter-spacing: -0.04em; }
+  .price-amount span { font-size: 1.5rem; color: var(--muted-fg); }
+  .price-features { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+  .price-features li { display: flex; align-items: center; gap: 12px; font-size: 1rem; color: var(--muted-fg); }
+  .price-features li::before { content: ""; width: 8px; height: 8px; background: var(--accent); flex-shrink: 0; }
+  .price-card:hover { background: var(--accent); border-color: var(--accent); }
+  .price-card:hover .price-tier,
+  .price-card:hover .price-amount,
+  .price-card:hover .price-amount span,
+  .price-card:hover .price-features li,
+  .price-card:hover .price-features li::before { color: var(--accent-fg); background: transparent; }
+  .price-card:hover .price-features li::before { background: var(--accent-fg); }
+  .price-card:hover .btn-primary { background: var(--accent-fg); color: var(--accent); }
+
+  /* ============ TESTIMONIALS (marquee) ============ */
+  .testimonials-marquee { padding: 64px 0; }
+  .testimonials-marquee .marquee-track { gap: 48px; }
+  .testimonial-card {
+    border-left: 4px solid var(--accent); padding: 24px 32px;
+    max-width: 520px; flex-shrink: 0;
+  }
+  .testimonial-card p {
+    font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 700; text-transform: uppercase;
+    line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 24px;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 16px; }
+  .author-box { width: 48px; height: 48px; background: var(--muted); flex-shrink: 0; }
+  .author-name { font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+  .author-role { font-size: 0.75rem; color: var(--muted-fg); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  /* ============ FAQ ============ */
+  .faq-list { border-top: 2px solid var(--border); }
+  .faq-item { border-bottom: 2px solid var(--border); }
+  .faq-q {
+    width: 100%; background: none; border: none; color: var(--fg);
+    font-family: inherit; text-align: left; cursor: pointer;
+    padding: 32px 0; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    font-size: clamp(1.25rem, 3vw, 2.5rem); font-weight: 700; text-transform: uppercase;
+    line-height: 1; letter-spacing: -0.02em;
+    transition: color 200ms var(--ease);
+  }
+  .faq-q:hover { color: var(--accent); }
+  .faq-icon {
+    width: 40px; height: 40px; border: 2px solid var(--border); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem; transition: all 300ms var(--ease);
+  }
+  .faq-item.open .faq-icon { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 300ms var(--ease), opacity 300ms var(--ease);
+    opacity: 0;
+  }
+  .faq-item.open .faq-a { max-height: 300px; opacity: 1; }
+  .faq-a p { color: var(--muted-fg); font-size: 1.25rem; line-height: 1.6; padding-bottom: 32px; max-width: 640px; }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    background: var(--accent); color: var(--accent-fg);
+    min-height: 100vh; padding: 128px 0 48px; position: relative;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .footer-headline {
+    font-size: clamp(2.5rem, 8vw, 10rem); font-weight: 700; text-transform: uppercase;
+    line-height: 0.85; letter-spacing: -0.04em; margin-bottom: 48px;
+  }
+  .footer-input-wrap { max-width: 720px; margin-bottom: 96px; }
+  .footer-input {
+    width: 100%; background: transparent; border: none; border-bottom: 4px solid var(--accent-fg);
+    color: var(--accent-fg); font-family: inherit; font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em;
+    padding: 16px 0; outline: none;
+  }
+  .footer-input::placeholder { color: rgba(0,0,0,0.3); }
+  .footer-input:focus { border-bottom-color: var(--bg); }
+  .footer-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 48px;
+    border-top: 2px solid var(--accent-fg); padding-top: 48px;
+  }
+  @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(4, 1fr); } }
+  .footer-col h4 { font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 20px; }
+  .footer-col a { display: block; color: var(--accent-fg); text-decoration: none; font-size: 1rem; margin-bottom: 12px; transition: opacity 200ms var(--ease); }
+  .footer-col a:hover { opacity: 0.6; }
+  .footer-bottom {
+    border-top: 2px solid var(--accent-fg); margin-top: 64px; padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+    font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+  }
+
+  /* ============ SCROLL ANIMATIONS ============ */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 600ms var(--ease), transform 600ms var(--ease); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ============ RESPONSIVE NAV ============ */
+  .nav-toggle { display: none; background: none; border: 2px solid var(--border); color: var(--fg); width: 44px; height: 44px; cursor: pointer; font-size: 1.25rem; }
+  @media (max-width: 768px) {
+    .nav-toggle { display: block; }
+    .nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; background: var(--bg); border-bottom: 2px solid var(--border); padding: 24px; gap: 16px; }
+    .nav-links.open { display: flex; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+    .scroll-hint { animation: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="noise" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">KINETIC<span>.</span></div>
+    <div class="nav-links" id="navLinks">
+      <a href="#work">Work</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn btn-primary" style="height:40px;padding:0 20px;font-size:0.875rem;">Get Started</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+  <div class="hero-content" id="heroContent">
+    <h1 class="display">
+      <span class="line">MOTION</span>
+      <span class="line accent-text">FIRST</span>
+      <span class="line">DESIGN</span>
+    </h1>
+    <p class="hero-sub">Typography is not decoration — it is the entire visual structure. Text becomes image, headline becomes hero, motion becomes rhythm.</p>
+    <div class="hero-cta">
+      <a href="#pricing" class="btn btn-primary">Start Moving</a>
+      <a href="#work" class="btn btn-outline">View Work</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll ↓</div>
+</header>
+
+<!-- STATS MARQUEE -->
+<section style="padding:0;">
+  <div class="marquee stats-marquee fast">
+    <div class="marquee-track">
+      <div class="stat-item"><span class="stat-star">✦</span><span class="stat-num">98%</span><span class="stat-label">Uptime</span></div>
+      <div class="stat-item"><span class="stat-star">✦</span><span class="stat-num">2M+</span><span class="stat-label">Users</span></div>
+      <div class="stat-item"><span class="stat-star">✦</span><span class="stat-num">60fps</span><span class="stat-label">Always</span></div>
+      <div class="stat-item"><span class="stat-star">✦</span><span class="stat-num">∞</span><span class="stat-label">Marquees</span></div>
+      <div class="stat-item"><span class="stat-star">✦</span><span class="stat-num">24/7</span><span class="stat-label">In Motion</span></div>
+      <!-- duplicate for loop -->
+      <div class="stat-item"><span class="stat-star">✦</span><span class="stat-num">98%</span><span class="stat-label">Uptime</span></div>
+      <div class="stat-item"><span class="stat-star">✦</span><span class="stat-num">2M+</span><span class="stat-label">Users</span></div>
+      <div class="stat-item"><span class="stat-star">✦</span><span class="stat-num">60fps</span><span class="stat-label">Always</span></div>
+      <div class="stat-item"><span class="stat-star">✦</span><span class="stat-num">∞</span><span class="stat-label">Marquees</span></div>
+      <div class="stat-item"><span class="stat-star">✦</span><span class="stat-num">24/7</span><span class="stat-label">In Motion</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT DETAIL -->
+<section id="work">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">— The Detail</p>
+      <h2 class="display" style="margin-top:16px;">Built For<br><span class="accent-text">Velocity</span></h2>
+    </div>
+    <div class="product-grid">
+      <div class="product-col reveal">
+        <span class="bg-number" aria-hidden="true">01</span>
+        <h3 class="display">Relentless Motion</h3>
+        <p>Marquees scroll endlessly. Numbers tower at 12rem. Every hover state is dramatic — cards flood with color, text translates across the screen, borders glow with accent hues.</p>
+        <p>The page pulses with kinetic energy. Nothing is ever truly still.</p>
+      </div>
+      <div class="product-col reveal">
+        <span class="bg-number" aria-hidden="true">02</span>
+        <h3 class="display">Screaming Scale</h3>
+        <p>Headlines are 8-10x larger than body text, not the typical 2x. Where others add subtle shadows, this style stays brutally flat with sharp borders and hard edges.</p>
+        <p>Confidence through scale. Urgency through motion. Clarity through contrast.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEXT MARQUEE divider -->
+<section style="padding:0;">
+  <div class="marquee">
+    <div class="marquee-track" style="font-size:clamp(2rem,6vw,5rem);font-weight:700;text-transform:uppercase;letter-spacing:-0.03em;line-height:1;padding:24px 0;">
+      <span>BRUTALIST ENERGY ✦</span>
+      <span class="accent-text">RHYTHMIC MOVEMENT ✦</span>
+      <span>AGGRESSIVE SCALE ✦</span>
+      <span class="accent-text">HIGH CONTRAST ✦</span>
+      <span>BRUTALIST ENERGY ✦</span>
+      <span class="accent-text">RHYTHMIC MOVEMENT ✦</span>
+      <span>AGGRESSIVE SCALE ✦</span>
+      <span class="accent-text">HIGH CONTRAST ✦</span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES (sticky) -->
+<section id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">— Features</p>
+      <h2 class="display" style="margin-top:16px;">What<br><span class="accent-text">Moves</span><br>You</h2>
+    </div>
+    <div class="features-wrap">
+      <div class="feature-card reveal">
+        <span class="feature-num">01</span>
+        <div class="feature-body">
+          <h3 class="display">Infinite Marquees</h3>
+          <p>GPU-accelerated scrolling that never stops. No gradients — raw, continuous motion with hairline dividers. Fast for stats, slower for reading.</p>
+        </div>
+      </div>
+      <div class="feature-card reveal" style="top:160px;">
+        <span class="feature-num">02</span>
+        <div class="feature-body">
+          <h3 class="display">Viewport Typography</h3>
+          <p>Fluid scaling using clamp() from 3rem to 14rem. Headlines fill the screen. Viewport-width units create immediate scale and drama.</p>
+        </div>
+      </div>
+      <div class="feature-card reveal" style="top:192px;">
+        <span class="feature-num">03</span>
+        <div class="feature-body">
+          <h3 class="display">Hard Inversions</h3>
+          <p>Cards completely flip color scheme on hover — black to yellow, white to black. Clean transitions, not gradual. The brutalist way.</p>
+        </div>
+      </div>
+      <div class="feature-card reveal" style="top:224px;">
+        <span class="feature-num">04</span>
+        <div class="feature-body">
+          <h3 class="display">Scroll Triggered</h3>
+          <p>Scale and opacity transforms fire as you scroll. Hero zooms out, cards stack and overlap. Every element feels alive through reactive motion.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="background:var(--bg);">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">— Process</p>
+      <h2 class="display" style="margin-top:16px;">How It<br><span class="accent-text">Works</span></h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step reveal">
+        <span class="step-num" aria-hidden="true">01</span>
+        <div>
+          <h3 class="display">Connect</h3>
+          <p>Plug in your content. The system extracts typography, structure, and rhythm automatically.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <span class="step-num" aria-hidden="true">02</span>
+        <div>
+          <h3 class="display">Animate</h3>
+          <p>Marquees spin up, scroll triggers activate, hover states come alive. Motion is baked in.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <span class="step-num" aria-hidden="true">03</span>
+        <div>
+          <h3 class="display">Deploy</h3>
+          <p>Ship a page that screams. High contrast, aggressive scale, relentless energy — live.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">— Benefits</p>
+      <h2 class="display" style="margin-top:16px;">Why<br><span class="accent-text">Kinetic</span></h2>
+    </div>
+    <div class="benefits-list">
+      <div class="benefit reveal">
+        <h3>Energy</h3>
+        <p>The page pulses with kinetic energy. Nothing is ever truly still — motion becomes rhythm.</p>
+      </div>
+      <div class="benefit reveal">
+        <h3>Clarity</h3>
+        <p>High contrast and aggressive uppercase treatment. The design screams rather than whispers.</p>
+      </div>
+      <div class="benefit reveal">
+        <h3>Impact</h3>
+        <p>Headlines at 200px+, numbers at 12rem. Immediate, unmissable, unforgettable scale.</p>
+      </div>
+      <div class="benefit reveal">
+        <h3>Speed</h3>
+        <p>GPU-accelerated transforms. 60fps marquees. Snappy 200-300ms micro-interactions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">— Pricing</p>
+      <h2 class="display" style="margin-top:16px;">Pick Your<br><span class="accent-text">Pace</span></h2>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <span class="price-tier">Starter</span>
+        <div class="price-amount">$0<span>/mo</span></div>
+        <p style="color:var(--muted-fg);">For getting off the ground.</p>
+        <ul class="price-features">
+          <li>3 marquees</li>
+          <li>Basic scroll triggers</li>
+          <li>Community support</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline" style="margin-top:auto;">Start Free</a>
+      </div>
+      <div class="price-card featured reveal">
+        <span class="price-tier">Pro ✦ Popular</span>
+        <div class="price-amount">$29<span>/mo</span></div>
+        <p style="color:var(--muted-fg);">For teams in full motion.</p>
+        <ul class="price-features">
+          <li>Unlimited marquees</li>
+          <li>Advanced scroll triggers</li>
+          <li>Custom accent colors</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" style="margin-top:auto;">Go Pro</a>
+      </div>
+      <div class="price-card reveal">
+        <span class="price-tier">Enterprise</span>
+        <div class="price-amount">$99<span>/mo</span></div>
+        <p style="color:var(--muted-fg);">For relentless velocity.</p>
+        <ul class="price-features">
+          <li>Everything in Pro</li>
+          <li>White-label branding</li>
+          <li>Dedicated engineer</li>
+          <li>SLA guarantee</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline" style="margin-top:auto;">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS MARQUEE -->
+<section style="padding:0;">
+  <div class="section-head reveal" style="padding:128px 0 48px;">
+    <div class="container">
+      <p class="eyebrow">— Testimonials</p>
+      <h2 class="display" style="margin-top:16px;">Loud<br><span class="accent-text">Praise</span></h2>
+    </div>
+  </div>
+  <div class="marquee testimonials-marquee slow">
+    <div class="marquee-track">
+      <div class="testimonial-card">
+        <p>"Never seen a page with this much energy. It screams and we love it."</p>
+        <div class="testimonial-author">
+          <div class="author-box"></div>
+          <div><div class="author-name">Maya Chen</div><div class="author-role">Creative Director</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p>"The marquees never stop. The scale is insane. Brutalist perfection."</p>
+        <div class="testimonial-author">
+          <div class="author-box"></div>
+          <div><div class="author-name">Dev Park</div><div class="author-role">Design Lead</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p>"High contrast, aggressive uppercase, relentless motion. Exactly us."</p>
+        <div class="testimonial-author">
+          <div class="author-box"></div>
+          <div><div class="author-name">Ria Sol</div><div class="author-role">Founder</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p>"Our conversions jumped 40%. The page just refuses to be ignored."</p>
+        <div class="testimonial-author">
+          <div class="author-box"></div>
+          <div><div class="author-name">Tom Voss</div><div class="author-role">Head of Growth</div></div>
+        </div>
+      </div>
+      <!-- duplicate -->
+      <div class="testimonial-card">
+        <p>"Never seen a page with this much energy. It screams and we love it."</p>
+        <div class="testimonial-author">
+          <div class="author-box"></div>
+          <div><div class="author-name">Maya Chen</div><div class="author-role">Creative Director</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p>"The marquees never stop. The scale is insane. Brutalist perfection."</p>
+        <div class="testimonial-author">
+          <div class="author-box"></div>
+          <div><div class="author-name">Dev Park</div><div class="author-role">Design Lead</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p>"High contrast, aggressive uppercase, relentless motion. Exactly us."</p>
+        <div class="testimonial-author">
+          <div class="author-box"></div>
+          <div><div class="author-name">Ria Sol</div><div class="author-role">Founder</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p>"Our conversions jumped 40%. The page just refuses to be ignored."</p>
+        <div class="testimonial-author">
+          <div class="author-box"></div>
+          <div><div class="author-name">Tom Voss</div><div class="author-role">Head of Growth</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="container" style="max-width:1100px;">
+    <div class="section-head reveal">
+      <p class="eyebrow">— FAQ</p>
+      <h2 class="display" style="margin-top:16px;">Questions<br><span class="accent-text">Answered</span></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q">Is it really always moving?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Yes. Marquees scroll endlessly via GPU-accelerated transforms. Scroll triggers and hover states add reactive motion. The only stillness is what you choose to read.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Does it respect reduced motion?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Absolutely. We wrap all marquees and scroll animations in prefers-reduced-motion checks, providing a static fallback that maintains layout and hierarchy.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Why is everything uppercase?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Uppercase with tight tracking creates the poster-like, bold aesthetic. It yells confidence. Body text stays normal case for readability.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Can I change the accent color?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>The acid yellow is signature, but Pro and Enterprise plans unlock custom accent colors while keeping the brutalist contrast system intact.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" id="contact">
+  <div class="container">
+    <h2 class="footer-headline">LET'S<br>MOVE<br>TOGETHER.</h2>
+    <div class="footer-input-wrap">
+      <input type="email" class="footer-input" placeholder="Enter your email" aria-label="Email">
+    </div>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#work">Showcase</a>
+        <a href="#">Changelog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Careers</a>
+        <a href="#">Blog</a>
+        <a href="#">Press</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#">Docs</a>
+        <a href="#">Guides</a>
+        <a href="#">Support</a>
+        <a href="#">Status</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Security</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>KINETIC © 2024 — Motion First</span>
+      <span>Made With Relentless Energy</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Scroll reveal
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // Hero parallax (scale + opacity on scroll)
+  const heroContent = document.getElementById('heroContent');
+  const hero = document.getElementById('hero');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduced) {
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const heroHeight = hero.offsetHeight;
+      const progress = Math.min(scrollY / heroHeight, 1);
+      const scale = 1 + progress * 0.2;
+      const opacity = 1 - progress;
+      heroContent.style.transform = `scale(${scale})`;
+      heroContent.style.opacity = opacity;
+    }, { passive: true });
+  }
+</script>
+</body>
+</html>

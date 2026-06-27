@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academia — A Scholarly Reading Room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --background:#1C1714;
+    --background-alt:#251E19;
+    --foreground:#E8DFD4;
+    --muted:#3D332B;
+    --muted-foreground:#9C8B7A;
+    --border:#4A3F35;
+    --accent:#C9A962;
+    --accent-secondary:#8B2635;
+    --accent-foreground:#1C1714;
+    --brass-gradient:linear-gradient(180deg,#D4B872 0%,#C9A962 50%,#B8953F 100%);
+    --engraved:1px 1px 1px rgba(0,0,0,.4),-1px -1px 1px rgba(255,255,255,.1);
+    --sepia:sepia(.6) contrast(.95) brightness(.9);
+    --arch:40% 40% 0 0 / 20% 20% 0 0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--background);
+    color:var(--foreground);
+    font-family:'Crimson Pro',serif;
+    font-size:18px;
+    line-height:1.625;
+    overflow-x:hidden;
+    position:relative;
+  }
+  /* Texture & vignette overlays */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;z-index:9999;
+    opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+  body::after{
+    content:"";
+    position:fixed;inset:0;pointer-events:none;z-index:9998;
+    background:radial-gradient(ellipse at center,transparent 0%,transparent 50%,rgba(28,23,20,.45) 100%);
+  }
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1152px;margin:0 auto;padding:0 24px}
+  .container-wide{max-width:1280px;margin:0 auto;padding:0 24px}
+
+  /* Typography */
+  h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:500;line-height:1.1;color:var(--foreground)}
+  .display{font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.25em;font-weight:500;color:var(--accent)}
+  .brass{color:var(--accent)}
+  .crimson{color:var(--accent-secondary)}
+
+  /* Ornate divider */
+  .ornate-divider{position:relative;height:1px;width:100%;max-width:480px;margin:0 auto;
+    background:linear-gradient(90deg,transparent 0%,#4A3F35 20%,#C9A962 50%,#4A3F35 80%,transparent 100%)}
+  .ornate-divider::before{content:"\2736";position:absolute;left:50%;top:50%;
+    transform:translate(-50%,-50%);color:var(--accent);font-size:14px;background:var(--background);padding:0 14px}
+
+  /* Corner flourish */
+  .corner-flourish{position:relative}
+  .corner-flourish::before,.corner-flourish::after{content:"";position:absolute;width:24px;height:24px;border:1.5px solid var(--accent);opacity:.6;transition:opacity .3s ease}
+  .corner-flourish::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+  .corner-flourish::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
+  .corner-flourish:hover::before,.corner-flourish:hover::after{opacity:1}
+  .ornate-frame{position:relative}
+  .ornate-frame::before,.ornate-frame::after{content:"";position:absolute;width:40px;height:40px;border:2px solid var(--accent)}
+  .ornate-frame::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+  .ornate-frame::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.15em;font-size:12px;font-weight:600;
+    padding:0 32px;height:48px;border-radius:4px;cursor:pointer;border:none;
+    transition:all .3s ease;position:relative;
+  }
+  .btn-primary{
+    background:var(--brass-gradient);color:var(--accent-foreground);
+    text-shadow:var(--engraved);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.2),inset 0 -1px 0 rgba(0,0,0,.2),0 2px 8px rgba(0,0,0,.3);
+  }
+  .btn-primary:hover{filter:brightness(1.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),inset 0 -1px 0 rgba(0,0,0,.2),0 4px 12px rgba(201,169,98,.4)}
+  .btn-secondary{background:transparent;color:var(--accent);border:2px solid var(--accent)}
+  .btn-secondary:hover{background:var(--accent-secondary);border-color:var(--accent-secondary);color:var(--foreground)}
+  .btn-ghost{background:transparent;color:var(--accent);padding:0 8px;height:auto}
+  .btn-ghost:hover{color:#D4B872;text-decoration:underline;text-underline-offset:4px}
+
+  /* Navigation */
+  nav.topbar{
+    position:sticky;top:0;z-index:100;
+    background:rgba(28,23,20,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{display:flex;align-items:center;gap:12px;font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.2em;font-size:14px;color:var(--foreground)}
+  .logo-mark{width:36px;height:36px;border:1.5px solid var(--accent);border-radius:50%;display:grid;place-items:center;color:var(--accent);font-size:18px}
+  .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+  .nav-links a{font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.2em;font-size:11px;color:var(--muted-foreground);transition:color .3s ease}
+  .nav-links a:hover{color:var(--accent);letter-spacing:.25em}
+  .nav-cta{display:flex;gap:12px;align-items:center}
+  .menu-toggle{display:none;background:none;border:none;color:var(--accent);font-size:24px;cursor:pointer}
+
+  /* Hero */
+  .hero{padding:96px 0 120px;position:relative}
+  .hero-grid{display:grid;grid-template-columns:7fr 5fr;gap:64px;align-items:center}
+  .hero-left{position:relative}
+  .establishment{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+  .establishment .line{flex:0 0 48px;height:1px;background:var(--accent)}
+  .establishment span{font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.3em;font-size:10px;color:var(--accent)}
+  .hero h1{font-size:clamp(48px,6vw,72px);font-weight:400;letter-spacing:-.01em;margin-bottom:24px}
+  .hero h1 .brass{font-style:italic;color:var(--accent)}
+  .hero-lead{font-size:19px;color:var(--muted-foreground);margin-bottom:36px;max-width:520px}
+  .hero-lead::first-letter{
+    font-family:'Cinzel',serif;font-size:72px;line-height:.8;float:left;margin-right:16px;margin-top:6px;
+    color:var(--accent);text-shadow:2px 2px 4px rgba(0,0,0,.3);
+  }
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+  .hero-right{position:relative}
+  .arch-img{
+    border-radius:var(--arch);overflow:hidden;
+    border:2px solid var(--accent);position:relative;
+    box-shadow:0 8px 24px rgba(0,0,0,.4);
+  }
+  .arch-img img{width:100%;height:560px;object-fit:cover;display:block;filter:var(--sepia);transition:filter .7s ease,transform .7s ease}
+  .arch-img:hover img{filter:sepia(0) contrast(1) brightness(1);transform:scale(1.05)}
+  .arch-img::after{content:"";position:absolute;inset:0;border-radius:var(--arch);box-shadow:inset 0 0 60px rgba(28,23,20,.5);pointer-events:none}
+
+  /* Stats band */
+  .stats{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(37,30,25,.4)}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .stat{padding:48px 32px;text-align:center;border-right:1px solid var(--border);transition:background .3s ease;cursor:default}
+  .stat:last-child{border-right:none}
+  .stat:hover{background:rgba(28,23,20,.5)}
+  .stat:hover .stat-num{transform:scale(1.1);color:#D4B872}
+  .stat-num{font-family:'Cinzel',serif;font-size:48px;font-weight:500;color:var(--accent);transition:transform .5s ease,color .5s ease;line-height:1}
+  .stat-label{font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.2em;font-size:11px;color:var(--muted-foreground);margin-top:12px}
+
+  /* Section heading */
+  .section{padding:96px 0}
+  .section-head{text-align:center;margin-bottom:64px}
+  .section-head .display{font-size:11px;margin-bottom:16px}
+  .section-head h2{font-size:clamp(36px,4.5vw,56px);font-weight:400}
+  .section-head .sub{font-size:18px;color:var(--muted-foreground);max-width:560px;margin:20px auto 0}
+
+  /* Proclamation */
+  .proclamation{background:rgba(37,30,25,.5);border:1px solid var(--border);border-radius:4px;padding:64px 48px;max-width:896px;margin:0 auto;position:relative;text-align:center}
+  .proc-label{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:24px}
+  .proc-label .line{width:48px;height:1px;background:var(--accent)}
+  .proc-label span{font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.3em;font-size:10px;color:var(--accent)}
+  .proclamation h2{font-size:clamp(36px,4vw,48px);margin-bottom:24px}
+  .proclamation p{font-size:18px;color:var(--muted-foreground);text-align:left;margin-bottom:20px;max-width:680px;margin-left:auto;margin-right:auto}
+  .proclamation p:first-of-type::first-letter{
+    font-family:'Cinzel',serif;font-size:72px;line-height:.8;float:left;margin-right:16px;margin-top:6px;color:var(--accent);text-shadow:2px 2px 4px rgba(0,0,0,.3)
+  }
+
+  /* Features */
+  .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  .feature-card{
+    background:var(--background-alt);border:1px solid var(--border);border-radius:4px;padding:40px 32px;
+    position:relative;transition:border-color .5s ease,box-shadow .5s ease;
+  }
+  .feature-card:hover{border-color:rgba(201,169,98,.5);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+  .feature-card:hover .corner-flourish::before,.feature-card:hover .corner-flourish::after{opacity:1}
+  .feat-icon{width:56px;height:56px;border-radius:50%;border:1px solid var(--accent);background:var(--background);display:grid;place-items:center;margin-bottom:24px}
+  .feat-icon svg{width:24px;height:24px;stroke:var(--accent);fill:none;stroke-width:1.5}
+  .feat-num{font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.3em;font-size:10px;color:var(--accent);margin-bottom:8px}
+  .feature-card h3{font-size:26px;margin-bottom:12px}
+  .feature-card p{color:var(--muted-foreground);font-size:16px}
+
+  /* Timeline */
+  .timeline{position:relative;max-width:896px;margin:0 auto}
+  .timeline::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--accent);transform:translateX(-50%)}
+  .tl-step{display:grid;grid-template-columns:1fr 80px 1fr;align-items:center;margin-bottom:48px}
+  .tl-step:last-child{margin-bottom:0}
+  .tl-medallion{width:64px;height:64px;border-radius:50%;border:2px solid var(--accent);background:var(--background);display:grid;place-items:center;font-family:'Cinzel',serif;color:var(--accent);font-size:20px;margin:0 auto;position:relative;z-index:2}
+  .tl-content{padding:24px 32px}
+  .tl-step:nth-child(odd) .tl-content:first-child{text-align:right}
+  .tl-step:nth-child(odd) .tl-content:last-child{visibility:hidden}
+  .tl-step:nth-child(even) .tl-content:first-child{visibility:hidden}
+  .tl-step:nth-child(even) .tl-content:last-child{text-align:left}
+  .tl-content h3{font-size:24px;margin-bottom:8px}
+  .tl-content p{color:var(--muted-foreground);font-size:16px}
+  .tl-content .num{font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.3em;font-size:10px;color:var(--accent);margin-bottom:8px;display:block}
+
+  /* Pricing */
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+  .price-card{
+    background:var(--background-alt);border:1px solid var(--border);border-radius:4px;padding:40px 32px;
+    position:relative;display:flex;flex-direction:column;transition:border-color .5s ease,box-shadow .5s ease;
+  }
+  .price-card:hover{border-color:rgba(201,169,98,.5);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+  .price-card.featured{border:2px solid var(--accent);box-shadow:0 0 0 4px rgba(201,169,98,.15),0 8px 24px rgba(0,0,0,.4)}
+  .wax-seal{
+    position:absolute;top:-22px;right:28px;width:48px;height:48px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#B5334A 0%,#8B2635 60%,#5C1A24 100%);
+    display:grid;place-items:center;color:#E8DFD4;font-size:18px;
+    box-shadow:inset 0 2px 4px rgba(255,255,255,.2),inset 0 -2px 4px rgba(0,0,0,.4),0 4px 8px rgba(0,0,0,.5);
+  }
+  .price-tier{font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.25em;font-size:11px;color:var(--accent);margin-bottom:8px}
+  .price-card h3{font-size:28px;margin-bottom:16px}
+  .price-amount{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:400;color:var(--foreground);line-height:1;margin-bottom:6px}
+  .price-amount .per{font-size:16px;color:var(--muted-foreground);font-style:italic}
+  .price-desc{color:var(--muted-foreground);font-size:15px;margin-bottom:28px;border-bottom:1px solid var(--border);padding-bottom:24px}
+  .price-features{list-style:none;flex:1;margin-bottom:28px}
+  .price-features li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;color:var(--foreground);font-size:15px}
+  .price-features li svg{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:2;flex-shrink:0;margin-top:4px}
+  .price-card .btn{width:100%}
+
+  /* Testimonials */
+  .testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px}
+  .testi-card{background:var(--background-alt);border:1px solid var(--border);border-radius:4px;padding:40px 32px;position:relative;transition:border-color .5s ease}
+  .testi-card:hover{border-color:rgba(201,169,98,.5)}
+  .testi-quote{font-family:'Cormorant Garamond',serif;font-size:72px;color:var(--accent);line-height:.5;height:32px;opacity:.5}
+  .testi-stars{display:flex;gap:4px;margin:12px 0 16px;color:var(--accent)}
+  .testi-stars svg{width:16px;height:16px;fill:var(--accent)}
+  .testi-card blockquote{font-style:italic;font-size:18px;color:var(--foreground);line-height:1.6;margin-bottom:24px}
+  .testi-author{display:flex;align-items:center;gap:14px}
+  .testi-avatar{width:48px;height:48px;border-radius:50%;overflow:hidden;border:1px solid var(--border)}
+  .testi-avatar img{width:100%;height:100%;object-fit:cover;filter:var(--sepia)}
+  .testi-name{font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.15em;font-size:12px;color:var(--foreground)}
+  .testi-role{font-size:13px;color:var(--muted-foreground);font-style:italic}
+
+  /* FAQ */
+  .faq-list{max-width:896px;margin:0 auto}
+  .faq-item{border-bottom:1px solid var(--border)}
+  .faq-q{width:100%;background:none;border:none;text-align:left;cursor:pointer;padding:24px 0;display:flex;align-items:center;gap:16px;color:var(--foreground);font-family:'Cormorant Garamond',serif;font-size:22px}
+  .faq-num{font-family:'Cinzel',serif;color:var(--accent);font-size:12px;letter-spacing:.2em;min-width:32px}
+  .faq-toggle{margin-left:auto;width:32px;height:32px;border:1px solid var(--accent);border-radius:4px;display:grid;place-items:center;flex-shrink:0;transition:transform .3s ease,background .3s ease}
+  .faq-toggle svg{width:14px;height:14px;stroke:var(--accent);fill:none;stroke-width:2}
+  .faq-item.open .faq-toggle{transform:rotate(180deg);background:var(--accent)}
+  .faq-item.open .faq-toggle svg{stroke:var(--accent-foreground)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+  .faq-a-inner{padding:0 0 24px 48px;color:var(--muted-foreground);font-size:16px;max-width:720px}
+
+  /* Blog */
+  .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  .blog-card{cursor:pointer}
+  .blog-img{border-radius:var(--arch);overflow:hidden;border:1px solid var(--border);margin-bottom:20px}
+  .blog-img img{width:100%;height:240px;object-fit:cover;display:block;filter:var(--sepia);transition:filter .7s ease,transform .7s ease}
+  .blog-card:hover .blog-img img{filter:sepia(0) contrast(1) brightness(1);transform:scale(1.05)}
+  .blog-meta{display:flex;align-items:center;gap:12px;font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.2em;font-size:10px;color:var(--muted-foreground);margin-bottom:10px}
+  .blog-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--muted-foreground)}
+  .blog-card h3{font-size:22px;transition:color .3s ease}
+  .blog-card:hover h3{color:var(--accent)}
+
+  /* CTA + Footer */
+  .cta-section{border-top:1px solid var(--border);padding:80px 0}
+  .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .cta-grid h2{font-size:clamp(32px,4vw,44px);font-weight:400}
+  .cta-form{display:flex;gap:12px}
+  .cta-form input{
+    flex:1;height:48px;background:var(--background-alt);border:1px solid var(--border);border-radius:4px;
+    padding:0 16px;color:var(--foreground);font-family:'Crimson Pro',serif;font-size:16px;
+  }
+  .cta-form input::placeholder{color:var(--muted-foreground);font-style:italic}
+  .cta-form input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(201,169,98,.2)}
+
+  footer{border-top:1px solid var(--border);padding:64px 0 32px;background:rgba(37,30,25,.3)}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+  .footer-brand .logo{margin-bottom:16px}
+  .footer-brand p{color:var(--muted-foreground);font-size:15px;max-width:320px}
+  .footer-col h4{font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.2em;font-size:11px;color:var(--accent);margin-bottom:18px;font-weight:600}
+  .footer-col ul{list-style:none}
+  .footer-col li{margin-bottom:10px}
+  .footer-col a{color:var(--muted-foreground);font-size:15px;transition:color .3s ease}
+  .footer-col a:hover{color:var(--accent)}
+  .footer-bottom{border-top:1px solid var(--border);padding-top:32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  .footer-bottom p{font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.2em;font-size:10px;color:var(--muted-foreground)}
+  .footer-social{display:flex;gap:14px}
+  .footer-social a{width:36px;height:36px;border:1px solid var(--border);border-radius:50%;display:grid;place-items:center;color:var(--muted-foreground);transition:all .3s ease}
+  .footer-social a:hover{border-color:var(--accent);color:var(--accent)}
+  .footer-social svg{width:16px;height:16px;fill:currentColor}
+
+  /* Reveal animation */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease-out,transform .7s ease-out}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+
+  /* Responsive */
+  @media(max-width:1024px){
+    .hero-grid{grid-template-columns:1fr;gap:48px}
+    .arch-img img{height:480px}
+    .features-grid,.pricing-grid,.blog-grid{grid-template-columns:repeat(2,1fr)}
+    .footer-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:768px){
+    body{font-size:16px}
+    .nav-links{display:none}
+    .menu-toggle{display:block}
+    .nav-links.open{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;background:var(--background);border-bottom:1px solid var(--border);padding:24px;gap:20px}
+    .hero{padding:48px 0 64px}
+    .section{padding:64px 0}
+    .stats-grid{grid-template-columns:repeat(2,1fr)}
+    .stat{border-right:none;border-bottom:1px solid var(--border)}
+    .stat:nth-child(2){border-right:none}
+    .stat:nth-child(odd){border-right:1px solid var(--border)}
+    .features-grid,.pricing-grid,.blog-grid,.testi-grid{grid-template-columns:1fr}
+    .price-card.featured{transform:none}
+    .timeline::before{left:32px}
+    .tl-step{grid-template-columns:64px 1fr;gap:24px}
+    .tl-step:nth-child(odd) .tl-content:first-child,.tl-step:nth-child(even) .tl-content:first-child{visibility:visible;text-align:left!important;grid-column:2}
+    .tl-step:nth-child(odd) .tl-content:last-child,.tl-step:nth-child(even) .tl-content:last-child{display:none}
+    .tl-step .tl-content:first-child{display:none}
+    .cta-grid{grid-template-columns:1fr;gap:24px}
+    .cta-form{flex-direction:column}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .proclamation{padding:40px 24px}
+    .price-card{padding:32px 24px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-mark">A</span>
+      <span>Academia</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features">Curriculum</a></li>
+      <li><a href="#pricing">Tuition</a></li>
+      <li><a href="#testimonials">Alumni</a></li>
+      <li><a href="#blog">Journal</a></li>
+      <li><a href="#faq">Inquiries</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#cta" class="btn btn-primary">Apply Now</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">&#9776;</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="container ornate-frame" style="padding:0 24px">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="establishment">
+          <span class="line"></span>
+          <span>Established MDCCCLXXXIV</span>
+        </div>
+        <h1>The <span class="brass">Pursuit</span> of<br>Lasting Knowledge</h1>
+        <p class="hero-lead">Within these gilded halls, scholars have gathered for over a century to study the humanities, the sciences, and the arts. Join a tradition where every page turned adds another line to the long manuscript of human understanding.</p>
+        <div class="hero-ctas">
+          <a href="#pricing" class="btn btn-primary">Begin Your Studies</a>
+          <a href="#features" class="btn btn-secondary">View the Prospectus</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="arch-img">
+          <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=900&q=80" alt="Grand library reading room">
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Stats -->
+<section class="stats">
+  <div class="container-wide">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-num">139</div>
+        <div class="stat-label">Years of Instruction</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">42</div>
+        <div class="stat-label">Disciplines Offered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">28K</div>
+        <div class="stat-label">Volumes in Stacks</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">96%</div>
+        <div class="stat-label">Graduate Placement</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Proclamation -->
+<section class="section">
+  <div class="container">
+    <div class="proclamation ornate-frame reveal">
+      <div class="proc-label">
+        <span class="line"></span>
+        <span>Volume I &middot; A Proclamation</span>
+        <span class="line"></span>
+      </div>
+      <h2>Scholarship is a Slow, Deliberate Craft</h2>
+      <div class="ornate-divider" style="margin:24px auto"></div>
+      <p>In an age that prizes speed above all else, we hold fast to the conviction that true understanding cannot be rushed. Knowledge, like fine wine or well-bound leather, improves with patience and care. Here, the lamp is lit at dusk and burns long into the night.</p>
+      <p>Our faculty are not merely instructors but custodians of inquiry. They invite you into a conversation that began centuries before any of us arrived and will, with your contribution, continue long after we depart. To study at Academia is to accept an invitation into that unbroken dialogue.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section" id="features" style="border-top:1px solid var(--border)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="display">Volume II &middot; The Curriculum</div>
+      <h2>A Course of Study Worthy of Your Years</h2>
+      <p class="sub">Three pillars uphold our academic tradition, each refined by generations of dedicated scholars.</p>
+    </div>
+    <div class="features-grid">
+      <article class="feature-card corner-flourish reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+        <div class="feat-num">I &middot; The Humanities</div>
+        <h3>Letters &amp; Philosophy</h3>
+        <p>Immerse yourself in the great texts of antiquity, from Aristotle to Austen, taught in small seminars of no more than twelve minds.</p>
+      </article>
+      <article class="feature-card corner-flourish reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+        <div class="feat-num">II &middot; The Sciences</div>
+        <h3>Natural Philosophy</h3>
+        <p>From celestial mechanics to molecular biology, our laboratories have hosted discoveries that reshaped how we read the natural world.</p>
+      </article>
+      <article class="feature-card corner-flourish reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
+        <div class="feat-num">III &middot; The Arts</div>
+        <h3>Composition &amp; Form</h3>
+        <p>Studios for painting, sculpture, and the musical arts, where craft is taught hand-in-hand with theory and critique.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Timeline / How It Works -->
+<section class="section" style="border-top:1px solid var(--border);background:rgba(37,30,25,.3)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="display">Volume III &middot; The Method</div>
+      <h2>How a Scholar is Made</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-step reveal">
+        <div class="tl-content">
+          <span class="num">Step I</span>
+          <h3>The Entrance Examination</h3>
+          <p>A written discourse on a chosen text, evaluated by a panel of three resident fellows.</p>
+        </div>
+        <div class="tl-medallion">I</div>
+        <div class="tl-content"></div>
+      </div>
+      <div class="tl-step reveal">
+        <div class="tl-content"></div>
+        <div class="tl-medallion">II</div>
+        <div class="tl-content">
+          <span class="num">Step II</span>
+          <h3>The Apprenticeship</h3>
+          <p>Three years of guided study under a personal tutor, with weekly colloquia and annual examinations.</p>
+        </div>
+      </div>
+      <div class="tl-step reveal">
+        <div class="tl-content">
+          <span class="num">Step III</span>
+          <h3>The Dissertation</h3>
+          <p>An original contribution to your field, defended orally before the assembled faculty and visiting scholars.</p>
+        </div>
+        <div class="tl-medallion">III</div>
+        <div class="tl-content"></div>
+      </div>
+      <div class="tl-step reveal">
+        <div class="tl-content"></div>
+        <div class="tl-medallion">IV</div>
+        <div class="tl-content">
+          <span class="num">Step IV</span>
+          <h3>The Conferment</h3>
+          <p>A ceremony in the Great Hall, where degrees are conferred with full academic regalia and the seal of the institution.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section" id="pricing" style="border-top:1px solid var(--border)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="display">Volume IV &middot; Tuition</div>
+      <h2>Choose Your Path of Study</h2>
+      <p class="sub">Each tier carries the same academic rigor. The difference lies in accommodation and access.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-tier">Tier I &middot; Auditor</div>
+        <h3>The Day Scholar</h3>
+        <div class="price-amount">$2,400<span class="per"> / term</span></div>
+        <p class="price-desc">For those who wish to attend lectures and use the reading rooms by day.</p>
+        <ul class="price-features">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Access to all lectures</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Day-time library access</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Weekly colloquium attendance</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Annual examination</li>
+        </ul>
+        <a href="#cta" class="btn btn-secondary">Enroll as Auditor</a>
+      </div>
+      <div class="price-card featured reveal">
+        <div class="wax-seal">&#9733;</div>
+        <div class="price-tier">Tier II &middot; Recommended</div>
+        <h3>The Resident Scholar</h3>
+        <div class="price-amount">$6,800<span class="per"> / term</span></div>
+        <p class="price-desc">Full residential membership with private study chambers and after-hours access.</p>
+        <ul class="price-features">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Everything in Day Scholar</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Private study chamber</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>24-hour library access</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Personal faculty tutor</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dining hall privileges</li>
+        </ul>
+        <a href="#cta" class="btn btn-primary">Apply for Residency</a>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-tier">Tier III &middot; Fellow</div>
+        <h3>The Life Fellow</h3>
+        <div class="price-amount">$12,000<span class="per"> / term</span></div>
+        <p class="price-desc">A lifetime appointment with full research grants and publishing privileges.</p>
+        <ul class="price-features">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Everything in Resident</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Research endowment</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Voting faculty status</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Publishing privileges</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sabbatical residence</li>
+        </ul>
+        <a href="#cta" class="btn btn-secondary">Petition for Fellowship</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section" id="testimonials" style="border-top:1px solid var(--border);background:rgba(37,30,25,.3)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="display">Volume V &middot; Alumni Voices</div>
+      <h2>Words from Our Graduates</h2>
+    </div>
+    <div class="testi-grid">
+      <article class="testi-card reveal">
+        <div class="testi-quote">&ldquo;</div>
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+        </div>
+        <blockquote>The years I spent within those gilded halls remain the most formative of my life. I did not merely earn a degree &mdash; I learned how to think slowly, and to write with care.</blockquote>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" alt="Portrait of Dr. Edmund Hartwell"></div>
+          <div>
+            <div class="testi-name">Dr. Edmund Hartwell</div>
+            <div class="testi-role">Professor Emeritus, Cambridge</div>
+          </div>
+        </div>
+      </article>
+      <article class="testi-card reveal">
+        <div class="testi-quote">&ldquo;</div>
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+        </div>
+        <blockquote>My tutor taught me that a single well-considered sentence is worth more than a volume of hurried prose. That lesson has carried me through thirty years of research.</blockquote>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&q=80" alt="Portrait of Prof. Eleanor Vance"></div>
+          <div>
+            <div class="testi-name">Prof. Eleanor Vance</div>
+            <div class="testi-role">Curator, British Museum</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq" style="border-top:1px solid var(--border)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="display">Volume VI &middot; Inquiries</div>
+      <h2>Frequently Posed Questions</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-num">I.</span><span>What are the requirements for admission?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Applicants must submit a written discourse of no fewer than two thousand words on a text of their choosing, along with two letters of recommendation from scholars familiar with their work. Shortlisted candidates are invited for an oral examination.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-num">II.</span><span>Are scholarships available?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Indeed. We offer the Brass Medal Scholarship for outstanding entrance discourses, and the Crimson Fellowship for scholars demonstrating both merit and need. Both cover full tuition and provide a modest stipend for books.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-num">III.</span><span>Can I visit the library before applying?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">The reading rooms are open to prospective scholars on the first Saturday of each month, from ten in the morning until four in the afternoon. Guided tours with a resident fellow may be arranged by written appointment.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="faq-num">IV.</span><span>What is the duration of a typical course?</span><span class="faq-toggle"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">The full course of study spans three academic years, divided into six terms. Each term runs for fourteen weeks, with a long recess between for independent research and travel to archival collections abroad.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog -->
+<section class="section" id="blog" style="border-top:1px solid var(--border);background:rgba(37,30,25,.3)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="display">Volume VII &middot; The Journal</div>
+      <h2>Dispatches from the Reading Room</h2>
+    </div>
+    <div class="blog-grid">
+      <article class="blog-card reveal">
+        <div class="blog-img"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80" alt="Old manuscript pages"></div>
+        <div class="blog-meta"><span>October XII</span><span class="dot"></span><span>By E. Hartwell</span></div>
+        <h3>On the Patience Required to Read Augustine</h3>
+      </article>
+      <article class="blog-card reveal">
+        <div class="blog-img"><img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?w=600&q=80" alt="Antique telescope"></div>
+        <div class="blog-meta"><span>September XXVIII</span><span class="dot"></span><span>By E. Vance</span></div>
+        <h3>The Astronomer as Natural Historian</h3>
+      </article>
+      <article class="blog-card reveal">
+        <div class="blog-img"><img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=600&q=80" alt="Sculpture studio"></div>
+        <div class="blog-meta"><span>September XIV</span><span class="dot"></span><span>By T. Ashworth</span></div>
+        <h3>Why Sculpture Still Teaches Us to See</h3>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="container">
+    <div class="ornate-divider" style="margin-bottom:48px"></div>
+    <div class="cta-grid">
+      <div class="reveal">
+        <div class="display" style="margin-bottom:16px">An Invitation</div>
+        <h2>Receive Our Monthly Prospectus</h2>
+      </div>
+      <form class="cta-form reveal" onsubmit="event.preventDefault();alert('Your request has been received. A printed prospectus will arrive by post.')">
+        <input type="email" placeholder="your correspondence address" required aria-label="Email">
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo"><span class="logo-mark">A</span><span>Academia</span></a>
+        <p>A scholarly institution devoted to the slow, deliberate craft of learning since the year MDCCCLXXXIV.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Faculty</h4>
+        <ul>
+          <li><a href="#">Humanities</a></li>
+          <li><a href="#">Sciences</a></li>
+          <li><a href="#">The Arts</a></li>
+          <li><a href="#">Library</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Admissions</h4>
+        <ul>
+          <li><a href="#">Apply</a></li>
+          <li><a href="#">Scholarships</a></li>
+          <li><a href="#">Visit</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Institution</h4>
+        <ul>
+          <li><a href="#">History</a></li>
+          <li><a href="#">Fellows</a></li>
+          <li><a href="#">Journal</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; MDCCCXXIV &mdash; MMXXVI &middot; Academia</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.8c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1-.7-.8-1.8-1.3-3-1.3-2.3 0-4.1 1.8-4.1 4.1 0 .3 0 .6.1.9-3.4-.2-6.4-1.8-8.4-4.3-.4.6-.6 1.3-.6 2.1 0 1.4.7 2.7 1.8 3.4-.7 0-1.3-.2-1.9-.5v.1c0 2 1.4 3.6 3.3 4-.3.1-.7.1-1 .1-.3 0-.5 0-.8-.1.5 1.6 2 2.8 3.8 2.8-1.4 1.1-3.1 1.7-5 1.7H2c1.8 1.2 4 1.9 6.3 1.9 7.5 0 11.7-6.3 11.7-11.7v-.5c.8-.6 1.5-1.3 2-2.1z"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM8.3 18.3H5.7V9.7h2.6v8.6zM7 8.5c-.8 0-1.5-.7-1.5-1.5S6.2 5.5 7 5.5s1.5.7 1.5 1.5S7.8 8.5 7 8.5zm11.3 9.8h-2.6v-4.2c0-1 0-2.3-1.4-2.3s-1.6 1.1-1.6 2.2v4.3h-2.6V9.7h2.5v1.2h.1c.3-.6 1.2-1.4 2.5-1.4 2.7 0 3.2 1.8 3.2 4.1v4.7z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.1-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.1 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.3.8-.4.4-.6.8-.8 1.3-.2.4-.3 1-.4 2.1-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.3.4.4.8.6 1.3.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.3-.8.4-.4.6-.8.8-1.3.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.3-.4-.4-.8-.6-1.3-.8-.4-.2-1-.3-2.1-.4-1.2-.1-1.6-.1-4.7-.1zm0 3.1c2.7 0 4.9 2.2 4.9 4.9s-2.2 4.9-4.9 4.9-4.9-2.2-4.9-4.9 2.2-4.9 4.9-4.9zm0 8.1c1.8 0 3.2-1.4 3.2-3.2s-1.4-3.2-3.2-3.2-3.2 1.4-3.2 3.2 1.4 3.2 3.2 3.2zm6.3-8.3c0 .6-.5 1.2-1.2 1.2-.6 0-1.2-.5-1.2-1.2 0-.6.5-1.2 1.2-1.2.7 0 1.2.5 1.2 1.2z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  const menuToggle=document.getElementById('menuToggle');
+  const navLinks=document.getElementById('navLinks');
+  menuToggle.addEventListener('click',()=>navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    const q=item.querySelector('.faq-q');
+    const a=item.querySelector('.faq-a');
+    q.addEventListener('click',()=>{
+      const open=item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o=>{
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight=null;
+      });
+      if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px'}
+    });
+  });
+
+  // Reveal on scroll
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}})
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Animated stat count-up
+  const statNums=document.querySelectorAll('.stat-num');
+  const animateNum=(el)=>{
+    const txt=el.textContent;
+    const num=parseInt(txt.replace(/\D/g,''));
+    const suffix=txt.replace(/[0-9]/g,'');
+    if(isNaN(num))return;
+    let cur=0;const step=Math.max(1,Math.ceil(num/40));
+    const tick=()=>{cur+=step;if(cur>=num){el.textContent=num+suffix;return}el.textContent=cur+suffix;requestAnimationFrame(tick)};
+    tick();
+  };
+  const statIO=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){animateNum(e.target);statIO.unobserve(e.target)}})
+  },{threshold:.5});
+  statNums.forEach(n=>statIO.observe(n));
+</script>
+</body>
+</html>

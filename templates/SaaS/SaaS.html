@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vortex — Tech Style | Minimalist Modern Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --background:#FAFAFA;
+    --foreground:#0F172A;
+    --muted:#F1F5F9;
+    --muted-foreground:#64748B;
+    --accent:#0052FF;
+    --accent-secondary:#4D7CFF;
+    --accent-foreground:#FFFFFF;
+    --border:#E2E8F0;
+    --card:#FFFFFF;
+    --ring:#0052FF;
+    --shadow-sm:0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md:0 4px 6px rgba(0,0,0,0.07);
+    --shadow-lg:0 10px 15px rgba(0,0,0,0.08);
+    --shadow-xl:0 20px 25px rgba(0,0,0,0.1);
+    --shadow-accent:0 4px 14px rgba(0,82,255,0.25);
+    --shadow-accent-lg:0 8px 24px rgba(0,82,255,0.35);
+    --gradient:linear-gradient(to right,#0052FF,#4D7CFF);
+    --gradient-diag:linear-gradient(135deg,#0052FF,#4D7CFF);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Inter",system-ui,sans-serif;
+    background:var(--background);
+    color:var(--foreground);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:"Calistoga",Georgia,serif;font-weight:400;letter-spacing:-0.01em}
+  .mono{font-family:"JetBrains Mono",monospace}
+  .container{max-width:72rem;margin:0 auto;padding:0 1.5rem;position:relative}
+  .gradient-text{
+    background:var(--gradient);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  /* Section label badge */
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:0.625rem;
+    padding:0.5rem 1.25rem;
+    border-radius:999px;
+    border:1px solid rgba(0,82,255,0.3);
+    background:rgba(0,82,255,0.05);
+    font-family:"JetBrains Mono",monospace;
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:0.15em;
+    color:var(--accent);
+  }
+  .badge .dot{
+    width:0.5rem;height:0.5rem;border-radius:50%;
+    background:var(--accent);
+    animation:pulse-dot 2s infinite;
+  }
+  @keyframes pulse-dot{
+    0%,100%{transform:scale(1);opacity:1}
+    50%{transform:scale(1.3);opacity:0.7}
+  }
+
+  /* Navigation */
+  nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(250,250,250,0.8);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:1rem 0}
+  .logo{
+    font-family:"Calistoga",serif;
+    font-size:1.5rem;
+    color:var(--foreground);
+    text-decoration:none;
+    display:flex;align-items:center;gap:0.5rem;
+  }
+  .logo-mark{
+    width:2rem;height:2rem;
+    background:var(--gradient);
+    border-radius:0.5rem;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;
+    box-shadow:var(--shadow-accent);
+  }
+  .nav-links{display:flex;gap:2rem;align-items:center}
+  .nav-links a{
+    color:var(--muted-foreground);
+    text-decoration:none;
+    font-size:0.9375rem;
+    font-weight:500;
+    transition:color 200ms ease-out;
+  }
+  .nav-links a:hover{color:var(--foreground)}
+  .nav-cta{
+    padding:0.625rem 1.25rem;
+    background:var(--gradient);
+    color:#fff;
+    border-radius:0.75rem;
+    font-weight:600;
+    font-size:0.875rem;
+    text-decoration:none;
+    transition:all 200ms ease-out;
+    box-shadow:var(--shadow-accent);
+    display:inline-flex;align-items:center;gap:0.5rem;
+  }
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:var(--shadow-accent-lg);filter:brightness(1.1)}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;
+    padding:0.875rem 1.75rem;
+    border-radius:0.75rem;
+    font-weight:600;
+    font-size:0.9375rem;
+    cursor:pointer;
+    text-decoration:none;
+    transition:all 200ms ease-out;
+    min-height:48px;
+    border:none;
+    font-family:"Inter",sans-serif;
+  }
+  .btn-primary{
+    background:var(--gradient);
+    color:#fff;
+    box-shadow:var(--shadow-accent);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-accent-lg);filter:brightness(1.1)}
+  .btn-primary:active{transform:scale(0.98)}
+  .btn-primary .arrow{transition:transform 200ms ease-out}
+  .btn-primary:hover .arrow{transform:translateX(4px)}
+  .btn-outline{
+    background:transparent;
+    border:1px solid var(--border);
+    color:var(--foreground);
+  }
+  .btn-outline:hover{background:var(--muted);border-color:rgba(0,82,255,0.3);box-shadow:var(--shadow-sm)}
+
+  /* Hero */
+  .hero{padding:5rem 0 7rem;position:relative;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;
+    top:-10%;right:-10%;
+    width:600px;height:600px;
+    background:var(--accent);
+    filter:blur(150px);
+    opacity:0.06;
+    border-radius:50%;
+    pointer-events:none;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:3rem;
+    align-items:center;
+  }
+  .hero-badge{margin-bottom:1.5rem}
+  .hero h1{
+    font-size:clamp(2.75rem,6vw,5.25rem);
+    line-height:1.05;
+    letter-spacing:-0.02em;
+    margin-bottom:1.5rem;
+  }
+  .hero-sub{
+    font-size:1.1875rem;
+    color:var(--muted-foreground);
+    line-height:1.7;
+    max-width:32rem;
+    margin-bottom:2rem;
+  }
+  .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem}
+  .hero-trust{display:flex;align-items:center;gap:1rem}
+  .avatars{display:flex}
+  .avatars .av{
+    width:2.25rem;height:2.25rem;border-radius:50%;
+    border:2px solid var(--background);
+    margin-left:-0.625rem;
+    background:var(--gradient);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:600;font-size:0.75rem;
+  }
+  .avatars .av:first-child{margin-left:0}
+  .avatars .av:nth-child(2){background:linear-gradient(135deg,#4D7CFF,#0052FF)}
+  .avatars .av:nth-child(3){background:linear-gradient(135deg,#0F172A,#475569)}
+  .avatars .av:nth-child(4){background:linear-gradient(135deg,#64748B,#94A3B8)}
+  .hero-trust-text{font-size:0.875rem;color:var(--muted-foreground)}
+  .hero-trust-text strong{color:var(--foreground)}
+
+  /* Hero visual (animated generative art) */
+  .hero-visual{
+    position:relative;
+    aspect-ratio:1;
+    max-width:32rem;
+    margin-left:auto;
+  }
+  .ring-outer{
+    position:absolute;inset:0;
+    border:2px dashed rgba(0,82,255,0.3);
+    border-radius:50%;
+    animation:rotate 60s linear infinite;
+  }
+  @keyframes rotate{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  .ring-inner{
+    position:absolute;inset:15%;
+    border:1px solid rgba(0,82,255,0.15);
+    border-radius:50%;
+  }
+  .dot-grid{
+    position:absolute;inset:25%;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1rem;
+    align-items:center;justify-items:center;
+  }
+  .dot-grid div{
+    width:0.75rem;height:0.75rem;border-radius:50%;
+    background:var(--accent);
+    opacity:0.4;
+  }
+  .hero-visual .core-card{
+    position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:55%;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:1rem;
+    padding:1.25rem;
+    box-shadow:var(--shadow-xl);
+    z-index:2;
+  }
+  .core-card .cc-head{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem}
+  .core-card .cc-dot{width:0.5rem;height:0.5rem;border-radius:50%;background:#22C55E;animation:pulse-dot 2s infinite}
+  .core-card .cc-label{font-family:"JetBrains Mono",monospace;font-size:0.7rem;color:var(--muted-foreground);text-transform:uppercase;letter-spacing:0.1em}
+  .core-card .cc-num{font-family:"Calistoga",serif;font-size:1.875rem;line-height:1;margin-bottom:0.25rem}
+  .core-card .cc-sub{font-size:0.8rem;color:var(--muted-foreground)}
+  .core-card .cc-bars{display:flex;gap:0.25rem;align-items:flex-end;height:2rem;margin-top:0.75rem}
+  .core-card .cc-bars div{flex:1;background:var(--gradient);border-radius:2px;opacity:0.8}
+  .float-card{
+    position:absolute;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:0.75rem;
+    padding:0.75rem 1rem;
+    box-shadow:var(--shadow-lg);
+    z-index:3;
+    font-size:0.8rem;
+    font-weight:600;
+    display:flex;align-items:center;gap:0.5rem;
+  }
+  .float-card .ic{width:1.5rem;height:1.5rem;border-radius:0.375rem;background:var(--gradient);display:flex;align-items:center;justify-content:center;color:#fff}
+  .float-1{top:8%;left:-5%;animation:float1 5s ease-in-out infinite}
+  .float-2{bottom:12%;right:-3%;animation:float2 4s ease-in-out infinite}
+  @keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  @keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+  .corner-block{
+    position:absolute;
+    bottom:-2%;left:8%;
+    width:4rem;height:4rem;
+    background:var(--gradient);
+    border-radius:1rem;
+    box-shadow:var(--shadow-accent-lg);
+    z-index:1;
+  }
+
+  /* Stats - INVERTED section */
+  .stats{
+    background:var(--foreground);
+    color:#fff;
+    padding:5rem 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .stats::before{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(circle,rgba(255,255,255,0.08) 1px,transparent 1px);
+    background-size:32px 32px;
+    opacity:0.5;
+    pointer-events:none;
+  }
+  .stats::after{
+    content:"";position:absolute;
+    top:-150px;right:-100px;
+    width:400px;height:400px;
+    background:var(--accent);
+    filter:blur(150px);
+    opacity:0.15;
+    border-radius:50%;
+    pointer-events:none;
+  }
+  .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    position:relative;
+    z-index:1;
+  }
+  .stat{
+    padding:1.5rem;
+    text-align:center;
+    position:relative;
+  }
+  .stat:not(:last-child)::after{
+    content:"";position:absolute;
+    right:0;top:20%;height:60%;width:1px;
+    background:rgba(255,255,255,0.1);
+  }
+  .stat-num{
+    font-family:"Calistoga",serif;
+    font-size:clamp(2.5rem,5vw,3.75rem);
+    line-height:1;
+    margin-bottom:0.5rem;
+    background:var(--gradient);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .stat-trend{
+    display:inline-flex;align-items:center;gap:0.25rem;
+    font-family:"JetBrains Mono",monospace;
+    font-size:0.75rem;
+    padding:0.25rem 0.625rem;
+    border-radius:999px;
+    background:rgba(34,197,94,0.15);
+    color:#22C55E;
+    margin-bottom:0.75rem;
+  }
+  .stat-label{
+    font-family:"JetBrains Mono",monospace;
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:rgba(255,255,255,0.6);
+  }
+
+  /* Section base */
+  section{padding:6rem 0;position:relative}
+  .section-header{text-align:center;max-width:42rem;margin:0 auto 3.5rem}
+  .section-header .badge{margin-bottom:1.25rem}
+  .section-header h2{
+    font-size:clamp(2.25rem,4.5vw,3.25rem);
+    line-height:1.15;
+    margin-bottom:1rem;
+  }
+  .section-header p{
+    font-size:1.125rem;
+    color:var(--muted-foreground);
+    line-height:1.7;
+  }
+
+  /* Features - asymmetric masonry */
+  .features-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    grid-auto-rows:1fr;
+    gap:1.25rem;
+  }
+  .feature-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:1rem;
+    padding:1.75rem;
+    transition:all 300ms ease-out;
+    position:relative;
+    overflow:hidden;
+  }
+  .feature-card.featured{grid-row:span 2}
+  .feature-card::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(0,82,255,0.04),transparent);
+    opacity:0;transition:opacity 300ms ease-out;
+    pointer-events:none;
+  }
+  .feature-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-xl);border-color:rgba(0,82,255,0.2)}
+  .feature-card:hover::before{opacity:1}
+  .feature-card:hover .feature-icon{transform:scale(1.1)}
+  .feature-icon{
+    width:3rem;height:3rem;
+    background:var(--gradient);
+    border-radius:0.75rem;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;
+    margin-bottom:1.25rem;
+    box-shadow:var(--shadow-accent);
+    transition:transform 300ms ease-out;
+  }
+  .feature-card h3{
+    font-family:"Inter",sans-serif;
+    font-size:1.25rem;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin-bottom:0.5rem;
+    line-height:1.3;
+  }
+  .feature-card p{
+    color:var(--muted-foreground);
+    font-size:0.9375rem;
+    line-height:1.6;
+  }
+  .feature-link{
+    margin-top:1rem;
+    display:inline-flex;align-items:center;gap:0.25rem;
+    color:var(--accent);
+    font-size:0.875rem;
+    font-weight:600;
+    text-decoration:none;
+  }
+  .feature-link .arrow{transition:transform 200ms ease-out}
+  .feature-link:hover .arrow{transform:translateX(3px)}
+  .featured .corner-glow{
+    position:absolute;
+    bottom:-50px;right:-50px;
+    width:150px;height:150px;
+    background:var(--accent);
+    filter:blur(60px);
+    opacity:0.15;
+    border-radius:50%;
+    pointer-events:none;
+  }
+
+  /* How it works - horizontal timeline */
+  .how-wrap{position:relative}
+  .timeline{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.5rem;
+    position:relative;
+  }
+  .timeline::before{
+    content:"";position:absolute;
+    top:1.5rem;left:20%;right:20%;
+    height:2px;
+    background:linear-gradient(to right,transparent,rgba(0,82,255,0.2),rgba(0,82,255,0.2),transparent);
+  }
+  .tl-step{text-align:center;position:relative}
+  .tl-num{
+    width:3rem;height:3rem;
+    border-radius:50%;
+    background:var(--card);
+    border:2px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 1.25rem;
+    font-family:"Calistoga",serif;
+    font-size:1.25rem;
+    color:var(--accent);
+    position:relative;
+    z-index:1;
+    box-shadow:var(--shadow-md);
+    transition:all 300ms ease-out;
+  }
+  .tl-step:hover .tl-num{
+    background:var(--gradient);
+    color:#fff;
+    border-color:transparent;
+    box-shadow:var(--shadow-accent-lg);
+  }
+  .tl-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:1rem;
+    padding:1.5rem;
+    box-shadow:var(--shadow-sm);
+    transition:all 300ms ease-out;
+  }
+  .tl-step:hover .tl-card{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+  .tl-card h3{
+    font-family:"Inter",sans-serif;
+    font-size:1.125rem;
+    font-weight:600;
+    margin-bottom:0.5rem;
+  }
+  .tl-card p{color:var(--muted-foreground);font-size:0.9375rem}
+  .tl-arrow{
+    position:absolute;
+    top:1rem;right:-1rem;
+    width:2rem;height:2rem;
+    border-radius:50%;
+    background:var(--gradient);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:var(--shadow-accent);
+    z-index:2;
+  }
+
+  /* Benefits - asymmetric with asymmetric radius */
+  .benefits-grid{
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    gap:3rem;
+    align-items:center;
+  }
+  .benefits h2{
+    font-size:clamp(2rem,4vw,2.75rem);
+    line-height:1.15;
+    margin-bottom:1rem;
+  }
+  .benefits .sub{
+    color:var(--muted-foreground);
+    font-size:1.125rem;
+    margin-bottom:1.75rem;
+    line-height:1.7;
+  }
+  .check-list{list-style:none;margin-bottom:2rem}
+  .check-list li{
+    display:flex;align-items:flex-start;gap:0.75rem;
+    padding:0.5rem 0;
+    font-size:1rem;
+  }
+  .check-list li::before{
+    content:"✓";
+    width:1.5rem;height:1.5rem;
+    flex-shrink:0;
+    background:var(--gradient);
+    color:#fff;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:0.75rem;
+    font-weight:700;
+    margin-top:0.125rem;
+  }
+  .benefit-visual{
+    position:relative;
+    aspect-ratio:4/3;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-top-left-radius:4rem;
+    border-bottom-right-radius:4rem;
+    overflow:hidden;
+    box-shadow:var(--shadow-xl);
+  }
+  .benefit-visual::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(0,82,255,0.05),transparent);
+  }
+  .bv-ui{
+    position:absolute;
+    inset:1.5rem;
+    background:var(--background);
+    border-radius:0.75rem;
+    border:1px solid var(--border);
+    padding:1.25rem;
+    display:flex;flex-direction:column;gap:0.75rem;
+  }
+  .bv-row{display:flex;gap:0.5rem;align-items:center}
+  .bv-bar{height:0.5rem;background:var(--muted);border-radius:999px;flex:1}
+  .bv-bar.grad{background:var(--gradient)}
+  .bv-bar.short{flex:0 0 30%}
+  .bv-dot{width:0.625rem;height:0.625rem;border-radius:50%;background:var(--accent);flex-shrink:0}
+  .bv-chip{
+    align-self:flex-start;
+    padding:0.25rem 0.625rem;
+    background:rgba(0,82,255,0.1);
+    color:var(--accent);
+    border-radius:0.375rem;
+    font-family:"JetBrains Mono",monospace;
+    font-size:0.7rem;
+  }
+
+  /* Pricing */
+  .pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.5rem;
+    align-items:start;
+  }
+  .price-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:1rem;
+    padding:2rem;
+    transition:all 300ms ease-out;
+    box-shadow:var(--shadow-sm);
+    position:relative;
+  }
+  .price-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .price-card.featured{
+    transform:translateY(-1rem);
+    padding:1px;
+    background:var(--gradient);
+    box-shadow:var(--shadow-accent-lg);
+  }
+  .price-card.featured .pc-inner{
+    background:var(--card);
+    border-radius:calc(1rem - 1px);
+    padding:2rem;
+    height:100%;
+  }
+  .price-card.featured:hover{transform:translateY(-1.25rem)}
+  .price-badge{
+    position:absolute;
+    top:-0.75rem;left:50%;
+    transform:translateX(-50%);
+    background:var(--gradient);
+    color:#fff;
+    font-family:"JetBrains Mono",monospace;
+    font-size:0.7rem;
+    font-weight:500;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    padding:0.375rem 1rem;
+    border-radius:999px;
+    box-shadow:var(--shadow-accent);
+    z-index:2;
+    white-space:nowrap;
+  }
+  .price-tier{
+    font-family:"JetBrains Mono",monospace;
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--muted-foreground);
+    margin-bottom:0.5rem;
+  }
+  .price-name{
+    font-family:"Calistoga",serif;
+    font-size:1.75rem;
+    margin-bottom:1rem;
+  }
+  .price-amount{
+    font-family:"Calistoga",serif;
+    font-size:3rem;
+    line-height:1;
+    margin-bottom:0.5rem;
+  }
+  .price-card.featured .price-amount{background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .price-amount .cur{font-size:1.5rem;vertical-align:top;color:var(--muted-foreground)}
+  .price-card.featured .price-amount .cur{background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+  .price-amount .period{font-size:1rem;color:var(--muted-foreground);font-family:"Inter",sans-serif;-webkit-text-fill-color:var(--muted-foreground)}
+  .price-desc{
+    color:var(--muted-foreground);
+    font-size:0.9375rem;
+    margin-bottom:1.5rem;
+    padding-bottom:1.5rem;
+    border-bottom:1px solid var(--border);
+  }
+  .price-features{list-style:none;margin-bottom:1.75rem}
+  .price-features li{
+    display:flex;align-items:center;gap:0.625rem;
+    padding:0.4375rem 0;
+    font-size:0.9375rem;
+  }
+  .price-features li::before{
+    content:"✓";
+    width:1.25rem;height:1.25rem;
+    flex-shrink:0;
+    color:var(--accent);
+    font-weight:700;
+    font-size:0.75rem;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .price-card.featured .price-features li::before{
+    background:var(--gradient);
+    color:#fff;
+    border-radius:50%;
+  }
+  .price-card .btn{width:100%}
+
+  /* Testimonials */
+  .testimonials-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.5rem;
+  }
+  .testimonial{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:1rem;
+    padding:2rem;
+    position:relative;
+    box-shadow:var(--shadow-sm);
+    transition:all 300ms ease-out;
+    overflow:hidden;
+  }
+  .testimonial:nth-child(2){transform:translateY(-1.5rem)}
+  .testimonial::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:4px;
+    background:var(--gradient);
+  }
+  .testimonial:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+  .testimonial:nth-child(2):hover{transform:translateY(-2.5rem)}
+  .quote-mark{
+    font-family:"Calistoga",serif;
+    font-size:7.5rem;
+    line-height:0.7;
+    color:var(--accent);
+    opacity:0.08;
+    position:absolute;
+    top:1rem;left:1.25rem;
+    pointer-events:none;
+  }
+  .testimonial blockquote{
+    font-family:"Calistoga",serif;
+    font-style:italic;
+    font-size:1.0625rem;
+    line-height:1.6;
+    color:var(--foreground);
+    margin:1rem 0 1.5rem;
+    position:relative;
+    z-index:1;
+  }
+  .testimonial-author{display:flex;align-items:center;gap:0.875rem}
+  .testimonial-avatar{
+    width:2.75rem;height:2.75rem;
+    border-radius:50%;
+    background:var(--gradient);
+    border:2px solid rgba(0,82,255,0.2);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:600;font-size:0.875rem;
+  }
+  .testimonial-name{font-weight:600;font-size:0.9375rem}
+  .testimonial-role{
+    font-family:"JetBrains Mono",monospace;
+    font-size:0.7rem;
+    color:var(--muted-foreground);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+  }
+
+  /* FAQ */
+  .faq-list{max-width:48rem;margin:0 auto}
+  .faq-item{border-bottom:1px solid var(--border)}
+  .faq-q{
+    width:100%;
+    background:none;border:none;cursor:pointer;
+    padding:1.5rem 0;
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    text-align:left;
+    font-family:"Inter",sans-serif;
+    font-size:1.125rem;
+    font-weight:600;
+    color:var(--foreground);
+    transition:color 200ms ease-out;
+  }
+  .faq-q:hover{color:var(--accent)}
+  .faq-toggle{
+    width:1.75rem;height:1.75rem;
+    flex-shrink:0;
+    border-radius:50%;
+    background:var(--muted);
+    display:flex;align-items:center;justify-content:center;
+    transition:transform 300ms ease-out,background 200ms ease-out;
+    color:var(--accent);
+  }
+  .faq-item.open .faq-toggle{transform:rotate(135deg);background:var(--accent);color:#fff}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height 300ms ease-out,opacity 300ms ease-out;opacity:0}
+  .faq-item.open .faq-a{max-height:300px;opacity:1}
+  .faq-a p{padding:0 0 1.5rem;color:var(--muted-foreground);font-size:1.0625rem;line-height:1.7;max-width:90%}
+
+  /* Final CTA - inverted */
+  .final-cta{
+    background:var(--foreground);
+    color:#fff;
+    text-align:center;
+    padding:6rem 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .final-cta::before{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(circle,rgba(255,255,255,0.06) 1px,transparent 1px);
+    background-size:32px 32px;
+    pointer-events:none;
+  }
+  .final-cta::after{
+    content:"";position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:500px;height:500px;
+    background:var(--accent);
+    filter:blur(150px);
+    opacity:0.2;
+    border-radius:50%;
+    pointer-events:none;
+  }
+  .final-cta .inner{position:relative;z-index:1;max-width:36rem;margin:0 auto}
+  .final-cta h2{
+    font-size:clamp(2.25rem,5vw,3.5rem);
+    line-height:1.1;
+    margin-bottom:1rem;
+  }
+  .final-cta h2 .gradient-text{background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .final-cta p{color:rgba(255,255,255,0.7);font-size:1.125rem;margin-bottom:2rem}
+  .final-cta-form{
+    display:flex;gap:0.75rem;
+    max-width:28rem;margin:0 auto;
+    flex-wrap:wrap;
+  }
+  .final-cta-form input{
+    flex:1;min-width:12rem;
+    padding:0.875rem 1.25rem;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:0.75rem;
+    color:#fff;
+    font-family:"Inter",sans-serif;
+    font-size:0.9375rem;
+    transition:all 200ms ease-out;
+  }
+  .final-cta-form input::placeholder{color:rgba(255,255,255,0.4)}
+  .final-cta-form input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,82,255,0.3)}
+
+  /* Footer */
+  footer{
+    background:var(--background);
+    border-top:1px solid var(--border);
+    padding:4rem 0 2rem;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr 1fr;
+    gap:2rem;
+    margin-bottom:3rem;
+  }
+  .footer-brand .logo{margin-bottom:1rem}
+  .footer-brand p{color:var(--muted-foreground);font-size:0.9375rem;line-height:1.6;max-width:22rem}
+  .footer-social{display:flex;gap:0.5rem;margin-top:1.25rem}
+  .footer-social a{
+    width:2.25rem;height:2.25rem;
+    border-radius:0.75rem;
+    border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--muted-foreground);
+    background:var(--card);
+    transition:all 200ms ease-out;
+  }
+  .footer-social a:hover{background:var(--gradient);color:#fff;border-color:transparent;transform:translateY(-2px);box-shadow:var(--shadow-accent)}
+  .footer-col h4{
+    font-family:"JetBrains Mono",monospace;
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--foreground);
+    margin-bottom:1rem;
+  }
+  .footer-col ul{list-style:none}
+  .footer-col li{margin-bottom:0.625rem}
+  .footer-col a{color:var(--muted-foreground);text-decoration:none;font-size:0.9375rem;transition:color 200ms ease-out}
+  .footer-col a:hover{color:var(--accent)}
+  .footer-bottom{
+    border-top:1px solid var(--border);
+    padding-top:2rem;
+    display:flex;align-items:center;justify-content:space-between;
+    flex-wrap:wrap;gap:1rem;
+  }
+  .footer-bottom p,.footer-bottom a{
+    font-family:"JetBrains Mono",monospace;
+    font-size:0.75rem;
+    color:var(--muted-foreground);
+    text-decoration:none;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+  }
+  .footer-bottom .legal{display:flex;gap:1.5rem}
+  .footer-bottom .legal a:hover{color:var(--accent)}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 700ms cubic-bezier(0.16,1,0.3,1),transform 700ms cubic-bezier(0.16,1,0.3,1)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+
+  /* Responsive */
+  @media (max-width:1024px){
+    .features-grid{grid-template-columns:repeat(2,1fr)}
+    .feature-card.featured{grid-row:span 1;grid-column:span 2}
+  }
+  @media (max-width:768px){
+    .nav-links{display:none}
+    .hero-grid{grid-template-columns:1fr;gap:3rem}
+    .hero-visual{max-width:24rem;margin:0 auto}
+    .hero{padding:3rem 0 4rem}
+    .stats-grid{grid-template-columns:repeat(2,1fr);gap:1.5rem 0}
+    .stat:nth-child(2)::after{display:none}
+    .features-grid,.timeline,.pricing-grid,.testimonials-grid,.benefits-grid,.footer-grid{grid-template-columns:1fr}
+    .feature-card.featured{grid-column:span 1}
+    .price-card.featured{transform:none}
+    .price-card.featured:hover{transform:translateY(-4px)}
+    .testimonial:nth-child(2){transform:none}
+    .testimonial:nth-child(2):hover{transform:translateY(-4px)}
+    .timeline::before,.tl-arrow{display:none}
+    section{padding:4rem 0}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .footer-brand{grid-column:1/-1}
+  }
+  @media (max-width:480px){
+    .footer-grid{grid-template-columns:1fr}
+    .footer-bottom{flex-direction:column;text-align:center}
+    .final-cta-form{flex-direction:column}
+    .final-cta-form .btn{width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important}
+    .reveal{transition:none;opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+        Vortex
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how">Workflow</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#testimonials">Customers</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <a href="#cta" class="nav-cta">Get Started <span>→</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="badge hero-badge reveal"><span class="dot"></span>New · Vortex 3.0 is live</div>
+        <h1 class="reveal">Build faster.<br>Ship <span class="gradient-text">smarter</span>.</h1>
+        <p class="hero-sub reveal">The modern development platform that turns ambitious ideas into production reality. One workspace for design, code, and deploy — engineered for teams who ship at the speed of thought.</p>
+        <div class="hero-ctas reveal">
+          <a href="#cta" class="btn btn-primary">Start Building <span class="arrow">→</span></a>
+          <a href="#features" class="btn btn-outline">View Features</a>
+        </div>
+        <div class="hero-trust reveal">
+          <div class="avatars">
+            <div class="av">AK</div>
+            <div class="av">JM</div>
+            <div class="av">SR</div>
+            <div class="av">+</div>
+          </div>
+          <div class="hero-trust-text">Trusted by <strong>40,000+ engineers</strong> at frontier teams</div>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="ring-outer"></div>
+        <div class="ring-inner"></div>
+        <div class="dot-grid">
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+        </div>
+        <div class="core-card">
+          <div class="cc-head">
+            <span class="cc-dot"></span>
+            <span class="cc-label">Deploy · Live</span>
+          </div>
+          <div class="cc-num">99.99%</div>
+          <div class="cc-sub">Uptime this quarter</div>
+          <div class="cc-bars">
+            <div style="height:40%"></div>
+            <div style="height:65%"></div>
+            <div style="height:50%"></div>
+            <div style="height:80%"></div>
+            <div style="height:70%"></div>
+            <div style="height:95%"></div>
+            <div style="height:85%"></div>
+          </div>
+        </div>
+        <div class="float-card float-1">
+          <span class="ic"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg></span>
+          Build passed
+        </div>
+        <div class="float-card float-2">
+          <span class="ic"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          Shipped to prod
+        </div>
+        <div class="corner-block"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Stats (inverted) -->
+<section class="stats" style="padding:5rem 0">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat reveal">
+        <div class="stat-trend">↑ 42% YoY</div>
+        <div class="stat-num">40K+</div>
+        <div class="stat-label">Active Engineers</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-trend">↑ 8.3x faster</div>
+        <div class="stat-num">2.4M</div>
+        <div class="stat-label">Deploys / Month</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-trend">↑ 99.99%</div>
+        <div class="stat-num">180ms</div>
+        <div class="stat-label">Median P95 Latency</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-trend">↑ SOC 2</div>
+        <div class="stat-num">60+</div>
+        <div class="stat-label">Global Edge Regions</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="badge"><span class="dot"></span>Features</div>
+      <h2>Everything you need to <span class="gradient-text">ship</span></h2>
+      <p>A complete platform with the bold execution your team deserves. No clutter, no compromise.</p>
+    </div>
+    <div class="features-grid">
+      <article class="feature-card featured reveal">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h3>Instant Edge Deploys</h3>
+        <p>Push to main and watch your code live across 60+ regions in under 800ms. Global edge network with automatic scaling, zero cold starts, and built-in observability that actually tells you what's happening.</p>
+        <a href="#" class="feature-link">Learn more <span class="arrow">→</span></a>
+        <div class="corner-glow"></div>
+      </article>
+      <article class="feature-card reveal">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
+        </div>
+        <h3>Git-Native Workflow</h3>
+        <p>Every branch is a preview environment. Merge with confidence.</p>
+      </article>
+      <article class="feature-card reveal">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3>Type-Safe APIs</h3>
+        <p>End-to-end type safety from database to UI. Catch bugs at compile.</p>
+      </article>
+      <article class="feature-card reveal">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3>Global Edge Network</h3>
+        <p>Serve users from the nearest region with sub-100ms latency.</p>
+      </article>
+      <article class="feature-card reveal">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 12l3-3 4 4 5-5"/></svg>
+        </div>
+        <h3>Real-time Analytics</h3>
+        <p>Live dashboards with the metrics that matter. No more guessing.</p>
+      </article>
+      <article class="feature-card reveal">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Enterprise Security</h3>
+        <p>SOC 2 Type II, SSO, audit logs, and role-based access built in.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section id="how" style="background:var(--muted)">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="badge"><span class="dot"></span>Workflow</div>
+      <h2>From idea to prod in <span class="gradient-text">three steps</span></h2>
+      <p>A workflow designed for momentum. No context switching, no waiting.</p>
+    </div>
+    <div class="timeline how-wrap">
+      <div class="tl-step reveal">
+        <div class="tl-num">1</div>
+        <div class="tl-card">
+          <h3>Connect &amp; Build</h3>
+          <p>Import your repo, pick a template, and start coding in seconds. Every push spins up a live preview.</p>
+        </div>
+        <div class="tl-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+      <div class="tl-step reveal">
+        <div class="tl-num">2</div>
+        <div class="tl-card">
+          <h3>Preview &amp; Collaborate</h3>
+          <p>Share live preview URLs with your team. Comment directly on the UI. Merge with full confidence.</p>
+        </div>
+        <div class="tl-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+      <div class="tl-step reveal">
+        <div class="tl-num">3</div>
+        <div class="tl-card">
+          <h3>Ship to Edge</h3>
+          <p>One click deploys to 60+ global regions. Automatic scaling, instant rollbacks, zero downtime.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits -->
+<section class="benefits">
+  <div class="container">
+    <div class="benefits-grid">
+      <div class="reveal">
+        <div class="badge" style="margin-bottom:1.25rem"><span class="dot"></span>Why Vortex</div>
+        <h2>Minimalism that <span class="gradient-text">makes a statement</span></h2>
+        <p class="sub">We refuse to be "just clean." Every bold choice — the electric blue, the asymmetric layouts, the living animations — earns its place through execution, not decoration.</p>
+        <ul class="check-list">
+          <li>Electric Blue accent commands attention wherever it appears</li>
+          <li>Inverted sections create dramatic visual rhythm as you scroll</li>
+          <li>Generous whitespace is a precision instrument, not emptiness</li>
+          <li>Dual-font pairing balances personality with crystal clarity</li>
+          <li>Micro-animations make the interface feel alive and responsive</li>
+        </ul>
+        <a href="#cta" class="btn btn-primary">Start Building <span class="arrow">→</span></a>
+      </div>
+      <div class="benefit-visual reveal">
+        <div class="bv-ui">
+          <div class="bv-row"><span class="bv-dot"></span><span class="bv-bar grad short"></span><span class="bv-chip">live</span></div>
+          <div class="bv-bar"></div>
+          <div class="bv-bar" style="flex:0 0 70%"></div>
+          <div class="bv-bar"></div>
+          <div class="bv-row" style="margin-top:auto">
+            <span class="bv-chip">v3.0.1</span>
+            <span class="bv-chip" style="background:rgba(34,197,94,0.15);color:#16A34A">stable</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="badge"><span class="dot"></span>Pricing</div>
+      <h2>Simple pricing that <span class="gradient-text">scales with you</span></h2>
+      <p>Start free. Upgrade when you ship. No surprise bills, ever.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-tier">Hobby</div>
+        <div class="price-name">Starter</div>
+        <div class="price-amount"><span class="cur">$</span>0<span class="period">/mo</span></div>
+        <p class="price-desc">For side projects and learning.</p>
+        <ul class="price-features">
+          <li>3 projects</li>
+          <li>1GB bandwidth</li>
+          <li>Community support</li>
+          <li>Automatic HTTPS</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Start Free</a>
+      </div>
+      <div class="price-card featured reveal">
+        <div class="price-badge">Most Popular</div>
+        <div class="pc-inner">
+          <div class="price-tier">Pro</div>
+          <div class="price-name">Vortex Pro</div>
+          <div class="price-amount"><span class="cur">$</span>29<span class="period">/mo</span></div>
+          <p class="price-desc">For teams shipping to production.</p>
+          <ul class="price-features">
+            <li>Unlimited projects</li>
+            <li>1TB bandwidth</li>
+            <li>Priority support</li>
+            <li>Preview deployments</li>
+            <li>Team collaboration</li>
+            <li>Advanced analytics</li>
+          </ul>
+          <a href="#" class="btn btn-primary">Start Pro Trial <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-tier">Enterprise</div>
+        <div class="price-name">Scale</div>
+        <div class="price-amount"><span class="cur">$</span>99<span class="period">/mo</span></div>
+        <p class="price-desc">For organizations at frontier scale.</p>
+        <ul class="price-features">
+          <li>Everything in Pro</li>
+          <li>Custom edge regions</li>
+          <li>SSO &amp; SAML</li>
+          <li>Dedicated support</li>
+          <li>99.99% SLA</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials" style="background:var(--muted)">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="badge"><span class="dot"></span>Customers</div>
+      <h2>Loved by <span class="gradient-text">frontier teams</span></h2>
+      <p>From seed-stage startups to public companies, teams ship faster with Vortex.</p>
+    </div>
+    <div class="testimonials-grid">
+      <article class="testimonial reveal">
+        <span class="quote-mark">"</span>
+        <blockquote>Vortex cut our deploy time from 12 minutes to 8 seconds. The team ships features the same day they conceive them now.</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AK</div>
+          <div>
+            <div class="testimonial-name">Amara Kowalski</div>
+            <div class="testimonial-role">VP Engineering · Linear</div>
+          </div>
+        </div>
+      </article>
+      <article class="testimonial reveal">
+        <span class="quote-mark">"</span>
+        <blockquote>The dual-font system and electric blue aren't just pretty — they made our internal docs a joy to read. Adoption tripled overnight.</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JM</div>
+          <div>
+            <div class="testimonial-name">Jihoon Min</div>
+            <div class="testimonial-role">CTO · Resend</div>
+          </div>
+        </div>
+      </article>
+      <article class="testimonial reveal">
+        <span class="quote-mark">"</span>
+        <blockquote>We migrated 200 services in a weekend. The edge network handles our Black Friday traffic without breaking a sweat.</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SR</div>
+          <div>
+            <div class="testimonial-name">Sofia Reyes</div>
+            <div class="testimonial-role">Staff SRE · Vercel</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="badge"><span class="dot"></span>FAQ</div>
+      <h2>Questions, <span class="gradient-text">answered</span></h2>
+      <p>Everything you need to know before you ship.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">How does the free tier work?<span class="faq-toggle">+</span></button>
+        <div class="faq-a"><p>The Hobby plan is free forever for personal projects. You get 3 projects, 1GB of bandwidth, and community support. No credit card required to start.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Can I bring my own domain?<span class="faq-toggle">+</span></button>
+        <div class="faq-a"><p>Yes. On every plan, including Hobby, you can connect unlimited custom domains with automatic HTTPS provisioning. DNS verification takes under a minute.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">What languages and frameworks are supported?<span class="faq-toggle">+</span></button>
+        <div class="faq-a"><p>Vortex supports any framework that runs on Node.js, Python, Go, Rust, and Ruby out of the box. Custom runtimes are available on the Scale plan. TypeScript is a first-class citizen with end-to-end type safety.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Do you offer discounts for startups?<span class="faq-toggle">+</span></button>
+        <div class="faq-a"><p>Yes. Seed-stage startups under 10 people get 50% off the Pro plan for their first year. Y Combinator companies get Vortex Pro free during the batch. Reach out to our team for details.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">How does the edge network handle compliance?<span class="faq-toggle">+</span></button>
+        <div class="faq-a"><p>We're SOC 2 Type II certified, GDPR compliant, and offer data residency in the US, EU, and APAC regions on the Scale plan. Full audit logs and SSO/SAML are included for enterprise customers.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA (inverted) -->
+<section class="final-cta" id="cta">
+  <div class="container">
+    <div class="inner reveal">
+      <div class="badge" style="margin-bottom:1.5rem;background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.2);color:#fff"><span class="dot"></span>Ready when you are</div>
+      <h2>Start building the <span class="gradient-text">future</span> today</h2>
+      <p>Join 40,000+ engineers shipping at the speed of thought. Free to start, no credit card required.</p>
+      <form class="final-cta-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Welcome aboard ✓'">
+        <input type="email" placeholder="you@company.com" required>
+        <button type="submit" class="btn btn-primary">Start Free <span class="arrow">→</span></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <span class="logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+          Vortex
+        </a>
+        <p>The modern development platform engineered for teams who ship at the speed of thought.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.8c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1-1.5-1.6-4-1.7-5.6-.2-1 1-1.5 2.5-1.1 3.9-3.3-.2-6.4-1.7-8.4-4.3-1.1 1.9-.5 4.3 1.3 5.5-.7 0-1.3-.2-1.9-.5 0 2 1.4 3.7 3.3 4.1-.6.2-1.2.2-1.9.1.5 1.7 2.1 2.9 3.9 2.9-1.7 1.3-3.8 2-6 1.7 2 1.3 4.2 1.9 6.5 1.9 7.8 0 12.1-6.5 12.1-12.1v-.6c.8-.6 1.5-1.3 2.1-2.1z"/></svg></a>
+          <a href="#" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.2 6.8 9.5.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.2-.3-4.5-1.1-4.5-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1 .8-.2 1.7-.3 2.5-.3s1.7.1 2.5.3c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.5 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5C19.1 20.2 22 16.4 22 12c0-5.5-4.5-10-10-10z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM8.3 18.3H5.7V9.7h2.7v8.6zM7 8.6c-.9 0-1.6-.7-1.6-1.6S6.1 5.4 7 5.4s1.6.7 1.6 1.6S7.9 8.6 7 8.6zm11.3 9.7h-2.7v-4.2c0-1 0-2.3-1.4-2.3s-1.6 1.1-1.6 2.2v4.3h-2.7V9.7h2.6v1.2h.1c.4-.7 1.3-1.4 2.6-1.4 2.8 0 3.3 1.8 3.3 4.2v4.6z"/></svg></a>
+          <a href="#" aria-label="Discord"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.2.4c1.7.4 3.2 1 4.6 1.9a16.6 16.6 0 0 0-13.6 0c1.4-.9 2.9-1.5 4.6-1.9L10.6 3a19.8 19.8 0 0 0-4.9 1.4C2.5 9.1 1.7 13.7 2.1 18.2a19.9 19.9 0 0 0 6.1 3.1l.4-.6c-1-.4-1.9-.8-2.7-1.4l.6-.4a14.2 14.2 0 0 0 11.6 0l.6.4c-.8.6-1.7 1-2.7 1.4l.4.6a19.9 19.9 0 0 0 6.1-3.1c.5-5.2-.8-9.8-3.6-13.8zM9.5 15.3c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm5 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Changelog</a></li>
+          <li><a href="#">Roadmap</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Developers</h4>
+        <ul>
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">API Reference</a></li>
+          <li><a href="#">CLI</a></li>
+          <li><a href="#">Status</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Security</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Vortex Labs, Inc. All rights reserved.</p>
+      <div class="legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const item=btn.parentElement;
+      const isOpen=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-q').setAttribute('aria-expanded','false')});
+      if(!isOpen){item.classList.add('open');btn.setAttribute('aria-expanded','true')}
+    });
+  });
+
+  // Reveal on scroll
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}
+    });
+  },{threshold:0.15,rootMargin:'-60px'});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  // Stagger reveal children
+  document.querySelectorAll('.features-grid, .timeline, .testimonials-grid, .pricing-grid, .faq-list, .stats-grid').forEach(grid=>{
+    [...grid.children].forEach((child,i)=>{child.style.transitionDelay=(i*0.1)+'s'});
+  });
+</script>
+</body>
+</html>

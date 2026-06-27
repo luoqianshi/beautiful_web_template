@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TERM.SYS — Terminal CLI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=VT323&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-panel: #0d0d0d;
+    --fg: #33ff00;
+    --amber: #ffb000;
+    --muted: #1f521f;
+    --muted-2: #2a6b2a;
+    --error: #ff3333;
+    --border: #1f521f;
+    --glow: 0 0 5px rgba(51, 255, 0, 0.5);
+    --glow-amber: 0 0 5px rgba(255, 176, 0, 0.5);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.5;
+    font-size: 15px;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: var(--glow);
+  }
+
+  /* Global CRT scanline overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0px,
+      rgba(0, 0, 0, 0) 2px,
+      rgba(0, 0, 0, 0.15) 2px,
+      rgba(0, 0, 0, 0.15) 4px
+    );
+    mix-blend-mode: multiply;
+  }
+
+  /* Subtle CRT vignette */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+    background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.4) 100%);
+  }
+
+  ::selection { background: var(--fg); color: var(--bg); text-shadow: none; }
+
+  a { color: var(--fg); text-decoration: none; }
+  a:hover { color: var(--amber); text-shadow: var(--glow-amber); }
+
+  /* ---------- LAYOUT ---------- */
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- NAV / STATUS BAR ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .nav-brand .blink {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background: var(--fg);
+    box-shadow: var(--glow);
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  .nav-link {
+    text-transform: lowercase;
+    transition: color 0.1s;
+    position: relative;
+  }
+  .nav-link::before { content: "~/"; opacity: 0.5; }
+  .nav-link:hover { color: var(--amber); }
+  .nav-status {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--muted-2);
+  }
+  .nav-status .ok { color: var(--fg); }
+  .nav-status .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--fg);
+    border-radius: 50%;
+    box-shadow: var(--glow);
+    animation: blink 2s ease-in-out infinite;
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+  }
+
+  /* ---------- PROMPT UTIL ---------- */
+  .prompt::before {
+    content: "$ ";
+    color: var(--amber);
+    text-shadow: var(--glow-amber);
+  }
+  .prompt-user::before {
+    content: "root@term.sys:~# ";
+    color: var(--amber);
+    text-shadow: var(--glow-amber);
+  }
+  .gt::before { content: "> "; color: var(--muted-2); }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 64px 0 48px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 32px;
+  }
+  .hero-left .boot-line {
+    color: var(--muted-2);
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .boot-line .ok { color: var(--fg); }
+  .boot-line .warn { color: var(--amber); }
+
+  .ascii-logo {
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--fg);
+    text-shadow: var(--glow);
+    white-space: pre;
+    margin: 24px 0;
+    overflow-x: auto;
+  }
+  @media (max-width: 768px) {
+    .ascii-logo { font-size: 11px; }
+  }
+
+  .hero h1 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    min-height: 1.2em;
+  }
+  .hero h1 .cursor {
+    display: inline-block;
+    width: 0.6em;
+    height: 1em;
+    background: var(--fg);
+    box-shadow: var(--glow);
+    vertical-align: text-bottom;
+    margin-left: 4px;
+    animation: blink 1s step-end infinite;
+  }
+  .hero-sub {
+    color: var(--muted-2);
+    margin-bottom: 32px;
+    max-width: 560px;
+    font-size: 14px;
+  }
+  .hero-sub .green { color: var(--fg); }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 1px solid var(--fg);
+    background: transparent;
+    color: var(--fg);
+    cursor: pointer;
+    transition: background 0.1s, color 0.1s, box-shadow 0.1s;
+    text-shadow: var(--glow);
+  }
+  .btn:hover {
+    background: var(--fg);
+    color: var(--bg);
+    text-shadow: none;
+    box-shadow: 0 0 15px rgba(51,255,0,0.6);
+  }
+  .btn-amber { border-color: var(--amber); color: var(--amber); text-shadow: var(--glow-amber); }
+  .btn-amber:hover { background: var(--amber); color: var(--bg); box-shadow: 0 0 15px rgba(255,176,0,0.6); }
+  .btn-bracket {
+    border: none;
+    background: transparent;
+    color: var(--fg);
+    padding: 14px 8px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: color 0.1s;
+    text-shadow: var(--glow);
+  }
+  .btn-bracket::before { content: "[ "; color: var(--muted-2); }
+  .btn-bracket::after { content: " ]"; color: var(--muted-2); }
+  .btn-bracket:hover { color: var(--amber); text-shadow: var(--glow-amber); }
+  .btn-bracket:hover::before, .btn-bracket:hover::after { color: var(--amber); }
+
+  /* Hero right — terminal window */
+  .term-window {
+    border: 1px solid var(--fg);
+    background: var(--bg-panel);
+    box-shadow: var(--glow);
+    height: 100%;
+    min-height: 360px;
+    display: flex;
+    flex-direction: column;
+  }
+  .term-titlebar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(51, 255, 0, 0.05);
+    font-size: 12px;
+  }
+  .term-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted-2);
+  }
+  .term-title .dots {
+    display: flex;
+    gap: 6px;
+  }
+  .term-title .dots span {
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--muted-2);
+  }
+  .term-title .dots span:nth-child(1) { background: var(--error); border-color: var(--error); }
+  .term-title .dots span:nth-child(2) { background: var(--amber); border-color: var(--amber); }
+  .term-title .dots span:nth-child(3) { background: var(--fg); border-color: var(--fg); }
+  .term-body {
+    padding: 16px;
+    flex: 1;
+    font-size: 13px;
+    overflow: hidden;
+  }
+  .term-body .line { margin-bottom: 4px; }
+  .term-body .cmd { color: var(--amber); text-shadow: var(--glow-amber); }
+  .term-body .out { color: var(--muted-2); }
+  .term-body .ok { color: var(--fg); }
+  .term-body .err { color: var(--error); text-shadow: 0 0 5px rgba(255,51,51,0.5); }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- SECTION HEADER ---------- */
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .section-head .label {
+    color: var(--amber);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-shadow: var(--glow-amber);
+  }
+  .section-head h2 {
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+  .section-head .comment {
+    color: var(--muted);
+    font-size: 12px;
+    margin-left: auto;
+  }
+
+  /* ---------- STATS ---------- */
+  .stats {
+    padding: 48px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .stats-table {
+    width: 100%;
+    border: 1px solid var(--border);
+  }
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-cell {
+    padding: 24px 20px;
+    border-right: 1px solid var(--border);
+    transition: background 0.1s;
+    cursor: default;
+  }
+  .stat-cell:last-child { border-right: none; }
+  .stat-cell:hover { background: rgba(51, 255, 0, 0.05); }
+  .stat-key {
+    color: var(--muted-2);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .stat-val {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--fg);
+    text-shadow: var(--glow);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .stat-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--muted-2);
+  }
+  .bar-track {
+    flex: 1;
+    height: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-panel);
+    position: relative;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: var(--fg);
+    box-shadow: var(--glow);
+    transition: width 1s ease-out;
+  }
+  @media (max-width: 768px) {
+    .stat-row { grid-template-columns: 1fr 1fr; }
+    .stat-cell:nth-child(2) { border-right: none; }
+    .stat-cell:nth-child(1), .stat-cell:nth-child(2) { border-bottom: 1px solid var(--border); }
+  }
+
+  /* ---------- FEATURES ---------- */
+  .features {
+    padding: 48px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .man-card {
+    border: 1px solid var(--border);
+    background: var(--bg-panel);
+    padding: 20px;
+    transition: border-color 0.1s, box-shadow 0.1s;
+    cursor: pointer;
+  }
+  .man-card:hover {
+    border-color: var(--fg);
+    box-shadow: 0 0 12px rgba(51,255,0,0.2);
+  }
+  .man-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--border);
+    margin-bottom: 12px;
+  }
+  .man-flag {
+    color: var(--amber);
+    font-weight: 700;
+    font-size: 13px;
+    text-shadow: var(--glow-amber);
+  }
+  .man-section {
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .man-card h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .man-card p {
+    color: var(--muted-2);
+    font-size: 13px;
+    line-height: 1.55;
+    margin-bottom: 16px;
+  }
+  .man-card code {
+    display: block;
+    color: var(--fg);
+    background: rgba(51,255,0,0.05);
+    border-left: 2px solid var(--fg);
+    padding: 8px 12px;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  @media (max-width: 900px) {
+    .features-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- HOW IT WORKS (shell log) ---------- */
+  .how {
+    padding: 48px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .how-log {
+    border: 1px solid var(--border);
+    background: var(--bg-panel);
+    padding: 24px;
+    font-size: 13px;
+    max-width: 900px;
+  }
+  .log-step {
+    padding: 16px 0;
+    border-bottom: 1px dashed var(--border);
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .log-step:last-child { border-bottom: none; }
+  .log-time {
+    color: var(--muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .log-cmd { color: var(--amber); text-shadow: var(--glow-amber); margin-bottom: 4px; }
+  .log-cmd::before { content: "$ "; color: var(--amber); }
+  .log-out { color: var(--muted-2); }
+  .log-out .ok { color: var(--fg); }
+  .log-out .amber { color: var(--amber); }
+  .log-progress {
+    color: var(--fg);
+    font-family: inherit;
+    letter-spacing: -1px;
+  }
+  @media (max-width: 600px) {
+    .log-step { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  /* ---------- PRICING ---------- */
+  .pricing {
+    padding: 48px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .pricing-table {
+    border: 1px solid var(--border);
+    overflow-x: auto;
+  }
+  .pricing-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+  .pricing-row:last-child { border-bottom: none; }
+  .pricing-row.header {
+    background: rgba(51,255,0,0.05);
+  }
+  .price-cell {
+    padding: 24px 20px;
+    border-right: 1px solid var(--border);
+    transition: background 0.1s;
+  }
+  .price-cell:last-child { border-right: none; }
+  .price-cell.featured {
+    background: rgba(255,176,0,0.08);
+    box-shadow: inset 0 0 20px rgba(255,176,0,0.1);
+  }
+  .price-cell:hover { background: rgba(51,255,0,0.05); }
+  .price-cell.featured:hover { background: rgba(255,176,0,0.12); }
+  .price-tier {
+    color: var(--amber);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-shadow: var(--glow-amber);
+    margin-bottom: 8px;
+  }
+  .price-amt {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--fg);
+    text-shadow: var(--glow);
+    margin-bottom: 4px;
+  }
+  .price-amt .currency { font-size: 1rem; color: var(--muted-2); }
+  .price-per { color: var(--muted-2); font-size: 11px; margin-bottom: 16px; }
+  .price-list {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+  .price-list li {
+    padding: 6px 0;
+    font-size: 12px;
+    color: var(--muted-2);
+    display: flex;
+    gap: 8px;
+  }
+  .price-list li::before { content: "[+]"; color: var(--fg); }
+  .price-list li.no::before { content: "[-]"; color: var(--error); }
+  .price-btn {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--fg);
+    color: var(--fg);
+    padding: 12px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: background 0.1s, color 0.1s;
+    text-shadow: var(--glow);
+  }
+  .price-btn:hover { background: var(--fg); color: var(--bg); text-shadow: none; }
+  .price-cell.featured .price-btn { border-color: var(--amber); color: var(--amber); text-shadow: var(--glow-amber); }
+  .price-cell.featured .price-btn:hover { background: var(--amber); color: var(--bg); text-shadow: none; }
+  @media (max-width: 768px) {
+    .pricing-row { grid-template-columns: 1fr; }
+    .price-cell { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+
+  /* ---------- TESTIMONIALS (IRC logs) ---------- */
+  .testimonials {
+    padding: 48px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .irc-log {
+    border: 1px solid var(--border);
+    background: var(--bg-panel);
+    padding: 20px;
+    max-width: 900px;
+    font-size: 13px;
+  }
+  .irc-line {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border);
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 16px;
+  }
+  .irc-line:last-child { border-bottom: none; }
+  .irc-meta { color: var(--muted); font-size: 11px; }
+  .irc-nick { color: var(--amber); text-shadow: var(--glow-amber); font-weight: 700; }
+  .irc-nick::before { content: "<"; color: var(--muted-2); }
+  .irc-nick::after { content: ">"; color: var(--muted-2); }
+  .irc-msg { color: var(--muted-2); }
+  .irc-msg .hl { color: var(--fg); text-shadow: var(--glow); }
+  @media (max-width: 600px) {
+    .irc-line { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  /* ---------- FAQ (man page) ---------- */
+  .faq {
+    padding: 48px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .man-page {
+    border: 1px solid var(--border);
+    background: var(--bg-panel);
+    padding: 24px;
+    max-width: 900px;
+  }
+  .man-name {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    color: var(--amber);
+    text-shadow: var(--glow-amber);
+    font-weight: 700;
+  }
+  .faq-item {
+    border-bottom: 1px dashed var(--border);
+    padding: 16px 0;
+    cursor: pointer;
+  }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    color: var(--amber);
+    text-shadow: var(--glow-amber);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .faq-q::before { content: "> QUERY: "; color: var(--muted-2); font-weight: 400; }
+  .faq-toggle {
+    color: var(--fg);
+    transition: transform 0.15s;
+    flex-shrink: 0;
+  }
+  .faq-item.open .faq-toggle { transform: rotate(90deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease-out, padding 0.25s ease-out;
+    color: var(--muted-2);
+    font-size: 13px;
+    padding: 0 16px;
+    line-height: 1.6;
+  }
+  .faq-a::before { content: "> RESPONSE: "; color: var(--fg); text-shadow: var(--glow); display: block; margin-top: 12px; }
+  .faq-item.open .faq-a { max-height: 300px; padding: 0 16px 12px; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    padding: 48px 0 24px;
+    background: var(--bg-panel);
+    border-top: 1px solid var(--border);
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+  .footer-brand .ascii-mini {
+    font-family: 'VT323', monospace;
+    color: var(--fg);
+    text-shadow: var(--glow);
+    font-size: 16px;
+    line-height: 1;
+    white-space: pre;
+    margin-bottom: 16px;
+  }
+  .footer-brand p {
+    color: var(--muted-2);
+    font-size: 12px;
+    max-width: 320px;
+    line-height: 1.6;
+  }
+  .footer-col h4 {
+    color: var(--amber);
+    text-shadow: var(--glow-amber);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .footer-col h4::before { content: "# "; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 8px; font-size: 12px; }
+  .footer-col a { color: var(--muted-2); transition: color 0.1s; }
+  .footer-col a:hover { color: var(--fg); text-shadow: var(--glow); }
+  .footer-col a::before { content: "-> "; color: var(--muted); }
+  .footer-bottom {
+    border-top: 1px dashed var(--border);
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .footer-bottom .ok { color: var(--fg); }
+  @media (max-width: 768px) {
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <div class="nav-brand">TERM.SYS<span class="blink"></span></div>
+    <ul class="nav-links">
+      <li><a class="nav-link" href="#features">features</a></li>
+      <li><a class="nav-link" href="#how">how</a></li>
+      <li><a class="nav-link" href="#pricing">pricing</a></li>
+      <li><a class="nav-link" href="#faq">help</a></li>
+    </ul>
+    <div class="nav-status">
+      <span class="dot"></span>
+      <span>STATUS: <span class="ok">[ONLINE]</span></span>
+      <span>v3.14.2</span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="boot-line">[ <span class="ok">OK</span> ] Initializing TERM.SYS kernel...</div>
+        <div class="boot-line">[ <span class="ok">OK</span> ] Loading monospace modules... <span class="ok">loaded</span></div>
+        <div class="boot-line">[ <span class="warn">WARN</span> ] CRT phosphor degradation detected (nominal)</div>
+        <div class="boot-line">[ <span class="ok">OK</span> ] System ready. Welcome back, root.</div>
+
+        <pre class="ascii-logo">  ████████╗███████╗██████╗ ███╗   ███╗
+  ╚══██╔══╝██╔════╝██╔══██╗████╗ ████║
+     ██║   █████╗  ██████╔╝██╔████╔██║
+     ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║
+     ██║   ███████╗██║  ██║██║ ╚═╝ ██║
+     ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝</pre>
+
+        <h1 id="typed-headline"><span class="cursor"></span></h1>
+        <p class="hero-sub"><span class="prompt-user"></span><span class="green">run</span> --raw --functional --retro-futuristic. A command-line interface aesthetic stripped to its essence. Monospace supremacy. Blinking cursors. Shell metaphors. No UI fluff — just the system, exposed.</p>
+
+        <div class="hero-cta">
+          <button class="btn">$ ./install.sh</button>
+          <button class="btn-amber btn">man term.sys</button>
+          <button class="btn-bracket">Initiate</button>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="term-window">
+          <div class="term-titlebar">
+            <div class="term-title">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <span>root@term.sys: ~/session</span>
+            </div>
+            <span style="color:var(--muted)">80x24</span>
+          </div>
+          <div class="term-body" id="term-body">
+            <div class="line"><span class="cmd">term.sys --status</span></div>
+            <div class="line out">─────────────────────────────</div>
+            <div class="line">uptime    : <span class="ok">99.9%</span></div>
+            <div class="line">users     : <span class="ok">10,247</span></div>
+            <div class="line">latency   : <span class="ok">4ms</span></div>
+            <div class="line">region    : us-east-1</div>
+            <div class="line out">─────────────────────────────</div>
+            <div class="line"><span class="cmd">term.sys --deploy</span></div>
+            <div class="line out">> compiling assets...........<span class="ok">[OK]</span></div>
+            <div class="line out">> linking modules............<span class="ok">[OK]</span></div>
+            <div class="line out">> starting daemon............<span class="ok">[OK]</span></div>
+            <div class="line"><span class="ok">[SUCCESS]</span> deployment complete<span class="cursor" style="display:inline-block;width:8px;height:14px;background:var(--fg);box-shadow:var(--glow);vertical-align:middle;margin-left:4px;animation:blink 1s step-end infinite;"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">[01]</span>
+      <h2>System Status Report</h2>
+      <span class="comment">// cat /proc/term.sys/metrics</span>
+    </div>
+    <div class="stats-table">
+      <div class="stat-row">
+        <div class="stat-cell">
+          <div class="stat-key">UPTIME</div>
+          <div class="stat-val">99.9%</div>
+          <div class="stat-bar"><div class="bar-track"><div class="bar-fill" data-width="99"></div></div><span>5y</span></div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-key">ACTIVE USERS</div>
+          <div class="stat-val">10,247</div>
+          <div class="stat-bar"><div class="bar-track"><div class="bar-fill" data-width="78"></div></div><span>+12%</span></div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-key">AVG LATENCY</div>
+          <div class="stat-val">4ms</div>
+          <div class="stat-bar"><div class="bar-track"><div class="bar-fill" data-width="15"></div></div><span>↘</span></div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-key">DEPLOYS / DAY</div>
+          <div class="stat-val">842</div>
+          <div class="stat-bar"><div class="bar-track"><div class="bar-fill" data-width="64"></div></div><span>stable</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">[02]</span>
+      <h2>man term.sys</h2>
+      <span class="comment">// --help for available flags</span>
+    </div>
+    <div class="features-grid">
+      <div class="man-card">
+        <div class="man-card-head">
+          <span class="man-flag">--speed</span>
+          <span class="man-section">SECTION 1</span>
+        </div>
+        <h3>Instant Execution</h3>
+        <p>Compiled to native bytecode with zero virtual machine overhead. Commands return before you finish typing the next one.</p>
+        <code>$ term.sys run --fast</code>
+      </div>
+      <div class="man-card">
+        <div class="man-card-head">
+          <span class="man-flag">--security</span>
+          <span class="man-section">SECTION 2</span>
+        </div>
+        <h3>Encrypted By Default</h3>
+        <p>End-to-end AES-256 with rotating keys. Every packet signed. Every session ephemeral. No plaintext crosses the wire.</p>
+        <code>$ term.sys encrypt --on</code>
+      </div>
+      <div class="man-card">
+        <div class="man-card-head">
+          <span class="man-flag">--scriptable</span>
+          <span class="man-section">SECTION 3</span>
+        </div>
+        <h3>Pipe Everything</h3>
+        <p>STDOUT composable with grep, awk, sed, jq. Build pipelines that span services. The shell is the API.</p>
+        <code>$ term.sys get | jq '.[]'</code>
+      </div>
+      <div class="man-card">
+        <div class="man-card-head">
+          <span class="man-flag">--offline</span>
+          <span class="man-section">SECTION 4</span>
+        </div>
+        <h3>Local-First</h3>
+        <p>Full functionality without a network connection. Sync when reconnected. Your data never leaves the machine unless you say so.</p>
+        <code>$ term.sys sync --later</code>
+      </div>
+      <div class="man-card">
+        <div class="man-card-head">
+          <span class="man-flag">--audit</span>
+          <span class="man-section">SECTION 5</span>
+        </div>
+        <h3>Immutable Logs</h3>
+        <p>Append-only audit trail with cryptographic chaining. Every action traceable. Nothing retractable. Total accountability.</p>
+        <code>$ term.sys log --tail</code>
+      </div>
+      <div class="man-card">
+        <div class="man-card-head">
+          <span class="man-flag">--extend</span>
+          <span class="man-section">SECTION 6</span>
+        </div>
+        <h3>Plugin Architecture</h3>
+        <p>Write extensions in any language that speaks STDIN/STDOUT. Distribute via git. No package manager lock-in.</p>
+        <code>$ term.sys plug add ./ext</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">[03]</span>
+      <h2>Execution Log</h2>
+      <span class="comment">// tail -f /var/log/term.sys</span>
+    </div>
+    <div class="how-log">
+      <div class="log-step">
+        <div class="log-time">[00:00.012]</div>
+        <div>
+          <div class="log-cmd">term.sys init --project=myapp</div>
+          <div class="log-out">Initializing project structure... <span class="ok">[OK]</span></div>
+          <div class="log-out">Created: ./myapp/</div>
+        </div>
+      </div>
+      <div class="log-step">
+        <div class="log-time">[00:00.341]</div>
+        <div>
+          <div class="log-cmd">term.sys configure --env=prod</div>
+          <div class="log-out">Loading environment variables... <span class="ok">[OK]</span></div>
+          <div class="log-out">Validating schema... <span class="ok">[OK]</span></div>
+          <div class="log-out"><span class="amber">[WARN]</span> 2 optional keys missing (using defaults)</div>
+        </div>
+      </div>
+      <div class="log-step">
+        <div class="log-time">[00:01.108]</div>
+        <div>
+          <div class="log-cmd">term.sys build --optimize</div>
+          <div class="log-out">Compiling 247 modules...</div>
+          <div class="log-progress">[████████████████████████████] 100%</div>
+          <div class="log-out">Bundle: <span class="ok">142.3 KB</span> (gzipped: 48.1 KB)</div>
+        </div>
+      </div>
+      <div class="log-step">
+        <div class="log-time">[00:02.844]</div>
+        <div>
+          <div class="log-cmd">term.sys deploy --target=edge</div>
+          <div class="log-out">Pushing to 18 edge regions...</div>
+          <div class="log-out"><span class="ok">[SUCCESS]</span> Live at <span class="ok">https://myapp.term.sys</span></div>
+          <div class="log-out">Total time: <span class="ok">2.844s</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">[04]</span>
+      <h2>ls -la /plans</h2>
+      <span class="comment">// term.sys --billing</span>
+    </div>
+    <div class="pricing-table">
+      <div class="pricing-row">
+        <div class="price-cell">
+          <div class="price-tier">--free</div>
+          <div class="price-amt"><span class="currency">$</span>0</div>
+          <div class="price-per">/ forever</div>
+          <ul class="price-list">
+            <li>1 project</li>
+            <li>Community support</li>
+            <li>100 deploys/mo</li>
+            <li class="no">No plugins</li>
+            <li class="no">No audit logs</li>
+          </ul>
+          <button class="price-btn">$ install free</button>
+        </div>
+        <div class="price-cell featured">
+          <div class="price-tier">--pro [SELECTED]</div>
+          <div class="price-amt"><span class="currency">$</span>19</div>
+          <div class="price-per">/ month</div>
+          <ul class="price-list">
+            <li>Unlimited projects</li>
+            <li>Priority support</li>
+            <li>Unlimited deploys</li>
+            <li>All plugins</li>
+            <li>30-day audit logs</li>
+          </ul>
+          <button class="price-btn">$ upgrade pro</button>
+        </div>
+        <div class="price-cell">
+          <div class="price-tier">--enterprise</div>
+          <div class="price-amt"><span class="currency">$</span>99</div>
+          <div class="price-per">/ month</div>
+          <ul class="price-list">
+            <li>Everything in Pro</li>
+            <li>Dedicated engineer</li>
+            <li>SSO + SAML</li>
+            <li>Unlimited audit logs</li>
+            <li>On-prem deploy</li>
+          </ul>
+          <button class="price-btn">$ contact sales</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">[05]</span>
+      <h2>tail /var/log/irc.log</h2>
+      <span class="comment">// #term.sys @ irc.libera.chat</span>
+    </div>
+    <div class="irc-log">
+      <div class="irc-line">
+        <div class="irc-meta">[14:22] #term.sys</div>
+        <div><span class="irc-nick">root_op</span> <span class="irc-msg">just migrated 200 services to term.sys, deploy times went from <span class="hl">12min to 8sec</span>. this is unreal.</span></div>
+      </div>
+      <div class="irc-line">
+        <div class="irc-meta">[14:24] #term.sys</div>
+        <div><span class="irc-nick">nullbyte</span> <span class="irc-msg">the <span class="hl">--audit</span> flag alone is worth the pro plan. compliance team finally stopped yelling.</span></div>
+      </div>
+      <div class="irc-line">
+        <div class="irc-meta">[14:27] #term.sys</div>
+        <div><span class="irc-nick">segfault_sue</span> <span class="irc-msg">piping term.sys output into jq and feeding it to grafana... <span class="hl">chef's kiss</span>. shell is the api.</span></div>
+      </div>
+      <div class="irc-line">
+        <div class="irc-meta">[14:31] #term.sys</div>
+        <div><span class="irc-nick">daemon_42</span> <span class="irc-msg">been running it on a 2009 thinkpad in my closet. <span class="hl">uptime 547 days</span>. zero incidents.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">[06]</span>
+      <h2>man term.sys(7)</h2>
+      <span class="comment">// help --topic faq</span>
+    </div>
+    <div class="man-page">
+      <div class="man-name">TERM.SYS(7)          Miscellaneous Information Manual          TERM.SYS(7)</div>
+      <div class="faq-item">
+        <div class="faq-q">Is term.sys open source?<span class="faq-toggle">▶</span></div>
+        <div class="faq-a">Yes. The core runtime is MIT-licensed and available on our git server. Enterprise plugins are source-available under a commercial license. Fork it, audit it, contribute back.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I run it without a GUI?<span class="faq-toggle">▶</span></div>
+        <div class="faq-a">Absolutely. term.sys is designed for headless operation. SSH into a server, pipe commands, read STDOUT. A GUI is a convenience, never a requirement.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Does it work on Windows?<span class="faq-toggle">▶</span></div>
+        <div class="faq-a">Yes — via WSL2, Cygwin, or the native binary we ship for x64 and ARM64. PowerShell integration is supported through our PSReadLine-compatible module.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How is data encrypted at rest?<span class="faq-toggle">▶</span></div>
+        <div class="faq-a">AES-256-GCM with per-record keys derived from a master key sealed by your OS keychain (Keychain, Secret Service, or DPAPI). Keys never touch disk in plaintext.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What is the blinking cursor for?<span class="faq-toggle">▶</div>
+        <div class="faq-a">It is the heartbeat of the interface. When the cursor blinks, the system is alive and listening. It is the only animation that matters.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <pre class="ascii-mini">┌──────────────┐
+│  TERM.SYS    │
+│  v3.14.2     │
+└──────────────┘</pre>
+        <p># a raw, functional, retro-futuristic command-line interface. high contrast, monospaced precision, blinking cursors. built for those who speak fluent shell.</p>
+      </div>
+      <div class="footer-col">
+        <h4>system</h4>
+        <ul>
+          <li><a href="#features">features</a></li>
+          <li><a href="#how">how-it-works</a></li>
+          <li><a href="#pricing">pricing</a></li>
+          <li><a href="#faq">help</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>docs</h4>
+        <ul>
+          <li><a href="#">man pages</a></li>
+          <li><a href="#">api reference</a></li>
+          <li><a href="#">cookbook</a></li>
+          <li><a href="#">changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>connect</h4>
+        <ul>
+          <li><a href="#">github</a></li>
+          <li><a href="#">irc #term.sys</a></li>
+          <li><a href="#">rss feed</a></li>
+          <li><a href="#">email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>~ <span class="ok">root@term.sys</span>:/var/www$ <span style="animation:blink 1s step-end infinite;">█</span></span>
+      <span>shell: zsh 5.9 · terminal: xterm-256color</span>
+      <span>// © 2026 term.sys — all rights reserved</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Typewriter effect for hero headline
+  const headline = document.getElementById('typed-headline');
+  const text = 'THE SHELL IS THE INTERFACE';
+  let i = 0;
+  function type() {
+    if (i <= text.length) {
+      headline.innerHTML = text.slice(0, i) + '<span class="cursor"></span>';
+      i++;
+      setTimeout(type, 70);
+    }
+  }
+  setTimeout(type, 800);
+
+  // Animate progress bars on scroll
+  const bars = document.querySelectorAll('.bar-fill');
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const w = entry.target.dataset.width;
+        setTimeout(() => { entry.target.style.width = w + '%'; }, 100);
+        barObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  bars.forEach(b => { b.style.width = '0%'; barObserver.observe(b); });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Live clock in nav status
+  function updateClock() {
+    const status = document.querySelector('.nav-status');
+    // keep simple — no clock to preserve layout
+  }
+</script>
+
+</body>
+</html>

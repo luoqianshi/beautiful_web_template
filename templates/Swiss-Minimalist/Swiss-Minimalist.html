@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SWISS — International Typographic Style</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --fg: #000000;
+    --muted: #F2F2F2;
+    --accent: #FF3000;
+    --border: #000000;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Global noise texture overlay (paper grain) */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.015;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  ::selection { background: var(--accent); color: #fff; }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- PATTERNS ---------- */
+  .pat-grid {
+    background-image:
+      linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .pat-dots {
+    background-image: radial-gradient(rgba(0,0,0,0.08) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+  .pat-diagonal {
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(0,0,0,0.06),
+      rgba(0,0,0,0.06) 1px,
+      transparent 1px,
+      transparent 10px
+    );
+  }
+
+  /* ---------- LAYOUT ---------- */
+  .container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  section { position: relative; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #fff;
+    border-bottom: 4px solid var(--fg);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+  .logo {
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-mark {
+    width: 24px;
+    height: 24px;
+    background: var(--accent);
+    display: inline-block;
+  }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-link {
+    position: relative;
+    overflow: hidden;
+    height: 24px;
+    display: inline-block;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.85rem;
+  }
+  .nav-link span {
+    display: block;
+    transition: transform 0.2s ease-out;
+  }
+  .nav-link span:last-child {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: var(--accent);
+  }
+  .nav-link:hover span:first-child { transform: translateY(-100%); }
+  .nav-link:hover span:last-child { transform: translateY(-100%); }
+  .nav-cta {
+    background: var(--fg);
+    color: #fff;
+    padding: 14px 28px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.85rem;
+    border: 4px solid var(--fg);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-cta:hover { background: var(--accent); border-color: var(--accent); }
+  .menu-toggle { display: none; }
+
+  @media (max-width: 900px) {
+    .nav-links, .nav-cta { display: none; }
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 8px;
+    }
+    .menu-toggle span { width: 28px; height: 3px; background: var(--fg); }
+  }
+
+  /* ---------- SECTION NUMBER ---------- */
+  .section-num {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .section-num::before {
+    content: "";
+    width: 32px;
+    height: 4px;
+    background: var(--accent);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding-top: 72px;
+    border-bottom: 4px solid var(--fg);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 8fr 4fr;
+    min-height: calc(100vh - 72px);
+  }
+  .hero-left {
+    padding: 80px 32px 64px;
+    border-right: 4px solid var(--fg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.8rem;
+    margin-bottom: 32px;
+  }
+  .hero-tag .dot {
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+  .hero h1 {
+    font-weight: 900;
+    font-size: clamp(3rem, 11vw, 10rem);
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero h1 .red { color: var(--accent); }
+  .hero h1 .outline {
+    -webkit-text-stroke: 2px var(--fg);
+    color: transparent;
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    max-width: 540px;
+    margin-bottom: 48px;
+    color: #1a1a1a;
+    line-height: 1.6;
+  }
+  .hero-cta-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 22px 36px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+    border: 4px solid var(--fg);
+    cursor: pointer;
+    transition: background 0.15s ease-out, color 0.15s ease-out;
+    font-family: inherit;
+  }
+  .btn-primary { background: var(--fg); color: #fff; }
+  .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-secondary { background: #fff; color: var(--fg); }
+  .btn-secondary:hover { background: var(--fg); color: #fff; }
+  .btn .arrow {
+    display: inline-block;
+    transition: transform 0.2s ease-out;
+  }
+  .btn:hover .arrow { transform: translateX(4px); }
+
+  .hero-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--fg);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+
+  /* Hero right — geometric composition */
+  .hero-right {
+    position: relative;
+    background: var(--muted);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .composition {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+  }
+  .shape {
+    position: absolute;
+    transition: transform 0.4s ease-out;
+  }
+  .shape-circle {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: var(--fg);
+    top: 15%;
+    left: 18%;
+  }
+  .shape-circle:hover { transform: scale(1.1) rotate(15deg); }
+  .shape-rect-red {
+    width: 160px;
+    height: 280px;
+    background: var(--accent);
+    top: 30%;
+    right: 12%;
+  }
+  .shape-rect-red:hover { transform: translateY(-20px); }
+  .shape-line-h {
+    width: 70%;
+    height: 4px;
+    background: var(--fg);
+    top: 50%;
+    left: 15%;
+  }
+  .shape-square {
+    width: 100px;
+    height: 100px;
+    border: 4px solid var(--fg);
+    bottom: 18%;
+    left: 28%;
+    background: #fff;
+  }
+  .shape-square:hover { background: var(--accent); border-color: var(--accent); }
+  .shape-tri {
+    width: 0;
+    height: 0;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+    border-bottom: 100px solid var(--fg);
+    bottom: 12%;
+    right: 25%;
+  }
+  .shape-ring {
+    width: 140px;
+    height: 140px;
+    border: 8px solid var(--accent);
+    border-radius: 50%;
+    top: 8%;
+    right: 35%;
+    background: transparent;
+  }
+  .shape-num {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    font-size: 8rem;
+    font-weight: 900;
+    color: var(--fg);
+    opacity: 0.08;
+    line-height: 0.8;
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-left { border-right: none; border-bottom: 4px solid var(--fg); }
+    .hero-right { min-height: 400px; }
+    .hero-meta { flex-direction: column; gap: 12px; align-items: flex-start; }
+  }
+
+  /* ---------- TICKER ---------- */
+  .ticker {
+    background: var(--fg);
+    color: #fff;
+    padding: 18px 0;
+    border-bottom: 4px solid var(--fg);
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-track {
+    display: inline-flex;
+    gap: 48px;
+    animation: scroll 30s linear infinite;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.85rem;
+  }
+  .ticker-track span { display: inline-flex; align-items: center; gap: 48px; }
+  .ticker-track span::after { content: "■"; color: var(--accent); font-size: 0.7rem; }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ---------- STATS ---------- */
+  .stats {
+    border-bottom: 4px solid var(--fg);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stat {
+    padding: 64px 32px;
+    border-right: 4px solid var(--fg);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat:last-child { border-right: none; }
+  .stat:hover { background: var(--accent); color: #fff; }
+  .stat-num {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    transition: transform 0.2s ease-out;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .stat:hover .stat-num { transform: scale(1.05); }
+  .stat-plus {
+    font-size: 2rem;
+    color: var(--accent);
+    transition: transform 0.2s ease-out, color 0.15s;
+  }
+  .stat:hover .stat-plus { transform: rotate(90deg); color: #fff; }
+  .stat-label {
+    margin-top: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+  @media (max-width: 768px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 4px solid var(--fg); }
+  }
+
+  /* ---------- FEATURES ---------- */
+  .features {
+    border-bottom: 4px solid var(--fg);
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+  }
+  .features-left {
+    padding: 96px 48px;
+    border-right: 4px solid var(--fg);
+    background: var(--muted);
+    position: relative;
+    position: sticky;
+    top: 72px;
+    align-self: start;
+  }
+  .features-left .pat-dots {
+    position: absolute;
+    inset: 0;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .features-left > * { position: relative; z-index: 1; }
+  .features-left h2 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .features-left p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 380px;
+    margin-bottom: 32px;
+    color: #1a1a1a;
+  }
+  .features-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .feature-card {
+    padding: 56px 48px;
+    border-bottom: 4px solid var(--fg);
+    display: grid;
+    grid-template-columns: 60px 1fr 40px;
+    gap: 32px;
+    align-items: start;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .feature-card:last-child { border-bottom: none; }
+  .feature-card:hover { background: var(--accent); color: #fff; }
+  .feature-num {
+    font-weight: 900;
+    font-size: 1.5rem;
+    border: 4px solid var(--fg);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .feature-card:hover .feature-num { background: #fff; color: var(--accent); border-color: #fff; }
+  .feature-body h3 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .feature-body p {
+    font-size: 1rem;
+    line-height: 1.55;
+    color: #333;
+    transition: color 0.15s;
+  }
+  .feature-card:hover .feature-body p { color: rgba(255,255,255,0.85); }
+  .feature-arrow {
+    font-size: 1.8rem;
+    font-weight: 700;
+    transform: rotate(-45deg);
+    transition: transform 0.2s ease-out;
+    align-self: center;
+  }
+  .feature-card:hover .feature-arrow { transform: rotate(0deg); }
+
+  @media (max-width: 900px) {
+    .features-grid { grid-template-columns: 1fr; }
+    .features-left { border-right: none; border-bottom: 4px solid var(--fg); position: relative; top: 0; }
+    .feature-card { grid-template-columns: 48px 1fr 32px; padding: 36px 24px; gap: 20px; }
+    .feature-num { width: 48px; height: 48px; font-size: 1.1rem; }
+  }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .how {
+    background: var(--fg);
+    color: #fff;
+    border-bottom: 4px solid var(--fg);
+  }
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .how-step {
+    padding: 80px 40px;
+    border-right: 4px solid #2a2a2a;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.15s;
+  }
+  .how-step:last-child { border-right: none; }
+  .how-step:hover { background: #1a1a1a; }
+  .how-step::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.25s ease-out;
+  }
+  .how-step:hover::before { transform: scaleY(1); }
+  .how-watermark {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 9rem;
+    font-weight: 900;
+    color: #fff;
+    opacity: 0.06;
+    line-height: 0.8;
+  }
+  .how-step-num {
+    color: var(--accent);
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+  .how-step h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    line-height: 1;
+  }
+  .how-step p {
+    color: #b5b5b5;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+  }
+  @media (max-width: 768px) {
+    .how-grid { grid-template-columns: 1fr; }
+    .how-step { border-right: none; border-bottom: 4px solid #2a2a2a; }
+    .how-watermark { font-size: 6rem; }
+  }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testimonials {
+    padding: 96px 0;
+    border-bottom: 4px solid var(--fg);
+  }
+  .testimonials-header {
+    padding: 0 32px 64px;
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 48px;
+    align-items: end;
+  }
+  .testimonials-header h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+  }
+  .testimonials-header p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 480px;
+    color: #1a1a1a;
+  }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 4px solid var(--fg);
+  }
+  .testimonial {
+    padding: 48px 32px;
+    border-right: 4px solid var(--fg);
+    border-top: 4px solid var(--fg);
+    margin-top: -4px;
+    cursor: pointer;
+    transition: transform 0.2s ease-out, border-color 0.15s;
+  }
+  .testimonial:last-child { border-right: none; }
+  .testimonial:hover { transform: translateY(-4px); border-top-color: var(--accent); }
+  .quote-mark {
+    font-size: 5rem;
+    color: var(--accent);
+    line-height: 0.7;
+    font-weight: 900;
+    margin-bottom: 16px;
+  }
+  .testimonial blockquote {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    font-size: 1.15rem;
+    line-height: 1.35;
+    margin-bottom: 32px;
+  }
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-top: 1px solid var(--fg);
+    padding-top: 20px;
+  }
+  .avatar {
+    width: 48px;
+    height: 48px;
+    background: var(--fg);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  .author-name { font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.9rem; }
+  .author-role { font-size: 0.8rem; color: #555; text-transform: uppercase; letter-spacing: 0.08em; }
+  @media (max-width: 900px) {
+    .testimonials-header { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .testimonial { border-right: none; }
+  }
+
+  /* ---------- PRICING ---------- */
+  .pricing {
+    padding: 96px 0;
+    border-bottom: 4px solid var(--fg);
+  }
+  .pricing-header {
+    text-align: center;
+    margin-bottom: 64px;
+    padding: 0 32px;
+  }
+  .pricing-header h2 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    margin-bottom: 16px;
+  }
+  .pricing-header p { font-size: 1.05rem; color: #444; }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .price-card {
+    border: 4px solid var(--fg);
+    padding: 48px 36px;
+    margin-right: -4px;
+    background: #fff;
+    transition: transform 0.2s ease-out, background 0.15s, color 0.15s;
+    position: relative;
+    cursor: pointer;
+  }
+  .price-card:hover { transform: translateY(-8px); }
+  .price-card.featured {
+    background: var(--fg);
+    color: #fff;
+    z-index: 2;
+  }
+  .price-card.featured .price-features li { border-color: #333; }
+  .price-card.featured .price-cta {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .price-card.featured:hover { background: var(--accent); }
+  .price-card.featured:hover .price-cta { background: #fff; color: var(--accent); border-color: #fff; }
+  .price-badge {
+    position: absolute;
+    top: -16px;
+    left: -4px;
+    background: var(--accent);
+    color: #fff;
+    padding: 6px 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.75rem;
+  }
+  .price-tier {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    color: var(--accent);
+  }
+  .price-card.featured .price-tier { color: var(--accent); }
+  .price-amount {
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .price-amount .currency { font-size: 1.5rem; margin-top: 8px; }
+  .price-period { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.8rem; color: #666; margin-bottom: 32px; }
+  .price-card.featured .price-period { color: #aaa; }
+  .price-features {
+    list-style: none;
+    margin-bottom: 32px;
+  }
+  .price-features li {
+    padding: 14px 0;
+    border-top: 1px solid var(--fg);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+  }
+  .price-features li::before {
+    content: "+";
+    color: var(--accent);
+    font-weight: 900;
+    font-size: 1.2rem;
+  }
+  .price-cta {
+    width: 100%;
+    background: var(--fg);
+    color: #fff;
+    border: 4px solid var(--fg);
+    padding: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 800;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s, color 0.15s;
+  }
+  .price-cta:hover { background: var(--accent); border-color: var(--accent); }
+  .price-card.featured .price-cta:hover { background: #fff; color: var(--accent); border-color: #fff; }
+  @media (max-width: 768px) {
+    .pricing-grid { grid-template-columns: 1fr; gap: 16px; }
+    .price-card { margin-right: 0; }
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq {
+    padding: 96px 0;
+    background: var(--muted);
+    border-bottom: 4px solid var(--fg);
+  }
+  .faq-header {
+    padding: 0 32px 64px;
+  }
+  .faq-header h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    max-width: 700px;
+  }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 0 32px;
+  }
+  .faq-item {
+    border: 4px solid var(--fg);
+    margin: -2px;
+    background: #fff;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .faq-item:hover { background: var(--accent); color: #fff; }
+  .faq-q {
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    font-size: 1.1rem;
+  }
+  .faq-q-num { color: var(--accent); font-size: 0.85rem; letter-spacing: 0.2em; }
+  .faq-item:hover .faq-q-num { color: #fff; }
+  .faq-toggle {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .faq-toggle::before, .faq-toggle::after {
+    content: "";
+    position: absolute;
+    background: currentColor;
+    transition: transform 0.2s ease-out;
+  }
+  .faq-toggle::before { top: 50%; left: 0; right: 0; height: 3px; transform: translateY(-50%); }
+  .faq-toggle::after { left: 50%; top: 0; bottom: 0; width: 3px; transform: translateX(-50%); }
+  .faq-item.open .faq-toggle::after { transform: translateX(-50%) rotate(90deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    padding: 0 32px;
+    line-height: 1.6;
+    color: #333;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding: 0 32px 28px; }
+  .faq-item:hover .faq-a { color: rgba(255,255,255,0.9); }
+  @media (max-width: 768px) {
+    .faq-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--fg);
+    color: #fff;
+    padding: 96px 0 32px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding: 0 32px;
+    margin-bottom: 96px;
+  }
+  .footer-brand h3 {
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    line-height: 0.85;
+    margin-bottom: 32px;
+  }
+  .footer-brand h3 .red { color: var(--accent); }
+  .newsletter-label {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #aaa;
+  }
+  .newsletter {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #fff;
+    padding-bottom: 8px;
+    max-width: 360px;
+  }
+  .newsletter input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 8px 0;
+    outline: none;
+  }
+  .newsletter input::placeholder { color: #777; }
+  .newsletter button {
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.85rem;
+    padding: 8px;
+    font-family: inherit;
+    transition: color 0.15s;
+  }
+  .newsletter button:hover { color: var(--accent); }
+  .footer-col h4 {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.8rem;
+    margin-bottom: 24px;
+    color: var(--accent);
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 14px; }
+  .footer-col a {
+    color: #ccc;
+    font-size: 0.95rem;
+    transition: color 0.15s;
+  }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-social {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .social-icon {
+    width: 44px;
+    height: 44px;
+    background: #fff;
+    color: var(--fg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .social-icon:hover { background: var(--accent); color: #fff; }
+  .footer-bottom {
+    border-top: 1px solid #333;
+    padding: 32px 32px 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  @media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="logo"><span class="logo-mark"></span>SWISS</a>
+    <ul class="nav-links">
+      <li><a class="nav-link" href="#features"><span>System</span><span>System</span></a></li>
+      <li><a class="nav-link" href="#how"><span>Method</span><span>Method</span></a></li>
+      <li><a class="nav-link" href="#pricing"><span>Pricing</span><span>Pricing</span></a></li>
+      <li><a class="nav-link" href="#faq"><span>Journal</span><span>Journal</span></a></li>
+    </ul>
+    <button class="nav-cta">Get Started</button>
+    <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-grid">
+    <div class="hero-left pat-grid">
+      <div>
+        <div class="hero-tag"><span class="dot"></span>EST. 1957 · ZÜRICH · SWITZERLAND</div>
+        <h1>
+          <span class="outline">OBJECTIVE</span><br>
+          <span>TYPE-</span><span class="red">GRAPHY</span><br>
+          <span class="outline">FOR THE</span> GRID
+        </h1>
+        <p class="hero-sub">A rigorous implementation of the International Typographic Style. Mathematical grids, neutral grotesque type, and a strict black/white/red palette. Designed to recede so the content speaks.</p>
+        <div class="hero-cta-row">
+          <a href="#pricing" class="btn btn-primary">Start Project <span class="arrow">→</span></a>
+          <a href="#features" class="btn btn-secondary">View System</a>
+        </div>
+      </div>
+      <div class="hero-meta">
+        <span>01 / Manifesto</span>
+        <span>Vol. IX — 2026</span>
+        <span>↓ Scroll</span>
+      </div>
+    </div>
+    <div class="hero-right pat-grid">
+      <div class="composition">
+        <div class="shape shape-circle"></div>
+        <div class="shape shape-rect-red"></div>
+        <div class="shape shape-line-h"></div>
+        <div class="shape shape-square"></div>
+        <div class="shape shape-tri"></div>
+        <div class="shape shape-ring"></div>
+        <div class="shape-num">57</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>HELVETICA</span><span>GRID SYSTEMS</span><span>OBJECTIVE</span><span>MÜLLER-BROCKMANN</span><span>TYPOGRAPHY</span><span>BAUHAUS</span>
+    <span>HELVETICA</span><span>GRID SYSTEMS</span><span>OBJECTIVE</span><span>MÜLLER-BROCKMANN</span><span>TYPOGRAPHY</span><span>BAUHAUS</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="stat-num">68<span class="stat-plus">+</span></div>
+      <div class="stat-label">Years of Practice</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">99.9<span class="stat-plus">%</span></div>
+      <div class="stat-label">Grid Precision</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">240<span class="stat-plus">+</span></div>
+      <div class="stat-label">Type Specimens</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3<span class="stat-plus">·</span></div>
+      <div class="stat-label">Color Palette</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="features-grid">
+    <div class="features-left pat-dots">
+      <div class="section-num">02. System</div>
+      <h2>The Grid Is Law</h2>
+      <p>Every visual decision is justifiable by the content's needs. Personal ornamentation is eliminated in favor of functional communication. Type is the interface.</p>
+      <button class="btn btn-primary">Explore Method <span class="arrow">→</span></button>
+    </div>
+    <div class="features-list">
+      <div class="feature-card">
+        <div class="feature-num">01</div>
+        <div class="feature-body">
+          <h3>Mathematical Grids</h3>
+          <p>24px baseline grids with visible structure. Asymmetrical organization creates dynamic visual rhythm and tension without sacrificing legibility.</p>
+        </div>
+        <div class="feature-arrow">→</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">02</div>
+        <div class="feature-body">
+          <h3>Neutral Grotesque Type</h3>
+          <p>Inter at weights 400 to 900. Scale, weight, and position are the only tools needed to create hierarchy. Type recedes so meaning can emerge.</p>
+        </div>
+        <div class="feature-arrow">→</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">03</div>
+        <div class="feature-body">
+          <h3>Active Negative Space</h3>
+          <p>White space is not empty. It is a structural element that defines boundaries, gives weight to massive typography, and creates breathing room.</p>
+        </div>
+        <div class="feature-arrow">→</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">04</div>
+        <div class="feature-body">
+          <h3>Layered Texture Depth</h3>
+          <p>Subtle CSS patterns — grids, dot matrices, diagonals, noise — add tactile richness without compromising the objective, flat aesthetic.</p>
+        </div>
+        <div class="feature-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="how-watermark">01</div>
+      <div class="how-step-num">— STEP ONE</div>
+      <h3>Define The Grid</h3>
+      <p>Establish the modular grid before a single character is set. The structure dictates every subsequent decision, from column widths to type scale.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-watermark">02</div>
+      <div class="how-step-num">— STEP TWO</div>
+      <h3>Set The Type</h3>
+      <p>Choose neutral grotesque typefaces. Establish a mathematical scale with clear ratios. Flush-left, ragged-right. Uppercase for hierarchy.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-watermark">03</div>
+      <div class="how-step-num">— STEP THREE</div>
+      <h3>Apply The Signal</h3>
+      <p>Swiss Red (#FF3000) appears only as a functional signal — a stop sign, a warning, a highlight. Never decorative. Always purposeful.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-header">
+    <h2>What Practitioners Say</h2>
+    <p>From design studios and museums to transit authorities — the International Typographic Style remains the language of objective communication.</p>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial">
+      <div class="quote-mark">"</div>
+      <blockquote>The grid is not a cage. It is the skeleton that lets the design stand upright and speak clearly.</blockquote>
+      <div class="testimonial-author">
+        <div class="avatar">JR</div>
+        <div>
+          <div class="author-name">Josef R.</div>
+          <div class="author-role">Design Director</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="quote-mark">"</div>
+      <blockquote>Objectivity over subjectivity. The designer is a conduit for information, not an artist expressing themselves.</blockquote>
+      <div class="testimonial-author">
+        <div class="avatar">MB</div>
+        <div>
+          <div class="author-name">Müller B.</div>
+          <div class="author-role">Typographer</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="quote-mark">"</div>
+      <blockquote>By avoiding ephemeral trends, the design aims for permanence. Clean, legible, undeniably modern.</blockquote>
+      <div class="testimonial-author">
+        <div class="avatar">AH</div>
+        <div>
+          <div class="author-name">Armin H.</div>
+          <div class="author-role">Editor, Werk</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="pricing-header">
+    <div class="section-num" style="justify-content:center;">03. Pricing</div>
+    <h2>Choose Your Tier</h2>
+    <p>Strict rectangular pricing. No rounded corners. No hidden fees.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-tier">— STUDENT</div>
+      <div class="price-amount"><span class="currency">$</span>0</div>
+      <div class="price-period">/ FOREVER</div>
+      <ul class="price-features">
+        <li>1 active project</li>
+        <li>12-column grid</li>
+        <li>Inter typeface</li>
+        <li>Community support</li>
+      </ul>
+      <button class="price-cta">Begin Free</button>
+    </div>
+    <div class="price-card featured">
+      <div class="price-badge">RECOMMENDED</div>
+      <div class="price-tier">— STUDIO</div>
+      <div class="price-amount"><span class="currency">$</span>48</div>
+      <div class="price-period">/ MONTH</div>
+      <ul class="price-features">
+        <li>Unlimited projects</li>
+        <li>Custom grid systems</li>
+        <li>Full type library</li>
+        <li>Priority support</li>
+        <li>Version history</li>
+      </ul>
+      <button class="price-cta">Start Studio</button>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">— ATELIER</div>
+      <div class="price-amount"><span class="currency">$</span>192</div>
+      <div class="price-period">/ MONTH</div>
+      <ul class="price-features">
+        <li>Everything in Studio</li>
+        <li>Team collaboration</li>
+        <li>Custom type licensing</li>
+        <li>Dedicated account</li>
+        <li>On-site training</li>
+      </ul>
+      <button class="price-cta">Contact Sales</button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="faq-header">
+    <div class="section-num">04. Journal</div>
+    <h2>Frequently Asked Questions</h2>
+  </div>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-q"><span><span class="faq-q-num">01.</span> Why no rounded corners?</span><div class="faq-toggle"></div></div>
+      <div class="faq-a">Rectangular forms are honest. They reveal the grid and the construction. Softening corners would compromise the objective, architectural character of the system.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span><span class="faq-q-num">02.</span> Is red ever decorative?</span><div class="faq-toggle"></div></div>
+      <div class="faq-a">Never. Swiss Red is a functional signal — used for CTAs, hover states, and section number prefixes. Decorative use would dilute its meaning as a stop sign.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span><span class="faq-q-num">03.</span> Why Inter and not Helvetica?</span><div class="faq-toggle"></div></div>
+      <div class="faq-a">Inter is a neutral grotesque with high x-heights, optimized for screens. It carries the same objective DNA as Helvetica while being freely available and screen-optimized.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span><span class="faq-q-num">04.</span> What about shadows and gradients?</span><div class="faq-toggle"></div></div>
+      <div class="faq-a">None. Depth comes from pattern overlays — grids, dots, diagonals, noise — never from drop shadows or gradients. The design is flat yet rich, stark yet nuanced.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>SWISS<br><span class="red">SYSTEM</span></h3>
+      <div class="newsletter-label">Subscribe to the Journal</div>
+      <form class="newsletter" onsubmit="event.preventDefault(); this.querySelector('input').value=''; alert('Subscribed.');">
+        <input type="email" placeholder="your@email.ch" required />
+        <button type="submit">Subscribe →</button>
+      </form>
+    </div>
+    <div class="footer-col">
+      <h4>System</h4>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how">Method</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">Journal</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Studio</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Manifesto</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#">Newsletter</a></li>
+        <li><a href="#">Workshops</a></li>
+        <li><a href="#">Archive</a></li>
+      </ul>
+      <div class="footer-social">
+        <a class="social-icon" href="#" aria-label="X">X</a>
+        <a class="social-icon" href="#" aria-label="IG">IG</a>
+        <a class="social-icon" href="#" aria-label="BE">BE</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 SWISS SYSTEM · ZÜRICH</span>
+    <span>DESIGNED ON A GRID</span>
+    <span>VOL. IX</span>
+  </div>
+</footer>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Mobile menu toggle (simple)
+  const toggle = document.querySelector('.menu-toggle');
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const links = document.querySelector('.nav-links');
+      if (links.style.display === 'flex') {
+        links.style.display = '';
+      } else {
+        links.style.display = 'flex';
+        links.style.flexDirection = 'column';
+        links.style.position = 'absolute';
+        links.style.top = '72px';
+        links.style.left = '0';
+        links.style.right = '0';
+        links.style.background = '#fff';
+        links.style.padding = '24px 32px';
+        links.style.borderBottom = '4px solid #000';
+      }
+    });
+  }
+
+  // Stat counter animation on scroll
+  const stats = document.querySelectorAll('.stat-num');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.5s, transform 0.5s';
+        setTimeout(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, 100);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  stats.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

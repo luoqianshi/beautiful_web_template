@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Monochrome — Editorial Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --fg:#000000;
+    --muted:#F5F5F5;
+    --mutedFg:#525252;
+    --borderLight:#E5E5E5;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Source Serif 4",Georgia,serif;
+    background:var(--bg);
+    color:var(--fg);
+    line-height:1.625;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* Global horizontal line texture + noise */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:repeating-linear-gradient(0deg,transparent,transparent 1px,#000 1px,#000 2px);
+    background-size:100% 4px;opacity:0.015;
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:0.02;
+  }
+  .container{max-width:72rem;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1}
+  section{position:relative;z-index:1}
+  .section-pad{padding:5rem 0}
+  @media(min-width:768px){.section-pad{padding:7rem 0}}
+  .heavy-rule{height:4px;background:var(--fg);width:100%}
+
+  /* Typography */
+  .display{font-family:"Playfair Display",Georgia,serif;font-weight:900;letter-spacing:-0.025em;line-height:1}
+  .serif{font-family:"Playfair Display",Georgia,serif}
+  .body-serif{font-family:"Source Serif 4",Georgia,serif}
+  .mono{font-family:"JetBrains Mono",monospace;letter-spacing:0.1em}
+  .smallcaps{font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:0.15em;font-size:.75rem;font-weight:500}
+
+  /* Nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--fg)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:72rem;margin:0 auto;padding:0 1.5rem}
+  .logo{font-family:"Playfair Display",serif;font-weight:900;font-size:1.5rem;letter-spacing:-0.02em}
+  .nav-links{display:none;gap:2rem;align-items:center}
+  @media(min-width:768px){.nav-links{display:flex}}
+  .nav-links a{color:var(--fg);text-decoration:none;font-size:.875rem;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:0.1em;transition:all .1s;padding:.25rem 0;border-bottom:2px solid transparent}
+  .nav-links a:hover{border-bottom-color:var(--fg)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-family:"JetBrains Mono",monospace;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;font-size:.8rem;cursor:pointer;border:none;font-size:.8rem;transition:all .1s;text-decoration:none;line-height:1;white-space:nowrap}
+  .btn-primary{background:var(--fg);color:var(--bg);padding:1rem 2rem;border:2px solid var(--fg)}
+  .btn-primary:hover{background:var(--bg);color:var(--fg);border-color:var(--fg)}
+  .btn-outline{background:transparent;color:var(--fg);border:2px solid var(--fg);padding:1rem 2rem}
+  .btn-outline:hover{background:var(--fg);color:var(--bg)}
+
+  /* Hero */
+  .hero{text-align:center;padding:7rem 0 4rem;border-bottom:4px solid var(--fg)}
+  @media(min-width:768px){.hero{padding:9rem 0 5rem}}
+  .hero-badge{display:inline-flex;align-items:center;gap:.6rem;font-family:"JetBrains Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:2.5rem}
+  .hero-badge .dot{width:8px;height:8px;background:var(--fg)}
+  .hero h1{font-family:"Playfair Display",serif;font-weight:900;font-size:clamp(3.5rem,14vw,10rem);letter-spacing:-0.05em;line-height:.85;margin-bottom:2rem}
+  .hero-rule{display:flex;align-items:center;justify-content:center;gap:1rem;margin:2rem auto;max-width:32rem}
+  .hero-rule .line{flex:1;height:2px;background:var(--fg)}
+  .hero-rule .sq{width:14px;height:14px;border:2px solid var(--fg)}
+  .hero-sub{font-family:"Source Serif 4",serif;font-size:clamp(1.125rem,2.5vw,1.5rem);max-width:36rem;margin:0 auto 2.5rem;line-height:1.5;font-style:italic}
+  .hero-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .trust{margin-top:3rem;font-family:"JetBrains Mono",monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--mutedFg)}
+
+  /* Stats - inverted */
+  .stats{background:var(--fg);color:var(--bg);border-bottom:4px solid var(--fg);position:relative;overflow:hidden}
+  .stats::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,transparent,transparent 1px,#fff 1px,#fff 2px);background-size:4px 100%;opacity:0.03;pointer-events:none}
+  .stats-grid{display:grid;grid-template-columns:repeat(2,1fr)}
+  @media(min-width:768px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+  .stat{padding:3rem 1.5rem;text-align:center;border-right:1px solid rgba(255,255,255,0.2)}
+  .stat:last-child{border-right:none}
+  @media(max-width:767px){.stat:nth-child(2n){border-right:none}.stat{border-bottom:1px solid rgba(255,255,255,0.2)}}
+  .stat-num{font-family:"Playfair Display",serif;font-weight:900;font-size:clamp(2.5rem,6vw,5rem);letter-spacing:-0.03em;line-height:1}
+  .stat-label{font-family:"JetBrains Mono",monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:0.15em;margin-top:.75rem;opacity:.7}
+  .stat-trend{font-family:"JetBrains Mono",monospace;font-size:.65rem;margin-top:.4rem;opacity:.6}
+
+  /* Section header */
+  .sec-head{text-align:center;max-width:44rem;margin:0 auto 4rem}
+  .sec-tag{font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.25rem;display:inline-block;border-bottom:2px solid var(--fg);padding-bottom:.25rem}
+  .sec-title{font-family:"Playfair Display",serif;font-weight:900;font-size:clamp(2.25rem,6vw,4.5rem);letter-spacing:-0.03em;line-height:1;margin-bottom:1.25rem}
+  .sec-desc{font-family:"Source Serif 4",serif;font-size:1.125rem;color:var(--mutedFg);font-style:italic}
+
+  /* Product detail with drop cap */
+  .product{display:grid;grid-template-columns:1fr;gap:3rem;align-items:start;border-bottom:4px solid var(--fg);padding-bottom:5rem}
+  @media(min-width:1024px){.product{grid-template-columns:1fr 1fr}}
+  .product-left h2{font-family:"Playfair Display",serif;font-weight:900;font-size:clamp(2.25rem,5vw,4rem);letter-spacing:-0.03em;line-height:1;text-align:left}
+  .product-right{position:relative}
+  .product-right::before{content:"";position:absolute;inset:0;background-image:linear-gradient(#00000008 1px,transparent 1px),linear-gradient(90deg,#00000008 1px,transparent 1px);background-size:40px 40px;opacity:0.5;pointer-events:none}
+  .product-right p{font-size:1.0625rem;line-height:1.7;margin-bottom:1.25rem}
+  .product-right p:first-of-type::first-letter{font-family:"Playfair Display",serif;font-weight:900;font-size:4.5rem;float:left;line-height:.85;margin:.25rem .75rem 0 0;padding:.5rem;border:2px solid var(--fg)}
+
+  /* Features - hover invert */
+  .features{border-bottom:4px solid var(--fg)}
+  .features-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--fg)}
+  @media(min-width:768px){.features-grid{grid-template-columns:repeat(3,1fr)}}
+  .feature{background:var(--bg);padding:2.5rem;transition:all .1s;cursor:pointer}
+  .feature:hover{background:var(--fg);color:var(--bg)}
+  .feat-num{font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:0.2em;margin-bottom:1rem;display:flex;align-items:center;gap:.75rem}
+  .feat-ic{width:32px;height:32px;border:2px solid currentColor;display:flex;align-items:center;justify-content:center}
+  .feat-ic svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.5;fill:none}
+  .feature h3{font-family:"Playfair Display",serif;font-weight:700;font-size:1.5rem;margin-bottom:.75rem;letter-spacing:-0.01em}
+  .feature p{font-family:"Source Serif 4",serif;font-size:.95rem;line-height:1.6;opacity:.85}
+
+  /* How it works */
+  .how{border-bottom:4px solid var(--fg);position:relative}
+  .how::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,transparent,transparent 40px,#00000008 40px,#00000008 42px);opacity:0.6;pointer-events:none}
+  .how-grid{display:grid;grid-template-columns:1fr;gap:2rem;position:relative}
+  @media(min-width:768px){.how-grid{grid-template-columns:repeat(3,1fr)}}
+  .how-step{text-align:center}
+  .how-box{width:80px;height:80px;border:2px solid var(--fg);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-family:"Playfair Display",serif;font-weight:900;font-size:2.5rem;transition:all .1s}
+  .how-step:hover .how-box{background:var(--fg);color:var(--bg)}
+  .how-step h3{font-family:"Playfair Display",serif;font-weight:700;font-size:1.375rem;margin-bottom:.5rem}
+  .how-step p{font-family:"Source Serif 4",serif;color:var(--mutedFg);font-size:.95rem}
+  .how-line{display:none}
+  @media(min-width:768px){.how-line{display:block;height:2px;background:var(--fg);position:absolute;top:40px;left:16%;right:16%}}
+
+  /* Benefits */
+  .benefits{border-bottom:4px solid var(--fg)}
+  .benefits-list{display:flex;flex-direction:column;gap:2rem;max-width:42rem;margin:0 auto}
+  .benefit{display:flex;gap:1.25rem;align-items:start}
+  .benefit:nth-child(even){flex-direction:row-reverse;text-align:right}
+  .benefit-check{flex-shrink:0;width:32px;height:32px}
+  .benefit-check svg{width:100%;height:100%;stroke:var(--fg);stroke-width:2;fill:none}
+  .benefit h3{font-family:"Playfair Display",serif;font-weight:700;font-size:1.5rem;margin-bottom:.4rem}
+  .benefit p{font-family:"Source Serif 4",serif;color:var(--mutedFg);font-size:.95rem}
+
+  /* Pricing */
+  .pricing{border-bottom:4px solid var(--fg)}
+  .pricing-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--fg)}
+  @media(min-width:768px){.pricing-grid{grid-template-columns:repeat(3,1fr);align-items:start}}
+  .price-card{background:var(--bg);color:var(--fg);padding:2.5rem;transition:background .1s,color .1s}
+  .price-card:hover{background:var(--muted)}
+  .price-card.highlight{background:var(--fg);color:var(--bg)}
+  @media(min-width:768px){.price-card.highlight{padding-top:4rem;padding-bottom:4rem;margin-top:-1.5rem;margin-bottom:-1.5rem}}
+  .price-name{font-family:"JetBrains Mono",monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:0.2em;margin-bottom:1rem}
+  .price-badge{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:0.15em;border:2px solid currentColor;padding:.2rem .6rem;margin-bottom:1rem}
+  .price-amount{font-family:"Playfair Display",serif;font-weight:900;font-size:clamp(2.5rem,5vw,4rem);letter-spacing:-0.03em;line-height:1;margin-bottom:.5rem}
+  .price-amount span{font-size:1rem;font-weight:400}
+  .price-desc{font-family:"Source Serif 4",serif;font-size:.95rem;margin-bottom:1.5rem;min-height:2.5em;opacity:.8;font-style:italic}
+  .price-features{list-style:none;margin-bottom:1.5rem;display:flex;flex-direction:column;gap:.6rem}
+  .price-features li{display:flex;align-items:center;gap:.6rem;font-family:"Source Serif 4",serif;font-size:.9rem}
+  .price-features li::before{content:"";width:8px;height:8px;background:currentColor;flex-shrink:0}
+  .price-card .btn{width:100%}
+  .price-card.highlight .btn-primary{background:var(--bg);color:var(--fg);border-color:var(--bg)}
+  .price-card.highlight .btn-primary:hover{background:transparent;color:var(--bg);border-color:var(--bg)}
+
+  /* Testimonials */
+  .testimonials{border-bottom:4px solid var(--fg)}
+  .test-grid{display:grid;grid-template-columns:1fr;gap:2rem}
+  @media(min-width:768px){.test-grid{grid-template-columns:repeat(3,1fr)}}
+  .test-card{position:relative;padding:0 1rem}
+  .test-card:nth-child(2){margin-top:2rem}
+  @media(min-width:768px){.test-card:nth-child(2){margin-top:4rem}}
+  .test-quote-mark{font-family:"Playfair Display",serif;font-weight:900;font-size:5rem;line-height:.6;height:3rem;opacity:.1;transition:opacity .1s}
+  .test-card:hover .test-quote-mark{opacity:.2}
+  .test-quote{font-family:"Playfair Display",serif;font-style:italic;font-weight:400;font-size:1.125rem;line-height:1.5;margin-bottom:1.5rem}
+  .test-author{border-top:2px solid var(--fg);padding-top:1rem;transition:border-width .1s}
+  .test-card:hover .test-author{border-top-width:3px}
+  .test-name{font-family:"Playfair Display",serif;font-weight:700;font-size:1rem}
+  .test-role{font-family:"JetBrains Mono",monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--mutedFg);margin-top:.25rem}
+
+  /* FAQ */
+  .faq{max-width:48rem;margin:0 auto;border-bottom:4px solid var(--fg)}
+  .faq-item{border-bottom:2px solid var(--fg)}
+  .faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0;cursor:pointer;font-family:"Playfair Display",serif;font-weight:700;font-size:1.25rem}
+  .faq-icon{width:20px;height:20px;flex-shrink:0;position:relative}
+  .faq-icon::before,.faq-icon::after{content:"";position:absolute;background:var(--fg);transition:all .1s}
+  .faq-icon::before{width:16px;height:2px;top:9px;left:2px}
+  .faq-icon::after{width:2px;height:16px;top:2px;left:9px}
+  .faq-item.open .faq-icon::after{transform:rotate(90deg);opacity:0}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease-out;font-family:"Source Serif 4",serif;color:var(--mutedFg);font-size:1rem;line-height:1.6}
+  .faq-item.open .faq-a{max-height:200px;padding-bottom:1.5rem}
+
+  /* Footer */
+  footer{background:var(--bg);border-top:4px solid var(--fg);padding:4rem 0 2rem}
+  .footer-grid{display:grid;grid-template-columns:1fr;gap:2.5rem;margin-bottom:3rem}
+  @media(min-width:768px){.footer-grid{grid-template-columns:2fr 1fr 1fr 1fr}}
+  .footer-brand .logo{font-size:1.75rem;margin-bottom:1rem}
+  .footer-brand p{font-family:"Source Serif 4",serif;font-size:.9rem;color:var(--mutedFg);max-width:22rem}
+  .footer-col h4{font-family:"JetBrains Mono",monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:0.2em;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--fg)}
+  .footer-col a{display:block;color:var(--fg);text-decoration:none;font-family:"Source Serif 4",serif;font-size:.9rem;margin-bottom:.5rem;transition:all .1s}
+  .footer-col a:hover{font-style:italic}
+  .socials{display:flex;gap:.75rem;margin-top:1.5rem}
+  .social{width:38px;height:38px;border:2px solid var(--fg);border-radius:0;display:flex;align-items:center;justify-content:center;transition:all .1s;cursor:pointer}
+  .social:hover{background:var(--fg)}
+  .social:hover svg{stroke:var(--bg)}
+  .social svg{width:15px;height:15px;stroke:var(--fg);stroke-width:1.5;fill:none}
+  .footer-bottom{border-top:1px solid var(--fg);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+  .footer-bottom p{font-family:"JetBrains Mono",monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--mutedFg)}
+  .footer-bottom .mono{font-family:"JetBrains Mono",monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--mutedFg)}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease-out,transform .5s ease-out}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">MAISON</div>
+    <div class="nav-links">
+      <a href="#features">Work</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#testimonials">Press</a>
+      <a href="#faq">Journal</a>
+    </div>
+    <a href="#" class="btn btn-primary">Subscribe</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge reveal"><span class="dot"></span>Volume XII — Winter Edition</div>
+    <h1 class="reveal">The Art of<br>Restraint.</h1>
+    <div class="hero-rule reveal"><span class="line"></span><span class="sq"></span><span class="line"></span></div>
+    <p class="hero-sub reveal">An editorial design system built on pure contrast. No color to hide behind — only type, line, and the confidence of negative space.</p>
+    <div class="hero-ctas reveal">
+      <a href="#" class="btn btn-primary">Read the issue →</a>
+      <a href="#" class="btn btn-outline">View archive</a>
+    </div>
+    <p class="trust reveal">Est. 2019 — Printed in black &amp; white since the beginning</p>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat reveal"><div class="stat-num">147</div><div class="stat-label">ISSUES PUBLISHED</div><div class="stat-trend">SINCE 2019</div></div>
+      <div class="stat reveal"><div class="stat-num">2.4M</div><div class="stat-label">READERS WORLDWIDE</div><div class="stat-trend">↑ 18% YOY</div></div>
+      <div class="stat reveal"><div class="stat-num">92</div><div class="stat-label">COUNTRIES SERVED</div><div class="stat-trend">ON SIX CONTINENTS</div></div>
+      <div class="stat reveal"><div class="stat-num">21:1</div><div class="stat-label">CONTRAST RATIO</div><div class="stat-trend">WCAG AAA</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT DETAIL -->
+<section class="section-pad">
+  <div class="container">
+    <div class="product">
+      <div class="product-left reveal">
+        <span class="sec-tag" style="border:none;padding:0;margin-bottom:1.5rem">The Manifesto</span>
+        <h2>Reduction as<br>the highest form<br>of expression.</h2>
+      </div>
+      <div class="product-right reveal">
+        <p>Maison strips design to its essence: black, white, and typography. There are no gradients to soften edges, no accent colors to distract the eye, no shadows to fabricate depth. Every decision must stand on its own merit — and in that discipline, restraint becomes the ultimate form of expression.</p>
+        <p>This is the visual language of high-end fashion editorials, architectural monographs, and gallery exhibition catalogs. It commands respect through confidence, using scale, contrast, rhythm, and negative space to create visual drama that color could never achieve.</p>
+        <p>The result is a system that feels timeless precisely because it refuses to be trendy. It is austere, sophisticated, and unapologetically bold — the kind of design that whispers of permanence in a world addicted to novelty.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features section-pad" id="features">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">The System</span>
+      <h2 class="sec-title">Seven principles,<br>zero compromise.</h2>
+    </div>
+  </div>
+  <div class="container" style="padding:0 1.5rem">
+    <div class="features-grid">
+      <div class="feature reveal">
+        <div class="feat-num"><span class="feat-ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18"/></svg></span>01 — Palette</div>
+        <h3>Pure monochrome</h3>
+        <p>True black on true white. Gray reserved only for secondary text and dividers. The stark contrast forces deliberate hierarchy at every turn.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="feat-num"><span class="feat-ic"><svg viewBox="0 0 24 24"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></span>02 — Typography</div>
+        <h3>Serif as hero</h3>
+        <p>Playfair Display dominates. The classical serif adds sophistication, editorial weight, and a timeless elegance that sans-serif minimalism cannot.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="feat-num"><span class="feat-ic"><svg viewBox="0 0 24 24"><path d="M4 12h16M4 6h16M4 18h16"/></svg></span>03 — Scale</div>
+        <h3>Oversized drama</h3>
+        <p>Headlines don't inform — they dominate. Single words fill entire viewport widths, becoming graphic elements rather than mere text.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="feat-num"><span class="feat-ic"><svg viewBox="0 0 24 24"><path d="M3 3l18 18M21 3L3 21"/></svg></span>04 — Lines</div>
+        <h3>Structure by line</h3>
+        <p>Hairlines, thick rules, borders, underlines. Lines create structure without mass — defining edges where shadows and fills would be crude.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="feat-num"><span class="feat-ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/></svg></span>05 — Geometry</div>
+        <h3>Sharp precision</h3>
+        <p>Zero border radius everywhere. Perfect ninety-degree corners. The geometry is architectural — Bauhaus meets editorial print design.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="feat-num"><span class="feat-ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg></span>06 — Space</div>
+        <h3>Active void</h3>
+        <p>Negative space isn't empty — it's active. Generous margins make black elements more impactful. The page breathes with intention.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how section-pad">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">The Process</span>
+      <h2 class="sec-title">Three movements.</h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-line"></div>
+      <div class="how-step reveal">
+        <div class="how-box">I</div>
+        <h3>Edit ruthlessly</h3>
+        <p>Begin with everything. Remove until only the essential remains. What survives the cut earns its place on the page.</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-box">II</div>
+        <h3>Compose with line</h3>
+        <p>Build structure from borders and rules. Let typography breathe within a grid of precise, architectural proportions.</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-box">III</div>
+        <h3>Invert for emphasis</h3>
+        <p>Use color inversion — black to white, white to black — to create drama without ever breaking the monochrome rule.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits section-pad">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">The Value</span>
+      <h2 class="sec-title">Why restraint wins.</h2>
+    </div>
+    <div class="benefits-list">
+      <div class="benefit reveal">
+        <div class="benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><h3>Timeless by nature</h3><p>Trends fade; contrast endures. A monochrome system looks as considered in a decade as it does today.</p></div>
+      </div>
+      <div class="benefit reveal">
+        <div class="benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><h3>Accessibility built-in</h3><p>Pure black on white exceeds WCAG AAA at 21:1 contrast. No color, no compromise on legibility.</p></div>
+      </div>
+      <div class="benefit reveal">
+        <div class="benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><h3>Instant recognition</h3><p>Bold serif typography and stark geometry create a brand presence that is unmistakably your own.</p></div>
+      </div>
+      <div class="benefit reveal">
+        <div class="benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><h3>Print-perfect fidelity</h3><p>Designed for editorial print first, the system translates flawlessly to screen with zero compromise.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing section-pad" id="pricing">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Subscriptions</span>
+      <h2 class="sec-title">Choose your volume.</h2>
+    </div>
+  </div>
+  <div class="container" style="padding:0 1.5rem">
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-name">Digital</div>
+        <div class="price-amount">$8<span>/issue</span></div>
+        <p class="price-desc">For the screen-first reader.</p>
+        <ul class="price-features">
+          <li>Digital edition access</li>
+          <li>Web archive (147 issues)</li>
+          <li>Weekly journal dispatch</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Subscribe</a>
+      </div>
+      <div class="price-card highlight reveal">
+        <div class="price-badge">Most chosen</div>
+        <div class="price-name">Print + Digital</div>
+        <div class="price-amount">$24<span>/quarter</span></div>
+        <p class="price-desc">The complete Maison experience.</p>
+        <ul class="price-features">
+          <li>Quarterly print edition</li>
+          <li>Everything in Digital</li>
+          <li>Limited art prints</li>
+          <li>Members-only essays</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Subscribe →</a>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-name">Patron</div>
+        <div class="price-amount">$120<span>/year</span></div>
+        <p class="price-desc">For collectors &amp; institutions.</p>
+        <ul class="price-features">
+          <li>Bound annual volume</li>
+          <li>Everything in Print</li>
+          <li>Studio access</li>
+        </ul>
+        <a href="#" class="btn btn-outline">Become a patron</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials section-pad" id="testimonials">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">The Press</span>
+      <h2 class="sec-title">Critical acclaim.</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="test-quote-mark">"</div>
+        <blockquote class="test-quote">Maison has done the impossible — made restraint feel opulent. Every page is a masterclass in editorial discipline.</blockquote>
+        <div class="test-author">
+          <div class="test-name">Eleanor Voss</div>
+          <div class="test-role">Editor-in-Chief, Atelier</div>
+        </div>
+      </div>
+      <div class="test-card reveal">
+        <div class="test-quote-mark">"</div>
+        <blockquote class="test-quote">The most beautifully considered publication working today. Black, white, and absolutely nothing else — and it works.</blockquote>
+        <div class="test-author">
+          <div class="test-name">Julian Marsh</div>
+          <div class="test-role">Design Director, Form</div>
+        </div>
+      </div>
+      <div class="test-card reveal">
+        <div class="test-quote-mark">"</div>
+        <blockquote class="test-quote">A reminder that the boldest design decisions are often the ones you don't make. Maison knows exactly what to leave out.</blockquote>
+        <div class="test-author">
+          <div class="test-name">Naomi Blackwood</div>
+          <div class="test-role">Curator, MoMA Design</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq section-pad" id="faq">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Inquiries</span>
+      <h2 class="sec-title">Questions answered.</h2>
+    </div>
+    <div class="faq" style="border:none">
+      <div class="faq-item reveal">
+        <div class="faq-q">Is Maison really printed in only black and white?<span class="faq-icon"></span></div>
+        <div class="faq-a">Yes. Every issue, every page, every detail. We believe color is often a shortcut around difficult design decisions. Removing it entirely forces a discipline that produces work of far greater sophistication and permanence.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">How often is the print edition published?<span class="faq-icon"></span></div>
+        <div class="faq-a">Maison prints quarterly — four issues per year, each themed around a single principle of design. The digital journal publishes weekly dispatches between print issues to keep the conversation alive.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Can I access the full archive?<span class="faq-icon"></span></div>
+        <div class="faq-a">All subscribers gain access to our complete digital archive of 147 issues dating back to 2019. Patron-level members also receive the bound annual volume collecting each year's four print issues in a single archival edition.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Do you ship internationally?<span class="faq-icon"></span></div>
+        <div class="faq-a">We ship to 92 countries across six continents. Shipping is included in all Print and Patron subscriptions, with no hidden fees regardless of destination. Issues arrive in protective archival sleeves.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">MAISON</div>
+        <p>An editorial design system and quarterly publication devoted to the art of restraint. Printed in black &amp; white since 2019.</p>
+        <div class="socials">
+          <a href="#" class="social" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+          <a href="#" class="social" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+          <a href="#" class="social" aria-label="Behance"><svg viewBox="0 0 24 24"><path d="M2 6h7a3 3 0 0 1 0 6H2zM2 12h7.5a3 3 0 0 1 0 6H2zM15 9h6M15 14h6a3 3 0 0 0-6 0z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Publication</h4><a href="#">Current Issue</a><a href="#">Archive</a><a href="#">Subscribe</a><a href="#">Editorial</a></div>
+      <div class="footer-col"><h4>Studio</h4><a href="#">About</a><a href="#">Manifesto</a><a href="#">Collaborations</a><a href="#">Contact</a></div>
+      <div class="footer-col"><h4>Connect</h4><a href="#">Journal</a><a href="#">Newsletter</a><a href="#">Press Kit</a><a href="#">Stockists</a></div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Maison Editorial — All Rights Reserved</p>
+      <span class="mono">Vol. XII / Issue 04</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+  },{threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  document.querySelectorAll('.faq-q').forEach(q=>{
+    q.addEventListener('click',()=>{
+      const item=q.parentElement;
+      const wasOpen=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen)item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>

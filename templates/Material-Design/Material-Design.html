@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Materia — Material You Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ RESET & TOKENS ============ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #FFFBFE;
+    --fg: #1C1B1F;
+    --primary: #6750A4;
+    --on-primary: #FFFFFF;
+    --secondary-container: #E8DEF8;
+    --on-secondary-container: #1D192B;
+    --tertiary: #7D5260;
+    --surface-container: #F3EDF7;
+    --surface-container-low: #E7E0EC;
+    --outline: #79747E;
+    --on-surface-variant: #49454F;
+    --ease: cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Roboto", system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--primary); color: var(--on-primary); }
+
+  .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 96px 0; position: relative; }
+  @media (min-width: 768px) { section { padding: 120px 0; } }
+
+  .eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; color: var(--primary); text-transform: uppercase; }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed; top: 16px; left: 16px; right: 16px; z-index: 100;
+    background: rgba(255, 251, 254, 0.85); backdrop-filter: blur(16px);
+    border-radius: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid rgba(103, 80, 164, 0.08);
+  }
+  .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-size: 1.25rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+  .logo-mark { width: 32px; height: 32px; border-radius: 12px; background: var(--primary); display: flex; align-items: center; justify-content: center; color: var(--on-primary); font-size: 1rem; }
+  .nav-links { display: flex; gap: 8px; align-items: center; }
+  .nav-links a {
+    color: var(--on-surface-variant); text-decoration: none; font-size: 0.875rem; font-weight: 500;
+    padding: 10px 20px; border-radius: 9999px;
+    transition: background 300ms var(--ease), color 300ms var(--ease);
+  }
+  .nav-links a:hover { background: rgba(103, 80, 164, 0.1); color: var(--primary); }
+  .nav-toggle { display: none; background: var(--secondary-container); border: none; color: var(--primary); width: 44px; height: 44px; border-radius: 9999px; cursor: pointer; font-size: 1.25rem; }
+  @media (max-width: 768px) {
+    .nav-toggle { display: flex; align-items: center; justify-content: center; }
+    .nav-links { display: none; position: absolute; top: 76px; left: 0; right: 0; flex-direction: column; background: var(--surface-container); border-radius: 28px; padding: 16px; gap: 4px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+    .nav-links.open { display: flex; }
+    .nav-links a { width: 100%; }
+  }
+
+  /* ============ BUTTONS (pill) ============ */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: inherit; font-weight: 500; font-size: 0.875rem; letter-spacing: 0.01em;
+    cursor: pointer; border: none; text-decoration: none;
+    border-radius: 9999px; height: 48px; padding: 0 24px;
+    transition: all 300ms var(--ease); position: relative; overflow: hidden;
+  }
+  .btn:active { transform: scale(0.95); }
+  .btn-primary { background: var(--primary); color: var(--on-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+  .btn-primary:hover { background: rgba(103, 80, 164, 0.9); box-shadow: 0 4px 12px rgba(103,80,164,0.3); }
+  .btn-tonal { background: var(--secondary-container); color: var(--on-secondary-container); }
+  .btn-tonal:hover { background: rgba(232, 222, 248, 0.85); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .btn-outline { background: transparent; color: var(--primary); border: 1px solid var(--outline); }
+  .btn-outline:hover { background: rgba(103, 80, 164, 0.08); }
+  .btn-text { background: transparent; color: var(--primary); padding: 10px 16px; height: 40px; }
+  .btn-text:hover { background: rgba(103, 80, 164, 0.1); }
+  .btn-large { height: 56px; padding: 0 32px; font-size: 1rem; }
+
+  /* ============ HERO ============ */
+  .hero { padding: 120px 0 64px; position: relative; overflow: hidden; }
+  .hero-container {
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    background: var(--surface-container); border-radius: 48px;
+    padding: 64px 48px; position: relative; overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+  }
+  @media (max-width: 768px) { .hero-container { border-radius: 28px; padding: 40px 24px; } }
+  .blur-shape { position: absolute; border-radius: 50%; filter: blur(64px); pointer-events: none; z-index: 0; }
+  .blur-1 { width: 300px; height: 300px; background: var(--primary); opacity: 0.18; top: -100px; right: -50px; }
+  .blur-2 { width: 260px; height: 260px; background: var(--tertiary); opacity: 0.15; bottom: -80px; left: -60px; }
+  .blur-3 { width: 200px; height: 200px; background: var(--secondary-container); opacity: 0.5; top: 40%; left: 45%; }
+  .hero-content { position: relative; z-index: 2; max-width: 720px; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--secondary-container); color: var(--on-secondary-container); padding: 8px 16px; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; margin-bottom: 24px; }
+  .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
+  .hero h1 { font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 20px; }
+  .hero h1 .grad { background: linear-gradient(90deg, var(--primary), var(--tertiary)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { font-size: 1.25rem; color: var(--on-surface-variant); line-height: 1.6; margin-bottom: 36px; max-width: 560px; }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* decorative shapes */
+  .deco-shape { position: absolute; z-index: 1; pointer-events: none; }
+  .deco-circle { width: 120px; height: 120px; border-radius: 50%; background: var(--tertiary); opacity: 0.8; top: 60px; right: 80px; }
+  .deco-pill { width: 160px; height: 80px; border-radius: 9999px; background: var(--primary); opacity: 0.7; bottom: 60px; right: 200px; transform: rotate(-15deg); }
+  .deco-squircle { width: 100px; height: 100px; border-radius: 24px; background: var(--secondary-container); border: 2px solid var(--primary); bottom: 100px; right: 60px; transform: rotate(20deg); }
+  @media (max-width: 900px) { .deco-shape { display: none; } }
+
+  /* ============ STATS ============ */
+  .stats-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+  .stat-card {
+    background: var(--surface-container); border-radius: 24px; padding: 32px;
+    transition: all 300ms var(--ease); box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    text-align: center;
+  }
+  .stat-card:hover { box-shadow: 0 6px 20px rgba(103,80,164,0.12); transform: translateY(-4px); background: rgba(243, 237, 247, 0.7); }
+  .stat-num { font-size: 2.5rem; font-weight: 700; color: var(--primary); line-height: 1; margin-bottom: 8px; }
+  .stat-label { font-size: 0.875rem; color: var(--on-surface-variant); font-weight: 500; }
+
+  /* ============ SECTION HEAD ============ */
+  .section-head { text-align: center; max-width: 720px; margin: 0 auto 64px; }
+  .section-head h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 500; line-height: 1.2; letter-spacing: -0.01em; margin: 12px 0 16px; }
+  .section-head p { font-size: 1.125rem; color: var(--on-surface-variant); line-height: 1.6; }
+
+  /* ============ FEATURES ============ */
+  .features-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width: 768px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .features-grid { grid-template-columns: repeat(3, 1fr); } }
+  .feature-card {
+    background: var(--surface-container); border-radius: 24px; padding: 32px;
+    transition: all 300ms var(--ease); box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .feature-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: scale(1.02); background: rgba(243, 237, 247, 0.8); }
+  .feature-icon {
+    width: 56px; height: 56px; border-radius: 16px; background: var(--secondary-container);
+    display: flex; align-items: center; justify-content: center; color: var(--primary);
+    font-size: 1.5rem; transition: all 300ms var(--ease);
+  }
+  .feature-card:hover .feature-icon { background: var(--primary); color: var(--on-primary); transform: scale(1.05); }
+  .feature-card h3 { font-size: 1.5rem; font-weight: 500; line-height: 1.3; }
+  .feature-card p { color: var(--on-surface-variant); font-size: 1rem; line-height: 1.6; }
+
+  /* ============ HOW IT WORKS ============ */
+  .how { background: var(--surface-container); border-radius: 48px; margin: 0 16px; }
+  @media (max-width: 768px) { .how { border-radius: 28px; margin: 0 8px; } }
+  .steps { display: grid; grid-template-columns: 1fr; gap: 24px; position: relative; }
+  @media (min-width: 768px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+  .step-card {
+    background: var(--bg); border-radius: 24px; padding: 32px; text-align: center;
+    transition: all 300ms var(--ease); box-shadow: 0 1px 3px rgba(0,0,0,0.04); position: relative;
+  }
+  .step-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-4px); }
+  .step-badge {
+    width: 64px; height: 64px; border-radius: 50%; background: var(--primary); color: var(--on-primary);
+    display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700;
+    margin: 0 auto 24px; position: relative; transition: all 300ms var(--ease);
+  }
+  .step-badge::after { content: ""; position: absolute; inset: -8px; border-radius: 50%; background: var(--primary); opacity: 0; filter: blur(12px); transition: opacity 300ms var(--ease); z-index: -1; }
+  .step-card:hover .step-badge::after { opacity: 0.4; }
+  .step-card h3 { font-size: 1.25rem; font-weight: 500; margin-bottom: 12px; }
+  .step-card p { color: var(--on-surface-variant); font-size: 0.9375rem; line-height: 1.6; }
+
+  /* ============ BENEFITS (colored container) ============ */
+  .benefits { position: relative; overflow: hidden; }
+  .benefits-container {
+    background: var(--primary); border-radius: 48px; padding: 64px 48px; position: relative; overflow: hidden;
+    color: var(--on-primary);
+  }
+  @media (max-width: 768px) { .benefits-container { border-radius: 28px; padding: 40px 24px; } }
+  .benefits-container .blur-shape { opacity: 0.3; }
+  .b-blur-1 { width: 280px; height: 280px; background: var(--tertiary); top: -80px; right: 10%; }
+  .b-blur-2 { width: 240px; height: 240px; background: var(--secondary-container); bottom: -60px; left: 5%; }
+  .benefits-grid { display: grid; grid-template-columns: 1fr; gap: 24px; position: relative; z-index: 2; }
+  @media (min-width: 768px) { .benefits-grid { grid-template-columns: repeat(2, 1fr); } }
+  .benefit-card {
+    background: rgba(255,255,255,0.1); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 32px;
+    transition: all 300ms var(--ease);
+  }
+  .benefit-card:hover { background: rgba(255,255,255,0.18); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+  .benefit-card h3 { font-size: 1.375rem; font-weight: 500; margin-bottom: 12px; }
+  .benefit-card p { font-size: 1rem; line-height: 1.6; opacity: 0.9; }
+
+  /* ============ PRICING ============ */
+  .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: start; }
+  @media (min-width: 768px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
+  .price-card {
+    background: var(--surface-container); border-radius: 24px; padding: 32px;
+    transition: all 300ms var(--ease); box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .price-card.featured { background: var(--bg); box-shadow: 0 12px 40px rgba(103,80,164,0.18); transform: translateY(-16px); border: 2px solid var(--primary); }
+  @media (max-width: 767px) { .price-card.featured { transform: none; } }
+  .price-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+  .price-badge { display: inline-flex; align-self: flex-start; background: var(--primary); color: var(--on-primary); padding: 6px 14px; border-radius: 9999px; font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.05em; }
+  .price-tier { font-size: 1.25rem; font-weight: 500; color: var(--on-surface-variant); }
+  .price-amount { font-size: 2.5rem; font-weight: 700; color: var(--fg); line-height: 1; }
+  .price-amount span { font-size: 1rem; font-weight: 400; color: var(--on-surface-variant); }
+  .price-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin: 8px 0; }
+  .price-features li { display: flex; align-items: center; gap: 10px; font-size: 0.9375rem; color: var(--on-surface-variant); transition: transform 300ms var(--ease); }
+  .price-features li::before { content: "✓"; color: var(--primary); font-weight: 700; font-size: 1rem; }
+  .price-card:hover .price-features li { transform: translateX(4px); }
+
+  /* ============ TESTIMONIALS ============ */
+  .testi-wrap { background: var(--surface-container); border-radius: 48px; padding: 64px 48px; }
+  @media (max-width: 768px) { .testi-wrap { border-radius: 28px; padding: 40px 24px; } }
+  .testi-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width: 768px) { .testi-grid { grid-template-columns: repeat(3, 1fr); } }
+  .testi-card {
+    background: var(--bg); border-radius: 24px; padding: 32px;
+    transition: all 300ms var(--ease); box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .testi-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-4px); }
+  .testi-stars { color: var(--primary); font-size: 1rem; margin-bottom: 16px; letter-spacing: 2px; }
+  .testi-quote { font-size: 1.0625rem; line-height: 1.6; color: var(--fg); margin-bottom: 24px; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--tertiary)); flex-shrink: 0; }
+  .testi-name { font-size: 0.9375rem; font-weight: 500; }
+  .testi-role { font-size: 0.75rem; color: var(--on-surface-variant); }
+
+  /* ============ FAQ ============ */
+  .faq-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .faq-item { background: var(--surface-container); border-radius: 24px; overflow: hidden; transition: all 300ms var(--ease); }
+  .faq-item:hover { background: rgba(243, 237, 247, 0.7); }
+  .faq-item.open { background: var(--secondary-container); }
+  .faq-q {
+    width: 100%; background: none; border: none; color: var(--fg); text-align: left; cursor: pointer;
+    padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    font-family: inherit; font-size: 1.0625rem; font-weight: 500;
+  }
+  .faq-icon { width: 32px; height: 32px; border-radius: 50%; background: var(--bg); display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.25rem; flex-shrink: 0; transition: transform 300ms var(--ease); }
+  .faq-item.open .faq-icon { transform: rotate(180deg); background: var(--primary); color: var(--on-primary); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 300ms var(--ease); }
+  .faq-item.open .faq-a { max-height: 300px; }
+  .faq-a p { padding: 0 28px 24px; color: var(--on-surface-variant); font-size: 1rem; line-height: 1.6; }
+
+  /* ============ FINAL CTA ============ */
+  .final-cta { position: relative; overflow: hidden; }
+  .cta-container {
+    background: var(--primary); border-radius: 48px; padding: 80px 48px; position: relative; overflow: hidden;
+    text-align: center; color: var(--on-primary);
+  }
+  @media (max-width: 768px) { .cta-container { border-radius: 28px; padding: 48px 24px; } }
+  .cta-container .blur-shape { opacity: 0.35; }
+  .cta-blur-1 { width: 320px; height: 320px; background: var(--tertiary); top: -120px; left: 10%; }
+  .cta-blur-2 { width: 280px; height: 280px; background: var(--secondary-container); bottom: -100px; right: 10%; }
+  .cta-content { position: relative; z-index: 2; max-width: 640px; margin: 0 auto; }
+  .cta-content h2 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 500; line-height: 1.2; margin-bottom: 20px; }
+  .cta-content p { font-size: 1.125rem; opacity: 0.9; line-height: 1.6; margin-bottom: 32px; }
+  .cta-form { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; max-width: 480px; margin: 0 auto; }
+  .cta-input {
+    flex: 1; min-width: 200px; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.25); border-radius: 9999px;
+    color: var(--on-primary); font-family: inherit; font-size: 1rem; padding: 14px 24px; outline: none;
+    transition: all 300ms var(--ease);
+  }
+  .cta-input::placeholder { color: rgba(255,255,255,0.7); }
+  .cta-input:focus { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.5); }
+  .cta-form .btn-primary { background: var(--on-primary); color: var(--primary); }
+  .cta-form .btn-primary:hover { background: rgba(255,255,255,0.9); }
+
+  /* ============ FOOTER ============ */
+  footer { border-top: 1px solid rgba(103,80,164,0.1); padding: 64px 0 32px; }
+  .footer-grid { display: grid; grid-template-columns: 1fr; gap: 48px; margin-bottom: 48px; }
+  @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+  .footer-brand p { color: var(--on-surface-variant); font-size: 0.9375rem; line-height: 1.6; margin-top: 16px; max-width: 320px; }
+  .footer-col h4 { font-size: 0.875rem; font-weight: 500; color: var(--primary); margin-bottom: 20px; }
+  .footer-col a { display: block; color: var(--on-surface-variant); text-decoration: none; font-size: 0.9375rem; margin-bottom: 12px; transition: color 300ms var(--ease); }
+  .footer-col a:hover { color: var(--primary); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding-top: 32px; border-top: 1px solid rgba(103,80,164,0.1); font-size: 0.8125rem; color: var(--on-surface-variant); }
+
+  /* ============ REVEAL ============ */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 500ms var(--ease), transform 500ms var(--ease); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* FAB */
+  .fab { position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; border-radius: 18px; background: var(--tertiary); color: var(--on-primary); border: none; cursor: pointer; box-shadow: 0 4px 16px rgba(125,82,96,0.4); font-size: 1.5rem; transition: all 300ms var(--ease); z-index: 90; display: flex; align-items: center; justify-content: center; }
+  .fab:hover { box-shadow: 0 8px 24px rgba(125,82,96,0.5); transform: scale(1.05); }
+  .fab:active { transform: scale(0.95); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><span class="logo-mark">M</span> Materia</div>
+    <div class="nav-links" id="navLinks">
+      <a href="#features">Features</a>
+      <a href="#how">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+      <a href="#pricing" class="btn btn-tonal" style="height:40px;padding:0 20px;">Get Started</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-container reveal">
+    <div class="blur-shape blur-1" aria-hidden="true"></div>
+    <div class="blur-shape blur-2" aria-hidden="true"></div>
+    <div class="blur-shape blur-3" aria-hidden="true"></div>
+    <div class="deco-shape deco-circle" aria-hidden="true"></div>
+    <div class="deco-shape deco-pill" aria-hidden="true"></div>
+    <div class="deco-shape deco-squircle" aria-hidden="true"></div>
+    <div class="hero-content">
+      <span class="hero-badge"><span class="dot"></span> Material You — Adaptive &amp; Personal</span>
+      <h1>Design that feels <span class="grad">alive</span> and personal</h1>
+      <p>Playful, dynamic color extraction with pill-shaped buttons and distinct elevation states. Built on Google's Material Design 3 with enhanced depth and tactile micro-interactions.</p>
+      <div class="hero-cta">
+        <a href="#pricing" class="btn btn-primary btn-large">Get Started Free</a>
+        <a href="#how" class="btn btn-outline btn-large">See How It Works</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<section style="padding-top:32px;">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card reveal"><div class="stat-num">2.4M</div><div class="stat-label">Active Users</div></div>
+      <div class="stat-card reveal"><div class="stat-num">99.9%</div><div class="stat-label">Uptime SLA</div></div>
+      <div class="stat-card reveal"><div class="stat-num">48ms</div><div class="stat-label">Avg Response</div></div>
+      <div class="stat-card reveal"><div class="stat-num">150+</div><div class="stat-label">Color Seeds</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Features</span>
+      <h2>Everything adapts to you</h2>
+      <p>Tonal surfaces, organic shapes, and state layers create a system that feels personal, soft, and responsive to every touch.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">◐</div>
+        <h3>Dynamic Color</h3>
+        <p>Extract palettes from seed colors. Surfaces shift tones organically, simulating wallpaper-based personalization that feels uniquely yours.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">⬭</div>
+        <h3>Organic Shapes</h3>
+        <p>Generous border radii and soft blur shapes replace rigid geometry. Everything feels friendly, flowing, and approachable.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"> ◳</div>
+        <h3>Tonal Elevation</h3>
+        <p>Depth through subtle surface differences and progressive shadows. Cards lift naturally without harsh drop shadows.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">⬭</div>
+        <h3>State Layers</h3>
+        <p>Hover and press states use opacity overlays, not color shifts. Interactions feel smooth, confident, and consistent.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">●</div>
+        <h3>Tactile Feedback</h3>
+        <p>Every interactive element scales on press for physical feel. Micro-animations provide satisfying, responsive feedback.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">◆</div>
+        <h3>Pill Buttons</h3>
+        <p>Signature rounded-full buttons with state layer system. Recognizable, friendly, and unmistakably Material You.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Process</span>
+      <h2>How it works</h2>
+      <p>Three simple steps to a design system that adapts and responds.</p>
+    </div>
+    <div class="steps">
+      <div class="step-card reveal">
+        <div class="step-badge">1</div>
+        <h3>Choose a Seed</h3>
+        <p>Pick a seed color or let the system extract one from your wallpaper. The full tonal palette generates instantly.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-badge">2</div>
+        <h3>Apply Surfaces</h3>
+        <p>Tonal surfaces, containers, and elevation states layer automatically. Organic shapes and blur effects complete the atmosphere.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-badge">3</div>
+        <h3>Feel the Response</h3>
+        <p>State layers, tactile feedback, and smooth easing bring every interaction to life. The system feels alive.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits">
+  <div class="container">
+    <div class="benefits-container reveal">
+      <div class="blur-shape b-blur-1" aria-hidden="true"></div>
+      <div class="blur-shape b-blur-2" aria-hidden="true"></div>
+      <div style="position:relative;z-index:2;max-width:640px;margin-bottom:48px;">
+        <span class="eyebrow" style="color:rgba(255,255,255,0.8);">Why Materia</span>
+        <h2 style="font-size:clamp(2rem,4vw,2.75rem);font-weight:500;line-height:1.2;margin:12px 0 16px;">Built for delight</h2>
+        <p style="font-size:1.125rem;opacity:0.9;line-height:1.6;">Glass-morphism cards, atmospheric blur, and coordinated group animations create depth that rewards interaction.</p>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <h3>Atmospheric Depth</h3>
+          <p>Multiple blur shapes and radial gradients create rich, layered backgrounds that feel alive without overwhelming.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>Coordinated Motion</h3>
+          <p>Group hover patterns trigger coordinated scale, shadow, and glow effects across related elements seamlessly.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>Progressive Disclosure</h3>
+          <p>Glow effects and shadows reveal on interaction. Depth unfolds as you engage, keeping the interface calm at rest.</p>
+        </div>
+        <div class="benefit-card">
+          <h3>Asymmetric Hierarchy</h3>
+          <p>Featured elements lift above siblings through vertical translation and ring highlights. Hierarchy through elevation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Pricing</span>
+      <h2>Simple, adaptive plans</h2>
+      <p>Choose the tier that fits. Featured plans lift above the rest — elevation as hierarchy.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-tier">Starter</div>
+        <div class="price-amount">$0<span>/mo</span></div>
+        <p style="color:var(--on-surface-variant);font-size:0.9375rem;">For individuals exploring the system.</p>
+        <ul class="price-features">
+          <li>3 color seeds</li>
+          <li>Basic components</li>
+          <li>Community support</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline" style="margin-top:auto;">Start Free</a>
+      </div>
+      <div class="price-card featured reveal">
+        <span class="price-badge">Most Popular</span>
+        <div class="price-tier">Pro</div>
+        <div class="price-amount">$24<span>/mo</span></div>
+        <p style="color:var(--on-surface-variant);font-size:0.9375rem;">For teams building with depth.</p>
+        <ul class="price-features">
+          <li>Unlimited color seeds</li>
+          <li>All components &amp; patterns</li>
+          <li>Custom tonal palettes</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" style="margin-top:auto;">Choose Pro</a>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-tier">Enterprise</div>
+        <div class="price-amount">$89<span>/mo</span></div>
+        <p style="color:var(--on-surface-variant);font-size:0.9375rem;">For organizations at scale.</p>
+        <ul class="price-features">
+          <li>Everything in Pro</li>
+          <li>White-label theming</li>
+          <li>Dedicated success manager</li>
+          <li>SSO &amp; audit logs</li>
+        </ul>
+        <a href="#contact" class="btn btn-tonal" style="margin-top:auto;">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background:var(--surface-container);border-radius:0;">
+  <div class="container">
+    <div class="testi-wrap reveal">
+      <div class="section-head" style="margin-bottom:48px;">
+        <span class="eyebrow">Testimonials</span>
+        <h2>Loved by builders</h2>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"The tonal surface system is genius. Our product finally feels cohesive and personal without any extra design effort."</p>
+          <div class="testi-author"><div class="testi-avatar"></div><div><div class="testi-name">Aria Okafor</div><div class="testi-role">Product Designer</div></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"State layers and tactile feedback make every interaction satisfying. Users keep commenting on how alive it feels."</p>
+          <div class="testi-author"><div class="testi-avatar"></div><div><div class="testi-name">Marco Bianchi</div><div class="testi-role">Frontend Lead</div></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"The blur shapes and glass-morphism create depth we couldn't achieve before. It's atmospheric and calm at once."</p>
+          <div class="testi-author"><div class="testi-avatar"></div><div><div class="testi-name">Sana Rahman</div><div class="testi-role">Design Systems Lead</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>Frequently asked</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q">What is Material You / MD3?<span class="faq-icon">⌄</span></button>
+        <div class="faq-a"><p>Material You is Google's Material Design 3 system. It shifts from rigid "paper and ink" to organic, expressive design with tonal surfaces, pill shapes, dynamic color, and soft curves that feel personal and adaptive.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How does dynamic color work?<span class="faq-icon">⌄</span></button>
+        <div class="faq-a"><p>The system extracts a tonal palette from a seed color (or your wallpaper). Primary, secondary, tertiary, and surface tones all derive from that seed, creating a cohesive, personalized palette automatically.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Why pill-shaped buttons?<span class="faq-icon">⌄</span></button>
+        <div class="faq-a"><p>Fully rounded (9999px) buttons are the signature Material You characteristic. Combined with state layers and active scale feedback, they feel friendly, tactile, and instantly recognizable.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is it accessible?<span class="faq-icon">⌄</span></button>
+        <div class="faq-a"><p>Yes. We maintain WCAG AA contrast, visible focus rings, 44px minimum touch targets, and full keyboard navigation. We also respect prefers-reduced-motion for users with vestibular sensitivities.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="contact">
+  <div class="container">
+    <div class="cta-container reveal">
+      <div class="blur-shape cta-blur-1" aria-hidden="true"></div>
+      <div class="blur-shape cta-blur-2" aria-hidden="true"></div>
+      <div class="cta-content">
+        <h2>Start building with depth</h2>
+        <p>Join thousands of teams designing interfaces that feel personal, alive, and responsive.</p>
+        <form class="cta-form" onsubmit="event.preventDefault();">
+          <input type="email" class="cta-input" placeholder="your@email.com" aria-label="Email">
+          <button type="submit" class="btn btn-primary btn-large">Get Started</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><span class="logo-mark">M</span> Materia</div>
+        <p>Material You design system with enhanced depth, dynamic color, and tactile micro-interactions. Built for delight.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#">Changelog</a>
+        <a href="#">Roadmap</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#">Documentation</a>
+        <a href="#">Components</a>
+        <a href="#">Guides</a>
+        <a href="#">Support</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Materia. Built with Material You.</span>
+      <span>Privacy · Terms · Status</span>
+    </div>
+  </div>
+</footer>
+
+<button class="fab" aria-label="Add">+</button>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>

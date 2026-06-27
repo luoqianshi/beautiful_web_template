@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAISON — Luxury Editorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,500;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============ RESET & TOKENS ============ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F9F8F6;
+    --fg: #1A1A1A;
+    --muted-bg: #EBE5DE;
+    --muted-fg: #6C6863;
+    --accent: #D4AF37;
+    --accent-fg: #FFFFFF;
+    --border: rgba(26, 26, 26, 0.15);
+    --border-strong: #1A1A1A;
+    --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Inter", system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.625;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--accent); color: var(--accent-fg); }
+
+  /* Paper noise texture */
+  .noise {
+    position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+    opacity: 0.02;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Vertical gridlines */
+  .gridlines { position: fixed; inset: 0; z-index: 1; pointer-events: none; display: none; }
+  @media (min-width: 1024px) { .gridlines { display: block; } }
+  .gridline { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(26,26,26,0.08); }
+  .gridline.g1 { left: 12.5%; }
+  .gridline.g2 { left: 37.5%; }
+  .gridline.g3 { left: 62.5%; }
+  .gridline.g4 { left: 87.5%; }
+
+  /* ============ LAYOUT ============ */
+  .container { width: 100%; max-width: 1600px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
+  @media (min-width: 1024px) { .container { padding: 0 64px; } }
+
+  section { padding: 96px 0; position: relative; }
+  @media (min-width: 1024px) { section { padding: 128px 0; } }
+
+  /* ============ TYPOGRAPHY ============ */
+  .serif { font-family: "Playfair Display", Georgia, serif; }
+  .sans { font-family: "Inter", sans-serif; }
+  .eyebrow {
+    font-size: 0.6875rem; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.3em; color: var(--muted-fg);
+  }
+  .gold { color: var(--accent); }
+  .italic { font-style: italic; }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(249, 248, 246, 0.9); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1600px; margin: 0 auto; padding: 0 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+  }
+  @media (min-width: 1024px) { .nav-inner { padding: 0 64px; } }
+  .logo { font-family: "Playfair Display", serif; font-size: 1.5rem; font-weight: 500; letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 40px; align-items: center; }
+  .nav-links a {
+    color: var(--fg); text-decoration: none; font-size: 0.75rem; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.2em;
+    transition: color 500ms var(--ease);
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-toggle { display: none; background: none; border: none; color: var(--fg); cursor: pointer; font-size: 1.5rem; }
+  @media (max-width: 768px) {
+    .nav-toggle { display: block; }
+    .nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; background: var(--bg); border-bottom: 1px solid var(--border); padding: 32px; gap: 20px; }
+    .nav-links.open { display: flex; }
+  }
+
+  /* ============ BUTTONS ============ */
+  .btn {
+    position: relative; display: inline-flex; align-items: center; justify-content: center;
+    font-family: "Inter", sans-serif; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.2em; font-size: 0.75rem; cursor: pointer; overflow: hidden;
+    transition: all 500ms var(--ease); text-decoration: none; border: none;
+    border-radius: 0; height: 48px; padding: 0 40px;
+  }
+  .btn-primary { background: var(--fg); color: var(--accent-fg); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+  .btn-primary .btn-gold {
+    position: absolute; inset: 0; background: var(--accent); transform: translateX(-100%);
+    transition: transform 500ms var(--ease); z-index: 1;
+  }
+  .btn-primary:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+  .btn-primary:hover .btn-gold { transform: translateX(0); }
+  .btn-primary .btn-text { position: relative; z-index: 2; }
+  .btn-secondary { background: transparent; color: var(--fg); border: 1px solid var(--fg); }
+  .btn-secondary:hover { background: var(--fg); color: var(--accent-fg); }
+  .btn-link {
+    background: transparent; color: var(--fg); padding: 0; height: auto;
+    border-bottom: 1px solid var(--fg); padding-bottom: 2px;
+    transition: color 500ms var(--ease), border-color 500ms var(--ease);
+  }
+  .btn-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ============ HERO ============ */
+  .hero { padding: 144px 0 96px; }
+  .hero-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: end; }
+  @media (min-width: 1024px) { .hero-grid { grid-template-columns: 7fr 5fr; gap: 64px; } }
+  .hero-left { padding-bottom: 16px; }
+  .hero-est { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; }
+  .hero-est .line { width: 48px; height: 1px; background: var(--fg); }
+  .hero h1 {
+    font-family: "Playfair Display", serif; font-weight: 400;
+    font-size: clamp(3rem, 9vw, 8rem); line-height: 0.9; letter-spacing: -0.02em;
+  }
+  .hero h1 .italic { font-style: italic; color: var(--accent); }
+  .hero-sub { margin-top: 40px; font-size: 1.125rem; color: var(--muted-fg); max-width: 480px; line-height: 1.625; }
+  .hero-cta { margin-top: 48px; display: flex; gap: 24px; flex-wrap: wrap; }
+
+  .hero-right { position: relative; }
+  .hero-img {
+    width: 100%; aspect-ratio: 3/4; background: linear-gradient(135deg, #3a3a3a 0%, #6c6863 50%, #2a2a2a 100%);
+    filter: grayscale(1); transition: filter 2000ms var(--ease), transform 2000ms var(--ease);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12), inset 0 0 0 1px rgba(0,0,0,0.05);
+    position: relative; overflow: hidden;
+  }
+  .hero-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(160deg, rgba(212,175,55,0.08), transparent 60%); }
+  .hero-right:hover .hero-img { filter: grayscale(0); transform: scale(1.03); box-shadow: 0 12px 40px rgba(0,0,0,0.18); }
+  .hero-vlabel {
+    position: absolute; top: 0; bottom: 0; left: -40px;
+    writing-mode: vertical-rl; text-orientation: mixed;
+    font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--muted-fg);
+    display: none;
+  }
+  @media (min-width: 1024px) { .hero-vlabel { display: flex; align-items: center; } }
+
+  /* ============ STATS ============ */
+  .stats { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  @media (min-width: 1024px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+  .stat { padding: 48px 32px; border-left: 1px solid var(--border); }
+  .stat:first-child { border-left: none; }
+  @media (max-width: 767px) { .stat:nth-child(3) { border-left: none; } }
+  .stat-num { font-family: "Playfair Display", serif; font-style: italic; font-weight: 400; font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1; }
+  .stat-label { margin-top: 12px; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--muted-fg); }
+
+  /* ============ PRODUCT DETAIL ============ */
+  .product-grid { display: grid; grid-template-columns: 1fr; gap: 64px; }
+  @media (min-width: 1024px) { .product-grid { grid-template-columns: 5fr 6fr; gap: 96px; } }
+  .product-left h2 {
+    font-family: "Playfair Display", serif; font-weight: 400;
+    font-size: clamp(2.5rem, 6vw, 5rem); line-height: 0.95; letter-spacing: -0.02em;
+  }
+  .product-left h2 .italic { font-style: italic; color: var(--accent); }
+  .product-right p { font-size: 1.0625rem; color: var(--muted-fg); line-height: 1.75; margin-bottom: 24px; }
+  .product-right p:first-of-type::first-letter {
+    font-family: "Playfair Display", serif; font-size: 4.5rem; font-weight: 400;
+    float: left; line-height: 0.8; margin-right: 12px; margin-top: 6px; color: var(--fg);
+  }
+
+  /* ============ FEATURES ============ */
+  .features-list { display: flex; flex-direction: column; gap: 96px; }
+  .feature-row { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
+  @media (min-width: 1024px) { .feature-row { grid-template-columns: 4fr 6fr; gap: 96px; } }
+  .feature-row.reverse { direction: rtl; }
+  .feature-row.reverse > * { direction: ltr; }
+  .feature-img {
+    aspect-ratio: 3/4; background: linear-gradient(135deg, #4a4a4a, #8a8580, #2a2a2a);
+    filter: grayscale(1); transition: filter 2000ms var(--ease), transform 2000ms var(--ease);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08), inset 0 0 0 1px rgba(0,0,0,0.05);
+    position: relative; overflow: hidden;
+  }
+  .feature-img::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(212,175,55,0.06), transparent 70%); }
+  .feature-row:hover .feature-img { filter: grayscale(0); transform: scale(1.04); box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+  .feature-num { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--accent); margin-bottom: 24px; }
+  .feature-title { font-family: "Playfair Display", serif; font-weight: 400; font-size: clamp(1.875rem, 4vw, 3rem); line-height: 1.1; margin-bottom: 24px; }
+  .feature-title .italic { font-style: italic; color: var(--accent); }
+  .feature-desc { color: var(--muted-fg); font-size: 1.0625rem; line-height: 1.75; margin-bottom: 32px; max-width: 460px; }
+
+  /* ============ HOW IT WORKS (dark) ============ */
+  .how { background: var(--fg); color: var(--bg); }
+  .how h2 { font-family: "Playfair Display", serif; font-weight: 400; font-size: clamp(2.5rem, 6vw, 5rem); line-height: 0.95; margin-bottom: 64px; }
+  .how h2 .italic { font-style: italic; color: var(--accent); }
+  .how-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: rgba(249,248,246,0.15); }
+  @media (min-width: 768px) { .how-grid { grid-template-columns: repeat(3, 1fr); } }
+  .how-card { background: var(--fg); padding: 48px; transition: background 700ms var(--ease); }
+  .how-card:hover { background: #2a2a2a; }
+  .how-step { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.3em; color: var(--accent); margin-bottom: 32px; }
+  .how-card h3 { font-family: "Playfair Display", serif; font-weight: 400; font-size: 1.875rem; line-height: 1.1; margin-bottom: 16px; }
+  .how-card p { color: rgba(249,248,246,0.6); font-size: 1rem; line-height: 1.625; }
+
+  /* ============ BENEFITS (dark) ============ */
+  .benefits { background: var(--fg); color: var(--bg); border-top: 1px solid rgba(249,248,246,0.1); }
+  .benefits-head { display: grid; grid-template-columns: 1fr; gap: 32px; margin-bottom: 80px; }
+  @media (min-width: 768px) { .benefits-head { grid-template-columns: 1fr 1fr 1fr; } }
+  .benefits-head h2 { font-family: "Playfair Display", serif; font-weight: 400; font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 0.95; }
+  .benefits-head h2 .italic { font-style: italic; color: var(--accent); }
+  .benefits-grid { display: grid; grid-template-columns: 1fr; gap: 0; }
+  @media (min-width: 768px) { .benefits-grid { grid-template-columns: repeat(3, 1fr); gap: 48px; } }
+  .benefit { border-top: 1px solid rgba(249,248,246,0.2); padding: 32px 0; transition: border-color 500ms var(--ease); }
+  .benefit:hover { border-top-color: var(--accent); }
+  .benefit h3 { font-family: "Playfair Display", serif; font-weight: 400; font-size: 1.5rem; margin-bottom: 12px; }
+  .benefit p { color: rgba(249,248,246,0.6); font-size: 1rem; line-height: 1.625; }
+
+  /* ============ PRICING ============ */
+  .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+  @media (min-width: 768px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
+  .price-card {
+    border-top: 1px solid var(--fg); padding: 40px 0;
+    transition: box-shadow 500ms var(--ease); box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  }
+  .price-card.featured { border-top: 4px solid var(--accent); }
+  .price-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+  .price-badge { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: 16px; }
+  .price-tier { font-family: "Playfair Display", serif; font-weight: 400; font-size: 1.875rem; margin-bottom: 24px; }
+  .price-amount { font-family: "Playfair Display", serif; font-style: italic; font-weight: 400; font-size: 3.5rem; line-height: 1; margin-bottom: 32px; }
+  .price-amount span { font-size: 1rem; font-style: normal; color: var(--muted-fg); font-family: "Inter", sans-serif; }
+  .price-features { list-style: none; margin-bottom: 32px; }
+  .price-features li { display: flex; align-items: center; gap: 12px; font-size: 0.9375rem; color: var(--muted-fg); padding: 10px 0; }
+  .price-features li::before { content: "✓"; color: var(--accent); font-weight: 500; }
+
+  /* ============ TESTIMONIALS ============ */
+  .testi-grid { display: grid; grid-template-columns: 1fr; gap: 64px; }
+  @media (min-width: 1024px) { .testi-grid { grid-template-columns: 4fr 8fr; gap: 96px; } }
+  .testi-list { display: flex; flex-direction: column; gap: 48px; }
+  .testimonial {
+    border-left: 1px solid var(--border); padding: 8px 0 8px 32px;
+    transition: border-color 700ms var(--ease), padding 700ms var(--ease);
+  }
+  .testimonial:hover { border-left-color: var(--accent); padding-left: 40px; }
+  .testi-stars { display: flex; gap: 4px; margin-bottom: 20px; color: var(--accent); font-size: 0.875rem; transition: transform 700ms var(--ease); }
+  .testimonial:hover .testi-stars { transform: scale(1.1); transform-origin: left; }
+  .testi-quote { font-family: "Playfair Display", serif; font-style: italic; font-weight: 400; font-size: clamp(1.25rem, 2.5vw, 1.875rem); line-height: 1.4; margin-bottom: 24px; }
+  .testi-author { display: flex; align-items: center; gap: 16px; }
+  .testi-avatar { width: 48px; height: 48px; background: linear-gradient(135deg, #6c6863, #3a3a3a); filter: grayscale(1); transition: filter 2000ms var(--ease); }
+  .testimonial:hover .testi-avatar { filter: grayscale(0); }
+  .testi-name { font-size: 0.875rem; font-weight: 500; transition: color 500ms var(--ease); }
+  .testimonial:hover .testi-name { color: var(--accent); }
+  .testi-role { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--muted-fg); }
+
+  /* ============ FAQ ============ */
+  .faq-grid { display: grid; grid-template-columns: 1fr; gap: 64px; }
+  @media (min-width: 1024px) { .faq-grid { grid-template-columns: 4fr 8fr; gap: 96px; } }
+  .faq-title h2 { font-family: "Playfair Display", serif; font-weight: 400; font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 0.95; }
+  .faq-title h2 .italic { font-style: italic; color: var(--accent); }
+  .faq-list { border-top: 1px solid var(--border); }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q {
+    width: 100%; background: none; border: none; color: var(--fg); text-align: left; cursor: pointer;
+    padding: 32px 0; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    font-family: "Playfair Display", serif; font-style: italic; font-weight: 400; font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+    transition: color 500ms var(--ease);
+  }
+  .faq-q:hover { color: var(--accent); }
+  .faq-icon { width: 36px; height: 36px; border: 1px solid var(--fg); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 500ms var(--ease); }
+  .faq-item.open .faq-q { color: var(--accent); }
+  .faq-item.open .faq-icon { transform: rotate(90deg); border-color: var(--accent); background: var(--accent); color: var(--accent-fg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 500ms var(--ease), opacity 500ms var(--ease); opacity: 0; }
+  .faq-item.open .faq-a { max-height: 300px; opacity: 1; }
+  .faq-a p { color: var(--muted-fg); font-size: 1rem; line-height: 1.75; padding-bottom: 32px; max-width: 600px; }
+
+  /* ============ FOOTER ============ */
+  .footer { background: var(--fg); color: var(--bg); padding: 96px 0 40px; }
+  .footer-top { display: grid; grid-template-columns: 1fr; gap: 48px; margin-bottom: 96px; }
+  @media (min-width: 1024px) { .footer-top { grid-template-columns: 7fr 5fr; gap: 96px; } }
+  .footer-cta h2 { font-family: "Playfair Display", serif; font-weight: 400; font-size: clamp(2.5rem, 7vw, 6rem); line-height: 0.95; }
+  .footer-cta h2 .italic { font-style: italic; color: var(--accent); }
+  .footer-form { display: flex; flex-direction: column; gap: 16px; }
+  .footer-input {
+    background: transparent; border: none; border-bottom: 1px solid rgba(249,248,246,0.3);
+    color: var(--bg); font-family: "Inter", sans-serif; font-size: 1rem; padding: 12px 0; outline: none;
+    transition: border-color 500ms var(--ease);
+  }
+  .footer-input::placeholder { font-family: "Playfair Display", serif; font-style: italic; color: rgba(249,248,246,0.4); }
+  .footer-input:focus { border-bottom-color: var(--accent); }
+  .footer-nav { display: grid; grid-template-columns: repeat(2, 1fr); gap: 48px; padding-top: 64px; border-top: 1px solid rgba(249,248,246,0.15); }
+  @media (min-width: 768px) { .footer-nav { grid-template-columns: repeat(4, 1fr); } }
+  .footer-col h4 { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--accent); margin-bottom: 24px; }
+  .footer-col a { display: block; color: rgba(249,248,246,0.7); text-decoration: none; font-size: 0.9375rem; margin-bottom: 14px; transition: color 500ms var(--ease); }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 64px; padding-top: 32px; border-top: 1px solid rgba(249,248,246,0.15); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(249,248,246,0.5); }
+
+  /* ============ SCROLL REVEAL ============ */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1000ms var(--ease), transform 1000ms var(--ease); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation: none !important; }
+    .reveal { opacity: 1; transform: none; }
+    .hero-img, .feature-img, .testi-avatar { filter: grayscale(0); }
+  }
+</style>
+</head>
+<body>
+<div class="noise" aria-hidden="true"></div>
+<div class="gridlines" aria-hidden="true">
+  <div class="gridline g1"></div>
+  <div class="gridline g2"></div>
+  <div class="gridline g3"></div>
+  <div class="gridline g4"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">MAISON</div>
+    <div class="nav-links" id="navLinks">
+      <a href="#collection">Collection</a>
+      <a href="#craft">Craft</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">≡</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-left reveal">
+        <div class="hero-est">
+          <span class="line"></span>
+          <span class="eyebrow">Est. 2024 — Maison Editorial</span>
+        </div>
+        <h1>The Art of<br><span class="italic">Quiet</span> Luxury</h1>
+        <p class="hero-sub">Elegance through restraint, precision, and depth. Every element considered, every detail intentional. This is the editorial aesthetic — where less becomes infinitely more.</p>
+        <div class="hero-cta">
+          <a href="#collection" class="btn btn-primary"><span class="btn-gold"></span><span class="btn-text">Explore Collection</span></a>
+          <a href="#craft" class="btn btn-link">Read the Journal</a>
+        </div>
+      </div>
+      <div class="hero-right reveal">
+        <div class="hero-img" role="img" aria-label="Editorial portrait"></div>
+        <span class="hero-vlabel">Editorial — Vol. 01</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<section class="stats" style="padding:48px 0;">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat reveal"><div class="stat-num serif">42</div><div class="stat-label">Years of Heritage</div></div>
+      <div class="stat reveal"><div class="stat-num serif">180</div><div class="stat-label">Artisans Worldwide</div></div>
+      <div class="stat reveal"><div class="stat-num serif">12k</div><div class="stat-label">Curated Pieces</div></div>
+      <div class="stat reveal"><div class="stat-num serif">∞</div><div class="stat-label">Attention to Detail</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT DETAIL -->
+<section id="collection">
+  <div class="container">
+    <div class="product-grid">
+      <div class="product-left reveal">
+        <p class="eyebrow">— The Collection</p>
+        <h2 style="margin-top:24px;">Curated<br><span class="italic">Excellence</span></h2>
+      </div>
+      <div class="product-right reveal">
+        <p>Luxury isn't about adding decoration — it's about removing everything unnecessary and perfecting what remains. Each piece in our collection is the result of obsessive refinement, where a single stitch can take a day to place.</p>
+        <p>We work with the finest materials sourced from heritage mills, paired with techniques passed down through generations. The result is objects that feel inevitable, as though they could not have been made any other way.</p>
+        <a href="#pricing" class="btn btn-link">Discover the Process</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="craft" style="padding-top:0;">
+  <div class="container">
+    <div class="features-list">
+      <div class="feature-row reveal">
+        <div class="feature-img" role="img" aria-label="Atelier craft"></div>
+        <div class="feature-text">
+          <div class="feature-num">01 — Material</div>
+          <h3 class="feature-title">Sourced with<br><span class="italic">Intention</span></h3>
+          <p class="feature-desc">We travel to heritage mills across Europe, selecting only materials that meet our exacting standards. Each fiber tells a story of place and time.</p>
+          <a href="#" class="btn btn-link">Read More</a>
+        </div>
+      </div>
+      <div class="feature-row reverse reveal">
+        <div class="feature-img" role="img" aria-label="Artisan hands"></div>
+        <div class="feature-text">
+          <div class="feature-num">02 — Craft</div>
+          <h3 class="feature-title">Made by<br><span class="italic">Hand</span></h3>
+          <p class="feature-desc">Every piece passes through the hands of master artisans. Techniques refined over decades ensure that imperfection is engineered out, character is engineered in.</p>
+          <a href="#" class="btn btn-link">Read More</a>
+        </div>
+      </div>
+      <div class="feature-row reveal">
+        <div class="feature-img" role="img" aria-label="Final finish"></div>
+        <div class="feature-text">
+          <div class="feature-num">03 — Finish</div>
+          <h3 class="feature-title">Finished with<br><span class="italic">Care</span></h3>
+          <p class="feature-desc">The final touches define the whole. A hand-applied finish, a signature stitch, a weight that feels just right — these are the details that endure.</p>
+          <a href="#" class="btn btn-link">Read More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS (dark) -->
+<section class="how">
+  <div class="container">
+    <p class="eyebrow" style="color:rgba(249,248,246,0.5);">— The Process</p>
+    <h2 style="margin-top:24px;">How It<br><span class="italic">Comes</span> to Be</h2>
+    <div class="how-grid">
+      <div class="how-card reveal">
+        <div class="how-step">Step 01</div>
+        <h3 class="serif">Consultation</h3>
+        <p>We begin with conversation — understanding your needs, your space, your sensibility. No detail is too small to consider.</p>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-step">Step 02</div>
+        <h3 class="serif">Composition</h3>
+        <p>Our atelier drafts, selects, and refines. Materials are chosen, forms are settled, and the piece begins to take shape.</p>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-step">Step 03</div>
+        <h3 class="serif">Completion</h3>
+        <p>The finished piece is inspected, packaged with care, and delivered. A lifetime of quiet service begins.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS (dark) -->
+<section class="benefits">
+  <div class="container">
+    <div class="benefits-head">
+      <div class="reveal"><p class="eyebrow" style="color:rgba(249,248,246,0.5);">— Why Maison</p></div>
+      <div class="reveal"><h2>The<br><span class="italic">Difference</span></h2></div>
+      <div class="reveal"><p style="color:rgba(249,248,246,0.6); font-size:1.0625rem; line-height:1.75;">What sets us apart is not what we add, but what we refuse to include. Restraint is our signature.</p></div>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit reveal"><h3 class="serif">Timeless Design</h3><p>Objects that outlive trends, designed to be passed down rather than replaced.</p></div>
+      <div class="benefit reveal"><h3 class="serif">Honest Materials</h3><p>No synthetics, no shortcuts. Only materials that age beautifully and tell the truth.</p></div>
+      <div class="benefit reveal"><h3 class="serif">Considered Service</h3><p>Personal, unhurried attention from first inquiry to final delivery and beyond.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <p class="eyebrow reveal">— Membership</p>
+    <h2 class="serif reveal" style="font-weight:400; font-size:clamp(2.5rem,6vw,4.5rem); line-height:0.95; margin-top:24px; margin-bottom:64px;">Choose Your<br><span class="italic gold">Tier</span></h2>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-tier serif">Apprentice</div>
+        <div class="price-amount serif">$120<span>/year</span></div>
+        <ul class="price-features">
+          <li>Quarterly journal subscription</li>
+          <li>Early access to sales</li>
+          <li>Member-only events</li>
+        </ul>
+        <a href="#contact" class="btn btn-secondary">Begin</a>
+      </div>
+      <div class="price-card featured reveal">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-tier serif">Artisan</div>
+        <div class="price-amount serif">$480<span>/year</span></div>
+        <ul class="price-features">
+          <li>Everything in Apprentice</li>
+          <li>Private atelier consultations</li>
+          <li>Bespoke commission access</li>
+          <li>Concierge delivery</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary"><span class="btn-gold"></span><span class="btn-text">Join Artisan</span></a>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-tier serif">Maison</div>
+        <div class="price-amount serif">$1,200<span>/year</span></div>
+        <ul class="price-features">
+          <li>Everything in Artisan</li>
+          <li>Dedicated personal advisor</li>
+          <li>Heritage restoration service</li>
+          <li>Lifetime warranty</li>
+        </ul>
+        <a href="#contact" class="btn btn-secondary">Inquire</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background:var(--muted-bg);">
+  <div class="container">
+    <div class="testi-grid">
+      <div class="reveal">
+        <p class="eyebrow">— Voices</p>
+        <h2 class="serif" style="font-weight:400; font-size:clamp(2.5rem,6vw,4.5rem); line-height:0.95; margin-top:24px;">In Their<br><span class="italic gold">Words</span></h2>
+      </div>
+      <div class="testi-list">
+        <div class="testimonial reveal">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"The level of consideration in every detail is unlike anything I've encountered. This is what true luxury feels like."</p>
+          <div class="testi-author">
+            <div class="testi-avatar"></div>
+            <div><div class="testi-name">Eleanor Vance</div><div class="testi-role">Creative Director</div></div>
+          </div>
+        </div>
+        <div class="testimonial reveal">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"They removed everything unnecessary and what remained was perfect. Restraint as a form of generosity."</p>
+          <div class="testi-author">
+            <div class="testi-avatar"></div>
+            <div><div class="testi-name">Julian Hart</div><div class="testi-role">Architect</div></div>
+          </div>
+        </div>
+        <div class="testimonial reveal">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Slow, deliberate, and worth every moment. The piece I commissioned will outlast me, and that is the point."</p>
+          <div class="testi-author">
+            <div class="testi-avatar"></div>
+            <div><div class="testi-name">Margaux Dubois</div><div class="testi-role">Collector</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="container">
+    <div class="faq-grid">
+      <div class="faq-title reveal">
+        <p class="eyebrow">— Questions</p>
+        <h2 style="margin-top:24px;">Asked &amp;<br><span class="italic gold">Answered</span></h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-q">What makes Maison different?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>We obsess over what to remove, not what to add. Every piece is the result of subtractive design — paring down until only the essential remains, then perfecting that essence.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How long does a bespoke piece take?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>Bespoke commissions typically take 8 to 16 weeks, depending on complexity. We refuse to rush what should be savored. The wait is part of the value.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Do you ship internationally?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>Yes, with white-glove concierge delivery worldwide. Each piece is hand-packaged and insured, arriving as carefully as it was made.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Is there a warranty?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><p>Maison tier members receive a lifetime warranty. All pieces include our heritage restoration service, because true luxury endures and is meant to be repaired, never discarded.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-cta reveal">
+        <h2>Join the<br><span class="italic">Maison</span></h2>
+      </div>
+      <div class="reveal">
+        <form class="footer-form" onsubmit="event.preventDefault();">
+          <label class="eyebrow" style="color:rgba(249,248,246,0.5);">Receive our journal</label>
+          <input type="email" class="footer-input" placeholder="Your email address" aria-label="Email">
+          <button type="submit" class="btn btn-primary" style="align-self:flex-start;"><span class="btn-gold"></span><span class="btn-text">Subscribe</span></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-col">
+        <h4>Maison</h4>
+        <a href="#">Our Story</a>
+        <a href="#">Atelier</a>
+        <a href="#">Sustainability</a>
+        <a href="#">Press</a>
+      </div>
+      <div class="footer-col">
+        <h4>Collection</h4>
+        <a href="#">New Arrivals</a>
+        <a href="#">Bespoke</a>
+        <a href="#">Archive</a>
+        <a href="#">Gifts</a>
+      </div>
+      <div class="footer-col">
+        <h4>Service</h4>
+        <a href="#">Consultation</a>
+        <a href="#">Restoration</a>
+        <a href="#">Shipping</a>
+        <a href="#">Returns</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Journal</a>
+        <a href="#">Newsletter</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>MAISON © 2024 — All Rights Reserved</span>
+      <span>Crafted with Intention</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>
