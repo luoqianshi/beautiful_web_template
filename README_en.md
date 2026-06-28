@@ -308,6 +308,16 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 
 > A rigorous implementation of the International Typographic Style (1950s). Characterized by objective typography, sans-serif fonts (Inter), mathematical grids with subtle texture patterns, and a strict black/white/red palette. Prioritizes readability, precision, asymmetrical organization, and visual depth through layered patterns.
 
+### [TRAE Dark Tech](./templates/TRAE-Dark-Tech/)
+
+<p>
+  <img src="./assets/screenshots/TRAE-Dark-Tech-01.png" width="32.5%" alt="TRAE Dark Tech — slide 01" />
+  <img src="./assets/screenshots/TRAE-Dark-Tech-02.png" width="32.5%" alt="TRAE Dark Tech — slide 02" />
+  <img src="./assets/screenshots/TRAE-Dark-Tech-03.png" width="32.5%" alt="TRAE Dark Tech — slide 03" />
+</p>
+
+> A dark-mode tech aesthetic built on a pure black canvas with neon-green accents. A flowing particle-network background, high-contrast hierarchy, and refined pill-shaped UI components deliver a professional, forward-looking, energetic modern developer community experience.
+
 ### [Terminal](./templates/Terminal/)
 
 <p>

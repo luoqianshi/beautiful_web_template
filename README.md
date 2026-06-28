@@ -308,6 +308,16 @@
 
 > 对国际字体排印风格（1950 年代）的严谨实现。以客观字体、无衬线字体（Inter）、带细腻纹理图案的数学网格，以及严格的黑/白/红调色板为特征。优先考虑可读性、精准、非对称组织，以及通过分层图案营造的视觉深度。
 
+### [TRAE Dark Tech](./templates/TRAE-Dark-Tech/)
+
+<p>
+  <img src="./assets/screenshots/TRAE-Dark-Tech-01.png" width="32.5%" alt="TRAE Dark Tech — slide 01" />
+  <img src="./assets/screenshots/TRAE-Dark-Tech-02.png" width="32.5%" alt="TRAE Dark Tech — slide 02" />
+  <img src="./assets/screenshots/TRAE-Dark-Tech-03.png" width="32.5%" alt="TRAE Dark Tech — slide 03" />
+</p>
+
+> 以纯黑为画布、荧光绿为画笔的深色科技风格。流动的粒子网络背景、高对比度的视觉层级与精致的胶囊形 UI 组件，打造专业、前沿、充满活力的现代开发者社区体验。
+
 ### [Terminal](./templates/Terminal/)
 
 <p>
