@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRAE Dark Tech — UI/UX 风格系统</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #0a0a0a;
+      --bg-card: #18181b;
+      --bg-tag: #27272a;
+      --bg-tag-hover: #3f3f46;
+      --border: #27272a;
+      --border-strong: #3f3f46;
+      --accent: #22c55e;
+      --accent-deep: #16a34a;
+      --accent-glow: rgba(34, 197, 94, 0.35);
+      --accent-soft: rgba(34, 197, 94, 0.12);
+      --text-primary: #ffffff;
+      --text-secondary: #a1a1aa;
+      --text-tertiary: #d4d4d8;
+      --text-muted: #71717a;
+      --gold: #fbbf24;
+      --silver: #a1a1aa;
+      --bronze: #b45309;
+      --font-sans: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+      --font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-base);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      z-index: 100;
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .navbar.scrolled {
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(14px);
+      border-color: var(--border);
+    }
+    .navbar-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 18px;
+    }
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+      display: grid;
+      place-items: center;
+      box-shadow: 0 0 16px var(--accent-soft);
+    }
+    .logo-icon svg { width: 18px; height: 18px; color: #000; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      transition: color 0.2s ease;
+      position: relative;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.2s ease;
+      border-radius: 2px;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .mobile-menu-btn {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border-strong);
+      border-radius: 10px;
+      background: transparent;
+      color: var(--text-primary);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-actions .btn-secondary { display: none; }
+      .mobile-menu-btn { display: inline-flex; }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-lg { padding: 14px 28px; font-size: 15px; }
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+    }
+    .btn-primary:hover {
+      background: var(--accent-deep);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border-strong);
+      color: var(--text-primary);
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Tags */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: var(--bg-tag);
+      color: var(--text-tertiary);
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .tag:hover { border-color: var(--accent); color: var(--accent); }
+    .tag-accent { background: var(--accent); color: #000; }
+    .tag-accent:hover { background: var(--accent-deep); color: #000; border-color: transparent; }
+    .tag-outline { background: transparent; border-color: var(--border-strong); }
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(0.8); opacity: 0.6; }
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 64px;
+    }
+    .hero-content { max-width: 780px; }
+    .hero-tag { margin-bottom: 24px; }
+    .hero-title {
+      font-size: clamp(40px, 6vw, 64px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+    .hero-title .gradient-text {
+      background: linear-gradient(135deg, var(--accent), #4ade80);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-subtitle {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-bottom: 36px;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 64px;
+    }
+    .stat-item { display: flex; flex-direction: column; gap: 6px; }
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .stat-label { font-size: 13px; color: var(--text-muted); }
+    @media (max-width: 768px) {
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; }
+      .hero-stats { gap: 24px; }
+      .stat-value { font-size: 26px; }
+    }
+
+    /* Sections */
+    .section { position: relative; z-index: 1; padding: 100px 0; }
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .section-number {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+    .section-title {
+      font-size: clamp(28px, 3vw, 36px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+    .section-title .gradient-text {
+      background: linear-gradient(135deg, var(--accent), #4ade80);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-desc {
+      max-width: 560px;
+      margin-top: 16px;
+      color: var(--text-secondary);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* Cards */
+    .grid { display: grid; gap: 24px; }
+    .grid-3 { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); }
+    @media (max-width: 768px) {
+      .grid-3, .grid-2 { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 24px var(--accent-soft);
+      transform: translateY(-4px);
+    }
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+    .card-icon svg { width: 24px; height: 24px; }
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+    .card-text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    /* Color palette */
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    .color-swatch {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .color-swatch:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .swatch-block { height: 96px; }
+    .swatch-info { padding: 14px; }
+    .swatch-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .swatch-hex {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Typography showcase */
+    .type-showcase {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px;
+    }
+    .type-row {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .type-row:last-child { border-bottom: none; }
+    .type-sample { color: var(--text-primary); margin-bottom: 6px; }
+    .type-meta {
+      display: flex;
+      gap: 16px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    /* Component showcase */
+    .showcase-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+    .showcase-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+    .showcase-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .showcase-row:last-child { margin-bottom: 0; }
+
+    /* Inputs */
+    .form-input {
+      width: 100%;
+      max-width: 320px;
+      padding: 12px 16px;
+      background: var(--bg-tag);
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-input::placeholder { color: var(--text-muted); }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+    }
+
+    /* Leaderboard */
+    .rank-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 20px;
+      background: rgba(24, 24, 27, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      transition: all 0.2s ease;
+    }
+    .rank-item:hover { border-color: var(--accent); }
+    .rank-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      flex-shrink: 0;
+    }
+    .rank-num.gold { background: var(--gold); color: #000; }
+    .rank-num.silver { background: var(--silver); color: #000; }
+    .rank-num.bronze { background: var(--bronze); color: #fff; }
+    .rank-num.other { background: var(--bg-tag); color: var(--text-muted); }
+    .rank-info { flex: 1; }
+    .rank-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+    .rank-meta { font-size: 12px; color: var(--text-muted); }
+    .rank-bar {
+      width: 120px;
+      height: 4px;
+      background: var(--bg-tag);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .rank-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      width: 0;
+      transition: width 1.5s ease-out;
+    }
+
+    /* Prompt section */
+    .prompt-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 0 60px rgba(34, 197, 94, 0.08);
+    }
+    .prompt-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .prompt-title { font-size: 20px; font-weight: 700; color: var(--text-primary); }
+    .prompt-textarea {
+      width: 100%;
+      min-height: 240px;
+      background: var(--bg-base);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.7;
+      resize: vertical;
+    }
+    .copy-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--accent);
+      color: #000;
+      padding: 12px 20px;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 14px;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: all 0.3s ease;
+      z-index: 200;
+      pointer-events: none;
+    }
+    .copy-toast.show { opacity: 1; transform: translateY(0); }
+
+    /* Footer */
+    .footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 48px 0;
+      text-align: center;
+    }
+    .footer-text {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .footer-text a { color: var(--accent); }
+    .footer-text a:hover { text-decoration: underline; }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Scroll hint */
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 12px;
+      animation: fadeBounce 2.4s infinite;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: stretch 2.4s infinite;
+    }
+    @keyframes stretch {
+      0%, 100% { transform: scaleY(1); opacity: 1; }
+      50% { transform: scaleY(0.6); opacity: 0.5; }
+    }
+    @keyframes fadeBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </span>
+        <span>TRAE Dark Tech</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#philosophy">设计哲学</a></li>
+        <li><a href="#tokens">设计 Token</a></li>
+        <li><a href="#components">组件</a></li>
+        <li><a href="#motion">动画</a></li>
+        <li><a href="#prompt">完整提示词</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#prompt" class="btn btn-primary">获取提示词</a>
+        <button class="mobile-menu-btn" aria-label="Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-tag">
+        <span class="tag tag-outline">
+          <span class="pulse-dot"></span>
+          UI/UX 风格系统
+        </span>
+      </div>
+      <h1 class="hero-title">
+        纯黑画布<br>
+        <span class="gradient-text">荧光绿画笔</span>
+      </h1>
+      <p class="hero-subtitle">
+        TRAE Dark Tech 是一套面向开发者社区与技术产品的深色科技风格系统。以纯黑为底、荧光绿为强调色，融合赛博朋克的冷峻感与极简主义的克制感，打造专业、前沿、充满活力的现代网页体验。
+      </p>
+      <div class="hero-actions">
+        <a href="#prompt" class="btn btn-primary btn-lg">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          复制完整提示词
+        </a>
+        <a href="#tokens" class="btn btn-secondary btn-lg">浏览设计 Token</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-value">54</span>
+          <span class="stat-label">设计 Token</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">7</span>
+          <span class="stat-label">签名特征</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">∞</span>
+          <span class="stat-label">可复用场景</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>向下滚动</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Philosophy -->
+  <section class="section" id="philosophy">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-number">01</span>
+        <h2 class="section-title">设计哲学 · <span class="gradient-text">深夜实验室</span></h2>
+      </div>
+      <p class="section-desc reveal">
+        这是一种深色模式下的现代科技风格。它像一间深夜的实验室：黑色背景是安静的实验台，荧光绿是示波器上跳动的信号，白色文字是清晰的读数，灰色文字是辅助的标注。
+      </p>
+      <div class="grid grid-3" style="margin-top: 48px;">
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+          </div>
+          <h3 class="card-title">不是消费级 UI</h3>
+          <p class="card-text">拒绝温暖柔和、色彩斑斓或厚重拟物。强调功能优先、结构清晰、交互反馈即时，呈现冷静、工程师、未来感的气质。</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <h3 class="card-title">结构即美学</h3>
+          <p class="card-text">通过极高对比度让信息一目了然。胶囊形按钮与圆角卡片带来恰到好处的亲和力，在冷峻中保留人性的温度。</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+            </svg>
+          </div>
+          <h3 class="card-title">即时反馈</h3>
+          <p class="card-text">几乎所有可交互元素在 Hover 或 Focus 时都会产生绿色边框或绿色阴影，让用户始终感受到系统的响应与活力。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tokens -->
+  <section class="section" id="tokens" style="background: rgba(0,0,0,0.3);">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-number">02</span>
+        <h2 class="section-title">设计 Token · <span class="gradient-text">色彩与排版</span></h2>
+      </div>
+      <p class="section-desc reveal">
+        完整的 Token 系统涵盖色彩、字体、间距、圆角与阴影，确保任何基于该系统构建的页面都保持高度一致的视觉语言。
+      </p>
+
+      <h3 class="section-title" style="font-size: 20px; margin: 48px 0 24px; color: var(--text-tertiary);">色彩系统</h3>
+      <div class="palette-grid reveal">
+        <div class="color-swatch">
+          <div class="swatch-block" style="background: #0a0a0a;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">bg-base</div>
+            <div class="swatch-hex">#0a0a0a</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background: #18181b;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">bg-card</div>
+            <div class="swatch-hex">#18181b</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background: #27272a;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">bg-tag</div>
+            <div class="swatch-hex">#27272a</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background: #22c55e;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">accent</div>
+            <div class="swatch-hex">#22c55e</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background: #16a34a;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">accent-deep</div>
+            <div class="swatch-hex">#16a34a</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background: #ffffff;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">text-primary</div>
+            <div class="swatch-hex">#ffffff</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background: #a1a1aa;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">text-secondary</div>
+            <div class="swatch-hex">#a1a1aa</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-block" style="background: #71717a;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">text-muted</div>
+            <div class="swatch-hex">#71717a</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-title" style="font-size: 20px; margin: 48px 0 24px; color: var(--text-tertiary);">排版层级</h3>
+      <div class="type-showcase reveal">
+        <div class="type-row">
+          <div class="type-sample" style="font-size: clamp(40px, 6vw, 64px); font-weight: 800; line-height: 1.1; letter-spacing: -1.5px;">Hero 标题 / 64px Bold</div>
+          <div class="type-meta">
+            <span>size: clamp(40px, 6vw, 64px)</span>
+            <span>weight: 800</span>
+            <span>line-height: 1.1</span>
+          </div>
+        </div>
+        <div class="type-row">
+          <div class="type-sample" style="font-size: 36px; font-weight: 700; line-height: 1.2;">页面标题 / 36px Bold</div>
+          <div class="type-meta">
+            <span>size: 32-40px</span>
+            <span>weight: 700</span>
+            <span>line-height: 1.2</span>
+          </div>
+        </div>
+        <div class="type-row">
+          <div class="type-sample" style="font-size: 18px; font-weight: 600; line-height: 1.3;">卡片标题 / 18px SemiBold</div>
+          <div class="type-meta">
+            <span>size: 18-20px</span>
+            <span>weight: 600</span>
+            <span>line-height: 1.3</span>
+          </div>
+        </div>
+        <div class="type-row">
+          <div class="type-sample" style="font-size: 15px; font-weight: 400; line-height: 1.7; color: var(--text-secondary);">正文文本 / 15px Regular，使用 secondary 颜色，行高 1.6-1.7，保证长文阅读舒适性。</div>
+          <div class="type-meta">
+            <span>size: 14-16px</span>
+            <span>weight: 400</span>
+            <span>line-height: 1.6-1.7</span>
+          </div>
+        </div>
+        <div class="type-row">
+          <div class="type-sample" style="font-family: var(--font-mono); font-size: 13px; font-weight: 500; line-height: 1.5; color: var(--accent);">mono-label / 13px Medium</div>
+          <div class="type-meta">
+            <span>font: JetBrains Mono</span>
+            <span>size: 12-14px</span>
+            <span>weight: 500</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Components -->
+  <section class="section" id="components">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-number">03</span>
+        <h2 class="section-title">组件样式 · <span class="gradient-text">胶囊与光晕</span></h2>
+      </div>
+      <p class="section-desc reveal">
+        从按钮到卡片，从标签到排行榜，所有组件共享一致的胶囊形语言与绿色光晕反馈。
+      </p>
+
+      <div class="grid grid-2" style="margin-top: 48px;">
+        <div class="showcase-panel reveal">
+          <div class="showcase-label">BUTTONS</div>
+          <div class="showcase-row">
+            <button class="btn btn-primary btn-lg">Primary Button</button>
+            <button class="btn btn-secondary btn-lg">Secondary Button</button>
+          </div>
+          <div class="showcase-row">
+            <button class="btn btn-primary">Default</button>
+            <button class="btn btn-secondary">Ghost</button>
+          </div>
+        </div>
+
+        <div class="showcase-panel reveal">
+          <div class="showcase-label">TAGS / PILLS</div>
+          <div class="showcase-row">
+            <span class="tag">Default</span>
+            <span class="tag tag-accent">Active</span>
+            <span class="tag tag-outline">Outline</span>
+          </div>
+          <div class="showcase-row">
+            <span class="tag tag-outline">
+              <span class="pulse-dot"></span>
+              Live
+            </span>
+            <span class="tag tag-accent">v2.0</span>
+          </div>
+        </div>
+
+        <div class="showcase-panel reveal">
+          <div class="showcase-label">INPUT</div>
+          <div class="showcase-row">
+            <input type="text" class="form-input" placeholder="Enter your email">
+          </div>
+          <div class="showcase-row">
+            <input type="text" class="form-input" value="focused state" style="border-color: var(--accent); box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);">
+          </div>
+        </div>
+
+        <div class="showcase-panel reveal">
+          <div class="showcase-label">LEADERBOARD</div>
+          <div class="rank-item">
+            <span class="rank-num gold">1</span>
+            <div class="rank-info">
+              <div class="rank-name">Neon Architect</div>
+              <div class="rank-meta">Creator of the month</div>
+            </div>
+            <div class="rank-bar"><div class="rank-bar-fill" data-width="95%"></div></div>
+          </div>
+          <div class="rank-item">
+            <span class="rank-num silver">2</span>
+            <div class="rank-info">
+              <div class="rank-name">Pixel Engineer</div>
+              <div class="rank-meta">Top contributor</div>
+            </div>
+            <div class="rank-bar"><div class="rank-bar-fill" data-width="82%"></div></div>
+          </div>
+          <div class="rank-item">
+            <span class="rank-num bronze">3</span>
+            <div class="rank-info">
+              <div class="rank-name">Dark Matter</div>
+              <div class="rank-meta">Rising star</div>
+            </div>
+            <div class="rank-bar"><div class="rank-bar-fill" data-width="68%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Motion -->
+  <section class="section" id="motion" style="background: rgba(0,0,0,0.3);">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-number">04</span>
+        <h2 class="section-title">效果与动画 · <span class="gradient-text">流动与呼吸</span></h2>
+      </div>
+      <p class="section-desc reveal">
+        动画是 TRAE Dark Tech 的签名特征。流动的粒子网络背景、滚动触发的入场效果、即时的 Hover 反馈，共同营造出沉浸式的科技体验。
+      </p>
+
+      <div class="grid grid-3" style="margin-top: 48px;">
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="1"></circle>
+              <circle cx="19" cy="12" r="1"></circle>
+              <circle cx="5" cy="12" r="1"></circle>
+            </svg>
+          </div>
+          <h3 class="card-title">粒子网络背景</h3>
+          <p class="card-text">Canvas 2D 全屏绘制 80-120 个绿色粒子，距离小于阈值时自动连线，鼠标靠近产生交互吸引，是整套风格最具辨识度的视觉元素。</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+              <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+          </div>
+          <h3 class="card-title">滚动入场动画</h3>
+          <p class="card-text">元素进入视口时触发 opacity 0→1 与 translateY(30px)→0 的过渡，持续 0.6s。进度条在可见时从 0 宽度扩展到目标值，持续 1.5s。</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+            </svg>
+          </div>
+          <h3 class="card-title">Hover 光晕反馈</h3>
+          <p class="card-text">按钮悬停时上移并扩散绿色阴影，卡片悬停时边框变绿并产生柔和辉光，输入框聚焦时获得绿色边框与外发光，反馈即时且一致。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prompt -->
+  <section class="section" id="prompt">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-number">05</span>
+        <h2 class="section-title">完整提示词 · <span class="gradient-text">直接复制使用</span></h2>
+      </div>
+      <p class="section-desc reveal">
+        将下方提示词直接交给代码生成 Agent，即可生成同风格的现代网页或落地页。
+      </p>
+
+      <div class="prompt-card reveal" style="margin-top: 48px;">
+        <div class="prompt-header">
+          <h3 class="prompt-title">TRAE Dark Tech 风格提示词</h3>
+          <button class="btn btn-primary" id="copyBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            复制提示词
+          </button>
+        </div>
+        <textarea class="prompt-textarea" id="promptText" readonly>请使用以下设计系统创建一个现代科技风格的网页/落地页：
+
+## 整体风格
+一个以纯黑为画布、荧光绿为画笔的深色科技风格网站。整体气质专业、前沿、充满活力，面向开发者社区或技术产品。融合赛博朋克与极简主义，强调高对比度、清晰的信息层级和精致的微交互。
+
+## 色彩系统
+- 主背景：#0a0a0a
+- 卡片/面板背景：#18181b
+- 标签/输入框背景：#27272a
+- 边框：#27272a，激活/悬停边框：#3f3f46
+- 主强调色：#22c55e（荧光绿）
+- 次强调色/悬停：#16a34a
+- 绿色光晕：rgba(34, 197, 94, 0.35)
+- 柔和绿背景：rgba(34, 197, 94, 0.12)
+- 主标题文字：#ffffff
+- 副标题文字：#a1a1aa
+- 第三级文字：#d4d4d8
+- 辅助/占位文字：#71717a
+- 排行榜金/银/铜：#fbbf24 / #a1a1aa / #b45309
+
+## 字体
+- 无衬线：Inter, "SF Pro Display", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif
+- 等宽："JetBrains Mono", "SF Mono", Menlo, Consolas, monospace
+- Hero 标题：clamp(40px, 6vw, 64px), weight 800, line-height 1.1, letter-spacing -1.5px
+- 页面标题：32-40px, weight 700, line-height 1.2
+- 卡片标题：18-20px, weight 600
+- 正文：14-16px, weight 400, line-height 1.6-1.7, color #a1a1aa
+- 标签/辅助：12-14px, weight 500
+
+## 布局
+- 固定导航栏：高度 64px，初始半透明，滚动后加深并加 blur(12-14px)
+- Hero：占满首屏 100vh，内容居中偏左，包含胶囊标签、大标题、副标题、CTA 按钮组
+- 内容区：最大宽度 1200-1280px 居中，section 间距 80-120px
+- 响应式网格：grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))
+- 响应式断点：1024px（平板 2 列）、768px（手机单列 + 汉堡菜单）
+
+## 组件
+- 按钮：胶囊形（border-radius: 9999px）
+  - 主按钮：绿色填充，黑色文字，悬停变深绿 + 上移 + 绿色阴影
+  - 次按钮：透明背景，暗灰边框，悬停边框变绿 + 文字变绿
+- 标签：胶囊形，暗灰背景，悬停/激活变绿色
+- 卡片：16px 圆角，深灰背景，1px 暗灰边框，悬停变绿边框 + 上浮 + 绿色光晕
+- 输入框：8px 圆角，暗灰背景，聚焦绿色边框 + 外发光
+- 登录卡片：24px 圆角，大面积绿色弱光晕
+- 排行榜：前三名金/银/铜徽章，绿色进度条
+
+## 动画
+- 背景：Canvas 2D 全屏粒子网络动画，绿色粒子 + 连线 + 鼠标交互
+- 导航栏：滚动后背景加深 + 模糊
+- 元素入场：滚动触发淡入上浮（opacity 0->1, translateY 30px->0），0.6s ease
+- 进度条：进入视口时从 0 宽度过渡到目标值，1.5s ease-out
+- 悬停反馈：按钮/卡片/标签悬停时产生绿色光晕或边框高亮
+- 图标：SVG 细线图标，悬停时变为绿色；关键图标可添加脉冲/旋转/描边动画
+
+## 技术栈建议
+- React / Vue / Next.js
+- Tailwind CSS
+- Framer Motion（React）或 GSAP 用于复杂动画
+- Canvas 2D API 用于粒子背景
+- Lucide React / Heroicons 用于图标
+- 所有 CSS 代码应可直接运行，使用 CSS 自定义属性管理 Token
+
+## 设计关键词
+深色模式、科技感、赛博朋克、极简主义、荧光绿、粒子动画、开发者社区、高对比度、玻璃拟态、胶囊按钮、圆角设计、渐变光晕</textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text">
+        TRAE Dark Tech 风格系统 · 基于 <a href="#">trae-design-system</a>、<a href="#">trae-style-guide</a> 与 <a href="#">TRAEDemoWall_风格提示词</a> 逆向提取
+      </p>
+    </div>
+  </footer>
+
+  <div class="copy-toast" id="copyToast">提示词已复制到剪贴板</div>
+
+  <script>
+    // Particle network background
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouse = { x: null, y: null };
+    const PARTICLE_COUNT = 90;
+    const CONNECTION_DIST = 120;
+    const MOUSE_DIST = 150;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.6;
+        this.vy = (Math.random() - 0.5) * 0.6;
+        this.size = Math.random() * 1.4 + 0.6;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < MOUSE_DIST) {
+            const force = (MOUSE_DIST - dist) / MOUSE_DIST;
+            this.x -= dx * force * 0.02;
+            this.y -= dy * force * 0.02;
+          }
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(34, 197, 94, 0.5)';
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push(new Particle());
+      }
+    }
+    initParticles();
+
+    function drawConnections() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECTION_DIST) {
+            const opacity = 1 - dist / CONNECTION_DIST;
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(34, 197, 94, ${opacity * 0.25})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = particles[i].x - mouse.x;
+          const dy = particles[i].y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < MOUSE_DIST) {
+            const opacity = 1 - dist / MOUSE_DIST;
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(34, 197, 94, ${opacity * 0.4})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      drawConnections();
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    window.addEventListener('mousemove', e => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+    window.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 30);
+    });
+
+    // Scroll reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Progress bar animation
+    const progressBars = document.querySelectorAll('.rank-bar-fill');
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.width = entry.target.dataset.width;
+          barObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    progressBars.forEach(bar => barObserver.observe(bar));
+
+    // Copy prompt
+    const copyBtn = document.getElementById('copyBtn');
+    const promptText = document.getElementById('promptText');
+    const copyToast = document.getElementById('copyToast');
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(promptText.value);
+        copyToast.classList.add('show');
+        setTimeout(() => copyToast.classList.remove('show'), 2500);
+      } catch (err) {
+        promptText.select();
+        document.execCommand('copy');
+        copyToast.classList.add('show');
+        setTimeout(() => copyToast.classList.remove('show'), 2500);
+      }
+    });
+  </script>
+</body>
+</html>
