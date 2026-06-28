@@ -1,3 +1,8 @@
+---
+name: web2template
+description: 从任意网站或本地 HTML demo 中逆向提取 UI/UX 设计特征，生成可复用的标准化风格提示词文档。当用户要求分析网站设计风格、提取页面视觉特征、生成设计提示词或基于现有页面复刻风格时，务必使用此 skill。
+---
+
 # web2template
 
 > 从任意网站或 HTML demo 中逆向提取 UI/UX 设计特征，生成可复用的标准化风格提示词文档。
