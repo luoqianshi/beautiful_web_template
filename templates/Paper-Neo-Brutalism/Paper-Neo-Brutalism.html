@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>纸质现代主义 · Paper Neo-Brutalism</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* =========================================
+     Design Tokens (摘自 Paper Neo-Brutalism.md)
+     ========================================= */
+  :root {
+    /* Colors */
+    --bg-paper: #f4f1e8;
+    --bg-soft: #fbfaf5;
+    --bg-cream: #fffdf7;
+    --bg-ink: #050505;
+    --ink: #151511;
+    --muted-ink: #6f6b60;
+    --line: #ded8ca;
+    --line-strong: #171713;
+    --green: #08d36c;
+    --green-dark: #00a955;
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-lg: 16px;
+    --space-xl: 24px;
+    --space-2xl: 32px;
+
+    /* Radius */
+    --radius-sm: 2px;
+    --radius-md: 2px;
+    --radius-lg: 2px;
+
+    /* Easing */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* =========================================
+     Reset & Base
+     ========================================= */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: "DM Sans", "Microsoft YaHei", "PingFang SC", Georgia, "Times New Roman", serif;
+    background: var(--bg-paper);
+    color: var(--ink);
+    line-height: 1.5;
+    font-size: 16px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* 工程网格背景 */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(90deg, rgba(21, 21, 17, 0.035) 1px, transparent 1px),
+      linear-gradient(rgba(21, 21, 17, 0.024) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  /* =========================================
+     Layout
+     ========================================= */
+  .container {
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 0 48px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* =========================================
+     Top Banner
+     ========================================= */
+  .banner {
+    background: var(--bg-ink);
+    color: var(--bg-cream);
+    padding: 10px 0;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.24px;
+    border-bottom: 1px solid var(--line-strong);
+    position: relative;
+    z-index: 5;
+  }
+  .banner-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .banner-dot {
+    width: 8px; height: 8px;
+    border-radius: 999px;
+    background: var(--green);
+    box-shadow: 0 0 12px rgba(8, 211, 108, 0.7);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.85); }
+  }
+  .banner-link {
+    color: var(--green);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* =========================================
+     Nav
+     ========================================= */
+  .nav {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 253, 247, 0.84);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(21, 21, 17, 0.18);
+    box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.12), 0px 10px 30px 0px rgba(5,5,5,0.06);
+    z-index: 10;
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-mark {
+    width: 36px; height: 36px;
+    background: var(--bg-ink);
+    color: var(--green);
+    display: grid; place-items: center;
+    border-radius: var(--radius-sm);
+    box-shadow: 3px 3px 0 0 var(--green);
+    font-weight: 800;
+    font-size: 18px;
+  }
+  .logo-text {
+    display: flex; flex-direction: column;
+    line-height: 1.1;
+  }
+  .logo-name {
+    font-weight: 800; font-size: 15px; letter-spacing: -0.2px;
+  }
+  .logo-sub {
+    font-size: 11px; color: var(--muted-ink); letter-spacing: 0.2px;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 28px;
+  }
+  .nav-link {
+    font-size: 14px; font-weight: 500;
+    color: var(--ink);
+    position: relative;
+    padding: 4px 0;
+    transition: color 0.16s var(--ease-out);
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -2px;
+    height: 2px;
+    background: var(--green);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s var(--ease-out);
+  }
+  .nav-link:hover { color: var(--green-dark); }
+  .nav-link:hover::after { transform: scaleX(1); }
+
+  .nav-cta {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .icon-btn {
+    width: 36px; height: 36px;
+    border: 1px solid var(--line-strong);
+    background: var(--bg-cream);
+    border-radius: var(--radius-sm);
+    display: grid; place-items: center;
+    cursor: pointer;
+    box-shadow: 3px 3px 0 0 var(--bg-ink);
+    transition: transform 0.16s var(--ease-out), box-shadow 0.16s var(--ease-out);
+  }
+  .icon-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 0 var(--green);
+  }
+  .icon-btn svg { width: 16px; height: 16px; stroke: var(--ink); }
+
+  /* =========================================
+     Buttons
+     ========================================= */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: inherit;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 0.1px;
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 0.16s var(--ease-out), box-shadow 0.16s var(--ease-out), background-color 0.16s var(--ease-out), color 0.16s var(--ease-out);
+  }
+  .btn-primary {
+    background: var(--bg-ink);
+    color: var(--bg-cream);
+    box-shadow: 4px 4px 0 0 var(--green);
+  }
+  .btn-primary:hover {
+    color: var(--green);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 0 var(--green);
+  }
+  .btn-primary:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 0 var(--green);
+  }
+  .btn-outline {
+    background: var(--bg-cream);
+    color: var(--ink);
+    border-color: var(--line-strong);
+    box-shadow: 4px 4px 0 0 var(--bg-ink);
+  }
+  .btn-outline:hover {
+    background: var(--bg-paper);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 0 var(--bg-ink);
+  }
+  .btn-ghost {
+    background: rgba(8, 211, 108, 0.08);
+    color: var(--green-dark);
+    border: 1px solid rgba(0, 169, 85, 0.28);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.24px;
+  }
+  .btn-ghost:hover { background: rgba(8, 211, 108, 0.18); }
+
+  /* =========================================
+     Hero
+     ========================================= */
+  .hero {
+    padding: 56px 0 48px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .hero-head {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 18px;
+  }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(8, 211, 108, 0.08);
+    color: var(--green-dark);
+    border: 1px solid rgba(0, 169, 85, 0.28);
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.24px;
+  }
+  .pill-dot {
+    width: 6px; height: 6px; border-radius: 999px; background: var(--green);
+  }
+  .hero h1 {
+    font-size: 92px;
+    line-height: 0.96;
+    font-weight: 400;
+    letter-spacing: -2.76px;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .hero h1 .accent {
+    color: var(--green-dark);
+    font-style: italic;
+    font-weight: 500;
+  }
+  .hero h1 .underline {
+    position: relative;
+    display: inline-block;
+  }
+  .hero h1 .underline::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 6px;
+    height: 12px;
+    background: rgba(8, 211, 108, 0.35);
+    z-index: -1;
+  }
+  .hero-sub {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--muted-ink);
+    max-width: 520px;
+    margin-bottom: 28px;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .hero-side {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .ai-card {
+    background: var(--bg-cream);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    padding: 18px 20px;
+    box-shadow: 4px 4px 0 0 var(--green);
+    position: relative;
+  }
+  .ai-card-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .ai-card-title {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+  .ai-card-tag {
+    font-size: 10px; font-weight: 700;
+    color: var(--green-dark);
+    background: rgba(8, 211, 108, 0.12);
+    padding: 2px 6px;
+    border-radius: 999px;
+    letter-spacing: 0.6px;
+  }
+  .ai-card-body {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .stat-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    box-shadow: 4px 4px 0 0 var(--bg-ink);
+  }
+  .stat-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .stat-row:last-child { border-bottom: 0; }
+  .stat-key { font-size: 13px; color: var(--muted-ink); }
+  .stat-val { font-size: 15px; font-weight: 700; }
+
+  /* =========================================
+     Main Card (Hero Bottom)
+     ========================================= */
+  .main-card {
+    margin-top: 28px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    box-shadow: 6px 6px 0 0 var(--bg-ink);
+    overflow: hidden;
+    position: relative;
+  }
+  .main-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 4px;
+    background: var(--green);
+  }
+  .main-card-inner {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 0;
+  }
+  .main-card-left {
+    padding: 32px 36px;
+    border-right: 1px dashed var(--line);
+  }
+  .main-card-right {
+    padding: 32px 36px;
+    background:
+      linear-gradient(90deg, rgba(8, 211, 108, 0.08), transparent 58%),
+      var(--bg-cream);
+  }
+  .main-card h2 {
+    font-size: 36px;
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 14px;
+  }
+  .main-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--muted-ink);
+    margin-bottom: 18px;
+  }
+  .check-list { list-style: none; margin: 14px 0 20px; }
+  .check-list li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 14px; font-weight: 500;
+    padding: 6px 0;
+  }
+  .check-list .check {
+    width: 20px; height: 20px;
+    background: var(--green);
+    color: var(--bg-ink);
+    display: grid; place-items: center;
+    border-radius: 999px;
+    font-size: 12px; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .panel-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.96px;
+    text-transform: uppercase;
+    color: var(--muted-ink);
+    margin-bottom: 12px;
+  }
+  .feature-item {
+    display: flex; gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .feature-item:last-child { border-bottom: 0; }
+  .feature-num {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.6px;
+    color: var(--green-dark);
+    flex-shrink: 0;
+  }
+  .feature-content h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .feature-content p { font-size: 13px; color: var(--muted-ink); margin: 0; }
+
+  /* =========================================
+     Section Heading
+     ========================================= */
+  .section { padding: 56px 0; }
+  .section-head {
+    display: flex; align-items: end; justify-content: space-between;
+    margin-bottom: 32px;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .section-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.96px;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    margin-bottom: 10px;
+  }
+  .section-eyebrow::before {
+    content: "";
+    width: 24px; height: 2px;
+    background: var(--green);
+  }
+  .section h2 {
+    font-size: 54px;
+    line-height: 1.05;
+    font-weight: 400;
+    letter-spacing: -1.2px;
+  }
+  .section h2 .strong { font-weight: 700; }
+  .section-desc {
+    font-size: 15px; color: var(--muted-ink);
+    max-width: 420px; line-height: 1.6;
+  }
+
+  /* =========================================
+     Features Grid (4 cols)
+     ========================================= */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .feature-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 22px 20px;
+    box-shadow: 4px 4px 0 0 var(--bg-ink);
+    transition: transform 0.16s var(--ease-out), box-shadow 0.16s var(--ease-out);
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-card::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: var(--green);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s var(--ease-out);
+  }
+  .feature-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 0 var(--green);
+  }
+  .feature-card:hover::after { transform: scaleX(1); }
+
+  .feature-card .num {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.96px;
+    color: var(--muted-ink);
+    margin-bottom: 16px;
+  }
+  .feature-card .icon-box {
+    width: 44px; height: 44px;
+    background: var(--bg-ink);
+    color: var(--green);
+    display: grid; place-items: center;
+    border-radius: var(--radius-sm);
+    box-shadow: 3px 3px 0 0 var(--green);
+    margin-bottom: 16px;
+  }
+  .feature-card .icon-box svg { width: 20px; height: 20px; stroke: var(--green); }
+  .feature-card h3 {
+    font-size: 18px; font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  .feature-card p {
+    font-size: 13px; line-height: 1.55;
+    color: var(--muted-ink);
+  }
+
+  /* =========================================
+     Color Tokens
+     ========================================= */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+  .color-chip {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    box-shadow: 3px 3px 0 0 var(--bg-ink);
+    overflow: hidden;
+    transition: transform 0.16s var(--ease-out), box-shadow 0.16s var(--ease-out);
+  }
+  .color-chip:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 0 var(--green);
+  }
+  .color-swatch {
+    height: 90px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .color-swatch.green { background: var(--green); }
+  .color-swatch.ink { background: var(--bg-ink); }
+  .color-info { padding: 12px 14px; }
+  .color-info .name {
+    font-size: 12px; font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .color-info .hex {
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    color: var(--muted-ink);
+    letter-spacing: 0.5px;
+  }
+
+  /* =========================================
+     Typography Showcase
+     ========================================= */
+  .typo-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    box-shadow: 4px 4px 0 0 var(--bg-ink);
+    padding: 28px 32px;
+    margin-bottom: 20px;
+  }
+  .typo-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 140px;
+    gap: 20px;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .typo-row:last-child { border-bottom: 0; }
+  .typo-label {
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    color: var(--muted-ink);
+    letter-spacing: 0.5px;
+  }
+  .typo-sample { color: var(--ink); }
+  .typo-meta {
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    color: var(--muted-ink);
+    text-align: right;
+    letter-spacing: 0.3px;
+  }
+  .typo-hero { font-size: 92px; font-weight: 400; line-height: 0.96; letter-spacing: -2.76px; }
+  .typo-h2 { font-size: 54px; font-weight: 400; line-height: 1.05; }
+  .typo-h3 { font-size: 28px; font-weight: 700; line-height: 1.2; }
+  .typo-h4 { font-size: 24px; font-weight: 700; line-height: 1.2; }
+  .typo-body { font-size: 16px; font-weight: 400; line-height: 1.55; }
+  .typo-label-text { font-size: 13px; font-weight: 700; letter-spacing: 0.24px; }
+  .typo-num { font-size: 10px; font-weight: 700; letter-spacing: 0.96px; }
+
+  /* =========================================
+     Shadow Showcase
+     ========================================= */
+  .shadow-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .shadow-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 32px 24px;
+    text-align: center;
+    transition: transform 0.16s var(--ease-out);
+  }
+  .shadow-card:hover { transform: translate(-2px, -2px); }
+  .shadow-demo {
+    width: 80px; height: 80px;
+    background: var(--bg-cream);
+    border-radius: var(--radius-sm);
+    margin: 0 auto 20px;
+    border: 1px solid var(--line-strong);
+  }
+  .shadow-demo.hard { box-shadow: 4px 4px 0 0 var(--bg-ink); }
+  .shadow-demo.accent { box-shadow: 4px 4px 0 0 var(--green); }
+  .shadow-demo.accent-soft { box-shadow: 4px 4px 0 0 rgba(8, 211, 108, 0.18); }
+  .shadow-demo.glow { box-shadow: 0 0 0 4px rgba(8, 211, 108, 0.13), 0 0 18px rgba(8, 211, 108, 0.72); }
+  .shadow-demo.inset { box-shadow: inset 0 -2px 0 0 var(--green); }
+  .shadow-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .shadow-card code {
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+    color: var(--muted-ink);
+    display: block;
+    line-height: 1.5;
+  }
+
+  /* =========================================
+     Components Showcase
+     ========================================= */
+  .components-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .component-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    box-shadow: 4px 4px 0 0 var(--bg-ink);
+    padding: 24px;
+  }
+  .component-card h4 {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.96px;
+    text-transform: uppercase;
+    color: var(--muted-ink);
+    margin-bottom: 16px;
+  }
+  .component-row {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    align-items: center;
+  }
+  .form-input {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--bg-cream);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.16s var(--ease-out), box-shadow 0.16s var(--ease-out);
+  }
+  .form-input:focus {
+    outline: none;
+    border-color: var(--green);
+    box-shadow: 0 0 0 4px rgba(8, 211, 108, 0.13), 0 0 18px rgba(8, 211, 108, 0.72);
+  }
+  .form-input::placeholder { color: var(--muted-ink); }
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.24px;
+  }
+  .badge-green {
+    background: rgba(8, 211, 108, 0.08);
+    color: var(--green-dark);
+    border: 1px solid rgba(0, 169, 85, 0.28);
+  }
+  .badge-ink {
+    background: var(--bg-ink);
+    color: var(--bg-cream);
+    border: 1px solid var(--green);
+    box-shadow: 3px 3px 0 0 var(--green);
+  }
+
+  /* =========================================
+     Tool / Workflow
+     ========================================= */
+  .tool-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .tool-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    box-shadow: 4px 4px 0 0 var(--bg-ink);
+    padding: 28px;
+  }
+  .tool-card h3 {
+    font-size: 24px; font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .tool-card .desc {
+    font-size: 14px; color: var(--muted-ink);
+    margin-bottom: 18px;
+  }
+  .form-group { margin-bottom: 14px; }
+  .form-group label {
+    display: block;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.24px;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .result-box {
+    margin-top: 18px;
+    padding: 16px;
+    background: var(--bg-cream);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    box-shadow: inset 0 -2px 0 0 var(--green);
+  }
+  .result-box .label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.96px;
+    text-transform: uppercase;
+    color: var(--muted-ink);
+  }
+  .result-box .value {
+    font-size: 36px; font-weight: 700; line-height: 1.1;
+    margin-top: 4px;
+  }
+  .result-box .delta {
+    font-size: 12px; color: var(--green-dark);
+    font-weight: 700;
+    margin-top: 4px;
+  }
+  .steps { list-style: none; }
+  .steps li {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .steps li:last-child { border-bottom: 0; }
+  .step-num {
+    width: 32px; height: 32px;
+    background: var(--bg-ink);
+    color: var(--green);
+    border-radius: var(--radius-sm);
+    display: grid; place-items: center;
+    font-size: 13px; font-weight: 800;
+    box-shadow: 2px 2px 0 0 var(--green);
+  }
+  .step-content h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .step-content p { font-size: 13px; color: var(--muted-ink); line-height: 1.55; margin: 0; }
+
+  /* =========================================
+     DNA / Quote Section
+     ========================================= */
+  .dna-card {
+    background: var(--bg-ink);
+    color: var(--bg-cream);
+    border-radius: var(--radius-sm);
+    padding: 56px 56px;
+    box-shadow: 8px 8px 0 0 var(--green);
+    position: relative;
+    overflow: hidden;
+  }
+  .dna-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(8, 211, 108, 0.12), transparent 48%);
+    pointer-events: none;
+  }
+  .dna-card .quote {
+    position: relative;
+    font-size: 44px;
+    line-height: 1.2;
+    font-weight: 400;
+    letter-spacing: -0.8px;
+    max-width: 800px;
+  }
+  .dna-card .quote .highlight {
+    color: var(--green);
+    font-style: italic;
+    font-weight: 500;
+  }
+  .dna-card .quote-mark {
+    font-size: 80px;
+    line-height: 0.5;
+    color: var(--green);
+    font-family: Georgia, serif;
+    margin-bottom: 16px;
+  }
+  .dna-meta {
+    position: relative;
+    margin-top: 32px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .dna-meta .author {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.24px;
+  }
+  .dna-meta .role {
+    font-size: 12px; color: var(--muted-ink);
+  }
+  .dna-grid {
+    position: relative;
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .dna-item {
+    border: 1px solid rgba(255, 253, 247, 0.18);
+    border-radius: var(--radius-sm);
+    padding: 18px 20px;
+    background: rgba(255, 253, 247, 0.04);
+  }
+  .dna-item .dna-num {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.96px;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .dna-item h4 {
+    font-size: 16px; font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--bg-cream);
+  }
+  .dna-item p {
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(255, 253, 247, 0.7);
+  }
+
+  /* =========================================
+     Footer
+     ========================================= */
+  .footer {
+    background: var(--bg-ink);
+    color: var(--bg-cream);
+    padding: 48px 0 32px;
+    margin-top: 64px;
+    border-top: 4px solid var(--green);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+  .footer h5 {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.96px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 14px;
+  }
+  .footer ul { list-style: none; }
+  .footer ul li {
+    padding: 4px 0;
+    font-size: 14px;
+    color: rgba(255, 253, 247, 0.78);
+    transition: color 0.16s var(--ease-out);
+  }
+  .footer ul li:hover { color: var(--green); }
+  .footer-brand p {
+    font-size: 13px;
+    color: rgba(255, 253, 247, 0.6);
+    line-height: 1.6;
+    margin-top: 12px;
+  }
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 253, 247, 0.18);
+    padding-top: 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 12px;
+    color: rgba(255, 253, 247, 0.6);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* =========================================
+     Responsive
+     ========================================= */
+  @media (max-width: 1024px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .color-grid { grid-template-columns: repeat(3, 1fr); }
+    .shadow-grid { grid-template-columns: repeat(2, 1fr); }
+    .tool-grid, .main-card-inner, .hero-grid { grid-template-columns: 1fr; }
+    .main-card-left { border-right: 0; border-bottom: 1px dashed var(--line); }
+    .dna-card { padding: 36px 28px; }
+    .dna-card .quote { font-size: 32px; }
+    .dna-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .container { padding: 0 24px; }
+    .hero h1 { font-size: 48px; letter-spacing: -1.4px; }
+    .section h2 { font-size: 36px; }
+    .features-grid, .color-grid, .shadow-grid, .components-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .typo-hero { font-size: 48px; }
+    .typo-h2 { font-size: 36px; }
+    .typo-row { grid-template-columns: 60px 1fr; }
+    .typo-meta { display: none; }
+  }
+
+  /* =========================================
+     Reduce motion
+     ========================================= */
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Top Banner -->
+<div class="banner">
+  <div class="container banner-inner">
+    <span class="banner-dot"></span>
+    <span>设计系统文档 · v1.0 · 编辑式产品落地页风格</span>
+    <span>·</span>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <div class="logo">
+      <div class="logo-mark">P</div>
+      <div class="logo-text">
+        <span class="logo-name">Paper Neo-Brutalism</span>
+        <span class="logo-sub">纸质现代主义设计系统</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a class="nav-link" href="#overview">概览</a>
+      <a class="nav-link" href="#dna">设计 DNA</a>
+      <a class="nav-link" href="#tokens">设计 Token</a>
+      <a class="nav-link" href="#components">组件</a>
+      <a class="nav-link" href="#workflow">应用场景</a>
+    </div>
+    <div class="nav-cta">
+      <button class="icon-btn" aria-label="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero container" id="overview">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="hero-head">
+        <span class="pill"><span class="pill-dot"></span>Light Warm · Light Mode</span>
+        <span class="pill" style="background:transparent;color:var(--muted-ink);border-color:var(--line);">DM Sans / 几何人文</span>
+      </div>
+      <h1>
+        纸面之上，<br>
+        <span class="underline">墨印</span>与<span class="accent">荧光</span>的<br>
+        编辑式表达。
+      </h1>
+      <p class="hero-sub">
+        以暖米色纸纹为底、深墨文字为骨、亮绿为荧光标记。硬边阴影、2px 微圆角与工程网格纹理，构筑一种可触摸、可信赖的纸质产品手册气质。
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary">
+          打开风格规范
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+        <button class="btn btn-outline">下载设计 Token</button>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="ai-card">
+        <div class="ai-card-head">
+          <span class="ai-card-title">系统 AI 助手</span>
+          <span class="ai-card-tag">Beta</span>
+        </div>
+        <div class="ai-card-body">
+          一份从原站 <code style="font-family:'DM Mono',monospace;background:rgba(8,211,108,0.08);padding:1px 5px;border-radius:2px;color:var(--green-dark);">zu-xiao-shen.onrender.com</code> 提炼出的设计系统。覆盖色彩、字体、间距、阴影、组件与动效的全部 DNA。
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-row">
+          <span class="stat-key">风格 ID</span>
+          <span class="stat-val" style="font-family:'DM Mono',monospace;font-size:13px;">zuxiaoshen-paper-neo-brutalism</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-key">主色</span>
+          <span class="stat-val"><span style="display:inline-block;width:12px;height:12px;background:var(--green);border-radius:2px;vertical-align:middle;margin-right:6px;box-shadow:2px 2px 0 0 var(--bg-ink);"></span>#08D36C</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-key">圆角策略</span>
+          <span class="stat-val">2px · 微圆角</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-key">签名阴影</span>
+          <span class="stat-val">4 · 4 · 0 · #000</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main card -->
+  <div class="main-card">
+    <div class="main-card-inner">
+      <div class="main-card-left">
+        <span class="section-eyebrow" style="margin-bottom:14px;">风格定位 · Position</span>
+        <h2>可信赖的、手作感的、克制活力的编辑式落地页。</h2>
+        <p>拒绝冷色调的科技玻璃感，规避圆润 SaaS 通用模板，不做极简到空白。我们用纸、墨、绿三色与硬边阴影，搭建一套"高级产品手册"般的视觉语言。</p>
+        <ul class="check-list">
+          <li><span class="check">✓</span>暖米色纸纹底，深墨黑文字</li>
+          <li><span class="check">✓</span>亮绿色作为唯一高饱和强调色</li>
+          <li><span class="check">✓</span>2px 微圆角 + 4×4 硬偏移阴影</li>
+          <li><span class="check">✓</span>极淡工程网格线，理性又温暖</li>
+        </ul>
+        <button class="btn btn-primary">查看完整 Prompt →</button>
+      </div>
+      <div class="main-card-right">
+        <div class="panel-title">// 核心签名要素 · Signatures</div>
+        <div class="feature-item">
+          <span class="feature-num">01</span>
+          <div class="feature-content">
+            <h4>硬偏移阴影</h4>
+            <p>4px 4px 0 0 纯黑 / 亮绿，模拟贴纸与印刷裁切。</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-num">02</span>
+          <div class="feature-content">
+            <h4>92px 超大标题</h4>
+            <p>DM Sans 400 / -2.76px 字距，断行形成块状轮廓。</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-num">03</span>
+          <div class="feature-content">
+            <h4>绿色"荧光标记"</h4>
+            <p>焦点态发光、底部内阴影、hover 高亮一气呵成。</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-num">04</span>
+          <div class="feature-content">
+            <h4>工程网格纹理</h4>
+            <p>1px 渐变网格线叠加，可触的"草稿纸"质感。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Design DNA Quote Section -->
+<section class="section container" id="dna">
+  <div class="dna-card">
+    <div class="quote-mark">"</div>
+    <p class="quote">
+      这是一种 <span class="highlight">编辑式产品落地页</span> 风格 —— 纸质为底，墨色为骨，绿色为荧光标记。<br>
+      它不是冷峻的科技感，也不是圆润的 SaaS 通稿，而是一份 <span class="highlight">被精心排版的纸质产品手册</span>。
+    </p>
+    <div class="dna-meta">
+      <div>
+        <div class="author">租小审 · 设计系统</div>
+        <div class="role">来源：zu-xiao-shen.onrender.com</div>
+      </div>
+    </div>
+    <div class="dna-grid">
+      <div class="dna-item">
+        <div class="dna-num">DNA · 01</div>
+        <h4>纸质为底</h4>
+        <p>暖米色、奶油白、纸白层层叠加，拒绝冰冷纯白，追求可触摸的实体感。</p>
+      </div>
+      <div class="dna-item">
+        <div class="dna-num">DNA · 02</div>
+        <h4>墨印文字</h4>
+        <p>深墨黑 #151511 为主文字，高对比度的阅读权威感，印刷品般的庄重。</p>
+      </div>
+      <div class="dna-item">
+        <div class="dna-num">DNA · 03</div>
+        <h4>绿色点睛</h4>
+        <p>亮绿 #08D36C 仅用于核心行动点与高亮，像荧光笔划过纸面一样精准。</p>
+      </div>
+      <div class="dna-item">
+        <div class="dna-num">DNA · 04</div>
+        <h4>硬边阴影</h4>
+        <p>4px 偏移、无模糊，呈现印刷裁切与贴纸堆叠的立体感。</p>
+      </div>
+      <div class="dna-item">
+        <div class="dna-num">DNA · 05</div>
+        <h4>网格纹理</h4>
+        <p>极淡的 1px 渐变网格，暗示工程设计图纸与草稿纸的理性气质。</p>
+      </div>
+      <div class="dna-item">
+        <div class="dna-num">DNA · 06</div>
+        <h4>2px 微圆角</h4>
+        <p>几乎不使用大圆角，保持纸张裁切的利落感，与弥散阴影潮流形成反差。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Color Tokens -->
+<section class="section container" id="tokens">
+  <div class="section-head">
+    <div>
+      <div class="section-eyebrow">设计 Token · Color</div>
+      <h2>纸—墨—绿<br><span class="strong">三色构成品牌色谱。</span></h2>
+    </div>
+    <p class="section-desc">暖纸米色为基底，深墨黑用于文字与边框，亮绿作为唯一高饱和强调色。简洁、强烈、可识别。</p>
+  </div>
+  <div class="color-grid">
+    <div class="color-chip">
+      <div class="color-swatch" style="background:#f4f1e8;"></div>
+      <div class="color-info"><div class="name">Paper</div><div class="hex">#F4F1E8</div></div>
+    </div>
+    <div class="color-chip">
+      <div class="color-swatch" style="background:#fbfaf5;"></div>
+      <div class="color-info"><div class="name">Soft</div><div class="hex">#FBFAF5</div></div>
+    </div>
+    <div class="color-chip">
+      <div class="color-swatch" style="background:#fffdf7;"></div>
+      <div class="color-info"><div class="name">Cream</div><div class="hex">#FFFDF7</div></div>
+    </div>
+    <div class="color-chip">
+      <div class="color-swatch" style="background:#ded8ca;"></div>
+      <div class="color-info"><div class="name">Line</div><div class="hex">#DED8CA</div></div>
+    </div>
+    <div class="color-chip">
+      <div class="color-swatch green"></div>
+      <div class="color-info"><div class="name">Accent</div><div class="hex">#08D36C</div></div>
+    </div>
+    <div class="color-chip">
+      <div class="color-swatch" style="background:#00a955;"></div>
+      <div class="color-info"><div class="name">Accent Dark</div><div class="hex">#00A955</div></div>
+    </div>
+    <div class="color-chip">
+      <div class="color-swatch" style="background:#151511;"></div>
+      <div class="color-info"><div class="name">Ink</div><div class="hex">#151511</div></div>
+    </div>
+    <div class="color-chip">
+      <div class="color-swatch ink"></div>
+      <div class="color-info" style="color:var(--bg-cream);"><div class="name">Ink Black</div><div class="hex" style="color:rgba(255,253,247,0.6);">#050505</div></div>
+    </div>
+    <div class="color-chip">
+      <div class="color-swatch" style="background:#6f6b60;"></div>
+      <div class="color-info"><div class="name">Muted</div><div class="hex">#6F6B60</div></div>
+    </div>
+    <div class="color-chip">
+      <div class="color-swatch" style="background:#171713;"></div>
+      <div class="color-info"><div class="name">Line Strong</div><div class="hex">#171713</div></div>
+    </div>
+    <div class="color-chip">
+      <div class="color-swatch" style="background:#c43d3d;"></div>
+      <div class="color-info"><div class="name">Danger</div><div class="hex">#C43D3D</div></div>
+    </div>
+    <div class="color-chip">
+      <div class="color-swatch" style="background:#b87621;"></div>
+      <div class="color-info"><div class="name">Warning</div><div class="hex">#B87621</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Typography -->
+<section class="section container">
+  <div class="section-head">
+    <div>
+      <div class="section-eyebrow">字体系统 · Typography</div>
+      <h2>DM Sans 主导，<br><span class="strong">几何人文的编辑气质。</span></h2>
+    </div>
+    <p class="section-desc">展示字体 DM Sans 400 / 700 / 800，标题故意断行形成块状轮廓。中文环境回退 Microsoft YaHei / PingFang SC。</p>
+  </div>
+  <div class="typo-card">
+    <div class="typo-row">
+      <span class="typo-label">hero</span>
+      <div class="typo-sample typo-hero">纸张之上，<br>墨与荧光。</div>
+      <span class="typo-meta">92 / 400 / -2.76</span>
+    </div>
+    <div class="typo-row">
+      <span class="typo-label">h2</span>
+      <div class="typo-sample typo-h2">区块标题 · Section Title</div>
+      <span class="typo-meta">54 / 400 / -1.2</span>
+    </div>
+    <div class="typo-row">
+      <span class="typo-label">h3</span>
+      <div class="typo-sample typo-h3">卡片标题 · Card Title</div>
+      <span class="typo-meta">28 / 700 / 0</span>
+    </div>
+    <div class="typo-row">
+      <span class="typo-label">h4</span>
+      <div class="typo-sample typo-h4">副标题 · Subhead</div>
+      <span class="typo-meta">24 / 700 / 0</span>
+    </div>
+    <div class="typo-row">
+      <span class="typo-label">body</span>
+      <div class="typo-sample typo-body">正文段落 · 正文段落，16px 字号、400 字重，行高 1.55，用于默认段落与说明性文字。</div>
+      <span class="typo-meta">16 / 400 / 0</span>
+    </div>
+    <div class="typo-row">
+      <span class="typo-label">label</span>
+      <div class="typo-sample typo-label-text">标签 · 徽章 · 13PX · 700</div>
+      <span class="typo-meta">13 / 700 / 0.24</span>
+    </div>
+    <div class="typo-row">
+      <span class="typo-label">num</span>
+      <div class="typo-sample typo-num">01 / 02 / 03 / 04</div>
+      <span class="typo-meta">10 / 700 / 0.96</span>
+    </div>
+  </div>
+</section>
+
+<!-- Features Grid -->
+<section class="section container">
+  <div class="section-head">
+    <div>
+      <div class="section-eyebrow">核心入口 · Features</div>
+      <h2>四列编号卡片，<br><span class="strong">像产品目录一样可扫。</span></h2>
+    </div>
+    <p class="section-desc">每张卡片顶部标有序号（01–04）与图标，2px 微圆角、1px 细边框、硬边阴影，呈现可点击的"纸块"质感。</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="num"><span>01 · SIGNATURE</span></div>
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+      </div>
+      <h3>硬偏移阴影</h3>
+      <p>4×4 无模糊阴影，纯黑或亮绿，模拟贴纸堆叠与印刷裁切的立体感。</p>
+    </div>
+    <div class="feature-card">
+      <div class="num"><span>02 · TYPE</span></div>
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+      </div>
+      <h3>92px 大字标题</h3>
+      <p>DM Sans 400 / -2.76px 字距，断行排版形成块状轮廓，文字本身就是主体。</p>
+    </div>
+    <div class="feature-card">
+      <div class="num"><span>03 · ACCENT</span></div>
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11-6 6v3h9l3-3M22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2c2 0 3.8.5 5.3 1.5"/><path d="m17 3 3 3-9 9-3-3z"/></svg>
+      </div>
+      <h3>绿色荧光标记</h3>
+      <p>亮绿 #08D36C 仅用于核心行动点、标签、焦点态，像荧光笔划过纸面。</p>
+    </div>
+    <div class="feature-card">
+      <div class="num"><span>04 · TEXTURE</span></div>
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg>
+      </div>
+      <h3>工程网格纹理</h3>
+      <p>1px 渐变网格叠加，透明度 0.02–0.04，暗示草稿纸与设计图纸的理性气质。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Shadows -->
+<section class="section container">
+  <div class="section-head">
+    <div>
+      <div class="section-eyebrow">阴影系统 · Shadow</div>
+      <h2>硬边阴影，<br><span class="strong">让"纸块"浮出纸面。</span></h2>
+    </div>
+    <p class="section-desc">无模糊、固定 4px 偏移，纯黑或亮绿托起组件。悬停时阴影可略微放大或改变颜色，形成"被拿起"的纸块感。</p>
+  </div>
+  <div class="shadow-grid">
+    <div class="shadow-card">
+      <div class="shadow-demo hard"></div>
+      <h4>shadow-hard</h4>
+      <code>4px 4px 0 0 #050505<br>默认卡片 / 主按钮</code>
+    </div>
+    <div class="shadow-card">
+      <div class="shadow-demo accent"></div>
+      <h4>shadow-accent</h4>
+      <code>4px 4px 0 0 #08d36c<br>绿色行动 / 高亮卡片</code>
+    </div>
+    <div class="shadow-card">
+      <div class="shadow-demo accent-soft"></div>
+      <h4>shadow-accent-soft</h4>
+      <code>4px 4px 0 0 rgba(8,211,108,.18)<br>次级绿色阴影</code>
+    </div>
+    <div class="shadow-card">
+      <div class="shadow-demo glow"></div>
+      <h4>shadow-glow</h4>
+      <code>0 0 0 4px rgba(8,211,108,.13)<br>0 0 18px rgba(8,211,108,.72)<br>焦点 / 发光</code>
+    </div>
+    <div class="shadow-card">
+      <div class="shadow-demo inset"></div>
+      <h4>shadow-inset-green</h4>
+      <code>inset 0 -2px 0 0 #08d36c<br>底部绿色描边 / 下划线</code>
+    </div>
+    <div class="shadow-card">
+      <div class="shadow-demo" style="background:rgba(255,253,247,.84);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 10px 30px rgba(5,5,5,.16);"></div>
+      <h4>shadow-glass</h4>
+      <code>inset + 0 10px 30px<br>毛玻璃导航栏</code>
+    </div>
+  </div>
+</section>
+
+<!-- Components -->
+<section class="section container" id="components">
+  <div class="section-head">
+    <div>
+      <div class="section-eyebrow">组件样式 · Components</div>
+      <h2>按钮、卡片、输入框、徽章<br><span class="strong">统一的纸块语言。</span></h2>
+    </div>
+    <p class="section-desc">圆角 2px、边框 1px、阴影 4×4 硬偏移，所有组件共享同一种纸张裁切的利落感。</p>
+  </div>
+  <div class="components-grid">
+    <div class="component-card">
+      <h4>// Buttons</h4>
+      <div class="component-row">
+        <button class="btn btn-primary">主按钮 · Primary</button>
+        <button class="btn btn-outline">描边按钮</button>
+        <button class="btn-ghost">胶囊标签 · Pill</button>
+      </div>
+    </div>
+    <div class="component-card">
+      <h4>// Badges</h4>
+      <div class="component-row">
+        <span class="badge badge-green"><span class="pill-dot"></span>绿色徽章</span>
+        <span class="badge badge-ink">墨黑徽章</span>
+        <span class="badge" style="background:rgba(8,211,108,0.08);color:var(--green-dark);border:1px solid rgba(0,169,85,0.28);">BETA</span>
+        <span class="badge" style="background:var(--bg-ink);color:var(--bg-cream);">v1.0</span>
+      </div>
+    </div>
+    <div class="component-card">
+      <h4>// Input</h4>
+      <input class="form-input" placeholder="输入框 · 聚焦时绿色发光环" />
+    </div>
+    <div class="component-card">
+      <h4>// Card Sample</h4>
+      <div style="background:var(--bg-cream);border:1px solid var(--line-strong);border-radius:2px;box-shadow:4px 4px 0 0 var(--green);padding:18px;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.96px;color:var(--muted-ink);margin-bottom:8px;">SAMPLE · 01</div>
+        <div style="font-size:16px;font-weight:700;margin-bottom:4px;">强调卡片</div>
+        <div style="font-size:13px;color:var(--muted-ink);">使用绿色硬阴影托起的高亮卡片。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tool / Workflow -->
+<section class="section container" id="workflow">
+  <div class="section-head">
+    <div>
+      <div class="section-eyebrow">应用场景 · Workflow</div>
+      <h2>交互式工具 +<br><span class="strong">编号步骤的延展应用。</span></h2>
+    </div>
+    <p class="section-desc">桌面端双栏（工具左 + 步骤右），移动端折叠为单列。卡片、输入框、按钮均沿用核心组件样式。</p>
+  </div>
+  <div class="tool-grid">
+    <div class="tool-card">
+      <h3>押金计算器</h3>
+      <p class="desc">输入租金与租期，快速估算押金金额。</p>
+      <div class="form-group">
+        <label>月租金（元）</label>
+        <input class="form-input" value="5000" />
+      </div>
+      <div class="form-group">
+        <label>付款方式</label>
+        <select class="form-input">
+          <option>押一付三</option>
+          <option>押二付一</option>
+          <option>押一付一</option>
+        </select>
+      </div>
+      <div class="result-box">
+        <div class="label">预估押金</div>
+        <div class="value">¥ 15,000.00</div>
+        <div class="delta">↑ 比上月 +2.4%</div>
+      </div>
+    </div>
+    <div class="tool-card">
+      <h3>使用流程</h3>
+      <p class="desc">从登记到签约，标准化四步完成。</p>
+      <ol class="steps">
+        <li>
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <h4>登记房源信息</h4>
+            <p>填写地址、户型、面积等基本信息。</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <h4>上传权属材料</h4>
+            <p>房产证、身份证、租赁授权等扫描件。</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <h4>AI 智能核验</h4>
+            <p>系统自动比对真伪并生成风险报告。</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <h4>签署电子合同</h4>
+            <p>双方在线签署，区块链存证可追溯。</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-mark">P</div>
+          <div class="logo-text">
+            <span class="logo-name" style="color:var(--bg-cream);">Paper Neo-Brutalism</span>
+            <span class="logo-sub" style="color:rgba(255,253,247,0.6);">纸质现代主义设计系统</span>
+          </div>
+        </div>
+        <p>从租小审 zu-xiao-shen.onrender.com 提炼的编辑式产品落地页风格。纸为底，墨为骨，绿为荧光标记。</p>
+      </div>
+      <div>
+        <h5>设计 Token</h5>
+        <ul>
+          <li>Color</li>
+          <li>Typography</li>
+          <li>Spacing</li>
+          <li>Shadow</li>
+        </ul>
+      </div>
+      <div>
+        <h5>组件</h5>
+        <ul>
+          <li>Button</li>
+          <li>Card</li>
+          <li>Input</li>
+          <li>Badge</li>
+        </ul>
+      </div>
+      <div>
+        <h5>资源</h5>
+        <ul>
+          <li>完整 Prompt</li>
+          <li>CSS 变量</li>
+          <li>Figma 库</li>
+          <li>更新日志</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Paper Neo-Brutalism Design System · 风格 ID: zuxiaoshen-paper-neo-brutalism</span>
+      <span style="color:var(--green);">● 当前版本 v1.0 · Light Warm Mode</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

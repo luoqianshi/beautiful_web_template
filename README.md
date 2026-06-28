@@ -248,6 +248,16 @@
 
 > 大地灵感的调色板，含苔藓绿、赤陶与沙色调。有机水滴形、颗粒质感叠加、不对称圆角与柔和阴影。拥抱侘寂哲学，透出温暖与自然的不完美。
 
+### [Paper Neo-Brutalism](./templates/Paper-Neo-Brutalism/)
+
+<p>
+  <img src="./assets/screenshots/Paper-Neo-Brutalism-01.png" width="32.5%" alt="Paper Neo-Brutalism — slide 01" />
+  <img src="./assets/screenshots/Paper-Neo-Brutalism-02.png" width="32.5%" alt="Paper Neo-Brutalism — slide 02" />
+  <img src="./assets/screenshots/Paper-Neo-Brutalism-03.png" width="32.5%" alt="Paper Neo-Brutalism — slide 03" />
+</p>
+
+> 以暖米色纸纹为底、深墨文字为主、亮绿色为点缀的编辑式产品落地页风格，带有新粗野主义的硬边阴影与卡片拼贴感。
+
 ### [Playful Geometric](./templates/Playful-Geometric/)
 
 <p>

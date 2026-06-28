@@ -248,6 +248,16 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 
 > Earth-inspired palette with moss greens, terracotta, and sand tones. Features organic blob shapes, grain texture overlays, asymmetric rounded corners, and soft shadows. Embraces wabi-sabi philosophy with warmth and natural imperfection.
 
+### [Paper Neo-Brutalism](./templates/Paper-Neo-Brutalism/)
+
+<p>
+  <img src="./assets/screenshots/Paper-Neo-Brutalism-01.png" width="32.5%" alt="Paper Neo-Brutalism — slide 01" />
+  <img src="./assets/screenshots/Paper-Neo-Brutalism-02.png" width="32.5%" alt="Paper Neo-Brutalism — slide 02" />
+  <img src="./assets/screenshots/Paper-Neo-Brutalism-03.png" width="32.5%" alt="Paper Neo-Brutalism — slide 03" />
+</p>
+
+> An editorial product-landing style built on warm beige paper textures, deep ink typography, and a single neon-green accent — paired with neo-brutalist hard-edge shadows and a collage-like card layout.
+
 ### [Playful Geometric](./templates/Playful-Geometric/)
 
 <p>
