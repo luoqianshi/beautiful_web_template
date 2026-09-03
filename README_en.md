@@ -208,6 +208,16 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 
 > A stark, editorial design system built on pure black and white. No accent colors—just dramatic contrast, oversized serif typography, and precise geometric layouts. Evokes high-end fashion editorials and architectural portfolios. Austere, sophisticated, unapologetically bold.
 
+### [Moonshot](./templates/Moonshot/)
+
+<p>
+  <img src="./assets/screenshots/Moonshot-01.png" width="32.5%" alt="Moonshot — slide 01" />
+  <img src="./assets/screenshots/Moonshot-02.png" width="32.5%" alt="Moonshot — slide 02" />
+  <img src="./assets/screenshots/Moonshot-03.png" width="32.5%" alt="Moonshot — slide 03" />
+</p>
+
+> Lunar-eclipse minimalism reverse-engineered from the [Moonshot AI website](https://www.moonshot.cn/). A single rim-lit eclipse floating in a pure black void, monochrome grayscale with one blue accent dot, hairline-inset pill buttons and dark glass cards—with a chat input as the hero and a perspective wireframe grid finale.
+
 ### [Neo Brutalism](./templates/Neo-Brutalism/)
 
 <p>

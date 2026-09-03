@@ -208,6 +208,16 @@
 
 > 建立在纯黑白之上的冷峻编辑设计系统。无点缀色——唯有戏剧性对比、超大衬线字体与精准的几何布局。唤起高端时尚编辑与建筑作品集的质感。克制、精致、不妥协的大胆。
 
+### [Moonshot](./templates/Moonshot/)
+
+<p>
+  <img src="./assets/screenshots/Moonshot-01.png" width="32.5%" alt="Moonshot — slide 01" />
+  <img src="./assets/screenshots/Moonshot-02.png" width="32.5%" alt="Moonshot — slide 02" />
+  <img src="./assets/screenshots/Moonshot-03.png" width="32.5%" alt="Moonshot — slide 03" />
+</p>
+
+> 月食式暗面极简美学，逆向提炼自 [Moonshot AI 官网](https://www.moonshot.cn/)。纯黑虚空中的一轮环光、单色灰阶 + 单点蓝点缀、发丝高光胶囊按钮与暗玻璃浮卡，对话输入框即 Hero，透视网格地面收尾。
+
 ### [Neo Brutalism](./templates/Neo-Brutalism/)
 
 <p>
