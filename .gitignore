@@ -1,1 +1,7 @@
 raw/
+
+# 存放私人信息
+.lqs/
+
+# 存放trae的规划文档
+.trae/documents/
