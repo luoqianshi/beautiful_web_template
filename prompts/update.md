@@ -11,11 +11,11 @@
 ## 前置准备
 
 1. **确认新增模板**：扫描 `templates/` 目录，对比 `README.md` 中已收录的条目，找出尚未被收录的新增文件夹。记录每个新增模板的：
-   - 文件夹名（风格 ID，连字符命名，如 `TRAE-Dark-Tech`）
+   - 文件夹名（风格 ID，连字符命名，如 `Modern-Dark`）
    - 内部 `.html` 与 `.md` 文件的实际文件名
-2. **校验命名规范**：本项目的约定是文件夹名 = HTML 文件名 = MD 文件名（均用连字符），例如 `templates/Glassmorphism/Glassmorphism.html`。若新增文件使用了下划线或其它分隔符（如 `TRAE_Dark_Tech.html`），**必须先重命名**使其与文件夹名完全一致：
-   - `TRAE_Dark_Tech.html` → `TRAE-Dark-Tech.html`
-   - `TRAE_Dark_Tech.md` → `TRAE-Dark-Tech.md`
+2. **校验命名规范**：本项目的约定是文件夹名 = HTML 文件名 = MD 文件名（均用连字符），例如 `templates/Glassmorphism/Glassmorphism.html`。若新增文件使用了下划线或其它分隔符（如 `Modern_Dark.html`），**必须先重命名**使其与文件夹名完全一致：
+   - `Modern_Dark.html` → `Modern-Dark.html`
+   - `Modern_Dark.md` → `Modern-Dark.md`
    - 同步更新 `.md` 文件内部引用自身文件名的位置（若有）。
 3. **读取模板元数据**：打开新增模板的 `.md` 文件，从「基本信息」表格中提取以下字段，后续步骤会用到：
 
@@ -74,7 +74,7 @@
 ### 操作
 
 1. **定位插入位置**：README 的画廊按文件夹名字母升序排列。找到新增模板应插入的位置（前一个 `###` 标题与后一个 `###` 标题之间）。
-2. **插入条目**，格式严格如下（以 `TRAE-Dark-Tech` 为例）：
+2. **插入条目**，格式严格如下（以 `Modern-Dark` 为例）：
 
 ```markdown
 ### [显示名称](./templates/文件夹名/)
@@ -141,8 +141,8 @@
 
 | 字段 | 取值来源 |
 |------|----------|
-| `name` | 文件夹名（连字符，如 `TRAE-Dark-Tech`） |
-| `display` | `.md` 文件「显示名称」字段（如 `TRAE Dark Tech`） |
+| `name` | 文件夹名（连字符，如 `Modern-Dark`） |
+| `display` | `.md` 文件「显示名称」字段（如 `Modern Dark`） |
 | `description` | `.md` 文件「描述」字段（中文，一句话） |
 | `tags` | `[".md 模式字段(Dark/Light)", ".md 字体类型字段"]` |
 | `htmlPath` | `./templates/{文件夹名}/{文件夹名}.html` |

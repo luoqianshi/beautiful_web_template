@@ -208,16 +208,6 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 
 > A stark, editorial design system built on pure black and white. No accent colors—just dramatic contrast, oversized serif typography, and precise geometric layouts. Evokes high-end fashion editorials and architectural portfolios. Austere, sophisticated, unapologetically bold.
 
-### [Moonshot](./templates/Moonshot/)
-
-<p>
-  <img src="./assets/screenshots/Moonshot-01.png" width="32.5%" alt="Moonshot — slide 01" />
-  <img src="./assets/screenshots/Moonshot-02.png" width="32.5%" alt="Moonshot — slide 02" />
-  <img src="./assets/screenshots/Moonshot-03.png" width="32.5%" alt="Moonshot — slide 03" />
-</p>
-
-> Lunar-eclipse minimalism reverse-engineered from the [Moonshot AI website](https://www.moonshot.cn/). A single rim-lit eclipse floating in a pure black void, monochrome grayscale with one blue accent dot, hairline-inset pill buttons and dark glass cards—with a chat input as the hero and a perspective wireframe grid finale.
-
 ### [Neo Brutalism](./templates/Neo-Brutalism/)
 
 <p>
@@ -258,16 +248,6 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 
 > Earth-inspired palette with moss greens, terracotta, and sand tones. Features organic blob shapes, grain texture overlays, asymmetric rounded corners, and soft shadows. Embraces wabi-sabi philosophy with warmth and natural imperfection.
 
-### [Paper Neo-Brutalism](./templates/Paper-Neo-Brutalism/)
-
-<p>
-  <img src="./assets/screenshots/Paper-Neo-Brutalism-01.png" width="32.5%" alt="Paper Neo-Brutalism — slide 01" />
-  <img src="./assets/screenshots/Paper-Neo-Brutalism-02.png" width="32.5%" alt="Paper Neo-Brutalism — slide 02" />
-  <img src="./assets/screenshots/Paper-Neo-Brutalism-03.png" width="32.5%" alt="Paper Neo-Brutalism — slide 03" />
-</p>
-
-> An editorial product-landing style built on warm beige paper textures, deep ink typography, and a single neon-green accent — paired with neo-brutalist hard-edge shadows and a collage-like card layout.
-
 ### [Playful Geometric](./templates/Playful-Geometric/)
 
 <p>
@@ -287,16 +267,6 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 </p>
 
 > An editorial-inspired minimalist design system centered on elegant serif typography. Warm ivory backgrounds with subtle paper texture, refined spacing, rule lines, and classical proportions create a timeless, literary aesthetic. Enhanced depth through layered gradients and multi-toned shadows. The design whispers sophistication through restraint and typographic excellence.
-
-### [Retro](./templates/Retro/)
-
-<p>
-  <img src="./assets/screenshots/Retro-01.png" width="32.5%" alt="Retro — slide 01" />
-  <img src="./assets/screenshots/Retro-02.png" width="32.5%" alt="Retro — slide 02" />
-  <img src="./assets/screenshots/Retro-03.png" width="32.5%" alt="Retro — slide 03" />
-</p>
-
-> Ugly-cool 90s nostalgia aesthetic with Windows 95 beveled UI, system fonts, bright primary colors, marquee scrolling text, and maximum visual chaos.
 
 ### [SaaS](./templates/SaaS/)
 
@@ -327,16 +297,6 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 </p>
 
 > A rigorous implementation of the International Typographic Style (1950s). Characterized by objective typography, sans-serif fonts (Inter), mathematical grids with subtle texture patterns, and a strict black/white/red palette. Prioritizes readability, precision, asymmetrical organization, and visual depth through layered patterns.
-
-### [TRAE Dark Tech](./templates/TRAE-Dark-Tech/)
-
-<p>
-  <img src="./assets/screenshots/TRAE-Dark-Tech-01.png" width="32.5%" alt="TRAE Dark Tech — slide 01" />
-  <img src="./assets/screenshots/TRAE-Dark-Tech-02.png" width="32.5%" alt="TRAE Dark Tech — slide 02" />
-  <img src="./assets/screenshots/TRAE-Dark-Tech-03.png" width="32.5%" alt="TRAE Dark Tech — slide 03" />
-</p>
-
-> A dark-mode tech aesthetic built on a pure black canvas with neon-green accents. A flowing particle-network background, high-contrast hierarchy, and refined pill-shaped UI components deliver a professional, forward-looking, energetic modern developer community experience.
 
 ### [Terminal](./templates/Terminal/)
 

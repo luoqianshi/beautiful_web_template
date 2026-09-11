@@ -208,16 +208,6 @@
 
 > 建立在纯黑白之上的冷峻编辑设计系统。无点缀色——唯有戏剧性对比、超大衬线字体与精准的几何布局。唤起高端时尚编辑与建筑作品集的质感。克制、精致、不妥协的大胆。
 
-### [Moonshot](./templates/Moonshot/)
-
-<p>
-  <img src="./assets/screenshots/Moonshot-01.png" width="32.5%" alt="Moonshot — slide 01" />
-  <img src="./assets/screenshots/Moonshot-02.png" width="32.5%" alt="Moonshot — slide 02" />
-  <img src="./assets/screenshots/Moonshot-03.png" width="32.5%" alt="Moonshot — slide 03" />
-</p>
-
-> 月食式暗面极简美学，逆向提炼自 [Moonshot AI 官网](https://www.moonshot.cn/)。纯黑虚空中的一轮环光、单色灰阶 + 单点蓝点缀、发丝高光胶囊按钮与暗玻璃浮卡，对话输入框即 Hero，透视网格地面收尾。
-
 ### [Neo Brutalism](./templates/Neo-Brutalism/)
 
 <p>
@@ -258,16 +248,6 @@
 
 > 大地灵感的调色板，含苔藓绿、赤陶与沙色调。有机水滴形、颗粒质感叠加、不对称圆角与柔和阴影。拥抱侘寂哲学，透出温暖与自然的不完美。
 
-### [Paper Neo-Brutalism](./templates/Paper-Neo-Brutalism/)
-
-<p>
-  <img src="./assets/screenshots/Paper-Neo-Brutalism-01.png" width="32.5%" alt="Paper Neo-Brutalism — slide 01" />
-  <img src="./assets/screenshots/Paper-Neo-Brutalism-02.png" width="32.5%" alt="Paper Neo-Brutalism — slide 02" />
-  <img src="./assets/screenshots/Paper-Neo-Brutalism-03.png" width="32.5%" alt="Paper Neo-Brutalism — slide 03" />
-</p>
-
-> 以暖米色纸纹为底、深墨文字为主、亮绿色为点缀的编辑式产品落地页风格，带有新粗野主义的硬边阴影与卡片拼贴感。
-
 ### [Playful Geometric](./templates/Playful-Geometric/)
 
 <p>
@@ -287,16 +267,6 @@
 </p>
 
 > 以优雅衬线字体为中心的编辑风极简设计系统。温暖象牙白背景配细腻纸张质感、考究间距、分隔线与古典比例，营造永恒而文学化的美学。通过分层渐变与多色调阴影增强深度。设计以克制与排印之美低语出精致。
-
-### [Retro](./templates/Retro/)
-
-<p>
-  <img src="./assets/screenshots/Retro-01.png" width="32.5%" alt="Retro — slide 01" />
-  <img src="./assets/screenshots/Retro-02.png" width="32.5%" alt="Retro — slide 02" />
-  <img src="./assets/screenshots/Retro-03.png" width="32.5%" alt="Retro — slide 03" />
-</p>
-
-> 丑酷的 90 年代怀旧美学，Windows 95 斜面 UI、系统字体、明亮三原色、跑马灯滚动文字与最大化的视觉混乱。
 
 ### [SaaS](./templates/SaaS/)
 
@@ -327,16 +297,6 @@
 </p>
 
 > 对国际字体排印风格（1950 年代）的严谨实现。以客观字体、无衬线字体（Inter）、带细腻纹理图案的数学网格，以及严格的黑/白/红调色板为特征。优先考虑可读性、精准、非对称组织，以及通过分层图案营造的视觉深度。
-
-### [TRAE Dark Tech](./templates/TRAE-Dark-Tech/)
-
-<p>
-  <img src="./assets/screenshots/TRAE-Dark-Tech-01.png" width="32.5%" alt="TRAE Dark Tech — slide 01" />
-  <img src="./assets/screenshots/TRAE-Dark-Tech-02.png" width="32.5%" alt="TRAE Dark Tech — slide 02" />
-  <img src="./assets/screenshots/TRAE-Dark-Tech-03.png" width="32.5%" alt="TRAE Dark Tech — slide 03" />
-</p>
-
-> 以纯黑为画布、荧光绿为画笔的深色科技风格。流动的粒子网络背景、高对比度的视觉层级与精致的胶囊形 UI 组件，打造专业、前沿、充满活力的现代开发者社区体验。
 
 ### [Terminal](./templates/Terminal/)
 
