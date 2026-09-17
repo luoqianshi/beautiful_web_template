@@ -69,13 +69,19 @@ def run(source: str, output_dir: str, is_url: bool) -> dict:
         page = context.new_page()
 
         # ---- Navigate -------------------------------------------------------
+        # Heavy SPAs (e.g. cursor.com) keep background requests alive so
+        # "networkidle" may never fire during goto. Navigate with
+        # "domcontentloaded" and give networkidle a bounded grace period.
         if is_url:
-            page.goto(source, wait_until="networkidle", timeout=30000)
+            page.goto(source, wait_until="domcontentloaded", timeout=90000)
         else:
             file_path = Path(source).resolve()
-            page.goto(f"file:///{file_path.as_posix()}", wait_until="networkidle", timeout=30000)
+            page.goto(f"file:///{file_path.as_posix()}", wait_until="domcontentloaded", timeout=90000)
 
-        page.wait_for_load_state("networkidle")
+        try:
+            page.wait_for_load_state("networkidle", timeout=20000)
+        except Exception:
+            pass
         try:
             page.evaluate("document.fonts.ready")
         except Exception:
