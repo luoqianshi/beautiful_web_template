@@ -98,6 +98,16 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 
 > High contrast neon on black, glitch animations, terminal/monospace fonts, tech-oriented decorations. A dystopian digital aesthetic inspired by 80s sci-fi and hacker culture.
 
+### [Cursor Light Warmth](./templates/Cursor-Light-Warmth/)
+
+<p>
+  <img src="./assets/screenshots/Cursor-Light-Warmth-01.png" width="32.5%" alt="Cursor Light Warmth — slide 01" />
+  <img src="./assets/screenshots/Cursor-Light-Warmth-02.png" width="32.5%" alt="Cursor Light Warmth — slide 02" />
+  <img src="./assets/screenshots/Cursor-Light-Warmth-03.png" width="32.5%" alt="Cursor Light Warmth — slide 03" />
+</p>
+
+> Extracted from cursor.com's light theme. A three-layer warm-paper palette (#F7F7F4 → #F2F1ED → #E6E5E0) with warm-ink (#26251E) pill buttons; classical romantic oil paintings serve as "gallery stages" holding 4px-radius white product window mocks. Zero-offset diffuse shadows, weight-400 negative-tracked headlines with the two-tone title technique, and vermilion (#C8451D) reserved exclusively for text links. The human warmth of a serious tool.
+
 ### [Enterprise](./templates/Enterprise/)
 
 <p>

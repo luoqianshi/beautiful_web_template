@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cursor-Light-Warmth — 暖纸浅色组件库</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     Cursor-Light-Warmth — 设计 Token
+     暖纸白三层底色 × 暖墨黑 × 单点朱砂橙
+     ============================================================ */
+  :root{
+    /* 三层纸底色 */
+    --bg:#F7F7F4;            /* 主背景 */
+    --surface:#F2F1ED;       /* 卡片 / 页脚底板 */
+    --surface-deep:#E6E5E0;  /* 更深的凹陷面 */
+    /* 墨色体系(暖调黑,禁用纯黑) */
+    --ink:#26251E;
+    --ink-invert:#F7F7F4;
+    --ink-muted:rgba(38,37,30,0.55);
+    --ink-faint:rgba(38,37,30,0.38);
+    /* 唯一强调色:朱砂橙,仅用于文字链接 */
+    --accent:#C8451D;
+    /* 边框 */
+    --border:rgba(38,37,30,0.2);
+    --border-hairline:rgba(38,37,30,0.08);
+    /* 表面 */
+    --card:#FFFFFF;
+    /* 语义色(低饱和) */
+    --success:#3F7A46;
+    --error:#B0413E;
+    --warning:#B98A2E;
+    /* 时间线四色 */
+    --tl-thinking:#DFA88F;
+    --tl-grep:#9FC9A2;
+    --tl-read:#9FBBE0;
+    --tl-edit:#C0A8DD;
+    /* 圆角:全或无 —— 交互件胶囊,展示面 4px */
+    --r-pill:9999px;
+    --r-face:4px;
+    /* 零偏移弥散阴影:"离开纸面一毫米" */
+    --shadow-float:0 0 16px rgba(0,0,0,0.02),0 0 8px rgba(0,0,0,0.008);
+    --shadow-pop:0 0 24px rgba(0,0,0,0.05),0 2px 6px rgba(0,0,0,0.04);
+    /* 字体 */
+    --font-ui:'Instrument Sans','Noto Sans SC',system-ui,sans-serif;
+    --font-serif:'EB Garamond',Georgia,'Noto Serif SC',serif;
+    --font-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    /* 动效 */
+    --ease-out:cubic-bezier(0.25,1,0.5,1);
+    --dur-fast:0.14s;
+    --dur-slow:0.5s;
+    /* 布局 */
+    --container:1300px;
+    --header-h:52px;
+  }
+  /* 深色翻转:只换纸底三层与墨色,胶囊体系不变 */
+  html[data-theme="dark"]{
+    --bg:#1A1915;
+    --surface:#211F1A;
+    --surface-deep:#2A2822;
+    --ink:#EFEDE6;
+    --ink-invert:#1A1915;
+    --ink-muted:rgba(239,237,230,0.55);
+    --ink-faint:rgba(239,237,230,0.38);
+    --border:rgba(239,237,230,0.22);
+    --border-hairline:rgba(239,237,230,0.08);
+    --card:#26241E;
+    --shadow-float:0 0 16px rgba(0,0,0,0.25),0 0 8px rgba(0,0,0,0.15);
+    --shadow-pop:0 0 24px rgba(0,0,0,0.4),0 2px 6px rgba(0,0,0,0.3);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-ui);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    font-size:16px;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    transition:background var(--dur-slow) var(--ease-out),color var(--dur-slow) var(--ease-out);
+  }
+  a{text-decoration:none;color:inherit}
+  .container{max-width:var(--container);margin:0 auto;padding:0 20px}
+  section{padding:67.2px 20px}
+  section:first-of-type{padding-top:calc(var(--header-h) + 112px)}
+
+  /* ---------- 入场动画(微不可察) ---------- */
+  .reveal{opacity:0;transform:translateY(2px);transition:opacity var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out)}
+  .reveal.in{opacity:1;transform:translateY(0)}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    *{animation:none!important}
+  }
+
+  /* ---------- 栏头:编辑式 ---------- */
+  .kicker{
+    font-family:var(--font-mono);
+    font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--ink-faint);margin-bottom:12px;
+  }
+  h2.sec-title{font-size:26px;font-weight:400;letter-spacing:-0.325px;line-height:1.25;margin-bottom:8px}
+  h2.sec-title .dim{color:var(--ink-muted)}
+  .sec-desc{color:var(--ink-muted);font-size:14px;max-width:658px;margin-bottom:40px}
+
+  /* ============================================================
+     Header —— 固定顶栏,三栏网格,无阴影
+     ============================================================ */
+  .site-header{
+    position:fixed;top:0;left:0;z-index:50;width:100%;
+    height:var(--header-h);
+    background:var(--bg);
+    transition:background var(--dur-slow) var(--ease-out);
+  }
+  .site-header .container{
+    max-width:var(--container);height:100%;
+    display:grid;grid-template-columns:auto 1fr auto;align-items:center;
+  }
+  .logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;letter-spacing:0.02em}
+  .logo svg{width:20px;height:20px}
+  .main-nav{display:flex;justify-content:center;gap:28px}
+  .main-nav a{font-size:14px;color:var(--ink);transition:color var(--dur-fast) var(--ease-out)}
+  .main-nav a:hover{color:var(--ink-muted)}
+  .header-actions{display:flex;align-items:center;gap:12px}
+  .link-plain{font-size:14px;color:var(--ink)}
+  .link-plain:hover{color:var(--ink-muted)}
+
+  /* ============================================================
+     按钮体系 —— 胶囊全圆角,高 36-40px
+     ============================================================ */
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    height:38px;padding:0 16px;border-radius:var(--r-pill);
+    font-family:var(--font-ui);font-size:14px;font-weight:500;
+    border:1px solid transparent;cursor:pointer;
+    transition:background var(--dur-fast) var(--ease-out),transform var(--dur-fast) var(--ease-out),border-color var(--dur-fast) var(--ease-out);
+    white-space:nowrap;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .btn-primary{background:var(--ink);color:var(--ink-invert)}
+  .btn-primary:hover{background:color-mix(in srgb,var(--ink) 85%,var(--bg))}
+  .btn-secondary{background:var(--surface-deep);color:var(--ink)}
+  .btn-secondary:hover{background:color-mix(in srgb,var(--surface-deep) 80%,var(--ink) 6%)}
+  .btn-outline{background:transparent;color:var(--ink);border-color:var(--border)}
+  .btn-outline:hover{background:rgba(38,37,30,0.04)}
+  html[data-theme="dark"] .btn-outline:hover{background:rgba(239,237,230,0.06)}
+  .btn-sm{height:30px;font-size:13px;padding:0 12px}
+  .btn[disabled]{opacity:0.4;cursor:not-allowed;pointer-events:none}
+  .btn .arrow{transition:transform var(--dur-fast) var(--ease-out)}
+  .btn:hover .arrow{transform:translateX(2px)}
+  .btn:hover .arrow-down{transform:translateY(2px)}
+
+  /* 文字链接:朱砂橙单点 */
+  .link-accent{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:15px;color:var(--accent);
+    padding:8px 0; /* 触控目标扩展 */
+  }
+  .link-accent .arrow{transition:transform var(--dur-fast) var(--ease-out)}
+  .link-accent:hover .arrow{transform:translateX(3px)}
+  .link-accent:hover{text-decoration:underline;text-underline-offset:4px}
+
+  /* ============================================================
+     Hero —— 左文右"画廊舞台"
+     ============================================================ */
+  .hero{padding:112px 20px 67.2px}
+  .hero .container{display:block}
+  .hero h1{
+    font-size:clamp(28px,4vw,40px);font-weight:400;
+    letter-spacing:-0.72px;line-height:1.2;
+    max-width:658px;margin-bottom:28px;
+  }
+  .hero h1 .dim{color:var(--ink-muted)}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:56px}
+
+  /* 媒体舞台:油画底 + 悬浮窗口模型 */
+  .stage{
+    position:relative;border-radius:var(--r-face);overflow:hidden;
+    background-size:cover;background-position:center;
+    min-height:520px;
+    box-shadow:var(--shadow-float);
+  }
+  .stage .plaque{
+    position:absolute;left:24px;bottom:20px;z-index:5;
+    background:#B08D57;color:#241d12;
+    font-family:var(--font-serif);font-style:italic;font-size:13px;
+    padding:5px 14px;border-radius:2px;letter-spacing:0.02em;
+    box-shadow:0 1px 3px rgba(0,0,0,0.3);
+  }
+  .stage .win{position:absolute}
+  .win{
+    background:var(--card);border-radius:var(--r-face);
+    box-shadow:var(--shadow-pop);overflow:hidden;
+    border:1px solid var(--border-hairline);
+  }
+  .win-titlebar{
+    display:flex;align-items:center;height:36px;padding:0 12px;
+    border-bottom:1px solid var(--border-hairline);position:relative;
+  }
+  .traffic{display:flex;gap:6px}
+  .traffic i{width:10px;height:10px;border-radius:50%;display:block}
+  .traffic i:nth-child(1){background:#E0665F}
+  .traffic i:nth-child(2){background:#E0B15C}
+  .traffic i:nth-child(3){background:#7FB97E}
+  .win-title{
+    position:absolute;left:0;right:0;text-align:center;
+    font-size:12px;color:var(--ink-faint);pointer-events:none;
+  }
+  .win-body{padding:16px;font-size:13px}
+
+  /* 窗口内部:任务列表 */
+  .task-row{display:flex;gap:10px;padding:9px 10px;border-radius:var(--r-face);align-items:flex-start}
+  .task-row:hover{background:var(--bg)}
+  .task-row .dot{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;margin-top:2px}
+  .task-row.done .dot{border-color:var(--success);background:color-mix(in srgb,var(--success) 15%,transparent)}
+  .task-row .t{font-size:13px;font-weight:500;line-height:1.35}
+  .task-row .s{font-size:12px;color:var(--ink-faint);margin-top:2px}
+  .diff{font-family:var(--font-mono);font-size:12px}
+  .diff .add{color:var(--success)}
+  .diff .del{color:var(--error)}
+
+  /* 文件芯片 */
+  .file-chip{
+    display:flex;align-items:center;gap:8px;
+    border:1px solid var(--border-hairline);border-radius:var(--r-face);
+    padding:8px 12px;font-size:13px;margin-top:8px;background:var(--bg);
+  }
+  .file-chip svg{width:14px;height:14px;color:var(--ink-faint);flex-shrink:0}
+
+  /* CLI 窗口 */
+  .cli{font-family:var(--font-mono);font-size:12px;line-height:1.7}
+  .cli .path{color:var(--ink-faint)}
+  .cli .cmd{background:var(--bg);border:1px solid var(--border-hairline);border-radius:var(--r-face);padding:8px 10px;margin-top:8px}
+  .caret{display:inline-block;width:7px;height:14px;background:var(--ink);vertical-align:-2px;animation:blink 1.2s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  /* ============================================================
+     Token 展示区
+     ============================================================ */
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+  .swatch{
+    border:1px solid var(--border-hairline);border-radius:var(--r-face);overflow:hidden;background:var(--card);
+  }
+  .swatch .chip{height:64px;border-bottom:1px solid var(--border-hairline)}
+  .swatch .meta{padding:10px 12px}
+  .swatch .name{font-size:13px;font-weight:500}
+  .swatch .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-faint)}
+
+  .token-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:10px}
+  .token-card{background:var(--surface);border-radius:var(--r-face);padding:24px}
+  .token-card h3{font-size:16px;font-weight:600;margin-bottom:14px}
+  .token-card ul{list-style:none;font-size:13px;color:var(--ink-muted)}
+  .token-card li{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--border-hairline)}
+  .token-card li:last-child{border-bottom:none}
+  .token-card code{font-family:var(--font-mono);font-size:12px;color:var(--ink)}
+
+  /* 字号阶梯 */
+  .type-scale{display:flex;flex-direction:column;gap:26px}
+  .type-row{display:grid;grid-template-columns:150px 1fr;gap:24px;align-items:baseline;border-bottom:1px solid var(--border-hairline);padding-bottom:22px}
+  .type-row:last-child{border-bottom:none}
+  .type-row .spec{font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);line-height:1.7}
+  .t-hero{font-size:64px;font-weight:400;letter-spacing:-2px;line-height:1.05}
+  .t-h1{font-size:36px;font-weight:400;letter-spacing:-0.72px;line-height:1.2}
+  .t-h2{font-size:26px;font-weight:400;letter-spacing:-0.325px;line-height:1.25}
+  .t-h3{font-size:20px;font-weight:700;line-height:1.5}
+  .t-body{font-size:16px;font-weight:400}
+  .t-small{font-size:14px;color:var(--ink-muted)}
+  .t-mono{font-family:var(--font-mono);font-size:13px}
+  .t-serif{font-family:var(--font-serif);font-style:italic;font-size:18px}
+
+  /* ============================================================
+     组件展示网格
+     ============================================================ */
+  .demo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+  .demo-card{background:var(--surface);border-radius:var(--r-face);padding:28px}
+  .demo-card h3{font-size:14px;font-weight:600;margin-bottom:6px}
+  .demo-card .hint{font-size:12px;color:var(--ink-faint);margin-bottom:20px}
+  .demo-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+
+  /* 输入框 */
+  .field{
+    width:100%;height:42px;border-radius:var(--r-pill);
+    background:var(--card);border:1px solid var(--border);
+    padding:0 18px;font-family:var(--font-ui);font-size:14px;color:var(--ink);
+    transition:border-color var(--dur-fast) var(--ease-out);
+  }
+  .field::placeholder{color:var(--ink-faint)}
+  .field:focus{outline:none;border-color:var(--ink)}
+  .field:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .composer{
+    display:flex;align-items:center;gap:10px;
+    background:var(--card);border:1px solid var(--border);
+    border-radius:var(--r-pill);padding:6px 6px 6px 18px;
+  }
+  .composer input{flex:1;border:none;background:transparent;font-family:var(--font-ui);font-size:14px;color:var(--ink);min-width:0}
+  .composer input:focus{outline:none}
+  .composer .mic{
+    width:32px;height:32px;border-radius:50%;flex-shrink:0;
+    background:var(--ink);color:var(--ink-invert);border:none;cursor:pointer;
+    display:grid;place-items:center;
+    transition:transform var(--dur-fast) var(--ease-out);
+  }
+  .composer .mic:hover{transform:scale(0.96)}
+
+  /* 徽章 / 标签 */
+  .badge{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:var(--font-mono);font-size:11px;letter-spacing:0.04em;
+    background:rgba(38,37,30,0.05);color:var(--ink-muted);
+    padding:4px 10px;border-radius:var(--r-pill);
+  }
+  html[data-theme="dark"] .badge{background:rgba(239,237,230,0.07)}
+  .badge .st{width:6px;height:6px;border-radius:50%;background:var(--success)}
+  .badge .st.run{background:var(--accent);animation:pulseSoft 1.6s var(--ease-out) infinite}
+  @keyframes pulseSoft{0%,100%{opacity:1}50%{opacity:0.3}}
+  .badge.mono-cap{text-transform:uppercase}
+
+  /* 时间线色条 */
+  .timeline{display:flex;flex-direction:column;gap:8px}
+  .tl-row{display:flex;align-items:center;gap:12px;font-size:13px}
+  .tl-bar{width:6px;height:26px;border-radius:2px}
+  .tl-row .lab{color:var(--ink-muted)}
+  .tl-row .val{font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);margin-left:auto}
+
+  /* 状态开关 */
+  .switch{position:relative;width:40px;height:22px;border-radius:var(--r-pill);background:var(--surface-deep);border:1px solid var(--border);cursor:pointer;transition:background var(--dur-fast) var(--ease-out)}
+  .switch::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--card);box-shadow:0 1px 2px rgba(0,0,0,0.2);transition:transform var(--dur-fast) var(--ease-out)}
+  .switch.on{background:var(--ink);border-color:var(--ink)}
+  .switch.on::after{transform:translateX(18px)}
+
+  /* ============================================================
+     Feature Split —— 左舞台右文案(双色标题法)
+     ============================================================ */
+  .split{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center}
+  .split.flip{grid-template-columns:1fr 1.15fr}
+  .split .stage{min-height:420px}
+  .split-copy h3{font-size:30px;font-weight:400;letter-spacing:-0.5px;line-height:1.25;margin-bottom:14px}
+  .split-copy h3 .dim{color:var(--ink-muted)}
+  .split-copy p{font-size:15px;color:var(--ink-muted);max-width:48ch;margin-bottom:20px}
+
+  /* 聊天气泡(窗口内部) */
+  .chat{display:flex;flex-direction:column;gap:10px;padding:4px 0}
+  .msg{max-width:85%;padding:9px 14px;border-radius:12px;font-size:13px;line-height:1.5}
+  .msg.them{background:var(--bg);border:1px solid var(--border-hairline);align-self:flex-start;border-bottom-left-radius:4px}
+  .msg.me{background:var(--ink);color:var(--ink-invert);align-self:flex-end;border-bottom-right-radius:4px}
+  .msg .mention{color:var(--accent);font-weight:500}
+  html[data-theme="dark"] .msg .mention{color:#E8794E}
+
+  /* ============================================================
+     Final CTA —— 居中超大 400 字重标题
+     ============================================================ */
+  .final-cta{text-align:center;padding:134.4px 20px}
+  .final-cta h2{font-size:clamp(40px,7vw,72px);font-weight:400;letter-spacing:-2px;line-height:1.05;margin-bottom:36px}
+
+  /* ============================================================
+     Footer —— 第三层纸
+     ============================================================ */
+  .site-footer{background:var(--surface);padding:67.2px 20px 30px;transition:background var(--dur-slow) var(--ease-out)}
+  .footer-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;max-width:var(--container);margin:0 auto 56px}
+  .footer-col h4{font-size:13px;color:var(--ink-faint);font-weight:400;margin-bottom:16px}
+  .footer-col a{display:block;font-size:14px;color:var(--ink);padding:5px 0;transition:color var(--dur-fast) var(--ease-out)}
+  .footer-col a:hover{color:var(--ink-muted)}
+  .footer-bottom{
+    max-width:var(--container);margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    font-size:13px;color:var(--ink-faint);
+  }
+  .theme-toggle{display:flex;gap:4px;background:var(--surface-deep);border-radius:var(--r-pill);padding:4px}
+  .theme-toggle button{
+    width:30px;height:30px;border-radius:50%;border:none;background:transparent;
+    color:var(--ink-muted);cursor:pointer;display:grid;place-items:center;
+    transition:background var(--dur-fast) var(--ease-out),color var(--dur-fast) var(--ease-out);
+  }
+  .theme-toggle button.active{background:var(--card);color:var(--ink);box-shadow:var(--shadow-float)}
+
+  /* ---------- 响应式 ---------- */
+  @media (max-width:1024px){
+    .main-nav{display:none}
+    .split,.split.flip{grid-template-columns:1fr;gap:36px}
+    .footer-grid{grid-template-columns:repeat(3,1fr);gap:32px}
+    .stage .win.w2{display:none}
+  }
+  @media (max-width:768px){
+    section{padding:40px 20px}
+    .hero{padding:calc(var(--header-h) + 56px) 20px 40px}
+    .stage{min-height:400px}
+    .stage .win.w1{left:12px!important;right:12px!important;top:60px!important;width:auto!important}
+    .footer-grid{grid-template-columns:repeat(2,1fr)}
+    .type-row{grid-template-columns:1fr;gap:8px}
+    .final-cta{padding:80px 20px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================= Header ======================= -->
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="#">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M12 7v10M7.5 9.5 12 12l4.5-2.5" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      WARMTH
+    </a>
+    <nav class="main-nav" aria-label="主导航">
+      <a href="#tokens">Tokens</a>
+      <a href="#buttons">按钮</a>
+      <a href="#windows">窗口模型</a>
+      <a href="#inputs">输入</a>
+      <a href="#features">组合</a>
+    </nav>
+    <div class="header-actions">
+      <a class="link-plain" href="#">登录</a>
+      <a class="btn btn-outline btn-sm" href="#">联系我们</a>
+      <a class="btn btn-primary btn-sm" href="#">下载</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ======================= Hero ======================= -->
+<section class="hero" id="hero">
+  <div class="container">
+    <h1 class="reveal">
+      暖纸白上的克制组件库,<br>
+      <span class="dim">为严肃工具保留人文温度。</span>
+    </h1>
+    <div class="hero-actions reveal">
+      <a class="btn btn-primary" href="#tokens">浏览组件 <span class="arrow arrow-down">↓</span></a>
+      <a class="btn btn-secondary" href="#features">查看组合 <span class="arrow">→</span></a>
+    </div>
+
+    <!-- 画廊舞台:油画 + 悬浮窗口 -->
+    <div class="stage reveal" style="background-image:url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=19th%20century%20romanticism%20oil%20painting%20landscape%2C%20misty%20mountains%20and%20calm%20lake%20at%20golden%20hour%2C%20warm%20cream%20ochre%20and%20soft%20rose%20tones%2C%20visible%20painterly%20brushstrokes%2C%20sublime%20atmosphere%2C%20no%20text%2C%20no%20people&image_size=landscape_4_3')">
+      <!-- 桌面端窗口 -->
+      <div class="win w1" style="left:4%;top:8%;width:56%;max-width:520px">
+        <div class="win-titlebar"><span class="traffic"><i></i><i></i><i></i></span><span class="win-title">Cursor-Light-Warmth · 桌面端</span></div>
+        <div class="win-body">
+          <div class="task-row done"><span class="dot"></span><div><div class="t">构建落地页首屏</div><div class="s"><span class="diff"><span class="add">+70</span> <span class="del">−0</span></span> · 字体已预加载,暗色即时渲染</div></div></div>
+          <div class="task-row"><span class="dot"></span><div><div class="t">提取设计 Token 体系</div><div class="s">三层纸底色 · 墨色胶囊 · 零偏移阴影</div></div></div>
+          <div class="file-chip"><svg viewBox="0 0 16 16" fill="none"><path d="M4 1h6l3 3v11H4V1Z" stroke="currentColor" stroke-width="1.2"/></svg> tokens.css <span class="diff" style="margin-left:auto"><span class="add">+52</span> <span class="del">−0</span></span></div>
+          <div class="file-chip"><svg viewBox="0 0 16 16" fill="none"><path d="M4 1h6l3 3v11H4V1Z" stroke="currentColor" stroke-width="1.2"/></svg> components.css <span class="diff" style="margin-left:auto"><span class="add">+18</span> <span class="del">−0</span></span></div>
+        </div>
+      </div>
+      <!-- CLI 窗口 -->
+      <div class="win w2" style="right:4%;bottom:10%;width:38%;max-width:360px">
+        <div class="win-titlebar"><span class="traffic"><i></i><i></i><i></i></span><span class="win-title">Terminal</span></div>
+        <div class="win-body cli">
+          <div class="path">~/warmth/components</div>
+          <div class="cmd">$ npx warmth add pill-button <span class="caret"></span></div>
+        </div>
+      </div>
+      <span class="plaque">The Collection · 馆藏 № 01</span>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Tokens ======================= -->
+<section id="tokens">
+  <div class="container">
+    <div class="kicker reveal">Design Tokens</div>
+    <h2 class="sec-title reveal">色彩策略:<span class="dim">暖纸 × 墨黑 × 一点朱砂</span></h2>
+    <p class="sec-desc reveal">98% 的视觉面积交给暖纸白与暖墨黑的温度差;朱砂橙仅出现在文字链接上,稀缺性即品牌记忆。所有"黑色"统一为带黄调的 #26251E,与暖纸同温。</p>
+
+    <div class="swatches reveal">
+      <div class="swatch"><div class="chip" style="background:#F7F7F4"></div><div class="meta"><div class="name">background</div><div class="val">#F7F7F4 · 主背景</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#F2F1ED"></div><div class="meta"><div class="name">surface</div><div class="val">#F2F1ED · 卡片/页脚</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#E6E5E0"></div><div class="meta"><div class="name">surface-deep</div><div class="val">#E6E5E0 · 凹陷面</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#26251E"></div><div class="meta"><div class="name">ink</div><div class="val">#26251E · 正文/按钮底</div></div></div>
+      <div class="swatch"><div class="chip" style="background:rgba(38,37,30,0.55)"></div><div class="meta"><div class="name">ink-muted</div><div class="val">55% · 标题第二行</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#C8451D"></div><div class="meta"><div class="name">accent</div><div class="val">#C8451D · 仅链接</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#FFFFFF;border-bottom:1px solid var(--border-hairline)"></div><div class="meta"><div class="name">card</div><div class="val">#FFFFFF · 窗口模型</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#3F7A46"></div><div class="meta"><div class="name">success</div><div class="val">#3F7A46 · diff 新增</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#B0413E"></div><div class="meta"><div class="name">error</div><div class="val">#B0413E · diff 删除</div></div></div>
+      <div class="swatch"><div class="chip" style="background:linear-gradient(90deg,#DFA88F 25%,#9FC9A2 25% 50%,#9FBBE0 50% 75%,#C0A8DD 75%)"></div><div class="meta"><div class="name">timeline ×4</div><div class="val">思考/检索/读取/编辑</div></div></div>
+    </div>
+
+    <div class="token-grid" style="margin-top:24px">
+      <div class="token-card reveal">
+        <h3>圆角策略:全或无</h3>
+        <ul>
+          <li><span>交互件</span><code>border-radius: 9999px</code></li>
+          <li><span>展示面</span><code>border-radius: 4px</code></li>
+          <li><span>中间态</span><code>不存在 8/12/16px</code></li>
+        </ul>
+      </div>
+      <div class="token-card reveal">
+        <h3>阴影:零偏移弥散</h3>
+        <ul>
+          <li><span>shadow-float</span><code>0 0 16px rgba(0,0,0,.02)</code></li>
+          <li><span>shadow-pop</span><code>+ 0 2px 6px rgba(0,0,0,.04)</code></li>
+          <li><span>按钮/页眉/页脚</span><code>none</code></li>
+        </ul>
+      </div>
+      <div class="token-card reveal">
+        <h3>间距阶梯</h3>
+        <ul>
+          <li><span>区块垂直内边距</span><code>67.2px / 112px</code></li>
+          <li><span>容器最大宽</span><code>1300px</code></li>
+          <li><span>文案列</span><code>65ch ≈ 658px</code></li>
+          <li><span>基础步长</span><code>4 · 8 · 12 · 20 · 32</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="sec-title reveal" style="margin-top:67px">字体系统:<span class="dim">无衬线叙事,衬斜体入画</span></h2>
+    <p class="sec-desc reveal">Instrument Sans 承担全部版面(替代专有 CursorGothic);EB Garamond Italic 只出现在"画框内"的产品文案中;JetBrains Mono 负责代码与徽章。标题越大越不加重——字重 400 + 负字距本身就是底气。</p>
+
+    <div class="type-scale reveal">
+      <div class="type-row"><div class="spec">64px / 400<br>tracking −2px</div><div class="t-hero">Try Warmth now.</div></div>
+      <div class="type-row"><div class="spec">36px / 400<br>tracking −0.72px</div><div class="t-h1">Cursor is your coding agent for building ambitious software.</div></div>
+      <div class="type-row"><div class="spec">26px / 400 + 55%<br>双色两行法</div><div class="t-h2">Hand work to AI teammates.<br><span style="color:var(--ink-muted)">Bots come back with finished work.</span></div></div>
+      <div class="type-row"><div class="spec">20px / 700</div><div class="t-h3">窗口与卡片标题</div></div>
+      <div class="type-row"><div class="spec">16px / 400 · 65ch</div><div class="t-body">正文最大宽度 658px,行高 1.5。暖纸底上墨色对比度约 14:1,长时间阅读不刺眼。</div></div>
+      <div class="type-row"><div class="spec">14px / muted</div><div class="t-small">次要正文:页脚列标题、说明文字、时间戳。</div></div>
+      <div class="type-row"><div class="spec">13px / JetBrains Mono</div><div class="t-mono">+52 −0 · ~/warmth/components · Thought 6s</div></div>
+      <div class="type-row"><div class="spec">18px / EB Garamond Italic<br>画框内专用</div><div class="t-serif">Software creation is changing. We have much to learn, try, and build.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Buttons ======================= -->
+<section id="buttons" style="background:var(--surface)">
+  <div class="container">
+    <div class="kicker reveal">Buttons & Links</div>
+    <h2 class="sec-title reveal">按钮体系:<span class="dim">一切交互收敛为胶囊</span></h2>
+    <p class="sec-desc reveal">主按钮 = 墨底白字胶囊;次按钮 = 浅灰底;描边版用于低优先级动作。文字链接是唯一的朱砂橙出口。</p>
+
+    <div class="demo-grid">
+      <div class="demo-card reveal" style="background:var(--card)">
+        <h3>主 / 次 / 描边 / 禁用</h3>
+        <div class="hint">高 38px · 内边距 0 16px · 悬停提亮一档 · 激活下沉 1px</div>
+        <div class="demo-row">
+          <button class="btn btn-primary">下载 <span class="arrow arrow-down">↓</span></button>
+          <button class="btn btn-secondary">申请演示 <span class="arrow">→</span></button>
+          <button class="btn btn-outline">联系我们</button>
+          <button class="btn btn-primary" disabled>禁用态</button>
+        </div>
+      </div>
+      <div class="demo-card reveal" style="background:var(--card)">
+        <h3>小尺寸与图标钮</h3>
+        <div class="hint">btn-sm 高 30px · 图标内嵌于文字流</div>
+        <div class="demo-row">
+          <button class="btn btn-primary btn-sm">复制 Token</button>
+          <button class="btn btn-outline btn-sm">Esc 关闭</button>
+          <button class="switch on" aria-label="开关示例"></button>
+        </div>
+      </div>
+      <div class="demo-card reveal" style="background:var(--card)">
+        <h3>文字链接(朱砂橙单点)</h3>
+        <div class="hint">每屏 ≤1 处 · 悬停下划线 + 箭头右移 3px</div>
+        <div class="demo-row" style="flex-direction:column;align-items:flex-start;gap:2px">
+          <a class="link-accent" href="#">下载 Grok Bot <span class="arrow">→</span></a>
+          <a class="link-accent" href="#">阅读策展手记 <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Windows ======================= -->
+<section id="windows">
+  <div class="container">
+    <div class="kicker reveal">Window Mocks & Badges</div>
+    <h2 class="sec-title reveal">产品窗口模型:<span class="dim">4px 圆角白卡 + 红绿灯</span></h2>
+    <p class="sec-desc reveal">功能展示从不裸放截图——一律以"白色窗口悬浮于油画"呈现。窗口彼此错位叠压,最前完整、其余露边。</p>
+
+    <div class="demo-grid">
+      <div class="win reveal" style="box-shadow:var(--shadow-pop)">
+        <div class="win-titlebar"><span class="traffic"><i></i><i></i><i></i></span><span class="win-title">READY FOR REVIEW</span></div>
+        <div class="win-body">
+          <div class="task-row done"><span class="dot"></span><div><div class="t">重构导航组件</div><div class="s"><span class="diff"><span class="add">+135</span> <span class="del">−21</span></span> · Great! I've added sticky offsets</div></div></div>
+          <div class="task-row done"><span class="dot"></span><div><div class="t">配置 MINIST 实验</div><div class="s"><span class="diff"><span class="add">+68</span> <span class="del">−0</span></span> · Drafted implementation</div></div></div>
+          <div class="task-row"><span class="dot"></span><div><div class="t">补全深色模式翻转</div><div class="s"><span class="badge"><span class="st run"></span>进行中</span></div></div></div>
+        </div>
+      </div>
+
+      <div class="demo-card reveal" style="background:var(--card)">
+        <h3>徽章 / 标签 / 时间线</h3>
+        <div class="hint">等宽 11px · 状态点 6px · 时间线四色条</div>
+        <div class="demo-row" style="margin-bottom:20px">
+          <span class="badge mono-cap">Thought 6s</span>
+          <span class="badge"><span class="st"></span>done</span>
+          <span class="badge"><span class="st run"></span>running</span>
+          <span class="badge diff"><span class="add">+52</span>&nbsp;<span class="del">−0</span></span>
+        </div>
+        <div class="timeline">
+          <div class="tl-row"><span class="tl-bar" style="background:var(--tl-thinking)"></span><span class="lab">思考</span><span class="val">6s</span></div>
+          <div class="tl-row"><span class="tl-bar" style="background:var(--tl-read)"></span><span class="lab">读取 about-acme.md</span><span class="val">1s</span></div>
+          <div class="tl-row"><span class="tl-bar" style="background:var(--tl-grep)"></span><span class="lab">检索 brand-guidelines.pdf</span><span class="val">2s</span></div>
+          <div class="tl-row"><span class="tl-bar" style="background:var(--tl-edit)"></span><span class="lab">编辑 page.tsx</span><span class="val">+52 −0</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Inputs ======================= -->
+<section id="inputs" style="background:var(--surface)">
+  <div class="container">
+    <div class="kicker reveal">Inputs</div>
+    <h2 class="sec-title reveal">输入框:<span class="dim">聚焦靠边框本身,不靠发光环</span></h2>
+    <p class="sec-desc reveal">白底、1px 浅描边、胶囊形。聚焦时描边加深为墨色;无外发光、无阴影变化。</p>
+    <div class="demo-grid">
+      <div class="demo-card reveal" style="background:var(--card)">
+        <h3>搜索 / 表单字段</h3>
+        <div class="hint">聚焦试试:border-color → ink</div>
+        <input class="field" type="text" placeholder="搜索组件…" style="margin-bottom:14px" />
+        <input class="field" type="email" placeholder="you@example.com" />
+      </div>
+      <div class="demo-card reveal" style="background:var(--card)">
+        <h3>对话输入(Composer)</h3>
+        <div class="hint">胶囊容器内嵌墨色圆形动作钮</div>
+        <div class="composer">
+          <input type="text" placeholder="Message Sales Outbound" />
+          <button class="mic" aria-label="语音输入">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="6" y="1.5" width="4" height="8" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M3 8a5 5 0 0 0 10 0M8 13v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Feature Splits ======================= -->
+<section id="features">
+  <div class="container" style="display:flex;flex-direction:column;gap:112px">
+
+    <div class="split reveal">
+      <div class="stage" style="background-image:url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=19th%20century%20romanticism%20oil%20painting%20landscape%2C%20misty%20mountains%20and%20calm%20lake%20at%20golden%20hour%2C%20warm%20cream%20ochre%20and%20soft%20rose%20tones%2C%20visible%20painterly%20brushstrokes%2C%20sublime%20atmosphere%2C%20no%20text%2C%20no%20people&image_size=landscape_4_3')">
+        <div class="win" style="left:8%;top:12%;right:8%;bottom:14%">
+          <div class="win-titlebar"><span class="traffic"><i></i><i></i><i></i></span><span class="win-title">Grok Bot · Sales Outbound</span></div>
+          <div class="win-body chat">
+            <div class="msg them"><span class="mention">Account Manager</span> 发来了 Acme 的线索,优先级已标出。</div>
+            <div class="msg me">前 10 条看起来不错,每周跑一次。</div>
+            <div class="msg them">Done.</div>
+          </div>
+        </div>
+        <span class="plaque">馆藏 № 02</span>
+      </div>
+      <div class="split-copy">
+        <h3>把活交给 AI 队友。<br><span class="dim">它登录后开工,带着成品回来。</span></h3>
+        <p>区块标题两行同字号同字重,仅第二行降为 55% 透明度——用色彩完成主次,而非字号字重。文案列最大宽 658px,垂直居中。</p>
+        <a class="link-accent" href="#">下载 Grok Bot <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+    <div class="split flip reveal">
+      <div class="split-copy">
+        <h3>一屏一事。<br><span class="dim">留白本身就是版面语言。</span></h3>
+        <p>每个功能区块只承担一个论点,靠 67-112px 的垂直节奏推进叙事,而非视觉轰炸。媒体舞台嵌在略深一档的米色底板中,像纸张叠纸张。</p>
+        <a class="link-accent" href="#">阅读布局规范 <span class="arrow">→</span></a>
+      </div>
+      <div class="stage" style="background-image:url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=19th%20century%20romanticism%20oil%20painting%20landscape%2C%20misty%20mountains%20and%20calm%20lake%20at%20golden%20hour%2C%20warm%20cream%20ochre%20and%20soft%20rose%20tones%2C%20visible%20painterly%20brushstrokes%2C%20sublime%20atmosphere%2C%20no%20text%2C%20no%20people&image_size=landscape_4_3');background-position:70% 40%">
+        <div class="win" style="left:10%;top:14%;width:70%">
+          <div class="win-titlebar"><span class="traffic"><i></i><i></i><i></i></span><span class="win-title">Acme Labs</span></div>
+          <div class="win-body">
+            <p class="t-serif" style="margin-bottom:10px">Software creation is changing.</p>
+            <p style="font-size:13px;color:var(--ink-muted)">We are a group of researchers, engineers, and technologists inventing at the edge of what's useful and possible.</p>
+          </div>
+        </div>
+        <span class="plaque">馆藏 № 03</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Final CTA ======================= -->
+<section class="final-cta">
+  <div class="container">
+    <h2 class="reveal">Try Warmth now.</h2>
+    <a class="btn btn-primary reveal" style="height:44px;font-size:15px" href="#hero">回到顶部 <span class="arrow arrow-down">↓</span></a>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================= Footer ======================= -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col"><h4>组件</h4><a href="#buttons">按钮</a><a href="#windows">窗口模型</a><a href="#inputs">输入框</a><a href="#tokens">徽章标签</a></div>
+    <div class="footer-col"><h4>Token</h4><a href="#tokens">色彩</a><a href="#tokens">字体</a><a href="#tokens">间距</a><a href="#tokens">阴影</a></div>
+    <div class="footer-col"><h4>组合</h4><a href="#hero">画廊舞台</a><a href="#features">Feature Split</a><a href="#">Final CTA</a><a href="#">页脚网格</a></div>
+    <div class="footer-col"><h4>规范</h4><a href="#">圆角全或无</a><a href="#">单点朱砂</a><a href="#">双色标题法</a><a href="#">reduced-motion</a></div>
+    <div class="footer-col"><h4>来源</h4><a href="https://cursor.com" target="_blank" rel="noopener">cursor.com</a><a href="#">风格提示词文档</a><a href="#">design_data.json</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 beautiful_web_template · Cursor-Light-Warmth</span>
+    <div class="theme-toggle" role="group" aria-label="主题切换">
+      <button data-mode="system" class="active" aria-label="跟随系统">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5.5 14h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      </button>
+      <button data-mode="light" aria-label="浅色">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3.2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3 3l1.1 1.1M11.9 11.9 13 13M13 3l-1.1 1.1M4.1 11.9 3 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </button>
+      <button data-mode="dark" aria-label="深色">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 入场动画:IntersectionObserver 触发 fadeSlideUp
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // 开关示例
+  document.querySelectorAll('.switch').forEach(s =>
+    s.addEventListener('click', () => s.classList.toggle('on')));
+
+  // 主题翻转:三层纸底与墨色互换,胶囊体系不变
+  const toggle = document.querySelector('.theme-toggle');
+  toggle.addEventListener('click', (ev) => {
+    const btn = ev.target.closest('button'); if (!btn) return;
+    toggle.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const mode = btn.dataset.mode;
+    if (mode === 'dark') document.documentElement.dataset.theme = 'dark';
+    else document.documentElement.removeAttribute('data-theme');
+  });
+</script>
+</body>
+</html>

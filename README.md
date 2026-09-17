@@ -98,6 +98,16 @@
 
 > 黑底高对比霓虹，故障动画，终端/等宽字体，科技感装饰。受 80 年代科幻与黑客文化启发的反乌托邦数字美学。
 
+### [Cursor Light Warmth](./templates/Cursor-Light-Warmth/)
+
+<p>
+  <img src="./assets/screenshots/Cursor-Light-Warmth-01.png" width="32.5%" alt="Cursor Light Warmth — slide 01" />
+  <img src="./assets/screenshots/Cursor-Light-Warmth-02.png" width="32.5%" alt="Cursor Light Warmth — slide 02" />
+  <img src="./assets/screenshots/Cursor-Light-Warmth-03.png" width="32.5%" alt="Cursor Light Warmth — slide 03" />
+</p>
+
+> 提取自 cursor.com 首页的暖纸浅色风格。三层暖纸白底色（#F7F7F4 → #F2F1ED → #E6E5E0）配暖墨黑（#26251E）胶囊按钮，古典浪漫主义油画"策展舞台"托起 4px 圆角白色产品窗口模型，零偏移弥散阴影、字重 400 负字距大标题与双色标题法，朱砂橙（#C8451D）仅用于文字链接的单点强调。严肃工具的人文温度。
+
 ### [Enterprise](./templates/Enterprise/)
 
 <p>
