@@ -265,9 +265,23 @@
     .card-media img {
       width: 100%; height: 100%; object-fit: cover;
       filter: saturate(0.9);
-      transition: transform 0.5s ease, filter 0.5s ease;
+      transition: transform 0.5s ease, filter 0.5s ease, opacity 0.45s ease;
     }
     .card:hover .card-media img { transform: scale(1.03); filter: saturate(1); }
+    /* Progressive image loading: skeleton until the picture has decoded */
+    @keyframes img-shimmer { from { background-position: -200px 0; } to { background-position: 100% 0; } }
+    .card-media, .card-thumb, .shot { position: relative; }
+    .card-media:not(.is-loaded)::after,
+    .card-thumb:not(.is-loaded)::after,
+    .shot:not(.is-loaded)::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(100deg, transparent 25%, rgba(255, 255, 255, 0.55) 50%, transparent 75%) 0 / 200px 100% no-repeat;
+      animation: img-shimmer 1.25s linear infinite;
+    }
+    img.lazy { opacity: 0; transition: opacity 0.45s ease; }
+    img.lazy.is-loaded { opacity: 1; }
+    img.lazy.is-failed { opacity: 0.35; }
+
     .card-index {
       position: absolute; top: 10px; left: 10px; z-index: 2;
       padding: 3px 9px; border-radius: 999px;
@@ -353,7 +367,21 @@
     .modal-panel { flex: 1; overflow-y: auto; display: none; }
     .modal-panel.active { display: block; }
     .shots-strip { display: flex; flex-direction: column; gap: 12px; }
-    .shots-strip img { border-radius: var(--radius-sm); border: 1px solid var(--border); }
+    .shots-strip img {
+      display: block; width: 100%; height: auto;
+      border-radius: var(--radius-sm); border: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .shot figcaption {
+      position: absolute; left: 8px; bottom: 8px; z-index: 3;
+      padding: 2px 8px; border-radius: 999px;
+      background: rgba(25, 23, 19, 0.7); color: #fbfaf6;
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+    }
+    .quality-toggle { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .quality-toggle .btn { flex: 1; justify-content: center; padding: 8px 12px; font-size: 12px; }
+    .quality-state { font-family: var(--mono); font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; }
+
     .md-content { font-size: 13px; line-height: 1.7; color: var(--text); }
     .md-content h1, .md-content h2, .md-content h3 { margin: 16px 0 8px; font-size: 14px; }
     .md-content p { margin-bottom: 10px; color: var(--text-muted); }
@@ -455,6 +483,10 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .frame, .card, .btn { transition: none; }
+      .card-media:not(.is-loaded)::after,
+      .card-thumb:not(.is-loaded)::after,
+      .shot:not(.is-loaded)::after { animation: none; }
+      img.lazy { transition: none; }
     }
   </style>
 </head>
@@ -503,7 +535,7 @@
       <figure class="hero-art" id="hero-art">
         <div class="frame" id="hero-frame">
           <div class="mat">
-            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=19th%20century%20romanticism%20oil%20painting%20landscape%2C%20misty%20mountains%20and%20calm%20lake%20at%20golden%20hour%2C%20warm%20cream%20ochre%20and%20soft%20rose%20tones%2C%20visible%20painterly%20brushstrokes%2C%20sublime%20atmosphere%2C%20no%20text%2C%20no%20people&image_size=landscape_4_3" alt="策展挂画：浪漫主义油画风景">
+            <img src="./assets/hero/romantic-landscape.webp" alt="策展挂画：浪漫主义油画风景" width="1216" height="912" fetchpriority="high" decoding="async">
           </div>
           <figcaption class="plaque">№ 00 · form follows feeling</figcaption>
         </div>
@@ -556,6 +588,10 @@
             <div class="modal-tab" data-panel="md">设计提示词</div>
           </div>
           <div class="modal-panel active" id="panel-shots">
+            <div class="quality-toggle">
+              <button id="shot-quality" class="btn btn-outline" type="button" aria-pressed="false">切换为 PNG 原图</button>
+              <span class="quality-state" id="quality-state">WebP · 轻量预览</span>
+            </div>
             <div class="shots-strip" id="shots-strip"></div>
           </div>
           <div class="modal-panel" id="panel-md">
@@ -634,9 +670,114 @@
     const mdModalTitle = document.getElementById('md-modal-title');
     const mdModalClose = document.getElementById('md-modal-close');
     const mdReader = document.getElementById('md-reader');
+    const shotQuality = document.getElementById('shot-quality');
+    const qualityState = document.getElementById('quality-state');
+
+    let showOriginal = false;
+
+    // Cards keep the light webp copies; the modal can switch to the crisp PNG
+    // source when a visitor needs to inspect details.
+    function applyShotQuality() {
+      shotQuality.textContent = showOriginal ? '切换为 WebP 预览' : '切换为 PNG 原图';
+      shotQuality.setAttribute('aria-pressed', String(showOriginal));
+      qualityState.textContent = showOriginal ? 'PNG · 原始无损' : 'WebP · 轻量预览';
+      const want = showOriginal ? 'png' : 'webp';
+      shotsStrip.querySelectorAll('picture').forEach((pic) => {
+        const img = pic.querySelector('img');
+        img.dataset.want = want;
+        if (!img.dataset.current || img.dataset.current === want) return;
+        setVariant(img, want);
+      });
+    }
+
+    shotQuality.addEventListener('click', () => {
+      showOriginal = !showOriginal;
+      applyShotQuality();
+    });
 
     let currentMd = '';
     let currentName = '';
+
+    const SHOT_WEBP_DIR = "./assets/screenshots/webp/";
+    const toWebp = (src) => src.startsWith("./assets/screenshots/")
+      ? SHOT_WEBP_DIR + src.slice(src.lastIndexOf("/")).replace(/\.png$/i, ".webp")
+      : src;
+
+    // <picture> lets webp-capable browsers take the light copy and silently fall
+    // back to the crisp PNG; nothing is fetched until the queue activates it.
+    function pictureTag(png, alt) {
+      return `<picture>
+              <source type="image/webp" data-srcset="${toWebp(png)}">
+              <img class="lazy" data-src="${png}" alt="${alt}" width="1440" height="900" decoding="async">
+            </picture>`;
+    }
+
+    /* ---------- progressive lazy loading ---------- */
+    const MAX_IN_FLIGHT = 3;
+    const pendingQueue = [];
+    let inFlight = 0;
+
+    function startLoad(img, url, tag, onSettled) {
+      const settle = () => { if (onSettled) onSettled(); };
+      function ok() {
+        img.removeEventListener("load", ok);
+        img.removeEventListener("error", fail);
+        img.classList.add("is-loaded");
+        const host = img.closest(".card-media, .card-thumb, .shot");
+        if (host) host.classList.add("is-loaded");
+        settle();
+      }
+      function fail() {
+        img.removeEventListener("load", ok);
+        img.removeEventListener("error", fail);
+        img.classList.add("is-failed");
+        settle();
+      }
+      img.addEventListener("load", ok);
+      img.addEventListener("error", fail);
+      img.dataset.current = tag;
+      img.src = url;
+    }
+
+    function drainQueue() {
+      while (inFlight < MAX_IN_FLIGHT && pendingQueue.length) {
+        const img = pendingQueue.shift();
+        if (!img.isConnected || img.dataset.current) continue;
+        const want = img.dataset.want === "png" ? "png" : "webp";
+        const source = img.closest("picture")?.querySelector("source");
+        const useWebp = want === "webp" && Boolean(source?.dataset.srcset);
+        if (useWebp) source.srcset = source.dataset.srcset;
+        else if (source) source.removeAttribute("srcset");
+        inFlight++;
+        startLoad(img, img.dataset.src, useWebp ? "webp" : "png", () => {
+          inFlight--;
+          drainQueue();
+        });
+      }
+    }
+
+    function setVariant(img, want) {
+      const source = img.closest("picture")?.querySelector("source");
+      if (want === "webp" && source?.dataset.srcset) source.srcset = source.dataset.srcset;
+      else if (source) source.removeAttribute("srcset");
+      const host = img.closest(".card-media, .card-thumb, .shot");
+      if (host) host.classList.remove("is-loaded");
+      img.classList.remove("is-loaded");
+      startLoad(img, img.dataset.src, want);
+    }
+
+    const imgObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        imgObserver.unobserve(entry.target);
+        pendingQueue.push(entry.target);
+      });
+      drainQueue();
+    }, { rootMargin: "300px 0px" });
+
+    function observeLazy(scope) {
+      scope.querySelectorAll("img.lazy[data-src]:not([data-current])").forEach((img) => imgObserver.observe(img));
+    }
 
     function renderCards(items) {
       grid.innerHTML = items.map(t => {
@@ -644,11 +785,11 @@
         return `
         <article class="card" data-name="${t.name}">
           <div class="card-media">
-            <img src="${t.shots[0]}" alt="${t.display} preview" loading="lazy">
+            ${pictureTag(t.shots[0], `${t.display} preview`)}
             <span class="card-index">№ ${idx}</span>
             <div class="card-thumbs">
-              <div class="card-thumb"><img src="${t.shots[1]}" alt="${t.display} 02"></div>
-              <div class="card-thumb"><img src="${t.shots[2]}" alt="${t.display} 03"></div>
+              <div class="card-thumb">${pictureTag(t.shots[1], `${t.display} 02`)}</div>
+              <div class="card-thumb">${pictureTag(t.shots[2], `${t.display} 03`)}</div>
             </div>
           </div>
           <div class="card-body">
@@ -665,6 +806,7 @@
           </div>
         </article>
       `;}).join('');
+      observeLazy(grid);
     }
 
     renderCards(templates);
@@ -690,8 +832,10 @@
       modalHtml.href = t.htmlPath;
       previewFrame.src = t.htmlPath;
       shotsStrip.innerHTML = t.shots.map((src, i) =>
-        `<img src="${src}" alt="${t.display} screenshot ${i + 1}">`
+        `<figure class="shot">${pictureTag(src, `${t.display} screenshot ${i + 1}`)}<figcaption>№ 0${i + 1}</figcaption></figure>`
       ).join('');
+      applyShotQuality();
+      observeLazy(shotsStrip);
       mdContent.innerHTML = '';
       copyHint.classList.remove('visible');
 
