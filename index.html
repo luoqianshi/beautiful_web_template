@@ -708,8 +708,8 @@
       ? SHOT_WEBP_DIR + src.slice(src.lastIndexOf("/")).replace(/\.png$/i, ".webp")
       : src;
 
-    // <picture> lets webp-capable browsers take the light copy and silently fall
-    // back to the crisp PNG; nothing is fetched until the queue activates it.
+    // <picture> prefers the light webp copy, but a 404 on <source> does NOT
+    // fall back to <img> by itself — so on webp failure we retry the PNG once.
     function pictureTag(png, alt) {
       return `<picture>
               <source type="image/webp" data-srcset="${toWebp(png)}">
@@ -735,6 +735,15 @@
       function fail() {
         img.removeEventListener("load", ok);
         img.removeEventListener("error", fail);
+        const source = img.closest("picture")?.querySelector("source");
+        if (img.dataset.current === "webp" && source?.getAttribute("srcset")) {
+          // webp 变体缺失/损坏时降级回 PNG，避免卡片直接裂图
+          source.removeAttribute("srcset");
+          settle();
+          img.removeAttribute("src");
+          startLoad(img, img.dataset.src, "png");
+          return;
+        }
         img.classList.add("is-failed");
         settle();
       }
@@ -781,7 +790,15 @@
     }, { rootMargin: "300px 0px" });
 
     function observeLazy(scope) {
-      scope.querySelectorAll("img.lazy[data-src]:not([data-current])").forEach((img) => imgObserver.observe(img));
+      const imgs = scope.querySelectorAll("img.lazy[data-src]:not([data-current])");
+      // 零面积视口（如 in-app 预览浏览器 0x0）下 IntersectionObserver 永不触发，
+      // 图片会永远停在 data-src 状态，直接入队兜底加载。
+      if (!window.innerWidth || !window.innerHeight) {
+        imgs.forEach((img) => pendingQueue.push(img));
+        drainQueue();
+        return;
+      }
+      imgs.forEach((img) => imgObserver.observe(img));
     }
 
     function renderCards(items) {
