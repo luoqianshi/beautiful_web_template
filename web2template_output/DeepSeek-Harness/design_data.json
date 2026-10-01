@@ -1,0 +1,3338 @@
+{
+  "page_info": {
+    "title": "DeepSeek Harness｜共探智能上限",
+    "lang": "zh-CN",
+    "description": "使用 DeepSeek Harness 整理文档、分析表格、编写代码和安排定时任务，通过可自由组合的插件拓展 Agent 能力。",
+    "charset": "UTF-8"
+  },
+  "css_variables": {
+    "--ds-color-text-primary": "#1e232c",
+    "--ds-color-text-primary-bluish": "#152443",
+    "--ds-color-text-link-blue": "#234792",
+    "--ds-color-text-secondary": "rgba(0,0,0,.7)",
+    "--ds-color-text-description": "rgba(0,0,0,.65)",
+    "--ds-color-text-inverse": "#fff",
+    "--ds-color-text-placeholder": "#8691a1",
+    "--ds-color-brand": "#4d6bfe",
+    "--ds-color-brand-deep": "#3a65c2",
+    "--ds-color-brand-medium-reverse": "#4176e6",
+    "--ds-color-brand-light-reverse": "#73a3d2",
+    "--ds-color-static-white": "#fff",
+    "--ds-color-static-black": "#0f0f0f",
+    "--ds-color-static-black-secondary": "rgba(0,0,0,.6)",
+    "--ds-color-bg-hero-join": "#2e609f",
+    "--ds-btn-ghost-static-bg": "transparent",
+    "--ds-btn-ghost-static-text": "#0f0f0f",
+    "--ds-btn-ghost-static-border": "rgba(0,0,0,.2)",
+    "--ds-btn-ghost-static-hover-bg": "rgba(0,0,0,.05)",
+    "--ds-btn-ghost-static-hover-border": "rgba(9,45,78,.3)",
+    "--ds-color-bg-page": "#f9f8f8",
+    "--ds-color-bg-surface-1": "hsla(0,0%,100%,.3)",
+    "--ds-color-bg-surface-2": "hsla(0,0%,100%,.2)",
+    "--ds-color-bg-surface-3": "rgba(0,0,0,.03)",
+    "--ds-color-bg-surface-4": "rgba(0,0,0,.02)",
+    "--ds-color-bg-surface-5": "rgba(0,0,0,.05)",
+    "--ds-color-bg-overlay": "#fff",
+    "--ds-color-bg-surface-raised": "hsla(0,0%,100%,.45)",
+    "--ds-color-bg-code": "rgba(0,0,0,.05)",
+    "--ds-color-bg-hover": "rgba(0,0,0,.04)",
+    "--ds-color-bg-input": "hsla(0,0%,100%,.2)",
+    "--ds-color-bg-input-hover": "hsla(0,0%,100%,.36)",
+    "--ds-color-border-input": "hsla(0,0%,100%,.2)",
+    "--ds-color-border-input-focus": "hsla(0,0%,100%,.25)",
+    "--ds-color-scrollbar": "rgba(0,0,0,.15)",
+    "--ds-color-bg-dark": "#1a1615",
+    "--ds-color-border-subtle": "rgba(0,0,0,.06)",
+    "--ds-color-border-default": "rgba(0,0,0,.1)",
+    "--ds-color-border-divider": "rgba(0,0,0,.08)",
+    "--ds-color-border-hover": "hsla(20,1%,45%,.2)",
+    "--ds-color-border-strong": "rgba(0,0,0,.2)",
+    "--ds-color-border-secondary": "rgba(9,45,78,.14)",
+    "--ds-btn-primary-bg": "#1a1615",
+    "--ds-btn-primary-text": "#fff",
+    "--ds-btn-primary-border": "transparent",
+    "--ds-btn-primary-hover-bg": "hsla(0,0%,100%,.3)",
+    "--ds-btn-secondary-bg": "hsla(0,0%,100%,.4)",
+    "--ds-btn-secondary-text": "#1e232c",
+    "--ds-btn-secondary-border": "rgba(9,45,78,.18)",
+    "--ds-btn-secondary-hover-bg": "rgba(0,0,0,.05)",
+    "--ds-btn-secondary-hover-border": "rgba(9,45,78,.36)",
+    "--ds-btn-ghost-bg": "transparent",
+    "--ds-btn-ghost-text": "#121c31",
+    "--ds-btn-ghost-border": "transparent",
+    "--ds-btn-ghost-hover-bg": "rgba(0,0,0,.04)",
+    "--ds-btn-ghost-hover-border": "hsla(20,1%,45%,.2)",
+    "--ds-btn-liquid-bg": "hsla(0,0%,100%,.4)",
+    "--ds-btn-liquid-hover-bg": "hsla(0,0%,100%,.6)",
+    "--ds-radius-pill": "100px",
+    "--ds-radius-card": "24px",
+    "--ds-radius-panel": "16px",
+    "--ds-radius-media": "12px",
+    "--ds-radius-input": "10px",
+    "--ds-radius-sm": "8px",
+    "--ds-space-1": "4px",
+    "--ds-space-2": "8px",
+    "--ds-space-3": "12px",
+    "--ds-space-4": "16px",
+    "--ds-space-5": "24px",
+    "--ds-space-6": "32px",
+    "--ds-space-7": "40px",
+    "--ds-space-8": "56px",
+    "--ds-space-9": "80px",
+    "--ds-space-10": "120px",
+    "--ds-space-11": "160px",
+    "--ds-space-12": "200px",
+    "--ds-space-13": "240px",
+    "--ds-blur-glass": "12px",
+    "--ds-shadow-card": "0 0 0 1px #f1f5f9,0 2px 4px rgba(0,0,0,.05),0 12px 24px rgba(0,0,0,.05)",
+    "--ds-font-body": "\"DM Sans\",system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans SC\",\"PingFang SC\",sans-serif",
+    "--ds-font-mono": "\"Fragment Mono\",\"Roboto Mono\",ui-monospace,monospace",
+    "--ds-font-sans": "var(--ds-font-body)"
+  },
+  "color_palette": {
+    "backgrounds": [
+      "rgb(10, 10, 10)",
+      "rgba(255, 255, 255, 0.25)",
+      "rgb(255, 255, 255)",
+      "rgba(95, 102, 114, 0.42)",
+      "rgb(255, 96, 88)",
+      "rgb(255, 189, 46)",
+      "rgb(40, 200, 64)",
+      "rgba(255, 255, 255, 0.08)",
+      "rgba(255, 255, 255, 0.06)",
+      "rgb(21, 21, 23)",
+      "rgb(44, 44, 46)",
+      "rgb(53, 54, 56)",
+      "rgba(122, 170, 255, 0.4)"
+    ],
+    "texts": [
+      "rgb(0, 0, 0)",
+      "rgb(30, 35, 44)",
+      "rgb(255, 255, 255)",
+      "rgba(255, 255, 255, 0.5)",
+      "rgba(255, 255, 255, 0.45)",
+      "rgb(10, 10, 10)",
+      "rgb(249, 250, 251)",
+      "rgb(207, 211, 214)",
+      "rgb(231, 233, 236)",
+      "rgb(173, 178, 184)",
+      "rgb(122, 170, 255)",
+      "rgb(129, 133, 140)",
+      "rgba(249, 250, 251, 0.5)"
+    ],
+    "borders": [
+      "rgb(229, 231, 235)",
+      "rgba(255, 255, 255, 0.06)",
+      "rgb(10, 10, 10)",
+      "rgba(0, 0, 0, 0.1)"
+    ]
+  },
+  "typography": {
+    "font_families": [
+      "\"DM Sans\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans SC\", \"PingFang SC\", sans-serif",
+      "Montserrat, \"DM Sans\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans SC\", \"PingFang SC\", sans-serif",
+      "\"Fragment Mono\", ui-monospace, SFMono-Regular, Menlo, Consolas, \"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", monospace",
+      "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", sans-serif"
+    ],
+    "loaded_fonts": [
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "300",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Noto Sans SC",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "DM Sans",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "DM Sans",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "DM Sans",
+        "weight": "700",
+        "style": "normal"
+      },
+      {
+        "family": "Montserrat",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Montserrat",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Montserrat",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "Host Grotesk",
+        "weight": "300 800",
+        "style": "normal"
+      },
+      {
+        "family": "Host Grotesk",
+        "weight": "300 800",
+        "style": "normal"
+      },
+      {
+        "family": "Host Grotesk",
+        "weight": "300 800",
+        "style": "italic"
+      },
+      {
+        "family": "Host Grotesk",
+        "weight": "300 800",
+        "style": "italic"
+      },
+      {
+        "family": "Fragment Mono",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Fragment Mono",
+        "weight": "400",
+        "style": "normal"
+      }
+    ],
+    "heading_info": {
+      "h1": [
+        {
+          "size": "40px",
+          "weight": "400",
+          "lineHeight": "60px",
+          "letterSpacing": "-0.8px",
+          "textTransform": "none"
+        }
+      ],
+      "h2": [
+        {
+          "size": "36px",
+          "weight": "400",
+          "lineHeight": "54px",
+          "letterSpacing": "-0.72px",
+          "textTransform": "none"
+        },
+        {
+          "size": "36px",
+          "weight": "400",
+          "lineHeight": "54px",
+          "letterSpacing": "-0.72px",
+          "textTransform": "none"
+        },
+        {
+          "size": "36px",
+          "weight": "400",
+          "lineHeight": "54px",
+          "letterSpacing": "-0.72px",
+          "textTransform": "none"
+        }
+      ],
+      "h3": [
+        {
+          "size": "20px",
+          "weight": "400",
+          "lineHeight": "30px",
+          "letterSpacing": "-0.2px",
+          "textTransform": "none"
+        },
+        {
+          "size": "20px",
+          "weight": "400",
+          "lineHeight": "30px",
+          "letterSpacing": "-0.2px",
+          "textTransform": "none"
+        },
+        {
+          "size": "20px",
+          "weight": "400",
+          "lineHeight": "30px",
+          "letterSpacing": "-0.2px",
+          "textTransform": "none"
+        },
+        {
+          "size": "20px",
+          "weight": "400",
+          "lineHeight": "30px",
+          "letterSpacing": "-0.2px",
+          "textTransform": "none"
+        },
+        {
+          "size": "20px",
+          "weight": "400",
+          "lineHeight": "30px",
+          "letterSpacing": "-0.2px",
+          "textTransform": "none"
+        },
+        {
+          "size": "20px",
+          "weight": "400",
+          "lineHeight": "30px",
+          "letterSpacing": "-0.2px",
+          "textTransform": "none"
+        }
+      ],
+      "h4": [],
+      "h5": [],
+      "h6": []
+    },
+    "body_sizes": [
+      "16px",
+      "12px",
+      "18px",
+      "40px",
+      "15px",
+      "12.32px",
+      "12.6px",
+      "11.7px",
+      "13.16px",
+      "14.6875px",
+      "13.7083px",
+      "12.7292px",
+      "10.7708px",
+      "18.6042px",
+      "8.8125px"
+    ],
+    "font_weights": [
+      "400",
+      "500"
+    ],
+    "line_heights": [
+      "24px",
+      "60px",
+      "54px",
+      "30px",
+      "18px",
+      "27px",
+      "12px",
+      "25.6px",
+      "17.248px",
+      "17.64px",
+      "21.6px",
+      "22.56px",
+      "16.38px",
+      "22.0312px",
+      "20.5625px",
+      "19.0938px",
+      "16.1562px",
+      "27.9062px",
+      "13.2188px"
+    ],
+    "letter_spacings": [
+      "-0.8px",
+      "-0.72px",
+      "-0.2px",
+      "2.64px"
+    ],
+    "text_transforms": []
+  },
+  "spacing": {
+    "common_paddings": [
+      "8px 0px 0px",
+      "4px 0px",
+      "3px",
+      "0px 12px",
+      "12px 24px",
+      "24px 40px 24px 0px",
+      "0px 0px 12px",
+      "12px 0px",
+      "24px 0px",
+      "16px 0px 16px 24px",
+      "160px 0px 80px",
+      "16px 0px 0px",
+      "11px 12px 11px 18px",
+      "11px 14px 11px 12px",
+      "0px 10.56px 3.52px",
+      "0px 10.56px",
+      "0px 7.04px",
+      "0px 7.04px 0px 24.64px",
+      "10.56px",
+      "0px 18px"
+    ],
+    "common_margins": [
+      "0px 150px",
+      "0px 0px 0px 4px",
+      "-12px 0px 0px",
+      "8px 0px 0px",
+      "0px 0px 10.56px",
+      "0px 0px 8.8px",
+      "10.56px 0px 3.52px",
+      "8.8px 0px 0px",
+      "0px 67.1094px 0px 67.0938px",
+      "0px 0px 25.2px 502.219px",
+      "0px 0px 7.2px",
+      "0px 0px 14.4px",
+      "5.4px 0px 0px",
+      "14.4px 0px 0px",
+      "0px 52.7031px"
+    ],
+    "gaps": [
+      "8px",
+      "16px",
+      "56px",
+      "32px",
+      "7px",
+      "4px",
+      "6px",
+      "7.92px",
+      "5.28px",
+      "7.04px",
+      "12.32px",
+      "14.4px",
+      "8.1px",
+      "3.6px",
+      "10.8px"
+    ]
+  },
+  "borders": {
+    "radii": [
+      "100px",
+      "100px 0px 0px 100px",
+      "0px 100px 100px 0px",
+      "16px",
+      "50%",
+      "10.56px",
+      "7.04px",
+      "0px 16px 16px 0px",
+      "19.8px"
+    ],
+    "border_specs": [
+      "1px solid"
+    ],
+    "styles": [
+      "solid"
+    ]
+  },
+  "shadows": [
+    "rgba(0, 0, 0, 0.08) 0px 1px 3px 0px",
+    "rgba(255, 255, 255, 0.12) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 24px 72px 0px",
+    "rgba(255, 255, 255, 0.1) -0.5px 0px 0px 0px inset",
+    "rgba(0, 0, 0, 0.08) 0px 0px 0px 0.5px inset",
+    "rgba(255, 255, 255, 0.08) 0px 0px 0px 0.5px inset",
+    "rgba(255, 255, 255, 0.1) 0px -0.5px 0px 0px inset",
+    "rgba(255, 255, 255, 0.12) 0px 0px 0px 0.5px, rgba(0, 0, 0, 0.06) 0px 4px 16px 0px"
+  ],
+  "layout": {
+    "sections": [
+      {
+        "tag": "nav",
+        "classes": "ds-mobile-menu-body",
+        "id": "",
+        "width": 1440,
+        "height": 770,
+        "maxWidth": "none",
+        "padding": "12px 24px",
+        "display": "block",
+        "role": "navigation"
+      },
+      {
+        "tag": "nav",
+        "classes": "flex flex-wrap items-center justify-center gap-x-ds-3 gap-y-ds-2 xl:justify-self-end",
+        "id": "",
+        "width": 139,
+        "height": 21,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "政策与说明"
+      },
+      {
+        "tag": "main",
+        "classes": "relative flex flex-col w-full",
+        "id": "",
+        "width": 1440,
+        "height": 3958,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "main"
+      },
+      {
+        "tag": "section",
+        "classes": "relative flex items-center w-full",
+        "id": "",
+        "width": 1440,
+        "height": 1241,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "section"
+      },
+      {
+        "tag": "section",
+        "classes": "ds-container pt-ds-11 pb-ds-11",
+        "id": "",
+        "width": 1140,
+        "height": 1419,
+        "maxWidth": "none",
+        "padding": "160px 0px",
+        "display": "block",
+        "role": "section"
+      },
+      {
+        "tag": "section",
+        "classes": "ds-container py-ds-10",
+        "id": "",
+        "width": 1140,
+        "height": 617,
+        "maxWidth": "none",
+        "padding": "120px 0px",
+        "display": "block",
+        "role": "section"
+      },
+      {
+        "tag": "section",
+        "classes": "relative z-10 ds-container flex flex-col items-center text-center scroll-mt-[100px] pt-ds-11 pb-ds-13",
+        "id": "products",
+        "width": 1140,
+        "height": 603,
+        "maxWidth": "none",
+        "padding": "160px 0px 240px",
+        "display": "flex",
+        "role": "section"
+      },
+      {
+        "tag": "footer",
+        "classes": "ds-container pb-ds-6",
+        "id": "",
+        "width": 1140,
+        "height": 78,
+        "maxWidth": "none",
+        "padding": "0px 0px 32px",
+        "display": "block",
+        "role": "footer"
+      },
+      {
+        "tag": "aside",
+        "classes": "HarnessDesktopPreview_sidebar__Y6Rwg",
+        "id": "",
+        "width": 229,
+        "height": 612,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "aside"
+      },
+      {
+        "tag": "article",
+        "classes": "HarnessCapabilitiesSection_card__Yf6o5 HarnessCapabilitiesSection_entrance__EZAWd",
+        "id": "",
+        "width": 554,
+        "height": 467,
+        "maxWidth": "none",
+        "padding": "40px 40px 0px",
+        "display": "flex",
+        "role": "article"
+      },
+      {
+        "tag": "article",
+        "classes": "HarnessCapabilitiesSection_card__Yf6o5 HarnessCapabilitiesSection_entrance__EZAWd",
+        "id": "",
+        "width": 554,
+        "height": 467,
+        "maxWidth": "none",
+        "padding": "40px 40px 0px",
+        "display": "flex",
+        "role": "article"
+      },
+      {
+        "tag": "article",
+        "classes": "HarnessCapabilitiesSection_card__Yf6o5 HarnessCapabilitiesSection_entrance__EZAWd",
+        "id": "",
+        "width": 554,
+        "height": 466,
+        "maxWidth": "none",
+        "padding": "40px 40px 0px",
+        "display": "flex",
+        "role": "article"
+      },
+      {
+        "tag": "article",
+        "classes": "HarnessCapabilitiesSection_card__Yf6o5 HarnessCapabilitiesSection_entrance__EZAWd",
+        "id": "",
+        "width": 554,
+        "height": 466,
+        "maxWidth": "none",
+        "padding": "40px 40px 0px",
+        "display": "flex",
+        "role": "article"
+      }
+    ],
+    "containers": [
+      {
+        "classes": "ds-header-wrapper",
+        "maxWidth": "none",
+        "padding": "8px 0px 0px"
+      },
+      {
+        "classes": "relative z-10 ds-container flex flex-col items-center gap-ds-7 md:gap-ds-8 pt-ds-11 pb-ds-9",
+        "maxWidth": "none",
+        "padding": "160px 0px 80px"
+      },
+      {
+        "classes": "flex w-full max-w-[800px] flex-col items-center gap-ds-6 pt-ds-4 text-center",
+        "maxWidth": "800px",
+        "padding": "16px 0px 0px"
+      },
+      {
+        "classes": "ds-hero-enter w-full max-w-[720px] flex flex-col gap-ds-1",
+        "maxWidth": "720px",
+        "padding": "0px"
+      },
+      {
+        "classes": "ds-hero-preview-enter max-w-[1020px] w-full",
+        "maxWidth": "1020px",
+        "padding": "0px"
+      },
+      {
+        "classes": "ds-container pt-ds-11 pb-ds-11",
+        "maxWidth": "none",
+        "padding": "160px 0px"
+      },
+      {
+        "classes": "HarnessCapabilitiesSection_entrance__EZAWd max-w-[820px] mx-auto flex flex-col items-center gap-ds-7 text-center",
+        "maxWidth": "820px",
+        "padding": "0px"
+      },
+      {
+        "classes": "ds-container py-ds-10",
+        "maxWidth": "none",
+        "padding": "120px 0px"
+      },
+      {
+        "classes": "harness-heading ds-text-heading1 text-ds-primary mb-ds-9 max-w-[600px]",
+        "maxWidth": "600px",
+        "padding": "0px"
+      },
+      {
+        "classes": "relative z-10 ds-container flex flex-col items-center text-center scroll-mt-[100px] pt-ds-11 pb-ds-13",
+        "maxWidth": "none",
+        "padding": "160px 0px 240px"
+      },
+      {
+        "classes": "ds-text-body text-ds-description max-w-[652px] mt-ds-5",
+        "maxWidth": "652px",
+        "padding": "0px"
+      },
+      {
+        "classes": "ds-container pb-ds-6",
+        "maxWidth": "none",
+        "padding": "0px 0px 32px"
+      }
+    ],
+    "total_height": 3958,
+    "section_count": 13
+  },
+  "animations": {
+    "transitions": [
+      "all",
+      "background-color 0.3s, border-color 0.3s, backdrop-filter 0.3s",
+      "color 0.2s, background-color 0.2s, box-shadow 0.2s",
+      "opacity 0.2s",
+      "none"
+    ],
+    "animation_names": [
+      "harness-ds-hero-enter"
+    ],
+    "keyframes": [
+      {
+        "name": "harness-ds-hero-enter",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateY(var(--enter-y,20px)); filter: blur(var(--enter-blur,0));"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateY(0px); filter: blur(0px);"
+          }
+        ]
+      },
+      {
+        "name": "harness-ds-preview-enter",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateY(20px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "ds-loading",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "transform: rotate(0deg);"
+          },
+          {
+            "key": "100%",
+            "css": "transform: rotate(1turn);"
+          }
+        ]
+      },
+      {
+        "name": "HarnessDownloadMenu_download-menu-enter__0nvA8",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: scale(0.95);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: scale(1);"
+          }
+        ]
+      },
+      {
+        "name": "HarnessDeliverablesPreview_files-upward__sVCuc",
+        "frames": [
+          {
+            "key": "0%, 7.42857%",
+            "css": "transform: translateY(0px);"
+          },
+          {
+            "key": "14.2857%, 21.7143%",
+            "css": "transform: translateY(-10%);"
+          },
+          {
+            "key": "28.5714%, 36%",
+            "css": "transform: translateY(-20%);"
+          },
+          {
+            "key": "42.8571%, 50.2857%",
+            "css": "transform: translateY(-30%);"
+          },
+          {
+            "key": "57.1429%, 64.5714%",
+            "css": "transform: translateY(-40%);"
+          },
+          {
+            "key": "71.4286%, 78.8571%",
+            "css": "transform: translateY(-50%);"
+          },
+          {
+            "key": "85.7143%, 93.1429%",
+            "css": "transform: translateY(-60%);"
+          },
+          {
+            "key": "100%",
+            "css": "transform: translateY(-70%);"
+          }
+        ]
+      },
+      {
+        "name": "HarnessDeliverablesPreview_file-card-presence__M_qmP",
+        "frames": [
+          {
+            "key": "0%, 7.42857%",
+            "css": "opacity: 1; transform: scale(1);"
+          },
+          {
+            "key": "67.1429%, 9.42857%",
+            "css": "opacity: 0; transform: scale(0.92);"
+          },
+          {
+            "key": "71.4286%, 81.4286%",
+            "css": "opacity: var(--third-row-opacity,1); transform: scale(var(--third-row-scale,1));"
+          },
+          {
+            "key": "85.7143%, 100%",
+            "css": "opacity: 1; transform: scale(1);"
+          }
+        ]
+      },
+      {
+        "name": "HarnessWorkflowPreview_story-cycle__CBrlh",
+        "frames": [
+          {
+            "key": "0%, 100%",
+            "css": "opacity: 0; transform: translateY(calc(var(--u) * 6));"
+          },
+          {
+            "key": "8%, 95%",
+            "css": "opacity: 1; transform: translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "HarnessWorkflowPreview_process-enter__mK5b_",
+        "frames": [
+          {
+            "key": "0%, 8%",
+            "css": "opacity: 0; transform: translateY(calc(var(--u) * 4));"
+          },
+          {
+            "key": "15%, 100%",
+            "css": "opacity: 1; transform: translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "HarnessWorkflowPreview_process-disclosure__u_jvX",
+        "frames": [
+          {
+            "key": "0%, 16%, 71%, 100%",
+            "css": "grid-template-rows: 0fr;"
+          },
+          {
+            "key": "22%, 65%",
+            "css": "grid-template-rows: 1fr;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessWorkflowPreview_disclosure-fade__Hfm2u",
+        "frames": [
+          {
+            "key": "0%, 16%, 70%, 100%",
+            "css": "opacity: 0; mask-position: 0px 100%;"
+          },
+          {
+            "key": "22%, 64%",
+            "css": "opacity: 1; mask-position: 0px 0px;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessWorkflowPreview_process-chevron__fhCwz",
+        "frames": [
+          {
+            "key": "0%, 16%, 71%, 100%",
+            "css": "transform: scaleY(1);"
+          },
+          {
+            "key": "22%, 65%",
+            "css": "transform: scaleY(-1);"
+          }
+        ]
+      },
+      {
+        "name": "HarnessWorkflowPreview_working-label__WdKEj",
+        "frames": [
+          {
+            "key": "0%, 46%",
+            "css": "opacity: 1;"
+          },
+          {
+            "key": "50%, 100%",
+            "css": "opacity: 0;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessWorkflowPreview_finished-label__vNxyw",
+        "frames": [
+          {
+            "key": "0%, 46%",
+            "css": "opacity: 0;"
+          },
+          {
+            "key": "50%, 100%",
+            "css": "opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessWorkflowPreview_input-visible__yyW_e",
+        "frames": [
+          {
+            "key": "0%, 44%",
+            "css": "opacity: 1;"
+          },
+          {
+            "key": "48%, 100%",
+            "css": "opacity: 0;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessWorkflowPreview_result-visible__LAvdZ",
+        "frames": [
+          {
+            "key": "0%, 46%",
+            "css": "opacity: 0;"
+          },
+          {
+            "key": "50%, 100%",
+            "css": "opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessWorkflowPreview_completion-enter__rPVj2",
+        "frames": [
+          {
+            "key": "0%, 71%",
+            "css": "opacity: 0; transform: translateY(calc(var(--u) * 8)) scale(.98);"
+          },
+          {
+            "key": "78%, 100%",
+            "css": "opacity: 1; transform: translateY(0px) scale(1);"
+          }
+        ]
+      },
+      {
+        "name": "HarnessPluginsPreview_tool-row-enter__PnTpy",
+        "frames": [
+          {
+            "key": "0%, 18%",
+            "css": "opacity: 0; transform: translateY(5px);"
+          },
+          {
+            "key": "19%, 100%",
+            "css": "opacity: 1; transform: none;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessPluginsPreview_tool-collapse__2yBoS",
+        "frames": [
+          {
+            "key": "0%, 35.2727%",
+            "css": "grid-template-rows: 1fr; opacity: 1;"
+          },
+          {
+            "key": "37.5%, 100%",
+            "css": "grid-template-rows: 0fr; opacity: 0;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessPluginsPreview_completion-copy__BVuym",
+        "frames": [
+          {
+            "key": "0%, 37.5%",
+            "css": "opacity: 0; transform: translateY(5px);"
+          },
+          {
+            "key": "39%, 100%",
+            "css": "opacity: 1; transform: none;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessPluginsPreview_timer-frame__aSRBU",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 1;"
+          },
+          {
+            "key": "4%, 100%",
+            "css": "opacity: 0;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessPluginsPreview_conversation__oxg8B",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateY(8px);"
+          },
+          {
+            "key": "13.6364%, 2.7273%",
+            "css": "opacity: 1; transform: none;"
+          },
+          {
+            "key": "15.2727%, 100%",
+            "css": "opacity: 0; transform: translateY(-8px);"
+          }
+        ]
+      },
+      {
+        "name": "HarnessPluginsPreview_prompt__UJR1M",
+        "frames": [
+          {
+            "key": "0%, 2.7273%",
+            "css": "opacity: 0; clip-path: inset(0px 100% 0px 0px);"
+          },
+          {
+            "key": "8.7273%, 100%",
+            "css": "opacity: 1; clip-path: inset(0px);"
+          }
+        ]
+      },
+      {
+        "name": "HarnessPluginsPreview_send__kiZhx",
+        "frames": [
+          {
+            "key": "0%, 11.4545%, 15.2727%, 100%",
+            "css": "transform: scale(1);"
+          },
+          {
+            "key": "13.3636%",
+            "css": "transform: scale(0.87); background: rgb(120, 155, 234);"
+          }
+        ]
+      },
+      {
+        "name": "HarnessPluginsPreview_chat-view__bZ_n8",
+        "frames": [
+          {
+            "key": "0%, 14.7273%",
+            "css": "opacity: 0; transform: translateY(8px);"
+          },
+          {
+            "key": "16.9091%, 51%",
+            "css": "opacity: 1; transform: none;"
+          },
+          {
+            "key": "53%, 100%",
+            "css": "opacity: 0; transform: translateY(-5px);"
+          }
+        ]
+      },
+      {
+        "name": "HarnessPluginsPreview_process__taloc",
+        "frames": [
+          {
+            "key": "0%, 16.9091%",
+            "css": "opacity: 0; transform: translateY(5px);"
+          },
+          {
+            "key": "18.5455%, 100%",
+            "css": "opacity: 1; transform: none;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessPluginsPreview_working-state__0Ax4y",
+        "frames": [
+          {
+            "key": "0%, 35.2727%",
+            "css": "opacity: 1;"
+          },
+          {
+            "key": "36.3636%, 100%",
+            "css": "opacity: 0;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessPluginsPreview_finished-state__rsfa4",
+        "frames": [
+          {
+            "key": "0%, 36.3636%",
+            "css": "opacity: 0;"
+          },
+          {
+            "key": "37.4545%, 100%",
+            "css": "opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessPluginsPreview_manager__eeDKj",
+        "frames": [
+          {
+            "key": "0%, 52%",
+            "css": "opacity: 0; transform: translateY(8px);"
+          },
+          {
+            "key": "55%, 97.2727%",
+            "css": "opacity: 1; transform: none;"
+          },
+          {
+            "key": "99.0909%, 100%",
+            "css": "opacity: 0; transform: translateY(-5px);"
+          }
+        ]
+      },
+      {
+        "name": "HarnessPluginsPreview_list-scroll__G8NSS",
+        "frames": [
+          {
+            "key": "0%, 56.3636%",
+            "css": "transform: translateY(0px);"
+          },
+          {
+            "key": "81.3636%, 100%",
+            "css": "transform: translateY(var(--list-end));"
+          }
+        ]
+      },
+      {
+        "name": "HarnessPluginsPreview_new-plugin__yZSLG",
+        "frames": [
+          {
+            "key": "0%, 79.8636%",
+            "css": "background: transparent; box-shadow: none;"
+          },
+          {
+            "key": "83.3636%, 90.9091%",
+            "css": "background: rgb(36, 39, 46); box-shadow: rgb(101, 114, 139) 0px 0px 0px 0.5px inset;"
+          },
+          {
+            "key": "97.2727%, 100%",
+            "css": "background: rgb(29, 31, 36); box-shadow: rgb(53, 59, 71) 0px 0px 0px 0.5px inset;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessPluginsPreview_timer-widget__z7HxL",
+        "frames": [
+          {
+            "key": "0%, 39.5%",
+            "css": "opacity: 0; width: var(--widget-width); height: var(--widget-expanded-h); top: calc(var(--widget-expanded-top) + 3%); border-radius: calc(var(--u) * 20);"
+          },
+          {
+            "key": "42%, 49%",
+            "css": "opacity: 1; width: var(--widget-width); height: var(--widget-expanded-h); top: var(--widget-expanded-top); border-radius: calc(var(--u) * 20);"
+          },
+          {
+            "key": "53%, 97.2727%",
+            "css": "opacity: 1; width: var(--compact-width); height: var(--compact-height); top: 5%; border-radius: calc(var(--u) * 13);"
+          },
+          {
+            "key": "99.0909%, 100%",
+            "css": "opacity: 0; width: var(--compact-width); height: var(--compact-height); top: 5%; border-radius: calc(var(--u) * 13);"
+          }
+        ]
+      },
+      {
+        "name": "HarnessPluginsPreview_widget-expanded__CyEhV",
+        "frames": [
+          {
+            "key": "0%, 49%",
+            "css": "opacity: 1;"
+          },
+          {
+            "key": "51%, 100%",
+            "css": "opacity: 0;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessPluginsPreview_widget-compact__JFyyj",
+        "frames": [
+          {
+            "key": "0%, 51%",
+            "css": "opacity: 0;"
+          },
+          {
+            "key": "53%, 100%",
+            "css": "opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessTracePreview_chrome__CqzvW",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0;"
+          },
+          {
+            "key": "7%, 100%",
+            "css": "opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessTracePreview_span-reveal__3fzdT",
+        "frames": [
+          {
+            "key": "0%, 7%",
+            "css": "opacity: 0;"
+          },
+          {
+            "key": "10%, 100%",
+            "css": "opacity: 0.78;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessTracePreview_row-reveal__7cQn_",
+        "frames": [
+          {
+            "key": "0%, 9%",
+            "css": "opacity: 0; transform: translateY(calc(var(--u) * 4));"
+          },
+          {
+            "key": "13%, 100%",
+            "css": "opacity: 1; transform: none;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessTracePreview_ledger-scroll__b3Mft",
+        "frames": [
+          {
+            "key": "0%, 13%",
+            "css": "transform: translateY(0px);"
+          },
+          {
+            "key": "83%, 100%",
+            "css": "transform: translateY(calc(var(--u) * -196));"
+          }
+        ]
+      },
+      {
+        "name": "HarnessTracePreview_details-in__kF6av",
+        "frames": [
+          {
+            "key": "0%, 77%",
+            "css": "opacity: 0; transform: translateX(calc(var(--u) * 10));"
+          },
+          {
+            "key": "83%, 100%",
+            "css": "opacity: 1; transform: none;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessTracePreview_tab-active-result__Nb_9X",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "color: var(--label-primary); box-shadow: inset 0 calc(var(--u) * -2) 0 var(--business);"
+          },
+          {
+            "key": "90%",
+            "css": "color: var(--label-caption); box-shadow: inset 0 calc(var(--u) * -2) 0 transparent;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessTracePreview_tab-active-timing__IUKfg",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "color: var(--label-caption); box-shadow: inset 0 calc(var(--u) * -2) 0 transparent;"
+          },
+          {
+            "key": "90%",
+            "css": "color: var(--label-primary); box-shadow: inset 0 calc(var(--u) * -2) 0 var(--business);"
+          }
+        ]
+      },
+      {
+        "name": "HarnessTracePreview_panel-result__xHWAY",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 1;"
+          },
+          {
+            "key": "90%",
+            "css": "opacity: 0;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessTracePreview_panel-timing__9Z1J5",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0;"
+          },
+          {
+            "key": "90%",
+            "css": "opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "HarnessTracePreview_trace-fade__SIY_F",
+        "frames": [
+          {
+            "key": "0%, 96.7%",
+            "css": "opacity: 1;"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 0;"
+          }
+        ]
+      }
+    ]
+  },
+  "gradients": [
+    "linear-gradient(rgba(122, 155, 240, 0.08), rgba(122, 155, 240, 0) 35%, rgba(143, 137, 184, 0) 68%, rgba(143, 137, 184, 0.07)), none"
+  ],
+  "effects": {
+    "filters": [
+      "blur(0px)"
+    ],
+    "backdrop_filters": [
+      "blur(32px) saturate(1.25)"
+    ],
+    "transforms": [
+      "matrix(1, 0, 0, 1, 0.141602, 3.52197)",
+      "matrix(1, 0, 0, 1, 132.348, 5.5)",
+      "matrix(1, 0, 0, 1, 0, -20)",
+      "matrix(1, 0, 0, 1, 0, -1.5)",
+      "matrix(1, 0, 0, 1, 0, 0)",
+      "matrix(1, 0, 0, 1, 0.141602, 3.52185)",
+      "matrix(1, 0, 0, 1, 0.163086, 1.75)",
+      "matrix(0, -1, 1, 0, 0, 0)",
+      "matrix(1, 0, 0, 1, 0, 2)"
+    ]
+  },
+  "resources": {
+    "fonts": [],
+    "stylesheets": [
+      "https://www.deepseek.com/_next/static/css/25f198211a7e1205.css",
+      "https://www.deepseek.com/_next/static/css/826310b8bcf73c16.css",
+      "https://www.deepseek.com/_next/static/css/aa0e993381ed79dc.css",
+      "https://www.deepseek.com/_next/static/css/5adb47a13a2794be.css"
+    ],
+    "scripts": [
+      "https://www.deepseek.com/_next/static/chunks/86b88eeb-5b86058878847f6a.js",
+      "https://www.deepseek.com/_next/static/chunks/9164-9f2478a2648a9516.js",
+      "https://www.deepseek.com/_next/static/chunks/main-app-968203301d1a6d3c.js",
+      "https://www.deepseek.com/_next/static/chunks/1563-d3f244478cac7e75.js",
+      "https://www.deepseek.com/_next/static/chunks/1835-f521304a15b83224.js",
+      "https://www.deepseek.com/_next/static/chunks/app/layout-8187e9363743f22b.js",
+      "https://www.deepseek.com/_next/static/chunks/app/not-found-82b85b630d8e956c.js",
+      "https://www.deepseek.com/_next/static/chunks/8555-7c9518c428e988c2.js",
+      "https://www.deepseek.com/_next/static/chunks/3743-7c4be9ad33829b7f.js",
+      "https://www.deepseek.com/_next/static/chunks/1498-759c64eaa60c8a1f.js",
+      "https://www.deepseek.com/_next/static/chunks/6872-0ba11e0d1d1532e1.js",
+      "https://www.deepseek.com/_next/static/chunks/9540-101bef8f63f7ab13.js",
+      "https://www.deepseek.com/_next/static/chunks/app/%5Blocale%5D/layout-785e8a559058e2b3.js",
+      "https://www.deepseek.com/_next/static/chunks/6336-e0040a1eb23dd92b.js",
+      "https://www.deepseek.com/_next/static/chunks/8809-44db951c56e60f28.js",
+      "https://www.deepseek.com/_next/static/chunks/1798-4c32a4b3e02e20fe.js",
+      "https://www.deepseek.com/_next/static/chunks/app/%5Blocale%5D/harness/page-64b7fc38c3c75a99.js",
+      "https://www.deepseek.com/_next/static/chunks/app/%5Blocale%5D/template-4dc2bb6be23dc661.js",
+      "https://www.deepseek.com/_next/static/chunks/app/%5Blocale%5D/not-found-61a27b165a778020.js",
+      "https://www.deepseek.com/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js",
+      "https://lf3-data.volccdn.com/obj/data-static/log-sdk/collect/5.0/collect-rangers-v5.2.1.js",
+      "https://apm.volccdn.com/mars-web/apmplus/web/browser.cn.js?aid=0&globalName=apmPlus",
+      "https://www.deepseek.com/_next/static/chunks/webpack-b8973944fb18ed66.js"
+    ]
+  },
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "captured_at": "2026-10-01 01:43:50"
+}

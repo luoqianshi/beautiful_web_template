@@ -1,0 +1,573 @@
+{
+  "page_info": {
+    "title": "Xiaomi MiMo桌面客户端",
+    "lang": "zh-CN",
+    "description": "自由畅谈，肆意创作，无限想象即刻启程。",
+    "charset": "UTF-8"
+  },
+  "css_variables": {
+    "--font-sans": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Noto Sans CJK SC\", \"Noto Sans SC\", \"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Thai\", \"Noto Sans JP\", \"Noto Sans KR\", sans-serif",
+    "--fs-hero": "clamp(20px, 6.66px + 3.43vw, 56px)",
+    "--fs-hero-word": "clamp(16px, 5.31px + 2.76vw, 45px)",
+    "--fs-cta": "clamp(16px, 14.93px + .3vw, 19.2px)",
+    "--fs-h2": "clamp(28px, 23.63px + 1.14vw, 40px)",
+    "--fs-lead": "clamp(14px, 11.84px + .57vw, 20px)",
+    "--fs-h3": "clamp(19px, 17.14px + .48vw, 24px)",
+    "--fs-h3-sm": "20px",
+    "--fs-body": "clamp(14px, 13.26px + .19vw, 16px)",
+    "--fs-index": "clamp(16px, 14.51px + .38vw, 20px)",
+    "--fs-index-sm": "clamp(12px, 11.26px + .19vw, 14px)",
+    "--fs-caption": "clamp(14px, 10.58px + .38vw, 16px)",
+    "--fs-footer": "clamp(14px, 13.2571px + .190476vw, 16px)",
+    "--fs-footer-heading": "clamp(16px, 15.2571px + .190476vw, 18px)",
+    "--fs-footer-small": "clamp(12px, 11.6286px + .095238vw, 13px)",
+    "--footer-padding": "clamp(40px, 31.0857px + 2.28571vw, 64px)",
+    "--footer-max": "1600px",
+    "--lh-tight": "1.15",
+    "--lh-title": "1.32",
+    "--lh-body": "1.5",
+    "--space-1": "4px",
+    "--space-2": "8px",
+    "--space-3": "12px",
+    "--space-4": "16px",
+    "--space-5": "24px",
+    "--space-6": "32px",
+    "--space-7": "48px",
+    "--space-8": "64px",
+    "--space-9": "96px",
+    "--section-gap": "clamp(28px, 8.77px + 4.95vw, 80px)",
+    "--card-item-min-height": "clamp(64px, 56.5714px + 1.90476vw, 84px)",
+    "--content-cards-max": "1240px",
+    "--content-copy-top": "clamp(24px, 18.0571px + 1.52381vw, 40px)",
+    "--demo-window-height": "clamp(440px, 409.914px + 7.71429vw, 521px)",
+    "--hero-copy-lift": "clamp(8px, .942857px + 1.80952vw, 27px)",
+    "--hero-download-gap": "clamp(28px, 23.5429px + 1.14286vw, 40px)",
+    "--hero-demo-lift": "clamp(0px, -5.57143px + 1.42857vw, 15px)",
+    "--hero-demo-bottom-gap": "120px",
+    "--gutter": "clamp(12px, 4vw, 40px)",
+    "--content-max": "1200px",
+    "--content-width": "min(var(--content-max), calc(100% - 2 * var(--gutter)))",
+    "--hz": "1",
+    "--hero-zoom": "min(1.25, calc(100vw / 1440px))",
+    "--design-width": "1440px",
+    "--blue": "#3370ff",
+    "--blue-hover": "#2b5fe0",
+    "--blue-wash": "#eef3ff",
+    "--blue-line": "#c8d8ff",
+    "--ink": "#1f2329",
+    "--gray": "#646a73",
+    "--line": "#dee0e3",
+    "--bg": "#f5f6f7",
+    "--red": "#e34d59",
+    "--green": "#2ea44f"
+  },
+  "color_palette": {
+    "backgrounds": [
+      "rgb(245, 246, 247)",
+      "rgb(252, 250, 248)",
+      "rgb(38, 37, 30)",
+      "rgb(21, 28, 19)",
+      "rgb(255, 101, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0.55)",
+      "rgb(255, 254, 250)",
+      "rgb(0, 0, 0)",
+      "rgb(17, 17, 17)"
+    ],
+    "texts": [
+      "rgb(0, 0, 0)",
+      "rgb(31, 35, 41)",
+      "rgb(51, 112, 255)",
+      "rgb(255, 255, 255)",
+      "rgb(21, 28, 19)",
+      "rgb(250, 250, 250)",
+      "rgb(102, 100, 95)",
+      "rgb(189, 189, 189)",
+      "rgb(142, 142, 147)"
+    ],
+    "borders": [
+      "rgb(0, 0, 0)",
+      "rgb(31, 35, 41)",
+      "rgb(51, 112, 255)",
+      "rgb(255, 255, 255)",
+      "rgb(21, 28, 19)",
+      "rgb(250, 250, 250)",
+      "rgba(125, 113, 70, 0.35)",
+      "rgb(102, 100, 95)",
+      "rgba(255, 255, 255, 0.35)",
+      "rgb(189, 189, 189)",
+      "rgb(142, 142, 147)",
+      "rgb(50, 50, 50)"
+    ]
+  },
+  "typography": {
+    "font_families": [
+      "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Noto Sans CJK SC\", \"Noto Sans SC\", \"Noto Sans\", \"Noto Sans Arabic\", \"Noto Sans Thai\", \"Noto Sans JP\", \"Noto Sans KR\", sans-serif",
+      "\"Times New Roman\""
+    ],
+    "loaded_fonts": [],
+    "heading_info": {
+      "h1": [
+        {
+          "size": "56px",
+          "weight": "600",
+          "lineHeight": "73.92px",
+          "letterSpacing": "0.4px",
+          "textTransform": "none"
+        }
+      ],
+      "h2": [
+        {
+          "size": "40px",
+          "weight": "600",
+          "lineHeight": "40px",
+          "letterSpacing": "-1.6px",
+          "textTransform": "none"
+        },
+        {
+          "size": "18px",
+          "weight": "600",
+          "lineHeight": "26.9999px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "18px",
+          "weight": "600",
+          "lineHeight": "26.9999px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "18px",
+          "weight": "600",
+          "lineHeight": "26.9999px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "18px",
+          "weight": "600",
+          "lineHeight": "26.9999px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "18px",
+          "weight": "700",
+          "lineHeight": "26.9999px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        }
+      ],
+      "h3": [
+        {
+          "size": "24px",
+          "weight": "600",
+          "lineHeight": "34.728px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "24px",
+          "weight": "600",
+          "lineHeight": "34.728px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "24px",
+          "weight": "600",
+          "lineHeight": "34.728px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "24px",
+          "weight": "600",
+          "lineHeight": "34.728px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        }
+      ],
+      "h4": [],
+      "h5": [],
+      "h6": []
+    },
+    "body_sizes": [
+      "15px",
+      "14px",
+      "56px",
+      "45px",
+      "15.12px",
+      "12.24px",
+      "13.996px",
+      "20px",
+      "16px",
+      "15.996px",
+      "19.982px",
+      "13px",
+      "24px"
+    ],
+    "font_weights": [
+      "400",
+      "600",
+      "700",
+      "500"
+    ],
+    "line_heights": [
+      "25.5px",
+      "73.92px",
+      "40px",
+      "26.9999px",
+      "34.728px",
+      "14px",
+      "59.985px",
+      "45px",
+      "17.25px",
+      "16.632px",
+      "13.464px",
+      "20.994px",
+      "20px",
+      "normal",
+      "13.996px",
+      "19.1952px",
+      "19.982px",
+      "23.9999px",
+      "19.5px",
+      "36px"
+    ],
+    "letter_spacings": [
+      "0.4px",
+      "-1.6px",
+      "normal",
+      "0.2388px",
+      "0.2px",
+      "-1px",
+      "-0.28px",
+      "-0.63984px",
+      "-0.4px"
+    ],
+    "text_transforms": []
+  },
+  "spacing": {
+    "common_paddings": [
+      "0px 18px",
+      "0px 0px 120px",
+      "116px 0px 0px",
+      "0px 40px",
+      "0px 5px 0px 0px",
+      "0px 8px",
+      "125px 40px 62.554px",
+      "40px 0px 24px 54px",
+      "24px 0px 12px",
+      "51px 12px 24px 41px",
+      "83px 13px 24px 37px",
+      "60px 16px 24px 82px",
+      "63.9999px 0px 24px",
+      "0px 0px 63.9999px",
+      "2px",
+      "1px",
+      "8px 0px",
+      "24px 0px 0px",
+      "12px 0px",
+      "24px"
+    ],
+    "common_margins": [
+      "0px 0px 0px 3px",
+      "8px 0px 0px",
+      "40px 0px 0px",
+      "4px 0px 0px",
+      "13.0001px 100px 0px",
+      "0px 130px",
+      "20px 0px 0px",
+      "60.5538px 60px 0px",
+      "59px 100px 0px",
+      "0px 0px 24px",
+      "16px 0px 0px",
+      "0px 40px",
+      "12px 0px 24px",
+      "0px 0px 16px",
+      "auto"
+    ],
+    "gaps": [
+      "16px",
+      "8px",
+      "6px",
+      "20px",
+      "14px",
+      "80px",
+      "64px",
+      "4px",
+      "32px",
+      "normal 8px"
+    ]
+  },
+  "borders": {
+    "radii": [
+      "999px",
+      "1px",
+      "4px",
+      "13px",
+      "8px",
+      "3px",
+      "12px"
+    ],
+    "border_specs": [
+      "1px solid"
+    ],
+    "styles": [
+      "solid"
+    ]
+  },
+  "shadows": [
+    "rgba(21, 28, 19, 0.06) 0px 12px 32px 0px"
+  ],
+  "layout": {
+    "sections": [
+      {
+        "tag": "header",
+        "classes": "desktop-nav desktop-nav--marketing",
+        "id": "",
+        "width": 1440,
+        "height": 66,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "navigation"
+      },
+      {
+        "tag": "nav",
+        "classes": "desktop-footer__social",
+        "id": "",
+        "width": 400,
+        "height": 44,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "社交媒体"
+      },
+      {
+        "tag": "nav",
+        "classes": "desktop-footer__navigation",
+        "id": "",
+        "width": 896,
+        "height": 255,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "grid",
+        "role": "页脚导航"
+      },
+      {
+        "tag": "main",
+        "classes": "mimo-page ",
+        "id": "",
+        "width": 1440,
+        "height": 5270,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "main"
+      },
+      {
+        "tag": "section",
+        "classes": "desktop-hero",
+        "id": "",
+        "width": 1440,
+        "height": 1340,
+        "maxWidth": "none",
+        "padding": "0px 0px 120px",
+        "display": "block",
+        "role": "hero"
+      },
+      {
+        "tag": "section",
+        "classes": "desktop-content-section",
+        "id": "",
+        "width": 1440,
+        "height": 3453,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "section"
+      },
+      {
+        "tag": "footer",
+        "classes": "desktop-footer",
+        "id": "",
+        "width": 1440,
+        "height": 476,
+        "maxWidth": "none",
+        "padding": "63.9999px 0px 24px",
+        "display": "block",
+        "role": "contentinfo"
+      },
+      {
+        "tag": "article",
+        "classes": "desktop-content-card desktop-content-card--smart",
+        "id": "",
+        "width": 1240,
+        "height": 502,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "article"
+      },
+      {
+        "tag": "article",
+        "classes": "desktop-content-card desktop-content-card--iterate",
+        "id": "",
+        "width": 1240,
+        "height": 502,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "article"
+      },
+      {
+        "tag": "article",
+        "classes": "desktop-content-card desktop-content-card--long-task",
+        "id": "",
+        "width": 1240,
+        "height": 502,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "article"
+      },
+      {
+        "tag": "article",
+        "classes": "desktop-content-card desktop-content-card--browser",
+        "id": "",
+        "width": 1240,
+        "height": 502,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "article"
+      }
+    ],
+    "containers": [],
+    "total_height": 5270,
+    "section_count": 11
+  },
+  "animations": {
+    "transitions": [
+      "all",
+      "transform 0.2s, opacity 0.2s",
+      "none",
+      "opacity 0.35s 0.55s",
+      "opacity 0.25s",
+      "transform 0.2s"
+    ],
+    "animation_names": [
+      "hero-pill-enter"
+    ],
+    "keyframes": [
+      {
+        "name": "typewriter-caret-blink",
+        "frames": [
+          {
+            "key": "0%, 49%",
+            "css": "opacity: 1;"
+          },
+          {
+            "key": "50%, 100%",
+            "css": "opacity: 0;"
+          }
+        ]
+      },
+      {
+        "name": "hero-pill-enter",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateY(8px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "hero-pill-word-in",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateY(40%);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "download-shiny-ring",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "transform: translate(-50%, -50%) rotate(0deg);"
+          },
+          {
+            "key": "100%",
+            "css": "transform: translate(-50%, -50%) rotate(360deg);"
+          }
+        ]
+      },
+      {
+        "name": "download-shiny-sweep",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "transform: translate(-100%);"
+          },
+          {
+            "key": "65%, 100%",
+            "css": "transform: translate(100%);"
+          }
+        ]
+      }
+    ]
+  },
+  "gradients": [
+    "linear-gradient(rgba(232, 215, 193, 0.32) 13%, rgba(255, 255, 255, 0.32) 66%)"
+  ],
+  "effects": {
+    "filters": [],
+    "backdrop_filters": [],
+    "transforms": [
+      "matrix(1, 0, 0, 1, 0, -7.65625)",
+      "matrix(1, 0, 0, 1, 0, -26.9999)",
+      "matrix(1, 0, 0, 1, 0, 0)",
+      "matrix(1, 0, -0.140541, 1, 0, 4.95)"
+    ]
+  },
+  "resources": {
+    "fonts": [],
+    "stylesheets": [
+      "https://mimo.xiaomimimo.com/desktop/invite/_next/static/chunks/0nkg3nmfji8vm.css",
+      "https://mimo.xiaomimimo.com/desktop/invite/_next/static/chunks/0abyr59req1wb.css"
+    ],
+    "scripts": [
+      "https://mimo.xiaomimimo.com/desktop/invite/_next/static/chunks/0jw4jivscv1ye.js",
+      "https://mimo.xiaomimimo.com/desktop/invite/_next/static/chunks/36lm--m0zwqtj.js",
+      "https://mimo.xiaomimimo.com/desktop/invite/_next/static/chunks/3hro83lpv1x2t.js",
+      "https://mimo.xiaomimimo.com/desktop/invite/_next/static/chunks/turbopack-01f_tzsirkvpg.js",
+      "https://mimo.xiaomimimo.com/desktop/invite/_next/static/chunks/44oxwbh__ebkl.js",
+      "https://mimo.xiaomimimo.com/desktop/invite/_next/static/chunks/1034yhhljyhfj.js",
+      "https://mimo.xiaomimimo.com/desktop/invite/_next/static/chunks/037fv2fpy1knr.js",
+      "https://mimo.xiaomimimo.com/desktop/invite/_next/static/chunks/0blhjmdfurhnf.js",
+      "https://mimo.xiaomimimo.com/desktop/invite/_next/static/chunks/0kapxr3f8s6xh.js",
+      "https://mimo.xiaomimimo.com/desktop/invite/_next/static/chunks/0cz1d0mv5g_q7.js",
+      "https://mimo.xiaomimimo.com/desktop/invite/runtime-config.js",
+      "https://mimo.xiaomimimo.com/desktop/invite/_next/static/chunks/0jvhpaew_uadu.js"
+    ]
+  },
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "captured_at": "2026-10-01 01:33:28"
+}

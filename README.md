@@ -108,6 +108,16 @@
 
 > 提取自 cursor.com 首页的暖纸浅色风格。三层暖纸白底色（#F7F7F4 → #F2F1ED → #E6E5E0）配暖墨黑（#26251E）胶囊按钮，古典浪漫主义油画"策展舞台"托起 4px 圆角白色产品窗口模型，零偏移弥散阴影、字重 400 负字距大标题与双色标题法，朱砂橙（#C8451D）仅用于文字链接的单点强调。严肃工具的人文温度。
 
+### [DeepSeek Harness Navy Glow](./templates/DeepSeek-Harness-Navy-Glow/)
+
+<p>
+  <img src="./assets/screenshots/DeepSeek-Harness-Navy-Glow-01-hero-navy-glow.png" width="32.5%" alt="DeepSeek Harness Navy Glow — hero navy glow" />
+  <img src="./assets/screenshots/DeepSeek-Harness-Navy-Glow-02-bento-dark-grid.png" width="32.5%" alt="DeepSeek Harness Navy Glow — bento dark grid" />
+  <img src="./assets/screenshots/DeepSeek-Harness-Navy-Glow-03-starfield-cta.png" width="32.5%" alt="DeepSeek Harness Navy Glow — starfield cta" />
+</p>
+
+> 提取自 deepseek.com/harness 的深空蓝产品发布风格。钢蓝到近黑的星云渐变 Hero 以 1:1 应用窗口实景（macOS 红黄绿灯、侧栏、聊天气泡、输入栏）替代插画；#0A0A0A 舞台上的 #151517 Bento 卡片用 0.5px 发丝边定义轮廓，卡内浮动 UI 切片（插件面板、Diff 面板、定时任务卡、执行轨迹）讲述产品能力；液态玻璃胶囊导航（blur 32px）随滚动收拢，Fragment Mono 大字距徽章是唯一技术签名，终局 CTA 以星尘粒子与蓝色辉光收尾。字重 400/500、负字距标题的克制深邃。
+
 ### [Enterprise](./templates/Enterprise/)
 
 <p>
@@ -188,6 +198,16 @@
 
 > 冲突的图案、密集的布局、过饱和的色彩、刻意的视觉杂乱。多多益善。
 
+### [MiMo Warm Halftone](./templates/MiMo-Warm-Halftone/)
+
+<p>
+  <img src="./assets/screenshots/MiMo-Warm-Halftone-01-marker-hero.png" width="32.5%" alt="MiMo Warm Halftone — marker hero" />
+  <img src="./assets/screenshots/MiMo-Warm-Halftone-02-halftone-list.png" width="32.5%" alt="MiMo Warm Halftone — halftone list" />
+  <img src="./assets/screenshots/MiMo-Warm-Halftone-03-ink-footer.png" width="32.5%" alt="MiMo Warm Halftone — ink footer" />
+</p>
+
+> 暖纸三层底色上铺半调网点印刷纹理与 ASCII 字符噪点，标题关键词压一条斜切橙色胶带荧光笔。编号发丝线列表、墨色胶囊按钮、纯黑二维码页脚——印刷品气质的 AI 产品落地页。
+
 ### [Minimal Dark](./templates/Minimal-Dark/)
 
 <p>
@@ -217,6 +237,16 @@
 </p>
 
 > 建立在纯黑白之上的冷峻编辑设计系统。无点缀色——唯有戏剧性对比、超大衬线字体与精准的几何布局。唤起高端时尚编辑与建筑作品集的质感。克制、精致、不妥协的大胆。
+
+### [Moonshot Pixel Odyssey](./templates/Moonshot-Pixel-Odyssey/)
+
+<p>
+  <img src="./assets/screenshots/Moonshot-Pixel-Odyssey-01-hero.png" width="32.5%" alt="Moonshot Pixel Odyssey — hero" />
+  <img src="./assets/screenshots/Moonshot-Pixel-Odyssey-02-flowmap.png" width="32.5%" alt="Moonshot Pixel Odyssey — flowmap" />
+  <img src="./assets/screenshots/Moonshot-Pixel-Odyssey-03-cta-footer.png" width="32.5%" alt="Moonshot Pixel Odyssey — cta footer" />
+</p>
+
+> 1-bit 抖动点阵影像 + Fusion Pixel 像素等宽字 + 纯黑虚空的滚动场景叙事。月球天体随滚动换相位、终端斜切缺口按钮、`‹ ›` 尖括号区块标题与四角散点构图——仿佛整站运行在太空探测器的单色终端上。零圆角、零阴影、零彩色，明度即色彩。
 
 ### [Neo Brutalism](./templates/Neo-Brutalism/)
 
@@ -278,6 +308,16 @@
 
 > 以优雅衬线字体为中心的编辑风极简设计系统。温暖象牙白背景配细腻纸张质感、考究间距、分隔线与古典比例，营造永恒而文学化的美学。通过分层渐变与多色调阴影增强深度。设计以克制与排印之美低语出精致。
 
+### [Qoder-Mint-Garden](./templates/Qoder-Mint-Garden/)
+
+<p>
+  <img src="./assets/screenshots/Qoder-Mint-Garden-01-hero-green-lane.png" width="32.5%" alt="Qoder-Mint-Garden — hero green lane" />
+  <img src="./assets/screenshots/Qoder-Mint-Garden-02-card-mosaic.png" width="32.5%" alt="Qoder-Mint-Garden — card mosaic" />
+  <img src="./assets/screenshots/Qoder-Mint-Garden-03-link-columns-footer.png" width="32.5%" alt="Qoder-Mint-Garden — link columns footer" />
+</p>
+
+> 薄荷灰白大留白画布上的森林绿单点强调。绿野跑道弧带舞台托起悬浮出血的白色产品窗口，胶囊按钮带薄瓷内高光，不对称卡片拼贴里再叠白色 UI 浮卡。清新、可信、有生机的 AI 工作台营销语言。
+
 ### [SaaS](./templates/SaaS/)
 
 <p>
@@ -317,6 +357,16 @@
 </p>
 
 > 原始、功能性且复古未来主义的命令行界面美学。高对比、等宽精准与闪烁光标。
+
+### [Trae Matrix Mint](./templates/Trae-Matrix-Mint/)
+
+<p>
+  <img src="./assets/screenshots/Trae-Matrix-Mint-01-dot-matrix-hero.png" width="32.5%" alt="Trae Matrix Mint — dot matrix hero" />
+  <img src="./assets/screenshots/Trae-Matrix-Mint-02-indexed-cards.png" width="32.5%" alt="Trae Matrix Mint — indexed cards" />
+  <img src="./assets/screenshots/Trae-Matrix-Mint-03-giant-wordmark-footer.png" width="32.5%" alt="Trae Matrix Mint — giant wordmark footer" />
+</p>
+
+> 提取自 trae.cn 的深色开发者工具美学。纯黑虚空（#0A0B0D / #000）上以薄荷绿（#32F08C）为唯一强调色，点阵像素云 Hero 由数千抖动方块构成；等宽绿色编号 `[01]` 组织功能卡片，演示面板用虚线连接器与色块节点呈现"设计图"质感；2px/4px 锐角体系与菱形 ◆ 母题贯穿细节，页脚以巨型裁切字标绿带收尾。终端般的锋利与信号感。
 
 ### [Vaporwave](./templates/Vaporwave/)
 

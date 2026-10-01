@@ -1,0 +1,2512 @@
+{
+  "page_info": {
+    "title": "Qoder智能体编程平台",
+    "lang": "zh-CN",
+    "description": "Qoder CN 是新一代 AI 编程平台，提供智能代码补全、AI 对话编程、自动代码生成等功能，支持 VS Code、JetBrains 等主流 IDE。免费下载体验。",
+    "charset": "UTF-8"
+  },
+  "css_variables": {
+    "--swiper-theme-color": "#007aff",
+    "--swiper-navigation-size": "44px",
+    "--site-header-height": "64px",
+    "--container-max-width": "1440px",
+    "--radius-border-radius-sm": "6px",
+    "--radius-border-radius-lg": "12px",
+    "--default-font-size": "14px",
+    "color-scheme": "dark",
+    "--ant-color-blue": "#196678",
+    "--ant-color-blue-bg": "#b3dfe9",
+    "--ant-color-blue-hover": "#4b8c9c",
+    "--ant-color-brick": "#4b5130",
+    "--ant-color-brick-bg": "#252819",
+    "--ant-color-brick-hover": "#6e7746",
+    "--ant-color-desert": "#4b4832",
+    "--ant-color-desert-bg": "#25231a",
+    "--ant-color-desert-hover": "#817c5b",
+    "--ant-color-forest": "#31786b",
+    "--ant-color-forest-bg": "#1d2e24",
+    "--ant-color-forest-hover": "#73ae8c",
+    "--ant-color-frame": "#232722",
+    "--ant-color-growth": "#2f6327",
+    "--ant-color-growth-bg": "#21351e",
+    "--ant-color-growth-hover": "#41a53c",
+    "--ant-color-lavender": "#9b7ef0",
+    "--ant-color-lavender-bg": "#46444e",
+    "--ant-color-lavender-hover": "#b7a7e9",
+    "--ant-color-mauve": "#8e8c98",
+    "--ant-color-mauve-bg": "#2a2b30",
+    "--ant-color-mauve-hover": "#bab8c8",
+    "--ant-color-moss": "#343d66",
+    "--ant-color-moss-bg": "#212539",
+    "--ant-color-moss-hover": "#4b5689",
+    "--ant-color-orange": "#dd8c4e",
+    "--ant-color-orange-bg": "#322a21",
+    "--ant-color-orange-hover": "#e1a974",
+    "--ant-color-pale": "#3f4648",
+    "--ant-color-pale-bg": "#282a30",
+    "--ant-color-pale-hover": "#7f828f",
+    "--ant-color-pink": "#ca5e95",
+    "--ant-color-pink-bg": "#262025",
+    "--ant-color-pink-hover": "#cf9bb8",
+    "--ant-color-purple": "#5f5cdd",
+    "--ant-color-purple-bg": "#32303f",
+    "--ant-color-purple-hover": "#8383e2",
+    "--ant-color-sea": "#abd1cd",
+    "--ant-color-sea-bg": "#1f2d2d",
+    "--ant-color-sea-hover": "#6fb0af",
+    "--ant-color-sky": "#1d4e6f",
+    "--ant-color-sky-bg": "#1f303b",
+    "--ant-color-sky-hover": "#466376",
+    "--ant-color-slate": "#313a4c",
+    "--ant-color-slate-bg": "#9fa7b7",
+    "--ant-color-slate-hover": "#3a4250",
+    "--ant-color-teal": "#2a7566",
+    "--ant-color-teal-bg": "#1c312d",
+    "--ant-color-teal-hover": "#53928a",
+    "--ant-color-yellow": "#dbb755",
+    "--ant-color-yellow-bg": "#45402d",
+    "--ant-color-yellow-hover": "#d2c07b",
+    "--ant-color-link": "#87d578",
+    "--ant-color-bg-base": "#000",
+    "--ant-color-bg-container": "#171716",
+    "--ant-color-bg-elevated": "#1a1a17",
+    "--ant-color-bg-highlight": "#eeeeeb",
+    "--ant-color-bg-highlight-hover": "#f5f5f5",
+    "--ant-color-bg-layout": "#121212",
+    "--ant-color-bg-mask": "#08080766",
+    "--ant-color-bg-spotlight": "#131311",
+    "--ant-color-black-opacity": "#00000000",
+    "--ant-color-border": "#61615c",
+    "--ant-color-border-quaternary": "#1d1d1b",
+    "--ant-color-border-secondary": "#484843",
+    "--ant-color-border-tertiary": "#2a2926",
+    "--ant-color-fill": "#2f312d",
+    "--ant-color-fill-disable": "#3b3a35",
+    "--ant-color-fill-quaternary": "#070807",
+    "--ant-color-fill-secondary": "#0f100f",
+    "--ant-color-fill-tertiary": "#0a0b0a",
+    "--ant-color-text": "#eeeeeb",
+    "--ant-color-text-base": "#fff",
+    "--ant-color-text-on-primary": "#171716",
+    "--ant-color-text-quaternary": "#484743",
+    "--ant-color-text-secondary": "#959590",
+    "--ant-color-text-tertiary": "#7b7b76",
+    "--ant-color-white-opacity": "#ffffff00",
+    "--ant-color-primary": "#6ad86c",
+    "--ant-color-primary-growth": "#30582f",
+    "--ant-color-primary-active": "#5fcd61",
+    "--ant-color-primary-bg": "#1f381f",
+    "--ant-color-primary-bg-hover": "#1e3b1e",
+    "--ant-color-primary-border": "#264926",
+    "--ant-color-primary-border-hover": "#30582f",
+    "--ant-color-primary-btn": "#3d8c66",
+    "--ant-color-primary-btn-hover": "#317052",
+    "--ant-color-primary-hover": "#bdf2bb",
+    "--ant-color-primary-text": "#6ad86c",
+    "--ant-color-primary-text-active": "#5fcd61",
+    "--ant-color-primary-text-hover": "#bdf2bb",
+    "--ant-color-diff-insert": "#5ba06b99",
+    "--ant-color-diff-insert-bg": "#5ba06b33",
+    "--ant-color-diff-remove": "#e14b5d",
+    "--ant-color-diff-remove-bg": "#a9222724",
+    "--ant-color-error": "#db655c",
+    "--ant-color-error-bg": "#240e0a",
+    "--ant-color-error-bg-hover": "#422c2a",
+    "--ant-color-error-border": "#ce6c5b",
+    "--ant-color-error-border-hover": "#e7aaa3",
+    "--ant-color-error-hover": "#cf735c",
+    "--ant-color-info": "#4d7fe2",
+    "--ant-color-info-bg": "#182231",
+    "--ant-color-info-bg-hover": "#334661",
+    "--ant-color-info-border": "#5f8cbf",
+    "--ant-color-info-border-hover": "#85b8f4",
+    "--ant-color-info-hover": "#85b8f4",
+    "--ant-color-success": "#82b591",
+    "--ant-color-success-bg": "#1c3024",
+    "--ant-color-success-bg-hover": "#465049",
+    "--ant-color-success-border": "#779670",
+    "--ant-color-success-border-hover": "#b9d2c0",
+    "--ant-color-success-hover": "#86a282",
+    "--ant-color-warning": "#e5b357",
+    "--ant-color-warning-bg": "#2a231c",
+    "--ant-color-warning-bg-hover": "#483d29",
+    "--ant-color-warning-border": "#e7ad5a",
+    "--ant-color-warning-border-hover": "#f3d986",
+    "--ant-color-warning-hover": "#e39653",
+    "--ant-color-base-foreground": "#fafafa",
+    "--ant-color-black-100": "#0c0c0d0d",
+    "--ant-color-black-200": "#0c0c0d1a"
+  },
+  "color_palette": {
+    "backgrounds": [
+      "rgb(242, 244, 242)",
+      "rgb(205, 236, 200)",
+      "rgb(128, 199, 118)",
+      "rgb(250, 250, 250)",
+      "rgb(37, 90, 65)",
+      "rgb(255, 255, 255)",
+      "rgb(249, 249, 249)",
+      "rgb(255, 95, 87)",
+      "rgb(254, 188, 46)",
+      "rgb(40, 200, 64)",
+      "rgb(247, 248, 247)",
+      "color(srgb 0.920784 0.924863 0.920784)",
+      "rgb(233, 246, 254)",
+      "rgb(218, 217, 216)",
+      "color(srgb 0.45098 0.717647 0.556863 / 0.2)"
+    ],
+    "texts": [
+      "rgb(0, 0, 0)",
+      "rgb(15, 13, 12)",
+      "rgb(131, 130, 128)",
+      "rgb(20, 20, 20)",
+      "rgb(99, 98, 97)",
+      "rgb(253, 253, 253)",
+      "rgb(142, 140, 139)",
+      "color(srgb 0.26102 0.392784 0.242196)",
+      "rgb(59, 129, 233)",
+      "color(srgb 0.556863 0.54902 0.545098 / 0.75)"
+    ],
+    "borders": [
+      "rgb(0, 0, 0)",
+      "rgb(15, 13, 12)",
+      "rgb(131, 130, 128)",
+      "rgb(20, 20, 20)",
+      "rgb(99, 98, 97)",
+      "rgb(239, 239, 239)",
+      "rgb(221, 221, 221)",
+      "rgb(253, 253, 253)",
+      "rgb(230, 230, 230)",
+      "rgba(0, 0, 0, 0.09)",
+      "rgb(142, 140, 139)",
+      "color(srgb 0.734667 0.766118 0.72251)",
+      "color(srgb 0.26102 0.392784 0.242196)",
+      "color(srgb 0.556863 0.54902 0.545098 / 0.75)"
+    ]
+  },
+  "typography": {
+    "font_families": [
+      "\"Instrument Sans\", system-ui, -apple-system, sans-serif",
+      "Arial, sans-serif"
+    ],
+    "loaded_fonts": [
+      {
+        "family": "QoderStaticSeti",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "KaTeX_AMS",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "KaTeX_Caligraphic",
+        "weight": "700",
+        "style": "normal"
+      },
+      {
+        "family": "KaTeX_Caligraphic",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "KaTeX_Fraktur",
+        "weight": "700",
+        "style": "normal"
+      },
+      {
+        "family": "KaTeX_Fraktur",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "KaTeX_Main",
+        "weight": "700",
+        "style": "normal"
+      },
+      {
+        "family": "KaTeX_Main",
+        "weight": "700",
+        "style": "italic"
+      },
+      {
+        "family": "KaTeX_Main",
+        "weight": "400",
+        "style": "italic"
+      },
+      {
+        "family": "KaTeX_Main",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "KaTeX_Math",
+        "weight": "700",
+        "style": "italic"
+      },
+      {
+        "family": "KaTeX_Math",
+        "weight": "400",
+        "style": "italic"
+      },
+      {
+        "family": "KaTeX_SansSerif",
+        "weight": "700",
+        "style": "normal"
+      },
+      {
+        "family": "KaTeX_SansSerif",
+        "weight": "400",
+        "style": "italic"
+      },
+      {
+        "family": "KaTeX_SansSerif",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "KaTeX_Script",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "KaTeX_Size1",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "KaTeX_Size2",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "KaTeX_Size3",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "KaTeX_Size4",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "KaTeX_Typewriter",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Instrument Sans",
+        "weight": "normal",
+        "style": "normal"
+      }
+    ],
+    "heading_info": {
+      "h1": [
+        {
+          "size": "36px",
+          "weight": "500",
+          "lineHeight": "48px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "20px",
+          "weight": "500",
+          "lineHeight": "32px",
+          "letterSpacing": "-0.32px",
+          "textTransform": "none"
+        },
+        {
+          "size": "7.739px",
+          "weight": "500",
+          "lineHeight": "10.319px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "20px",
+          "weight": "500",
+          "lineHeight": "32px",
+          "letterSpacing": "-0.32px",
+          "textTransform": "none"
+        }
+      ],
+      "h2": [
+        {
+          "size": "13px",
+          "weight": "600",
+          "lineHeight": "22px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "32px",
+          "weight": "500",
+          "lineHeight": "42px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "6.019px",
+          "weight": "600",
+          "lineHeight": "7.739px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "6.019px",
+          "weight": "600",
+          "lineHeight": "7.739px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "6.019px",
+          "weight": "600",
+          "lineHeight": "7.739px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "13px",
+          "weight": "600",
+          "lineHeight": "22px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        }
+      ],
+      "h3": [
+        {
+          "size": "12px",
+          "weight": "400",
+          "lineHeight": "18px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "26px",
+          "weight": "500",
+          "lineHeight": "32px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "26px",
+          "weight": "500",
+          "lineHeight": "32px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "26px",
+          "weight": "500",
+          "lineHeight": "32px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "12px",
+          "weight": "400",
+          "lineHeight": "18px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "26px",
+          "weight": "500",
+          "lineHeight": "32px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        }
+      ],
+      "h4": [],
+      "h5": [],
+      "h6": []
+    },
+    "body_sizes": [
+      "14px",
+      "13px",
+      "20px",
+      "36px",
+      "16px",
+      "10px",
+      "12px",
+      "6px"
+    ],
+    "font_weights": [
+      "400",
+      "500",
+      "600"
+    ],
+    "line_heights": [
+      "normal",
+      "48px",
+      "32px",
+      "10.319px",
+      "22px",
+      "42px",
+      "7.739px",
+      "18px",
+      "36px",
+      "19.5px",
+      "20px",
+      "16px",
+      "12px",
+      "8px",
+      "28px"
+    ],
+    "letter_spacings": [
+      "normal",
+      "-0.32px",
+      "-0.28px"
+    ],
+    "text_transforms": []
+  },
+  "spacing": {
+    "common_paddings": [
+      "0px 24px",
+      "0px 36px",
+      "10px 0px",
+      "8px 20px",
+      "48px 64px 56px",
+      "4px 12px",
+      "0px 20px",
+      "0px 16px",
+      "8px 6px",
+      "2px",
+      "0px 8px",
+      "1px",
+      "0px 6px",
+      "20px 14px 0px 10px",
+      "0px 0px 0px 8px",
+      "0px 4px",
+      "160px 0px 0px",
+      "16px",
+      "4px"
+    ],
+    "common_margins": [
+      "0px 12px",
+      "0px 36px 0px 0px",
+      "0px 0px 24px",
+      "32px 0px 0px",
+      "0px 16px 0px 0px",
+      "0px 0px 6px",
+      "11px 0px 3px",
+      "0px -6px",
+      "4px 4px 4px 0px",
+      "0px 149px",
+      "16px 0px 0px",
+      "4px 0px 0px",
+      "28px 0px 0px",
+      "8px 0px 0px"
+    ],
+    "gaps": [
+      "6px",
+      "36px",
+      "20px",
+      "normal 40px",
+      "10px",
+      "4px",
+      "8px",
+      "2px",
+      "3px"
+    ]
+  },
+  "borders": {
+    "radii": [
+      "50%",
+      "4px",
+      "20px",
+      "999px",
+      "9999px",
+      "8px",
+      "6px",
+      "12px"
+    ],
+    "border_specs": [
+      "1px solid"
+    ],
+    "styles": [
+      "solid"
+    ]
+  },
+  "shadows": [
+    "rgba(0, 0, 0, 0.04) 0px 0px 48px 0px, rgba(0, 0, 0, 0.05) 0px 0px 12px 0px",
+    "rgba(0, 0, 0, 0.04) 0px 2px 4px 0px inset, rgba(255, 255, 255, 0.66) 0px 0.5px 0px 0px",
+    "rgba(255, 255, 255, 0.4) 0px 0px 1px 1px inset, rgba(0, 0, 0, 0.04) 0px 2px 4px 0px inset, rgba(255, 255, 255, 0.66) 0px 0.5px 0px 0px",
+    "rgba(0, 0, 0, 0.1) -2px 0px 12px -8px",
+    "rgba(12, 12, 13, 0.1) 0px 1px 2px 0px, rgba(12, 12, 13, 0.05) 0px 1px 2px 0px"
+  ],
+  "layout": {
+    "sections": [
+      {
+        "tag": "header",
+        "classes": "style_header__Zwktt full-top-nav undefined",
+        "id": "",
+        "width": 1440,
+        "height": 64,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "navigation"
+      },
+      {
+        "tag": "header",
+        "classes": "NewQoderLiveDemo_nq-main-header__86Q2c",
+        "id": "",
+        "width": 52,
+        "height": 33,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "navigation"
+      },
+      {
+        "tag": "header",
+        "classes": "",
+        "id": "",
+        "width": 601,
+        "height": 18,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "header"
+      },
+      {
+        "tag": "header",
+        "classes": "JetBrainsLiveDemo_titlebar__XRYPC",
+        "id": "",
+        "width": 560,
+        "height": 14,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "header"
+      },
+      {
+        "tag": "header",
+        "classes": "JetBrainsLiveDemo_panel-header__Y73o0",
+        "id": "",
+        "width": 67,
+        "height": 16,
+        "maxWidth": "none",
+        "padding": "0px 4.667px",
+        "display": "flex",
+        "role": "navigation"
+      },
+      {
+        "tag": "header",
+        "classes": "JetBrainsLiveDemo_editor-tabs__68qAN",
+        "id": "",
+        "width": 311,
+        "height": 15,
+        "maxWidth": "none",
+        "padding": "1.72px 3.44px",
+        "display": "flex",
+        "role": "header"
+      },
+      {
+        "tag": "header",
+        "classes": "JetBrainsLiveDemo_editor-toolbar__vs_g5",
+        "id": "",
+        "width": 311,
+        "height": 14,
+        "maxWidth": "none",
+        "padding": "0px 4px",
+        "display": "flex",
+        "role": "header"
+      },
+      {
+        "tag": "header",
+        "classes": "JetBrainsLiveDemo_qoder-pane-header__kuUZb",
+        "id": "",
+        "width": 141,
+        "height": 16,
+        "maxWidth": "none",
+        "padding": "0px 4.667px",
+        "display": "flex",
+        "role": "navigation"
+      },
+      {
+        "tag": "header",
+        "classes": "NewQoderLiveDemo_nq-main-header__86Q2c",
+        "id": "",
+        "width": 27,
+        "height": 17,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "navigation"
+      },
+      {
+        "tag": "header",
+        "classes": "",
+        "id": "",
+        "width": 311,
+        "height": 9,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "header"
+      },
+      {
+        "tag": "header",
+        "classes": "IdeLiveDemo_qim-titlebar__qguDV",
+        "id": "",
+        "width": 560,
+        "height": 16,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "header"
+      },
+      {
+        "tag": "header",
+        "classes": "EnterpriseSection_header__RVZFV",
+        "id": "",
+        "width": 1312,
+        "height": 160,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "navigation"
+      },
+      {
+        "tag": "header",
+        "classes": "TestimonialsSection_header__CHNnK",
+        "id": "",
+        "width": 639,
+        "height": 104,
+        "maxWidth": "639px",
+        "padding": "0px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "nav",
+        "classes": "HeaderNav_headerNav__3vIYb",
+        "id": "",
+        "width": 434,
+        "height": 38,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "navigation"
+      },
+      {
+        "tag": "nav",
+        "classes": "NewQoderLiveDemo_nq-primary-nav__plSC_",
+        "id": "",
+        "width": 203,
+        "height": 96,
+        "maxWidth": "none",
+        "padding": "0px 8px",
+        "display": "grid",
+        "role": "Qoder"
+      },
+      {
+        "tag": "nav",
+        "classes": "JetBrainsLiveDemo_activity-rail__BhjIM",
+        "id": "",
+        "width": 16,
+        "height": 358,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "IDE tools"
+      },
+      {
+        "tag": "nav",
+        "classes": "JetBrainsLiveDemo_right-rail__P6oQO",
+        "id": "",
+        "width": 16,
+        "height": 358,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "Qoder tools"
+      },
+      {
+        "tag": "nav",
+        "classes": "NewQoderLiveDemo_nq-primary-nav__plSC_",
+        "id": "",
+        "width": 105,
+        "height": 50,
+        "maxWidth": "none",
+        "padding": "0px 8px",
+        "display": "grid",
+        "role": "Qoder"
+      },
+      {
+        "tag": "nav",
+        "classes": "",
+        "id": "",
+        "width": 271,
+        "height": 13,
+        "maxWidth": "none",
+        "padding": "0px 0px 0px 3px",
+        "display": "block",
+        "role": "nav"
+      },
+      {
+        "tag": "main",
+        "classes": "",
+        "id": "main",
+        "width": 1440,
+        "height": 5559,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "main"
+      },
+      {
+        "tag": "main",
+        "classes": "NewQoderLiveDemo_nq-main__4jh1J",
+        "id": "",
+        "width": 874,
+        "height": 646,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "main"
+      },
+      {
+        "tag": "main",
+        "classes": "NewQoderLiveDemo_nq-main__4jh1J",
+        "id": "",
+        "width": 453,
+        "height": 381,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "main"
+      },
+      {
+        "tag": "section",
+        "classes": "HeroSection_heroSection__Ficti",
+        "id": "",
+        "width": 1440,
+        "height": 1120,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "hero"
+      },
+      {
+        "tag": "section",
+        "classes": "NewQoderLiveDemo_nq-activity-card__OgJMo",
+        "id": "",
+        "width": 628,
+        "height": 151,
+        "maxWidth": "none",
+        "padding": "16px",
+        "display": "block",
+        "role": "活跃对话"
+      },
+      {
+        "tag": "section",
+        "classes": "ProductShowcase_productShowcase__Q__cE",
+        "id": "",
+        "width": 1440,
+        "height": 862,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "section"
+      },
+      {
+        "tag": "section",
+        "classes": "JetBrainsLiveDemo_jb-window__cozG_",
+        "id": "",
+        "width": 560,
+        "height": 384,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "grid",
+        "role": "Qoder JetBrains authentication review workspace"
+      },
+      {
+        "tag": "section",
+        "classes": "JetBrainsLiveDemo_project-panel__qZJmp",
+        "id": "",
+        "width": 69,
+        "height": 358,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "section"
+      },
+      {
+        "tag": "section",
+        "classes": "JetBrainsLiveDemo_editor-shell__end6q",
+        "id": "",
+        "width": 313,
+        "height": 358,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "section"
+      },
+      {
+        "tag": "section",
+        "classes": "CliLiveDemo_cli-welcome__SJWWK",
+        "id": "",
+        "width": 536,
+        "height": 41,
+        "maxWidth": "none",
+        "padding": "8.12px 6.49px",
+        "display": "block",
+        "role": "section"
+      },
+      {
+        "tag": "section",
+        "classes": "CliLiveDemo_cli-reasoning__zIo4G",
+        "id": "",
+        "width": 501,
+        "height": 0,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "section"
+      },
+      {
+        "tag": "section",
+        "classes": "CliLiveDemo_cli-agent-list__yfnrB",
+        "id": "",
+        "width": 490,
+        "height": 0,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "section"
+      },
+      {
+        "tag": "section",
+        "classes": "NewQoderLiveDemo_nq-activity-card__OgJMo",
+        "id": "",
+        "width": 326,
+        "height": 79,
+        "maxWidth": "none",
+        "padding": "16px",
+        "display": "block",
+        "role": "活跃对话"
+      },
+      {
+        "tag": "section",
+        "classes": "IdeLiveDemo_qim-editor__1moUl",
+        "id": "",
+        "width": 271,
+        "height": 359,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "section"
+      },
+      {
+        "tag": "section",
+        "classes": "AgentIntegration_agentIntegration__uojAN",
+        "id": "",
+        "width": 1440,
+        "height": 734,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "section"
+      },
+      {
+        "tag": "section",
+        "classes": "QoderWakeSection_wakerSection__4t7i6",
+        "id": "",
+        "width": 1440,
+        "height": 829,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "section"
+      },
+      {
+        "tag": "section",
+        "classes": "EnterpriseSection_enterpriseSection__luBfN",
+        "id": "enterprise",
+        "width": 1440,
+        "height": 892,
+        "maxWidth": "1440px",
+        "padding": "84px 64px",
+        "display": "block",
+        "role": "section"
+      },
+      {
+        "tag": "section",
+        "classes": "TestimonialsSection_section__sa6gg",
+        "id": "",
+        "width": 1440,
+        "height": 553,
+        "maxWidth": "none",
+        "padding": "84px 0px",
+        "display": "block",
+        "role": "testimonials"
+      },
+      {
+        "tag": "section",
+        "classes": "FAQs_faqsWrap__2Ak5h",
+        "id": "",
+        "width": 1440,
+        "height": 569,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "faq"
+      },
+      {
+        "tag": "section",
+        "classes": "Collapse_collapseItem__0jcva Collapse_iconEnd__qWqOE FAQs_item__lQuG8",
+        "id": "",
+        "width": 632,
+        "height": 126,
+        "maxWidth": "none",
+        "padding": "20px 24px",
+        "display": "flex",
+        "role": "faq"
+      },
+      {
+        "tag": "section",
+        "classes": "Collapse_collapseItem__0jcva Collapse_iconEnd__qWqOE FAQs_item__lQuG8",
+        "id": "",
+        "width": 632,
+        "height": 69,
+        "maxWidth": "none",
+        "padding": "20px 24px",
+        "display": "flex",
+        "role": "faq"
+      },
+      {
+        "tag": "section",
+        "classes": "Collapse_collapseItem__0jcva Collapse_iconEnd__qWqOE FAQs_item__lQuG8",
+        "id": "",
+        "width": 632,
+        "height": 69,
+        "maxWidth": "none",
+        "padding": "20px 24px",
+        "display": "flex",
+        "role": "faq"
+      },
+      {
+        "tag": "section",
+        "classes": "Collapse_collapseItem__0jcva Collapse_iconEnd__qWqOE FAQs_item__lQuG8",
+        "id": "",
+        "width": 632,
+        "height": 69,
+        "maxWidth": "none",
+        "padding": "20px 24px",
+        "display": "flex",
+        "role": "faq"
+      },
+      {
+        "tag": "section",
+        "classes": "Collapse_collapseItem__0jcva Collapse_iconEnd__qWqOE FAQs_item__lQuG8",
+        "id": "",
+        "width": 632,
+        "height": 68,
+        "maxWidth": "none",
+        "padding": "20px 24px",
+        "display": "flex",
+        "role": "faq"
+      },
+      {
+        "tag": "footer",
+        "classes": "JetBrainsLiveDemo_statusbar__4XyAy",
+        "id": "",
+        "width": 560,
+        "height": 12,
+        "maxWidth": "none",
+        "padding": "0px 5.056px",
+        "display": "flex",
+        "role": "stats"
+      },
+      {
+        "tag": "footer",
+        "classes": "IdeLiveDemo_qim-status__SrOPS",
+        "id": "",
+        "width": 560,
+        "height": 9,
+        "maxWidth": "none",
+        "padding": "0px 4px",
+        "display": "flex",
+        "role": "stats"
+      },
+      {
+        "tag": "footer",
+        "classes": "style_footer__z4X_A",
+        "id": "",
+        "width": 1440,
+        "height": 538,
+        "maxWidth": "none",
+        "padding": "84px 36px 36px 64px",
+        "display": "block",
+        "role": "footer"
+      },
+      {
+        "tag": "aside",
+        "classes": "NewQoderLiveDemo_nq-sidebar__zXSwH",
+        "id": "",
+        "width": 203,
+        "height": 653,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "aside"
+      },
+      {
+        "tag": "aside",
+        "classes": "JetBrainsLiveDemo_left-dock__wQ8uP",
+        "id": "",
+        "width": 85,
+        "height": 358,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "grid",
+        "role": "aside"
+      },
+      {
+        "tag": "aside",
+        "classes": "JetBrainsLiveDemo_qoder-pane__w9mwl",
+        "id": "",
+        "width": 143,
+        "height": 358,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "aside"
+      },
+      {
+        "tag": "aside",
+        "classes": "NewQoderLiveDemo_nq-sidebar__zXSwH",
+        "id": "",
+        "width": 105,
+        "height": 384,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "aside"
+      },
+      {
+        "tag": "aside",
+        "classes": "IdeLiveDemo_qim-rail__gP5x1",
+        "id": "",
+        "width": 14,
+        "height": 359,
+        "maxWidth": "none",
+        "padding": "3.89px 0px 0px",
+        "display": "flex",
+        "role": "IDE tools"
+      },
+      {
+        "tag": "aside",
+        "classes": "IdeLiveDemo_qim-explorer__AF6Va",
+        "id": "",
+        "width": 91,
+        "height": 359,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "aside"
+      },
+      {
+        "tag": "aside",
+        "classes": "IdeLiveDemo_qim-agent__ZdTkZ",
+        "id": "",
+        "width": 184,
+        "height": 359,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "aside"
+      },
+      {
+        "tag": "article",
+        "classes": "ProductCard_card__rcHEz",
+        "id": "product-showcase-panel-jetbrains",
+        "width": 1040,
+        "height": 480,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "tabpanel"
+      },
+      {
+        "tag": "article",
+        "classes": "JetBrainsLiveDemo_source-pane___q4D2",
+        "id": "",
+        "width": 126,
+        "height": 327,
+        "maxWidth": "none",
+        "padding": "8px 4px 8px 17px",
+        "display": "block",
+        "role": "article"
+      },
+      {
+        "tag": "article",
+        "classes": "JetBrainsLiveDemo_review-pane__TKfsJ",
+        "id": "",
+        "width": 185,
+        "height": 327,
+        "maxWidth": "none",
+        "padding": "9.459px 8.599px",
+        "display": "block",
+        "role": "article"
+      },
+      {
+        "tag": "article",
+        "classes": "ProductCard_card__rcHEz",
+        "id": "product-showcase-panel-cli",
+        "width": 1040,
+        "height": 480,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "tabpanel"
+      },
+      {
+        "tag": "article",
+        "classes": "ProductCard_card__rcHEz",
+        "id": "product-showcase-panel-qoder",
+        "width": 1040,
+        "height": 480,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "tabpanel"
+      },
+      {
+        "tag": "article",
+        "classes": "ProductCard_card__rcHEz",
+        "id": "product-showcase-panel-mobile",
+        "width": 1040,
+        "height": 480,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "tabpanel"
+      },
+      {
+        "tag": "article",
+        "classes": "ProductCard_card__rcHEz",
+        "id": "product-showcase-panel-ide",
+        "width": 1040,
+        "height": 480,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "tabpanel"
+      },
+      {
+        "tag": "article",
+        "classes": "AgentIntegration_card__3x2yo",
+        "id": "",
+        "width": 648,
+        "height": 440,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "article"
+      },
+      {
+        "tag": "article",
+        "classes": "AgentIntegration_card__3x2yo",
+        "id": "",
+        "width": 648,
+        "height": 440,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "article"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      },
+      {
+        "tag": "article",
+        "classes": "TestimonialsSection_card__KzYj6",
+        "id": "",
+        "width": 360,
+        "height": 211,
+        "maxWidth": "none",
+        "padding": "24px",
+        "display": "flex",
+        "role": "testimonials"
+      }
+    ],
+    "containers": [
+      {
+        "classes": "HeroSection_container__vJ9_W",
+        "maxWidth": "1680px",
+        "padding": "48px 64px 56px"
+      },
+      {
+        "classes": "ProductShowcase_container__csEzU",
+        "maxWidth": "1440px",
+        "padding": "84px 64px"
+      },
+      {
+        "classes": "swiper-wrapper",
+        "maxWidth": "none",
+        "padding": "0px"
+      },
+      {
+        "classes": "AgentIntegration_container__ys2qx",
+        "maxWidth": "1440px",
+        "padding": "84px 64px"
+      },
+      {
+        "classes": "QoderWakeSection_container__bToCW",
+        "maxWidth": "1440px",
+        "padding": "84px 64px"
+      },
+      {
+        "classes": "EnterpriseSection_container__ywDTn",
+        "maxWidth": "1312px",
+        "padding": "0px"
+      },
+      {
+        "classes": "TestimonialsSection_container__fUIXc",
+        "maxWidth": "1440px",
+        "padding": "0px"
+      }
+    ],
+    "total_height": 6193,
+    "section_count": 82
+  },
+  "animations": {
+    "transitions": [
+      "all",
+      "color 0.2s",
+      "0.3s",
+      "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+      "0.2s",
+      "opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1)",
+      "0.2s ease-in-out",
+      "background-color 0.18s",
+      "background-color 0.18s, border-color 0.18s, color 0.18s",
+      "none",
+      "transform 0.5s",
+      "opacity 0.2s",
+      "transform 0.12s ease-out"
+    ],
+    "animation_names": [
+      "HeroMotionEmbed_hero-dash-flow__7pylc, HeroMotionEmbed_hero-dash-breathe__z3oHX",
+      "HeroMotionEmbed_focus-breathe__dPrzg",
+      "HeroMotionEmbed_hero-dash-flow-top__2O8Ce, HeroMotionEmbed_hero-dash-breathe-top__5_tM3"
+    ],
+    "keyframes": [
+      {
+        "name": "DropdownMenu_dropdownFadeIn__C_mVl",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateY(-4px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenu_dropdownFadeInCenter__KVwz3",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateX(-50%) translateY(-4px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateX(-50%) translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenu_dropdownFadeInTopCenter__nEqCJ",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateX(-50%) translateY(4px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateX(-50%) translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenu_dropdownFadeInTop__oHh_D",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateY(4px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "IdeLiveDemo_qim-code-generate__nDq8Q",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateY(1.5px); clip-path: inset(0px 100% 0px 0px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateY(0px); clip-path: inset(0px);"
+          }
+        ]
+      },
+      {
+        "name": "IdeLiveDemo_qim-summary-fade-in__aV44t",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0;"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "CliLiveDemo_cli-spark-pulse__xNo6_",
+        "frames": [
+          {
+            "key": "0%, 100%",
+            "css": "opacity: 0.55; transform: scale(0.9);"
+          },
+          {
+            "key": "50%",
+            "css": "opacity: 1; transform: scale(1.08);"
+          }
+        ]
+      },
+      {
+        "name": "CliLiveDemo_cli-cursor-blink__OEkVX",
+        "frames": [
+          {
+            "key": "0%, 45%",
+            "css": "opacity: 1;"
+          },
+          {
+            "key": "46%, 100%",
+            "css": "opacity: 0;"
+          }
+        ]
+      },
+      {
+        "name": "CliLiveDemo_cli-agent-fade__dyfHH",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0;"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "CliLiveDemo_cli-dot-blink__LuBXu",
+        "frames": [
+          {
+            "key": "0%, 80%, 100%",
+            "css": "opacity: 0.18; transform: scale(0.72);"
+          },
+          {
+            "key": "35%",
+            "css": "opacity: 1; transform: scale(1.08);"
+          }
+        ]
+      },
+      {
+        "name": "CliLiveDemo_cli-thinking-pulse__06VWb",
+        "frames": [
+          {
+            "key": "0%, 100%",
+            "css": "opacity: 0.45; transform: scale(0.86); box-shadow: 0 0 0 0 color-mix(in srgb,var(--ant-color-primary) 0,transparent);"
+          },
+          {
+            "key": "45%",
+            "css": "opacity: 1; transform: scale(1.08); box-shadow: 0 0 0 2.5px color-mix(in srgb,var(--ant-color-primary) 18%,transparent);"
+          }
+        ]
+      },
+      {
+        "name": "CliLiveDemo_cli-ellipsis-blink__a3spy",
+        "frames": [
+          {
+            "key": "0%, 76%, 100%",
+            "css": "opacity: 0.18;"
+          },
+          {
+            "key": "36%",
+            "css": "opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "FeatureGrid_borderFlowTop__kc4oU",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "background-position: 0px 0px;"
+          },
+          {
+            "key": "100%",
+            "css": "background-position: 10px 0px;"
+          }
+        ]
+      },
+      {
+        "name": "FeatureGrid_borderFlowRight__9i_tA",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "background-position: 100% 0px;"
+          },
+          {
+            "key": "100%",
+            "css": "background-position: 100% 10px;"
+          }
+        ]
+      },
+      {
+        "name": "FeatureGrid_borderFlowBottom__TJZ2P",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "background-position: 0px 100%;"
+          },
+          {
+            "key": "100%",
+            "css": "background-position: -10px 100%;"
+          }
+        ]
+      },
+      {
+        "name": "FeatureGrid_borderFlowLeft__uuBn2",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "background-position: 0px 0px;"
+          },
+          {
+            "key": "100%",
+            "css": "background-position: 0px -10px;"
+          }
+        ]
+      },
+      {
+        "name": "StatsSection_vertical-dash-animation__NPjsP",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "background-position: 0px 0px;"
+          },
+          {
+            "key": "100%",
+            "css": "background-position: 0px 10px;"
+          }
+        ]
+      },
+      {
+        "name": "CatalogSection_pulse__pFJzb",
+        "frames": [
+          {
+            "key": "0%, 100%",
+            "css": "opacity: 1;"
+          },
+          {
+            "key": "50%",
+            "css": "opacity: 0.4;"
+          }
+        ]
+      },
+      {
+        "name": "Message_slideInDown__s9gS3",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translate(-50%, -100%);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translate(-50%);"
+          }
+        ]
+      },
+      {
+        "name": "Message_spin__ZvRQc",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "transform: rotate(0deg);"
+          },
+          {
+            "key": "100%",
+            "css": "transform: rotate(1turn);"
+          }
+        ]
+      },
+      {
+        "name": "ConnectorTabView_skeletonPulse__GpKxU",
+        "frames": [
+          {
+            "key": "0%, 100%",
+            "css": "opacity: 1;"
+          },
+          {
+            "key": "50%",
+            "css": "opacity: 0.5;"
+          }
+        ]
+      },
+      {
+        "name": "ShinyText_shine__VD2fp",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "background-position: 100% center;"
+          },
+          {
+            "key": "100%",
+            "css": "background-position: -100% center;"
+          }
+        ]
+      },
+      {
+        "name": "ComputerUsePreview_selectionCursor__QVkoZ",
+        "frames": [
+          {
+            "key": "0%, 100%",
+            "css": "transform: translate(calc(var(--first-x) + 16px),calc(var(--first-y) - 22px)); opacity: 0;"
+          },
+          {
+            "key": "15%, 8%",
+            "css": "transform: translate(var(--first-x),var(--first-y)); opacity: 1; animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);"
+          },
+          {
+            "key": "35%",
+            "css": "transform: translate(var(--first-end-x),var(--first-y)); animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1);"
+          },
+          {
+            "key": "49%",
+            "css": "transform: translate(var(--second-x),var(--second-y)); animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);"
+          },
+          {
+            "key": "64%, 88%",
+            "css": "transform: translate(var(--second-end-x),var(--second-y)); opacity: 1;"
+          },
+          {
+            "key": "98%",
+            "css": "transform: translate(var(--second-end-x),var(--second-y)); opacity: 0;"
+          }
+        ]
+      },
+      {
+        "name": "ComputerUsePreview_selectFirstLine__L9K_h",
+        "frames": [
+          {
+            "key": "0%, 15%",
+            "css": "transform: scaleX(0); opacity: 1; animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);"
+          },
+          {
+            "key": "35%, 88%",
+            "css": "transform: scaleX(1); opacity: 1;"
+          },
+          {
+            "key": "98%, 100%",
+            "css": "transform: scaleX(1); opacity: 0;"
+          }
+        ]
+      },
+      {
+        "name": "ComputerUsePreview_selectSecondLine__DGXVq",
+        "frames": [
+          {
+            "key": "0%, 49%",
+            "css": "transform: scaleX(0); opacity: 1; animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);"
+          },
+          {
+            "key": "64%, 88%",
+            "css": "transform: scaleX(1); opacity: 1;"
+          },
+          {
+            "key": "98%, 100%",
+            "css": "transform: scaleX(1); opacity: 0;"
+          }
+        ]
+      },
+      {
+        "name": "MobileTasksPreview_loaderSpin__uyaG3",
+        "frames": [
+          {
+            "key": "100%",
+            "css": "transform: rotate(1turn);"
+          }
+        ]
+      },
+      {
+        "name": "VoiceInputPreview_characterReveal__eyTXI",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0;"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "VoiceInputPreview_waveformPulse__kQG5u",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "height: var(--wave-min-height);"
+          },
+          {
+            "key": "100%",
+            "css": "height: var(--wave-max-height);"
+          }
+        ]
+      },
+      {
+        "name": "swiper-preloader-spin",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "transform: rotate(0deg);"
+          },
+          {
+            "key": "100%",
+            "css": "transform: rotate(1turn);"
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenu_dropdownFadeIn__dBp9C",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateY(-4px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenu_dropdownFadeInCenter__CFFTX",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateX(-50%) translateY(-4px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateX(-50%) translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenu_dropdownFadeInTopCenter__Oz8M5",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateX(-50%) translateY(4px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateX(-50%) translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "DropdownMenu_dropdownFadeInTop__KQw3s",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateY(4px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "GroupedDropdownContent_groupedDropdownFadeIn__3xYbi",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateY(-4px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "EnterpriseCapabilities_borderFlowTop__qrFh3",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "background-position: 0px 0px;"
+          },
+          {
+            "key": "100%",
+            "css": "background-position: 10px 0px;"
+          }
+        ]
+      },
+      {
+        "name": "EnterpriseCapabilities_borderFlowRight__0Uuyo",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "background-position: 100% 0px;"
+          },
+          {
+            "key": "100%",
+            "css": "background-position: 100% 10px;"
+          }
+        ]
+      },
+      {
+        "name": "EnterpriseCapabilities_borderFlowBottom__uIPX4",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "background-position: 0px 100%;"
+          },
+          {
+            "key": "100%",
+            "css": "background-position: -10px 100%;"
+          }
+        ]
+      },
+      {
+        "name": "EnterpriseCapabilities_borderFlowLeft__mSzAi",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "background-position: 0px 0px;"
+          },
+          {
+            "key": "100%",
+            "css": "background-position: 0px -10px;"
+          }
+        ]
+      },
+      {
+        "name": "NewQoderLiveDemo_nq-activity-detail-enter__X9_UX",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateY(-3px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "NewQoderLiveDemo_nq-bottom-panel-enter__JprRC",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateY(12px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "NewQoderLiveDemo_nq-answer-dot__Stjte",
+        "frames": [
+          {
+            "key": "0%, 70%, 100%",
+            "css": "opacity: 0.25; transform: translateY(0px);"
+          },
+          {
+            "key": "35%",
+            "css": "opacity: 1; transform: translateY(-2px);"
+          }
+        ]
+      },
+      {
+        "name": "NewQoderLiveDemo_nq-menu-enter__cTRyb",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateY(4px) scale(0.98);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateY(0px) scale(1);"
+          }
+        ]
+      },
+      {
+        "name": "NewQoderLiveDemo_nq-hover-card-enter__MarHa",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translate(-50%, calc(-100% + 3px)) scale(0.98);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translate(-50%, -100%) scale(1);"
+          }
+        ]
+      },
+      {
+        "name": "NewQoderLiveDemo_nq-dialog-mask-enter__UHMK0",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0;"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "NewQoderLiveDemo_nq-dialog-enter__WrpzK",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateY(6px) scale(0.98);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateY(0px) scale(1);"
+          }
+        ]
+      },
+      {
+        "name": "NewQoderLiveDemo_nq-session-enter__MPPdJ",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateY(8px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "NewQoderLiveDemo_nq-progressive-enter__mEwP7",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translateY(5px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateY(0px);"
+          }
+        ]
+      },
+      {
+        "name": "NewQoderLiveDemo_nq-session-spin__04pDU",
+        "frames": [
+          {
+            "key": "100%",
+            "css": "transform: rotate(1turn);"
+          }
+        ]
+      },
+      {
+        "name": "NewQoderLiveDemo_nq-stage-arrow-running__5ih5K",
+        "frames": [
+          {
+            "key": "0%, 100%",
+            "css": "opacity: 0.58; transform: translateX(-1px);"
+          },
+          {
+            "key": "50%",
+            "css": "opacity: 1; transform: translateX(1px);"
+          }
+        ]
+      },
+      {
+        "name": "NewQoderLiveDemo_nq-stage-arrow-running-open__cBMYN",
+        "frames": [
+          {
+            "key": "0%, 100%",
+            "css": "opacity: 0.58; transform: translateX(-1px);"
+          },
+          {
+            "key": "50%",
+            "css": "opacity: 1; transform: translateX(1px);"
+          }
+        ]
+      },
+      {
+        "name": "QoderHero_forestDrift__STMKK",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "transform: translate3d(-50%, 0px, 0px);"
+          },
+          {
+            "key": "100%",
+            "css": "transform: translate3d(-50%, 700px, 0px);"
+          }
+        ]
+      },
+      {
+        "name": "QoderHero_forestFade__h6D2f",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0;"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "QoderHero_forestDepth__Wu75P",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "transform: scale(1);"
+          },
+          {
+            "key": "100%",
+            "css": "transform: scale(1.08);"
+          }
+        ]
+      },
+      {
+        "name": "QoderHero_demoEnter__40GVT",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translate3d(0px, -20px, 0px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translateZ(0px);"
+          }
+        ]
+      },
+      {
+        "name": "HeroMotionEmbed_focus-breathe__dPrzg",
+        "frames": [
+          {
+            "key": "0%, 100%",
+            "css": "opacity: 0.7; transform: scale(0.82);"
+          },
+          {
+            "key": "48%",
+            "css": "opacity: 1; transform: scale(1);"
+          }
+        ]
+      },
+      {
+        "name": "HeroMotionEmbed_hero-dash-flow__7pylc",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "stroke-dashoffset: 160;"
+          },
+          {
+            "key": "100%",
+            "css": "stroke-dashoffset: -160;"
+          }
+        ]
+      },
+      {
+        "name": "HeroMotionEmbed_hero-dash-breathe__z3oHX",
+        "frames": [
+          {
+            "key": "0%, 100%",
+            "css": "stroke-opacity: 0.119;"
+          },
+          {
+            "key": "45%, 58%",
+            "css": "stroke-opacity: 0.289;"
+          }
+        ]
+      },
+      {
+        "name": "HeroMotionEmbed_hero-dash-flow-top__2O8Ce",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "stroke-dashoffset: -48;"
+          },
+          {
+            "key": "100%",
+            "css": "stroke-dashoffset: -368;"
+          }
+        ]
+      },
+      {
+        "name": "HeroMotionEmbed_hero-dash-breathe-top__5_tM3",
+        "frames": [
+          {
+            "key": "0%, 100%",
+            "css": "stroke-opacity: 0.119;"
+          },
+          {
+            "key": "45%, 58%",
+            "css": "stroke-opacity: 0.289;"
+          }
+        ]
+      },
+      {
+        "name": "MobileLiveDemo_product-mobile-scene-enter__Cx_w0",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; filter: blur(0.8px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; filter: blur(0px);"
+          }
+        ]
+      },
+      {
+        "name": "MobileLiveDemo_product-mobile-approval-enter__kqbKS",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: translate(-50%, calc(-50% + 14px)); filter: blur(0.8px);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: translate(-50%, -50%); filter: blur(0px);"
+          }
+        ]
+      },
+      {
+        "name": "MobileLiveDemo_product-mobile-bg-enter__1yBF5",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; scale: 1.008;"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; scale: 1;"
+          }
+        ]
+      },
+      {
+        "name": "MobileLiveDemo_product-mobile-bg-exit__HdM89",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 1; scale: 1;"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 0; scale: 1.004;"
+          }
+        ]
+      },
+      {
+        "name": "WakerProfileCard_trigger-fade-in__0R3bo",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0;"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "WakerProfileCard_trigger-fade-out__6BuLM",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 1;"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 0;"
+          }
+        ]
+      },
+      {
+        "name": "WakerTaskCard_task-status-fade__ecS75",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0;"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "WakerTaskCard_task-icon-spin__S3Fxk",
+        "frames": [
+          {
+            "key": "100%",
+            "css": "transform: rotate(1turn);"
+          }
+        ]
+      },
+      {
+        "name": "WakerTaskCard_task-waiting-pulse__j4_e3",
+        "frames": [
+          {
+            "key": "0%, 100%",
+            "css": "opacity: 0.35;"
+          },
+          {
+            "key": "50%",
+            "css": "opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "WakerTaskCard_task-title-shiny__V4Vdn",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "background-position: 120% 50%;"
+          },
+          {
+            "key": "100%",
+            "css": "background-position: -120% 50%;"
+          }
+        ]
+      },
+      {
+        "name": "TestimonialsSection_testimonialsMarquee__BG7H7",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "transform: translateX(0px);"
+          },
+          {
+            "key": "100%",
+            "css": "transform: translateX(calc(-50% - 10px));"
+          }
+        ]
+      },
+      {
+        "name": "scroll",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "transform: translateX(0%);"
+          },
+          {
+            "key": "100%",
+            "css": "transform: translateX(-100%);"
+          }
+        ]
+      }
+    ]
+  },
+  "gradients": [],
+  "effects": {
+    "filters": [],
+    "backdrop_filters": [],
+    "transforms": [
+      "matrix(1, 0, 0, 1, 0, -10)",
+      "matrix(1, 0, 0, 1, 0, 0)",
+      "matrix(1, 0, 0, 1, -720, 0)",
+      "matrix(0.820537, 0, 0, 0.820537, 0, 0)",
+      "matrix(1, 0, 0, 1, -541, -327.5)",
+      "matrix(0.818182, 0, 0, 0.81625, 0, 0)",
+      "matrix(1, 0, 0, 1, -4, 0)"
+    ]
+  },
+  "resources": {
+    "fonts": [],
+    "stylesheets": [
+      "https://qoder.cn/_next/static/css/c5d7ce7310428b21.css",
+      "https://qoder.cn/_next/static/css/4fb83cbb3b1595ba.css",
+      "https://qoder.cn/_next/static/css/0a3cb7fc09f0aede.css",
+      "https://qoder.cn/_next/static/css/3b7e9211cc3e1f99.css",
+      "https://qoder.cn/_next/static/css/0f9ea87ff9bc93b2.css",
+      "https://qoder.cn/_next/static/css/479761264a753d58.css",
+      "https://qoder.cn/_next/static/css/13360dc2ae3fe5a5.css",
+      "https://qoder.cn/_next/static/css/0b7ebf94edeec187.css",
+      "https://qoder.cn/_next/static/css/593d7d248981a79b.css",
+      "https://qoder.cn/_next/static/css/4039daf6ddddd172.css",
+      "https://qoder.cn/_next/static/css/04e6bbd1fe8deec5.css",
+      "https://qoder.cn/_next/static/css/7bae8f250f5a31ad.css",
+      "https://qoder.cn/_next/static/css/4ad14c4f6a292f1b.css",
+      "https://qoder.cn/_next/static/css/7bb03b8b74a3bf9b.css",
+      "https://qoder.cn/_next/static/css/046085e27633e405.css",
+      "https://qoder.cn/_next/static/css/eefb69c0cf9e9ed3.css"
+    ],
+    "scripts": [
+      "https://g.alicdn.com/AWSC/et/1.83.41/et_f.js",
+      "https://g.alicdn.com/sd/baxia/2.5.37/baxiaCommon.js",
+      "https://g.alicdn.com/AWSC/AWSC/awsc.js",
+      "https://g.alicdn.com/secdev/sufei_data/3.9.14/index.js",
+      "https://o.alicdn.com/baxia/baxia-entry-gray/index.js",
+      "https://g.alicdn.com/alilog/mlog/aplus_v2.js",
+      "https://qoder.cn/_next/static/chunks/fd9d1056-01c043eb6ae08f26.js",
+      "https://qoder.cn/_next/static/chunks/2117-376141753282a83f.js",
+      "https://qoder.cn/_next/static/chunks/main-app-0f06e6b8e1052c50.js",
+      "https://qoder.cn/_next/static/chunks/6126-721d5e9e68b00fb0.js",
+      "https://qoder.cn/_next/static/chunks/9677-23e93fcb9567d0cb.js",
+      "https://qoder.cn/_next/static/chunks/9698-d29359eaaca7bd88.js",
+      "https://qoder.cn/_next/static/chunks/2539-b17c8b83e7840e6a.js",
+      "https://qoder.cn/_next/static/chunks/3679-46ecc6d04fbed333.js",
+      "https://qoder.cn/_next/static/chunks/1450-0a66d8ea13c7efeb.js",
+      "https://qoder.cn/_next/static/chunks/app/page-f6ccf8cf507cd5e3.js",
+      "https://qoder.cn/_next/static/chunks/app/layout-11987cd4536b9e7b.js",
+      "https://qoder.cn/_next/static/chunks/polyfills-42372ed130431b0a.js",
+      "https://log.mmstat.com/eg.js",
+      "https://log.mmstat.com/eg.js",
+      "https://log.mmstat.com/eg.js",
+      "https://log.mmstat.com/eg.js",
+      "https://fourier.taobao.com/rp?ext=51&data=jm_null&random=6541952019786356&href=https%3A%2F%2Fqoder.cn%2F&protocol=https:&callback=jsonpCallback",
+      "https://log.mmstat.com/eg.js",
+      "https://qoder.cn/_next/static/chunks/webpack-4c1afacc21efbe99.js"
+    ]
+  },
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "captured_at": "2026-10-01 01:33:00"
+}

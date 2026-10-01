@@ -108,6 +108,16 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 
 > Extracted from cursor.com's light theme. A three-layer warm-paper palette (#F7F7F4 → #F2F1ED → #E6E5E0) with warm-ink (#26251E) pill buttons; classical romantic oil paintings serve as "gallery stages" holding 4px-radius white product window mocks. Zero-offset diffuse shadows, weight-400 negative-tracked headlines with the two-tone title technique, and vermilion (#C8451D) reserved exclusively for text links. The human warmth of a serious tool.
 
+### [DeepSeek Harness Navy Glow](./templates/DeepSeek-Harness-Navy-Glow/)
+
+<p>
+  <img src="./assets/screenshots/DeepSeek-Harness-Navy-Glow-01-hero-navy-glow.png" width="32.5%" alt="DeepSeek Harness Navy Glow — hero navy glow" />
+  <img src="./assets/screenshots/DeepSeek-Harness-Navy-Glow-02-bento-dark-grid.png" width="32.5%" alt="DeepSeek Harness Navy Glow — bento dark grid" />
+  <img src="./assets/screenshots/DeepSeek-Harness-Navy-Glow-03-starfield-cta.png" width="32.5%" alt="DeepSeek Harness Navy Glow — starfield cta" />
+</p>
+
+> A deep-space navy product-launch style extracted from deepseek.com/harness. A starfield gradient hero (steel blue → near-black) carries a 1:1 application window mock (macOS traffic lights, sidebar, chat bubbles, input bar) instead of illustrations; #151517 bento cards on an #0A0A0A stage define their edges with 0.5px hairlines, while floating UI slices (plugin panel, diff panel, scheduled-task card, execution trace) tell the product story. A liquid-glass pill nav (blur 32px) collapses on scroll, Fragment Mono wide-tracked badges are the sole technical signature, and the closing CTA finishes with stardust particles and a blue glow. Restrained depth with 400/500 weights and negative tracking.
+
 ### [Enterprise](./templates/Enterprise/)
 
 <p>
@@ -188,6 +198,16 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 
 > Clashing patterns, dense layouts, oversaturated colors, intentional visual clutter. MORE IS MORE.
 
+### [MiMo Warm Halftone](./templates/MiMo-Warm-Halftone/)
+
+<p>
+  <img src="./assets/screenshots/MiMo-Warm-Halftone-01-marker-hero.png" width="32.5%" alt="MiMo Warm Halftone — marker hero" />
+  <img src="./assets/screenshots/MiMo-Warm-Halftone-02-halftone-list.png" width="32.5%" alt="MiMo Warm Halftone — halftone list" />
+  <img src="./assets/screenshots/MiMo-Warm-Halftone-03-ink-footer.png" width="32.5%" alt="MiMo Warm Halftone — ink footer" />
+</p>
+
+> Three-layer warm paper grounds dusted with halftone print texture and ASCII glyph noise, headline keywords underlined by a skewed orange marker tape. Numbered hairline lists, ink pill buttons, and a pure-black QR footer — an AI product landing page with the temperament of print.
+
 ### [Minimal Dark](./templates/Minimal-Dark/)
 
 <p>
@@ -217,6 +237,16 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 </p>
 
 > A stark, editorial design system built on pure black and white. No accent colors—just dramatic contrast, oversized serif typography, and precise geometric layouts. Evokes high-end fashion editorials and architectural portfolios. Austere, sophisticated, unapologetically bold.
+
+### [Moonshot Pixel Odyssey](./templates/Moonshot-Pixel-Odyssey/)
+
+<p>
+  <img src="./assets/screenshots/Moonshot-Pixel-Odyssey-01-hero.png" width="32.5%" alt="Moonshot Pixel Odyssey — hero" />
+  <img src="./assets/screenshots/Moonshot-Pixel-Odyssey-02-flowmap.png" width="32.5%" alt="Moonshot Pixel Odyssey — flowmap" />
+  <img src="./assets/screenshots/Moonshot-Pixel-Odyssey-03-cta-footer.png" width="32.5%" alt="Moonshot Pixel Odyssey — cta footer" />
+</p>
+
+> A scroll-driven space-terminal aesthetic built from 1-bit dithered imagery, Fusion Pixel bitmap type, and pure-black void. Lunar phases advance with the scroll, terminal notch-cut buttons with `<<<` arrows, `‹ ›` bracketed section titles, and four-corner hero composition — like running on a monochrome probe display. Zero radius, zero shadow, zero color: luminance is the palette.
 
 ### [Neo Brutalism](./templates/Neo-Brutalism/)
 
@@ -278,6 +308,16 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 
 > An editorial-inspired minimalist design system centered on elegant serif typography. Warm ivory backgrounds with subtle paper texture, refined spacing, rule lines, and classical proportions create a timeless, literary aesthetic. Enhanced depth through layered gradients and multi-toned shadows. The design whispers sophistication through restraint and typographic excellence.
 
+### [Qoder-Mint-Garden](./templates/Qoder-Mint-Garden/)
+
+<p>
+  <img src="./assets/screenshots/Qoder-Mint-Garden-01-hero-green-lane.png" width="32.5%" alt="Qoder-Mint-Garden — hero green lane" />
+  <img src="./assets/screenshots/Qoder-Mint-Garden-02-card-mosaic.png" width="32.5%" alt="Qoder-Mint-Garden — card mosaic" />
+  <img src="./assets/screenshots/Qoder-Mint-Garden-03-link-columns-footer.png" width="32.5%" alt="Qoder-Mint-Garden — link columns footer" />
+</p>
+
+> A forest-green single accent on a mint-grey canvas of generous whitespace. A green-lane stage of arc stripes lifts a floating white product window, pill buttons carry a porcelain inner highlight, and asymmetric card mosaics nest white UI float-cards inside. Fresh, trustworthy, organic AI-workbench marketing language.
+
 ### [SaaS](./templates/SaaS/)
 
 <p>
@@ -317,6 +357,16 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 </p>
 
 > A raw, functional, and retro-futuristic command-line interface aesthetic. High contrast, monospaced precision, and blinking cursors.
+
+### [Trae Matrix Mint](./templates/Trae-Matrix-Mint/)
+
+<p>
+  <img src="./assets/screenshots/Trae-Matrix-Mint-01-dot-matrix-hero.png" width="32.5%" alt="Trae Matrix Mint — dot matrix hero" />
+  <img src="./assets/screenshots/Trae-Matrix-Mint-02-indexed-cards.png" width="32.5%" alt="Trae Matrix Mint — indexed cards" />
+  <img src="./assets/screenshots/Trae-Matrix-Mint-03-giant-wordmark-footer.png" width="32.5%" alt="Trae Matrix Mint — giant wordmark footer" />
+</p>
+
+> Extracted from trae.cn's dark developer-tool aesthetic. A pure-black void (#0A0B0D / #000) with mint green (#32F08C) as the single accent; the hero dot-matrix cloud is built from thousands of dithered squares. Monospaced green `[01]` indices organize the feature cards, whose mock panels render as "design diagrams" with dashed connectors and colored node tiles. A 2/4px sharp-radius system and the diamond ◆ motif run through every detail, and the page signs off with a giant cropped wordmark band. Terminal-grade sharpness and signal.
 
 ### [Vaporwave](./templates/Vaporwave/)
 

@@ -1,0 +1,587 @@
+{
+  "page_info": {
+    "title": "TRAE - The Real AI Engineer ｜ TraeCode - 你的 AI 开发工程师",
+    "lang": "",
+    "description": "TraeWork 是字节跳动推出的 AI 办公平台，支持自动生成 PPT、数据分析、深度研究、生成文档等多种工作场景，可调用飞书、微信、钉钉等插件。Work、Code、Design 模式一键切换，桌面端、移动端与网页端多端协同，已接入豆包2.1、Kimi3、GLM5.2、DeepSeek V4、Seedance、Seedream 等模型，让 AI 帮你高效完成日常工作。立即免费体验。",
+    "charset": "UTF-8"
+  },
+  "css_variables": {},
+  "color_palette": {
+    "backgrounds": [
+      "rgb(10, 11, 13)",
+      "rgba(237, 239, 242, 0.08)",
+      "rgb(50, 240, 140)",
+      "rgb(0, 0, 0)",
+      "rgb(18, 19, 20)",
+      "rgba(237, 239, 242, 0.18)",
+      "rgba(255, 255, 255, 0.18)",
+      "rgba(237, 239, 242, 0.13)",
+      "rgb(23, 26, 28)",
+      "rgba(237, 239, 242, 0.04)"
+    ],
+    "texts": [
+      "rgb(255, 255, 255)",
+      "rgb(245, 249, 254)",
+      "rgb(10, 11, 13)",
+      "rgb(166, 170, 181)",
+      "rgb(50, 240, 140)",
+      "rgb(0, 0, 0)",
+      "rgb(120, 125, 135)"
+    ],
+    "borders": [
+      "rgb(229, 231, 235)",
+      "rgb(10, 11, 13)",
+      "rgb(245, 249, 254)",
+      "rgb(255, 255, 255)"
+    ]
+  },
+  "typography": {
+    "font_families": [
+      "Inter",
+      "Inter, sans-serif",
+      "\"JetBrains Mono\""
+    ],
+    "loaded_fonts": [
+      {
+        "family": "Inter",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "Inter",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "Inter",
+        "weight": "600",
+        "style": "normal"
+      },
+      {
+        "family": "JetBrains Mono",
+        "weight": "400",
+        "style": "normal"
+      },
+      {
+        "family": "JetBrains Mono",
+        "weight": "500",
+        "style": "normal"
+      },
+      {
+        "family": "JetBrains Mono",
+        "weight": "600",
+        "style": "normal"
+      }
+    ],
+    "heading_info": {
+      "h1": [],
+      "h2": [
+        {
+          "size": "56px",
+          "weight": "600",
+          "lineHeight": "67.2px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "56px",
+          "weight": "600",
+          "lineHeight": "67.2px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "56px",
+          "weight": "600",
+          "lineHeight": "67.2px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "16px",
+          "weight": "400",
+          "lineHeight": "25.6px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        }
+      ],
+      "h3": [
+        {
+          "size": "20px",
+          "weight": "600",
+          "lineHeight": "26px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "20px",
+          "weight": "600",
+          "lineHeight": "26px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "20px",
+          "weight": "600",
+          "lineHeight": "26px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        }
+      ],
+      "h4": [
+        {
+          "size": "14px",
+          "weight": "500",
+          "lineHeight": "16.8px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "14px",
+          "weight": "500",
+          "lineHeight": "16.8px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        },
+        {
+          "size": "14px",
+          "weight": "500",
+          "lineHeight": "16.8px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        }
+      ],
+      "h5": [],
+      "h6": []
+    },
+    "body_sizes": [
+      "16px",
+      "14px",
+      "13px",
+      "18px",
+      "56px",
+      "12px"
+    ],
+    "font_weights": [
+      "400",
+      "600",
+      "500"
+    ],
+    "line_heights": [
+      "25.6px",
+      "67.2px",
+      "26px",
+      "16.8px",
+      "19.2px",
+      "16.9px",
+      "22.4px",
+      "28.8px",
+      "14.4px"
+    ],
+    "letter_spacings": [
+      "normal",
+      "0.35px"
+    ],
+    "text_transforms": []
+  },
+  "spacing": {
+    "common_paddings": [
+      "0px 32px",
+      "0px 8px",
+      "16px 32px",
+      "2px 8px",
+      "1px 6px",
+      "0px 32px 32px",
+      "0px 0px 24px",
+      "0px 24px 24px 0px",
+      "0px 24px",
+      "100px 32px",
+      "0px 16px",
+      "0px 16px 100px 0px",
+      "0px 0px 1088px",
+      "171px 0px 171px 162px",
+      "100px 32px 160px",
+      "24px 48px 24px 24px",
+      "0px 0px 80px",
+      "0px 0px 0.5px",
+      "60px 32px 140px",
+      "0px 14px"
+    ],
+    "common_margins": [
+      "0px 20px 0px 0px",
+      "0px 0px 0px 6px",
+      "0px 0px 0px 2px",
+      "536.812px 0px 0px",
+      "0px 0px 8px",
+      "0px 60.9531px",
+      "0px 400px",
+      "12px 0px",
+      "20px 0px 0px",
+      "100px 0px 0px",
+      "100px 0px",
+      "0px 19.9844px",
+      "48px 0px 0px",
+      "90px 0px 0px",
+      "0px 0px 0px 314.078px"
+    ],
+    "gaps": [
+      "17px",
+      "12px",
+      "6px",
+      "16px",
+      "24px",
+      "8px",
+      "4px",
+      "19.2px",
+      "9.6px",
+      "10px",
+      "80px",
+      "32px",
+      "152px",
+      "12px 16px",
+      "96px"
+    ]
+  },
+  "borders": {
+    "radii": [
+      "2px",
+      "4px"
+    ],
+    "border_specs": [
+      "1px solid"
+    ],
+    "styles": [
+      "solid"
+    ]
+  },
+  "shadows": [
+    "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px"
+  ],
+  "layout": {
+    "sections": [
+      {
+        "tag": "header",
+        "classes": "header-AsQGW7",
+        "id": "",
+        "width": 1440,
+        "height": 64,
+        "maxWidth": "none",
+        "padding": "16px 32px",
+        "display": "grid",
+        "role": "navigation"
+      },
+      {
+        "tag": "header",
+        "classes": "header-A25VOa",
+        "id": "",
+        "width": 0,
+        "height": 0,
+        "maxWidth": "none",
+        "padding": "0px 32px",
+        "display": "none",
+        "role": "navigation"
+      },
+      {
+        "tag": "section",
+        "classes": "container-wK63uw",
+        "id": "",
+        "width": 1440,
+        "height": 796,
+        "maxWidth": "none",
+        "padding": "0px 32px 32px",
+        "display": "flex",
+        "role": "section"
+      },
+      {
+        "tag": "section",
+        "classes": "embla-xk8gIC",
+        "id": "",
+        "width": 1440,
+        "height": 785,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "section"
+      },
+      {
+        "tag": "section",
+        "classes": "container-RpXtnx",
+        "id": "",
+        "width": 1440,
+        "height": 836,
+        "maxWidth": "1440px",
+        "padding": "0px 32px",
+        "display": "block",
+        "role": "section"
+      },
+      {
+        "tag": "footer",
+        "classes": "container-vQskkp",
+        "id": "",
+        "width": 1440,
+        "height": 1106,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "footer"
+      }
+    ],
+    "containers": [
+      {
+        "classes": "container-TkCScj containerWithHeaderBanner-TjdbZH",
+        "maxWidth": "none",
+        "padding": "0px"
+      },
+      {
+        "classes": "container-b0758E",
+        "maxWidth": "none",
+        "padding": "0px 32px"
+      },
+      {
+        "classes": "rive-hover-container",
+        "maxWidth": "none",
+        "padding": "0px"
+      },
+      {
+        "classes": "rive-hover-container",
+        "maxWidth": "none",
+        "padding": "0px"
+      },
+      {
+        "classes": "container-wK63uw",
+        "maxWidth": "none",
+        "padding": "0px 32px 32px"
+      },
+      {
+        "classes": "flex max-w-full min-w-0 flex-col gap-3 w-fit",
+        "maxWidth": "100%",
+        "padding": "0px"
+      },
+      {
+        "classes": "container-ECPOFR",
+        "maxWidth": "none",
+        "padding": "0px"
+      },
+      {
+        "classes": "max-w-[680px] m-auto",
+        "maxWidth": "680px",
+        "padding": "0px"
+      },
+      {
+        "classes": "container-kGpFlw",
+        "maxWidth": "none",
+        "padding": "0px"
+      },
+      {
+        "classes": "container-RpXtnx",
+        "maxWidth": "1440px",
+        "padding": "0px 32px"
+      },
+      {
+        "classes": "container-rIkQ59",
+        "maxWidth": "none",
+        "padding": "100px 32px 160px"
+      },
+      {
+        "classes": "container-K9_pbK",
+        "maxWidth": "none",
+        "padding": "0px 32px"
+      }
+    ],
+    "total_height": 7265,
+    "section_count": 6
+  },
+  "animations": {
+    "transitions": [
+      "all",
+      "border-color 0.3s",
+      "transform 0.2s",
+      "color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1), text-decoration-color 0.15s cubic-bezier(0.4, 0, 0.2, 1), fill 0.15s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.15s cubic-bezier(0.4, 0, 0.2, 1), -webkit-text-decoration-color 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
+      "transform 0.3s",
+      "opacity 0.3s",
+      "0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+    ],
+    "animation_names": [],
+    "keyframes": [
+      {
+        "name": "go2264125279",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "transform: scale(0) rotate(45deg); opacity: 0;"
+          },
+          {
+            "key": "100%",
+            "css": "transform: scale(1) rotate(45deg); opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "go3020080000",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "transform: scale(0); opacity: 0;"
+          },
+          {
+            "key": "100%",
+            "css": "transform: scale(1); opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "go463499852",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "transform: scale(0) rotate(90deg); opacity: 0;"
+          },
+          {
+            "key": "100%",
+            "css": "transform: scale(1) rotate(90deg); opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "go1268368563",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "transform: rotate(0deg);"
+          },
+          {
+            "key": "100%",
+            "css": "transform: rotate(360deg);"
+          }
+        ]
+      },
+      {
+        "name": "go1310225428",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "transform: scale(0) rotate(45deg); opacity: 0;"
+          },
+          {
+            "key": "100%",
+            "css": "transform: scale(1) rotate(45deg); opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "go651618207",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "height: 0px; width: 0px; opacity: 0;"
+          },
+          {
+            "key": "40%",
+            "css": "height: 0px; width: 6px; opacity: 1;"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; height: 10px;"
+          }
+        ]
+      },
+      {
+        "name": "go901347462",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "transform: scale(0.6); opacity: 0.4;"
+          },
+          {
+            "key": "100%",
+            "css": "transform: scale(1); opacity: 1;"
+          }
+        ]
+      }
+    ]
+  },
+  "gradients": [
+    "linear-gradient(90deg, rgb(169, 216, 204) 0px, rgb(151, 224, 191) 52%, rgb(127, 220, 173) 100%)",
+    "linear-gradient(90deg, rgb(62, 225, 163) 0px, rgb(50, 240, 140) 36%, rgb(96, 242, 189) 71.63%, rgb(160, 253, 231) 100%)",
+    "linear-gradient(rgb(12, 12, 12) 0%, rgba(12, 12, 12, 0.6) 30%, rgba(12, 12, 12, 0.6) 60%, rgb(12, 12, 12) 100%)"
+  ],
+  "effects": {
+    "filters": [
+      "url(\"#video_play_svg__a\")"
+    ],
+    "backdrop_filters": [],
+    "transforms": [
+      "matrix(1, 0, 0, 1, 0, 1)",
+      "matrix(1, 0, 0, 1, -720, 0)",
+      "matrix(0.8, 0, 0, 0.8, 0, 0)",
+      "matrix(1, 0, 0, 1, 0, 0)",
+      "matrix(1, 0, 0, 1, -42, -42)",
+      "matrix(0.01613, 0, 0, 0.01493, 0, 0)"
+    ]
+  },
+  "resources": {
+    "fonts": [],
+    "stylesheets": [
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/css/65960.aee2dfd308.css",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/css/main.b2eff749cf.css",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/css/51412.1c3b2ad1b0.css",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/css/async/24275.807141bf5c.css",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/css/async/28383.22fa9fe587.css",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/css/async/32389.f72233b8a4.css",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/css/async/39572.7b75425565.css",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/css/async/page.447d6b4aa0.css",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/css/async/93816.f8033365a8.css",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/css/async/83087.1e97ddd91c.css",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/css/async/16645.fd82b14727.css",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/css/async/63349.cb768ead8d.css",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/css/async/80667.e2b49fe6fa.css",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/css/async/20496.8eb09d1838.css"
+    ],
+    "scripts": [
+      "https://scripts.clarity.ms/0.8.70/clarity.js",
+      "https://bat.bing.com/p/conversions/s/0.8.70",
+      "https://bat.bing.com/p/conversions/t/97178773",
+      "https://www.clarity.ms/tag/uet/97261083?conversions=1",
+      "https://bat.bing.com/bat.js",
+      "https://bat.bing.com/bat.js",
+      "https://bat.bing.com/bat.js",
+      "https://lf-c-flwb.bytetos.com/obj/rc-client-security/web/glue/1.0.0.66/sdk-glue.js",
+      "https://lf-c-flwb.bytetos.com/obj/rc-client-security/web/stable/1.0.1.20/bdms.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/lib-react.221643c4d6.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/lib-polyfill.dcbcb8811d.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/lib-router.21bfe38a46.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/92922.1e295b3eb6.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/56874.b525a55a12.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/98377.8f6bb52691.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/42478.1d8929e911.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/70169.d17954f106.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/43881.e789bc7b72.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/84821.b968ddd2ae.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/71248.477db2767f.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/37953.a9f8a54d80.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/39800.4d18585a40.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/8049.3a9b192c2c.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/70556.896375bc70.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/69255.4ff576d82b.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/83263.1b7bc169ca.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/3015.7043dd91f7.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/85982.2c23b22218.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/58867.d6b085932a.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/55994.c6222b3a56.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/65960.ebe9121008.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/7665.b409be16ee.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/26138.fe5d999885.js",
+      "https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/static/js/main.39975e381f.js",
+      "https://lf3-short.ibytedapm.com/slardar/fe/sdk-web/browser.cn.js?bid=trae_website_cn&globalName=slardarWeb",
+      "https://bat.bing.com/p/action/97261083.js",
+      "https://bat.bing.com/p/action/187182237.js",
+      "https://bat.bing.com/p/action/97178773.js",
+      "https://lf3-short.ibytedapm.com/slardar/fe/sdk-web/plugins/common-monitors.1.16.9.js"
+    ]
+  },
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "captured_at": "2026-10-01 01:33:27"
+}

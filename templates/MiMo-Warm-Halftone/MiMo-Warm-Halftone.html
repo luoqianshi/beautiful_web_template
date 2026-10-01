@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MiMo-Warm-Halftone — 暖纸半调组件库</title>
+<style>
+  /* ============================================================
+     MiMo-Warm-Halftone — 设计 Token
+     暖纸三层底 × 半调网点 × 橙色胶带荧光笔 × 深墨绿黑
+     ============================================================ */
+  :root{
+    /* 暖纸三层底 */
+    --bg-paper:#FCFAF8;
+    --bg-paper-light:#FFFEFA;
+    --bg-panel:#F5EFE6;
+    --bg-band:#E8D7C1;
+    /* 墨色体系（深墨绿黑，非纯黑） */
+    --ink:#151C13;
+    --ink-soft:#26251E;
+    --ink-muted:#66645F;
+    --ink-faint:#8E8E93;
+    --ink-invert:#FCFAF8;
+    /* 唯一饱和色：胶带橙 */
+    --accent:#FF6500;
+    --accent-dot:rgba(214,142,102,.5);
+    /* 边框 */
+    --border-warm:rgba(125,113,70,.35);
+    --border-hair:rgba(21,28,19,.08);
+    /* 页脚纯黑 */
+    --footer-bg:#000000;
+    --footer-text:#FAFAFA;
+    --footer-text-dim:#BDBDBD;
+    --footer-line:rgba(255,255,255,.35);
+    /* 圆角 */
+    --r-pill:999px;
+    --r-win:13px;
+    --r-card:12px;
+    --r-sm:8px;
+    --r-xs:4px;
+    /* 全站唯一阴影 */
+    --shadow-float:0 12px 32px rgba(21,28,19,.06);
+    /* 字体 */
+    --font-ui:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+    --font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    /* 字号阶梯（流式） */
+    --fs-hero:clamp(20px,6.66px + 3.43vw,56px);
+    --fs-h2:clamp(28px,23.63px + 1.14vw,40px);
+    --fs-h3:clamp(19px,17.14px + .48vw,24px);
+    --fs-index:clamp(16px,14.51px + .38vw,20px);
+    --fs-body:clamp(14px,13.26px + .19vw,16px);
+    --fs-small:clamp(12px,11.63px + .1vw,13px);
+    /* 间距 */
+    --gutter:clamp(12px,4vw,40px);
+    --content-max:1200px;
+    --cards-max:1240px;
+    --section-gap:clamp(28px,8.77px + 4.95vw,80px);
+    --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
+    --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px; --space-9:96px;
+    /* 动效 */
+    --ease-out:cubic-bezier(.25,1,.5,1);
+    --dur-fast:.2s;
+    --dur-slow:.25s;
+  }
+  html[data-theme="dark"]{
+    --bg-paper:#191712;
+    --bg-paper-light:#221F19;
+    --bg-panel:#221F19;
+    --bg-band:#3A2F22;
+    --ink:#F2EDE4;
+    --ink-soft:#E8E2D6;
+    --ink-muted:rgba(242,237,228,.62);
+    --ink-faint:rgba(242,237,228,.4);
+    --ink-invert:#191712;
+    --border-warm:rgba(242,237,228,.24);
+    --border-hair:rgba(242,237,228,.1);
+    --accent-dot:rgba(214,142,102,.32);
+    --shadow-float:0 12px 32px rgba(0,0,0,.35);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-ui);
+    background:var(--bg-paper);
+    color:var(--ink);
+    font-size:var(--fs-body);
+    line-height:1.5;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    transition:background var(--dur-slow) var(--ease-out),color var(--dur-slow) var(--ease-out);
+  }
+  a{text-decoration:none;color:inherit}
+  ul,ol{list-style:none}
+  button{font-family:inherit;cursor:pointer}
+  .container{max-width:var(--content-max);margin:0 auto;padding:0 var(--gutter)}
+  section{padding:var(--space-9) var(--gutter)}
+  .sec-head{margin-bottom:var(--space-7)}
+  .kicker{
+    font-family:var(--font-mono);
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-faint);margin-bottom:var(--space-3);
+  }
+  h2.sec-title{
+    font-size:var(--fs-h2);font-weight:600;letter-spacing:-1.6px;line-height:1.15;
+    margin-bottom:var(--space-3);
+  }
+  .sec-desc{color:var(--ink-muted);max-width:640px}
+
+  /* ---------- 入场动画（纸片落位，位移 8px 内） ---------- */
+  .reveal{opacity:0;transform:translateY(8px);transition:opacity var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    *{animation:none!important}
+    html{scroll-behavior:auto}
+  }
+
+  /* ============================================================
+     签名纹理 ①：半调网点场（对角疏密溶解）
+     ============================================================ */
+  .halftone{position:relative;background:var(--bg-panel);overflow:hidden}
+  .halftone::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:radial-gradient(circle,var(--accent-dot) 1.3px,transparent 1.7px);
+    background-size:7px 7px;
+    -webkit-mask-image:repeating-linear-gradient(112deg,rgba(0,0,0,.95) 0 42px,rgba(0,0,0,.18) 42px 86px,rgba(0,0,0,.55) 86px 132px),linear-gradient(112deg,#000 5%,rgba(0,0,0,.35) 55%,transparent 88%);
+    mask-image:repeating-linear-gradient(112deg,rgba(0,0,0,.95) 0 42px,rgba(0,0,0,.18) 42px 86px,rgba(0,0,0,.55) 86px 132px),linear-gradient(112deg,#000 5%,rgba(0,0,0,.35) 55%,transparent 88%);
+    -webkit-mask-composite:source-in;mask-composite:intersect;
+  }
+  .halftone-band{
+    background:linear-gradient(rgba(232,215,193,.32) 13%,rgba(255,255,255,.32) 66%),var(--bg-band);
+    background-blend-mode:normal;
+  }
+  html[data-theme="dark"] .halftone-band{background:linear-gradient(rgba(58,47,34,.9),rgba(30,25,18,.9)),var(--bg-band)}
+
+  /* ============================================================
+     签名纹理 ②：ASCII 字符噪点纸底
+     ============================================================ */
+  .glyph-noise{position:absolute;inset:0;overflow:hidden;pointer-events:none;user-select:none;z-index:0}
+  .glyph-noise pre{
+    font-family:var(--font-mono);font-size:13px;line-height:1.35;
+    letter-spacing:2px;word-break:break-all;white-space:pre-wrap;
+    color:var(--ink);opacity:.05;
+  }
+
+  /* ============================================================
+     签名元素 ③：橙色胶带荧光笔
+     ============================================================ */
+  .marker{
+    position:relative;z-index:0;display:inline-block;
+    padding:0 .12em;font-style:italic;font-weight:600;
+  }
+  .marker::before{
+    content:"";position:absolute;z-index:-1;
+    left:-.1em;right:-.1em;top:.14em;bottom:.04em;
+    background:var(--accent);
+    border:2px solid var(--ink);
+    border-radius:3px;
+    transform:skewX(-8deg) rotate(-.6deg);
+    transition:transform var(--dur-fast) var(--ease-out);
+  }
+  .marker:hover::before{transform:skewX(-8deg) rotate(-.6deg) translateY(-1px)}
+
+  /* ============================================================
+     按钮体系 —— 墨色胶囊
+     ============================================================ */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);
+    height:40px;padding:0 18px;border-radius:var(--r-pill);
+    font-size:15px;font-weight:500;border:1px solid transparent;
+    color:var(--ink-invert);background:var(--ink);
+    transition:background var(--dur-fast) var(--ease-out),transform var(--dur-fast) var(--ease-out),border-color var(--dur-fast) var(--ease-out),opacity var(--dur-fast) var(--ease-out);
+    white-space:nowrap;
+  }
+  .btn:hover{background:color-mix(in srgb,var(--ink) 85%,var(--bg-paper))}
+  .btn:active{transform:translateY(1px)}
+  .btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .btn .arrow{transition:transform var(--dur-fast) var(--ease-out)}
+  .btn:hover .arrow{transform:translateX(2px)}
+  .btn-secondary{background:var(--bg-panel);color:var(--ink);border-color:var(--border-warm)}
+  .btn-secondary:hover{background:color-mix(in srgb,var(--bg-panel) 88%,var(--ink))}
+  .btn-outline{background:transparent;color:var(--ink);border-color:var(--border-warm)}
+  .btn-outline:hover{background:color-mix(in srgb,var(--bg-paper) 92%,var(--ink))}
+  .btn-sm{height:32px;font-size:13px;padding:0 14px}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;pointer-events:none}
+
+  /* 下载变体：图标 + 双行小字 + 箭头，光带周期扫过 */
+  .btn-download{
+    position:relative;overflow:hidden;
+    height:56px;padding:0 26px;gap:14px;font-size:16px;font-weight:600;
+  }
+  .btn-download .dl-icon{width:22px;height:22px;flex-shrink:0;opacity:.95}
+  .btn-download .dl-text{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15}
+  .btn-download .dl-sub{font-size:12px;font-weight:400;opacity:.55}
+  .btn-download::after{
+    content:"";position:absolute;top:-40%;bottom:-40%;left:0;width:60%;
+    background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);
+    transform:translateX(-120%);
+    animation:download-shiny-sweep 3.6s ease-in-out infinite;
+    pointer-events:none;
+  }
+  @keyframes download-shiny-sweep{0%{transform:translateX(-120%)}65%,100%{transform:translateX(280%)}}
+  @keyframes hero-pill-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @keyframes hero-pill-word-in{from{opacity:0;transform:translateY(40%)}to{opacity:1;transform:none}}
+  @keyframes typewriter-caret-blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+
+  /* ============================================================
+     Header
+     ============================================================ */
+  .site-header{
+    position:sticky;top:0;z-index:50;
+    background:color-mix(in srgb,var(--bg-paper) 92%,transparent);
+    backdrop-filter:saturate(1.1) blur(6px);
+  }
+  .site-header .container{
+    max-width:1600px;height:66px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:17px;letter-spacing:-.3px}
+  .logo .logo-mark{
+    width:22px;height:22px;border-radius:6px;background:var(--ink);
+    display:inline-flex;align-items:center;justify-content:center;
+    color:var(--ink-invert);font-size:12px;font-weight:700;
+  }
+  .main-nav{display:flex;gap:28px;font-size:14px;color:var(--ink-muted)}
+  .main-nav a{transition:color var(--dur-fast) var(--ease-out)}
+  .main-nav a:hover{color:var(--ink)}
+
+  /* ============================================================
+     Hero —— 居中叙事 + 胶带高亮 + 窗口模型
+     ============================================================ */
+  .hero{position:relative;padding:clamp(48px,7vw,110px) var(--gutter) 120px;text-align:center;overflow:hidden}
+  .hero-inner{position:relative;z-index:1;max-width:var(--cards-max);margin:0 auto}
+  .hero h1{
+    font-size:var(--fs-hero);font-weight:600;letter-spacing:.4px;line-height:1.32;
+    animation:hero-pill-enter .5s var(--ease-out) both;
+  }
+  .hero h1 .line{display:block}
+  .hero h1 .word-in{display:inline-block;animation:hero-pill-word-in .55s var(--ease-out) both}
+  .hero-actions{
+    display:flex;justify-content:center;gap:var(--space-4);flex-wrap:wrap;
+    margin-top:clamp(28px,2.4vw,40px);
+  }
+  .hero-note{margin-top:var(--space-4);font-size:var(--fs-small);color:var(--ink-faint)}
+  .hero-stage{margin-top:clamp(40px,5vw,72px);position:relative;z-index:1}
+
+  /* ============================================================
+     窗口模型（13px 圆角 + 发丝描边 + 唯一柔影）
+     ============================================================ */
+  .win{
+    background:var(--bg-paper-light);
+    border:1px solid var(--border-hair);
+    border-radius:var(--r-win);
+    box-shadow:var(--shadow-float);
+    overflow:hidden;text-align:left;
+  }
+  .win-bar{
+    display:flex;align-items:center;gap:10px;height:38px;padding:0 14px;
+    border-bottom:1px solid var(--border-hair);
+  }
+  .traffic{display:flex;gap:6px}
+  .traffic i{width:9px;height:9px;border-radius:50%;display:block;background:var(--border-warm)}
+  .win-bar .win-title{font-size:12px;color:var(--ink-faint)}
+  .win-bar .win-tools{margin-left:auto;display:flex;gap:10px;color:var(--ink-faint)}
+  .win-body{display:flex;min-height:320px}
+  .win-side{
+    width:200px;flex-shrink:0;padding:16px 14px;
+    border-right:1px solid var(--border-hair);
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .win-side .side-item{display:flex;align-items:center;gap:10px;font-size:14px;padding:7px 8px;border-radius:var(--r-sm);color:var(--ink)}
+  .win-side .side-item.dim{color:var(--ink-muted)}
+  .win-side .side-item.active{background:var(--bg-panel)}
+  .win-side .side-label{font-size:12px;color:var(--ink-faint);padding:10px 8px 2px}
+  .win-side .dot{width:6px;height:6px;border-radius:50%;background:var(--ink-faint)}
+  .win-main{flex:1;position:relative;padding:26px 22px;display:flex;flex-direction:column}
+  .win-coord{
+    position:absolute;font-family:var(--font-mono);font-size:11px;
+    color:var(--ink-faint);opacity:.7;letter-spacing:.5px;
+  }
+  .win-empty{
+    margin:auto;text-align:center;padding-bottom:12px;
+  }
+  .win-empty .glyph-icon{
+    width:46px;height:46px;margin:0 auto 18px;border:1px solid var(--border-warm);
+    border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;
+    color:var(--ink-muted);font-family:var(--font-mono);font-size:15px;
+    transform:rotate(-2deg);
+  }
+  .win-empty h4{font-size:var(--fs-h3);font-weight:600;letter-spacing:-.3px}
+
+  /* 对话输入胶囊 */
+  .composer{
+    margin-top:22px;background:var(--bg-paper);
+    border:1px solid var(--border-hair);border-radius:var(--r-card);
+    padding:14px 16px 10px;
+  }
+  .composer .ph{font-size:13px;color:var(--ink-faint);min-height:34px}
+  .composer .ph .caret{
+    display:inline-block;width:1px;height:13px;margin-left:1px;
+    background:var(--ink-muted);vertical-align:-2px;
+    animation:typewriter-caret-blink 1s steps(1) infinite;
+  }
+  .composer-row{display:flex;align-items:center;gap:12px;font-size:12px;color:var(--ink-muted)}
+  .composer-row .chip{
+    display:inline-flex;align-items:center;gap:5px;
+    padding:3px 9px;border-radius:var(--r-pill);border:1px solid var(--border-hair);
+  }
+  .composer-row .send{
+    margin-left:auto;width:28px;height:28px;border-radius:50%;border:none;
+    background:var(--ink);color:var(--ink-invert);
+    display:inline-flex;align-items:center;justify-content:center;
+    transition:transform var(--dur-fast) var(--ease-out);
+  }
+  .composer-row .send:hover{transform:translateY(-1px)}
+
+  /* ============================================================
+     Feature 卡 —— 半调媒体面板 + 编号发丝线列表
+     ============================================================ */
+  .feature-card{
+    max-width:var(--cards-max);margin:0 auto;
+    display:grid;grid-template-columns:55fr 45fr;gap:var(--space-8);
+    align-items:center;
+  }
+  .feature-card.flip .media{order:2}
+  .feature-card.flip .copy{order:1}
+  .media{
+    position:relative;min-height:clamp(300px,32vw,500px);
+    border-radius:var(--r-card);overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+    padding:clamp(18px,2.6vw,42px);
+  }
+  .media .win{width:100%;max-width:560px;transform:rotate(-.4deg)}
+  .copy h3{
+    font-size:var(--fs-h3);font-weight:600;letter-spacing:-.4px;line-height:1.4;
+    padding-bottom:var(--space-5);border-bottom:1px solid var(--border-warm);
+  }
+  .num-list li{padding:var(--space-5) 0;border-bottom:1px solid var(--border-warm)}
+  .num-list .n{
+    display:block;font-size:var(--fs-index);font-weight:700;letter-spacing:-.4px;
+    margin-bottom:var(--space-1);
+  }
+  .num-list p{color:var(--ink);opacity:.92}
+  .copy-link{
+    display:inline-flex;align-items:center;gap:6px;margin-top:var(--space-5);
+    font-size:15px;font-weight:500;color:var(--ink);
+  }
+  .copy-link .arrow{transition:transform var(--dur-fast) var(--ease-out)}
+  .copy-link:hover .arrow{transform:translateX(3px)}
+  .copy-link:hover{text-decoration:underline;text-underline-offset:4px}
+
+  /* 媒体面板里的幻灯片窗口 */
+  .slide-shot{
+    height:190px;background-size:cover;background-position:50% 42%;
+    background-color:var(--bg-panel);
+  }
+  .slide-cap{
+    display:flex;align-items:center;gap:8px;
+    padding:12px 16px;font-size:13px;color:var(--ink-muted);
+    border-top:1px solid var(--border-hair);
+  }
+  .slide-cap .flag{width:16px;height:11px;border-radius:2px;background:linear-gradient(90deg,#009246 33%,#fff 33% 66%,#ce2b37 66%)}
+
+  /* 流程图窗口 */
+  .flow{padding:26px 22px;text-align:center}
+  .flow h5{font-size:15px;font-weight:600;margin-bottom:18px}
+  .flow .flow-pill{
+    display:inline-flex;flex-direction:column;align-items:center;
+    background:var(--ink);color:var(--ink-invert);
+    border-radius:var(--r-sm);padding:8px 44px;font-size:14px;font-weight:600;
+  }
+  .flow .flow-pill small{font-size:10px;font-weight:400;opacity:.6}
+  .flow .flow-line{width:1px;height:16px;background:var(--border-warm);margin:0 auto}
+  .flow .flow-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .flow .flow-node{
+    border:1px solid var(--border-hair);border-radius:var(--r-sm);
+    padding:8px 12px;font-size:12px;background:var(--bg-paper-light);
+  }
+  .flow .flow-node small{display:block;font-size:10px;color:var(--ink-faint)}
+  .flow .flow-node .tag{
+    display:inline-block;margin-left:4px;padding:0 5px;border-radius:var(--r-xs);
+    font-size:9px;background:color-mix(in srgb,var(--accent) 18%,transparent);color:var(--ink);
+  }
+
+  /* ============================================================
+     Token 展示区
+     ============================================================ */
+  .demo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-5)}
+  .demo-card{
+    background:var(--bg-paper-light);border:1px solid var(--border-hair);
+    border-radius:var(--r-card);padding:var(--space-6);
+  }
+  .demo-card h3{font-size:16px;font-weight:600;margin-bottom:var(--space-2)}
+  .demo-card .hint{font-size:var(--fs-small);color:var(--ink-faint);margin-bottom:var(--space-5)}
+  .swatch-row{display:flex;gap:10px;flex-wrap:wrap}
+  .swatch{
+    width:74px;border-radius:var(--r-sm);overflow:hidden;
+    border:1px solid var(--border-hair);font-size:10px;
+  }
+  .swatch .chip-color{height:52px}
+  .swatch .chip-name{padding:5px 6px;color:var(--ink-muted);font-family:var(--font-mono)}
+  .badge-row{display:flex;gap:8px;flex-wrap:wrap}
+  .badge{
+    display:inline-flex;align-items:center;gap:5px;
+    padding:4px 11px;border-radius:var(--r-pill);
+    font-size:var(--fs-small);border:1px solid var(--border-warm);color:var(--ink-muted);
+  }
+  .badge.solid{background:var(--ink);color:var(--ink-invert);border-color:transparent}
+  .badge.accent{background:var(--accent);color:#151C13;border-color:transparent;font-weight:600}
+  .btn-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .texture-swatch{
+    height:96px;border-radius:var(--r-sm);border:1px solid var(--border-hair);
+    position:relative;overflow:hidden;
+  }
+  .texture-swatch .lbl{
+    position:absolute;left:10px;bottom:8px;font-family:var(--font-mono);
+    font-size:10px;color:var(--ink-muted);z-index:2;
+    background:color-mix(in srgb,var(--bg-paper-light) 80%,transparent);
+    padding:2px 6px;border-radius:var(--r-xs);
+  }
+  .field{
+    width:100%;height:42px;padding:0 14px;
+    background:var(--bg-paper-light);color:var(--ink);
+    border:1px solid var(--border-warm);border-radius:var(--r-sm);
+    font-size:14px;font-family:inherit;
+    transition:border-color var(--dur-fast) var(--ease-out);
+  }
+  .field::placeholder{color:var(--ink-faint)}
+  .field:focus{outline:none;border-color:var(--ink)}
+  .radius-row{display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap}
+  .radius-demo{width:64px;height:48px;background:var(--bg-panel);border:1px solid var(--border-warm)}
+  .radius-demo span{display:block;text-align:center;padding-top:32px;font-size:10px;color:var(--ink-muted);font-family:var(--font-mono)}
+
+  /* ============================================================
+     Final CTA —— 半调带 + 输入胶囊
+     ============================================================ */
+  .final-cta{position:relative;text-align:center;padding:clamp(64px,8vw,120px) var(--gutter)}
+  .final-cta h2{font-size:var(--fs-h2);font-weight:600;letter-spacing:-1.6px;margin-bottom:var(--space-3)}
+  .final-cta p{color:var(--ink-muted);margin-bottom:var(--space-7)}
+  .final-cta .composer{max-width:640px;margin:0 auto;text-align:left}
+
+  /* ============================================================
+     Footer —— 纯黑硬切 + 二维码阵列
+     ============================================================ */
+  .site-footer{background:var(--footer-bg);color:var(--footer-text);padding:64px 0 24px}
+  .footer-grid{
+    max-width:1600px;margin:0 auto;padding:0 clamp(16px,3vw,40px);
+    display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:var(--space-7);
+  }
+  .footer-brand .logo{color:var(--footer-text)}
+  .footer-brand .logo .logo-mark{background:var(--footer-text);color:var(--footer-bg)}
+  .footer-social{display:flex;gap:14px;margin:18px 0 22px}
+  .footer-social a{
+    width:32px;height:32px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,.12);color:var(--footer-text);
+    transition:background var(--dur-fast) var(--ease-out);
+  }
+  .footer-social a:hover{background:rgba(255,255,255,.28)}
+  .qr-row{display:flex;gap:12px;flex-wrap:wrap}
+  .qr-block{width:82px}
+  .qr-block .qr{
+    width:82px;height:82px;background:#fff;border:1px solid var(--footer-line);
+    border-radius:var(--r-xs);padding:5px;
+  }
+  .qr-block .qr canvas{width:100%;height:100%;image-rendering:pixelated;display:block}
+  .qr-block .qr-label{margin-top:6px;font-size:11px;color:var(--footer-text-dim);text-align:center;line-height:1.3}
+  .footer-col h4{font-size:17px;font-weight:600;margin-bottom:18px}
+  .footer-col a{
+    display:block;font-size:14px;color:var(--footer-text-dim);
+    padding:7px 0;transition:color var(--dur-fast) var(--ease-out);
+  }
+  .footer-col a:hover{color:var(--footer-text)}
+  .footer-bottom{
+    max-width:1600px;margin:var(--space-8) auto 0;padding:var(--space-5) clamp(16px,3vw,40px) 0;
+    border-top:1px solid var(--footer-line);
+    display:flex;justify-content:space-between;align-items:center;gap:var(--space-4);flex-wrap:wrap;
+    font-size:12px;color:var(--footer-text-dim);
+  }
+  .footer-bottom .legal{display:flex;gap:18px;flex-wrap:wrap}
+  .footer-bottom .legal a:hover{color:var(--footer-text)}
+
+  /* 主题切换 */
+  .theme-toggle{
+    display:inline-flex;gap:2px;padding:3px;border-radius:var(--r-pill);
+    background:rgba(255,255,255,.1);
+  }
+  .theme-toggle button{
+    width:30px;height:26px;border:none;border-radius:var(--r-pill);
+    background:transparent;color:var(--footer-text-dim);
+    display:inline-flex;align-items:center;justify-content:center;
+    transition:background var(--dur-fast) var(--ease-out),color var(--dur-fast) var(--ease-out);
+  }
+  .theme-toggle button.active{background:rgba(255,255,255,.22);color:var(--footer-text)}
+
+  /* ============================================================
+     响应式：1024 / 768 两档
+     ============================================================ */
+  @media (max-width:1024px){
+    .feature-card{grid-template-columns:1fr;gap:var(--space-6)}
+    .feature-card.flip .media{order:0}
+    .feature-card.flip .copy{order:1}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .win-side{width:170px}
+  }
+  @media (max-width:768px){
+    .main-nav{display:none}
+    .hero-actions{flex-direction:column;align-items:stretch}
+    .btn-download{width:100%}
+    .win-body{flex-direction:column}
+    .win-side{width:100%;border-right:none;border-bottom:1px solid var(--border-hair)}
+    .footer-grid{grid-template-columns:1fr}
+    .footer-bottom{flex-direction:column;align-items:flex-start}
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================= Header ======================= -->
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="#hero"><span class="logo-mark">M</span>MiMo Studio</a>
+    <nav class="main-nav">
+      <a href="#signatures">签名元素</a>
+      <a href="#buttons">按钮</a>
+      <a href="#features">Feature 卡</a>
+      <a href="#tokens">Token</a>
+      <a href="#inputs">输入框</a>
+    </nav>
+    <a class="btn btn-sm" href="#cta">订阅 <span class="arrow">→</span></a>
+  </div>
+</header>
+
+<main>
+
+<!-- ======================= Hero ======================= -->
+<section class="hero" id="hero">
+  <div class="glyph-noise" aria-hidden="true"><pre id="glyph-field"></pre></div>
+  <div class="hero-inner">
+    <h1>
+      <span class="line">和 <span class="word-in">MiMo 桌面工作台</span></span>
+      <span class="line"><span class="marker">Write</span> 无限可能</span>
+    </h1>
+    <div class="hero-actions">
+      <a class="btn btn-download" href="#cta">
+        <svg class="dl-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5 10.2 4.4v7.1H3zM11.3 4.2 21 2.8v8.7h-9.7zM3 12.5h7.2v7.1L3 18.5zM11.3 12.5H21v8.7l-9.7-1.4z"/></svg>
+        <span class="dl-text"><span>Windows</span></span>
+        <span class="arrow">→</span>
+      </a>
+      <a class="btn btn-download" href="#cta">
+        <svg class="dl-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.9-1.4-.2-2.8.8-3.5.8s-1.9-.8-3.1-.8c-1.6 0-3 .9-3.8 2.4-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3.1-.7s1.8.7 3.1.7c1.3 0 2.1-1.1 2.9-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.7-3.7zM14.2 5.4c.6-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.2-.6 2.8-1.4z"/></svg>
+        <span class="dl-text"><span>MAC</span><span class="dl-sub">Apple 芯片</span></span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+    <p class="hero-note">预览版 · 支持 Windows 11 / macOS 14+</p>
+  </div>
+
+  <!-- Hero 窗口模型：侧边栏 + 空态 + 对话输入胶囊 -->
+  <div class="hero-stage reveal">
+    <div class="win" style="max-width:1180px;margin:0 auto">
+      <div class="win-bar">
+        <span class="traffic"><i></i><i></i><i></i></span>
+        <span class="win-title">MiMo Studio</span>
+        <span class="win-tools">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="2" width="12" height="12" rx="2"/><rect x="5.5" y="5.5" width="7" height="7" rx="1"/></svg>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="3" width="12" height="10" rx="2"/><path d="M2 6h12"/></svg>
+        </span>
+      </div>
+      <div class="win-body">
+        <aside class="win-side">
+          <div class="side-item"><span class="dot"></span>新建任务</div>
+          <div class="side-item"><span class="dot"></span>插件</div>
+          <div class="side-item"><span class="dot"></span>产物中心</div>
+          <div class="side-label">项目</div>
+          <div class="side-item dim">智能的下一次远征</div>
+          <div class="side-label">最近</div>
+          <div class="side-item active"><span class="dot" style="background:var(--accent)"></span>暖纸半调风格手册</div>
+          <div class="side-item dim"><span class="dot"></span>当排版学会了印刷术</div>
+          <div class="side-item dim"><span class="dot"></span>一座城市的智能共生</div>
+        </aside>
+        <div class="win-main">
+          <span class="win-coord" style="top:26px;right:30px">40°02'40"N</span>
+          <span class="win-coord" style="top:52px;left:30px">116°18'39"E</span>
+          <div class="win-empty">
+            <div class="glyph-icon">M◧</div>
+            <h4>和 MiMo 一起探索无限可能</h4>
+          </div>
+          <div class="composer">
+            <div class="ph">描述任务，输入 / 调用技能<span class="caret"></span></div>
+            <div class="composer-row">
+              <span class="chip">＋</span>
+              <span class="chip">◉ 默认权限 ▾</span>
+              <button class="send" aria-label="发送">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 签名元素 ======================= -->
+<section id="signatures" class="halftone halftone-band">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="kicker">Signatures</div>
+      <h2 class="sec-title">签名元素：<span style="color:var(--ink-muted)">胶带、网点、字符噪点</span></h2>
+      <p class="sec-desc">三件套定义此风格：一条贴歪的橙色荧光胶带、一片溶解的半调网点、一张 3% 浓度的字符噪点纸底。稀缺使用，出现即焦点。</p>
+    </div>
+    <div class="demo-grid">
+      <div class="demo-card reveal" style="position:relative;overflow:hidden">
+        <h3>① 橙色胶带荧光笔</h3>
+        <p class="hint">skewX(-8deg) + 深墨描边 + 微旋转，全页仅一次</p>
+        <p style="font-size:clamp(22px,2.4vw,34px);font-weight:600;line-height:1.35">让每个词都 <span class="marker">Write</span> 起来</p>
+      </div>
+      <div class="demo-card halftone reveal" style="background:var(--bg-panel)">
+        <h3 style="position:relative;z-index:2">② 半调网点场</h3>
+        <p class="hint" style="position:relative;z-index:2">radial-gradient 点阵沿 112° 疏密溶解</p>
+        <div style="position:relative;z-index:2;display:flex;gap:10px">
+          <div class="texture-swatch halftone" style="flex:1"><span class="lbl">dots · 7px</span></div>
+          <div class="texture-swatch halftone" style="flex:1"><span class="lbl">band · 112°</span></div>
+        </div>
+      </div>
+      <div class="demo-card reveal" style="position:relative;overflow:hidden">
+        <h3 style="position:relative;z-index:2">③ ASCII 字符噪点</h3>
+        <p class="hint" style="position:relative;z-index:2">monospace 字符场，opacity .05 平铺</p>
+        <div class="glyph-noise" aria-hidden="true"><pre class="glyph-mini"></pre></div>
+        <div class="texture-swatch" style="position:relative;z-index:2;border-style:dashed"><span class="lbl">glyph noise · 240px tile</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Buttons ======================= -->
+<section id="buttons">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="kicker">Buttons</div>
+      <h2 class="sec-title">按钮体系：<span style="color:var(--ink-muted)">墨色胶囊，全或无</span></h2>
+      <p class="sec-desc">交互件一律 999px 胶囊 + 深墨绿黑底；hover 只提亮与箭头平移，不放大不投影。</p>
+    </div>
+    <div class="demo-grid">
+      <div class="demo-card reveal">
+        <h3>四种形态</h3>
+        <p class="hint">主 / 次 / 描边 / 禁用</p>
+        <div class="btn-row">
+          <button class="btn">主按钮 <span class="arrow">→</span></button>
+          <button class="btn btn-secondary">次按钮</button>
+          <button class="btn btn-outline">描边按钮</button>
+          <button class="btn" disabled>禁用</button>
+          <button class="btn btn-sm">小号</button>
+        </div>
+      </div>
+      <div class="demo-card reveal">
+        <h3>下载变体</h3>
+        <p class="hint">图标 + 双行小字 + 周期光带扫过</p>
+        <div class="btn-row">
+          <a class="btn btn-download" href="#cta">
+            <svg class="dl-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.5 10.2 4.4v7.1H3zM11.3 4.2 21 2.8v8.7h-9.7zM3 12.5h7.2v7.1L3 18.5zM11.3 12.5H21v8.7l-9.7-1.4z"/></svg>
+            <span class="dl-text"><span>Windows</span></span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+      <div class="demo-card reveal">
+        <h3>徽章 / 标签</h3>
+        <p class="hint">胶囊形、12-13px 小字</p>
+        <div class="badge-row">
+          <span class="badge solid">预览版</span>
+          <span class="badge accent">New</span>
+          <span class="badge">◉ 默认权限 ▾</span>
+          <span class="badge">MiMo 新一代模型</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Feature Cards ======================= -->
+<section id="features" style="padding-top:0">
+  <div class="container" style="display:flex;flex-direction:column;gap:clamp(48px,6vw,96px)">
+
+    <!-- 卡 1：media-left + 编号列表 -->
+    <article class="feature-card reveal">
+      <div class="media halftone">
+        <div class="win">
+          <div class="win-bar">
+            <span class="traffic"><i></i><i></i><i></i></span>
+            <span class="win-title">Smart 调度</span>
+          </div>
+          <div class="flow">
+            <h5>统一的智能编排</h5>
+            <div class="flow-pill">Smart<small>智能编排</small></div>
+            <div class="flow-line"></div>
+            <div class="flow-row">
+              <div class="flow-node">办公智能体<small>文档 · 表格 · 幻灯</small></div>
+              <div class="flow-node">代码智能体<small>编写 · 调试 · 审查</small></div>
+              <div class="flow-node">研究智能体<small>检索 · 综述 · 分析</small></div>
+            </div>
+            <div class="flow-line"></div>
+            <div class="flow-row">
+              <div class="flow-node">极速模型<span class="tag">推荐</span><small>Flash 预览</small></div>
+              <div class="flow-node">旗舰模型<span class="tag">推荐</span><small>Pro 预览</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copy">
+        <h3>「Smart」调度</h3>
+        <ol class="num-list">
+          <li><span class="n">01</span><p>自动评估任务类型、复杂度与成本，确定执行路径。</p></li>
+          <li><span class="n">02</span><p>按需路由到办公 / 代码 / 研究框架，动态选择模型与工具。</p></li>
+          <li><span class="n">03</span><p>复杂任务拆解为子任务，多 Agent 并行推进，状态全程可见。</p></li>
+          <li><span class="n">04</span><p>Self-Evolve 引擎持续优化自身代码，让系统不断变强。</p></li>
+        </ol>
+        <a class="copy-link" href="#cta">了解调度策略 <span class="arrow">→</span></a>
+      </div>
+    </article>
+
+    <!-- 卡 2：media-right + 编号列表 + 幻灯片图像 -->
+    <article class="feature-card flip reveal">
+      <div class="media halftone">
+        <div class="win">
+          <div class="win-bar">
+            <span class="traffic"><i></i><i></i><i></i></span>
+            <span class="win-title">成果预览 · Slides</span>
+          </div>
+          <div class="slide-shot" role="img" aria-label="金光时分的雾山湖泊油画风格幻灯片"
+               style="background-image:url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=19th%20century%20romanticism%20oil%20painting%20landscape%2C%20misty%20mountains%20and%20calm%20lake%20at%20golden%20hour%2C%20warm%20cream%20ochre%20and%20soft%20rose%20tones%2C%20visible%20painterly%20brushstrokes%2C%20sublime%20atmosphere%2C%20no%20text%2C%20no%20people&image_size=landscape_4_3')"></div>
+          <div class="slide-cap"><span class="flag"></span>FINE DELLA PRESENTAZIONE · 期待与你在暖光中相见</div>
+        </div>
+      </div>
+      <div class="copy">
+        <h3>从生成结果到持续迭代</h3>
+        <ol class="num-list">
+          <li><span class="n">01</span><p>多类文件可直接拖入作为上下文，成果覆盖 PPT、网页、3D、App 等。</p></li>
+          <li><span class="n">02</span><p>会话内或预览区可对成果实时运行、操作、交互。</p></li>
+          <li><span class="n">03</span><p>选中局部即可精准修改，支持批量调整与版本回退。</p></li>
+        </ol>
+        <a class="copy-link" href="#cta">查看产物中心 <span class="arrow">→</span></a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ======================= Tokens ======================= -->
+<section id="tokens" class="halftone halftone-band">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="kicker">Tokens</div>
+      <h2 class="sec-title">Token 系统：<span style="color:var(--ink-muted)">暖纸三层底 × 单点橙</span></h2>
+      <p class="sec-desc">全站 95% 是暖中性，#FF6500 是唯一饱和色。阴影只有一档，圆角只有四档。</p>
+    </div>
+    <div class="demo-grid">
+      <div class="demo-card reveal">
+        <h3>色彩</h3>
+        <p class="hint">bg-paper #FCFAF8 · ink #151C13 · accent #FF6500</p>
+        <div class="swatch-row">
+          <div class="swatch"><div class="chip-color" style="background:#FCFAF8"></div><div class="chip-name">#FCFAF8</div></div>
+          <div class="swatch"><div class="chip-color" style="background:#F5EFE6"></div><div class="chip-name">#F5EFE6</div></div>
+          <div class="swatch"><div class="chip-color" style="background:#E8D7C1"></div><div class="chip-name">#E8D7C1</div></div>
+          <div class="swatch"><div class="chip-color" style="background:#66645F"></div><div class="chip-name">#66645F</div></div>
+          <div class="swatch"><div class="chip-color" style="background:#151C13"></div><div class="chip-name">#151C13</div></div>
+          <div class="swatch"><div class="chip-color" style="background:#FF6500"></div><div class="chip-name">#FF6500</div></div>
+        </div>
+      </div>
+      <div class="demo-card reveal">
+        <h3>圆角</h3>
+        <p class="hint">999 胶囊 / 13 窗口 / 12 卡片 / 8 小件</p>
+        <div class="radius-row">
+          <div class="radius-demo" style="border-radius:999px"><span>999</span></div>
+          <div class="radius-demo" style="border-radius:13px"><span>13</span></div>
+          <div class="radius-demo" style="border-radius:12px"><span>12</span></div>
+          <div class="radius-demo" style="border-radius:8px"><span>8</span></div>
+          <div class="radius-demo" style="border-radius:4px"><span>4</span></div>
+        </div>
+      </div>
+      <div class="demo-card reveal">
+        <h3>阴影与描边</h3>
+        <p class="hint">唯一阴影 0 12px 32px rgba(21,28,19,.06)</p>
+        <div class="win" style="box-shadow:var(--shadow-float)">
+          <div class="win-bar"><span class="traffic"><i></i><i></i><i></i></span><span class="win-title">shadow-float</span></div>
+          <div style="padding:22px;font-size:13px;color:var(--ink-muted)">
+            暖发丝描边 <code style="font-family:var(--font-mono)">rgba(125,113,70,.35)</code><br />
+            极淡卡描边 <code style="font-family:var(--font-mono)">rgba(21,28,19,.08)</code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Inputs ======================= -->
+<section id="inputs">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="kicker">Inputs</div>
+      <h2 class="sec-title">输入框：<span style="color:var(--ink-muted)">聚焦靠描边本身</span></h2>
+      <p class="sec-desc">白纸面 + 1px 暖描边，聚焦时描边转深墨；无发光环、无阴影变化。</p>
+    </div>
+    <div class="demo-grid">
+      <div class="demo-card reveal">
+        <h3>表单字段</h3>
+        <p class="hint">聚焦试试 border-color → ink</p>
+        <input class="field" type="text" placeholder="搜索组件…" style="margin-bottom:14px" />
+        <input class="field" type="email" placeholder="you@example.com" />
+      </div>
+      <div class="demo-card reveal">
+        <h3>对话输入胶囊</h3>
+        <p class="hint">工具行 + 圆形发送钮</p>
+        <div class="composer" style="margin-top:0">
+          <div class="ph">描述任务，输入 / 调用技能<span class="caret"></span></div>
+          <div class="composer-row">
+            <span class="chip">＋</span>
+            <span class="chip">◉ 默认权限 ▾</span>
+            <span class="chip">MiMo 新一代模型 ▾</span>
+            <button class="send" aria-label="发送">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="demo-card reveal">
+        <h3>发丝线编号列表</h3>
+        <p class="hint">杂志目录排版语言</p>
+        <ol class="num-list" style="margin-top:4px">
+          <li><span class="n">01</span><p>序号 700 字重单独占行。</p></li>
+          <li><span class="n">02</span><p>条目间暖发丝线分隔。</p></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Final CTA ======================= -->
+<section class="final-cta halftone halftone-band" id="cta">
+  <h2 class="reveal">和 MiMo 一起<span class="marker">探索</span>无限可能</h2>
+  <p class="reveal">PPT、文档、表格、定时与文件整理，统统交给 MiMo。</p>
+  <div class="composer reveal">
+    <div class="ph">描述任务，输入 / 调用技能<span class="caret"></span></div>
+    <div class="composer-row">
+      <span class="chip">＋</span>
+      <span class="chip">◉ 默认权限 ▾</span>
+      <span class="chip">MiMo 新一代模型 ▾</span>
+      <button class="send" aria-label="发送">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================= Footer ======================= -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="logo" href="#hero"><span class="logo-mark">M</span>MiMo Studio</a>
+      <div class="footer-social">
+        <a href="#" aria-label="邮件"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="3" width="13" height="10" rx="2"/><path d="m2 4 6 5 6-5"/></svg></a>
+        <a href="#" aria-label="社区"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="8" r="6"/><path d="M5 8h6M8 5v6"/></svg></a>
+        <a href="#" aria-label="代码"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="m5.5 5-3 3 3 3M10.5 5l3 3-3 3"/></svg></a>
+        <a href="#" aria-label="论坛"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2.5 3.5h11v7h-7l-3 2.5v-2.5h-1z"/></svg></a>
+      </div>
+      <div class="qr-row">
+        <div class="qr-block"><div class="qr"><canvas width="29" height="29" data-seed="7"></canvas></div><div class="qr-label">开放平台<br />微信群</div></div>
+        <div class="qr-block"><div class="qr"><canvas width="29" height="29" data-seed="13"></canvas></div><div class="qr-label">开放平台<br />飞书群</div></div>
+        <div class="qr-block"><div class="qr"><canvas width="29" height="29" data-seed="21"></canvas></div><div class="qr-label">Token Plan<br />微信群</div></div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>产品</h4>
+      <a href="#">MiMo Desktop</a>
+      <a href="#">MiMo Studio</a>
+      <a href="#">MiMo Claw</a>
+      <a href="#">MiMo Code</a>
+    </div>
+    <div class="footer-col">
+      <h4>开放平台</h4>
+      <a href="#">文档</a>
+      <a href="#">常见问题</a>
+      <a href="#">API 定价</a>
+      <a href="#">Token Plan</a>
+    </div>
+    <div class="footer-col">
+      <h4>动态</h4>
+      <a href="#">新闻</a>
+      <a href="#">更新日志</a>
+      <a href="#">博客</a>
+    </div>
+    <div class="footer-col">
+      <h4>关于我们</h4>
+      <a href="#">服务条款</a>
+      <a href="#">隐私政策</a>
+      <a href="#">Cookie 政策</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Copyright © 2026 beautiful_web_template · MiMo-Warm-Halftone</span>
+    <div class="legal">
+      <a href="#">服务协议</a>
+      <a href="#">隐私政策</a>
+      <a href="#">Cookie 偏好设置</a>
+    </div>
+    <div class="theme-toggle" role="group" aria-label="主题切换">
+      <button data-mode="system" class="active" aria-label="跟随系统">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="2.5" width="13" height="9" rx="1.5"/><path d="M5.5 14h5"/></svg>
+      </button>
+      <button data-mode="light" aria-label="浅色">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="8" r="3.2"/><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3 3l1.1 1.1M11.9 11.9 13 13M13 3l-1.1 1.1M4.1 11.9 3 13"/></svg>
+      </button>
+      <button data-mode="dark" aria-label="深色">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7Z"/></svg>
+      </button>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ---------- ASCII 字符噪点纸底 ---------- */
+  (function () {
+    const glyphs = "·#*+@mIo1l0M◧/\\|=<>[]";
+    function buildField(rows, cols) {
+      let out = "";
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          out += glyphs[(r * 7 + c * 13 + ((r * c) % 11)) % glyphs.length];
+        }
+        out += "\n";
+      }
+      return out;
+    }
+    const main = document.getElementById("glyph-field");
+    if (main) main.textContent = buildField(26, 110);
+    document.querySelectorAll(".glyph-mini").forEach(function (el) {
+      el.textContent = buildField(12, 60);
+    });
+  })();
+
+  /* ---------- 伪二维码（确定性图案，仅供装饰） ---------- */
+  (function () {
+    document.querySelectorAll(".qr canvas").forEach(function (cv) {
+      const ctx = cv.getContext("2d");
+      const n = cv.width, seed = Number(cv.dataset.seed) || 1;
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(0, 0, n, n);
+      ctx.fillStyle = "#000";
+      let s = seed;
+      const rand = function () { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+      for (let y = 0; y < n; y++) {
+        for (let x = 0; x < n; x++) {
+          const finder = (x < 7 && y < 7) || (x >= n - 7 && y < 7) || (x < 7 && y >= n - 7);
+          if (finder) {
+            const fx = x < 7 ? x : x - (n - 7);
+            const fy = y < 7 ? y : y - (n - 7);
+            const ring = fx === 0 || fx === 6 || fy === 0 || fy === 6;
+            const core = fx >= 2 && fx <= 4 && fy >= 2 && fy <= 4;
+            if (ring || core) ctx.fillRect(x, y, 1, 1);
+          } else if (rand() > 0.55) {
+            ctx.fillRect(x, y, 1, 1);
+          }
+        }
+      }
+    });
+  })();
+
+  /* ---------- 入场动画：IntersectionObserver 触发 ---------- */
+  const io = new IntersectionObserver(function (entries) {
+    for (const e of entries) {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    }
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+
+  /* ---------- 主题切换：暖纸 / 深纸，页脚固定纯黑 ---------- */
+  const toggle = document.querySelector(".theme-toggle");
+  toggle.addEventListener("click", function (ev) {
+    const btn = ev.target.closest("button");
+    if (!btn) return;
+    toggle.querySelectorAll("button").forEach(function (b) { b.classList.remove("active"); });
+    btn.classList.add("active");
+    const mode = btn.dataset.mode;
+    const preferDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const useDark = mode === "dark" || (mode === "system" && preferDark);
+    if (useDark) document.documentElement.dataset.theme = "dark";
+    else document.documentElement.removeAttribute("data-theme");
+  });
+</script>
+</body>
+</html>

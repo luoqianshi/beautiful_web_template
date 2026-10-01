@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moonshot Pixel Odyssey — 像素点阵深空终端风格</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/fusion-pixel-12px-monospaced-sc@5.3.0/400.css" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS — Moonshot-Pixel-Odyssey
+   ============================================================ */
+:root {
+  --bg-void: #000000;
+  --text-primary: #ffffff;
+  --text-secondary: #7a7a7a;
+  --text-dim: #ffffff4d;
+  --border-hairline: #ffffff26;
+  --border-strong: #ffffff;
+  --fill-inverse: #ffffff;
+  --text-inverse: #000000;
+  --fill-hover: #f7f7f7;
+  --fill-soft: #ffffff1a;
+  --accent-optional: #1783ff;
+
+  --font-pixel: "Fusion Pixel 12px Monospaced SC", "Fusion Pixel 12px Mono zh_hans", "SimSun", monospace;
+
+  --fs-hero: clamp(36px, 8vw, 64px);
+  --fs-hero-sub: clamp(20px, 4vw, 30px);
+  --fs-display: clamp(26px, 5vw, 40px);
+  --fs-h2: clamp(22px, 3.6vw, 30px);
+  --fs-num: clamp(40px, 7vw, 64px);
+  --fs-title: 20px;
+  --fs-nav: 16px;
+  --fs-body: 14px;
+  --fs-small: 12px;
+
+  --hero-edge-x: clamp(16px, 3vw, 40px);
+  --hero-edge-y: clamp(16px, 3vh, 32px);
+  --gap-grid: 20px;
+  --gap-buttons: 16px;
+  --gap-nav: clamp(24px, 5vw, 80px);
+
+  --ease-ui: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --t-ui: 0.2s;
+  --t-enter: 0.3s;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-pixel);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+img, canvas { image-rendering: pixelated; display: block; }
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--text-primary); color: var(--text-inverse); }
+
+/* ============================================================
+   REVEAL — 入场动画（0.3s / 0.06s 阶梯延迟）
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--t-enter) var(--ease-enter) calc(var(--i, 0) * 0.06s),
+              transform var(--t-enter) var(--ease-enter) calc(var(--i, 0) * 0.06s);
+}
+.reveal.is-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .scroll-hint__chev, .blink, .ray-flow { animation: none !important; }
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 60px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--hero-edge-x);
+  background: transparent;
+}
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--fs-nav);
+  font-weight: 500;
+}
+.header__logo svg { width: 28px; height: 28px; }
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-nav);
+  font-size: var(--fs-nav);
+  font-weight: 500;
+}
+.header__nav a { position: relative; padding: 4px 0; transition: color var(--t-ui) var(--ease-ui); }
+.header__nav a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: var(--border-strong);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-ui) var(--ease-ui);
+}
+.header__nav a:hover::after, .header__nav a:focus-visible::after { transform: scaleX(1); }
+.header__menu-btn {
+  display: none;
+  background: none;
+  border: 1px solid var(--border-hairline);
+  color: var(--text-primary);
+  font-family: var(--font-pixel);
+  font-size: var(--fs-small);
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.header__drawer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: var(--bg-void);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+.header__drawer.is-open { display: flex; }
+.header__drawer a {
+  writing-mode: vertical-rl;
+  font-size: var(--fs-title);
+  letter-spacing: 8px;
+  padding: 8px;
+  border: 1px solid transparent;
+}
+.header__drawer a:hover { border-color: var(--border-hairline); }
+
+/* ============================================================
+   HERO — 四角散点 + 抖动月食
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+}
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.hero__title {
+  position: absolute;
+  top: clamp(90px, 14vh, 150px);
+  left: var(--hero-edge-x);
+  z-index: 2;
+}
+.hero__title h1 {
+  font-size: var(--fs-hero);
+  font-weight: 400;
+  line-height: 1;
+}
+.hero__title .hero__sub {
+  margin-top: 10px;
+  font-size: var(--fs-hero-sub);
+  line-height: 1.2;
+}
+.hero__note {
+  position: absolute;
+  left: var(--hero-edge-x);
+  bottom: clamp(80px, 14vh, 130px);
+  z-index: 2;
+  max-width: 400px;
+  background: var(--bg-void);
+  padding: 8px 12px;
+}
+.hero__note h3 { font-size: var(--fs-nav); font-weight: 500; }
+.hero__note p {
+  margin-top: 8px;
+  color: var(--text-secondary);
+  font-size: var(--fs-small);
+  line-height: 1.4;
+}
+.hero__claim {
+  position: absolute;
+  right: var(--hero-edge-x);
+  bottom: clamp(120px, 20vh, 180px);
+  z-index: 2;
+  text-align: right;
+}
+.hero__claim .join {
+  font-size: var(--fs-h2);
+  line-height: 1;
+}
+.hero__claim .build {
+  margin-top: 8px;
+  font-size: var(--fs-display);
+  line-height: 1;
+}
+
+/* ============================================================
+   SCROLL HINT
+   ============================================================ */
+.scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 24px 0;
+  color: var(--text-secondary);
+  font-size: var(--fs-small);
+}
+.scroll-hint__chev {
+  width: 18px; height: 12px;
+  animation: hintFloat 2s ease-in-out infinite;
+}
+@keyframes hintFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* ============================================================
+   SECTION SHELL
+   ============================================================ */
+.section {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.section__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: var(--fs-h2);
+  font-weight: 500;
+}
+.section__label .chev { color: var(--text-secondary); font-size: 24px; }
+
+/* ============================================================
+   AGI ODYSSEY — 代码雨 + 胶片条
+   ============================================================ */
+.odyssey__rain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.55;
+}
+.odyssey__film {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: clamp(150px, 22vw, 320px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding-left: clamp(8px, 2vw, 24px);
+  background:
+    repeating-linear-gradient(0deg, transparent 0 34px, var(--bg-void) 34px 40px),
+    linear-gradient(90deg, var(--bg-void) 0 10px, transparent 10px calc(100% - 10px), var(--bg-void) calc(100% - 10px));
+}
+.odyssey__frame {
+  position: relative;
+  border: 1px solid var(--border-hairline);
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.odyssey__frame canvas { width: 100%; height: 100%; }
+.odyssey__text {
+  position: relative;
+  z-index: 2;
+  margin-left: clamp(160px, 24vw, 340px);
+  padding: 0 var(--hero-edge-x);
+}
+.odyssey__text h2 {
+  font-size: var(--fs-display);
+  font-weight: 400;
+  line-height: 1.15;
+}
+.odyssey__poem {
+  margin-top: 28px;
+  font-size: var(--fs-body);
+  line-height: 2;
+}
+.odyssey__poem .en { color: var(--text-secondary); margin-top: 12px; display: block; }
+
+/* ============================================================
+   JOIN SCENE — 星野 + 终端按钮
+   ============================================================ */
+.join__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.join__actions {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+  padding: 0 var(--hero-edge-x);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn-terminal {
+  position: relative;
+  background: var(--bg-void);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  font-family: var(--font-pixel);
+  font-size: var(--fs-nav);
+  font-weight: 500;
+  padding: 12px 22px;
+  cursor: pointer;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  transition: color var(--t-ui) var(--ease-ui), background-color var(--t-ui) var(--ease-ui);
+}
+.btn-terminal:hover, .btn-terminal:focus-visible {
+  background: var(--fill-inverse);
+  color: var(--text-inverse);
+}
+.btn-primary {
+  background: var(--fill-inverse);
+  color: var(--text-inverse);
+  border: 1px solid var(--fill-inverse);
+  font-family: var(--font-pixel);
+  font-size: var(--fs-nav);
+  font-weight: 500;
+  padding: 16px 40px;
+  cursor: pointer;
+  transition: background-color var(--t-ui) var(--ease-ui);
+}
+.btn-primary:hover, .btn-primary:focus-visible { background: var(--fill-hover); }
+.btn-ghost {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-hairline);
+  font-family: var(--font-pixel);
+  font-size: var(--fs-nav);
+  padding: 12px 22px;
+  cursor: pointer;
+  transition: border-color var(--t-ui) var(--ease-ui);
+}
+.btn-ghost:hover, .btn-ghost:focus-visible { border-color: var(--border-strong); }
+.btn-terminal:disabled, .btn-primary:disabled, .btn-ghost:disabled {
+  color: var(--text-dim);
+  border-color: var(--border-hairline);
+  background: transparent;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   STATS — 探索阶段
+   ============================================================ */
+.stats {
+  width: 100%;
+  max-width: 1280px;
+  margin: 64px auto 0;
+  padding: 0 var(--hero-edge-x);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--gap-grid);
+  align-items: end;
+}
+.stat {
+  border-top: 1px solid var(--border-hairline);
+  padding-top: 20px;
+  transition: border-color var(--t-ui) var(--ease-ui);
+}
+.stat:hover { border-color: var(--border-strong); }
+.stat__num {
+  font-size: var(--fs-num);
+  line-height: 1;
+}
+.stat h3 {
+  margin-top: 24px;
+  border-top: 1px solid var(--border-hairline);
+  padding-top: 16px;
+  font-size: var(--fs-nav);
+  font-weight: 500;
+}
+.stat p {
+  margin-top: 12px;
+  color: var(--text-secondary);
+  font-size: var(--fs-small);
+  line-height: 1.55;
+}
+.stat--art { border-top: none; align-self: stretch; display: flex; align-items: flex-end; }
+.stat--art canvas { width: 100%; aspect-ratio: 1; }
+
+/* ============================================================
+   ARC MOON — 弧形文字 + 椭圆月球
+   ============================================================ */
+.arc {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.arc__stage {
+  position: relative;
+  width: clamp(320px, 42vw, 560px);
+  aspect-ratio: 1.35;
+}
+.arc__stage canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.arc__svg {
+  position: absolute;
+  inset: -12%;
+  width: 124%;
+  height: 124%;
+  overflow: visible;
+}
+.arc__svg text {
+  font-family: var(--font-pixel);
+  font-size: 13px;
+  fill: var(--text-secondary);
+  letter-spacing: 6px;
+}
+.arc__wordmark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-h2);
+  z-index: 2;
+  text-shadow: 0 0 12px var(--bg-void), 0 0 12px var(--bg-void);
+}
+
+/* ============================================================
+   RECRUITMENT FLOW MAP
+   ============================================================ */
+.flowmap {
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  margin: 48px auto 0;
+  padding: 0 var(--hero-edge-x);
+}
+.flowmap svg { width: 100%; height: auto; overflow: visible; }
+.flowmap .ray-flow {
+  stroke-dasharray: 6 8;
+  animation: rayMove 2.4s linear infinite;
+}
+@keyframes rayMove { to { stroke-dashoffset: -14; } }
+.flowmap .node { cursor: pointer; }
+.flowmap .node .node-ring {
+  transition: opacity var(--t-ui) var(--ease-ui);
+}
+.flowmap .node:hover .node-glow,
+.flowmap .node:focus-visible .node-glow { animation: hoverRayGlow 1.2s var(--ease-enter) forwards; }
+.flowmap .node:hover .node-badge,
+.flowmap .node:focus-visible .node-badge { animation: hoverRayEndpoint 0.3s var(--ease-enter) forwards; }
+@keyframes hoverRayGlow {
+  0% { opacity: 0; }
+  45% { opacity: 0.95; }
+  100% { opacity: 0.42; }
+}
+@keyframes hoverRayEndpoint {
+  0% { opacity: 0; transform: scale(0.35); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.node-badge { transform-origin: center; transform-box: fill-box; }
+.flowmap__caption {
+  margin-top: 20px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: var(--fs-small);
+}
+
+/* ============================================================
+   COMPONENT SHOWCASE
+   ============================================================ */
+.kit {
+  width: 100%;
+  max-width: 1180px;
+  margin: 56px auto 0;
+  padding: 0 var(--hero-edge-x);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-grid);
+}
+.panel {
+  border: 1px solid var(--border-hairline);
+  padding: 28px;
+}
+.panel h3 {
+  font-size: var(--fs-nav);
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 22px;
+}
+.panel h3::before { content: "▮ "; color: var(--text-primary); }
+.panel__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-buttons);
+  align-items: center;
+}
+.field {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-hairline);
+  background: var(--bg-void);
+  transition: border-color var(--t-ui) var(--ease-ui);
+}
+.field:focus-within {
+  border-color: var(--border-strong);
+  outline: 1px solid var(--border-hairline);
+  outline-offset: 2px;
+}
+.field__prefix {
+  padding: 0 10px;
+  color: var(--text-secondary);
+  user-select: none;
+}
+.field input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-family: var(--font-pixel);
+  font-size: var(--fs-body);
+  padding: 12px 12px 12px 0;
+}
+.field input::placeholder { color: var(--text-dim); }
+.badge {
+  display: inline-block;
+  border: 1px solid var(--border-hairline);
+  color: var(--text-secondary);
+  font-size: var(--fs-small);
+  padding: 2px 8px;
+}
+.badge--solid {
+  background: var(--fill-inverse);
+  color: var(--text-inverse);
+  border-color: var(--fill-inverse);
+}
+.badge--dash { border-style: dashed; }
+.card {
+  border: 1px solid var(--border-hairline);
+  padding: 20px;
+  transition: border-color var(--t-ui) var(--ease-ui), transform var(--t-ui) var(--ease-ui);
+}
+.card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+.card__num { font-size: var(--fs-title); }
+.card h4 { font-size: var(--fs-nav); font-weight: 500; margin-top: 14px; }
+.card p { color: var(--text-secondary); font-size: var(--fs-small); margin-top: 8px; line-height: 1.55; }
+.card--inverse { background: var(--fill-inverse); color: var(--text-inverse); border-color: var(--fill-inverse); }
+.card--inverse p { color: var(--text-inverse); opacity: 0.7; }
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+.cta {
+  position: relative;
+  min-height: 88svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+.cta__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.85;
+}
+.cta__body {
+  position: relative;
+  z-index: 2;
+  padding: 40px var(--hero-edge-x);
+  background: radial-gradient(ellipse 60% 70% at center, rgba(0,0,0,0.72), rgba(0,0,0,0) 70%);
+}
+.cta__body p {
+  font-size: var(--fs-title);
+  line-height: 1.9;
+  text-shadow: 0 0 10px var(--bg-void), 0 0 10px var(--bg-void);
+}
+.cta__body .btn-primary { margin-top: 36px; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  position: relative;
+  z-index: 2;
+  background: var(--bg-void);
+  padding: 48px var(--hero-edge-x) 32px;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.footer__brand { max-width: 420px; }
+.footer__brand .header__logo { font-size: var(--fs-nav); }
+.footer__brand p {
+  margin-top: 18px;
+  color: var(--text-secondary);
+  font-size: var(--fs-small);
+  line-height: 1.9;
+}
+.footer__cols {
+  display: flex;
+  gap: clamp(40px, 8vw, 120px);
+}
+.footer__col h4 {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+.footer__col a {
+  display: block;
+  color: var(--text-secondary);
+  font-size: var(--fs-small);
+  line-height: 2.4;
+  transition: color var(--t-ui) var(--ease-ui);
+}
+.footer__col a:hover { color: var(--text-primary); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .stat--art { grid-column: 1 / -1; }
+  .stat--art canvas { max-width: 320px; margin: 0 auto; }
+  .kit { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .header__nav { display: none; }
+  .header__menu-btn { display: block; }
+  .hero__title { top: 90px; }
+  .hero__note { position: static; margin: 24px var(--hero-edge-x) 0; max-width: none; }
+  .hero__claim {
+    position: static;
+    text-align: left;
+    margin: 28px var(--hero-edge-x) 0;
+  }
+  .hero { display: flex; flex-direction: column; padding-bottom: 32px; }
+  .hero__spacer { flex: 1; }
+  .odyssey__film { display: none; }
+  .odyssey__text { margin-left: 0; }
+  .join__actions { flex-direction: column; gap: var(--gap-buttons); align-items: stretch; }
+  .btn-terminal { text-align: center; }
+  .stats { grid-template-columns: 1fr; }
+  .footer { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="header">
+  <a class="header__logo" href="#" aria-label="Moonshot AI 招聘">
+    <svg viewBox="0 0 28 28" aria-hidden="true">
+      <rect x="2" y="2" width="24" height="24" fill="#fff"/>
+      <circle cx="14" cy="14" r="8" fill="#000"/>
+      <circle cx="17" cy="11" r="3.2" fill="#fff"/>
+    </svg>
+    <span>Moonshot AI 招聘</span>
+  </a>
+  <nav class="header__nav" aria-label="主导航">
+    <a href="#join">加入我们</a>
+    <a href="#about">关于我们</a>
+    <a href="#process">招聘流程</a>
+    <a href="#kit">Kimi K3</a>
+  </nav>
+  <button class="header__menu-btn" id="menuBtn" aria-expanded="false" aria-controls="drawer">MENU</button>
+</header>
+<nav class="header__drawer" id="drawer" aria-label="移动导航">
+  <a href="#join">加入我们</a>
+  <a href="#about">关于我们</a>
+  <a href="#process">招聘流程</a>
+  <a href="#kit">Kimi K3</a>
+</nav>
+
+<main>
+  <!-- ============ HERO ============ -->
+  <section class="hero" role="img" aria-label="月食点阵场景">
+    <canvas class="hero__bg" id="heroBg"></canvas>
+    <div class="hero__title reveal" style="--i:0">
+      <h1>Moonshot.AI</h1>
+      <p class="hero__sub">月之暗面，把光带进来</p>
+    </div>
+    <div class="hero__note reveal" style="--i:1">
+      <h3>New builder</h3>
+      <p>We look forward to building the future<br>of AI with you</p>
+    </div>
+    <div class="hero__claim reveal" style="--i:2">
+      <div class="join">Join us</div>
+      <div class="build">Build your<br>own job</div>
+    </div>
+    <div class="hero__spacer"></div>
+    <div class="scroll-hint" aria-hidden="true">
+      <svg class="scroll-hint__chev" viewBox="0 0 18 12" fill="none" stroke="#7a7a7a" stroke-width="1.5">
+        <path d="M1 1l8 4 8-4"/><path d="M1 7l8 4 8-4"/>
+      </svg>
+      <span>滑动开启探索</span>
+    </div>
+  </section>
+
+  <!-- ============ AGI ODYSSEY ============ -->
+  <section class="section" id="about">
+    <canvas class="odyssey__rain" id="codeRain" aria-hidden="true"></canvas>
+    <div class="odyssey__film" aria-hidden="true">
+      <div class="odyssey__frame"><canvas id="filmA"></canvas></div>
+      <div class="odyssey__frame"><canvas id="filmB"></canvas></div>
+      <div class="odyssey__frame"><canvas id="filmC"></canvas></div>
+      <div class="odyssey__frame"><canvas id="filmD"></canvas></div>
+    </div>
+    <div class="odyssey__text">
+      <h2 class="reveal" style="--i:0">The AGI Odyssey<br>Since 2023</h2>
+      <div class="odyssey__poem reveal" style="--i:1">
+        也许有一天会发现<br>
+        这趟旅程没有尽头<br>
+        我希望它一直没有尽头
+        <span class="en">The beginning of infinity</span>
+      </div>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <svg class="scroll-hint__chev" viewBox="0 0 18 12" fill="none" stroke="#7a7a7a" stroke-width="1.5">
+        <path d="M1 1l8 4 8-4"/><path d="M1 7l8 4 8-4"/>
+      </svg>
+      <span>继续了解</span>
+    </div>
+  </section>
+
+  <!-- ============ JOIN SCENE ============ -->
+  <section class="section" id="join">
+    <canvas class="join__bg" id="joinBg" aria-hidden="true"></canvas>
+    <div class="join__actions">
+      <button class="btn-terminal reveal" style="--i:0">&lt;&lt;&lt; 校园招聘</button>
+      <button class="btn-terminal reveal" style="--i:1">了解「月之暗面」</button>
+      <button class="btn-terminal reveal" style="--i:2">社会招聘 &gt;&gt;&gt;</button>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <svg class="scroll-hint__chev" viewBox="0 0 18 12" fill="none" stroke="#7a7a7a" stroke-width="1.5">
+        <path d="M1 1l8 4 8-4"/><path d="M1 7l8 4 8-4"/>
+      </svg>
+      <span>了解月之暗面</span>
+    </div>
+  </section>
+
+  <!-- ============ STATS ============ -->
+  <section class="section">
+    <div class="section__label reveal"><span class="chev">‹</span>探索阶段<span class="chev">›</span></div>
+    <div class="stats">
+      <div class="stat reveal" style="--i:0">
+        <div class="stat__num">268</div>
+        <h3>解决复杂问题</h3>
+        <p>支持 300 个子 Agent 并行，完成 4000 步协作，连续自主运行 5 天，系统不是在执行任务，而是在推进目标</p>
+      </div>
+      <div class="stat reveal" style="--i:1">
+        <div class="stat__num">178</div>
+        <h3>一开始就是全球化</h3>
+        <p>用户遍布 200 个国家，不做“出海”，默认就在世界中央</p>
+      </div>
+      <div class="stat--art reveal" style="--i:2"><canvas id="burstArt"></canvas></div>
+      <div class="stat reveal" style="--i:3">
+        <div class="stat__num">15</div>
+        <h3>用 1%，做到 100% 之上</h3>
+        <p>仅以大厂不到 1% 的资源规模，在算力与人力的双重约束下，做出超越大厂水平的模型表现</p>
+      </div>
+      <div class="stat reveal" style="--i:4">
+        <div class="stat__num">4</div>
+        <h3>全球 5 大城市办公</h3>
+        <p>团队分布北京、上海、深圳、新加坡、硅谷，支持全球化研发与产品落地</p>
+      </div>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <svg class="scroll-hint__chev" viewBox="0 0 18 12" fill="none" stroke="#7a7a7a" stroke-width="1.5">
+        <path d="M1 1l8 4 8-4"/><path d="M1 7l8 4 8-4"/>
+      </svg>
+      <span>继续了解</span>
+    </div>
+  </section>
+
+  <!-- ============ ARC MOON ============ -->
+  <section class="section">
+    <div class="arc">
+      <div class="arc__stage reveal">
+        <canvas id="arcMoon"></canvas>
+        <svg class="arc__svg" viewBox="0 0 560 420" aria-hidden="true">
+          <defs>
+            <path id="arcPath" d="M 80 300 A 210 130 0 0 1 480 300" fill="none"/>
+          </defs>
+          <text>
+            <textPath href="#arcPath" startOffset="50%" text-anchor="middle">寻求将能源转换为智能的最优解</textPath>
+          </text>
+        </svg>
+        <div class="arc__wordmark">Moonshot.AI</div>
+      </div>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <svg class="scroll-hint__chev" viewBox="0 0 18 12" fill="none" stroke="#7a7a7a" stroke-width="1.5">
+        <path d="M1 1l8 4 8-4"/><path d="M1 7l8 4 8-4"/>
+      </svg>
+      <span>继续探索</span>
+    </div>
+  </section>
+
+  <!-- ============ RECRUITMENT FLOW ============ -->
+  <section class="section" id="process">
+    <div class="section__label reveal"><span class="chev">‹</span>登月申请流程<span class="chev">›</span></div>
+    <div class="flowmap reveal">
+      <svg viewBox="0 0 980 340" role="img" aria-label="四步登月申请流程">
+        <path class="ray-flow" d="M 180 240 C 320 240 340 90 490 90 C 640 90 660 240 800 240"
+              fill="none" stroke="#ffffff40" stroke-width="1.5" stroke-dasharray="6 8"/>
+        <g class="node" tabindex="0">
+          <circle class="node-glow" cx="180" cy="240" r="58" fill="none" stroke="#fff" stroke-width="1" opacity="0"/>
+          <circle class="node-ring" cx="180" cy="240" r="48" fill="#000" stroke="#fff" stroke-width="1"/>
+          <g transform="translate(150 210)"><rect x="14" y="8" width="32" height="22" fill="none" stroke="#fff"/><rect x="22" y="32" width="16" height="3" fill="#fff"/><rect x="18" y="38" width="24" height="3" fill="#fff"/><rect x="22" y="14" width="8" height="3" fill="#fff"/><rect x="22" y="20" width="14" height="3" fill="#fff"/></g>
+          <rect class="node-badge" x="212" y="196" width="24" height="24" fill="#fff"/>
+          <text x="224" y="213" text-anchor="middle" font-size="13" fill="#000">1</text>
+        </g>
+        <g class="node" tabindex="0">
+          <circle class="node-glow" cx="490" cy="90" r="58" fill="none" stroke="#fff" stroke-width="1" opacity="0"/>
+          <circle class="node-ring" cx="490" cy="90" r="48" fill="#000" stroke="#fff" stroke-width="1"/>
+          <g transform="translate(460 60)"><rect x="16" y="6" width="28" height="36" fill="none" stroke="#fff"/><rect x="21" y="13" width="18" height="3" fill="#fff"/><rect x="21" y="19" width="18" height="3" fill="#fff"/><rect x="21" y="25" width="12" height="3" fill="#fff"/><rect x="24" y="34" width="12" height="3" fill="#fff"/></g>
+          <rect class="node-badge" x="522" y="46" width="24" height="24" fill="#fff"/>
+          <text x="534" y="63" text-anchor="middle" font-size="13" fill="#000">2</text>
+        </g>
+        <g class="node" tabindex="0">
+          <circle class="node-glow" cx="800" cy="240" r="58" fill="none" stroke="#fff" stroke-width="1" opacity="0"/>
+          <circle class="node-ring" cx="800" cy="240" r="48" fill="#000" stroke="#fff" stroke-width="1"/>
+          <g transform="translate(770 210)"><path d="M30 4 L42 28 L30 24 L18 28 Z" fill="none" stroke="#fff"/><rect x="27" y="24" width="6" height="14" fill="none" stroke="#fff"/><path d="M24 38 L20 44 M36 38 L40 44" stroke="#fff"/></g>
+          <rect class="node-badge" x="832" y="196" width="24" height="24" fill="#fff"/>
+          <text x="844" y="213" text-anchor="middle" font-size="13" fill="#000">3</text>
+        </g>
+        <g class="node" tabindex="0">
+          <circle class="node-glow" cx="490" cy="240" r="58" fill="none" stroke="#fff" stroke-width="1" opacity="0"/>
+          <circle class="node-ring" cx="490" cy="240" r="48" fill="#000" stroke="#fff" stroke-width="1"/>
+          <g transform="translate(460 210)">
+            <circle cx="30" cy="30" r="20" fill="none" stroke="#fff"/>
+            <rect x="22" y="18" width="7" height="5" fill="#fff"/><rect x="35" y="26" width="8" height="6" fill="#fff"/><rect x="26" y="35" width="6" height="5" fill="#fff"/>
+          </g>
+          <rect class="node-badge" x="522" y="196" width="24" height="24" fill="#fff"/>
+          <text x="534" y="213" text-anchor="middle" font-size="13" fill="#000">4</text>
+        </g>
+      </svg>
+      <p class="flowmap__caption">1 投递简历 → 2 技术评估 → 3 与团队同行 → 4 登月<br>悬停节点查看光线动效</p>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <svg class="scroll-hint__chev" viewBox="0 0 18 12" fill="none" stroke="#7a7a7a" stroke-width="1.5">
+        <path d="M1 1l8 4 8-4"/><path d="M1 7l8 4 8-4"/>
+      </svg>
+      <span>继续了解</span>
+    </div>
+  </section>
+
+  <!-- ============ COMPONENT KIT ============ -->
+  <section class="section" id="kit" style="min-height: auto; padding: 120px 0;">
+    <div class="section__label reveal"><span class="chev">‹</span>组件样式<span class="chev">›</span></div>
+    <div class="kit">
+      <div class="panel reveal">
+        <h3>BUTTONS / 按钮体系</h3>
+        <div class="panel__row">
+          <button class="btn-primary">去登月 &gt;</button>
+          <button class="btn-terminal">&lt;&lt;&lt; 校园招聘</button>
+          <button class="btn-ghost">描边按钮</button>
+          <button class="btn-terminal" disabled>禁用态</button>
+        </div>
+      </div>
+      <div class="panel reveal">
+        <h3>INPUT / 输入框</h3>
+        <div class="field">
+          <span class="field__prefix">&gt;</span>
+          <input type="text" placeholder="输入岗位关键词，例如 Agent 研究员">
+        </div>
+        <div class="panel__row" style="margin-top: 18px;">
+          <span class="badge">v2.6</span>
+          <span class="badge badge--solid">NEW</span>
+          <span class="badge badge--dash">MISSION</span>
+          <span class="badge">AGI</span>
+        </div>
+      </div>
+      <div class="panel reveal">
+        <h3>CARDS / 卡片</h3>
+        <div class="panel__row" style="align-items: stretch;">
+          <div class="card" style="flex:1; min-width: 180px;">
+            <div class="card__num">01</div>
+            <h4>New builder</h4>
+            <p>直角边框卡片，悬停时边框亮起并轻微上移 2px。</p>
+          </div>
+          <div class="card card--inverse" style="flex:1; min-width: 180px;">
+            <div class="card__num">02</div>
+            <h4>去登月</h4>
+            <p>反白卡片用于关键动作的强调呈现。</p>
+          </div>
+        </div>
+      </div>
+      <div class="panel reveal">
+        <h3>STATS / 数据列</h3>
+        <div class="panel__row" style="align-items: stretch;">
+          <div class="stat" style="flex:1;">
+            <div class="stat__num">300</div>
+            <h3>子 Agent 并行</h3>
+            <p>顶部细线 + 巨型数字 + 灰色描述的三段结构。</p>
+          </div>
+          <div class="stat" style="flex:1;">
+            <div class="stat__num">5d</div>
+            <h3>连续自主运行</h3>
+            <p>悬停时顶部线条由 15% 白提亮为纯白。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="cta">
+    <canvas class="cta__bg" id="ctaBg" aria-hidden="true"></canvas>
+    <div class="cta__body">
+      <p class="reveal" style="--i:0">期待你与 Kimi 并肩探索 AGI<br>来成为一束光，折射进真理未校准的裂缝</p>
+      <button class="btn-primary reveal" style="--i:1">去登月 &gt;</button>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer__brand">
+    <div class="header__logo">
+      <svg viewBox="0 0 28 28" aria-hidden="true">
+        <rect x="2" y="2" width="24" height="24" fill="#fff"/>
+        <circle cx="14" cy="14" r="8" fill="#000"/>
+        <circle cx="17" cy="11" r="3.2" fill="#fff"/>
+      </svg>
+      <span>Moonshot AI</span>
+    </div>
+    <p>Copyright © 2026 Moonshot AI. All Rights Reserved<br>Co-created with Kimi K2.6</p>
+  </div>
+  <div class="footer__cols">
+    <div class="footer__col">
+      <h4>产品</h4>
+      <a href="#">Kimi</a>
+      <a href="#">Kimi Code</a>
+      <a href="#">Kimi 开放平台</a>
+    </div>
+    <div class="footer__col">
+      <h4>招聘通道</h4>
+      <a href="#">校园招聘</a>
+      <a href="#">社会招聘</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   BAYER DITHER ENGINE — 1-bit 点阵影像程序化生成
+   ============================================================ */
+const BAYER4 = [
+  [0, 8, 2, 10],
+  [12, 4, 14, 6],
+  [3, 11, 1, 9],
+  [15, 7, 13, 5],
+];
+
+function ditherTo(canvas, painter, scale = 3) {
+  const w = Math.max(80, Math.round(canvas.clientWidth / scale));
+  const h = Math.max(60, Math.round(canvas.clientHeight / scale));
+  const off = document.createElement("canvas");
+  off.width = w; off.height = h;
+  const octx = off.getContext("2d");
+  painter(octx, w, h);
+  const img = octx.getImageData(0, 0, w, h);
+  const d = img.data;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const i = (y * w + x) * 4;
+      const lum = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
+      const threshold = (BAYER4[y & 3][x & 3] + 0.5) * 16;
+      const v = lum > threshold ? 255 : 0;
+      d[i] = d[i + 1] = d[i + 2] = v;
+      d[i + 3] = 255;
+    }
+  }
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext("2d");
+  ctx.putImageData(img, 0, 0);
+}
+
+function seededRandom(seed) {
+  let s = seed >>> 0;
+  return () => {
+    s = (s * 1664525 + 1013904223) >>> 0;
+    return s / 4294967296;
+  };
+}
+
+/* ---- 场景画笔 ---- */
+function paintEclipse(ctx, w, h) {
+  const rand = seededRandom(20231001);
+  ctx.fillStyle = "#141414";
+  ctx.fillRect(0, 0, w, h);
+  // 星野
+  for (let i = 0; i < w * h / 260; i++) {
+    const v = 90 + rand() * 120;
+    ctx.fillStyle = `rgb(${v},${v},${v})`;
+    ctx.fillRect(rand() * w, rand() * h * 0.75, 1, 1);
+  }
+  // 两侧竖直光带
+  for (const cx of [w * 0.12, w * 0.88]) {
+    const g = ctx.createLinearGradient(cx - w * 0.05, 0, cx + w * 0.05, 0);
+    g.addColorStop(0, "rgba(255,255,255,0)");
+    g.addColorStop(0.5, "rgba(255,255,255,0.28)");
+    g.addColorStop(1, "rgba(255,255,255,0)");
+    ctx.fillStyle = g;
+    ctx.fillRect(cx - w * 0.05, h * 0.12, w * 0.1, h * 0.7);
+  }
+  // 中央大黑盘（月食）
+  const cx = w * 0.5, cy = h * 0.48, r = Math.min(w, h) * 0.34;
+  const halo = ctx.createRadialGradient(cx, cy, r * 0.9, cx, cy, r * 1.35);
+  halo.addColorStop(0, "rgba(255,255,255,0.30)");
+  halo.addColorStop(1, "rgba(255,255,255,0)");
+  ctx.fillStyle = halo;
+  ctx.fillRect(0, 0, w, h);
+  ctx.fillStyle = "#000";
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = "rgba(255,255,255,0.75)";
+  ctx.lineWidth = 1.4;
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, -Math.PI * 0.72, -Math.PI * 0.28);
+  ctx.stroke();
+  // 中心小亮月
+  const mr = Math.min(w, h) * 0.075;
+  const mg = ctx.createRadialGradient(cx - mr * 0.35, cy - mr * 0.35, mr * 0.15, cx, cy, mr);
+  mg.addColorStop(0, "#ffffff");
+  mg.addColorStop(0.6, "#bdbdbd");
+  mg.addColorStop(1, "#4a4a4a");
+  ctx.fillStyle = mg;
+  ctx.beginPath();
+  ctx.arc(cx, cy, mr, 0, Math.PI * 2);
+  ctx.fill();
+  for (let i = 0; i < 7; i++) {
+    const a = rand() * Math.PI * 2, dd = rand() * mr * 0.6;
+    ctx.fillStyle = "rgba(60,60,60,0.55)";
+    ctx.beginPath();
+    ctx.arc(cx + Math.cos(a) * dd, cy + Math.sin(a) * dd, mr * (0.1 + rand() * 0.18), 0, Math.PI * 2);
+    ctx.fill();
+  }
+  // 底部剪影
+  ctx.fillStyle = "#0a0a0a";
+  ctx.beginPath();
+  ctx.moveTo(0, h);
+  ctx.lineTo(0, h * 0.82);
+  ctx.lineTo(w * 0.18, h * 0.72);
+  ctx.lineTo(w * 0.36, h * 0.86);
+  ctx.lineTo(w * 0.6, h * 0.8);
+  ctx.lineTo(w * 0.82, h * 0.9);
+  ctx.lineTo(w, h * 0.78);
+  ctx.lineTo(w, h);
+  ctx.fill();
+}
+
+function paintGalaxyMoon(ctx, w, h) {
+  const rand = seededRandom(424242);
+  ctx.fillStyle = "#050505";
+  ctx.fillRect(0, 0, w, h);
+  for (let i = 0; i < w * h / 180; i++) {
+    const v = 60 + rand() * 190;
+    ctx.fillStyle = `rgb(${v},${v},${v})`;
+    ctx.fillRect(rand() * w, rand() * h, 1, 1);
+  }
+  // 星系云
+  const gx = w * 0.68, gy = h * 0.32;
+  for (let i = 0; i < 340; i++) {
+    const a = rand() * Math.PI * 2;
+    const dd = Math.pow(rand(), 0.5) * w * 0.22;
+    const v = 55 + (1 - dd / (w * 0.22)) * 110 + rand() * 40;
+    ctx.fillStyle = `rgba(${v},${v},${v},0.5)`;
+    ctx.fillRect(gx + Math.cos(a) * dd * 1.5, gy + Math.sin(a) * dd * 0.55, 1.6, 1.6);
+  }
+  const core = ctx.createRadialGradient(gx, gy, 1, gx, gy, w * 0.1);
+  core.addColorStop(0, "rgba(255,255,255,0.5)");
+  core.addColorStop(1, "rgba(255,255,255,0)");
+  ctx.fillStyle = core;
+  ctx.fillRect(0, 0, w, h);
+  // 左下大月球
+  const cx = w * 0.22, cy = h * 0.88, r = Math.min(w, h) * 0.52;
+  const mg = ctx.createRadialGradient(cx - r * 0.3, cy - r * 0.35, r * 0.1, cx, cy, r);
+  mg.addColorStop(0, "#d8d8d8");
+  mg.addColorStop(0.55, "#8f8f8f");
+  mg.addColorStop(1, "#2b2b2b");
+  ctx.fillStyle = mg;
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
+  ctx.fill();
+  for (let i = 0; i < 26; i++) {
+    const a = rand() * Math.PI * 2, dd = Math.sqrt(rand()) * r * 0.85;
+    const cr = r * (0.03 + rand() * 0.09);
+    ctx.fillStyle = `rgba(${40 + rand() * 70},${40 + rand() * 70},${40 + rand() * 70},0.5)`;
+    ctx.beginPath();
+    ctx.arc(cx + Math.cos(a) * dd, cy + Math.sin(a) * dd, cr, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function paintMoonEllipse(ctx, w, h) {
+  const rand = seededRandom(777001);
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0, 0, w, h);
+  for (let i = 0; i < w * h / 420; i++) {
+    const v = 50 + rand() * 90;
+    ctx.fillStyle = `rgb(${v},${v},${v})`;
+    ctx.fillRect(rand() * w, rand() * h, 1, 1);
+  }
+  ctx.save();
+  ctx.translate(w / 2, h / 2);
+  ctx.rotate(-0.45);
+  const rx = w * 0.34, ry = h * 0.22;
+  const g = ctx.createRadialGradient(-rx * 0.35, -ry * 0.4, rx * 0.1, 0, 0, rx);
+  g.addColorStop(0, "#e6e6e6");
+  g.addColorStop(0.5, "#8c8c8c");
+  g.addColorStop(1, "#3a3a3a");
+  ctx.fillStyle = g;
+  ctx.beginPath();
+  ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
+  ctx.fill();
+  for (let i = 0; i < 16; i++) {
+    const a = rand() * Math.PI * 2, dd = Math.sqrt(rand()) * rx * 0.8;
+    ctx.fillStyle = `rgba(${45 + rand() * 60},${45 + rand() * 60},${45 + rand() * 60},0.55)`;
+    ctx.beginPath();
+    ctx.ellipse(Math.cos(a) * dd, Math.sin(a) * dd * (ry / rx), rx * (0.05 + rand() * 0.12), ry * (0.05 + rand() * 0.12), 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function paintBurst(ctx, w, h) {
+  const rand = seededRandom(31415);
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0, 0, w, h);
+  const cx = w * 0.5, cy = h * 0.52;
+  for (let i = 0; i < 42; i++) {
+    const a = rand() * Math.PI * 2;
+    const len = (0.15 + rand() * 0.38) * Math.min(w, h);
+    const v = 120 + rand() * 135;
+    ctx.strokeStyle = `rgba(${v},${v},${v},${0.35 + rand() * 0.5})`;
+    ctx.lineWidth = 0.7 + rand() * 1.6;
+    ctx.beginPath();
+    ctx.moveTo(cx + Math.cos(a) * 6, cy + Math.sin(a) * 6);
+    ctx.lineTo(cx + Math.cos(a) * len, cy + Math.sin(a) * len);
+    ctx.stroke();
+  }
+  const core = ctx.createRadialGradient(cx, cy, 1, cx, cy, Math.min(w, h) * 0.16);
+  core.addColorStop(0, "rgba(255,255,255,0.95)");
+  core.addColorStop(1, "rgba(255,255,255,0)");
+  ctx.fillStyle = core;
+  ctx.fillRect(0, 0, w, h);
+  for (let i = 0; i < 26; i++) {
+    const v = 120 + rand() * 135;
+    ctx.fillStyle = `rgb(${v},${v},${v})`;
+    ctx.fillRect(rand() * w, rand() * h, 1 + rand() * 2, 1 + rand() * 2);
+  }
+}
+
+function paintFilmFrame(kind) {
+  return (ctx, w, h) => {
+    const rand = seededRandom(9000 + kind);
+    const g = ctx.createLinearGradient(0, 0, 0, h);
+    g.addColorStop(0, "#c9c9c9");
+    g.addColorStop(1, "#3c3c3c");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+    // 胶片纹理
+    for (let y = 0; y < h; y += 3) {
+      ctx.fillStyle = `rgba(0,0,0,${0.04 + rand() * 0.12})`;
+      ctx.fillRect(0, y, w, 1.4);
+    }
+    ctx.fillStyle = "rgba(20,20,20,0.85)";
+    if (kind % 4 === 0) {           // 人物剪影
+      ctx.beginPath();
+      ctx.arc(w * 0.5, h * 0.38, w * 0.16, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillRect(w * 0.26, h * 0.56, w * 0.48, h * 0.44);
+    } else if (kind % 4 === 1) {    // 机器剪影
+      ctx.fillRect(w * 0.18, h * 0.3, w * 0.64, h * 0.42);
+      ctx.fillRect(w * 0.3, h * 0.72, w * 0.4, h * 0.28);
+    } else if (kind % 4 === 2) {    // 手持光斑
+      const c = ctx.createRadialGradient(w * 0.55, h * 0.45, 2, w * 0.55, h * 0.45, w * 0.42);
+      c.addColorStop(0, "rgba(255,255,255,0.9)");
+      c.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = c;
+      ctx.fillRect(0, 0, w, h);
+    } else {                        // 结构线
+      for (let i = 0; i < 6; i++) {
+        ctx.fillStyle = "rgba(15,15,15,0.8)";
+        ctx.fillRect(w * (0.1 + i * 0.15), h * 0.2, 3, h * 0.6);
+      }
+    }
+  };
+}
+
+function paintMountains(ctx, w, h) {
+  const rand = seededRandom(555123);
+  const sky = ctx.createLinearGradient(0, 0, 0, h);
+  sky.addColorStop(0, "#060606");
+  sky.addColorStop(0.55, "#171717");
+  sky.addColorStop(1, "#070707");
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, w, h);
+  for (let i = 0; i < w * h / 500; i++) {
+    const v = 20 + rand() * 40;
+    ctx.fillStyle = `rgb(${v},${v},${v})`;
+    ctx.fillRect(rand() * w, rand() * h * 0.5, 1, 1);
+  }
+  // 云海（低明度，几乎融进黑底）
+  for (let i = 0; i < 200; i++) {
+    const x = rand() * w, y = h * (0.42 + rand() * 0.3);
+    const v = 30 + rand() * 70;
+    ctx.fillStyle = `rgba(${v},${v},${v},0.14)`;
+    ctx.beginPath();
+    ctx.ellipse(x, y, w * (0.05 + rand() * 0.12), h * (0.015 + rand() * 0.04), 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  // 山脊
+  for (const [base, dark, alpha] of [[0.72, 10, 0.9], [0.82, 6, 0.95], [0.92, 2, 1]]) {
+    ctx.fillStyle = `rgba(${dark},${dark},${dark},${alpha})`;
+    ctx.beginPath();
+    ctx.moveTo(0, h);
+    let y = h * base;
+    for (let x = 0; x <= w; x += w / 24) {
+      y = h * base + Math.sin(x * 0.013 + base * 40) * h * 0.06 + (rand() - 0.5) * h * 0.045;
+      ctx.lineTo(x, y);
+    }
+    ctx.lineTo(w, h);
+    ctx.fill();
+  }
+}
+
+/* ============================================================
+   SCENE BOOTSTRAP
+   ============================================================ */
+const scenes = [
+  ["heroBg", paintEclipse, 4],
+  ["codeRain", null, 1],
+  ["filmA", paintFilmFrame(0), 2],
+  ["filmB", paintFilmFrame(1), 2],
+  ["filmC", paintFilmFrame(2), 2],
+  ["filmD", paintFilmFrame(3), 2],
+  ["joinBg", paintGalaxyMoon, 4],
+  ["burstArt", paintBurst, 2],
+  ["arcMoon", paintMoonEllipse, 2],
+  ["ctaBg", paintMountains, 4],
+];
+
+function renderScenes() {
+  for (const [id, painter, scale] of scenes) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    if (painter) {
+      ditherTo(el, painter, scale);
+    } else {
+      resizeCodeRain(el);
+    }
+  }
+}
+
+/* ---- 代码雨（AGI Odyssey 背景） ---- */
+const rainState = new Map();
+const GLYPHS = "01<>[]{}/\\|=+-*$#@%&_ABCDEF0123456789月之暗面";
+function resizeCodeRain(canvas) {
+  const w = Math.round(canvas.clientWidth / 4);
+  const h = Math.round(canvas.clientHeight / 4);
+  canvas.width = w;
+  canvas.height = h;
+  rainState.set(canvas, { w, h, drops: Array.from({ length: Math.ceil(w / 6) }, () => Math.random() * h) });
+}
+function stepCodeRain(canvas) {
+  const st = rainState.get(canvas);
+  if (!st) return;
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = "rgba(0,0,0,0.14)";
+  ctx.fillRect(0, 0, st.w, st.h);
+  ctx.fillStyle = "rgba(255,255,255,0.34)";
+  for (let i = 0; i < st.drops.length; i++) {
+    const ch = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+    ctx.fillText(ch, i * 6, st.drops[i] * 6);
+    if (st.drops[i] * 6 > st.h && Math.random() > 0.975) st.drops[i] = 0;
+    st.drops[i] += 0.45;
+  }
+}
+
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let rainTimer = null;
+function startRain() {
+  const canvas = document.getElementById("codeRain");
+  if (!canvas || reduceMotion) return;
+  stopRain();
+  rainTimer = setInterval(() => stepCodeRain(canvas), 90);
+}
+function stopRain() {
+  if (rainTimer) { clearInterval(rainTimer); rainTimer = null; }
+}
+
+/* ---- Reveal Observer ---- */
+const io = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    if (e.isIntersecting) {
+      e.target.classList.add("is-in");
+      if (e.target.querySelector("#codeRain") || e.target.id === "about") startRain();
+    }
+  }
+}, { threshold: 0.12 });
+document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+/* ---- 移动端抽屉 ---- */
+const menuBtn = document.getElementById("menuBtn");
+const drawer = document.getElementById("drawer");
+menuBtn.addEventListener("click", () => {
+  const open = drawer.classList.toggle("is-open");
+  menuBtn.setAttribute("aria-expanded", String(open));
+  menuBtn.textContent = open ? "CLOSE" : "MENU";
+});
+drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => {
+  drawer.classList.remove("is-open");
+  menuBtn.setAttribute("aria-expanded", "false");
+  menuBtn.textContent = "MENU";
+}));
+
+/* ---- 启动 & 响应式重绘 ---- */
+renderScenes();
+if (reduceMotion) {
+  // 静态渲染一帧代码雨即可
+  const c = document.getElementById("codeRain");
+  if (c) { resizeCodeRain(c); const ctx = c.getContext("2d"); ctx.fillStyle = "#000"; ctx.fillRect(0, 0, c.width, c.height); stepCodeRain(c); }
+}
+let rsTimer = null;
+window.addEventListener("resize", () => {
+  clearTimeout(rsTimer);
+  rsTimer = setTimeout(() => { stopRain(); renderScenes(); startRain(); }, 250);
+});
+</script>
+</body>
+</html>

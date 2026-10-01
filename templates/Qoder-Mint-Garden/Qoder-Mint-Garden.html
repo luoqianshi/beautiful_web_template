@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Qoder-Mint-Garden — 薄荷绿园组件库</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     Qoder-Mint-Garden — 设计 Token
+     薄荷灰白画布 × 森林绿单点 CTA × 绿野跑道舞台
+     ============================================================ */
+  :root{
+    /* 画布与表面 */
+    --bg:#f2f4f2;
+    --bg-alt:#f7f8f7;
+    --surface:#ffffff;
+    /* 绿色三级 */
+    --mint:#cdecc8;
+    --grass:#80c776;
+    --forest:#255a41;
+    --forest-hover:#2f6b4e;
+    --link-green:#42643e;
+    /* 墨色 */
+    --ink:#0f0d0c;
+    --ink-2:#141414;
+    --muted:#636261;
+    --muted-2:#838280;
+    /* 边框 */
+    --border:#e6e6e6;
+    --border-soft:#efefef;
+    --border-green:#bbc3b8;
+    /* 点缀 */
+    --highlight:#eeeeeb;
+    --accent-blue:#b3dfe9;
+    --accent-blue-bg:#e9f6fe;
+    --badge-beta:#5b8def;
+    /* 圆角:交互件胶囊,卡片 12/20 */
+    --r-pill:999px;
+    --r-sm:6px;
+    --r-md:12px;
+    --r-lg:20px;
+    /* 阴影:薄瓷 */
+    --shadow-sm:0 1px 2px rgba(12,12,13,.1),0 1px 2px rgba(12,12,13,.05);
+    --shadow-md:0 0 12px rgba(0,0,0,.05),0 0 48px rgba(0,0,0,.04);
+    --shadow-inset-hi:inset 0 2px 4px rgba(0,0,0,.04),0 .5px 0 rgba(255,255,255,.66);
+    /* 字体 */
+    --font-ui:'Instrument Sans','Noto Sans SC',system-ui,-apple-system,sans-serif;
+    --font-mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+    /* 动效 */
+    --ease-out:cubic-bezier(0.22,1,0.36,1);
+    --ease-std:cubic-bezier(0.4,0,0.2,1);
+    --dur-fast:0.18s;
+    --dur-mid:0.3s;
+    --dur-slow:1.2s;
+    /* 布局 */
+    --container:1312px;
+    --header-h:64px;
+  }
+  html[data-theme="dark"]{
+    --bg:#141613;
+    --bg-alt:#191c18;
+    --surface:#1f231e;
+    --mint:#2c3d2c;
+    --grass:#4d8f45;
+    --forest:#8fd08a;
+    --forest-hover:#a5de9f;
+    --link-green:#9fd494;
+    --ink:#eeeeeb;
+    --ink-2:#e2e2df;
+    --muted:#a5a49f;
+    --muted-2:#85847f;
+    --border:#33362f;
+    --border-soft:#2a2d27;
+    --border-green:#4a5546;
+    --highlight:#262a24;
+    --accent-blue:#27454e;
+    --accent-blue-bg:#1c2b31;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+    --shadow-md:0 0 12px rgba(0,0,0,.45),0 0 48px rgba(0,0,0,.35);
+    --shadow-inset-hi:inset 0 2px 4px rgba(0,0,0,.35),0 .5px 0 rgba(255,255,255,.12);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-ui);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    font-size:15px;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    transition:background var(--dur-mid) var(--ease-out),color var(--dur-mid) var(--ease-out);
+  }
+  a{text-decoration:none;color:inherit}
+  ul{list-style:none}
+  .container{max-width:var(--container);margin:0 auto;padding:0 20px}
+  section{padding:120px 20px}
+
+  /* ---------- 入场动画(微位移) ---------- */
+  .reveal{opacity:0;transform:translateY(6px);transition:opacity var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out)}
+  .reveal.in{opacity:1;transform:translateY(0)}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    *{animation:none!important}
+  }
+
+  .kicker{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);margin-bottom:12px}
+  h2.sec-title{font-size:32px;font-weight:500;letter-spacing:-.32px;line-height:1.3}
+  .sec-desc{color:var(--muted);font-size:15px;max-width:658px;margin-top:12px}
+
+  /* ============================================================
+     公告条 —— 浅绿薄荷 + 跑马灯
+     ============================================================ */
+  .announce{
+    background:var(--mint);color:var(--forest);
+    font-size:13px;height:36px;display:flex;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;
+  }
+  .announce .marquee{display:flex;gap:48px;white-space:nowrap;animation:marquee 24s linear infinite}
+  .announce a{font-weight:600;text-decoration:underline;text-underline-offset:3px}
+  .announce .close{position:absolute;right:16px;top:50%;transform:translateY(-50%);cursor:pointer;opacity:.6;font-size:14px;background:none;border:none;color:inherit}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ============================================================
+     Header —— 64px 吸顶导航
+     ============================================================ */
+  .site-header{
+    position:sticky;top:0;z-index:50;height:var(--header-h);
+    background:color-mix(in srgb,var(--bg) 86%,transparent);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid transparent;
+  }
+  .site-header.scrolled{border-bottom-color:var(--border-soft);box-shadow:0 1px 2px rgba(12,12,13,.03)}
+  .site-header .container{height:100%;display:flex;align-items:center;gap:36px}
+  .brand{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:600;letter-spacing:-.2px}
+  .brand svg{width:28px;height:28px;flex:none}
+  .nav-links{display:flex;align-items:center;gap:32px;font-size:14px;color:var(--ink-2)}
+  .nav-links a{position:relative;padding:6px 0;transition:color var(--dur-fast)}
+  .nav-links a:hover{color:var(--muted)}
+  .nav-links .has-menu::after{content:"";display:inline-block;width:5px;height:5px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);margin-left:6px}
+  .nav-actions{margin-left:auto;display:flex;align-items:center;gap:18px}
+  .nav-actions .login{font-size:14px;color:var(--ink-2);transition:color var(--dur-fast)}
+  .nav-actions .login:hover{color:var(--muted)}
+  .dot-new{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--grass);margin-left:2px;vertical-align:top}
+
+  /* ============================================================
+     按钮体系 —— 胶囊 + 薄瓷内高光
+     ============================================================ */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    height:44px;padding:0 24px;border-radius:var(--r-pill);
+    font-family:var(--font-ui);font-size:14px;font-weight:500;cursor:pointer;
+    border:1px solid transparent;white-space:nowrap;
+    transition:background var(--dur-fast),border-color var(--dur-fast),color var(--dur-fast),transform 0.12s ease-out;
+  }
+  .btn:active{transform:scale(.98)}
+  .btn-primary{background:var(--forest);color:#fff;box-shadow:var(--shadow-inset-hi)}
+  .btn-primary:hover{background:var(--forest-hover)}
+  .btn-secondary{background:var(--surface);color:var(--ink);border-color:#dddddd;box-shadow:var(--shadow-sm)}
+  .btn-secondary:hover{background:var(--highlight);border-color:var(--muted-2)}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--border-green)}
+  .btn-ghost:hover{background:var(--highlight)}
+  .btn-text{background:none;color:var(--link-green);height:auto;padding:0;font-weight:500}
+  .btn-text .arrow{display:inline-block;transition:transform .2s var(--ease-std)}
+  .btn-text:hover .arrow{transform:translateX(4px)}
+  .btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+  .btn-sm{height:36px;padding:0 18px;font-size:13px}
+
+  /* ============================================================
+     Hero —— 非对称呼吸
+     ============================================================ */
+  .hero{padding:88px 20px 96px}
+  .hero .container{position:relative}
+  .hero-badge{
+    display:inline-flex;align-items:center;height:30px;max-width:340px;padding:0 14px;
+    border:1px solid var(--border);border-radius:var(--r-pill);background:var(--surface);
+    font-size:12.5px;color:var(--muted);overflow:hidden;position:relative;
+  }
+  .hero-badge .track{display:flex;gap:40px;white-space:nowrap;animation:marquee 18s linear infinite}
+  .hero h1{
+    margin-top:26px;font-size:clamp(34px,4.4vw,56px);font-weight:500;
+    line-height:1.18;letter-spacing:-.5px;max-width:12em;
+  }
+  .hero-actions{display:flex;gap:14px;margin-top:40px;flex-wrap:wrap}
+  .hero-sub{
+    position:absolute;right:20px;bottom:4px;text-align:right;color:var(--muted);
+    font-size:15px;line-height:1.7;max-width:320px;
+  }
+
+  /* ============================================================
+     绿野跑道舞台 —— 签名元素
+     ============================================================ */
+  .stage{
+    position:relative;background:var(--grass);
+    padding:0 20px 96px;margin-top:32px;overflow:hidden;
+  }
+  .stage .lanes{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .stage-inner{position:relative;max-width:1080px;margin:0 auto;padding-top:80px}
+  .window{
+    background:var(--surface);border-radius:var(--r-lg);border:1px solid var(--border);
+    box-shadow:var(--shadow-md);overflow:hidden;
+    transition:transform var(--dur-mid) var(--ease-std);
+  }
+  .window:hover{transform:translateY(-3px)}
+  .win-titlebar{
+    display:flex;align-items:center;gap:8px;height:38px;padding:0 14px;
+    border-bottom:1px solid var(--border-soft);background:var(--surface);
+  }
+  .traffic{display:flex;gap:6px}
+  .traffic i{width:11px;height:11px;border-radius:50%;display:block}
+  .traffic .r{background:#ff5f57}.traffic .y{background:#febc2e}.traffic .g{background:#28c840}
+  .win-titlebar .tb-icons{margin-left:auto;display:flex;gap:10px;color:var(--muted-2);font-size:12px}
+  .win-body{display:flex;min-height:420px}
+  .win-side{width:212px;flex:none;border-right:1px solid var(--border-soft);padding:14px 12px;font-size:12.5px}
+  .seg{display:flex;background:var(--highlight);border-radius:var(--r-sm);padding:2px;gap:2px;margin-bottom:14px}
+  .seg button{
+    flex:1;border:none;background:none;font-family:var(--font-ui);font-size:12px;color:var(--muted);
+    padding:5px 0;border-radius:4px;cursor:pointer;
+  }
+  .seg button.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm)}
+  .side-item{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:var(--r-sm);color:var(--ink-2);cursor:default}
+  .side-item:hover{background:var(--highlight)}
+  .side-item .tag{margin-left:auto;font-size:10px;font-weight:600;color:var(--badge-beta);background:var(--accent-blue-bg);border-radius:var(--r-pill);padding:1px 7px}
+  .side-label{color:var(--muted-2);font-size:11px;padding:12px 8px 4px;display:flex;align-items:center}
+  .side-label .plus{margin-left:auto;font-size:14px;color:var(--muted-2)}
+  .win-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;gap:26px}
+  .win-caption{text-align:center}
+  .win-caption h3{font-size:19px;font-weight:500;letter-spacing:-.2px}
+  .win-caption p{color:var(--muted);font-size:13.5px;margin-top:4px}
+  .mini-post{display:flex;gap:12px;align-items:center;margin-bottom:6px}
+  .mini-post .thumb{width:74px;height:52px;border-radius:6px;border:1px solid var(--border);background:linear-gradient(135deg,#dfe8df,#c7d6c7)}
+  .mini-post .meta{font-size:11px;color:var(--muted-2)}
+  .mini-post .meta b{display:block;color:var(--ink-2);font-size:13px;font-weight:600}
+  .heat-card{width:100%;max-width:560px;border:1px solid var(--border-soft);border-radius:var(--r-md);padding:16px 18px;background:var(--surface)}
+  .heat-card .head{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:12px}
+  .heat-grid{display:grid;grid-template-columns:repeat(32,1fr);gap:4px}
+  .heat-grid i{aspect-ratio:1;border-radius:2.5px;background:var(--grass);opacity:.15;display:block}
+  .stage-caption{position:relative;text-align:center;margin-top:44px;color:#0e2c13;font-size:13px;opacity:.75}
+
+  /* ============================================================
+     Feature 拼贴 —— 卡片中的卡片
+     ============================================================ */
+  .feature .container{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;align-items:center}
+  .feature-copy h2{font-size:clamp(26px,2.6vw,34px);font-weight:500;letter-spacing:-.32px;line-height:1.32}
+  .feature-copy .body{color:var(--muted);margin-top:20px;font-size:15px;max-width:440px}
+  .feature-copy .btn-text{margin-top:26px;display:inline-flex;align-items:center;gap:6px}
+  .mosaic{display:grid;grid-template-columns:1.35fr 1fr;grid-template-rows:auto auto;gap:24px}
+  .m-card{border-radius:var(--r-lg);overflow:hidden;position:relative;min-height:200px;padding:22px;display:flex;align-items:center;justify-content:center;transition:transform var(--dur-mid) var(--ease-std)}
+  .m-card:hover{transform:translateY(-3px)}
+  .m-tall{grid-row:span 2;background:linear-gradient(160deg,#8fc4c9,#5d9aa6)}
+  .m-narrow{background:#dad9d8;min-height:180px}
+  .m-wide{
+    grid-column:1 / -1;min-height:260px;
+    background-image:linear-gradient(rgba(37,90,65,.16),rgba(37,90,65,.3)),
+      url("https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=19th%20century%20romanticism%20oil%20painting%20landscape%2C%20misty%20mountains%20and%20calm%20lake%20at%20golden%20hour%2C%20warm%20cream%20ochre%20and%20soft%20rose%20tones%2C%20visible%20painterly%20brushstrokes%2C%20sublime%20atmosphere%2C%20no%20text%2C%20no%20people&image_size=landscape_4_3");
+    background-size:cover;background-position:center 30%;
+  }
+  .float-card{
+    background:var(--surface);border-radius:var(--r-md);border:1px solid var(--border-soft);
+    box-shadow:var(--shadow-md);padding:16px;width:100%;max-width:330px;font-size:12.5px;
+  }
+  .float-card .row{display:flex;align-items:center;gap:10px}
+  .avatar{width:34px;height:34px;border-radius:50%;background:var(--highlight);border:1px solid var(--border-soft);flex:none;display:flex;align-items:center;justify-content:center;font-size:15px}
+  .float-card .name{font-weight:600;font-size:13px}
+  .float-card .desc{color:var(--muted);margin-top:10px;line-height:1.55}
+  .float-card .cap{font-weight:600;margin-top:14px;font-size:12.5px}
+  .prompt-chip{
+    display:flex;align-items:center;gap:8px;margin-top:10px;padding:8px 10px;
+    border:1px solid var(--border-soft);border-radius:var(--r-sm);background:var(--bg-alt);
+  }
+  .prompt-chip b{font-size:11px;color:var(--badge-beta);white-space:nowrap}
+  .prompt-chip span{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .badge-mock{
+    width:118px;background:#fff;border-radius:10px;border:1px solid rgba(0,0,0,.08);
+    box-shadow:var(--shadow-md);overflow:hidden;text-align:center;
+  }
+  .badge-mock .strap{height:26px;background:#22242a}
+  .badge-mock .face{height:88px;background:linear-gradient(180deg,#3c4437,#2c3228);display:flex;align-items:center;justify-content:center;font-size:34px}
+  .badge-mock .info{padding:8px 6px 10px;font-size:9.5px;color:#333;background:#f4f4f2}
+  .badge-mock .info b{display:block;font-size:11px}
+  .check-card{width:100%;max-width:520px;background:var(--surface);border-radius:var(--r-md);border:1px solid var(--border-soft);box-shadow:var(--shadow-md);overflow:hidden}
+  .check-card .head{display:flex;align-items:center;gap:9px;padding:13px 18px;border-bottom:1px solid var(--border-soft);font-size:13px;font-weight:600}
+  .check-item{display:flex;gap:11px;padding:13px 18px;border-bottom:1px solid var(--border-soft)}
+  .check-item:last-child{border-bottom:none}
+  .check-item .mark{width:17px;height:17px;border-radius:50%;border:1.5px solid var(--grass);flex:none;margin-top:2px;position:relative}
+  .check-item.done .mark::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--grass)}
+  .check-item b{font-size:13px;font-weight:600;display:block}
+  .check-item p{color:var(--muted);font-size:12px;margin-top:2px}
+
+  /* ============================================================
+     表单 / 徽章展示
+     ============================================================ */
+  .kit .grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:48px}
+  .kit-block h3{font-size:15px;font-weight:600;margin-bottom:18px}
+  .field{
+    width:100%;height:44px;padding:0 16px;border-radius:var(--r-md);
+    border:1px solid var(--border);background:var(--surface);color:var(--ink);
+    font-family:var(--font-ui);font-size:14px;outline:none;
+    transition:border-color var(--dur-fast),box-shadow var(--dur-fast);
+  }
+  .field::placeholder{color:var(--muted-2)}
+  .field:focus{border-color:var(--forest);box-shadow:0 0 0 3px color-mix(in srgb,var(--grass) 28%,transparent)}
+  .field-row{display:flex;gap:12px;margin-bottom:14px}
+  .badges{display:flex;flex-wrap:wrap;gap:10px}
+  .badge{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 12px;border-radius:var(--r-pill);font-size:12px;font-weight:500}
+  .badge-mint{background:var(--mint);color:var(--forest)}
+  .badge-line{border:1px solid var(--border-green);color:var(--muted)}
+  .badge-beta{background:var(--accent-blue-bg);color:var(--badge-beta)}
+  .badge-solid{background:var(--forest);color:#fff}
+
+  /* ============================================================
+     FAQ —— 纸感手风琴
+     ============================================================ */
+  .faq .container{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px}
+  .faq details{border-top:1px solid var(--border-soft)}
+  .faq details:last-child{border-bottom:1px solid var(--border-soft)}
+  .faq summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;gap:16px;
+    padding:26px 4px;font-size:19px;font-weight:500;letter-spacing:-.2px;
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary .plus{margin-left:auto;font-size:20px;color:var(--muted-2);transition:transform var(--dur-mid) var(--ease-std)}
+  .faq details[open] summary .plus{transform:rotate(45deg)}
+  .faq .answer{color:var(--muted);font-size:14.5px;padding:0 4px 26px;max-width:620px;animation:fadeIn var(--dur-mid) var(--ease-out)}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+  /* ============================================================
+     Footer —— 多列链接 + 大 Tagline
+     ============================================================ */
+  .footer{background:var(--bg-alt);padding:88px 20px 36px;border-top:1px solid var(--border-soft)}
+  .footer .container{display:grid;grid-template-columns:2fr 5fr;gap:48px}
+  .footer-brand .logo{width:42px;height:42px}
+  .footer-brand .tagline{font-size:22px;font-weight:500;letter-spacing:-.3px;margin-top:22px}
+  .socials{display:flex;gap:14px;margin-top:26px}
+  .socials a{
+    width:34px;height:34px;border-radius:50%;border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;color:var(--muted);
+    transition:background var(--dur-fast),color var(--dur-fast);
+  }
+  .socials a:hover{background:var(--highlight);color:var(--ink)}
+  .link-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+  .link-cols h4{font-size:13px;font-weight:500;color:var(--muted-2);margin-bottom:6px}
+  .link-cols a{display:block;font-size:14px;color:var(--ink-2);padding:7px 0;transition:color var(--dur-fast)}
+  .link-cols a:hover{color:var(--muted)}
+  .footer-bottom{
+    max-width:var(--container);margin:56px auto 0;padding-top:22px;border-top:1px solid var(--border-soft);
+    display:flex;align-items:flex-end;gap:16px;font-size:12px;color:var(--muted-2);
+  }
+  .footer-bottom .to-top{
+    margin-left:auto;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 20px;
+    border-radius:var(--r-pill);border:1px solid var(--border);background:var(--surface);
+    color:var(--ink);font-size:13px;cursor:pointer;font-family:var(--font-ui);
+    transition:background var(--dur-fast);
+  }
+  .footer-bottom .to-top:hover{background:var(--highlight)}
+  .theme-toggle{
+    display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 20px;
+    border-radius:var(--r-pill);border:1px solid var(--border);background:var(--surface);
+    color:var(--ink);font-size:13px;cursor:pointer;font-family:var(--font-ui);
+    transition:background var(--dur-fast);
+  }
+  .theme-toggle:hover{background:var(--highlight)}
+
+  /* ============================================================
+     响应式
+     ============================================================ */
+  @media (max-width:1024px){
+    section{padding:96px 20px}
+    .hero-sub{position:static;text-align:left;margin-top:32px;max-width:420px}
+    .feature .container,.faq .container{grid-template-columns:1fr;gap:40px}
+    .footer .container{grid-template-columns:1fr}
+    .link-cols{grid-template-columns:repeat(3,1fr)}
+  }
+  @media (max-width:768px){
+    section{padding:64px 16px}
+    .nav-links{display:none}
+    .win-body{flex-direction:column}
+    .win-side{width:100%;border-right:none;border-bottom:1px solid var(--border-soft)}
+    .mosaic{grid-template-columns:1fr}
+    .m-tall{grid-row:auto}
+    .kit .grid{grid-template-columns:1fr;gap:32px}
+    .link-cols{grid-template-columns:repeat(2,1fr)}
+    .footer-bottom{flex-wrap:wrap}
+    .heat-grid{grid-template-columns:repeat(20,1fr)}
+  }
+</style>
+</head>
+<body>
+
+<!-- 公告条 -->
+<div class="announce" id="announce">
+  <div class="marquee">
+    <span>9 月限时：首购专业版和高级版，首月 Credits 翻倍。<a href="#">了解详情 →</a></span>
+    <span>9 月限时：首购专业版和高级版，首月 Credits 翻倍。<a href="#">了解详情 →</a></span>
+    <span>9 月限时：首购专业版和高级版，首月 Credits 翻倍。<a href="#">了解详情 →</a></span>
+    <span>9 月限时：首购专业版和高级版，首月 Credits 翻倍。<a href="#">了解详情 →</a></span>
+  </div>
+  <button class="close" aria-label="关闭公告" onclick="document.getElementById('announce').style.display='none'">✕</button>
+</div>
+
+<!-- Header -->
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <a class="brand" href="#">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="2.2"/>
+        <path d="M11 21c8-1 11-6 11-12-6 0-11 3-12 9-.5 2.5 0 4 1 5z" fill="currentColor"/>
+      </svg>
+      Qoder CN
+    </a>
+    <nav class="nav-links">
+      <a href="#" class="has-menu">产品<i class="dot-new"></i></a>
+      <a href="#">企业版</a>
+      <a href="#">价格</a>
+      <a href="#">能力市场</a>
+      <a href="#" class="has-menu">资源</a>
+      <a href="#">活动</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="login" href="#">登录</a>
+      <a class="btn btn-secondary btn-sm" href="#">下载</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge reveal">
+      <div class="track">
+        <span>智能体工作台全新上线 · 首月 Credits 翻倍</span>
+        <span>不止于编程 · 从想法到实现</span>
+        <span>智能体工作台全新上线 · 首月 Credits 翻倍</span>
+        <span>不止于编程 · 从想法到实现</span>
+      </div>
+    </div>
+    <h1 class="reveal">全新 Qoder<br />你的智能体工作台</h1>
+    <div class="hero-actions reveal">
+      <a class="btn btn-primary" href="#">↓&nbsp; 立即下载</a>
+      <a class="btn btn-secondary" href="#">所有下载&nbsp; →</a>
+    </div>
+    <p class="hero-sub reveal">Qoder 全新形态，以编程智能体为核心引擎<br />从想法到实现，轻松搞定</p>
+  </div>
+</section>
+
+<!-- 绿野跑道舞台 + 产品窗口 -->
+<div class="stage">
+  <svg class="lanes" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="#255a41" stroke-width="34" fill="none" opacity="0.55">
+      <path d="M-120 640 C 220 640 260 220 640 220" stroke-dasharray="0" />
+      <path d="M240 760 C 620 760 700 320 1120 320" opacity="0.75" />
+      <path d="M1560 -40 C 1180 -40 1120 380 760 380" opacity="0.6" />
+    </g>
+    <g stroke="#255a41" stroke-width="2.5" fill="none" opacity="0.5" stroke-dasharray="10 12">
+      <path d="M-60 560 C 300 560 360 160 760 160" />
+      <path d="M1520 120 C 1140 120 1060 500 660 500" />
+    </g>
+    <g fill="#255a41" opacity="0.5">
+      <circle cx="18" cy="470" r="7" /><circle cx="22" cy="470" r="20" fill="none" stroke="#255a41" stroke-width="2.5" />
+      <circle cx="1305" cy="440" r="7" /><circle cx="1305" cy="440" r="20" fill="none" stroke="#255a41" stroke-width="2.5" />
+    </g>
+  </svg>
+  <div class="stage-inner">
+    <!-- 产品窗口 Mockup -->
+    <div class="window reveal" aria-label="产品窗口模型">
+      <div class="win-titlebar">
+        <div class="traffic"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+        <div class="tb-icons"><span>◫</span><span>←</span><span>→</span></div>
+        <div class="tb-icons" style="margin-left:auto"><span>◱</span><span>▢</span></div>
+      </div>
+      <div class="win-body">
+        <aside class="win-side">
+          <div class="seg"><button class="on">⌗ 编码</button><button>✎ 设计</button></div>
+          <div class="side-item">◉ 新任务</div>
+          <div class="side-item">▤ 项目 <span class="tag">Beta</span></div>
+          <div class="side-item">✦ 讨论 <span class="tag">Beta</span></div>
+          <div class="side-item">⌕ 搜索</div>
+          <div class="side-label">工作区 <span class="plus">+</span></div>
+          <div class="side-label" style="padding-top:6px">最近对话</div>
+          <div class="side-item" style="color:var(--muted)">Create HTML competitive analys…</div>
+        </aside>
+        <main class="win-main">
+          <div class="mini-post">
+            <div class="thumb"></div>
+            <div class="meta"><b>1666</b>Tree of Contemplation<br />Quietly, 2024</div>
+          </div>
+          <div class="win-caption">
+            <h3>不止于编程</h3>
+            <p>用 Qoder 创造了不起的事物</p>
+          </div>
+          <div class="heat-card">
+            <div class="head"><span>活跃对话</span><span>每日</span></div>
+            <div class="heat-grid" id="heatGrid"></div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <p class="stage-caption">绿野跑道舞台 · 白色产品窗口悬浮出血，虚线弧带持续流动</p>
+  </div>
+</div>
+
+<!-- Feature 拼贴 -->
+<section class="feature">
+  <div class="container">
+    <div class="feature-copy">
+      <div class="kicker reveal">QoderWake</div>
+      <h2 class="reveal">在真实场景自主工作的<br />数字员工</h2>
+      <p class="body reveal">基于 Qoder Agent 及多种运行环境，7×24 持续处理真实工作任务，人与 Agent 的协作方式进入下一代。深入融入人类主流工作场景及工具，在需求发生的地方主动开始工作、交付结果。</p>
+      <a class="btn-text reveal" href="#">体验 QoderWake <span class="arrow">→</span></a>
+    </div>
+    <div class="mosaic">
+      <!-- 竖高彩卡:评论浮卡 -->
+      <div class="m-card m-tall reveal">
+        <div class="float-card">
+          <div class="row">
+            <div class="avatar">🧑‍💻</div>
+            <div>
+              <div class="name">软件开发 Waker</div>
+            </div>
+            <div style="margin-left:auto;color:var(--muted-2)">👍</div>
+          </div>
+          <div class="desc">擅长 API 实现与系统设计，关注性能、可扩展性、可靠性与边界场景。</div>
+          <div class="cap">核心能力</div>
+          <div class="prompt-chip"><b>智能体</b><span>「加一个这个功能」「实现这个 API」</span></div>
+          <div class="prompt-chip"><b>智能体</b><span>「帮我排查这个错误」「这里又出问题了」</span></div>
+        </div>
+      </div>
+      <!-- 窄灰卡:工牌 -->
+      <div class="m-card m-narrow reveal">
+        <div class="badge-mock">
+          <div class="strap"></div>
+          <div class="face">🧑‍🔧</div>
+          <div class="info"><b>Backend Engineer</b>ID: worker001</div>
+        </div>
+      </div>
+      <!-- 横宽图卡:清单浮卡 -->
+      <div class="m-card m-wide reveal" id="meadowCard">
+        <div class="check-card">
+          <div class="head"><span class="avatar" style="width:26px;height:26px;font-size:13px">🧑‍💻</span> 软件开发数字员工</div>
+          <div class="check-item done"><span class="mark"></span><div><b>修复线上缺陷</b><p>复现问题、定位根因，并以最小改动完成修复，同时补充可靠的回归测试。</p></div></div>
+          <div class="check-item done"><span class="mark"></span><div><b>评审 PR</b><p>检查正确性、安全性、性能与边界场景，给出清晰、务实、可落地的建议。</p></div></div>
+          <div class="check-item"><span class="mark"></span><div><b>交付新功能</b><p>从规划、编码、测试到提交 PR，端到端完成。</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 组件套件:按钮 / 表单 / 徽章 -->
+<section class="kit" id="kit">
+  <div class="container">
+    <div class="kicker reveal">Components</div>
+    <h2 class="sec-title reveal">组件套件</h2>
+    <p class="sec-desc reveal">胶囊几何 + 薄瓷内高光 + 单点森林绿。所有组件只引用 Token，绿色只出现在可点击与舞台两处。</p>
+    <div class="grid">
+      <div class="kit-block reveal">
+        <h3>按钮体系</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px">
+          <a class="btn btn-primary" href="#">立即下载</a>
+          <a class="btn btn-secondary" href="#">所有下载 →</a>
+          <a class="btn btn-ghost" href="#">了解更多</a>
+          <button class="btn btn-primary" disabled>禁用态</button>
+        </div>
+        <a class="btn-text" href="#">文字链接按钮 <span class="arrow">→</span></a>
+      </div>
+      <div class="kit-block reveal">
+        <h3>徽章 / 标签</h3>
+        <div class="badges">
+          <span class="badge badge-mint">限时特惠</span>
+          <span class="badge badge-beta">Beta</span>
+          <span class="badge badge-line">企业版</span>
+          <span class="badge badge-solid">Pro</span>
+          <span class="badge badge-mint">Credits ×2</span>
+        </div>
+      </div>
+      <div class="kit-block reveal">
+        <h3>输入框</h3>
+        <div class="field-row">
+          <input class="field" type="email" placeholder="输入邮箱，获取下载链接" />
+          <a class="btn btn-primary" href="#">订阅</a>
+        </div>
+        <input class="field" type="text" placeholder="聚焦时绿色描边 + 浅绿外光" />
+      </div>
+      <div class="kit-block reveal">
+        <h3>浮层卡片</h3>
+        <div class="float-card">
+          <div class="row"><div class="avatar">🤖</div><div><div class="name">Agent 通知</div></div></div>
+          <div class="desc">已完成 3 项任务，等待你的确认。点击查看详情。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <div>
+      <div class="kicker reveal">FAQ</div>
+      <h2 class="sec-title reveal">常见问题</h2>
+      <p class="sec-desc reveal">纸感手风琴：无卡片化，仅 1px 分隔线，"+" 旋转 45° 展开。</p>
+    </div>
+    <div class="reveal">
+      <details open>
+        <summary>Qoder CN 采用哪些模型？<span class="plus">+</span></summary>
+        <div class="answer">接入多种主流大模型，按任务自动路由：代码生成、评审、对话等场景分别选用最合适的模型。</div>
+      </details>
+      <details>
+        <summary>Qoder CN 的定价方式是怎样的？<span class="plus">+</span></summary>
+        <div class="answer">提供免费版、专业版与高级版，按 Credits 计量；新用户首月 Credits 翻倍。</div>
+      </details>
+      <details>
+        <summary>需要帮助或进行反馈？<span class="plus">+</span></summary>
+        <div class="answer">可通过社区、工单咨询或企业方案咨询联系我们，工作日 24 小时内响应。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-brand">
+      <svg class="logo" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="2.2"/>
+        <path d="M11 21c8-1 11-6 11-12-6 0-11 3-12 9-.5 2.5 0 4 1 5z" fill="currentColor"/>
+      </svg>
+      <div class="tagline">不止编程，无限创造</div>
+      <div class="socials">
+        <a href="#" aria-label="X">𝕏</a>
+        <a href="#" aria-label="Bilibili">📺</a>
+        <a href="#" aria-label="WeChat">💬</a>
+        <a href="#" aria-label="Zhihu">知</a>
+        <a href="#" aria-label="Douyin">♪</a>
+      </div>
+    </div>
+    <div class="link-cols">
+      <div>
+        <h4>立即使用 Qoder</h4>
+        <a href="#">Qoder</a><a href="#">移动端</a>
+        <h4 style="margin-top:22px">其他使用方式</h4>
+        <a href="#">IDE</a><a href="#">JetBrains 插件</a><a href="#">CLI</a>
+        <h4 style="margin-top:22px">数字员工</h4>
+        <a href="#">QoderWake</a>
+      </div>
+      <div>
+        <h4>立即获取</h4>
+        <a href="#">企业版</a><a href="#">价格</a><a href="#">下载</a>
+        <h4 style="margin-top:22px">集成 Qoder Agent</h4>
+        <a href="#">Agent SDK</a><a href="#">Cloud Agents</a>
+      </div>
+      <div>
+        <h4>资源</h4>
+        <a href="#">能力市场</a><a href="#">活动</a><a href="#">文档</a><a href="#">常见问题</a><a href="#">更新日志</a>
+      </div>
+      <div>
+        <h4>法律</h4>
+        <a href="#">服务条款</a><a href="#">隐私政策</a>
+        <h4 style="margin-top:22px">合作伙伴</h4>
+        <a href="#">千问AI平台</a>
+        <h4 style="margin-top:22px">联系我们</h4>
+        <a href="#">工单咨询</a><a href="#">企业方案咨询</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>通义云启（杭州）信息技术有限公司　浙ICP备2023034206号-81<br />已获 ISO27001|ISO42001|ISO9001|ISO22301|ISO20000-1 认证</div>
+    <button class="theme-toggle" id="themeToggle">🌗 切换深浅模式</button>
+    <button class="to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">返回顶部 ↑</button>
+  </div>
+</footer>
+
+<script>
+  // 热力点阵(签名元素:绿色方点矩阵)
+  (function(){
+    var g=document.getElementById('heatGrid');
+    if(!g)return;
+    var frag=document.createDocumentFragment();
+    for(var i=0;i<32*7;i++){
+      var d=document.createElement('i');
+      var r=Math.random();
+      d.style.opacity=r>0.82?1:r>0.6?0.55:r>0.35?0.28:0.12;
+      frag.appendChild(d);
+    }
+    g.appendChild(frag);
+  })();
+
+  // 入场动画
+  (function(){
+    var els=document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+    },{threshold:0.12});
+    els.forEach(function(e){io.observe(e)});
+  })();
+
+  // Header 滚动态
+  (function(){
+    var h=document.getElementById('siteHeader');
+    window.addEventListener('scroll',function(){
+      h.classList.toggle('scrolled',window.scrollY>8);
+    },{passive:true});
+  })();
+
+  // 深浅模式
+  (function(){
+    var btn=document.getElementById('themeToggle');
+    btn.addEventListener('click',function(){
+      var cur=document.documentElement.getAttribute('data-theme');
+      document.documentElement.setAttribute('data-theme',cur==='dark'?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>

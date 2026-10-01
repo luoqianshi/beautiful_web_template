@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Trae-Matrix-Mint — 点阵矩阵薄荷绿组件库</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     Trae-Matrix-Mint — 设计 Token
+     纯黑虚空 × 薄荷绿单点强调 × 2/4px 锐角 × 点阵矩阵
+     ============================================================ */
+  :root{
+    --bg:#0A0B0D;              /* 主背景（蓝调黑） */
+    --bg-void:#000000;         /* Hero 虚空底 */
+    --surface:#121314;         /* 演示面板 */
+    --surface-2:#171A1C;       /* 次级面板 / 输入框 */
+    --overlay-04:rgba(237,239,242,0.04);
+    --overlay-08:rgba(237,239,242,0.08);
+    --overlay-13:rgba(237,239,242,0.13);
+    --overlay-18:rgba(237,239,242,0.18);
+    /* 唯一强调色：薄荷绿 */
+    --accent:#32F08C;
+    --accent-grad:linear-gradient(90deg,#3EE1A3 0%,#32F08C 36%,#60F2BD 71.6%,#A0FDE7 100%);
+    --accent-soft-grad:linear-gradient(90deg,#A9D8CC 0%,#97E0BF 52%,#7FDCAD 100%);
+    --ink:#FFFFFF;
+    --ink-offwhite:#F5F9FE;
+    --ink-muted:#A6AAB5;
+    --ink-faint:#787D87;
+    --ink-dark:#0A0B0D;
+    --border:rgba(255,255,255,0.18);
+    --border-hair:rgba(255,255,255,0.08);
+    --border-strong:rgba(245,249,254,0.3);
+    /* 示意图节点色（仅出现在演示面板内） */
+    --node-purple:#A78BFA;
+    --node-blue:#60A5FA;
+    --node-red:#F87171;
+    /* 圆角：2px 锐角体系 */
+    --r-sm:2px;
+    --r-md:4px;
+    /* 阴影：仅浮层 */
+    --shadow-sm:0 1px 3px rgba(0,0,0,0.1),0 1px 2px -1px rgba(0,0,0,0.1);
+    /* 字体 */
+    --font-ui:'Inter','Noto Sans SC',system-ui,sans-serif;
+    --font-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    /* 动效 */
+    --ease:cubic-bezier(0.4,0,0.2,1);
+    --dur-fast:0.15s;
+    --dur:0.2s;
+    --dur-slow:0.3s;
+    /* 布局 */
+    --container:1440px;
+    --pad-x:32px;
+  }
+  /* 浅色翻转：白纸底 + 墨黑字，薄荷绿不变 */
+  html[data-theme="light"]{
+    --bg:#F5F9FE;
+    --bg-void:#EDF1F5;
+    --surface:#FFFFFF;
+    --surface-2:#E9EEF3;
+    --overlay-04:rgba(10,11,13,0.04);
+    --overlay-08:rgba(10,11,13,0.08);
+    --overlay-13:rgba(10,11,13,0.13);
+    --overlay-18:rgba(10,11,13,0.18);
+    --ink:#0A0B0D;
+    --ink-offwhite:#121314;
+    --ink-muted:#585E6B;
+    --ink-faint:#787D87;
+    --ink-dark:#0A0B0D;
+    --border:rgba(10,11,13,0.18);
+    --border-hair:rgba(10,11,13,0.08);
+    --border-strong:rgba(10,11,13,0.3);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-ui);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    font-size:16px;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    transition:background var(--dur-slow) var(--ease),color var(--dur-slow) var(--ease);
+  }
+  a{text-decoration:none;color:inherit}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  .container{max-width:var(--container);margin:0 auto;padding:0 var(--pad-x)}
+  section{padding:100px 0}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1!important;transform:none!important;transition:none}
+    *{animation:none!important}
+    html{scroll-behavior:auto}
+  }
+
+  /* ---------- 入场动画（菱形母题：scale + rotate45） ---------- */
+  .reveal{opacity:0;transform:translateY(8px);transition:opacity var(--dur-slow) var(--ease),transform var(--dur-slow) var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal-diamond{opacity:0;transform:scale(0) rotate(45deg);transition:opacity var(--dur-slow) var(--ease),transform var(--dur-slow) var(--ease)}
+  .reveal-diamond.in{opacity:1;transform:scale(1) rotate(45deg)}
+
+  /* ---------- 点阵图案（公告条角饰） ---------- */
+  .dots{
+    background-image:radial-gradient(var(--ink-dark) 1.5px,transparent 1.5px);
+    background-size:8px 8px;
+    opacity:0.85;
+  }
+
+  /* ============================================================
+     公告条 —— 浅绿渐变 + 点阵角饰
+     ============================================================ */
+  .banner{
+    background:var(--accent-soft-grad);
+    color:var(--ink-dark);
+    font-size:14px;
+    position:relative;
+  }
+  .banner-inner{
+    max-width:var(--container);margin:0 auto;
+    display:flex;align-items:center;justify-content:center;gap:16px;
+    padding:10px var(--pad-x);min-height:40px;
+    position:relative;
+  }
+  .banner a{font-weight:500;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+  .banner a:hover{text-decoration:underline;text-underline-offset:3px}
+  .banner .dots-l,.banner .dots-r{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:64px;height:24px;
+  }
+  .banner .dots-l{left:var(--pad-x)}
+  .banner .dots-r{right:calc(var(--pad-x) + 36px)}
+  .banner-close{
+    position:absolute;right:var(--pad-x);top:50%;transform:translateY(-50%);
+    font-size:18px;line-height:1;width:28px;height:28px;
+    display:flex;align-items:center;justify-content:center;
+    transition:opacity var(--dur-fast) var(--ease);
+  }
+  .banner-close:hover{opacity:0.6}
+
+  /* ============================================================
+     Header —— 64px 吸顶导航
+     ============================================================ */
+  .site-header{
+    position:sticky;top:0;z-index:50;
+    background:var(--bg-void);
+    height:64px;
+  }
+  html[data-theme="light"] .site-header{background:var(--bg)}
+  .header-inner{
+    max-width:var(--container);margin:0 auto;height:100%;
+    display:flex;align-items:center;gap:32px;
+    padding:0 var(--pad-x);
+  }
+  .logo{
+    display:flex;align-items:center;gap:2px;
+    font-weight:700;font-size:22px;letter-spacing:-1px;color:var(--ink);
+  }
+  .logo .diamond{
+    display:inline-block;width:10px;height:10px;
+    background:var(--accent);transform:rotate(45deg);
+    margin:0 3px 2px;
+  }
+  .logo-mark{
+    width:28px;height:28px;border-radius:var(--r-md);
+    background:var(--ink);color:var(--bg-void);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:var(--font-mono);font-size:13px;font-weight:600;
+    position:relative;flex:none;
+  }
+  html[data-theme="light"] .logo-mark{background:var(--ink);color:#fff}
+  .logo-mark::before,.logo-mark::after{
+    content:"";position:absolute;width:4px;height:4px;background:var(--accent);
+    top:12px;
+  }
+  .logo-mark::before{left:8px}
+  .logo-mark::after{right:8px}
+  .nav-links{display:flex;align-items:center;gap:28px;flex:1}
+  .nav-links a{
+    font-size:14px;color:var(--ink);display:inline-flex;align-items:center;gap:6px;
+    transition:color var(--dur-fast) var(--ease);
+  }
+  .nav-links a:hover{color:var(--ink-muted)}
+  .nav-links .caret{
+    width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;
+    border-top:5px solid var(--ink-muted);display:inline-block;
+  }
+  .header-actions{display:flex;align-items:center;gap:12px}
+
+  /* ---------- 徽章 ---------- */
+  .badge{
+    font-family:var(--font-mono);font-size:12px;font-weight:500;letter-spacing:0.35px;
+    padding:1px 6px;border-radius:var(--r-sm);
+  }
+  .badge-hot{background:var(--accent);color:var(--ink-dark)}
+  .badge-outline{border:1px solid var(--border);color:var(--ink-muted)}
+  .badge-new{background:var(--overlay-08);color:var(--accent)}
+
+  /* ---------- 按钮体系 ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-size:16px;font-weight:500;border-radius:var(--r-sm);
+    padding:15px 32px;min-height:44px;
+    transition:transform var(--dur) var(--ease),background-color var(--dur-fast) var(--ease),
+               border-color var(--dur-fast) var(--ease),opacity var(--dur-fast) var(--ease),
+               filter var(--dur-fast) var(--ease);
+  }
+  .btn:active{transform:scale(0.98)}
+  .btn-primary{background:var(--accent-grad);background-size:180% 100%;color:var(--ink-dark)}
+  .btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px);background-position:60% 0}
+  .btn-outline{
+    border:1px solid var(--border);color:var(--ink);background:transparent;
+  }
+  .btn-outline:hover{background:var(--overlay-08);border-color:var(--border-strong)}
+  .btn-light{background:var(--ink);color:var(--ink-dark);font-size:14px;padding:9px 20px;min-height:38px}
+  html[data-theme="light"] .btn-light{background:var(--ink-dark);color:#fff}
+  .btn-light:hover{filter:brightness(0.92)}
+  .btn-ghost{color:var(--ink);font-size:14px;padding:9px 16px;min-height:38px}
+  .btn-ghost:hover{color:var(--ink-muted)}
+  .btn-sm{font-size:14px;padding:9px 20px;min-height:38px}
+  .btn:disabled,.btn[aria-disabled="true"]{
+    background:var(--overlay-13);color:var(--ink-faint);cursor:not-allowed;
+    transform:none;filter:none;
+  }
+
+  /* ============================================================
+     Hero —— 点阵像素云 + 巨型宣言 + 对角 CTA
+     ============================================================ */
+  .hero{
+    background:var(--bg-void);
+    position:relative;overflow:hidden;
+    padding:0;
+    min-height:calc(100vh - 64px - 40px);
+    display:flex;flex-direction:column;justify-content:flex-end;
+  }
+  html[data-theme="light"] .hero{background:var(--bg-void)}
+  #dotCloud{
+    position:absolute;inset:0;width:100%;height:100%;
+    opacity:0.9;
+  }
+  html[data-theme="light"] #dotCloud{opacity:0.5}
+  .hero-inner{
+    position:relative;z-index:2;
+    max-width:var(--container);margin:0 auto;width:100%;
+    padding:0 var(--pad-x) 48px;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:48px;
+    flex-wrap:wrap;
+  }
+  .hero-left{max-width:760px}
+  .hero-wordmark{
+    font-size:clamp(56px,9vw,120px);font-weight:700;letter-spacing:-4px;line-height:0.95;
+    color:var(--ink);margin-bottom:12px;
+    font-family:var(--font-ui);
+  }
+  .hero-title{
+    font-size:clamp(34px,5.6vw,80px);font-weight:600;letter-spacing:-1px;line-height:1.1;
+    color:var(--ink-offwhite);white-space:nowrap;
+  }
+  .hero-right{display:flex;flex-direction:column;gap:16px;padding-bottom:8px;min-width:320px}
+  .hero-products{font-size:18px;color:var(--ink);line-height:1.6}
+  .hero-products .dim{color:var(--ink-muted)}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap}
+  .hero-note{
+    display:flex;align-items:center;gap:8px;
+    font-size:14px;color:var(--accent);
+  }
+  .diamond-bullet{
+    width:6px;height:6px;background:var(--accent);transform:rotate(45deg);flex:none;
+  }
+
+  /* ============================================================
+     区块栏头（等宽 kicker + 标题）
+     ============================================================ */
+  .kicker{
+    font-family:var(--font-mono);font-size:13px;letter-spacing:0.35px;
+    color:var(--accent);margin-bottom:12px;
+  }
+  .sec-title{font-size:clamp(32px,4vw,56px);font-weight:600;line-height:1.2;letter-spacing:-0.5px}
+  .sec-desc{color:var(--ink-muted);font-size:16px;max-width:680px;margin-top:16px}
+
+  /* ============================================================
+     功能卡（编号索引 + 演示面板）
+     ============================================================ */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:56px}
+  .card-index{
+    font-family:var(--font-mono);font-size:16px;font-weight:500;letter-spacing:0.35px;
+    color:var(--accent);margin-bottom:12px;
+  }
+  .card-title{font-size:22px;font-weight:600;line-height:1.35;margin-bottom:20px;min-height:60px}
+  .panel{
+    background:var(--surface);
+    border:1px solid var(--border-hair);
+    border-radius:var(--r-md);
+    padding:24px;
+    transition:border-color var(--dur) var(--ease),transform var(--dur) var(--ease);
+  }
+  .card:hover .panel{border-color:rgba(50,240,140,0.4);transform:translateY(-2px)}
+  .card-desc{color:var(--ink-muted);font-size:14px;margin-top:20px}
+
+  /* 演示面板：对话图 */
+  .mock-chat{display:flex;flex-direction:column;gap:12px}
+  .mock-row{display:flex;justify-content:flex-end}
+  .mock-bubble{
+    background:var(--overlay-08);border-radius:var(--r-md);
+    padding:8px 12px;font-size:12px;color:var(--ink-muted);
+  }
+  .mock-agent{
+    border:1px solid rgba(50,240,140,0.35);border-radius:var(--r-md);
+    padding:12px;display:flex;flex-direction:column;gap:8px;
+  }
+  .mock-agent-head{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink)}
+  .mock-agent-head .tag{
+    width:18px;height:18px;border-radius:var(--r-sm);background:var(--accent);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:var(--font-mono);font-size:9px;color:var(--ink-dark);font-weight:600;
+  }
+  .mock-code{
+    background:var(--bg);border-radius:var(--r-sm);padding:8px 10px;
+    font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .mock-code .path{color:var(--ink-faint)}
+  .mock-code .cmd{color:var(--ink-offwhite)}
+  .mock-foot{
+    display:flex;align-items:center;justify-content:space-between;
+    font-family:var(--font-mono);font-size:11px;
+  }
+  .mock-foot .file{color:var(--ink-faint)}
+  .mock-foot .add{color:var(--accent)}
+  .mock-foot .del{color:var(--node-red);margin-left:4px}
+  .mock-foot .link{color:var(--accent);font-family:var(--font-ui);font-size:11px}
+
+  /* 演示面板：SOLO / IDE 双模 */
+  .mock-toggle{
+    display:flex;flex-direction:column;align-items:center;gap:0;position:relative;
+    padding:8px 0;
+  }
+  .toggle-node{
+    display:inline-flex;align-items:center;gap:10px;
+    border:1.5px solid var(--border);border-radius:var(--r-md);
+    padding:12px 18px;font-family:var(--font-mono);font-size:18px;font-weight:600;
+    background:var(--bg);color:var(--ink);position:relative;z-index:2;
+  }
+  .toggle-node.active{border-color:var(--accent);color:var(--accent)}
+  .toggle-icon{
+    width:32px;height:32px;border-radius:var(--r-md);
+    background:var(--ink);color:var(--bg-void);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:var(--font-mono);font-size:12px;font-weight:600;
+    position:relative;flex:none;
+  }
+  .toggle-icon::before,.toggle-icon::after{
+    content:"";position:absolute;width:4px;height:4px;background:var(--accent);top:14px;
+  }
+  .toggle-icon::before{left:9px}
+  .toggle-icon::after{right:9px}
+  .toggle-gap{height:20px;width:2px;background:transparent}
+  .toggle-rail{
+    position:absolute;left:32px;top:24px;bottom:24px;width:calc(100% - 64px);
+    border:1px dashed var(--border);border-radius:var(--r-md);z-index:1;
+    border-top:none;border-bottom:none;
+  }
+
+  /* 演示面板：智能体生态节点 */
+  .mock-nodes{
+    display:grid;grid-template-columns:40px 1fr 1fr;gap:16px 12px;align-items:center;
+  }
+  .node-tile{
+    width:36px;height:36px;border-radius:var(--r-md);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-dark);
+  }
+  .node-tile.center{background:var(--ink);color:var(--bg-void)}
+  .node-tile.purple{background:var(--node-purple)}
+  .node-tile.blue{background:var(--node-blue)}
+  .node-tile.green{background:var(--accent)}
+  .node-label{
+    font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);
+    display:flex;align-items:center;gap:8px;
+  }
+  .node-label .swatch{width:28px;height:28px;border-radius:var(--r-md);flex:none}
+  .node-line{
+    height:2px;
+    background-image:linear-gradient(90deg,var(--border) 4px,transparent 4px);
+    background-size:8px 2px;
+  }
+
+  /* ============================================================
+     按钮展示区
+     ============================================================ */
+  .showcase{
+    border:1px solid var(--border-hair);border-radius:var(--r-md);
+    background:var(--overlay-04);
+    padding:48px;margin-top:56px;
+  }
+  .showcase-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  .showcase-label{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:0.35px;
+    color:var(--ink-faint);width:120px;flex:none;
+  }
+  .showcase-block{padding:28px 0;border-bottom:1px solid var(--border-hair)}
+  .showcase-block:last-child{border-bottom:none;padding-bottom:0}
+  .showcase-block:first-child{padding-top:0}
+
+  /* ============================================================
+     输入框
+     ============================================================ */
+  .input{
+    background:var(--surface-2);
+    border:1px solid var(--border-hair);
+    border-radius:var(--r-sm);
+    color:var(--ink);font-size:14px;font-family:var(--font-ui);
+    padding:11px 14px;min-height:44px;width:280px;
+    transition:border-color var(--dur-fast) var(--ease),box-shadow var(--dur-fast) var(--ease);
+  }
+  .input::placeholder{color:var(--ink-faint)}
+  .input:focus{
+    outline:none;border-color:var(--accent);
+    box-shadow:0 0 0 2px rgba(50,240,140,0.25);
+  }
+  .input:disabled{opacity:0.5;cursor:not-allowed}
+
+  /* ============================================================
+     Footer —— 链接区 + 巨型裁切字标带
+     ============================================================ */
+  .site-footer{background:var(--bg-void);padding:80px 0 0}
+  html[data-theme="light"] .site-footer{background:var(--bg)}
+  .footer-top{
+    display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:32px;
+    padding-bottom:64px;
+  }
+  .footer-col h4{font-size:14px;font-weight:500;color:var(--ink-muted);margin-bottom:16px}
+  .footer-col a{
+    display:block;font-size:14px;color:var(--ink);margin-bottom:12px;
+    transition:color var(--dur-fast) var(--ease);
+  }
+  .footer-col a:hover{color:var(--accent)}
+  .footer-meta{
+    display:flex;justify-content:space-between;align-items:flex-end;gap:32px;
+    padding-bottom:48px;flex-wrap:wrap;
+  }
+  .footer-legal{font-size:13px;color:var(--ink-faint);line-height:1.9}
+  .footer-legal a{color:var(--ink-faint)}
+  .footer-legal a:hover{color:var(--accent)}
+  .qr-row{display:flex;gap:24px;align-items:flex-end}
+  .qr-item{display:flex;flex-direction:column;gap:8px;align-items:center}
+  .qr-item .cap{font-size:12px;color:var(--ink-faint)}
+  .qr{
+    width:88px;height:88px;border-radius:var(--r-md);background:#fff;
+    display:flex;align-items:center;justify-content:center;position:relative;
+  }
+  .qr .pattern{
+    width:64px;height:64px;
+    background-image:
+      radial-gradient(#000 2px,transparent 2px),
+      radial-gradient(#000 2px,transparent 2px);
+    background-size:8px 8px,8px 8px;
+    background-position:0 0,4px 4px;
+  }
+  .qr .finder{
+    position:absolute;width:16px;height:16px;border:3px solid var(--accent);
+  }
+  .qr .finder.tl{top:8px;left:8px}
+  .qr .finder.br{bottom:8px;right:8px}
+  .back-top{
+    display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--ink);
+    transition:color var(--dur-fast) var(--ease);
+  }
+  .back-top:hover{color:var(--accent)}
+  .back-top .ring{
+    width:18px;height:18px;border:1.5px solid currentColor;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;font-size:10px;
+  }
+
+  /* 巨型裁切字标带 */
+  .wordmark-band{
+    background:var(--accent);
+    overflow:hidden;
+    height:clamp(140px,22vw,300px);
+    display:flex;align-items:flex-start;justify-content:center;
+  }
+  .wordmark-band span{
+    font-family:var(--font-ui);font-weight:700;
+    font-size:clamp(180px,30vw,420px);
+    letter-spacing:-0.04em;line-height:0.82;
+    color:#000;white-space:nowrap;
+    transform:translateY(-4%);
+  }
+  html[data-theme="light"] .wordmark-band span{color:#0A0B0D}
+
+  /* 主题切换 */
+  .theme-toggle{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--border);border-radius:var(--r-sm);
+    padding:9px 16px;font-size:13px;color:var(--ink);min-height:38px;
+    transition:border-color var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease);
+  }
+  .theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* ============================================================
+     响应式
+     ============================================================ */
+  @media (max-width:1024px){
+    .nav-links{gap:18px}
+    .nav-links a:nth-child(n+6){display:none}
+    .cards{grid-template-columns:repeat(2,1fr)}
+    .card-title{min-height:0}
+    .footer-top{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:768px){
+    section{padding:64px 0}
+    .banner-inner{font-size:12px;gap:8px;padding:8px var(--pad-x)}
+    .banner .dots-l,.banner .dots-r{display:none}
+    .nav-links{display:none}
+    .hero-inner{flex-direction:column;align-items:flex-start;padding-bottom:32px}
+    .hero-right{min-width:0;width:100%}
+    .cards{grid-template-columns:1fr}
+    .showcase{padding:28px 20px}
+    .showcase-label{width:100%}
+    .footer-top{grid-template-columns:1fr}
+    .input{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ 公告条 ============ -->
+<div class="banner" id="banner">
+  <div class="banner-inner">
+    <div class="dots dots-l" aria-hidden="true"></div>
+    <div>邀请好友体验 TraeCode，双方各得 500 积分，最高得 3500 积分</div>
+    <a href="#hero">立即参与 →</a>
+    <div class="dots dots-r" aria-hidden="true"></div>
+    <button class="banner-close" aria-label="关闭公告" onclick="document.getElementById('banner').style.display='none'">×</button>
+  </div>
+</div>
+
+<!-- ============ Header ============ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="#hero" aria-label="TRAE 首页">
+      <span class="logo-mark" aria-hidden="true"></span>
+      <span>TRA<span class="diamond" aria-hidden="true"></span>E</span>
+    </a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="#features">TraeCode <span class="badge badge-hot">Hot</span> <span class="caret"></span></a>
+      <a href="#features">TraeWork</a>
+      <a href="#features">企业版</a>
+      <a href="#buttons">定价</a>
+      <a href="#buttons">文档</a>
+      <a href="#forms">更新日志</a>
+      <a href="#footer">社区</a>
+      <a href="#footer">知识库</a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn btn-light">登录</button>
+      <button class="btn btn-primary btn-sm">下载中心</button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ Hero ============ -->
+<section class="hero" id="hero">
+  <canvas id="dotCloud" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <div class="hero-left reveal">
+      <div class="hero-wordmark">TRAE</div>
+      <h1 class="hero-title">智能无限，协作无间</h1>
+    </div>
+    <div class="hero-right reveal">
+      <div class="hero-products">
+        <div><b>TraeCode：</b><span class="dim">你的专属 AI 开发工程师</span></div>
+        <div><b>TraeWork：</b><span class="dim">全新上线的 AI 办公平台</span></div>
+      </div>
+      <div class="hero-cta">
+        <button class="btn btn-primary"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><rect x="0" y="0" width="6" height="6"/><rect x="8" y="0" width="6" height="6"/><rect x="0" y="8" width="6" height="6"/><rect x="8" y="8" width="6" height="6"/></svg> 下载 TraeCode</button>
+        <button class="btn btn-outline"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><rect x="0" y="0" width="6" height="6"/><rect x="8" y="0" width="6" height="6"/><rect x="0" y="8" width="6" height="6"/><rect x="8" y="8" width="6" height="6"/></svg> 下载 TraeWork</button>
+      </div>
+      <div class="hero-note">
+        <span class="diamond-bullet reveal-diamond"></span>
+        新用户享多重积分好礼，畅用专业 AI 编程生产力
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Features：编号卡片 + 演示面板 ============ -->
+<section id="features">
+  <div class="container">
+    <div class="reveal">
+      <div class="kicker">[ FEATURES ]</div>
+      <h2 class="sec-title">内置 SOLO 模式，流畅推动每一步开发</h2>
+      <p class="sec-desc">等宽绿色编号把功能区组织成"代码清单"，演示面板以虚线、色块节点与终端行构成设计图质感，拒绝真实截图。</p>
+    </div>
+    <div class="cards">
+      <!-- 卡 01：对话图 -->
+      <article class="card reveal">
+        <div class="card-index">[01]</div>
+        <h3 class="card-title">专属 AI Coding Agent，流畅推动每一步开发</h3>
+        <div class="panel">
+          <div class="mock-chat">
+            <div class="mock-row"><div class="mock-bubble">👤 用户　设计一个现代感个人首页</div></div>
+            <div class="mock-agent">
+              <div class="mock-agent-head"><span class="tag">AI</span> Agent</div>
+              <div style="font-size:11px;color:var(--ink-muted)">让我们开始开发一个 React 应用</div>
+              <div class="mock-code"><span class="path">~/Desktop/usecase4</span></div>
+              <div class="mock-code"><span class="cmd">npx create-react-app react-todolist</span></div>
+              <div class="mock-foot">
+                <span class="file">/app/HomeScreen.tsx <span class="add">+195</span><span class="del">-0</span></span>
+                <span class="link">查看变更 →</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="card-desc">内置的 SOLO 模式，配备专属 Coding Agent，可理解目标、拆分任务并调度工具，独立推进各阶段开发工作。</p>
+      </article>
+
+      <!-- 卡 02：SOLO / IDE -->
+      <article class="card reveal">
+        <div class="card-index">[02]</div>
+        <h3 class="card-title">兼容双重开发模式，自由切换代码编程与自然语言对话</h3>
+        <div class="panel">
+          <div class="mock-toggle">
+            <div class="toggle-rail" aria-hidden="true"></div>
+            <div class="toggle-node active">SOLO <span class="toggle-icon">⌘</span></div>
+            <div class="toggle-gap"></div>
+            <div class="toggle-node"><span class="toggle-icon">⌘</span> IDE</div>
+          </div>
+        </div>
+        <p class="card-desc">IDE 模式保留原有流程，控制感更强；SOLO 模式让 AI 主导任务，自动推进开发任务。可根据任务需求自由切换。</p>
+      </article>
+
+      <!-- 卡 03：生态节点 -->
+      <article class="card reveal">
+        <div class="card-index">[03]</div>
+        <h3 class="card-title">开放智能体生态，一切围绕解决问题</h3>
+        <div class="panel">
+          <div class="mock-nodes">
+            <div class="node-tile center">⌘</div>
+            <div class="node-line" aria-hidden="true"></div>
+            <div class="node-label"><span class="swatch node-tile purple">▤</span> Docs</div>
+            <div></div>
+            <div class="node-line" aria-hidden="true"></div>
+            <div class="node-label"><span class="swatch node-tile blue">✦</span> MCP</div>
+            <div></div>
+            <div class="node-line" aria-hidden="true"></div>
+            <div class="node-label"><span class="swatch node-tile green">◎</span> Web</div>
+          </div>
+        </div>
+        <p class="card-desc">可自动拆分复杂任务，带来流畅交付体验。也支持独立创建 Agent 并分享到市场，像插件一样灵活组合智能体。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 按钮体系 ============ -->
+<section id="buttons">
+  <div class="container">
+    <div class="reveal">
+      <div class="kicker">[ BUTTONS ]</div>
+      <h2 class="sec-title">按钮体系</h2>
+      <p class="sec-desc">2px 锐角、四段薄荷绿渐变主按钮、发丝描边次按钮——绿色即"下一步"。</p>
+    </div>
+    <div class="showcase reveal">
+      <div class="showcase-block">
+        <div class="showcase-row">
+          <div class="showcase-label">PRIMARY</div>
+          <button class="btn btn-primary">下载 TraeCode</button>
+          <button class="btn btn-primary btn-sm">下载中心</button>
+        </div>
+      </div>
+      <div class="showcase-block">
+        <div class="showcase-row">
+          <div class="showcase-label">OUTLINE</div>
+          <button class="btn btn-outline">下载 TraeWork</button>
+          <button class="btn btn-outline btn-sm">了解更多</button>
+        </div>
+      </div>
+      <div class="showcase-block">
+        <div class="showcase-row">
+          <div class="showcase-label">LIGHT / GHOST</div>
+          <button class="btn btn-light">登录</button>
+          <button class="btn btn-ghost">文档</button>
+          <button class="theme-toggle" id="themeToggle">◐ 切换浅色模式</button>
+        </div>
+      </div>
+      <div class="showcase-block">
+        <div class="showcase-row">
+          <div class="showcase-label">DISABLED</div>
+          <button class="btn" disabled>暂不可下载</button>
+          <button class="btn btn-sm" disabled>敬请期待</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 输入框 & 徽章 ============ -->
+<section id="forms">
+  <div class="container">
+    <div class="reveal">
+      <div class="kicker">[ FORMS & BADGES ]</div>
+      <h2 class="sec-title">输入框与徽章</h2>
+      <p class="sec-desc">输入框聚焦时亮起绿色外环；徽章使用等宽字体与 2px 锐角，编号即层级。</p>
+    </div>
+    <div class="showcase reveal">
+      <div class="showcase-block">
+        <div class="showcase-row">
+          <div class="showcase-label">INPUT</div>
+          <input class="input" type="text" placeholder="描述你想开发的应用…" />
+          <input class="input" type="text" value="已聚焦状态" onfocus="this.select()" />
+          <input class="input" type="text" placeholder="禁用状态" disabled />
+        </div>
+      </div>
+      <div class="showcase-block">
+        <div class="showcase-row">
+          <div class="showcase-label">BADGES</div>
+          <span class="badge badge-hot">Hot</span>
+          <span class="badge badge-new">NEW</span>
+          <span class="badge badge-outline">v2.1</span>
+          <span class="card-index" style="margin:0">[01]</span>
+          <span class="hero-note" style="margin:0"><span class="diamond-bullet"></span> 积分好礼进行中</span>
+        </div>
+      </div>
+      <div class="showcase-block">
+        <div class="showcase-row">
+          <div class="showcase-label">TYPOGRAPHY</div>
+          <div>
+            <div style="font-size:56px;font-weight:600;line-height:1.2;letter-spacing:-0.5px">区块标题 56px</div>
+            <div style="font-family:var(--font-mono);color:var(--accent);letter-spacing:0.35px;margin:8px 0">[ MONO LABEL ] 13px</div>
+            <div style="color:var(--ink-muted);font-size:16px;max-width:680px">正文 16px：纯黑虚空上的薄荷绿点阵矩阵美学，2/4px 锐角体系，等宽编号索引，巨型字标裁切收尾。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Footer ============ -->
+<footer class="site-footer" id="footer">
+  <div class="container">
+    <div class="footer-top reveal">
+      <div class="footer-col">
+        <span class="logo-mark" aria-hidden="true" style="margin-bottom:16px"></span>
+      </div>
+      <div class="footer-col">
+        <h4>服务条款</h4>
+        <a href="#footer">用户协议</a>
+        <a href="#footer">隐私协议</a>
+      </div>
+      <div class="footer-col">
+        <h4>社区与文档</h4>
+        <a href="#footer">开发者社区</a>
+        <a href="#footer">文档</a>
+        <a href="#footer">更新日志</a>
+      </div>
+      <div class="footer-col">
+        <h4>联系我们</h4>
+        <a href="#footer">建议反馈</a>
+        <a href="#footer">企业咨询热线 400-034-7888</a>
+        <a href="#footer">企业采购咨询</a>
+      </div>
+    </div>
+    <div class="footer-meta reveal">
+      <div class="footer-legal">
+        © 2026 北京引力弹弓科技有限公司版权所有<br />
+        <a href="#footer">京ICP备2024062284号-13</a> ｜ <a href="#footer">营业执照</a><br />
+        北京市海淀区北三环西路甲23号院
+      </div>
+      <div class="qr-row">
+        <div class="qr-item">
+          <div class="qr" aria-hidden="true"><div class="pattern"></div><div class="finder tl"></div><div class="finder br"></div></div>
+          <span class="cap">关注微信公众号</span>
+        </div>
+        <div class="qr-item">
+          <div class="qr" aria-hidden="true"><div class="pattern"></div><div class="finder tl"></div><div class="finder br"></div></div>
+          <span class="cap">下载 TRAE 移动端</span>
+        </div>
+        <a class="back-top" href="#hero">回到顶部 <span class="ring">↑</span></a>
+      </div>
+    </div>
+  </div>
+  <!-- 签名动作：巨型裁切字标带 -->
+  <div class="wordmark-band" aria-hidden="true"><span>TRA◆E</span></div>
+</footer>
+
+<script>
+  /* ---------- 点阵像素云：抖动方块密度衰减 ---------- */
+  (function(){
+    const canvas=document.getElementById('dotCloud');
+    const ctx=canvas.getContext('2d');
+    const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let t=0,raf=null;
+
+    function hash(x,y,s){
+      const n=Math.sin(x*127.1+y*311.7+s*74.7)*43758.5453;
+      return n-Math.floor(n);
+    }
+    function density(x,y,w,h,t){
+      /* 两团高斯核 + 波纹，构成像素云体积感 */
+      const gx=x/w,gy=y/h;
+      const g1=Math.exp(-(((gx-0.32)**2)/0.10+((gy-0.42)**2)/0.16));
+      const g2=Math.exp(-(((gx-0.62)**2)/0.16+((gy-0.72)**2)/0.10));
+      const wave=0.5+0.5*Math.sin(gx*6.0+gy*3.0+t*0.35);
+      return (g1*0.85+g2*0.75)*wave;
+    }
+    function draw(){
+      const w=canvas.clientWidth,h=canvas.clientHeight;
+      const dpr=1;/* 刻意保持像素颗粒感 */
+      canvas.width=w*dpr;canvas.height=h*dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      ctx.clearRect(0,0,w,h);
+      const cell=Math.max(6,Math.round(w/170));
+      const isLight=document.documentElement.getAttribute('data-theme')==='light';
+      for(let y=0;y<h;y+=cell){
+        for(let x=0;x<w;x+=cell){
+          const d=density(x,y,w,h,t);
+          const rnd=hash(x,y,7);
+          if(rnd>d) continue;
+          const green=hash(x,y,13)<0.42;
+          let a;
+          if(green){
+            a=0.22+0.68*d;
+            ctx.fillStyle=isLight?`rgba(20,170,95,${a*0.85})`:`rgba(50,240,140,${a})`;
+          }else{
+            a=0.10+0.34*d;
+            ctx.fillStyle=isLight?`rgba(120,125,135,${a*0.7})`:`rgba(166,170,181,${a})`;
+          }
+          const s=cell-2;
+          ctx.fillRect(x,y,s,s);
+        }
+      }
+    }
+    function loop(){
+      t+=0.012;
+      draw();
+      raf=requestAnimationFrame(loop);
+    }
+    draw();
+    if(!reduced){loop();}
+    window.addEventListener('resize',()=>{
+      cancelAnimationFrame(raf);
+      draw();
+      if(!reduced){loop();}
+    });
+    document.addEventListener('visibilitychange',()=>{
+      if(document.hidden){cancelAnimationFrame(raf);}
+      else if(!reduced){cancelAnimationFrame(raf);loop();}
+    });
+    /* 主题切换后重绘取色 */
+    const obs=new MutationObserver(()=>draw());
+    obs.observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  })();
+
+  /* ---------- 入场动画 ---------- */
+  (function(){
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach((e)=>{
+        if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+      });
+    },{threshold:0.12});
+    document.querySelectorAll('.reveal,.reveal-diamond').forEach((el)=>io.observe(el));
+  })();
+
+  /* ---------- 主题切换 ---------- */
+  document.getElementById('themeToggle').addEventListener('click',function(){
+    const root=document.documentElement;
+    const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next);
+    this.textContent=next==='dark'?'◐ 切换浅色模式':'◑ 切换深色模式';
+  });
+</script>
+</body>
+</html>

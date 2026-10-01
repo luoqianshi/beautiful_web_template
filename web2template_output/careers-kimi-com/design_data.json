@@ -1,0 +1,545 @@
+{
+  "page_info": {
+    "title": "Moonshot · Kimi 招聘官网 | 月之暗面求职",
+    "lang": "zh-CN",
+    "description": "月之暗面 Moonshot AI 官方招聘平台，Kimi 招聘全岗位信息，欢迎优秀人才加入 AGI 第一梯队。",
+    "charset": "UTF-8"
+  },
+  "css_variables": {
+    "--color-km-blue": "#1783ff",
+    "--color-km-blue-hover": "#167ff7",
+    "--color-km-blue-active": "#167cf2",
+    "--color-red": "#ff3849",
+    "--color-red-hover": "#f73647",
+    "--color-red-active": "#f23545",
+    "--color-red-25": "#ff384940",
+    "--color-red-25-hover": "#e3324145",
+    "--color-red-25-active": "#d32e3c49",
+    "--color-positive-green": "#16c456",
+    "--color-positive-green-hover": "#15be53",
+    "--color-positive-green-active": "#15ba52",
+    "--color-positive-green-25": "#16c45640",
+    "--color-positive-green-25-hover": "#14ae4d45",
+    "--color-positive-green-25-active": "#12a24749",
+    "--color-green": "#32ff7d",
+    "--color-green-hover": "#31f779",
+    "--color-green-active": "#30f277",
+    "--color-yellow": "#ffd230",
+    "--color-yellow-hover": "#f7cc2f",
+    "--color-yellow-active": "#f2c82e",
+    "--color-orange": "#ff9500",
+    "--color-orange-hover": "#f79100",
+    "--color-orange-active": "#f28e00",
+    "--color-purple": "#985ffb",
+    "--color-purple-hover": "#935cf3",
+    "--color-purple-active": "#905aee",
+    "--bg-primary": "#fff",
+    "--bg-primary-hover": "#f7f7f7",
+    "--bg-primary-active": "#f2f2f2",
+    "--bg-primary-90": "#ffffffe6",
+    "--bg-primary-90-hover": "#f7f7f7e6",
+    "--bg-primary-90-active": "#f1f1f1e7",
+    "--bg-primary-70": "#ffffffb3",
+    "--bg-primary-70-hover": "#f4f4f4b5",
+    "--bg-primary-70-active": "#edededb6",
+    "--bg-secondary": "#f5f5f5",
+    "--bg-secondary-hover": "#eee",
+    "--bg-secondary-active": "#e9e9e9",
+    "--bg-secondary-90": "#f5f5f5e6",
+    "--bg-secondary-90-hover": "#ededede6",
+    "--bg-secondary-90-active": "#e7e7e7e7",
+    "--bg-tertiary": "#fff",
+    "--bg-tertiary-hover": "#f7f7f7",
+    "--bg-tertiary-active": "#f2f2f2",
+    "--bg-tertiary-90": "#ffffffe6",
+    "--bg-tertiary-90-hover": "#f7f7f7e6",
+    "--bg-tertiary-90-active": "#f1f1f1e7",
+    "--bg-ground-pc": "#f9fbfc",
+    "--bg-ground-pc-hover": "#f2f3f4",
+    "--bg-ground-pc-active": "#edeeef",
+    "--bg-quaternary": "#fff",
+    "--bg-quaternary-hover": "#f7f7f7",
+    "--bg-quaternary-active": "#f2f2f2",
+    "--bg-gp-primary": "#f5f5f5",
+    "--bg-gp-primary-hover": "#eee",
+    "--bg-gp-primary-active": "#e9e9e9",
+    "--bg-gp-primary-90": "#f5f5f5e6",
+    "--bg-gp-primary-90-hover": "#ededede6",
+    "--bg-gp-primary-90-active": "#e7e7e7e7",
+    "--bg-gp-secondary": "#fff",
+    "--bg-gp-secondary-hover": "#f7f7f7",
+    "--bg-gp-secondary-active": "#f2f2f2",
+    "--bg-gp-secondary-90": "#ffffffe6",
+    "--bg-gp-secondary-90-hover": "#f7f7f7e6",
+    "--bg-gp-secondary-90-active": "#f1f1f1e7",
+    "--bg-gp-tertiary": "#f5f5f5",
+    "--bg-gp-tertiary-hover": "#eee",
+    "--bg-gp-tertiary-active": "#e9e9e9",
+    "--label-primary": "#000000e6",
+    "--label-primary-hover": "#000000e6",
+    "--label-primary-active": "#000000e7",
+    "--label-secondary": "#0009",
+    "--label-secondary-hover": "#0000009c",
+    "--label-secondary-active": "#0000009e",
+    "--label-tertiary": "#00000073",
+    "--label-tertiary-hover": "#0007",
+    "--label-tertiary-active": "#0000007a",
+    "--label-quaternary": "#0000004d",
+    "--label-quaternary-hover": "#00000052",
+    "--label-quaternary-active": "#0005",
+    "--fill-1": "#00000008",
+    "--fill-1-hover": "#0000000f",
+    "--fill-1-active": "#00000014",
+    "--fill-2": "#0000000d",
+    "--fill-2-hover": "#00000014",
+    "--fill-2-active": "#00000019",
+    "--fill-3": "#00000026",
+    "--fill-3-hover": "#0000002d",
+    "--fill-3-active": "#00000031",
+    "--fill-4": "#00000040",
+    "--fill-4-hover": "#00000045",
+    "--fill-4-active": "#00000049",
+    "--separator-1": "#00000021",
+    "--separator-1-hover": "#00000028",
+    "--separator-1-active": "#0000002c",
+    "--mask-bg-light": "#0000001a",
+    "--mask-bg-light-hover": "#00000020",
+    "--mask-bg-light-active": "#00000025",
+    "--mask-bg-base": "#0006",
+    "--mask-bg-base-hover": "#0000006b",
+    "--mask-bg-base-active": "#0000006e",
+    "--mask-bg-dark": "#0009",
+    "--mask-bg-dark-hover": "#0000009c",
+    "--mask-bg-dark-active": "#0000009e",
+    "--mask-bg-gray": "#303030e6",
+    "--mask-bg-gray-hover": "#2e2e2ee6",
+    "--mask-bg-gray-active": "#2d2d2de7",
+    "--mask-bg-toast-ios": "#454545e6",
+    "--mask-bg-toast-ios-hover": "#434343e6",
+    "--mask-bg-toast-ios-active": "#414141e7",
+    "--mask-bg-toast-android": "#454545",
+    "--mask-bg-toast-android-hover": "#434343",
+    "--mask-bg-toast-android-active": "#424242",
+    "--mask-bg-toast-pc": "#2b2b2b",
+    "--mask-bg-toast-pc-hover": "#2a2a2a",
+    "--mask-bg-toast-pc-active": "#292929",
+    "--always-white": "#fff",
+    "--always-white-hover": "#f7f7f7",
+    "--always-white-active": "#f2f2f2",
+    "--always-white-secondary": "#ffffffd6",
+    "--always-white-secondary-hover": "#f6f6f6d7",
+    "--always-white-secondary-active": "#f0f0f0d8",
+    "--always-white-tertiary": "#ffffff8f",
+    "--always-white-tertiary-hover": "#f2f2f292",
+    "--always-white-tertiary-active": "#e9e9e994",
+    "--always-white-quaternary": "#ffffff6b",
+    "--always-white-quaternary-hover": "#eeeeee70",
+    "--always-white-quaternary-active": "#e3e3e372",
+    "--always-black": "#000",
+    "--always-black-hover": "#000",
+    "--always-black-active": "#000",
+    "--always-transparency-dark-fill": "#0009",
+    "--always-transparency-dark-fill-hover": "#0000009c",
+    "--always-transparency-dark-fill-active": "#0000009e",
+    "--always-transparency-tag-fill": "#454545b3",
+    "--always-transparency-tag-fill-hover": "#424242b5",
+    "--always-transparency-tag-fill-active": "#404040b6",
+    "--always-transparency-white-15": "#ffffff26",
+    "--always-transparency-white-15-hover": "#d3d3d32d",
+    "--always-transparency-white-15-active": "#bdbdbd31",
+    "--other-light-blue-bg": "#e8f3ff",
+    "--other-light-blue-bg-hover": "#e1ecf7",
+    "--other-light-blue-bg-active": "#dce7f2",
+    "--other-bubble-blue": "#1783ff",
+    "--other-bubble-blue-hover": "#167ff7",
+    "--other-bubble-blue-active": "#167cf2",
+    "--other-bubble-gray-pc": "#f5f5f5",
+    "--other-bubble-gray-pc-hover": "#eee",
+    "--other-bubble-gray-pc-active": "#e9e9e9",
+    "--other-light-red-bg": "#ff4d4d1a",
+    "--other-light-red-bg-hover": "#c33b3b20",
+    "--other-light-red-bg-active": "#a7323225",
+    "--other-light-orange-bg": "#ff95001a",
+    "--other-light-orange-bg-hover": "#c3720020",
+    "--other-light-orange-bg-active": "#a7620025",
+    "--other-light-green-bg": "#16c4561a",
+    "--other-light-green-bg-hover": "#11964220",
+    "--other-light-green-bg-active": "#0e803825",
+    "--other-light-yellow-bg": "#ffc80033",
+    "--other-light-yellow-bg-hover": "#ddad0039",
+    "--other-light-yellow-bg-active": "#ca9e003d",
+    "--other-km-blue-disabled": "#1783ff66",
+    "--other-km-blue-disabled-hover": "#157aed6b",
+    "--other-km-blue-disabled-active": "#1474e16e",
+    "--other-km-blue-10": "#1783ff1a",
+    "--other-km-blue-10-hover": "#1264c320",
+    "--other-km-blue-10-active": "#0f56a725",
+    "--other-text-selected": "#1783ff33",
+    "--other-text-selected-hover": "#1471dd39",
+    "--other-text-selected-active": "#1268ca3d",
+    "--other-white-on-dark-disabled": "#fff",
+    "--other-white-on-dark-disabled-hover": "#f7f7f7",
+    "--other-white-on-dark-disabled-active": "#f2f2f2",
+    "--other-sub-layer-bg": "#00000014",
+    "--other-sub-layer-bg-hover": "#0000001b",
+    "--other-sub-layer-bg-active": "#00000020",
+    "--syntax-keyword": "#a626a4",
+    "--syntax-keyword-hover": "#a1259f",
+    "--syntax-keyword-active": "#9e249c",
+    "--syntax-string": "#50a14f",
+    "--syntax-string-hover": "#4e9c4d",
+    "--syntax-string-active": "#4c994b",
+    "--syntax-literal": "#986801",
+    "--syntax-literal-hover": "#936501",
+    "--syntax-literal-active": "#906301",
+    "--syntax-comment": "#a1a1a1",
+    "--syntax-comment-hover": "#9c9c9c",
+    "--syntax-comment-active": "#999",
+    "--syntax-metadata": "#c18401",
+    "--syntax-metadata-hover": "#bb8001",
+    "--syntax-metadata-active": "#b77d01",
+    "--syntax-multiline-comment": "#a1a1a1",
+    "--syntax-multiline-comment-hover": "#9c9c9c",
+    "--syntax-multiline-comment-active": "#999",
+    "--syntax-punctuation": "#e45649",
+    "--syntax-punctuation-hover": "#dd5347",
+    "--syntax-punctuation-active": "#d95245",
+    "--syntax-mark": "#526fff",
+    "--syntax-mark-hover": "#506cf7",
+    "--syntax-mark-active": "#4e69f2",
+    "--font-ui-t1-size": "18px",
+    "--font-ui-t1-line-height": "26px",
+    "--font-ui-t2-size": "16px",
+    "--font-ui-t2-line-height": "24px",
+    "--font-ui-b1-size": "15px",
+    "--font-ui-b1-line-height": "22px",
+    "--font-ui-b2-size": "14px",
+    "--font-ui-b2-line-height": "20px",
+    "--font-ui-c1-size": "12px",
+    "--font-ui-c1-line-height": "18px",
+    "--font-ui-c2-size": "10px",
+    "--font-ui-c2-line-height": "14px",
+    "--font-md-h1-size": "20px",
+    "--font-md-h1-line-height": "32px",
+    "--font-md-h2-size": "18px",
+    "--font-md-h2-line-height": "28px",
+    "--font-md-b1-size": "16px",
+    "--font-md-b1-line-height": "26px",
+    "--font-md-b2-size": "15px",
+    "--font-md-b2-line-height": "24px",
+    "--font-md-b3-size": "14px",
+    "--font-md-b3-line-height": "22px",
+    "--font-md-codeblock-size": "14px",
+    "--font-md-codeblock-line-height": "22px",
+    "--font-md-inline-code-size": "16px",
+    "--font-md-inline-code-line-height": "26px"
+  },
+  "color_palette": {
+    "backgrounds": [
+      "rgb(0, 0, 0)",
+      "rgb(122, 122, 122)",
+      "rgb(255, 255, 255)"
+    ],
+    "texts": [
+      "rgb(0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgb(122, 122, 122)"
+    ],
+    "borders": [
+      "rgb(0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgb(122, 122, 122)",
+      "oklab(0.999994 0.0000455678 0.0000200868 / 0.15)"
+    ]
+  },
+  "typography": {
+    "font_families": [
+      "\"Fusion Pixel 12px Mono zh_hans\", monospace"
+    ],
+    "loaded_fonts": [
+      {
+        "family": "Fusion Pixel 12px Mono zh_hans",
+        "weight": "400",
+        "style": "normal"
+      }
+    ],
+    "heading_info": {
+      "h1": [
+        {
+          "size": "16px",
+          "weight": "400",
+          "lineHeight": "24px",
+          "letterSpacing": "normal",
+          "textTransform": "none"
+        }
+      ],
+      "h2": [],
+      "h3": [],
+      "h4": [],
+      "h5": [],
+      "h6": []
+    },
+    "body_sizes": [
+      "16px",
+      "63.9994px",
+      "40px",
+      "29.9995px",
+      "20px",
+      "12px"
+    ],
+    "font_weights": [
+      "400",
+      "500"
+    ],
+    "line_heights": [
+      "24px",
+      "63.9994px",
+      "40px",
+      "35.9994px",
+      "16px"
+    ],
+    "letter_spacings": [
+      "normal"
+    ],
+    "text_transforms": []
+  },
+  "spacing": {
+    "common_paddings": [
+      "8px 11.9995px",
+      "34px 0px 0px",
+      "16px 40px",
+      "2px 4px",
+      "20px"
+    ],
+    "common_margins": [
+      "9.99936px 0px 0px",
+      "8px 0px 0px",
+      "0px 0px 0px 9.99936px",
+      "6px 0px 0px",
+      "0px 672px",
+      "0px -4px 0px 0px"
+    ],
+    "gaps": [
+      "18px",
+      "16px",
+      "80px"
+    ]
+  },
+  "borders": {
+    "radii": [],
+    "border_specs": [
+      "1px solid"
+    ],
+    "styles": [
+      "solid"
+    ]
+  },
+  "shadows": [],
+  "layout": {
+    "sections": [
+      {
+        "tag": "header",
+        "classes": "relative pointer-events-auto",
+        "id": "",
+        "width": 1440,
+        "height": 60,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "header"
+      },
+      {
+        "tag": "nav",
+        "classes": "hidden gap-20 items-center font-medium text-[16px] leading-6 text-(--Labels-Primary) md:flex",
+        "id": "",
+        "width": 520,
+        "height": 28,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "nav"
+      },
+      {
+        "tag": "nav",
+        "classes": "flex overflow-y-auto flex-col items-stretch w-full h-full font-medium text-[16px] leading-6 text-white",
+        "id": "",
+        "width": 0,
+        "height": 0,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "flex",
+        "role": "nav"
+      },
+      {
+        "tag": "main",
+        "classes": "overflow-hidden relative bg-black h-svh",
+        "id": "",
+        "width": 1440,
+        "height": 900,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "Kimi careers scenes"
+      },
+      {
+        "tag": "section",
+        "classes": "relative min-h-svh overflow-hidden text-white",
+        "id": "",
+        "width": 1440,
+        "height": 900,
+        "maxWidth": "none",
+        "padding": "0px",
+        "display": "block",
+        "role": "Moonshot AI careers"
+      }
+    ],
+    "containers": [
+      {
+        "classes": "absolute z-[1] m-0 w-[400px] max-w-[calc(100vw_-_var(--hero-edge-x)_-_var(--hero-edge-x))] font-normal [left:var(--hero-edge-x)] [top:var(--hero-main-",
+        "maxWidth": "1280px",
+        "padding": "0px"
+      },
+      {
+        "classes": "mt-[var(--hero-footer-stack-gap)] inline-flex w-[405px] max-w-[calc(100vw_-_var(--hero-edge-x)_-_var(--hero-edge-x))] bg-black [font-size:var(--hero-c",
+        "maxWidth": "1280px",
+        "padding": "8px 11.9995px"
+      },
+      {
+        "classes": "relative mx-auto block h-full min-w-24 w-max max-w-[calc(100vw-2rem)]",
+        "maxWidth": "1408px",
+        "padding": "0px"
+      }
+    ],
+    "total_height": 900,
+    "section_count": 5
+  },
+  "animations": {
+    "transitions": [
+      "all",
+      "color 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), outline-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), text-decoration-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), fill 0.2s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.2s cubic-bezier(0.4, 0, 0.2, 1), --tw-gradient-from 0.2s cubic-bezier(0.4, 0, 0.2, 1), --tw-gradient-via 0.2s cubic-bezier(0.4, 0, 0.2, 1), --tw-gradient-to 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+      "transform 0.25s cubic-bezier(0, 0, 0.2, 1), opacity 0.25s cubic-bezier(0, 0, 0.2, 1)",
+      "opacity 0.3s cubic-bezier(0, 0, 0.2, 1) 0.18s, transform 0.3s cubic-bezier(0, 0, 0.2, 1) 0.18s",
+      "opacity 0.3s cubic-bezier(0, 0, 0.2, 1) 0.12s, transform 0.3s cubic-bezier(0, 0, 0.2, 1) 0.12s",
+      "opacity 0.3s cubic-bezier(0, 0, 0.2, 1) 0.06s, transform 0.3s cubic-bezier(0, 0, 0.2, 1) 0.06s",
+      "opacity 0.3s cubic-bezier(0, 0, 0.2, 1), transform 0.3s cubic-bezier(0, 0, 0.2, 1)"
+    ],
+    "animation_names": [],
+    "keyframes": [
+      {
+        "name": "pulse",
+        "frames": [
+          {
+            "key": "50%",
+            "css": "opacity: 0.5;"
+          }
+        ]
+      },
+      {
+        "name": "RecruitmentMap-module__Dzxh2q__hoverRayFade",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0;"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "RecruitmentMap-module__Dzxh2q__hoverRayReveal",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "stroke-dashoffset: 1px;"
+          },
+          {
+            "key": "100%",
+            "css": "stroke-dashoffset: 0;"
+          }
+        ]
+      },
+      {
+        "name": "RecruitmentMap-module__Dzxh2q__hoverRayGlow",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0;"
+          },
+          {
+            "key": "45%",
+            "css": "opacity: 0.95;"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 0.42;"
+          }
+        ]
+      },
+      {
+        "name": "RecruitmentMap-module__Dzxh2q__hoverRayDash",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0;"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1;"
+          }
+        ]
+      },
+      {
+        "name": "RecruitmentMap-module__Dzxh2q__hoverRayEndpoint",
+        "frames": [
+          {
+            "key": "0%",
+            "css": "opacity: 0; transform: scale(0.35);"
+          },
+          {
+            "key": "100%",
+            "css": "opacity: 1; transform: scale(1);"
+          }
+        ]
+      }
+    ]
+  },
+  "gradients": [],
+  "effects": {
+    "filters": [],
+    "backdrop_filters": [],
+    "transforms": [
+      "matrix(1, 0, 0, 1, 0, 0)"
+    ]
+  },
+  "resources": {
+    "fonts": [],
+    "stylesheets": [
+      "https://careers.kimi.com/careers-assets/_next/static/chunks/5180814f5f83ca1d.css",
+      "https://careers.kimi.com/careers-assets/_next/static/chunks/d1234ed065ef52a4.css"
+    ],
+    "scripts": [
+      "https://careers.kimi.com/careers-assets/_next/static/chunks/d6c900fc46caaf47.js",
+      "https://careers.kimi.com/careers-assets/_next/static/chunks/4a361251de05c07d.js",
+      "https://careers.kimi.com/careers-assets/_next/static/chunks/dc50c39337971afd.js",
+      "https://careers.kimi.com/careers-assets/_next/static/chunks/turbopack-4abcb428792706be.js",
+      "https://careers.kimi.com/careers-assets/_next/static/chunks/b878a91a1c07ab65.js",
+      "https://careers.kimi.com/careers-assets/_next/static/chunks/1f78efe31e47f463.js",
+      "https://careers.kimi.com/careers-assets/_next/static/chunks/edbdc66d39783ac0.js",
+      "https://careers.kimi.com/careers-assets/_next/static/chunks/2fea0907174d1c9c.js",
+      "https://careers.kimi.com/careers-assets/_next/static/chunks/be024c1fef2f1b1a.js",
+      "https://careers.kimi.com/careers-assets/_next/static/chunks/371bbac3e515d01e.js",
+      "https://careers.kimi.com/careers-assets/_next/static/chunks/185f2439cdeeae32.js",
+      "https://careers.kimi.com/careers-assets/_next/static/chunks/9eab2a0111585b22.js",
+      "https://careers.kimi.com/careers-assets/_next/static/chunks/007bfa8f63228a92.js",
+      "https://careers.kimi.com/careers-assets/_next/static/chunks/a6dad97d9634a72d.js",
+      "https://careers.kimi.com/careers-assets/_next/static/chunks/f1ba97b2a7311f60.js"
+    ]
+  },
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "captured_at": "2026-10-01 01:28:59"
+}

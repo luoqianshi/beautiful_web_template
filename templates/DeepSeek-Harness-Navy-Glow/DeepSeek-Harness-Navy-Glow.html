@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DeepSeek-Harness-Navy-Glow — 深空蓝辉光组件库</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Fragment+Mono&family=Montserrat:wght@400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     DeepSeek-Harness-Navy-Glow — 设计 Token
+     深空蓝渐变 × 近黑舞台 × 发丝边 × 液态玻璃胶囊 × 星尘粒子
+     ============================================================ */
+  :root{
+    /* 背景体系 */
+    --bg-page:#0a0a0a;
+    --bg-card:#151517;
+    --bg-elev:#2c2c2e;
+    --bg-elev-2:#353638;
+    --bg-glow-blue:rgba(122,170,255,.4);
+    /* 品牌与强调 */
+    --brand:#4d6bfe;
+    --brand-deep:#3a65c2;
+    --accent:#7aaaff;
+    /* 文字 */
+    --text:#ffffff;
+    --text-body:#cfd3d6;
+    --text-muted:rgba(255,255,255,.45);
+    --text-dim:rgba(255,255,255,.5);
+    /* 边框 */
+    --hairline:rgba(255,255,255,.08);
+    --hairline-strong:rgba(255,255,255,.12);
+    --border-soft:rgba(255,255,255,.2);
+    /* 窗口红黄绿灯 */
+    --traffic-r:#ff6058;
+    --traffic-y:#ffbd2e;
+    --traffic-g:#28c840;
+    /* 圆角 */
+    --r-pill:100px;
+    --r-card:24px;
+    --r-panel:16px;
+    --r-media:12px;
+    --r-input:10px;
+    --r-sm:8px;
+    /* 阴影 */
+    --shadow-hair:0 0 0 .5px var(--hairline);
+    --shadow-chip:0 4px 16px rgba(0,0,0,.35);
+    --shadow-float:0 24px 72px rgba(0,0,0,.2);
+    --glass:blur(32px) saturate(1.25);
+    /* 字体 */
+    --font-display:"Montserrat","DM Sans",system-ui,-apple-system,"Segoe UI","Noto Sans SC","PingFang SC",sans-serif;
+    --font-body:"DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans SC","PingFang SC",sans-serif;
+    --font-mono:"Fragment Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    /* 字号阶梯 */
+    --fs-hero:clamp(30px,2.1vw + 22px,40px);
+    --fs-h2:clamp(26px,1.6vw + 20px,36px);
+    --fs-h3:20px;
+    --fs-lead:18px;
+    --fs-body:16px;
+    --fs-small:13px;
+    --fs-badge:12px;
+    /* 间距 */
+    --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
+    --space-5:24px; --space-6:32px; --space-7:40px; --space-8:56px;
+    --space-9:80px; --space-10:120px; --space-11:160px;
+    --content-max:1140px;
+    --section-pad:clamp(64px,9vw,160px);
+    /* 动效 */
+    --ease-out:cubic-bezier(.25,1,.5,1);
+    --dur-fast:.2s;
+    --dur-mid:.3s;
+    --dur-slow:.5s;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg-page);
+    color:var(--text-body);
+    font-family:var(--font-body);
+    font-size:var(--fs-body);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  ::selection{background:rgba(122,170,255,.35);color:#fff}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+  .container{max-width:var(--content-max);margin:0 auto;padding:0 24px}
+  .section{padding:var(--section-pad) 0;position:relative}
+
+  /* ---------- 入场动画 ---------- */
+  .reveal{opacity:0;transform:translateY(20px);filter:blur(6px);
+    transition:opacity var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out),filter var(--dur-slow) var(--ease-out)}
+  .reveal.in{opacity:1;transform:none;filter:blur(0)}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;filter:none;transition:none}
+    *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
+  }
+
+  /* ---------- 徽章 / 标签（Fragment Mono 大字距） ---------- */
+  .badge{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:var(--font-mono);font-size:var(--fs-badge);line-height:1.5;
+    letter-spacing:2.64px;color:var(--text-muted);
+  }
+  .badge-frame{
+    padding:3px 10px;border:1px solid var(--border-soft);border-radius:var(--r-sm);
+    letter-spacing:2px;color:var(--text-body);
+  }
+  .badge-pill{
+    padding:3px 12px;border-radius:var(--r-pill);
+    background:rgba(255,255,255,.08);letter-spacing:2px;color:var(--text-body);
+    box-shadow:var(--shadow-hair);
+  }
+
+  /* ---------- 按钮体系 ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:var(--font-body);font-size:var(--fs-body);font-weight:500;
+    border-radius:var(--r-pill);border:1px solid transparent;cursor:pointer;
+    padding:11px 24px;min-height:40px;white-space:nowrap;
+    transition:background-color var(--dur-fast),border-color var(--dur-fast),
+      box-shadow var(--dur-fast),color var(--dur-fast),transform var(--dur-fast);
+    background:transparent;color:var(--text);
+  }
+  .btn svg{flex:none}
+  .btn-primary{background:#fff;color:#0f0f0f}
+  .btn-primary:hover{background:#e9edf5;transform:translateY(-1px)}
+  .btn-outline{border-color:var(--border-soft);color:var(--text)}
+  .btn-outline:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.36)}
+  .btn-ghost{color:var(--text-dim)}
+  .btn-ghost:hover{background:rgba(255,255,255,.06);color:var(--text)}
+  .btn:disabled,.btn-disabled{
+    opacity:.38;cursor:not-allowed;transform:none!important;
+    background:rgba(255,255,255,.06);color:var(--text-muted);border-color:var(--hairline);
+  }
+  /* 分裂式下载按钮 */
+  .btn-split{display:inline-flex;align-items:stretch;padding:0;overflow:hidden;background:#fff;color:#0f0f0f}
+  .btn-split .split-main{
+    display:inline-flex;align-items:center;gap:8px;padding:11px 22px;font-weight:500;
+    transition:background-color var(--dur-fast);
+  }
+  .btn-split .split-toggle{
+    display:inline-flex;align-items:center;padding:0 14px;cursor:pointer;
+    border-left:1px solid rgba(0,0,0,.12);transition:background-color var(--dur-fast);
+  }
+  .btn-split:hover .split-main,.btn-split:hover .split-toggle{background:#e9edf5}
+  .btn-sm{padding:7px 16px;font-size:var(--fs-small);min-height:32px}
+
+  /* ---------- 导航：透明顶栏 → 液态玻璃悬浮胶囊 ---------- */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px clamp(20px,4vw,48px);
+    transition:max-width var(--dur-mid) var(--ease-out),margin var(--dur-mid) var(--ease-out),
+      background-color var(--dur-mid),border-color var(--dur-mid),
+      backdrop-filter var(--dur-mid),border-radius var(--dur-mid),padding var(--dur-mid),
+      top var(--dur-mid) var(--ease-out),box-shadow var(--dur-mid);
+    border:1px solid transparent;border-radius:0;
+  }
+  .topbar.scrolled{
+    top:14px;max-width:760px;margin:0 auto;padding:8px 8px 8px 18px;
+    background:rgba(21,21,23,.55);
+    -webkit-backdrop-filter:var(--glass);backdrop-filter:var(--glass);
+    border-color:var(--hairline-strong);border-radius:var(--r-pill);
+    box-shadow:0 12px 40px rgba(0,0,0,.35);
+  }
+  .topbar .brand{display:flex;align-items:center;gap:8px}
+  .brand-mark{width:26px;height:26px;flex:none}
+  .brand-word{font-family:var(--font-display);font-size:18px;font-weight:500;color:#fff;letter-spacing:-.2px}
+  .topbar-actions{display:flex;align-items:center;gap:10px}
+  /* 滚动后才出现的动作按钮 */
+  .topbar .scroll-only{opacity:0;pointer-events:none;transform:translateY(-4px);
+    transition:opacity var(--dur-mid),transform var(--dur-mid)}
+  .topbar.scrolled .scroll-only{opacity:1;pointer-events:auto;transform:none}
+  .topbar.scrolled .top-only{opacity:0;pointer-events:none;position:absolute;right:24px}
+  .lang-switch{display:inline-flex;padding:3px;border-radius:var(--r-pill);background:rgba(255,255,255,.08);box-shadow:var(--shadow-hair)}
+  .lang-switch span{padding:4px 12px;border-radius:var(--r-pill);font-size:var(--fs-small);color:var(--text-muted);cursor:pointer;transition:background-color var(--dur-fast),color var(--dur-fast)}
+  .lang-switch span.active{background:rgba(255,255,255,.18);color:#fff}
+
+  /* ---------- Hero：深空蓝渐变 + 极光辉光 ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    padding:clamp(110px,13vw,160px) 0 0;
+    background:
+      radial-gradient(900px 500px at 15% 18%, rgba(122,170,255,.28), transparent 60%),
+      radial-gradient(800px 480px at 86% 28%, rgba(122,155,240,.18), transparent 65%),
+      radial-gradient(1200px 620px at 50% 110%, rgba(10,10,10,.85), transparent 70%),
+      linear-gradient(180deg,#2e5080 0%,#1c3254 34%,#142642 58%,#0c1626 84%,#0a0a0a 100%);
+  }
+  .hero-tint{
+    position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(rgba(122,155,240,.08),rgba(122,155,240,0) 35%,rgba(143,137,184,0) 68%,rgba(143,137,184,.07));
+  }
+  .hero-inner{position:relative;z-index:2;text-align:center;max-width:820px;margin:0 auto;padding:0 24px}
+  .hero h1{
+    font-family:var(--font-display);font-weight:400;color:#fff;
+    font-size:var(--fs-hero);line-height:1.5;letter-spacing:-.8px;
+  }
+  .hero h1 .line-2{display:block}
+  .hero-desc{
+    margin:var(--space-5) auto 0;max-width:640px;
+    color:var(--text-dim);font-size:var(--fs-lead);line-height:1.55;
+  }
+  .hero-cta{margin-top:var(--space-7);display:flex;justify-content:center}
+
+  /* ---------- 产品实景窗口 mockup ---------- */
+  .window-wrap{
+    position:relative;z-index:2;max-width:1024px;margin:clamp(48px,6vw,80px) auto 0;padding:0 24px;
+  }
+  .app-window{
+    border-radius:var(--r-panel);overflow:hidden;
+    background:#1a1b1d;
+    box-shadow:var(--shadow-float),0 0 0 1px rgba(255,255,255,.12);
+    display:grid;grid-template-columns:232px 1fr;text-align:left;
+    font-size:var(--fs-small);
+  }
+  .win-side{background:#202124;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;min-height:520px}
+  .win-side-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px}
+  .win-main{display:flex;flex-direction:column;background:#17181a;min-width:0}
+  .win-main-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.06);color:var(--text-body);
+  }
+  .traffic{display:flex;gap:8px}
+  .traffic i{width:12px;height:12px;border-radius:50%;display:block}
+  .traffic .r{background:var(--traffic-r)} .traffic .y{background:var(--traffic-y)} .traffic .g{background:var(--traffic-g)}
+  .icon-btn{width:26px;height:26px;border-radius:var(--r-sm);display:grid;place-items:center;color:var(--text-muted);cursor:pointer;transition:background-color var(--dur-fast)}
+  .icon-btn:hover{background:rgba(255,255,255,.08)}
+  .win-side-brand{display:flex;align-items:center;gap:6px;padding:2px 14px 12px}
+  .btn-new-chat{
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    margin:0 12px 14px;padding:8px 0;border-radius:var(--r-pill);
+    background:#2c2c2e;box-shadow:inset 0 0 0 .5px rgba(255,255,255,.1);
+    color:var(--text-body);cursor:pointer;transition:background-color var(--dur-fast);
+  }
+  .btn-new-chat:hover{background:#3a3a3c}
+  .side-item{display:flex;align-items:center;gap:8px;padding:7px 14px;color:var(--text-dim);cursor:pointer;border-radius:var(--r-sm);margin:0 6px;transition:background-color var(--dur-fast),color var(--dur-fast)}
+  .side-item:hover{background:rgba(255,255,255,.06);color:var(--text-body)}
+  .side-label{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 6px;color:var(--text-muted);font-size:12px}
+  .side-group{display:flex;align-items:center;gap:8px;padding:6px 14px;color:var(--text-dim)}
+  .side-chat{
+    display:flex;align-items:center;gap:8px;margin:2px 6px;padding:7px 12px;
+    border-radius:var(--r-sm);color:var(--text-dim);cursor:pointer;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .side-chat.active{background:rgba(255,255,255,.08);color:#fff;box-shadow:inset 0 0 0 .5px rgba(255,255,255,.1)}
+  .side-chat:hover{background:rgba(255,255,255,.06)}
+  .side-foot{margin-top:auto;display:flex;align-items:center;gap:8px;padding:12px 14px;border-top:1px solid rgba(255,255,255,.06);color:var(--text-dim)}
+  .win-chat{padding:22px 26px;display:flex;flex-direction:column;gap:14px;min-width:0}
+  .bubble-user{
+    align-self:flex-end;max-width:62%;padding:8px 14px;border-radius:var(--r-pill);
+    background:#2c2c2e;box-shadow:inset 0 0 0 .5px rgba(255,255,255,.1);color:var(--text-body);
+  }
+  .think-row{display:flex;align-items:center;gap:6px;color:var(--text-muted);font-size:12px}
+  .chat-text{color:var(--text-body);line-height:1.7}
+  .chat-text a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+  .chat-list{margin:8px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+  .chat-list li{line-height:1.7}
+  .chat-list b{font-weight:500;color:#fff;border-bottom:1px solid rgba(255,255,255,.35)}
+  .chat-input-bar{
+    margin-top:auto;display:flex;align-items:center;gap:10px;
+    background:#232427;border-radius:var(--r-panel);padding:12px 14px;
+    box-shadow:inset 0 0 0 .5px rgba(255,255,255,.1);color:var(--text-muted);
+  }
+  .chat-chip{
+    display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:var(--r-pill);
+    background:rgba(255,255,255,.08);color:var(--text-dim);font-size:12px;white-space:nowrap;
+  }
+  .send-dot{margin-left:auto;width:32px;height:32px;border-radius:50%;flex:none;display:grid;place-items:center;background:var(--brand);color:#fff}
+
+  /* ---------- 区块标题 ---------- */
+  .sec-head{text-align:center;max-width:720px;margin:0 auto clamp(40px,5vw,64px)}
+  .sec-head.left{text-align:left;margin-left:0}
+  .sec-title{
+    font-family:var(--font-display);font-weight:400;color:#fff;
+    font-size:var(--fs-h2);line-height:1.5;letter-spacing:-.72px;
+  }
+  .sec-sub{margin-top:var(--space-4);color:var(--text-muted);font-size:var(--fs-lead)}
+
+  /* ---------- 签名元素演示 ---------- */
+  .sig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-5)}
+  .sig-card{
+    background:var(--bg-card);border-radius:var(--r-card);padding:var(--space-6);
+    box-shadow:var(--shadow-hair);position:relative;overflow:hidden;min-height:280px;
+    display:flex;flex-direction:column;gap:var(--space-4);
+  }
+  .sig-card h3{font-family:var(--font-body);font-size:var(--fs-h3);font-weight:500;color:#fff;letter-spacing:-.2px;line-height:1.5}
+  .sig-card p{color:var(--text-muted);font-size:var(--fs-small)}
+  .sig-demo{margin-top:auto;border-radius:var(--r-media);position:relative;overflow:hidden;min-height:110px}
+  .sig-demo.aurora{
+    background:
+      radial-gradient(120px 80px at 22% 40%, rgba(122,170,255,.55), transparent 70%),
+      radial-gradient(150px 90px at 78% 65%, rgba(122,155,240,.4), transparent 70%),
+      linear-gradient(180deg,#2e5080,#12203a);
+  }
+  .sig-demo.grid-dots{
+    background:
+      radial-gradient(140px 90px at 50% 110%, rgba(46,96,159,.55), transparent 75%),
+      #0c1220;
+  }
+  .sig-demo.grid-dots::after{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+    background-size:28px 28px;
+    mask-image:linear-gradient(180deg,transparent,#000);
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000);
+  }
+  .mini-window{
+    background:#1a1b1d;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.1);
+    overflow:hidden;
+  }
+  .mini-window .titlebar{display:flex;align-items:center;gap:6px;padding:8px 10px;background:#202124}
+  .mini-window .titlebar i{width:8px;height:8px;border-radius:50%;display:block}
+  .mini-window .body{padding:12px;display:flex;flex-direction:column;gap:8px}
+  .mini-line{height:8px;border-radius:4px;background:rgba(255,255,255,.1)}
+  .mini-line.w60{width:60%} .mini-line.w80{width:80%} .mini-line.w40{width:40%}
+  .mini-bubble{align-self:flex-end;width:52%;height:22px;border-radius:var(--r-pill);background:#2c2c2e;box-shadow:inset 0 0 0 .5px rgba(255,255,255,.12)}
+
+  /* ---------- 能力 Bento 网格 ---------- */
+  .bento-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5)}
+  .bento-card{
+    background:var(--bg-card);border-radius:var(--r-card);box-shadow:var(--shadow-hair);
+    padding:var(--space-7) var(--space-7) 0;overflow:hidden;
+    display:flex;flex-direction:column;min-height:467px;
+  }
+  .bento-card h3{font-family:var(--font-body);font-size:var(--fs-h3);font-weight:500;color:#fff;letter-spacing:-.2px}
+  .bento-card > p{margin-top:var(--space-3);color:var(--text-muted);max-width:400px}
+  .bento-stage{
+    margin-top:auto;position:relative;min-height:230px;
+    display:flex;align-items:flex-end;justify-content:center;
+  }
+  .stage-glow{
+    position:absolute;inset:auto 6% -18% 6%;height:70%;border-radius:50%;
+    background:radial-gradient(closest-side,var(--bg-glow-blue),transparent 72%);
+    filter:blur(24px);opacity:.55;pointer-events:none;
+  }
+  /* 插件列表 */
+  .plugin-panel{
+    position:relative;width:88%;background:#1c1d20;border-radius:var(--r-panel) var(--r-panel) 0 0;
+    box-shadow:0 -4px 32px rgba(0,0,0,.35),inset 0 0 0 .5px rgba(255,255,255,.1);
+    padding:16px 18px;font-size:12px;
+  }
+  .plugin-head{display:flex;align-items:center;justify-content:space-between;color:var(--text-body);margin-bottom:12px}
+  .plugin-row{display:flex;align-items:center;gap:10px;padding:7px 0;color:var(--text-dim);border-top:1px solid rgba(255,255,255,.05)}
+  .plugin-row:first-of-type{border-top:0}
+  .plugin-ico{width:20px;height:20px;border-radius:6px;flex:none;background:linear-gradient(135deg,var(--brand),#7aaaff);opacity:.9}
+  .plugin-name{color:var(--text-body);font-weight:500}
+  .plugin-desc{color:var(--text-muted);font-size:11px}
+  .switch{margin-left:auto;width:28px;height:16px;border-radius:var(--r-pill);background:rgba(255,255,255,.14);position:relative;flex:none}
+  .switch::after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:#fff;opacity:.7;transition:left var(--dur-fast)}
+  .switch.on{background:var(--brand)}
+  .switch.on::after{left:14px;opacity:1}
+  /* 文件卡 + Diff 面板 */
+  .files-stack{position:relative;z-index:2;width:46%;display:flex;flex-direction:column;gap:10px;padding-bottom:28px}
+  .file-card{
+    display:flex;align-items:center;gap:10px;background:#1c1d20;border-radius:var(--r-panel);
+    padding:10px 14px;box-shadow:0 4px 16px rgba(0,0,0,.35),inset 0 0 0 .5px rgba(255,255,255,.1);
+  }
+  .file-ico{width:30px;height:30px;border-radius:8px;flex:none;display:grid;place-items:center;font-family:var(--font-mono);font-size:10px;color:#fff}
+  .file-ico.doc{background:#2b579a} .file-ico.xls{background:#217346} .file-ico.htm{background:#4d6bfe}
+  .file-name{color:#fff;font-weight:500;font-size:13px}
+  .file-type{color:var(--text-muted);font-size:11px}
+  .diff-panel{
+    position:absolute;right:0;bottom:0;width:58%;background:#141619;border-radius:var(--r-panel) 0 0 0;
+    box-shadow:-8px -8px 32px rgba(0,0,0,.4),inset 0 0 0 .5px rgba(255,255,255,.1);
+    font-family:var(--font-mono);font-size:11px;overflow:hidden;
+  }
+  .diff-head{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;color:var(--text-dim);border-bottom:1px solid rgba(255,255,255,.07)}
+  .diff-file{display:flex;align-items:center;justify-content:space-between;padding:6px 12px;color:var(--text-body);background:rgba(255,255,255,.04)}
+  .diff-file .ts{background:#2b579a;color:#fff;border-radius:4px;padding:1px 5px;font-size:9px}
+  .diff-stat .add{color:#3fb950} .diff-stat .del{color:#f85149}
+  .diff-lines{padding:4px 0 12px}
+  .diff-lines .meta{padding:2px 12px;color:var(--text-muted)}
+  .dl{display:flex;gap:8px;padding:2px 12px;line-height:1.7}
+  .dl .ln{color:var(--text-muted);width:18px;flex:none;text-align:right}
+  .dl.del{background:rgba(248,81,73,.14)}
+  .dl.add{background:rgba(63,185,80,.14)}
+  .dl.del .code{color:#ffa198} .dl.add .code{color:#7ee787} .dl .code{color:var(--text-dim)}
+  /* 定时任务 */
+  .task-scene{position:relative;width:92%;display:flex;flex-direction:column;gap:12px;padding-bottom:24px;font-size:13px}
+  .task-bubble{
+    align-self:center;background:#2c2c2e;box-shadow:inset 0 0 0 .5px rgba(255,255,255,.12);
+    color:var(--text-body);border-radius:var(--r-pill);padding:8px 16px;
+  }
+  .task-done-row{display:flex;align-items:center;gap:6px;color:var(--text-muted);font-size:12px;padding-left:8px}
+  .task-note{color:var(--text-body);padding-left:8px}
+  .task-note b{color:#fff;font-weight:500}
+  .task-card{
+    display:flex;align-items:center;gap:12px;background:#1c1d20;border-radius:var(--r-panel);
+    padding:12px 14px;box-shadow:0 4px 16px rgba(0,0,0,.35),inset 0 0 0 .5px rgba(255,255,255,.1);
+    margin-left:8px;
+  }
+  .clock{width:32px;height:32px;border-radius:50%;flex:none;display:grid;place-items:center;background:rgba(255,255,255,.08);color:var(--text-dim)}
+  .task-title{color:#fff;font-weight:500}
+  .task-sub{color:var(--text-muted);font-size:11px}
+  /* DevTools 轨迹 */
+  .devtools-panel{
+    position:relative;width:92%;background:#141619;border-radius:var(--r-panel) var(--r-panel) 0 0;
+    box-shadow:0 -4px 32px rgba(0,0,0,.4),inset 0 0 0 .5px rgba(255,255,255,.1);
+    padding:12px;font-family:var(--font-mono);font-size:10px;overflow:hidden;
+  }
+  .dt-tabs{display:flex;gap:14px;color:var(--text-muted);border-bottom:1px solid rgba(255,255,255,.07);padding-bottom:8px;margin-bottom:10px}
+  .dt-tabs .on{color:#fff}
+  .dt-row{display:flex;align-items:center;gap:8px;padding:3px 0;color:var(--text-dim)}
+  .dt-bar{height:6px;border-radius:3px;flex:none}
+  .dt-rows{display:flex;flex-direction:column;gap:2px}
+  .dt-split{display:grid;grid-template-columns:1.3fr 1fr;gap:12px;margin-top:10px}
+  .dt-kv{display:flex;gap:8px;padding:2px 0;color:var(--text-muted)}
+  .dt-kv b{color:var(--text-body);font-weight:400}
+
+  /* ---------- 开发者体验 ---------- */
+  .dev-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5)}
+  .dev-card{
+    background:var(--bg-card);border-radius:var(--r-card);box-shadow:var(--shadow-hair);
+    padding:var(--space-7);display:flex;flex-direction:column;gap:var(--space-4);
+  }
+  .dev-card h3{font-family:var(--font-body);font-size:var(--fs-h3);font-weight:500;color:#fff;letter-spacing:-.2px}
+  .dev-card > p{color:var(--text-muted)}
+  .code-block{
+    position:relative;background:#0f1114;border-radius:var(--r-panel);
+    box-shadow:inset 0 0 0 .5px rgba(255,255,255,.1);
+    padding:18px 20px;font-family:var(--font-mono);font-size:13px;line-height:2;color:var(--text-body);
+    overflow-x:auto;
+  }
+  .code-block .p{color:var(--accent)}
+  .code-block .c{color:var(--text-muted)}
+  .copy-btn{
+    position:absolute;top:12px;right:12px;padding:4px 12px;border-radius:var(--r-sm);
+    background:rgba(255,255,255,.08);color:var(--text-dim);font-family:var(--font-body);
+    font-size:12px;cursor:pointer;border:0;transition:background-color var(--dur-fast),color var(--dur-fast);
+  }
+  .copy-btn:hover{background:rgba(255,255,255,.16);color:#fff}
+  .copy-btn.done{color:#7ee787}
+
+  /* ---------- 按钮体系 / Token 展示 ---------- */
+  .demo-panel{
+    background:var(--bg-card);border-radius:var(--r-card);box-shadow:var(--shadow-hair);
+    padding:clamp(24px,3vw,40px);
+  }
+  .demo-row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-4)}
+  .demo-row + .demo-label{margin-top:var(--space-6)}
+  .demo-label{
+    display:flex;align-items:baseline;gap:12px;margin-bottom:var(--space-4);
+    color:var(--text);font-weight:500;
+  }
+  .demo-label small{color:var(--text-muted);font-weight:400}
+  .swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--space-4)}
+  .swatch{border-radius:var(--r-media);overflow:hidden;box-shadow:var(--shadow-hair);background:#111}
+  .swatch .chip{height:64px}
+  .swatch .meta{padding:10px 12px;font-family:var(--font-mono);font-size:11px;color:var(--text-dim);line-height:1.7}
+  .swatch .meta b{display:block;color:#fff;font-weight:400}
+  .radius-row{display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:flex-end}
+  .radius-demo{width:104px;height:72px;background:#23252a;box-shadow:var(--shadow-hair);display:grid;place-items:center;font-family:var(--font-mono);font-size:11px;color:var(--text-dim)}
+  .shadow-row{display:flex;flex-wrap:wrap;gap:var(--space-5);padding:var(--space-4) 0}
+  .shadow-demo{width:150px;height:96px;border-radius:var(--r-panel);background:#1a1c20;display:grid;place-items:center;font-family:var(--font-mono);font-size:11px;color:var(--text-dim)}
+  .shadow-demo.float{background:linear-gradient(150deg,#22252c,#14161a)}
+
+  /* ---------- 输入框 ---------- */
+  .input-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5)}
+  .field{display:flex;flex-direction:column;gap:var(--space-3)}
+  .field label{color:var(--text-muted);font-size:var(--fs-small)}
+  .text-input{
+    background:rgba(255,255,255,.06);border:1px solid var(--hairline);border-radius:var(--r-input);
+    padding:11px 14px;color:#fff;font-family:var(--font-body);font-size:var(--fs-body);
+    transition:border-color var(--dur-fast),background-color var(--dur-fast),box-shadow var(--dur-fast);
+  }
+  .text-input::placeholder{color:var(--text-muted)}
+  .text-input:hover{background:rgba(255,255,255,.1)}
+  .text-input:focus{outline:none;border-color:rgba(122,170,255,.6);box-shadow:0 0 0 3px rgba(122,170,255,.22)}
+  .chat-pill{
+    display:flex;align-items:center;gap:10px;background:#232427;
+    border-radius:var(--r-panel);padding:12px 14px;box-shadow:inset 0 0 0 .5px rgba(255,255,255,.1);
+    color:var(--text-muted);
+  }
+  .badge-row{display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center}
+  .tag{
+    display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:var(--r-pill);
+    background:rgba(255,255,255,.08);box-shadow:var(--shadow-hair);
+    font-family:var(--font-mono);font-size:var(--fs-badge);letter-spacing:1.5px;color:var(--text-body);
+  }
+  .tag.brand{background:rgba(77,107,254,.22);color:#a9bfff;box-shadow:inset 0 0 0 .5px rgba(122,170,255,.35)}
+
+  /* ---------- 终局 CTA：星尘粒子 ---------- */
+  .cta{
+    position:relative;overflow:hidden;text-align:center;
+    padding:clamp(110px,12vw,180px) 0 clamp(90px,10vw,150px);
+    background:
+      radial-gradient(760px 420px at 50% 118%, rgba(46,96,159,.5), transparent 72%),
+      radial-gradient(520px 300px at 50% 108%, rgba(122,170,255,.22), transparent 75%),
+      var(--bg-page);
+  }
+  .cta-grid{
+    position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background-image:
+      linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(600px 380px at 50% 100%,#000 20%,transparent 78%);
+    -webkit-mask-image:radial-gradient(600px 380px at 50% 100%,#000 20%,transparent 78%);
+  }
+  .starfield{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .star{
+    position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;
+    box-shadow:0 0 6px rgba(122,170,255,.8);
+  }
+  .cta-inner{position:relative;z-index:2;max-width:720px;margin:0 auto;padding:0 24px}
+  .cta h2{
+    font-family:var(--font-display);font-weight:400;color:#fff;
+    font-size:var(--fs-h2);line-height:1.5;letter-spacing:-.72px;
+  }
+  .cta p{margin:var(--space-5) auto 0;color:var(--text-dim);font-size:var(--fs-lead);line-height:1.65}
+  .cta-actions{margin-top:var(--space-7);display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-3)}
+
+  /* ---------- 页脚 ---------- */
+  .footer{
+    border-top:1px solid var(--hairline);
+    padding:var(--space-6) 0 var(--space-7);
+  }
+  .footer-inner{
+    display:flex;align-items:center;justify-content:space-between;gap:var(--space-5);flex-wrap:wrap;
+    color:var(--text-muted);font-size:var(--fs-small);
+  }
+  .footer a:hover{color:#fff}
+  .footer .mid{flex:1;text-align:center;min-width:260px}
+
+  /* ---------- 响应式 ---------- */
+  @media (max-width:1024px){
+    .sig-grid{grid-template-columns:1fr 1fr}
+    .bento-grid{grid-template-columns:1fr}
+    .bento-card{min-height:0;padding-bottom:var(--space-7)}
+    .bento-stage{min-height:210px}
+    .app-window{grid-template-columns:200px 1fr}
+  }
+  @media (max-width:768px){
+    .sig-grid,.dev-grid,.input-grid{grid-template-columns:1fr}
+    .topbar .top-only .lang-switch{display:none}
+    .topbar.scrolled{max-width:calc(100% - 24px);padding:8px 10px 8px 14px}
+    .topbar .brand-word{font-size:16px}
+    .app-window{grid-template-columns:1fr}
+    .win-side{display:none}
+    .files-stack{width:100%}
+    .diff-panel{position:relative;width:100%;border-radius:var(--r-panel);margin-top:12px}
+    .hero-desc{font-size:var(--fs-body)}
+    .footer-inner{justify-content:center;text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ 导航：透明 → 液态玻璃胶囊 ============ -->
+<header class="topbar" id="topbar">
+  <a class="brand" href="#">
+    <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <circle cx="16" cy="16" r="15" stroke="rgba(255,255,255,.35)"/>
+      <path d="M8 19c3-7 8-10 16-10-2 5-6 9-11 10 2 1 4 1 6 0-2 4-6 6-11 5 1-2 2-4 3-5-2 0-3 0-3 0z" fill="#fff"/>
+    </svg>
+    <span class="brand-word">deepseek</span>
+    <span class="badge badge-frame">HARNESS</span>
+    <span class="badge badge-pill scroll-only" style="margin-left:4px">预览版</span>
+  </a>
+  <div class="topbar-actions">
+    <div class="top-only">
+      <div class="lang-switch" role="group" aria-label="语言切换">
+        <span class="active">中文</span><span>EN</span>
+      </div>
+    </div>
+    <a class="btn btn-outline btn-sm scroll-only" href="#">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+    <div class="btn-split scroll-only" role="button" tabindex="0" aria-label="下载">
+      <span class="split-main">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2v8m0 0L5 7m3 3 3-3M3 12.5h10"/></svg>
+        下载
+      </span>
+      <span class="split-toggle" aria-hidden="true">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6l4 4 4-4"/></svg>
+      </span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ============ Hero ============ -->
+  <section class="hero">
+    <div class="hero-tint" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="badge reveal" style="justify-content:center">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.2 3.6L11 5l-3.8 1.4L6 10 4.8 6.4 1 5l3.8-1.4z"/></svg>
+        预览版
+      </div>
+      <h1 class="reveal" style="margin-top:20px">
+        DeepSeek Harness
+        <span class="line-2">现在，开箱即用</span>
+      </h1>
+      <p class="hero-desc reveal">
+        无论处理日常工作、编写代码，还是构建自己的 Harness，都可以从这里开始。<br />
+        DeepSeek Harness 面向全球开放测试并同步开源，以可自由组合的插件，拓展 Agent 能力。
+      </p>
+      <div class="hero-cta reveal">
+        <div class="btn-split" role="button" tabindex="0" aria-label="下载 Windows 版">
+          <span class="split-main">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2v8m0 0L5 7m3 3 3-3M3 12.5h10"/></svg>
+            下载 Windows 版
+          </span>
+          <span class="split-toggle" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6l4 4 4-4"/></svg>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 产品实景窗口 -->
+    <div class="window-wrap reveal">
+      <div class="app-window">
+        <aside class="win-side">
+          <div class="win-side-head">
+            <div class="traffic"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+            <div class="icon-btn" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="2"/><path d="M6 3v10"/></svg>
+            </div>
+          </div>
+          <div class="win-side-brand">
+            <svg class="brand-mark" style="width:18px;height:18px" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <circle cx="16" cy="16" r="15" stroke="rgba(255,255,255,.3)"/>
+              <path d="M8 19c3-7 8-10 16-10-2 5-6 9-11 10 2 1 4 1 6 0-2 4-6 6-11 5 1-2 2-4 3-5-2 0-3 0-3 0z" fill="#fff"/>
+            </svg>
+            <span class="brand-word" style="font-size:13px">deepseek</span>
+            <span class="badge badge-frame" style="font-size:9px;padding:1px 6px">HARNESS</span>
+          </div>
+          <div class="btn-new-chat">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3v10M3 8h10"/></svg>
+            新会话
+          </div>
+          <div class="side-item">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 2v12M2 8h12M4.5 4.5l7 7M11.5 4.5l-7 7"/></svg>
+            插件
+          </div>
+          <div class="side-item">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
+            自动化任务
+          </div>
+          <div class="side-label">
+            工作区
+            <span style="display:flex;gap:10px">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg>
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 2v12M12 2v12M2 5h4M10 11h4"/></svg>
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2.5" y="2.5" width="11" height="11" rx="2"/><path d="M8 5.5v5M5.5 8h5"/></svg>
+            </span>
+          </div>
+          <div class="side-group">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 5a2 2 0 0 1 2-2h3l1.5 2H12a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/></svg>
+            默认工作区
+          </div>
+          <div class="side-chat active">认识 DeepSeek Harness</div>
+          <div class="side-chat">生成 Q3 数据汇总 PPT</div>
+          <div class="side-chat">准备明天开会的随口清单</div>
+          <div class="side-chat">给销售部的同比分析 PPT</div>
+          <div class="side-group">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 5a2 2 0 0 1 2-2h3l1.5 2H12a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/></svg>
+            数据分析项目
+          </div>
+          <div class="side-group">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 5a2 2 0 0 1 2-2h3l1.5 2H12a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/></svg>
+            DSH 插件开发
+          </div>
+          <div class="side-foot">
+            <svg width="16" height="16" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <circle cx="16" cy="16" r="14" stroke="rgba(255,255,255,.25)"/>
+              <path d="M8 19c3-7 8-10 16-10-2 5-6 9-11 10 2 1 4 1 6 0-2 4-6 6-11 5 1-2 2-4 3-5-2 0-3 0-3 0z" fill="rgba(255,255,255,.7)"/>
+            </svg>
+            DeepSeek
+          </div>
+        </aside>
+        <div class="win-main">
+          <div class="win-main-head">
+            <div class="traffic"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+            <span>认识 DeepSeek Harness</span>
+            <div class="icon-btn" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="2"/><path d="M6 3v10"/></svg>
+            </div>
+          </div>
+          <div class="win-chat">
+            <div class="bubble-user">可以介绍一下自己吗？</div>
+            <div class="think-row">
+              <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 4l4 4-4 4"/></svg>
+              已思考
+            </div>
+            <div class="chat-text">
+              我是 DeepSeek Harness，DeepSeek 开源的 harness 架构，基于 <a href="#">Cordis</a> 的「一切皆插件」架构构建。我既可以是桌面应用，也可以通过代码启动为网页。
+              <div style="margin-top:10px">我可以帮你：</div>
+              <ol class="chat-list">
+                <li><b>辅助日常工作</b> —— 整理资料、分析表格、撰写文档、制作汇报。</li>
+                <li><b>写代码、改仓库</b> —— 理解项目、修复问题、开发功能、运行测试。</li>
+                <li><b>查资料、核对信息</b> —— 搜索资料、交叉查证，给出有来源的结论。</li>
+                <li><b>处理文件与任务</b> —— 运行脚本、批量处理文件、后台跑任务，随时查看进度。</li>
+                <li><b>安装插件、拓展能力</b> —— 使用现有插件，或写你自己的插件，定制专属的工作方式。</li>
+              </ol>
+            </div>
+            <div class="chat-input-bar">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3v10M3 8h10"/></svg>
+              <span style="flex:1;font-size:12px">描述你想构建的内容、常用指令、@文件或文件夹…</span>
+              <span class="chat-chip">
+                <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg>
+                工作区内搜索
+              </span>
+              <span class="chat-chip">DeepSeek-V4-Flash (High)</span>
+              <span class="send-dot" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 12V4m0 0L4.5 7.5M8 4l3.5 3.5"/></svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 签名元素 ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="sec-head reveal">
+        <h2 class="sec-title">签名元素：深空蓝 × 实景界面 × 星尘</h2>
+        <p class="sec-sub">此风格的辨识度来自三层叠加——蓝色星云包裹、产品即视觉、发丝级暗面。</p>
+      </div>
+      <div class="sig-grid">
+        <div class="sig-card reveal">
+          <span class="badge">01 / AURORA</span>
+          <h3>深空蓝极光辉光</h3>
+          <p>Hero 背景是钢蓝到近黑的垂直渐变，叠加两团大半径模糊极光，像夜空包裹产品。</p>
+          <div class="sig-demo aurora" aria-hidden="true"></div>
+        </div>
+        <div class="sig-card reveal">
+          <span class="badge">02 / WINDOW</span>
+          <h3>产品实景窗口</h3>
+          <p>用 1:1 的应用窗口 mockup（红黄绿灯、侧栏、聊天气泡）替代插画，超大投影让界面浮起。</p>
+          <div class="sig-demo" aria-hidden="true">
+            <div class="mini-window">
+              <div class="titlebar"><i style="background:var(--traffic-r)"></i><i style="background:var(--traffic-y)"></i><i style="background:var(--traffic-g)"></i></div>
+              <div class="body">
+                <div class="mini-line w40"></div>
+                <div class="mini-bubble"></div>
+                <div class="mini-line w80"></div>
+                <div class="mini-line w60"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sig-card reveal">
+          <span class="badge">03 / STARFIELD</span>
+          <h3>星尘粒子场</h3>
+          <p>终局 CTA 用蓝色径向辉光、白色微粒与淡透视网格，把转化区渲染成一场星空邀约。</p>
+          <div class="sig-demo grid-dots" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 能力 Bento 网格 ============ -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="sec-head reveal">
+        <h2 class="sec-title">能力不断拓展，工作由你掌握</h2>
+        <p class="sec-sub">卡片是暗面舞台，UI 切片悬浮其上——用界面零件讲述产品能力。</p>
+      </div>
+      <div class="bento-grid">
+
+        <!-- 一切皆插件 -->
+        <article class="bento-card reveal">
+          <h3>一切皆插件</h3>
+          <p>安装现有插件，或在「创造模式」中通过对话创建插件，扩展工具、技能和界面。</p>
+          <div class="bento-stage">
+            <div class="stage-glow" aria-hidden="true"></div>
+            <div class="plugin-panel">
+              <div class="plugin-head"><b style="font-weight:500">插件</b><span class="tag" style="font-size:10px;letter-spacing:1px">+ 添加插件</span></div>
+              <div class="plugin-row">
+                <div class="plugin-ico"></div>
+                <div><div class="plugin-name">智能体协作</div><div class="plugin-desc">调度子代理协作，编排复杂多步任务</div></div>
+                <div class="switch on"></div>
+              </div>
+              <div class="plugin-row">
+                <div class="plugin-ico"></div>
+                <div><div class="plugin-name">终端</div><div class="plugin-desc">执行命令并读取输出，管理长时任务</div></div>
+                <div class="switch on"></div>
+              </div>
+              <div class="plugin-row">
+                <div class="plugin-ico"></div>
+                <div><div class="plugin-name">Agent 侧载</div><div class="plugin-desc">以 Sidecar 方式集成本地工具</div></div>
+                <div class="switch"></div>
+              </div>
+              <div class="plugin-row">
+                <div class="plugin-ico"></div>
+                <div><div class="plugin-name">网页搜索</div><div class="plugin-desc">搜索 DeepSeek 的搜索增强能力</div></div>
+                <div class="switch"></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 完成各类任务 -->
+        <article class="bento-card reveal">
+          <h3>完成各类任务</h3>
+          <p>整理文档、分析表格、编写代码，直接预览任务成果，并通过对话持续完善。</p>
+          <div class="bento-stage">
+            <div class="stage-glow" aria-hidden="true"></div>
+            <div class="files-stack">
+              <div class="file-card">
+                <div class="file-ico doc">W</div>
+                <div><div class="file-name">简报.docx</div><div class="file-type">Word 文档</div></div>
+              </div>
+              <div class="file-card">
+                <div class="file-ico xls">X</div>
+                <div><div class="file-name">数据.xlsx</div><div class="file-type">Excel 表格</div></div>
+              </div>
+              <div class="file-card">
+                <div class="file-ico htm">&lt;/&gt;</div>
+                <div><div class="file-name">index.html</div><div class="file-type">HTML 页面</div></div>
+              </div>
+            </div>
+            <div class="diff-panel">
+              <div class="diff-head"><span>第 1 轮改动</span><span>×</span></div>
+              <div class="diff-file">
+                <span><span class="ts">TS</span> src/label.ts</span>
+                <span class="diff-stat"><span class="add">+2</span> <span class="del">-1</span></span>
+              </div>
+              <div class="diff-lines">
+                <div class="meta">@@ -8,3 +8,4 @@</div>
+                <div class="dl"><span class="ln">8</span><span class="code">function label(name: string) {</span></div>
+                <div class="dl del"><span class="ln">9</span><span class="code">- return name;</span></div>
+                <div class="dl add"><span class="ln">9</span><span class="code">+ const text = name.trim();</span></div>
+                <div class="dl add"><span class="ln">10</span><span class="code">+ return text || 'Untitled';</span></div>
+                <div class="dl"><span class="ln">11</span><span class="code">}</span></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 适应你的工作方式 -->
+        <article class="bento-card reveal">
+          <h3>适应你的工作方式</h3>
+          <p>启用自动化任务插件，随时发起任务，让重复工作按计划执行。掌握关键进展，按需展开工具调用详情。</p>
+          <div class="bento-stage">
+            <div class="stage-glow" aria-hidden="true"></div>
+            <div class="task-scene">
+              <div class="task-bubble">每周五 17:00（北京时间），整理本周项目记录，生成周报。</div>
+              <div class="task-done-row">
+                <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6l4 4 4-4"/></svg>
+                已完成工作
+              </div>
+              <div class="task-note">已创建 <b>「项目周报」</b>，每周五 17:00（北京时间）触发。</div>
+              <div class="task-card">
+                <div class="clock">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
+                </div>
+                <div>
+                  <div class="task-title">项目周报</div>
+                  <div class="task-sub">每周五 17:00 (UTC +08:00 中国标准时间)</div>
+                </div>
+                <span class="btn btn-outline btn-sm" style="margin-left:auto">打开</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 开发者工具 -->
+        <article class="bento-card reveal">
+          <h3>开发者工具</h3>
+          <p>支持开发者查看执行轨迹与详细运行信息，排查工具调用和任务执行中的各类问题。</p>
+          <div class="bento-stage">
+            <div class="stage-glow" aria-hidden="true"></div>
+            <div class="devtools-panel">
+              <div class="dt-tabs"><span class="on">执行轨迹</span><span>日志</span><span>调用</span><span>变量</span></div>
+              <div class="dt-rows">
+                <div class="dt-row"><span class="dt-bar" style="width:46px;background:#4d6bfe"></span> agent.run()</div>
+                <div class="dt-row"><span style="width:12px"></span><span class="dt-bar" style="width:88px;background:#7aaaff"></span> tool.file.read × 4</div>
+                <div class="dt-row"><span style="width:12px"></span><span class="dt-bar" style="width:64px;background:#3fb950"></span> tool.terminal.exec</div>
+                <div class="dt-row"><span style="width:12px"></span><span class="dt-bar" style="width:120px;background:#d29922"></span> tool.search.query × 2</div>
+                <div class="dt-row"><span style="width:12px"></span><span class="dt-bar" style="width:52px;background:#a371f7"></span> plugin.invoke</div>
+              </div>
+              <div class="dt-split">
+                <div>
+                  <div class="dt-kv"><b>duration</b><span>1.24s</span></div>
+                  <div class="dt-kv"><b>tokens</b><span>3,842</span></div>
+                  <div class="dt-kv"><b>status</b><span>OK</span></div>
+                </div>
+                <div>
+                  <div class="dt-kv"><b>cwd</b><span>~/workspace</span></div>
+                  <div class="dt-kv"><b>model</b><span>V4-Flash</span></div>
+                  <div class="dt-kv"><b>tools</b><span>6 active</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 开发者体验 ============ -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="sec-head left reveal">
+        <h2 class="sec-title">开发者体验</h2>
+        <p class="sec-sub">同一种能力，两种接入方式——命令行起步，或拿源码自己构建。</p>
+      </div>
+      <div class="dev-grid">
+        <div class="dev-card reveal">
+          <h3>命令启动</h3>
+          <p>安装 Node.js 后，通过 npx 启动 Web UI。</p>
+          <div class="code-block">
+            <button class="copy-btn" data-copy="npx deepseek-harness@latest start">复制</button>
+            <div><span class="c"># 一行命令启动</span></div>
+            <div><span class="p">$</span> npx deepseek-harness@latest start</div>
+            <div><span class="c">→ http://localhost:3737</span></div>
+          </div>
+        </div>
+        <div class="dev-card reveal">
+          <h3>源码安装</h3>
+          <p>获取完整项目源码，并按照仓库说明完成安装。</p>
+          <div class="code-block">
+            <button class="copy-btn" data-copy="git clone https://github.com/deepseek-ai/harness.git&#10;cd harness && npm install && npm run dev">复制</button>
+            <div><span class="p">$</span> git clone https://github.com/deepseek-ai/harness.git</div>
+            <div><span class="p">$</span> cd harness && npm install</div>
+            <div><span class="p">$</span> npm run dev</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 按钮体系 ============ -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="sec-head reveal">
+        <h2 class="sec-title">按钮体系：白色行动力</h2>
+        <p class="sec-sub">胶囊形、白色主按钮负责转化，描边按钮退居次席，分裂式下载按钮是签名变体。</p>
+      </div>
+      <div class="demo-panel reveal">
+        <div class="demo-label">四种形态 <small>主 / 描边 / 幽灵 / 禁用</small></div>
+        <div class="demo-row">
+          <button class="btn btn-primary">主要操作</button>
+          <button class="btn btn-outline">次要操作</button>
+          <button class="btn btn-ghost">幽灵按钮</button>
+          <button class="btn btn-disabled" disabled>不可用</button>
+        </div>
+
+        <div class="demo-label">分裂式下载变体 <small>主体 + 分隔线 + 下拉区</small></div>
+        <div class="demo-row">
+          <div class="btn-split" role="button" tabindex="0" aria-label="下载 Windows 版">
+            <span class="split-main">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2v8m0 0L5 7m3 3 3-3M3 12.5h10"/></svg>
+              下载 Windows 版
+            </span>
+            <span class="split-toggle" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6l4 4 4-4"/></svg>
+            </span>
+          </div>
+          <button class="btn btn-outline">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            查看 GitHub
+          </button>
+          <button class="btn btn-sm btn-outline">小尺寸</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Token 系统 ============ -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="sec-head reveal">
+        <h2 class="sec-title">Token 系统</h2>
+        <p class="sec-sub">深空蓝只做情绪，近黑才是舞台，白色负责行动，亮蓝（#7aaaff）是唯一强调。</p>
+      </div>
+      <div class="demo-panel reveal">
+        <div class="demo-label">色彩 <small>color</small></div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="chip" style="background:linear-gradient(180deg,#2e5080,#0c1626)"></div><div class="meta"><b>--bg-hero</b>#2E5080 → #0C1626</div></div>
+          <div class="swatch"><div class="chip" style="background:#0a0a0a"></div><div class="meta"><b>--bg-page</b>#0A0A0A</div></div>
+          <div class="swatch"><div class="chip" style="background:#151517"></div><div class="meta"><b>--bg-card</b>#151517</div></div>
+          <div class="swatch"><div class="chip" style="background:#4d6bfe"></div><div class="meta"><b>--brand</b>#4D6BFE</div></div>
+          <div class="swatch"><div class="chip" style="background:#7aaaff"></div><div class="meta"><b>--accent</b>#7AAAFF</div></div>
+          <div class="swatch"><div class="chip" style="background:#fff"></div><div class="meta"><b>--text</b>#FFFFFF</div></div>
+          <div class="swatch"><div class="chip" style="background:#cfd3d6"></div><div class="meta"><b>--text-body</b>#CFD3D6</div></div>
+          <div class="swatch"><div class="chip" style="background:rgba(255,255,255,.45)"></div><div class="meta"><b>--text-muted</b>rgba(255,255,255,.45)</div></div>
+        </div>
+
+        <div class="demo-label">圆角 <small>radius</small></div>
+        <div class="radius-row">
+          <div class="radius-demo" style="border-radius:var(--r-pill)">100px pill</div>
+          <div class="radius-demo" style="border-radius:var(--r-card)">24px card</div>
+          <div class="radius-demo" style="border-radius:var(--r-panel)">16px panel</div>
+          <div class="radius-demo" style="border-radius:var(--r-media)">12px media</div>
+          <div class="radius-demo" style="border-radius:var(--r-input)">10px input</div>
+          <div class="radius-demo" style="border-radius:var(--r-sm)">8px small</div>
+        </div>
+
+        <div class="demo-label">阴影与发丝边 <small>shadow</small></div>
+        <div class="shadow-row">
+          <div class="shadow-demo" style="box-shadow:var(--shadow-hair)">hairline 0.5px</div>
+          <div class="shadow-demo" style="box-shadow:0 4px 16px rgba(0,0,0,.35),inset 0 0 0 .5px rgba(255,255,255,.1)">chip shadow</div>
+          <div class="shadow-demo float" style="box-shadow:0 24px 72px rgba(0,0,0,.2),0 0 0 1px rgba(255,255,255,.12)">float 24/72</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 输入框 / 徽章 ============ -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="sec-head reveal">
+        <h2 class="sec-title">输入框与徽章</h2>
+        <p class="sec-sub">输入面都是低亮玻璃感，徽章是全页唯一的技术签名——Fragment Mono 大字距。</p>
+      </div>
+      <div class="input-grid">
+        <div class="demo-panel reveal">
+          <div class="demo-label">表单字段 <small>text input</small></div>
+          <div class="field">
+            <label for="demo-name">工作区名称</label>
+            <input class="text-input" id="demo-name" placeholder="例如：数据分析项目" />
+          </div>
+          <div class="field" style="margin-top:var(--space-5)">
+            <label for="demo-desc">描述</label>
+            <input class="text-input" id="demo-desc" placeholder="描述你想构建的内容、常用指令…" />
+          </div>
+        </div>
+        <div class="demo-panel reveal">
+          <div class="demo-label">对话输入胶囊 <small>chat pill</small></div>
+          <div class="chat-pill">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3v10M3 8h10"/></svg>
+            <span style="flex:1;font-size:var(--fs-small)">描述你想构建的内容、常用指令、@文件或文件夹…</span>
+            <span class="chat-chip">工作区内搜索</span>
+            <span class="send-dot" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 12V4m0 0L4.5 7.5M8 4l3.5 3.5"/></svg>
+            </span>
+          </div>
+          <div class="demo-label" style="margin-top:var(--space-6)">徽章 / 标签 <small>badge</small></div>
+          <div class="badge-row">
+            <span class="badge badge-frame">HARNESS</span>
+            <span class="badge badge-pill">预览版</span>
+            <span class="tag">TS</span>
+            <span class="tag brand">V4-FLASH</span>
+            <span class="tag">MIT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 终局 CTA：星尘粒子 ============ -->
+  <section class="cta">
+    <div class="cta-grid" aria-hidden="true"></div>
+    <div class="starfield" id="starfield" aria-hidden="true"></div>
+    <div class="cta-inner">
+      <h2 class="reveal">加入 DSH 插件生态</h2>
+      <p class="reveal">
+        DeepSeek Harness 预览版的核心插件和基础 API 将持续迭代。我们期待与全球用户和开发者一起，
+        在开源、开放、可复用、可组合的基础设施之上，共同探索智能上限。
+      </p>
+      <div class="cta-actions reveal">
+        <a class="btn btn-primary" href="#">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          查看 GitHub
+        </a>
+        <a class="btn btn-outline" href="#">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="2.5" width="10" height="11" rx="1.5"/><path d="M5.5 6h5M5.5 8.5h5M5.5 11h3"/></svg>
+          开发者文档
+        </a>
+        <a class="btn btn-outline" href="#">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 2l5 2.5v4c0 3-2.2 4.7-5 5.5-2.8-.8-5-2.5-5-5.5v-4z"/></svg>
+          社区插件
+        </a>
+        <a class="btn btn-outline" href="#">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.5"/><path d="M5.5 6h5M5.5 8.5h5M5.5 11h5"/></svg>
+          Cordis 论文
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ 页脚 ============ -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="foot-side">
+      <a href="#">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" style="vertical-align:-2px"><path d="M6.5 2C3.5 2 1 4 1 6.5c0 1.6 1 3 2.5 3.8L3 12l2.2-1.2c.4.1.9.2 1.3.2 3 0 5.5-2 5.5-4.5S9.5 2 6.5 2z"/><path d="M10 5.5c2.5 0 4.5 1.7 4.5 3.7 0 1.3-.8 2.5-2.1 3.2l.3 1.4-1.8-1c-.3.1-.6.1-.9.1-2.5 0-4.5-1.7-4.5-3.7"/></svg>
+        微信公众号
+      </a>
+    </div>
+    <div class="mid">开源 · MIT · © 2026 杭州深度求索人工智能基础技术研究有限公司 版权所有</div>
+    <div class="foot-side"><a href="#">隐私政策</a> &nbsp;·&nbsp; <a href="#">用户协议</a></div>
+  </div>
+</footer>
+
+<script>
+  // 导航：滚动后收拢为液态玻璃胶囊
+  const topbar = document.getElementById('topbar');
+  const onScroll = () => topbar.classList.toggle('scrolled', window.scrollY > 120);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // 入场动画
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reveals = document.querySelectorAll('.reveal');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    reveals.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('in'), i * 80);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(el => io.observe(el));
+  }
+
+  // 星尘粒子场
+  const starfield = document.getElementById('starfield');
+  if (starfield && !reduceMotion) {
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < 90; i++) {
+      const s = document.createElement('span');
+      s.className = 'star';
+      const x = Math.random() * 100;
+      const y = 45 + Math.random() * 55;
+      const o = 0.15 + Math.random() * 0.65;
+      s.style.cssText = `left:${x}%;top:${y}%;opacity:${o};width:${1 + Math.random() * 1.6}px;height:${1 + Math.random() * 1.6}px`;
+      frag.appendChild(s);
+    }
+    starfield.appendChild(frag);
+  }
+
+  // 复制按钮
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy || '');
+        btn.classList.add('done');
+        btn.textContent = '已复制';
+        setTimeout(() => { btn.classList.remove('done'); btn.textContent = '复制'; }, 1600);
+      } catch (_) { /* 剪贴板不可用时静默 */ }
+    });
+  });
+</script>
+</body>
+</html>
