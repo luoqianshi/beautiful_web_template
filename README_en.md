@@ -2,7 +2,7 @@
 
 A curated collection of beautiful HTML landing page templates, each exploring a distinct web design style.
 
-> **Source of original design prompts:** Some of the templates are based on original design prompts from [designprompts.dev](https://www.designprompts.dev). Other are collections of beautiful web templates by myself.
+> **Source of original design prompts:** Some of the templates are based on original design prompts from [designprompts.dev](https://www.designprompts.dev). Others are collections of beautiful web templates curated by myself.
 
 Browse, preview, and copy the templates in the interactive home page, or explore the gallery below.
 
@@ -308,12 +308,12 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 
 > An editorial-inspired minimalist design system centered on elegant serif typography. Warm ivory backgrounds with subtle paper texture, refined spacing, rule lines, and classical proportions create a timeless, literary aesthetic. Enhanced depth through layered gradients and multi-toned shadows. The design whispers sophistication through restraint and typographic excellence.
 
-### [Qoder-Mint-Garden](./templates/Qoder-Mint-Garden/)
+### [Qoder Mint Garden](./templates/Qoder-Mint-Garden/)
 
 <p>
-  <img src="./assets/screenshots/Qoder-Mint-Garden-01-hero-green-lane.png" width="32.5%" alt="Qoder-Mint-Garden — hero green lane" />
-  <img src="./assets/screenshots/Qoder-Mint-Garden-02-card-mosaic.png" width="32.5%" alt="Qoder-Mint-Garden — card mosaic" />
-  <img src="./assets/screenshots/Qoder-Mint-Garden-03-link-columns-footer.png" width="32.5%" alt="Qoder-Mint-Garden — link columns footer" />
+  <img src="./assets/screenshots/Qoder-Mint-Garden-01-hero-green-lane.png" width="32.5%" alt="Qoder Mint Garden — hero green lane" />
+  <img src="./assets/screenshots/Qoder-Mint-Garden-02-card-mosaic.png" width="32.5%" alt="Qoder Mint Garden — card mosaic" />
+  <img src="./assets/screenshots/Qoder-Mint-Garden-03-link-columns-footer.png" width="32.5%" alt="Qoder Mint Garden — link columns footer" />
 </p>
 
 > A forest-green single accent on a mint-grey canvas of generous whitespace. A green-lane stage of arc stripes lifts a floating white product window, pill buttons carry a porcelain inner highlight, and asymmetric card mosaics nest white UI float-cards inside. Fresh, trustworthy, organic AI-workbench marketing language.

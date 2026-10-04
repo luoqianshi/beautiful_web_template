@@ -308,12 +308,12 @@
 
 > 以优雅衬线字体为中心的编辑风极简设计系统。温暖象牙白背景配细腻纸张质感、考究间距、分隔线与古典比例，营造永恒而文学化的美学。通过分层渐变与多色调阴影增强深度。设计以克制与排印之美低语出精致。
 
-### [Qoder-Mint-Garden](./templates/Qoder-Mint-Garden/)
+### [Qoder Mint Garden](./templates/Qoder-Mint-Garden/)
 
 <p>
-  <img src="./assets/screenshots/Qoder-Mint-Garden-01-hero-green-lane.png" width="32.5%" alt="Qoder-Mint-Garden — hero green lane" />
-  <img src="./assets/screenshots/Qoder-Mint-Garden-02-card-mosaic.png" width="32.5%" alt="Qoder-Mint-Garden — card mosaic" />
-  <img src="./assets/screenshots/Qoder-Mint-Garden-03-link-columns-footer.png" width="32.5%" alt="Qoder-Mint-Garden — link columns footer" />
+  <img src="./assets/screenshots/Qoder-Mint-Garden-01-hero-green-lane.png" width="32.5%" alt="Qoder Mint Garden — hero green lane" />
+  <img src="./assets/screenshots/Qoder-Mint-Garden-02-card-mosaic.png" width="32.5%" alt="Qoder Mint Garden — card mosaic" />
+  <img src="./assets/screenshots/Qoder-Mint-Garden-03-link-columns-footer.png" width="32.5%" alt="Qoder Mint Garden — link columns footer" />
 </p>
 
 > 薄荷灰白大留白画布上的森林绿单点强调。绿野跑道弧带舞台托起悬浮出血的白色产品窗口，胶囊按钮带薄瓷内高光，不对称卡片拼贴里再叠白色 UI 浮卡。清新、可信、有生机的 AI 工作台营销语言。

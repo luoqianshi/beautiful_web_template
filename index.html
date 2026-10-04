@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beautiful Web Template — 精选 HTML 模板画廊</title>
-  <meta name="description" content="浏览 32 套精美的单页 HTML 落地页模板，每套展示独特的网页设计风格。原始提示词来自 designprompts.dev。">
+  <title>Beautiful Web Template</title>
+  <!-- 数量由脚本根据 templates.length 自动填充；此为无 JS 时的兜底文案，勿手填数字 -->
+  <meta name="description" content="浏览精美单页 HTML 落地页模板，每套展示独特的网页设计风格。原始提示词来自 designprompts.dev。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -547,7 +548,7 @@
     <div class="container">
       <div class="section-head">
         <h2 class="section-title">The Collection<em>馆藏</em></h2>
-        <span class="section-count">32 WORKS · 2026</span>
+        <span class="section-count" id="section-count">WORKS · 2026</span>
       </div>
       <div class="controls">
         <input type="text" class="search-input" id="search" placeholder="搜索风格，如 玻璃拟态、赛博朋克……">
@@ -833,6 +834,16 @@
 
     renderCards(templates);
 
+    // 所有数量类信息一律从 templates 单一数据源派生：新增模板只需维护数组，
+    // meta description 与馆藏计数会自动更新，无需再手改任何统计数字。
+    (function syncTemplateCount() {
+      const count = templates.length;
+      const sectionCount = document.getElementById('section-count');
+      if (sectionCount) sectionCount.textContent = `${count} WORKS · 2026`;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', `浏览 ${count} 套精美的单页 HTML 落地页模板，每套展示独特的网页设计风格。原始提示词来自 designprompts.dev。`);
+    })();
+
     search.addEventListener('input', () => {
       const q = search.value.toLowerCase();
       const filtered = templates.filter(t =>
@@ -963,6 +974,19 @@
   </script>
 
   <script>
+    /* 模板数量同样从 templates 数组派生（数组定义见上方脚本），
+       中文数字转换用于保留策展手记的文学写法。 */
+    const TEMPLATE_COUNT = (typeof templates !== 'undefined' && Array.isArray(templates)) ? templates.length : 0;
+    function toChineseNumber(n) {
+      const d = '零一二三四五六七八九';
+      if (n <= 0) return '零';
+      if (n < 10) return d[n];
+      if (n === 10) return '十';
+      if (n < 20) return '十' + d[n % 10];
+      const tens = Math.floor(n / 10), ones = n % 10;
+      return d[tens] + '十' + (ones ? d[ones] : '');
+    }
+
     /* ── 彩蛋一：控制台 ASCII 艺术 ─────────────────────────
        理性是页面的网格，感性是源码里的诗。 */
     (function consoleEgg() {
@@ -976,7 +1000,7 @@
       ].join('\n');
       console.log('%c' + art, 'color:#4a54c9;font-family:monospace;line-height:1.4;');
       console.log(
-        '%cBeautiful Web Template%c  32 套模板，每一套都是一次感性的实验。\nCrafted with ♥ for designers who read the source.',
+        '%cBeautiful Web Template%c  ' + TEMPLATE_COUNT + ' 套模板，每一套都是一次感性的实验。\nCrafted with ♥ for designers who read the source.',
         'color:#191713;font-weight:bold;font-size:13px;',
         'color:#6e675c;'
       );
@@ -1056,9 +1080,10 @@
       const note = document.getElementById('seal-note');
       const text = document.getElementById('seal-note-text');
       if (!btn || !note || !text) return;
+      const countCn = toChineseNumber(TEMPLATE_COUNT);
       const notes = [
         '网格是理性的承诺，留白是感性的余地。',
-        '三十五套模板，是三十五次对“美”的举证。',
+        `${countCn}套模板，是${countCn}次对“美”的举证。`,
         '衬线负责抒情，等宽负责诚实。',
         '好的排版，让眼睛听不见声音，却读得出语气。',
         'Less, but better — 然后，加一枚印章。'

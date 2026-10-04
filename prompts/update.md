@@ -127,7 +127,7 @@
 
 文件路径：`index.html`
 
-需要完成三处更新：① 模板数据数组、② hero 徽章数量、③ meta description 数量。
+需要完成一处更新：模板数据数组。页面上的所有数量展示（meta description、馆藏 `N WORKS · 2026` 计数、控制台彩蛋、策展手记中的中文数字）均由脚本根据 `templates.length` **自动派生**，严禁手填数字。
 
 ### 4.1 在 `templates` 数组中新增条目
 
@@ -151,25 +151,15 @@
 
 注意：`description` 字段在 index.html 中应比 README 中的略短（参考现有条目，index.html 的 description 通常为一句话的精简版），但仍取自 `.md` 文件描述字段的语义。
 
-### 4.2 更新 hero 徽章数量
+### 4.2 无需手改任何数量
 
-定位 hero 区域的徽章元素，将数字更新为新总数：
+以下位置的数字全部在运行时由 `templates.length` 自动填充，**不要**手动编辑：
 
-```html
-<div class="hero-badge">N 套免费 HTML 模板</div>
-```
+- `<head>` 中的 meta description（HTML 里保留无数字的兜底文案，脚本会替换为「浏览 N 套……」）
+- 画廊区 `<span class="section-count" id="section-count">`（渲染为 `N WORKS · 2026`）
+- 控制台彩蛋中的 `N 套模板` 与页脚策展手记中的中文数字（如「三十八套模板，是三十八次对『美』的举证」，由 `toChineseNumber()` 转换）
 
-`N` = `templates` 数组的最终长度（原数量 + 新增数量）。
-
-### 4.3 更新 meta description 数量
-
-定位 `<head>` 中的 meta description，将数字更新为新总数：
-
-```html
-<meta name="description" content="浏览 N 套精美的单页 HTML 落地页模板，每套展示独特的网页设计风格。原始提示词来自 designprompts.dev。">
-```
-
-`N` 同上。
+在浏览器中打开 index.html 确认计数显示为数组长度即可。
 
 ---
 
@@ -182,8 +172,7 @@
 - [ ] `README.md` 已按字母序插入新条目，格式（`width="32.5%"`、`alt` 文本、引用块）与现有条目一致
 - [ ] `README_en.md` 已按字母序插入新条目，英文描述
 - [ ] `index.html` 的 `templates` 数组已按字母序插入新对象，字段完整且路径正确
-- [ ] `index.html` hero 徽章数量已更新为最新总数
-- [ ] `index.html` meta description 数量已更新为最新总数
+- [ ] 浏览器打开 index.html，馆藏计数、meta description、控制台文案自动显示为最新总数（未手填任何数字）
 - [ ] 未修改任何已有模板的条目或截图
 
 ## 注意事项
