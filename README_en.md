@@ -206,7 +206,7 @@ Browse, preview, and copy the templates in the interactive home page, or explore
   <img src="./assets/screenshots/MiMo-Warm-Halftone-03-ink-footer.png" width="32.5%" alt="MiMo Warm Halftone — ink footer" />
 </p>
 
-> Three-layer warm paper grounds dusted with halftone print texture and ASCII glyph noise, headline keywords underlined by a skewed orange marker tape. Numbered hairline lists, ink pill buttons, and a pure-black QR footer — an AI product landing page with the temperament of print.
+> Three-layer warm paper grounds dusted with halftone print texture and ASCII glyph noise, headline keywords underlined by a skewed orange marker tape. Numbered hairline lists, ink pill buttons, and a pure-black footer — a landing page that introduces its own style-prompt manual with the temperament of print.
 
 ### [Minimal Dark](./templates/Minimal-Dark/)
 

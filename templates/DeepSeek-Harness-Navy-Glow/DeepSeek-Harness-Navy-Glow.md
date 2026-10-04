@@ -226,6 +226,14 @@ background: linear-gradient(rgba(122,155,240,0.08), rgba(122,155,240,0) 35%,
 - 滚动入场（Bento 卡）：IntersectionObserver 触发同类上浮
 - `prefers-reduced-motion: reduce` 时全部位移/模糊动画降级为纯淡入
 
+**循环产品演示（落地页还原的渐变交互）**：原站的产品预览区是循环播放的 UI 故事，全部以渐变淡入淡出（`loop-in` 关键帧 + 负延迟错相）实现：
+- 首屏窗口对话循环（14s）：用户气泡 → 已思考 → 回答逐行浮现 → 收束重置
+- 插件卡（10s）：插件列表整体滚动 + 新插件行渐变进入 + 开关滑块往复开合
+- 交付卡（9s）：文件卡依次浮现并整体上移，Diff 行逐行揭示
+- 工作流卡（12s）：输入气泡 → 执行中 → 结果卡与触发说明的故事循环
+- Trace 卡（10s）：跨度条逐条揭示，「执行轨迹 / 耗时」标签与数据面板交叉淡入
+- `prefers-reduced-motion: reduce` 下所有循环动画关闭，元素以静态终态呈现
+
 ---
 
 ## 响应式策略
@@ -258,6 +266,7 @@ background: linear-gradient(rgba(122,155,240,0.08), rgba(122,155,240,0) 35%,
 
 ## 实现说明
 
+- **页面定位**：`DeepSeek-Harness-Navy-Glow.html` 为产品介绍落地页（Hero → 能力 Bento → 开发者体验 → 生态 CTA → 页脚），不含组件库演示区块，也不含任何公司主体文字（版权、公众号等）
 - **组件结构**：单文件 HTML + 原生 CSS/JS，零构建；`:root` 集中 Token
 - **CSS 自定义属性**：色彩/圆角/阴影/间距全量 Token 化（参考 `--ds-*` 命名）
 - **字体加载**：Google Fonts 加载 Montserrat 400/500、DM Sans 400/500、Fragment Mono 400，中文回退 Noto Sans SC / PingFang SC

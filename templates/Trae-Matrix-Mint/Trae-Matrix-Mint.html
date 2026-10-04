@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Trae-Matrix-Mint — 点阵矩阵薄荷绿组件库</title>
+<title>Trae-Matrix-Mint — 点阵矩阵薄荷绿风格落地页</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -36,7 +36,6 @@
     /* 示意图节点色（仅出现在演示面板内） */
     --node-purple:#A78BFA;
     --node-blue:#60A5FA;
-    --node-red:#F87171;
     /* 圆角：2px 锐角体系 */
     --r-sm:2px;
     --r-md:4px;
@@ -102,11 +101,17 @@
   .reveal-diamond{opacity:0;transform:scale(0) rotate(45deg);transition:opacity var(--dur-slow) var(--ease),transform var(--dur-slow) var(--ease)}
   .reveal-diamond.in{opacity:1;transform:scale(1) rotate(45deg)}
 
-  /* ---------- 点阵图案（公告条角饰） ---------- */
+  /* ---------- 点阵图案（公告条角饰 / 面板样本） ---------- */
   .dots{
     background-image:radial-gradient(var(--ink-dark) 1.5px,transparent 1.5px);
     background-size:8px 8px;
     opacity:0.85;
+  }
+  .dots-green{
+    background-image:radial-gradient(var(--accent) 2px,transparent 2px),
+                     radial-gradient(rgba(166,170,181,0.5) 2px,transparent 2px);
+    background-size:10px 10px,10px 10px;
+    background-position:0 0,5px 5px;
   }
 
   /* ============================================================
@@ -155,13 +160,13 @@
     padding:0 var(--pad-x);
   }
   .logo{
-    display:flex;align-items:center;gap:2px;
+    display:flex;align-items:center;gap:8px;
     font-weight:700;font-size:22px;letter-spacing:-1px;color:var(--ink);
   }
   .logo .diamond{
     display:inline-block;width:10px;height:10px;
     background:var(--accent);transform:rotate(45deg);
-    margin:0 3px 2px;
+    margin:0 1px 2px;
   }
   .logo-mark{
     width:28px;height:28px;border-radius:var(--r-md);
@@ -182,11 +187,7 @@
     font-size:14px;color:var(--ink);display:inline-flex;align-items:center;gap:6px;
     transition:color var(--dur-fast) var(--ease);
   }
-  .nav-links a:hover{color:var(--ink-muted)}
-  .nav-links .caret{
-    width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;
-    border-top:5px solid var(--ink-muted);display:inline-block;
-  }
+  .nav-links a:hover{color:var(--accent)}
   .header-actions{display:flex;align-items:center;gap:12px}
 
   /* ---------- 徽章 ---------- */
@@ -235,7 +236,6 @@
     min-height:calc(100vh - 64px - 40px);
     display:flex;flex-direction:column;justify-content:flex-end;
   }
-  html[data-theme="light"] .hero{background:var(--bg-void)}
   #dotCloud{
     position:absolute;inset:0;width:100%;height:100%;
     opacity:0.9;
@@ -252,15 +252,20 @@
   .hero-wordmark{
     font-size:clamp(56px,9vw,120px);font-weight:700;letter-spacing:-4px;line-height:0.95;
     color:var(--ink);margin-bottom:12px;
-    font-family:var(--font-ui);
+    display:flex;align-items:center;
+  }
+  .hero-wordmark .diamond{
+    display:inline-block;width:0.62em;height:0.62em;
+    background:var(--accent);transform:rotate(45deg);
+    margin:0 0.06em 0.04em;
   }
   .hero-title{
     font-size:clamp(34px,5.6vw,80px);font-weight:600;letter-spacing:-1px;line-height:1.1;
     color:var(--ink-offwhite);white-space:nowrap;
   }
   .hero-right{display:flex;flex-direction:column;gap:16px;padding-bottom:8px;min-width:320px}
-  .hero-products{font-size:18px;color:var(--ink);line-height:1.6}
-  .hero-products .dim{color:var(--ink-muted)}
+  .hero-meta{font-size:16px;color:var(--ink);line-height:1.7;font-family:var(--font-mono);letter-spacing:0.35px}
+  .hero-meta .dim{color:var(--ink-muted)}
   .hero-cta{display:flex;gap:16px;flex-wrap:wrap}
   .hero-note{
     display:flex;align-items:center;gap:8px;
@@ -281,7 +286,7 @@
   .sec-desc{color:var(--ink-muted);font-size:16px;max-width:680px;margin-top:16px}
 
   /* ============================================================
-     功能卡（编号索引 + 演示面板）
+     编号卡片（哲学三原则 + 规格面板）
      ============================================================ */
   .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:56px}
   .card-index{
@@ -299,96 +304,82 @@
   .card:hover .panel{border-color:rgba(50,240,140,0.4);transform:translateY(-2px)}
   .card-desc{color:var(--ink-muted);font-size:14px;margin-top:20px}
 
-  /* 演示面板：对话图 */
-  .mock-chat{display:flex;flex-direction:column;gap:12px}
-  .mock-row{display:flex;justify-content:flex-end}
-  .mock-bubble{
-    background:var(--overlay-08);border-radius:var(--r-md);
-    padding:8px 12px;font-size:12px;color:var(--ink-muted);
+  /* 面板：规格样本 */
+  .spec-row{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+  .spec-row:last-child{margin-bottom:0}
+  .spec-chip{
+    border:1px solid var(--border);border-radius:var(--r-sm);
+    padding:10px 16px;font-family:var(--font-mono);font-size:13px;color:var(--ink);
   }
-  .mock-agent{
-    border:1px solid rgba(50,240,140,0.35);border-radius:var(--r-md);
-    padding:12px;display:flex;flex-direction:column;gap:8px;
-  }
-  .mock-agent-head{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink)}
-  .mock-agent-head .tag{
-    width:18px;height:18px;border-radius:var(--r-sm);background:var(--accent);
-    display:inline-flex;align-items:center;justify-content:center;
-    font-family:var(--font-mono);font-size:9px;color:var(--ink-dark);font-weight:600;
-  }
-  .mock-code{
-    background:var(--bg);border-radius:var(--r-sm);padding:8px 10px;
-    font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);
-    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-  }
-  .mock-code .path{color:var(--ink-faint)}
-  .mock-code .cmd{color:var(--ink-offwhite)}
-  .mock-foot{
-    display:flex;align-items:center;justify-content:space-between;
-    font-family:var(--font-mono);font-size:11px;
-  }
-  .mock-foot .file{color:var(--ink-faint)}
-  .mock-foot .add{color:var(--accent)}
-  .mock-foot .del{color:var(--node-red);margin-left:4px}
-  .mock-foot .link{color:var(--accent);font-family:var(--font-ui);font-size:11px}
-
-  /* 演示面板：SOLO / IDE 双模 */
-  .mock-toggle{
-    display:flex;flex-direction:column;align-items:center;gap:0;position:relative;
-    padding:8px 0;
-  }
-  .toggle-node{
-    display:inline-flex;align-items:center;gap:10px;
-    border:1.5px solid var(--border);border-radius:var(--r-md);
-    padding:12px 18px;font-family:var(--font-mono);font-size:18px;font-weight:600;
-    background:var(--bg);color:var(--ink);position:relative;z-index:2;
-  }
-  .toggle-node.active{border-color:var(--accent);color:var(--accent)}
-  .toggle-icon{
-    width:32px;height:32px;border-radius:var(--r-md);
-    background:var(--ink);color:var(--bg-void);
-    display:inline-flex;align-items:center;justify-content:center;
-    font-family:var(--font-mono);font-size:12px;font-weight:600;
-    position:relative;flex:none;
-  }
-  .toggle-icon::before,.toggle-icon::after{
-    content:"";position:absolute;width:4px;height:4px;background:var(--accent);top:14px;
-  }
-  .toggle-icon::before{left:9px}
-  .toggle-icon::after{right:9px}
-  .toggle-gap{height:20px;width:2px;background:transparent}
-  .toggle-rail{
-    position:absolute;left:32px;top:24px;bottom:24px;width:calc(100% - 64px);
-    border:1px dashed var(--border);border-radius:var(--r-md);z-index:1;
-    border-top:none;border-bottom:none;
-  }
-
-  /* 演示面板：智能体生态节点 */
-  .mock-nodes{
-    display:grid;grid-template-columns:40px 1fr 1fr;gap:16px 12px;align-items:center;
-  }
-  .node-tile{
-    width:36px;height:36px;border-radius:var(--r-md);
+  .spec-chip.r4{border-radius:var(--r-md)}
+  .spec-chip.hair{border-color:var(--border-hair);color:var(--ink-muted)}
+  .spec-note{font-family:var(--font-mono);font-size:11px;color:var(--ink-faint)}
+  .spec-swatch{
+    height:56px;border-radius:var(--r-md);background:var(--accent);
     display:flex;align-items:center;justify-content:center;
-    font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-dark);
+    font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--ink-dark);
   }
-  .node-tile.center{background:var(--ink);color:var(--bg-void)}
-  .node-tile.purple{background:var(--node-purple)}
-  .node-tile.blue{background:var(--node-blue)}
-  .node-tile.green{background:var(--accent)}
-  .node-label{
-    font-family:var(--font-mono);font-size:11px;color:var(--ink-muted);
-    display:flex;align-items:center;gap:8px;
+  .spec-grad{
+    height:24px;border-radius:var(--r-sm);background:var(--accent-grad);
   }
-  .node-label .swatch{width:28px;height:28px;border-radius:var(--r-md);flex:none}
-  .node-line{
-    height:2px;
-    background-image:linear-gradient(90deg,var(--border) 4px,transparent 4px);
-    background-size:8px 2px;
+  .spec-dots{
+    height:96px;border-radius:var(--r-md);background:var(--bg);
+    border:1px solid var(--border-hair);
+    background-image:radial-gradient(rgba(50,240,140,0.85) 2px,transparent 2px),
+                     radial-gradient(rgba(166,170,181,0.35) 2px,transparent 2px);
+    background-size:10px 10px,10px 10px;
+    background-position:0 0,5px 5px;
   }
 
   /* ============================================================
-     按钮展示区
+     Token 表（色彩 / 字体样本）
+     ============================================================ */
+  .token-grid{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:56px;
+  }
+  .token{
+    border:1px solid var(--border-hair);border-radius:var(--r-md);
+    background:var(--overlay-04);overflow:hidden;
+    transition:border-color var(--dur) var(--ease);
+  }
+  .token:hover{border-color:rgba(50,240,140,0.4)}
+  .token .sw{height:72px}
+  .token .meta{padding:12px 14px}
+  .token .name{font-family:var(--font-mono);font-size:12px;letter-spacing:0.35px;color:var(--accent)}
+  .token .hex{font-family:var(--font-mono);font-size:12px;color:var(--ink);margin-top:2px}
+  .token .use{font-size:12px;color:var(--ink-muted);margin-top:6px;line-height:1.5}
+
+  .type-row{
+    display:flex;align-items:baseline;gap:32px;
+    padding:28px 0;border-bottom:1px solid var(--border-hair);
+  }
+  .type-row:last-child{border-bottom:none}
+  .type-label{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:0.35px;
+    color:var(--ink-faint);width:180px;flex:none;
+  }
+  .type-sample{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+  /* ============================================================
+     签名要素清单
+     ============================================================ */
+  .sig-list{
+    display:grid;grid-template-columns:1fr 1fr;gap:0 48px;margin-top:56px;
+    counter-reset:sig;
+  }
+  .sig-item{
+    display:flex;gap:16px;align-items:flex-start;
+    padding:24px 0;border-bottom:1px solid var(--border-hair);
+  }
+  .sig-item .idx{
+    font-family:var(--font-mono);font-size:14px;letter-spacing:0.35px;
+    color:var(--accent);flex:none;padding-top:4px;
+  }
+  .sig-item h3{font-size:18px;font-weight:600;margin-bottom:6px}
+  .sig-item p{font-size:14px;color:var(--ink-muted)}
+
+  /* ============================================================
+     组件展示区
      ============================================================ */
   .showcase{
     border:1px solid var(--border-hair);border-radius:var(--r-md);
@@ -423,7 +414,20 @@
   .input:disabled{opacity:0.5;cursor:not-allowed}
 
   /* ============================================================
-     Footer —— 链接区 + 巨型裁切字标带
+     动效章节
+     ============================================================ */
+  .motion-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:56px}
+  .code-block{
+    background:var(--surface);border:1px solid var(--border-hair);border-radius:var(--r-md);
+    padding:24px;font-family:var(--font-mono);font-size:12.5px;line-height:1.8;
+    color:var(--ink-muted);overflow-x:auto;white-space:pre;
+  }
+  .code-block .k{color:var(--accent)}
+  .code-block .c{color:var(--ink-faint)}
+  .motion-note{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink-muted);margin-top:16px}
+
+  /* ============================================================
+     Footer —— 章节导航 + 巨型裁切字标带
      ============================================================ */
   .site-footer{background:var(--bg-void);padding:80px 0 0}
   html[data-theme="light"] .site-footer{background:var(--bg)}
@@ -442,28 +446,6 @@
     padding-bottom:48px;flex-wrap:wrap;
   }
   .footer-legal{font-size:13px;color:var(--ink-faint);line-height:1.9}
-  .footer-legal a{color:var(--ink-faint)}
-  .footer-legal a:hover{color:var(--accent)}
-  .qr-row{display:flex;gap:24px;align-items:flex-end}
-  .qr-item{display:flex;flex-direction:column;gap:8px;align-items:center}
-  .qr-item .cap{font-size:12px;color:var(--ink-faint)}
-  .qr{
-    width:88px;height:88px;border-radius:var(--r-md);background:#fff;
-    display:flex;align-items:center;justify-content:center;position:relative;
-  }
-  .qr .pattern{
-    width:64px;height:64px;
-    background-image:
-      radial-gradient(#000 2px,transparent 2px),
-      radial-gradient(#000 2px,transparent 2px);
-    background-size:8px 8px,8px 8px;
-    background-position:0 0,4px 4px;
-  }
-  .qr .finder{
-    position:absolute;width:16px;height:16px;border:3px solid var(--accent);
-  }
-  .qr .finder.tl{top:8px;left:8px}
-  .qr .finder.br{bottom:8px;right:8px}
   .back-top{
     display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--ink);
     transition:color var(--dur-fast) var(--ease);
@@ -487,8 +469,14 @@
     letter-spacing:-0.04em;line-height:0.82;
     color:#000;white-space:nowrap;
     transform:translateY(-4%);
+    display:flex;align-items:flex-start;
+  }
+  .wordmark-band .diamond{
+    display:inline-block;width:0.52em;height:0.52em;background:#000;
+    transform:rotate(45deg);margin:0.16em 0.02em 0;
   }
   html[data-theme="light"] .wordmark-band span{color:#0A0B0D}
+  html[data-theme="light"] .wordmark-band .diamond{background:#0A0B0D}
 
   /* 主题切换 */
   .theme-toggle{
@@ -504,10 +492,12 @@
      ============================================================ */
   @media (max-width:1024px){
     .nav-links{gap:18px}
-    .nav-links a:nth-child(n+6){display:none}
+    .nav-links a:nth-child(n+5){display:none}
     .cards{grid-template-columns:repeat(2,1fr)}
     .card-title{min-height:0}
+    .token-grid{grid-template-columns:repeat(3,1fr)}
     .footer-top{grid-template-columns:1fr 1fr}
+    .sig-list,.motion-grid{grid-template-columns:1fr}
   }
   @media (max-width:768px){
     section{padding:64px 0}
@@ -516,9 +506,12 @@
     .nav-links{display:none}
     .hero-inner{flex-direction:column;align-items:flex-start;padding-bottom:32px}
     .hero-right{min-width:0;width:100%}
+    .hero-title{white-space:normal}
     .cards{grid-template-columns:1fr}
+    .token-grid{grid-template-columns:1fr 1fr}
     .showcase{padding:28px 20px}
     .showcase-label{width:100%}
+    .type-row{flex-direction:column;gap:8px;align-items:flex-start}
     .footer-top{grid-template-columns:1fr}
     .input{width:100%}
   }
@@ -530,8 +523,8 @@
 <div class="banner" id="banner">
   <div class="banner-inner">
     <div class="dots dots-l" aria-hidden="true"></div>
-    <div>邀请好友体验 TraeCode，双方各得 500 积分，最高得 3500 积分</div>
-    <a href="#hero">立即参与 →</a>
+    <div>Trae-Matrix-Mint 风格提示词文档 v1.0 已沉淀进模板画廊</div>
+    <a href="#philosophy">查看章节 →</a>
     <div class="dots dots-r" aria-hidden="true"></div>
     <button class="banner-close" aria-label="关闭公告" onclick="document.getElementById('banner').style.display='none'">×</button>
   </div>
@@ -540,23 +533,21 @@
 <!-- ============ Header ============ -->
 <header class="site-header">
   <div class="header-inner">
-    <a class="logo" href="#hero" aria-label="TRAE 首页">
+    <a class="logo" href="#hero" aria-label="MINT 风格文档首页">
       <span class="logo-mark" aria-hidden="true"></span>
-      <span>TRA<span class="diamond" aria-hidden="true"></span>E</span>
+      <span>M<span class="diamond" aria-hidden="true"></span>NT</span>
     </a>
-    <nav class="nav-links" aria-label="主导航">
-      <a href="#features">TraeCode <span class="badge badge-hot">Hot</span> <span class="caret"></span></a>
-      <a href="#features">TraeWork</a>
-      <a href="#features">企业版</a>
-      <a href="#buttons">定价</a>
-      <a href="#buttons">文档</a>
-      <a href="#forms">更新日志</a>
-      <a href="#footer">社区</a>
-      <a href="#footer">知识库</a>
+    <nav class="nav-links" aria-label="文档章节导航">
+      <a href="#philosophy">设计哲学 <span class="badge badge-hot">v1.0</span></a>
+      <a href="#colors">色彩</a>
+      <a href="#type">字体</a>
+      <a href="#signature">签名要素</a>
+      <a href="#components">组件</a>
+      <a href="#motion">动效</a>
     </nav>
     <div class="header-actions">
-      <button class="btn btn-light">登录</button>
-      <button class="btn btn-primary btn-sm">下载中心</button>
+      <button class="theme-toggle" id="themeToggle">◐ 浅色</button>
+      <a class="btn btn-primary btn-sm" href="./Trae-Matrix-Mint.md" download>下载 .md</a>
     </div>
   </div>
 </header>
@@ -566,152 +557,162 @@
   <canvas id="dotCloud" aria-hidden="true"></canvas>
   <div class="hero-inner">
     <div class="hero-left reveal">
-      <div class="hero-wordmark">TRAE</div>
-      <h1 class="hero-title">智能无限，协作无间</h1>
+      <div class="hero-wordmark">M<span class="diamond" aria-hidden="true"></span>NT</div>
+      <h1 class="hero-title">点阵矩阵，信号薄荷</h1>
     </div>
     <div class="hero-right reveal">
-      <div class="hero-products">
-        <div><b>TraeCode：</b><span class="dim">你的专属 AI 开发工程师</span></div>
-        <div><b>TraeWork：</b><span class="dim">全新上线的 AI 办公平台</span></div>
+      <div class="hero-meta">
+        <div><span class="dim">SOURCE //</span> trae.cn 公开页面设计研究</div>
+        <div><span class="dim">DOC //</span> Trae-Matrix-Mint.md 风格提示词</div>
       </div>
       <div class="hero-cta">
-        <button class="btn btn-primary"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><rect x="0" y="0" width="6" height="6"/><rect x="8" y="0" width="6" height="6"/><rect x="0" y="8" width="6" height="6"/><rect x="8" y="8" width="6" height="6"/></svg> 下载 TraeCode</button>
-        <button class="btn btn-outline"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><rect x="0" y="0" width="6" height="6"/><rect x="8" y="0" width="6" height="6"/><rect x="0" y="8" width="6" height="6"/><rect x="8" y="8" width="6" height="6"/></svg> 下载 TraeWork</button>
+        <a class="btn btn-primary" href="./Trae-Matrix-Mint.md" download>下载风格提示词</a>
+        <a class="btn btn-outline" href="#components">浏览组件章节</a>
       </div>
       <div class="hero-note">
         <span class="diamond-bullet reveal-diamond"></span>
-        新用户享多重积分好礼，畅用专业 AI 编程生产力
+        单文件 · 零构建 · Token 全量落地
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ Features：编号卡片 + 演示面板 ============ -->
-<section id="features">
+<!-- ============ 01 设计哲学 ============ -->
+<section id="philosophy">
   <div class="container">
     <div class="reveal">
-      <div class="kicker">[ FEATURES ]</div>
-      <h2 class="sec-title">内置 SOLO 模式，流畅推动每一步开发</h2>
-      <p class="sec-desc">等宽绿色编号把功能区组织成"代码清单"，演示面板以虚线、色块节点与终端行构成设计图质感，拒绝真实截图。</p>
+      <div class="kicker">[01 · PHILOSOPHY]</div>
+      <h2 class="sec-title">克制的锋利，唯一的信号绿</h2>
+      <p class="sec-desc">这是"工程师写给工程师"的界面：黑底是终端的延伸，薄荷绿是唯一的生命信号。设计追求精确与信号感，拒绝一切装饰性柔和。</p>
     </div>
     <div class="cards">
-      <!-- 卡 01：对话图 -->
       <article class="card reveal">
         <div class="card-index">[01]</div>
-        <h3 class="card-title">专属 AI Coding Agent，流畅推动每一步开发</h3>
+        <h3 class="card-title">克制的锋利：2/4px 锐角与发丝边框</h3>
         <div class="panel">
-          <div class="mock-chat">
-            <div class="mock-row"><div class="mock-bubble">👤 用户　设计一个现代感个人首页</div></div>
-            <div class="mock-agent">
-              <div class="mock-agent-head"><span class="tag">AI</span> Agent</div>
-              <div style="font-size:11px;color:var(--ink-muted)">让我们开始开发一个 React 应用</div>
-              <div class="mock-code"><span class="path">~/Desktop/usecase4</span></div>
-              <div class="mock-code"><span class="cmd">npx create-react-app react-todolist</span></div>
-              <div class="mock-foot">
-                <span class="file">/app/HomeScreen.tsx <span class="add">+195</span><span class="del">-0</span></span>
-                <span class="link">查看变更 →</span>
-              </div>
-            </div>
+          <div class="spec-row">
+            <span class="spec-chip">radius 2px</span>
+            <span class="spec-chip r4">radius 4px</span>
           </div>
+          <div class="spec-row">
+            <span class="spec-chip hair">1px hairline border</span>
+          </div>
+          <div class="spec-note">box-shadow: none —— 层级靠表面明度差建立</div>
         </div>
-        <p class="card-desc">内置的 SOLO 模式，配备专属 Coding Agent，可理解目标、拆分任务并调度工具，独立推进各阶段开发工作。</p>
+        <p class="card-desc">一切边缘都像被 CLI 裁切过：按钮 2px、面板 4px，全站禁用 12px 以上大圆角与胶囊卡片。</p>
       </article>
 
-      <!-- 卡 02：SOLO / IDE -->
       <article class="card reveal">
         <div class="card-index">[02]</div>
-        <h3 class="card-title">兼容双重开发模式，自由切换代码编程与自然语言对话</h3>
+        <h3 class="card-title">信号绿 #32F08C：黑底上唯一色相</h3>
         <div class="panel">
-          <div class="mock-toggle">
-            <div class="toggle-rail" aria-hidden="true"></div>
-            <div class="toggle-node active">SOLO <span class="toggle-icon">⌘</span></div>
-            <div class="toggle-gap"></div>
-            <div class="toggle-node"><span class="toggle-icon">⌘</span> IDE</div>
-          </div>
+          <div class="spec-row"><div class="spec-swatch" style="flex:1">#32F08C</div></div>
+          <div class="spec-row"><div class="spec-grad" style="flex:1"></div></div>
+          <div class="spec-note">contrast on #0A0B0D ≈ 12:1 —— 绿即"下一步"</div>
         </div>
-        <p class="card-desc">IDE 模式保留原有流程，控制感更强；SOLO 模式让 AI 主导任务，自动推进开发任务。可根据任务需求自由切换。</p>
+        <p class="card-desc">绿色只出现在 CTA、编号、徽章与页脚巨带；四段渐变 #3EE1A3 → #32F08C → #60F2BD → #A0FDE7 在黑底上像发光条。</p>
       </article>
 
-      <!-- 卡 03：生态节点 -->
       <article class="card reveal">
         <div class="card-index">[03]</div>
-        <h3 class="card-title">开放智能体生态，一切围绕解决问题</h3>
+        <h3 class="card-title">数字尘埃：点阵抖动云是 AI 的像素隐喻</h3>
         <div class="panel">
-          <div class="mock-nodes">
-            <div class="node-tile center">⌘</div>
-            <div class="node-line" aria-hidden="true"></div>
-            <div class="node-label"><span class="swatch node-tile purple">▤</span> Docs</div>
-            <div></div>
-            <div class="node-line" aria-hidden="true"></div>
-            <div class="node-label"><span class="swatch node-tile blue">✦</span> MCP</div>
-            <div></div>
-            <div class="node-line" aria-hidden="true"></div>
-            <div class="node-label"><span class="swatch node-tile green">◎</span> Web</div>
-          </div>
+          <div class="spec-row"><div class="spec-dots" style="flex:1"></div></div>
+          <div class="spec-note">3-5px squares · dithered density falloff · green + gray</div>
         </div>
-        <p class="card-desc">可自动拆分复杂任务，带来流畅交付体验。也支持独立创建 Agent 并分享到市场，像插件一样灵活组合智能体。</p>
+        <p class="card-desc">数千个抖动方块按密度衰减混色，形成像素化的体积感——数据被具象化，冷静而有流动感。</p>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ============ 按钮体系 ============ -->
-<section id="buttons">
+<!-- ============ 02 色彩 Token ============ -->
+<section id="colors">
   <div class="container">
     <div class="reveal">
-      <div class="kicker">[ BUTTONS ]</div>
-      <h2 class="sec-title">按钮体系</h2>
-      <p class="sec-desc">2px 锐角、四段薄荷绿渐变主按钮、发丝描边次按钮——绿色即"下一步"。</p>
+      <div class="kicker">[02 · COLOR TOKENS]</div>
+      <h2 class="sec-title">近黑三度分层 + 白色透明度叠加</h2>
+      <p class="sec-desc">层级靠表面明度差（#000 → #0A0B0D → #121314 → #171A1C）与 4%/8%/13%/18% 白色叠加建立，绝不用阴影分层。</p>
     </div>
-    <div class="showcase reveal">
-      <div class="showcase-block">
-        <div class="showcase-row">
-          <div class="showcase-label">PRIMARY</div>
-          <button class="btn btn-primary">下载 TraeCode</button>
-          <button class="btn btn-primary btn-sm">下载中心</button>
-        </div>
-      </div>
-      <div class="showcase-block">
-        <div class="showcase-row">
-          <div class="showcase-label">OUTLINE</div>
-          <button class="btn btn-outline">下载 TraeWork</button>
-          <button class="btn btn-outline btn-sm">了解更多</button>
-        </div>
-      </div>
-      <div class="showcase-block">
-        <div class="showcase-row">
-          <div class="showcase-label">LIGHT / GHOST</div>
-          <button class="btn btn-light">登录</button>
-          <button class="btn btn-ghost">文档</button>
-          <button class="theme-toggle" id="themeToggle">◐ 切换浅色模式</button>
-        </div>
-      </div>
-      <div class="showcase-block">
-        <div class="showcase-row">
-          <div class="showcase-label">DISABLED</div>
-          <button class="btn" disabled>暂不可下载</button>
-          <button class="btn btn-sm" disabled>敬请期待</button>
-        </div>
-      </div>
+    <div class="token-grid reveal">
+      <div class="token"><div class="sw" style="background:#0A0B0D"></div><div class="meta"><div class="name">--bg</div><div class="hex">#0A0B0D</div><div class="use">页面主背景（蓝调黑）</div></div></div>
+      <div class="token"><div class="sw" style="background:#000000"></div><div class="meta"><div class="name">--bg-void</div><div class="hex">#000000</div><div class="use">Hero 虚空底 / 点云承载面</div></div></div>
+      <div class="token"><div class="sw" style="background:#121314"></div><div class="meta"><div class="name">--surface</div><div class="hex">#121314</div><div class="use">演示面板 / 卡片底</div></div></div>
+      <div class="token"><div class="sw" style="background:#171A1C"></div><div class="meta"><div class="name">--surface-2</div><div class="hex">#171A1C</div><div class="use">次级面板 / 输入框底</div></div></div>
+      <div class="token"><div class="sw" style="background:#32F08C"></div><div class="meta"><div class="name">--accent</div><div class="hex">#32F08C</div><div class="use">唯一强调色：CTA / 编号 / 巨带</div></div></div>
+      <div class="token"><div class="sw" style="background:#FFFFFF"></div><div class="meta"><div class="name">--ink</div><div class="hex">#FFFFFF</div><div class="use">主文字</div></div></div>
+      <div class="token"><div class="sw" style="background:#F5F9FE"></div><div class="meta"><div class="name">--ink-offwhite</div><div class="hex">#F5F9FE</div><div class="use">大标题 / 次主文字</div></div></div>
+      <div class="token"><div class="sw" style="background:#A6AAB5"></div><div class="meta"><div class="name">--ink-muted</div><div class="hex">#A6AAB5</div><div class="use">正文 / 说明（约 7:1）</div></div></div>
+      <div class="token"><div class="sw" style="background:#787D87"></div><div class="meta"><div class="name">--ink-faint</div><div class="hex">#787D87</div><div class="use">弱标签 / 备注</div></div></div>
+      <div class="token"><div class="sw" style="background:rgba(255,255,255,0.18)"></div><div class="meta"><div class="name">--border</div><div class="hex">rgba(255,255,255,.18)</div><div class="use">1px 发丝描边 / 描边按钮</div></div></div>
     </div>
   </div>
 </section>
 
-<!-- ============ 输入框 & 徽章 ============ -->
-<section id="forms">
+<!-- ============ 03 字体系统 ============ -->
+<section id="type">
   <div class="container">
     <div class="reveal">
-      <div class="kicker">[ FORMS & BADGES ]</div>
-      <h2 class="sec-title">输入框与徽章</h2>
-      <p class="sec-desc">输入框聚焦时亮起绿色外环；徽章使用等宽字体与 2px 锐角，编号即层级。</p>
+      <div class="kicker">[03 · TYPOGRAPHY]</div>
+      <h2 class="sec-title">Inter 宣言 × JetBrains Mono 秩序</h2>
+      <p class="sec-desc">展示字体紧字距、行高 1.1-1.2，宣言式；等宽字体以 0.35px 字距提供终端秩序，编号即层级。</p>
+    </div>
+    <div class="showcase reveal" style="margin-top:56px">
+      <div class="type-row"><div class="type-label">HERO 80px / 600</div><div class="type-sample" style="font-size:56px;font-weight:600;letter-spacing:-1px;line-height:1.1">点阵矩阵，信号薄荷</div></div>
+      <div class="type-row"><div class="type-label">SECTION 56px / 600</div><div class="type-sample" style="font-size:36px;font-weight:600;letter-spacing:-0.5px">区块标题：克制的锋利</div></div>
+      <div class="type-row"><div class="type-label">CARD 22px / 600</div><div class="type-sample" style="font-size:22px;font-weight:600">卡片标题：信号绿单点强调</div></div>
+      <div class="type-row"><div class="type-label">BODY 16px / 400</div><div class="type-sample" style="font-size:16px;color:var(--ink-muted)">正文：纯黑虚空上的薄荷绿点阵矩阵美学，2/4px 锐角体系，等宽编号索引，巨型字标裁切收尾。</div></div>
+      <div class="type-row"><div class="type-label">MONO 16px / 500</div><div class="type-sample" style="font-family:var(--font-mono);font-size:16px;color:var(--accent);letter-spacing:0.35px">[01] indexed label</div></div>
+      <div class="type-row"><div class="type-label">BADGE 12px / 500</div><div class="type-sample"><span class="badge badge-hot">Hot</span> <span class="badge badge-new">NEW</span> <span class="badge badge-outline">v1.0</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 签名要素 ============ -->
+<section id="signature">
+  <div class="container">
+    <div class="reveal">
+      <div class="kicker">[04 · SIGNATURE]</div>
+      <h2 class="sec-title">七个签名要素，防止通用输出</h2>
+      <p class="sec-desc">这些元素定义此实现：缺任何一个，页面都会滑向"普通深色 SaaS"。</p>
+    </div>
+    <div class="sig-list reveal">
+      <div class="sig-item"><div class="idx">[01]</div><div><h3>点阵像素云 Hero</h3><p>canvas 生成数千个 3-5px 抖动方块，绿灰双色密度衰减，像被低分辨率扫描的 AI 星云。</p></div></div>
+      <div class="sig-item"><div class="idx">[02]</div><div><h3>页脚巨型裁切字标带</h3><p>#32F08C 通栏 + 超大黑字标被底边裁切，是页面最响亮的句号。</p></div></div>
+      <div class="sig-item"><div class="idx">[03]</div><div><h3>等宽绿色索引 [01]</h3><p>把章节组织成"代码清单"，信息层级即行号，字距 0.35px。</p></div></div>
+      <div class="sig-item"><div class="idx">[04]</div><div><h3>2px / 4px 锐角体系</h3><p>全站无大圆角，终端窗格般的锋利边缘，零装饰阴影。</p></div></div>
+      <div class="sig-item"><div class="idx">[05]</div><div><h3>菱形 ◆ 母题</h3><p>字标内嵌、入场 rotate(45deg) 缩放、绿色方点引导符，微观处反复出现。</p></div></div>
+      <div class="sig-item"><div class="idx">[06]</div><div><h3>薄荷绿渐变按钮</h3><p>唯一的彩色面：四段绿色渐变在黑底上像发光条，悬停位移 1px。</p></div></div>
+      <div class="sig-item"><div class="idx">[07]</div><div><h3>示意图即设计图</h3><p>虚线连接器 + 色块节点 + 终端行，不用真实截图，保持"蓝图"质感。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 组件 ============ -->
+<section id="components">
+  <div class="container">
+    <div class="reveal">
+      <div class="kicker">[05 · COMPONENTS]</div>
+      <h2 class="sec-title">组件样式与交互</h2>
+      <p class="sec-desc">按钮、输入框、徽章全部引用 :root Token；绿色外环是唯一的聚焦语言。</p>
     </div>
     <div class="showcase reveal">
+      <div class="showcase-block">
+        <div class="showcase-row">
+          <div class="showcase-label">BUTTONS</div>
+          <button class="btn btn-primary">主按钮</button>
+          <button class="btn btn-outline">描边按钮</button>
+          <button class="btn btn-light">浅色钮</button>
+          <button class="btn btn-ghost">幽灵钮</button>
+          <button class="btn btn-sm" disabled>禁用态</button>
+        </div>
+      </div>
       <div class="showcase-block">
         <div class="showcase-row">
           <div class="showcase-label">INPUT</div>
-          <input class="input" type="text" placeholder="描述你想开发的应用…" />
-          <input class="input" type="text" value="已聚焦状态" onfocus="this.select()" />
-          <input class="input" type="text" placeholder="禁用状态" disabled />
+          <input class="input" type="text" placeholder="默认态：1px 发丝边" />
+          <input class="input" type="text" value="聚焦态：绿色外环" onfocus="this.select()" />
+          <input class="input" type="text" placeholder="禁用态" disabled />
         </div>
       </div>
       <div class="showcase-block">
@@ -719,20 +720,42 @@
           <div class="showcase-label">BADGES</div>
           <span class="badge badge-hot">Hot</span>
           <span class="badge badge-new">NEW</span>
-          <span class="badge badge-outline">v2.1</span>
-          <span class="card-index" style="margin:0">[01]</span>
-          <span class="hero-note" style="margin:0"><span class="diamond-bullet"></span> 积分好礼进行中</span>
+          <span class="badge badge-outline">v1.0</span>
+          <span class="card-index" style="margin:0">[05]</span>
+          <span class="hero-note" style="margin:0"><span class="diamond-bullet"></span> 菱形引导符</span>
         </div>
       </div>
-      <div class="showcase-block">
-        <div class="showcase-row">
-          <div class="showcase-label">TYPOGRAPHY</div>
-          <div>
-            <div style="font-size:56px;font-weight:600;line-height:1.2;letter-spacing:-0.5px">区块标题 56px</div>
-            <div style="font-family:var(--font-mono);color:var(--accent);letter-spacing:0.35px;margin:8px 0">[ MONO LABEL ] 13px</div>
-            <div style="color:var(--ink-muted);font-size:16px;max-width:680px">正文 16px：纯黑虚空上的薄荷绿点阵矩阵美学，2/4px 锐角体系，等宽编号索引，巨型字标裁切收尾。</div>
-          </div>
-        </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 动效 ============ -->
+<section id="motion">
+  <div class="container">
+    <div class="reveal">
+      <div class="kicker">[06 · MOTION]</div>
+      <h2 class="sec-title">短促精确，像 CLI 响应</h2>
+      <p class="sec-desc">所有过渡 0.15-0.3s，缓动 cubic-bezier(0.4, 0, 0.2, 1)；入场沿用菱形母题的 scale + rotate(45deg)。</p>
+    </div>
+    <div class="motion-grid reveal">
+      <div>
+        <div class="code-block"><span class="c">/* 标准过渡 */</span>
+transition:
+  color <span class="k">0.15s</span>, background-color <span class="k">0.15s</span>,
+  border-color <span class="k">0.15s</span> <span class="k">cubic-bezier(0.4,0,0.2,1)</span>;
+
+<span class="c">/* 悬停 */</span>
+transform: <span class="k">translateY(-1px)</span>;  <span class="c">0.2s</span></div>
+        <div class="motion-note"><span class="diamond-bullet"></span> prefers-reduced-motion 时仅保留透明度变化</div>
+      </div>
+      <div>
+        <div class="code-block"><span class="k">@keyframes</span> dot-in {
+  0%   { transform: scale(0) <span class="k">rotate(45deg)</span>; opacity: 0; }
+  100% { transform: scale(1) <span class="k">rotate(45deg)</span>; opacity: 1; }
+}
+
+<span class="c">/* 点云呼吸：8-12s，±4% 透明度，可关闭 */</span></div>
+        <div class="motion-note"><span class="diamond-bullet"></span> 点阵云静态为主，呼吸为可选增强</div>
       </div>
     </div>
   </div>
@@ -744,46 +767,37 @@
     <div class="footer-top reveal">
       <div class="footer-col">
         <span class="logo-mark" aria-hidden="true" style="margin-bottom:16px"></span>
+        <p style="font-size:13px;color:var(--ink-faint);max-width:260px">Trae-Matrix-Mint：从公开页面逆向提取的设计语言，沉淀为可复用的风格提示词。</p>
       </div>
       <div class="footer-col">
-        <h4>服务条款</h4>
-        <a href="#footer">用户协议</a>
-        <a href="#footer">隐私协议</a>
+        <h4>章节</h4>
+        <a href="#philosophy">设计哲学</a>
+        <a href="#colors">色彩 Token</a>
+        <a href="#type">字体系统</a>
       </div>
       <div class="footer-col">
-        <h4>社区与文档</h4>
-        <a href="#footer">开发者社区</a>
-        <a href="#footer">文档</a>
-        <a href="#footer">更新日志</a>
+        <h4>签名与组件</h4>
+        <a href="#signature">七个签名要素</a>
+        <a href="#components">组件样式</a>
+        <a href="#motion">动效策略</a>
       </div>
       <div class="footer-col">
-        <h4>联系我们</h4>
-        <a href="#footer">建议反馈</a>
-        <a href="#footer">企业咨询热线 400-034-7888</a>
-        <a href="#footer">企业采购咨询</a>
+        <h4>资源</h4>
+        <a href="./Trae-Matrix-Mint.md" download>风格提示词 .md</a>
+        <a href="../../index.html">模板画廊首页</a>
+        <a href="#hero">回到首屏</a>
       </div>
     </div>
     <div class="footer-meta reveal">
       <div class="footer-legal">
-        © 2026 北京引力弹弓科技有限公司版权所有<br />
-        <a href="#footer">京ICP备2024062284号-13</a> ｜ <a href="#footer">营业执照</a><br />
-        北京市海淀区北三环西路甲23号院
+        © 2026 Trae-Matrix-Mint 设计研究<br />
+        提取自公开页面的视觉语言，仅用于设计学习与模板沉淀
       </div>
-      <div class="qr-row">
-        <div class="qr-item">
-          <div class="qr" aria-hidden="true"><div class="pattern"></div><div class="finder tl"></div><div class="finder br"></div></div>
-          <span class="cap">关注微信公众号</span>
-        </div>
-        <div class="qr-item">
-          <div class="qr" aria-hidden="true"><div class="pattern"></div><div class="finder tl"></div><div class="finder br"></div></div>
-          <span class="cap">下载 TRAE 移动端</span>
-        </div>
-        <a class="back-top" href="#hero">回到顶部 <span class="ring">↑</span></a>
-      </div>
+      <a class="back-top" href="#hero">回到顶部 <span class="ring">↑</span></a>
     </div>
   </div>
   <!-- 签名动作：巨型裁切字标带 -->
-  <div class="wordmark-band" aria-hidden="true"><span>TRA◆E</span></div>
+  <div class="wordmark-band" aria-hidden="true"><span>M<span class="diamond"></span>NT</span></div>
 </footer>
 
 <script>
@@ -869,7 +883,7 @@
     const root=document.documentElement;
     const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
     root.setAttribute('data-theme',next);
-    this.textContent=next==='dark'?'◐ 切换浅色模式':'◑ 切换深色模式';
+    this.textContent=next==='dark'?'◐ 浅色':'◑ 深色';
   });
 </script>
 </body>

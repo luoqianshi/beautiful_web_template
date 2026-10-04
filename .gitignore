@@ -5,3 +5,6 @@ raw/
 
 # 存放trae的规划文档
 .trae/documents/
+
+# Agent进行设计语言提取的过程产物
+web2template_output/

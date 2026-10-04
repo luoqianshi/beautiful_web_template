@@ -206,7 +206,7 @@
   <img src="./assets/screenshots/MiMo-Warm-Halftone-03-ink-footer.png" width="32.5%" alt="MiMo Warm Halftone — ink footer" />
 </p>
 
-> 暖纸三层底色上铺半调网点印刷纹理与 ASCII 字符噪点，标题关键词压一条斜切橙色胶带荧光笔。编号发丝线列表、墨色胶囊按钮、纯黑二维码页脚——印刷品气质的 AI 产品落地页。
+> 暖纸三层底色上铺半调网点印刷纹理与 ASCII 字符噪点，标题关键词压一条斜切橙色胶带荧光笔。编号发丝线列表、墨色胶囊按钮、纯黑页脚——以自身风格介绍这份风格提示词手册的落地页。
 
 ### [Minimal Dark](./templates/Minimal-Dark/)
 

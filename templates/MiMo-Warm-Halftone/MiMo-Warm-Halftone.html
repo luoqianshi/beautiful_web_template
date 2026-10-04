@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MiMo-Warm-Halftone — 暖纸半调组件库</title>
+<title>MiMo-Warm-Halftone — 暖纸半调设计手册落地页</title>
 <style>
   /* ============================================================
      MiMo-Warm-Halftone — 设计 Token
@@ -130,7 +130,6 @@
   }
   .halftone-band{
     background:linear-gradient(rgba(232,215,193,.32) 13%,rgba(255,255,255,.32) 66%),var(--bg-band);
-    background-blend-mode:normal;
   }
   html[data-theme="dark"] .halftone-band{background:linear-gradient(rgba(58,47,34,.9),rgba(30,25,18,.9)),var(--bg-band)}
 
@@ -185,22 +184,22 @@
   .btn-sm{height:32px;font-size:13px;padding:0 14px}
   .btn[disabled]{opacity:.4;cursor:not-allowed;pointer-events:none}
 
-  /* 下载变体：图标 + 双行小字 + 箭头，光带周期扫过 */
-  .btn-download{
+  /* 文档 CTA 变体：图标 + 双行小字 + 箭头，光带周期扫过 */
+  .btn-doc{
     position:relative;overflow:hidden;
     height:56px;padding:0 26px;gap:14px;font-size:16px;font-weight:600;
   }
-  .btn-download .dl-icon{width:22px;height:22px;flex-shrink:0;opacity:.95}
-  .btn-download .dl-text{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15}
-  .btn-download .dl-sub{font-size:12px;font-weight:400;opacity:.55}
-  .btn-download::after{
+  .btn-doc .doc-icon{width:22px;height:22px;flex-shrink:0;opacity:.95}
+  .btn-doc .doc-text{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15}
+  .btn-doc .doc-sub{font-size:12px;font-weight:400;opacity:.55}
+  .btn-doc::after{
     content:"";position:absolute;top:-40%;bottom:-40%;left:0;width:60%;
     background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);
     transform:translateX(-120%);
-    animation:download-shiny-sweep 3.6s ease-in-out infinite;
+    animation:cta-shiny-sweep 3.6s ease-in-out infinite;
     pointer-events:none;
   }
-  @keyframes download-shiny-sweep{0%{transform:translateX(-120%)}65%,100%{transform:translateX(280%)}}
+  @keyframes cta-shiny-sweep{0%{transform:translateX(-120%)}65%,100%{transform:translateX(280%)}}
   @keyframes hero-pill-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
   @keyframes hero-pill-word-in{from{opacity:0;transform:translateY(40%)}to{opacity:1;transform:none}}
   @keyframes typewriter-caret-blink{0%,49%{opacity:1}50%,100%{opacity:0}}
@@ -228,7 +227,7 @@
   .main-nav a:hover{color:var(--ink)}
 
   /* ============================================================
-     Hero —— 居中叙事 + 胶带高亮 + 窗口模型
+     Hero —— 居中叙事 + 胶带高亮 + 手册阅读器窗口
      ============================================================ */
   .hero{position:relative;padding:clamp(48px,7vw,110px) var(--gutter) 120px;text-align:center;overflow:hidden}
   .hero-inner{position:relative;z-index:1;max-width:var(--cards-max);margin:0 auto}
@@ -238,6 +237,7 @@
   }
   .hero h1 .line{display:block}
   .hero h1 .word-in{display:inline-block;animation:hero-pill-word-in .55s var(--ease-out) both}
+  .hero-lead{margin-top:var(--space-5);color:var(--ink-muted);font-size:var(--fs-h3);font-weight:400;letter-spacing:-.2px}
   .hero-actions{
     display:flex;justify-content:center;gap:var(--space-4);flex-wrap:wrap;
     margin-top:clamp(28px,2.4vw,40px);
@@ -261,27 +261,25 @@
   }
   .traffic{display:flex;gap:6px}
   .traffic i{width:9px;height:9px;border-radius:50%;display:block;background:var(--border-warm)}
-  .win-bar .win-title{font-size:12px;color:var(--ink-faint)}
+  .win-bar .win-title{font-size:12px;color:var(--ink-faint);font-family:var(--font-mono)}
   .win-bar .win-tools{margin-left:auto;display:flex;gap:10px;color:var(--ink-faint)}
   .win-body{display:flex;min-height:320px}
   .win-side{
-    width:200px;flex-shrink:0;padding:16px 14px;
+    width:210px;flex-shrink:0;padding:16px 14px;
     border-right:1px solid var(--border-hair);
     display:flex;flex-direction:column;gap:6px;
   }
   .win-side .side-item{display:flex;align-items:center;gap:10px;font-size:14px;padding:7px 8px;border-radius:var(--r-sm);color:var(--ink)}
   .win-side .side-item.dim{color:var(--ink-muted)}
   .win-side .side-item.active{background:var(--bg-panel)}
-  .win-side .side-label{font-size:12px;color:var(--ink-faint);padding:10px 8px 2px}
+  .win-side .side-label{font-size:12px;color:var(--ink-faint);padding:10px 8px 2px;font-family:var(--font-mono)}
   .win-side .dot{width:6px;height:6px;border-radius:50%;background:var(--ink-faint)}
   .win-main{flex:1;position:relative;padding:26px 22px;display:flex;flex-direction:column}
   .win-coord{
     position:absolute;font-family:var(--font-mono);font-size:11px;
     color:var(--ink-faint);opacity:.7;letter-spacing:.5px;
   }
-  .win-empty{
-    margin:auto;text-align:center;padding-bottom:12px;
-  }
+  .win-empty{margin:auto;text-align:center;padding-bottom:12px}
   .win-empty .glyph-icon{
     width:46px;height:46px;margin:0 auto 18px;border:1px solid var(--border-warm);
     border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;
@@ -289,6 +287,15 @@
     transform:rotate(-2deg);
   }
   .win-empty h4{font-size:var(--fs-h3);font-weight:600;letter-spacing:-.3px}
+  /* 手册正文（markdown 阅读态） */
+  .md-doc{font-size:14px}
+  .md-doc h5{font-size:15px;font-weight:600;margin:14px 0 6px}
+  .md-doc h5:first-child{margin-top:0}
+  .md-doc p{color:var(--ink-muted);margin-bottom:6px}
+  .md-doc code{
+    font-family:var(--font-mono);font-size:12px;
+    background:var(--bg-panel);border-radius:var(--r-xs);padding:1px 5px;
+  }
 
   /* 对话输入胶囊 */
   .composer{
@@ -360,27 +367,21 @@
     padding:12px 16px;font-size:13px;color:var(--ink-muted);
     border-top:1px solid var(--border-hair);
   }
-  .slide-cap .flag{width:16px;height:11px;border-radius:2px;background:linear-gradient(90deg,#009246 33%,#fff 33% 66%,#ce2b37 66%)}
+  .slide-cap .tape{
+    width:26px;height:10px;background:var(--accent);
+    border:1.5px solid var(--ink);border-radius:2px;
+    transform:skewX(-8deg);
+  }
 
-  /* 流程图窗口 */
-  .flow{padding:26px 22px;text-align:center}
-  .flow h5{font-size:15px;font-weight:600;margin-bottom:18px}
-  .flow .flow-pill{
-    display:inline-flex;flex-direction:column;align-items:center;
-    background:var(--ink);color:var(--ink-invert);
-    border-radius:var(--r-sm);padding:8px 44px;font-size:14px;font-weight:600;
-  }
-  .flow .flow-pill small{font-size:10px;font-weight:400;opacity:.6}
-  .flow .flow-line{width:1px;height:16px;background:var(--border-warm);margin:0 auto}
-  .flow .flow-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-  .flow .flow-node{
-    border:1px solid var(--border-hair);border-radius:var(--r-sm);
-    padding:8px 12px;font-size:12px;background:var(--bg-paper-light);
-  }
-  .flow .flow-node small{display:block;font-size:10px;color:var(--ink-faint)}
-  .flow .flow-node .tag{
-    display:inline-block;margin-left:4px;padding:0 5px;border-radius:var(--r-xs);
-    font-size:9px;background:color-mix(in srgb,var(--accent) 18%,transparent);color:var(--ink);
+  /* 文档结构树窗口 */
+  .doc-tree{padding:24px 22px;font-family:var(--font-mono);font-size:12.5px;line-height:2}
+  .doc-tree .lv1{font-weight:700}
+  .doc-tree .lv2{color:var(--ink-muted);padding-left:18px}
+  .doc-tree .lv2::before{content:"├─ ";color:var(--border-warm)}
+  .doc-tree .lv2:last-child::before{content:"└─ ";color:var(--border-warm)}
+  .doc-tree .hl{
+    background:color-mix(in srgb,var(--accent) 16%,transparent);
+    border-radius:var(--r-xs);padding:0 4px;
   }
 
   /* ============================================================
@@ -431,6 +432,14 @@
   .radius-row{display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap}
   .radius-demo{width:64px;height:48px;background:var(--bg-panel);border:1px solid var(--border-warm)}
   .radius-demo span{display:block;text-align:center;padding-top:32px;font-size:10px;color:var(--ink-muted);font-family:var(--font-mono)}
+  .type-row{display:flex;flex-direction:column;gap:10px}
+  .type-row .t-line{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--border-hair);padding-bottom:8px}
+  .type-row .t-name{width:88px;flex-shrink:0;font-family:var(--font-mono);font-size:11px;color:var(--ink-faint)}
+  .type-row .t-hero{font-size:30px;font-weight:600;letter-spacing:.2px}
+  .type-row .t-h2{font-size:24px;font-weight:600;letter-spacing:-1px}
+  .type-row .t-h3{font-size:19px;font-weight:600}
+  .type-row .t-body{font-size:15px}
+  .type-row .t-small{font-size:12px;color:var(--ink-muted)}
 
   /* ============================================================
      Final CTA —— 半调带 + 输入胶囊
@@ -438,34 +447,20 @@
   .final-cta{position:relative;text-align:center;padding:clamp(64px,8vw,120px) var(--gutter)}
   .final-cta h2{font-size:var(--fs-h2);font-weight:600;letter-spacing:-1.6px;margin-bottom:var(--space-3)}
   .final-cta p{color:var(--ink-muted);margin-bottom:var(--space-7)}
-  .final-cta .composer{max-width:640px;margin:0 auto;text-align:left}
+  .final-cta .composer{max-width:640px;margin:0 auto 22px;text-align:left}
+  .final-cta .cta-row{display:flex;justify-content:center;gap:var(--space-4);flex-wrap:wrap}
 
   /* ============================================================
-     Footer —— 纯黑硬切 + 二维码阵列
+     Footer —— 纯黑硬切 + 章节导航
      ============================================================ */
   .site-footer{background:var(--footer-bg);color:var(--footer-text);padding:64px 0 24px}
   .footer-grid{
     max-width:1600px;margin:0 auto;padding:0 clamp(16px,3vw,40px);
-    display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:var(--space-7);
+    display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:var(--space-7);
   }
   .footer-brand .logo{color:var(--footer-text)}
   .footer-brand .logo .logo-mark{background:var(--footer-text);color:var(--footer-bg)}
-  .footer-social{display:flex;gap:14px;margin:18px 0 22px}
-  .footer-social a{
-    width:32px;height:32px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    background:rgba(255,255,255,.12);color:var(--footer-text);
-    transition:background var(--dur-fast) var(--ease-out);
-  }
-  .footer-social a:hover{background:rgba(255,255,255,.28)}
-  .qr-row{display:flex;gap:12px;flex-wrap:wrap}
-  .qr-block{width:82px}
-  .qr-block .qr{
-    width:82px;height:82px;background:#fff;border:1px solid var(--footer-line);
-    border-radius:var(--r-xs);padding:5px;
-  }
-  .qr-block .qr canvas{width:100%;height:100%;image-rendering:pixelated;display:block}
-  .qr-block .qr-label{margin-top:6px;font-size:11px;color:var(--footer-text-dim);text-align:center;line-height:1.3}
+  .footer-brand p{margin-top:16px;font-size:14px;color:var(--footer-text-dim);max-width:340px;line-height:1.7}
   .footer-col h4{font-size:17px;font-weight:600;margin-bottom:18px}
   .footer-col a{
     display:block;font-size:14px;color:var(--footer-text-dim);
@@ -507,7 +502,7 @@
   @media (max-width:768px){
     .main-nav{display:none}
     .hero-actions{flex-direction:column;align-items:stretch}
-    .btn-download{width:100%}
+    .btn-doc{width:100%}
     .win-body{flex-direction:column}
     .win-side{width:100%;border-right:none;border-bottom:1px solid var(--border-hair)}
     .footer-grid{grid-template-columns:1fr}
@@ -520,15 +515,16 @@
 <!-- ======================= Header ======================= -->
 <header class="site-header">
   <div class="container">
-    <a class="logo" href="#hero"><span class="logo-mark">M</span>MiMo Studio</a>
+    <a class="logo" href="#hero"><span class="logo-mark">M</span>MiMo Warm Halftone</a>
     <nav class="main-nav">
+      <a href="#philosophy">设计哲学</a>
       <a href="#signatures">签名元素</a>
-      <a href="#buttons">按钮</a>
-      <a href="#features">Feature 卡</a>
       <a href="#tokens">Token</a>
-      <a href="#inputs">输入框</a>
+      <a href="#components">组件</a>
+      <a href="#motion">动效</a>
+      <a href="#doc">手册</a>
     </nav>
-    <a class="btn btn-sm" href="#cta">订阅 <span class="arrow">→</span></a>
+    <a class="btn btn-sm" href="#doc">获取手册 <span class="arrow">→</span></a>
   </div>
 </header>
 
@@ -539,30 +535,31 @@
   <div class="glyph-noise" aria-hidden="true"><pre id="glyph-field"></pre></div>
   <div class="hero-inner">
     <h1>
-      <span class="line">和 <span class="word-in">MiMo 桌面工作台</span></span>
-      <span class="line"><span class="marker">Write</span> 无限可能</span>
+      <span class="line">一份可复现的风格提示词</span>
+      <span class="line"><span class="marker">Warm Halftone</span> 设计手册</span>
     </h1>
+    <p class="hero-lead">暖纸、半调网点与一条橙色胶带，被写成可以交给任何 Agent 的文档。</p>
     <div class="hero-actions">
-      <a class="btn btn-download" href="#cta">
-        <svg class="dl-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5 10.2 4.4v7.1H3zM11.3 4.2 21 2.8v8.7h-9.7zM3 12.5h7.2v7.1L3 18.5zM11.3 12.5H21v8.7l-9.7-1.4z"/></svg>
-        <span class="dl-text"><span>Windows</span></span>
+      <a class="btn btn-doc" href="./MiMo-Warm-Halftone.md" target="_blank" rel="noopener">
+        <svg class="doc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 2.5h9l4 4v15H6z"/><path d="M15 2.5v4h4M9 12h7M9 16h7"/></svg>
+        <span class="doc-text"><span>阅读完整提示词</span><span class="doc-sub">MiMo-Warm-Halftone.md</span></span>
         <span class="arrow">→</span>
       </a>
-      <a class="btn btn-download" href="#cta">
-        <svg class="dl-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.9-1.4-.2-2.8.8-3.5.8s-1.9-.8-3.1-.8c-1.6 0-3 .9-3.8 2.4-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3.1-.7s1.8.7 3.1.7c1.3 0 2.1-1.1 2.9-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.7-3.7zM14.2 5.4c.6-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.2-.6 2.8-1.4z"/></svg>
-        <span class="dl-text"><span>MAC</span><span class="dl-sub">Apple 芯片</span></span>
+      <a class="btn btn-doc btn-secondary" href="#tokens">
+        <svg class="doc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="3.2"/><circle cx="16" cy="8" r="3.2"/><circle cx="8" cy="16" r="3.2"/><path d="M16 13v6M13 16h6"/></svg>
+        <span class="doc-text"><span>Token 速查</span><span class="doc-sub">色彩 · 字体 · 圆角 · 阴影</span></span>
         <span class="arrow">→</span>
       </a>
     </div>
-    <p class="hero-note">预览版 · 支持 Windows 11 / macOS 14+</p>
+    <p class="hero-note">单文件 · 零构建依赖 · 系统字族 · 深浅双模式</p>
   </div>
 
-  <!-- Hero 窗口模型：侧边栏 + 空态 + 对话输入胶囊 -->
+  <!-- Hero 窗口模型：手册目录 + 阅读态正文 -->
   <div class="hero-stage reveal">
     <div class="win" style="max-width:1180px;margin:0 auto">
       <div class="win-bar">
         <span class="traffic"><i></i><i></i><i></i></span>
-        <span class="win-title">MiMo Studio</span>
+        <span class="win-title">MiMo-Warm-Halftone.md — reader</span>
         <span class="win-tools">
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="2" width="12" height="12" rx="2"/><rect x="5.5" y="5.5" width="7" height="7" rx="1"/></svg>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="3" width="12" height="10" rx="2"/><path d="M2 6h12"/></svg>
@@ -570,28 +567,33 @@
       </div>
       <div class="win-body">
         <aside class="win-side">
-          <div class="side-item"><span class="dot"></span>新建任务</div>
-          <div class="side-item"><span class="dot"></span>插件</div>
-          <div class="side-item"><span class="dot"></span>产物中心</div>
-          <div class="side-label">项目</div>
-          <div class="side-item dim">智能的下一次远征</div>
-          <div class="side-label">最近</div>
-          <div class="side-item active"><span class="dot" style="background:var(--accent)"></span>暖纸半调风格手册</div>
-          <div class="side-item dim"><span class="dot"></span>当排版学会了印刷术</div>
-          <div class="side-item dim"><span class="dot"></span>一座城市的智能共生</div>
+          <div class="side-label">CHAPTERS</div>
+          <div class="side-item active"><span class="dot" style="background:var(--accent)"></span>设计哲学</div>
+          <div class="side-item dim"><span class="dot"></span>签名元素 DNA</div>
+          <div class="side-item dim"><span class="dot"></span>Token 系统</div>
+          <div class="side-item dim"><span class="dot"></span>组件样式</div>
+          <div class="side-item dim"><span class="dot"></span>大胆要素</div>
+          <div class="side-item dim"><span class="dot"></span>效果与动画</div>
+          <div class="side-item dim"><span class="dot"></span>响应式策略</div>
+          <div class="side-item dim"><span class="dot"></span>可访问性</div>
+          <div class="side-item dim"><span class="dot"></span>实现说明</div>
         </aside>
         <div class="win-main">
           <span class="win-coord" style="top:26px;right:30px">40°02'40"N</span>
           <span class="win-coord" style="top:52px;left:30px">116°18'39"E</span>
-          <div class="win-empty">
-            <div class="glyph-icon">M◧</div>
-            <h4>和 MiMo 一起探索无限可能</h4>
+          <div class="md-doc">
+            <h5>设计哲学 · 核心原则</h5>
+            <p>这是「印刷品气质的软件落地页」：底子是暖白纸张，纹理是老式半调网点印刷，唯一饱和色是一道橙色荧光笔。</p>
+            <h5>视觉气质</h5>
+            <p><code>纸感温暖</code> <code>印刷手作</code> <code>克制的宣言</code> <code>工程可信</code></p>
+            <h5>此设计不是什么</h5>
+            <p>不是玻璃拟态的霓虹科技风；不是纯白极简冷淡风；不是多彩 SaaS 风；不是重投影立体风。</p>
           </div>
           <div class="composer">
-            <div class="ph">描述任务，输入 / 调用技能<span class="caret"></span></div>
+            <div class="ph">向这份手册提问，输入 / 检索章节<span class="caret"></span></div>
             <div class="composer-row">
               <span class="chip">＋</span>
-              <span class="chip">◉ 默认权限 ▾</span>
+              <span class="chip">◉ 只读手册 ▾</span>
               <button class="send" aria-label="发送">
                 <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg>
               </button>
@@ -607,9 +609,9 @@
 <section id="signatures" class="halftone halftone-band">
   <div class="container">
     <div class="sec-head reveal">
-      <div class="kicker">Signatures</div>
+      <div class="kicker">Chapter 02 · Signatures</div>
       <h2 class="sec-title">签名元素：<span style="color:var(--ink-muted)">胶带、网点、字符噪点</span></h2>
-      <p class="sec-desc">三件套定义此风格：一条贴歪的橙色荧光胶带、一片溶解的半调网点、一张 3% 浓度的字符噪点纸底。稀缺使用，出现即焦点。</p>
+      <p class="sec-desc">手册第二章定义此风格的 DNA：一条贴歪的橙色荧光胶带、一片溶解的半调网点、一张 3% 浓度的字符噪点纸底。稀缺使用，出现即焦点。</p>
     </div>
     <div class="demo-grid">
       <div class="demo-card reveal" style="position:relative;overflow:hidden">
@@ -635,116 +637,35 @@
   </div>
 </section>
 
-<!-- ======================= Buttons ======================= -->
-<section id="buttons">
+<!-- ======================= 设计哲学 ======================= -->
+<section id="philosophy">
   <div class="container">
     <div class="sec-head reveal">
-      <div class="kicker">Buttons</div>
-      <h2 class="sec-title">按钮体系：<span style="color:var(--ink-muted)">墨色胶囊，全或无</span></h2>
-      <p class="sec-desc">交互件一律 999px 胶囊 + 深墨绿黑底；hover 只提亮与箭头平移，不放大不投影。</p>
+      <div class="kicker">Chapter 01 · Philosophy</div>
+      <h2 class="sec-title">设计哲学：<span style="color:var(--ink-muted)">纸张的温度，印刷的痕迹</span></h2>
+      <p class="sec-desc">手册第一章用感官语言写清这份风格追求什么、拒绝什么。落地页把它的四个情感关键词与四条反特征原样陈列。</p>
     </div>
-    <div class="demo-grid">
-      <div class="demo-card reveal">
-        <h3>四种形态</h3>
-        <p class="hint">主 / 次 / 描边 / 禁用</p>
-        <div class="btn-row">
-          <button class="btn">主按钮 <span class="arrow">→</span></button>
-          <button class="btn btn-secondary">次按钮</button>
-          <button class="btn btn-outline">描边按钮</button>
-          <button class="btn" disabled>禁用</button>
-          <button class="btn btn-sm">小号</button>
-        </div>
-      </div>
-      <div class="demo-card reveal">
-        <h3>下载变体</h3>
-        <p class="hint">图标 + 双行小字 + 周期光带扫过</p>
-        <div class="btn-row">
-          <a class="btn btn-download" href="#cta">
-            <svg class="dl-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.5 10.2 4.4v7.1H3zM11.3 4.2 21 2.8v8.7h-9.7zM3 12.5h7.2v7.1L3 18.5zM11.3 12.5H21v8.7l-9.7-1.4z"/></svg>
-            <span class="dl-text"><span>Windows</span></span>
-            <span class="arrow">→</span>
-          </a>
-        </div>
-      </div>
-      <div class="demo-card reveal">
-        <h3>徽章 / 标签</h3>
-        <p class="hint">胶囊形、12-13px 小字</p>
-        <div class="badge-row">
-          <span class="badge solid">预览版</span>
-          <span class="badge accent">New</span>
-          <span class="badge">◉ 默认权限 ▾</span>
-          <span class="badge">MiMo 新一代模型</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ======================= Feature Cards ======================= -->
-<section id="features" style="padding-top:0">
-  <div class="container" style="display:flex;flex-direction:column;gap:clamp(48px,6vw,96px)">
-
-    <!-- 卡 1：media-left + 编号列表 -->
     <article class="feature-card reveal">
-      <div class="media halftone">
-        <div class="win">
-          <div class="win-bar">
-            <span class="traffic"><i></i><i></i><i></i></span>
-            <span class="win-title">Smart 调度</span>
-          </div>
-          <div class="flow">
-            <h5>统一的智能编排</h5>
-            <div class="flow-pill">Smart<small>智能编排</small></div>
-            <div class="flow-line"></div>
-            <div class="flow-row">
-              <div class="flow-node">办公智能体<small>文档 · 表格 · 幻灯</small></div>
-              <div class="flow-node">代码智能体<small>编写 · 调试 · 审查</small></div>
-              <div class="flow-node">研究智能体<small>检索 · 综述 · 分析</small></div>
-            </div>
-            <div class="flow-line"></div>
-            <div class="flow-row">
-              <div class="flow-node">极速模型<span class="tag">推荐</span><small>Flash 预览</small></div>
-              <div class="flow-node">旗舰模型<span class="tag">推荐</span><small>Pro 预览</small></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="copy">
-        <h3>「Smart」调度</h3>
+      <div class="copy" style="order:1">
+        <h3>情感关键词</h3>
         <ol class="num-list">
-          <li><span class="n">01</span><p>自动评估任务类型、复杂度与成本，确定执行路径。</p></li>
-          <li><span class="n">02</span><p>按需路由到办公 / 代码 / 研究框架，动态选择模型与工具。</p></li>
-          <li><span class="n">03</span><p>复杂任务拆解为子任务，多 Agent 并行推进，状态全程可见。</p></li>
-          <li><span class="n">04</span><p>Self-Evolve 引擎持续优化自身代码，让系统不断变强。</p></li>
+          <li><span class="n">01</span><p><strong>纸感温暖</strong> — 米白纸底与暖驼色带营造的书页温度。</p></li>
+          <li><span class="n">02</span><p><strong>印刷手作</strong> — 半调网点、字符噪点、斜切胶带，都是印出来、贴上去的手工痕迹。</p></li>
+          <li><span class="n">03</span><p><strong>克制的宣言</strong> — 全页只有一处橙色高亮、一处纯黑页脚，稀缺性让宣言词成为视觉锚点。</p></li>
+          <li><span class="n">04</span><p><strong>工程可信</strong> — 界面窗口模型精确还原真实能力，让承诺可被亲眼验证。</p></li>
         </ol>
-        <a class="copy-link" href="#cta">了解调度策略 <span class="arrow">→</span></a>
+      </div>
+      <div class="copy" style="order:2">
+        <h3>此设计不是什么</h3>
+        <ol class="num-list">
+          <li><span class="n">×</span><p>不是玻璃拟态 / 霓虹渐变的科技风：无 blur、无发光。</p></li>
+          <li><span class="n">×</span><p>不是纯白极简冷淡风：底色永远偏暖，拒绝冷灰。</p></li>
+          <li><span class="n">×</span><p>不是多彩 SaaS 风：全页只有橙色一个饱和色，其余全为暖中性。</p></li>
+          <li><span class="n">×</span><p>不是重投影立体风：阴影只有一种 6% 透明度的柔影。</p></li>
+        </ol>
+        <a class="copy-link" href="./MiMo-Warm-Halftone.md" target="_blank" rel="noopener">读第一章全文 <span class="arrow">→</span></a>
       </div>
     </article>
-
-    <!-- 卡 2：media-right + 编号列表 + 幻灯片图像 -->
-    <article class="feature-card flip reveal">
-      <div class="media halftone">
-        <div class="win">
-          <div class="win-bar">
-            <span class="traffic"><i></i><i></i><i></i></span>
-            <span class="win-title">成果预览 · Slides</span>
-          </div>
-          <div class="slide-shot" role="img" aria-label="金光时分的雾山湖泊油画风格幻灯片"
-               style="background-image:url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=19th%20century%20romanticism%20oil%20painting%20landscape%2C%20misty%20mountains%20and%20calm%20lake%20at%20golden%20hour%2C%20warm%20cream%20ochre%20and%20soft%20rose%20tones%2C%20visible%20painterly%20brushstrokes%2C%20sublime%20atmosphere%2C%20no%20text%2C%20no%20people&image_size=landscape_4_3')"></div>
-          <div class="slide-cap"><span class="flag"></span>FINE DELLA PRESENTAZIONE · 期待与你在暖光中相见</div>
-        </div>
-      </div>
-      <div class="copy">
-        <h3>从生成结果到持续迭代</h3>
-        <ol class="num-list">
-          <li><span class="n">01</span><p>多类文件可直接拖入作为上下文，成果覆盖 PPT、网页、3D、App 等。</p></li>
-          <li><span class="n">02</span><p>会话内或预览区可对成果实时运行、操作、交互。</p></li>
-          <li><span class="n">03</span><p>选中局部即可精准修改，支持批量调整与版本回退。</p></li>
-        </ol>
-        <a class="copy-link" href="#cta">查看产物中心 <span class="arrow">→</span></a>
-      </div>
-    </article>
-
   </div>
 </section>
 
@@ -752,9 +673,9 @@
 <section id="tokens" class="halftone halftone-band">
   <div class="container">
     <div class="sec-head reveal">
-      <div class="kicker">Tokens</div>
+      <div class="kicker">Chapter 03 · Tokens</div>
       <h2 class="sec-title">Token 系统：<span style="color:var(--ink-muted)">暖纸三层底 × 单点橙</span></h2>
-      <p class="sec-desc">全站 95% 是暖中性，#FF6500 是唯一饱和色。阴影只有一档，圆角只有四档。</p>
+      <p class="sec-desc">手册第三章给出全部精确数值：95% 暖中性，#FF6500 是唯一饱和色；阴影只有一档，圆角只有四档。</p>
     </div>
     <div class="demo-grid">
       <div class="demo-card reveal">
@@ -770,8 +691,19 @@
         </div>
       </div>
       <div class="demo-card reveal">
-        <h3>圆角</h3>
-        <p class="hint">999 胶囊 / 13 窗口 / 12 卡片 / 8 小件</p>
+        <h3>字体阶梯</h3>
+        <p class="hint">系统字族，靠字重与字距分层；中文紧排大标题是气质核心</p>
+        <div class="type-row">
+          <div class="t-line"><span class="t-name">hero 56</span><span class="t-hero">暖纸半调</span></div>
+          <div class="t-line"><span class="t-name">h2 40</span><span class="t-h2">章节标题 -1.6px</span></div>
+          <div class="t-line"><span class="t-name">h3 24</span><span class="t-h3">卡片标题</span></div>
+          <div class="t-line"><span class="t-name">body 16</span><span class="t-body">正文行高 1.5</span></div>
+          <div class="t-line"><span class="t-name">small 13</span><span class="t-small">图注 / 时间戳</span></div>
+        </div>
+      </div>
+      <div class="demo-card reveal">
+        <h3>圆角与阴影</h3>
+        <p class="hint">999 胶囊 / 13 窗口 / 12 卡片 / 8 小件；唯一阴影 0 12px 32px</p>
         <div class="radius-row">
           <div class="radius-demo" style="border-radius:999px"><span>999</span></div>
           <div class="radius-demo" style="border-radius:13px"><span>13</span></div>
@@ -779,13 +711,9 @@
           <div class="radius-demo" style="border-radius:8px"><span>8</span></div>
           <div class="radius-demo" style="border-radius:4px"><span>4</span></div>
         </div>
-      </div>
-      <div class="demo-card reveal">
-        <h3>阴影与描边</h3>
-        <p class="hint">唯一阴影 0 12px 32px rgba(21,28,19,.06)</p>
-        <div class="win" style="box-shadow:var(--shadow-float)">
+        <div class="win" style="box-shadow:var(--shadow-float);margin-top:18px">
           <div class="win-bar"><span class="traffic"><i></i><i></i><i></i></span><span class="win-title">shadow-float</span></div>
-          <div style="padding:22px;font-size:13px;color:var(--ink-muted)">
+          <div style="padding:18px;font-size:13px;color:var(--ink-muted)">
             暖发丝描边 <code style="font-family:var(--font-mono)">rgba(125,113,70,.35)</code><br />
             极淡卡描边 <code style="font-family:var(--font-mono)">rgba(21,28,19,.08)</code>
           </div>
@@ -795,30 +723,140 @@
   </div>
 </section>
 
-<!-- ======================= Inputs ======================= -->
-<section id="inputs">
+<!-- ======================= Components ======================= -->
+<section id="components">
   <div class="container">
     <div class="sec-head reveal">
-      <div class="kicker">Inputs</div>
-      <h2 class="sec-title">输入框：<span style="color:var(--ink-muted)">聚焦靠描边本身</span></h2>
-      <p class="sec-desc">白纸面 + 1px 暖描边，聚焦时描边转深墨；无发光环、无阴影变化。</p>
+      <div class="kicker">Chapter 04 · Components</div>
+      <h2 class="sec-title">组件样式：<span style="color:var(--ink-muted)">墨色胶囊，全或无</span></h2>
+      <p class="sec-desc">手册第四章逐一规定按钮、卡片、输入框、徽章与导航的样式和交互：hover 只提亮与箭头平移，不放大不投影。</p>
     </div>
     <div class="demo-grid">
       <div class="demo-card reveal">
-        <h3>表单字段</h3>
-        <p class="hint">聚焦试试 border-color → ink</p>
-        <input class="field" type="text" placeholder="搜索组件…" style="margin-bottom:14px" />
-        <input class="field" type="email" placeholder="you@example.com" />
+        <h3>按钮四种形态</h3>
+        <p class="hint">主 / 次 / 描边 / 禁用</p>
+        <div class="btn-row">
+          <button class="btn">主按钮 <span class="arrow">→</span></button>
+          <button class="btn btn-secondary">次按钮</button>
+          <button class="btn btn-outline">描边按钮</button>
+          <button class="btn" disabled>禁用</button>
+          <button class="btn btn-sm">小号</button>
+        </div>
       </div>
       <div class="demo-card reveal">
-        <h3>对话输入胶囊</h3>
-        <p class="hint">工具行 + 圆形发送钮</p>
+        <h3>徽章 / 标签</h3>
+        <p class="hint">胶囊形、12-13px 小字</p>
+        <div class="badge-row">
+          <span class="badge solid">v1.0</span>
+          <span class="badge accent">New</span>
+          <span class="badge">◉ 只读手册 ▾</span>
+          <span class="badge">单文件交付</span>
+        </div>
+        <h3 style="margin-top:22px">输入框</h3>
+        <p class="hint">聚焦靠描边本身：border-color → ink</p>
+        <input class="field" type="text" placeholder="检索 Token / 章节…" />
+      </div>
+      <div class="demo-card reveal">
+        <h3>发丝线编号列表</h3>
+        <p class="hint">杂志目录排版语言，替代图标卡片列表</p>
+        <ol class="num-list" style="margin-top:4px">
+          <li><span class="n">01</span><p>序号 700 字重单独占行。</p></li>
+          <li><span class="n">02</span><p>条目间暖发丝线分隔，线宽不满栏。</p></li>
+          <li><span class="n">03</span><p>正文 15-16px 常规，行高 1.5。</p></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 大胆要素 / 布局创意 ======================= -->
+<section id="doc" style="padding-top:0">
+  <div class="container" style="display:flex;flex-direction:column;gap:clamp(48px,6vw,96px)">
+
+    <!-- 卡 1：media-left 文档结构树 + 编号列表 -->
+    <article class="feature-card reveal">
+      <div class="media halftone">
+        <div class="win">
+          <div class="win-bar">
+            <span class="traffic"><i></i><i></i><i></i></span>
+            <span class="win-title">outline · MiMo-Warm-Halftone.md</span>
+          </div>
+          <div class="doc-tree">
+            <div class="lv1"># 设计风格：暖纸半调</div>
+            <div class="lv2">设计哲学 / 视觉气质 / <span class="hl">DNA</span></div>
+            <div class="lv2">色彩策略 / 字体系统</div>
+            <div class="lv2">间距布局 / 边框表面阴影</div>
+            <div class="lv2">组件样式与交互</div>
+            <div class="lv2"><span class="hl">大胆要素</span>（签名元素）</div>
+            <div class="lv2">效果与动画 / 响应式策略</div>
+            <div class="lv2">可访问性 / 实现说明</div>
+          </div>
+        </div>
+      </div>
+      <div class="copy">
+        <h3>手册的九个章节</h3>
+        <ol class="num-list">
+          <li><span class="n">01</span><p>哲学与 DNA 先行：先写清气质与签名特征，再给数值。</p></li>
+          <li><span class="n">02</span><p>Token 全部表格化：hex、px、阴影值可直接复制执行。</p></li>
+          <li><span class="n">03</span><p>组件按类型逐一规定样式与交互行为，含悬停与聚焦。</p></li>
+          <li><span class="n">04</span><p>结尾附实现说明：单文件、:root 变量化、纹理纯 CSS。</p></li>
+        </ol>
+        <a class="copy-link" href="./MiMo-Warm-Halftone.md" target="_blank" rel="noopener">查看目录全文 <span class="arrow">→</span></a>
+      </div>
+    </article>
+
+    <!-- 卡 2：media-right 幻灯片窗口 + 编号列表 -->
+    <article class="feature-card flip reveal">
+      <div class="media halftone">
+        <div class="win">
+          <div class="win-bar">
+            <span class="traffic"><i></i><i></i><i></i></span>
+            <span class="win-title">成果预览 · Slides</span>
+          </div>
+          <div class="slide-shot" role="img" aria-label="金光时分的雾山湖泊油画风格幻灯片"
+               style="background-image:url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=19th%20century%20romanticism%20oil%20painting%20landscape%2C%20misty%20mountains%20and%20calm%20lake%20at%20golden%20hour%2C%20warm%20cream%20ochre%20and%20soft%20rose%20tones%2C%20visible%20painterly%20brushstrokes%2C%20sublime%20atmosphere%2C%20no%20text%2C%20no%20people&image_size=landscape_4_3')"></div>
+          <div class="slide-cap"><span class="tape"></span>FINE DELLA PRESENTAZIONE · 期待与你在暖光中相见</div>
+        </div>
+      </div>
+      <div class="copy">
+        <h3>七条大胆要素</h3>
+        <ol class="num-list">
+          <li><span class="n">05</span><p>暖纸三层底：#FCFAF8 / #F5EFE6 / #FFFEFA，用色温不用明度分层。</p></li>
+          <li><span class="n">06</span><p>窗口模型托半调：真实界面悬浮在网点底板上，能力可验证。</p></li>
+          <li><span class="n">07</span><p>纯黑硬切页脚：暖纸主体直接切进 #000，反差收尾。</p></li>
+        </ol>
+        <a class="copy-link" href="#signatures">回看签名元素 <span class="arrow">→</span></a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ======================= Motion ======================= -->
+<section id="motion" class="halftone halftone-band">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="kicker">Chapter 06 · Motion</div>
+      <h2 class="sec-title">效果与动画：<span style="color:var(--ink-muted)">克制的纸片落位</span></h2>
+      <p class="sec-desc">手册第六章：位移不超过 8px，只做透明度与轻微上移；prefers-reduced-motion 时全部禁用。</p>
+    </div>
+    <div class="demo-grid">
+      <div class="demo-card reveal">
+        <h3>入场与悬停</h3>
+        <p class="hint">IntersectionObserver 触发 fade + 8px 上移</p>
+        <div class="btn-row">
+          <button class="btn">悬停看箭头 <span class="arrow">→</span></button>
+          <button class="btn btn-doc" style="height:44px">光带扫过演示</button>
+        </div>
+      </div>
+      <div class="demo-card reveal">
+        <h3>持续动画</h3>
+        <p class="hint">cta-shiny-sweep 3.6s · typewriter-caret-blink 1s</p>
         <div class="composer" style="margin-top:0">
-          <div class="ph">描述任务，输入 / 调用技能<span class="caret"></span></div>
+          <div class="ph">光标在这里闪烁<span class="caret"></span></div>
           <div class="composer-row">
             <span class="chip">＋</span>
-            <span class="chip">◉ 默认权限 ▾</span>
-            <span class="chip">MiMo 新一代模型 ▾</span>
+            <span class="chip">◉ 只读手册 ▾</span>
             <button class="send" aria-label="发送">
               <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg>
             </button>
@@ -826,11 +864,11 @@
         </div>
       </div>
       <div class="demo-card reveal">
-        <h3>发丝线编号列表</h3>
-        <p class="hint">杂志目录排版语言</p>
+        <h3>响应式与可访问性</h3>
+        <p class="hint">clamp() 流式字号 · 1024 / 768 两档断点</p>
         <ol class="num-list" style="margin-top:4px">
-          <li><span class="n">01</span><p>序号 700 字重单独占行。</p></li>
-          <li><span class="n">02</span><p>条目间暖发丝线分隔。</p></li>
+          <li><span class="n">A11y</span><p>主文字对比度 &gt;15:1，正文 &gt;5:1，页脚 &gt;9:1。</p></li>
+          <li><span class="n">A11y</span><p>聚焦环 2px 墨色外描边；触控目标 ≥38px。</p></li>
         </ol>
       </div>
     </div>
@@ -839,18 +877,22 @@
 
 <!-- ======================= Final CTA ======================= -->
 <section class="final-cta halftone halftone-band" id="cta">
-  <h2 class="reveal">和 MiMo 一起<span class="marker">探索</span>无限可能</h2>
-  <p class="reveal">PPT、文档、表格、定时与文件整理，统统交给 MiMo。</p>
+  <h2 class="reveal">把这份手册交给<span class="marker">下一个</span> Agent</h2>
+  <p class="reveal">仅凭此文档即可还原相近视觉：色值、字号、间距、圆角、阴影全部可执行。</p>
   <div class="composer reveal">
-    <div class="ph">描述任务，输入 / 调用技能<span class="caret"></span></div>
+    <div class="ph">描述你要生成的页面，输入 / 调用风格<span class="caret"></span></div>
     <div class="composer-row">
       <span class="chip">＋</span>
-      <span class="chip">◉ 默认权限 ▾</span>
-      <span class="chip">MiMo 新一代模型 ▾</span>
+      <span class="chip">◉ 只读手册 ▾</span>
+      <span class="chip">MiMo Warm Halftone ▾</span>
       <button class="send" aria-label="发送">
         <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg>
       </button>
     </div>
+  </div>
+  <div class="cta-row reveal">
+    <a class="btn" href="./MiMo-Warm-Halftone.md" target="_blank" rel="noopener">打开 MiMo-Warm-Halftone.md <span class="arrow">→</span></a>
+    <a class="btn btn-outline" href="#hero">回到顶部 <span class="arrow">↑</span></a>
   </div>
 </section>
 
@@ -860,52 +902,36 @@
 <footer class="site-footer">
   <div class="footer-grid">
     <div class="footer-brand">
-      <a class="logo" href="#hero"><span class="logo-mark">M</span>MiMo Studio</a>
-      <div class="footer-social">
-        <a href="#" aria-label="邮件"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="3" width="13" height="10" rx="2"/><path d="m2 4 6 5 6-5"/></svg></a>
-        <a href="#" aria-label="社区"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="8" r="6"/><path d="M5 8h6M8 5v6"/></svg></a>
-        <a href="#" aria-label="代码"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="m5.5 5-3 3 3 3M10.5 5l3 3-3 3"/></svg></a>
-        <a href="#" aria-label="论坛"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2.5 3.5h11v7h-7l-3 2.5v-2.5h-1z"/></svg></a>
-      </div>
-      <div class="qr-row">
-        <div class="qr-block"><div class="qr"><canvas width="29" height="29" data-seed="7"></canvas></div><div class="qr-label">开放平台<br />微信群</div></div>
-        <div class="qr-block"><div class="qr"><canvas width="29" height="29" data-seed="13"></canvas></div><div class="qr-label">开放平台<br />飞书群</div></div>
-        <div class="qr-block"><div class="qr"><canvas width="29" height="29" data-seed="21"></canvas></div><div class="qr-label">Token Plan<br />微信群</div></div>
-      </div>
+      <a class="logo" href="#hero"><span class="logo-mark">M</span>MiMo Warm Halftone</a>
+      <p>一份从真实页面逆向提取的风格提示词文档，以及用它自身风格写成的落地页。暖纸、半调与胶带，皆可复现。</p>
     </div>
     <div class="footer-col">
-      <h4>产品</h4>
-      <a href="#">MiMo Desktop</a>
-      <a href="#">MiMo Studio</a>
-      <a href="#">MiMo Claw</a>
-      <a href="#">MiMo Code</a>
+      <h4>手册章节</h4>
+      <a href="#philosophy">设计哲学</a>
+      <a href="#signatures">签名元素</a>
+      <a href="#tokens">Token 系统</a>
+      <a href="#components">组件样式</a>
     </div>
     <div class="footer-col">
-      <h4>开放平台</h4>
-      <a href="#">文档</a>
-      <a href="#">常见问题</a>
-      <a href="#">API 定价</a>
-      <a href="#">Token Plan</a>
+      <h4>风格签名</h4>
+      <a href="#signatures">橙色胶带荧光笔</a>
+      <a href="#signatures">半调网点场</a>
+      <a href="#signatures">ASCII 字符噪点</a>
+      <a href="#doc">编号发丝线列表</a>
     </div>
     <div class="footer-col">
-      <h4>动态</h4>
-      <a href="#">新闻</a>
-      <a href="#">更新日志</a>
-      <a href="#">博客</a>
-    </div>
-    <div class="footer-col">
-      <h4>关于我们</h4>
-      <a href="#">服务条款</a>
-      <a href="#">隐私政策</a>
-      <a href="#">Cookie 政策</a>
+      <h4>交付</h4>
+      <a href="./MiMo-Warm-Halftone.md" target="_blank" rel="noopener">风格提示词 .md</a>
+      <a href="./MiMo-Warm-Halftone.html" target="_blank" rel="noopener">本落地页 .html</a>
+      <a href="#motion">动效与可访问性</a>
     </div>
   </div>
   <div class="footer-bottom">
     <span>Copyright © 2026 beautiful_web_template · MiMo-Warm-Halftone</span>
     <div class="legal">
-      <a href="#">服务协议</a>
-      <a href="#">隐私政策</a>
-      <a href="#">Cookie 偏好设置</a>
+      <a href="#philosophy">设计哲学</a>
+      <a href="#tokens">Token</a>
+      <a href="#doc">手册目录</a>
     </div>
     <div class="theme-toggle" role="group" aria-label="主题切换">
       <button data-mode="system" class="active" aria-label="跟随系统">
@@ -939,33 +965,6 @@
     if (main) main.textContent = buildField(26, 110);
     document.querySelectorAll(".glyph-mini").forEach(function (el) {
       el.textContent = buildField(12, 60);
-    });
-  })();
-
-  /* ---------- 伪二维码（确定性图案，仅供装饰） ---------- */
-  (function () {
-    document.querySelectorAll(".qr canvas").forEach(function (cv) {
-      const ctx = cv.getContext("2d");
-      const n = cv.width, seed = Number(cv.dataset.seed) || 1;
-      ctx.fillStyle = "#fff";
-      ctx.fillRect(0, 0, n, n);
-      ctx.fillStyle = "#000";
-      let s = seed;
-      const rand = function () { s = (s * 9301 + 49297) % 233280; return s / 233280; };
-      for (let y = 0; y < n; y++) {
-        for (let x = 0; x < n; x++) {
-          const finder = (x < 7 && y < 7) || (x >= n - 7 && y < 7) || (x < 7 && y >= n - 7);
-          if (finder) {
-            const fx = x < 7 ? x : x - (n - 7);
-            const fy = y < 7 ? y : y - (n - 7);
-            const ring = fx === 0 || fx === 6 || fy === 0 || fy === 6;
-            const core = fx >= 2 && fx <= 4 && fy >= 2 && fy <= 4;
-            if (ring || core) ctx.fillRect(x, y, 1, 1);
-          } else if (rand() > 0.55) {
-            ctx.fillRect(x, y, 1, 1);
-          }
-        }
-      }
     });
   })();
 
