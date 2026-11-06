@@ -64,6 +64,9 @@ function syncStyle() {
   fields.style.value = style;
   styleLink.href = styleAddress(style).href;
   styleLink.textContent = location.protocol === "file:" ? "当前风格链接（本地文件）" : "当前风格的分享链接";
+  document.querySelector("#copy-style").textContent = location.protocol === "file:" ? "复制所选风格的本地链接" : "复制所选风格链接";
+  document.querySelector("#style-feedback").textContent = "";
+  styleLink.hidden = true;
 }
 
 function chooseStyle(style) {
@@ -155,6 +158,17 @@ window.addEventListener("popstate", syncStyle);
 window.addEventListener("hashchange", syncStyle);
 window.addEventListener("pageshow", syncStyle);
 syncStyle();
+
+document.querySelector("#copy-style").addEventListener("click", async () => {
+  const status = document.querySelector("#style-feedback");
+  try {
+    await navigator.clipboard.writeText(styleLink.href);
+    status.textContent = location.protocol === "file:" ? "已复制本机文件链接，仅适用于这台设备。" : "已复制仅包含风格选择的分享链接。";
+  } catch {
+    styleLink.hidden = false;
+    status.textContent = "请右键或长按上方链接，选择复制链接地址。";
+  }
+});
 
 form.addEventListener("submit", event => {
   event.preventDefault();

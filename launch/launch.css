@@ -56,6 +56,8 @@ legend, h2 { font-size: clamp(1.45rem, 2.5vw, 2.05rem); font-weight: 700; line-h
 .card-content small { font: italic 1rem/1.5 Georgia, serif; color: var(--muted); margin-left: .2rem; }
 .card-content p { color: var(--muted); margin: .35rem 0 .5rem; font-size: .93rem; }
 .style-url { margin: .85rem 0 0; text-align: right; color: var(--muted); }
+.link-button { background: transparent; border: 0; color: inherit; padding: .25rem; font-weight: 500; text-decoration: underline; text-underline-offset: .2em; }
+.style-url span, .style-url a:not([hidden]) { display: block; }
 .section-row { border-top: 1px solid var(--rule); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.5fr); gap: clamp(2rem, 6vw, 5.5rem); margin-top: 2.3rem; padding-top: 2.8rem; }
 .section-heading p { margin-top: .6rem; }
 .fields { display: grid; gap: 1.2rem; }
