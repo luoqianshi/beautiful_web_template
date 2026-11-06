@@ -4,7 +4,9 @@
 
 > **原始设计提示词来源：** 部分模板基于 [designprompts.dev](https://www.designprompts.dev) 的原始设计提示词，其余为本人整理的精美网页模板合集。英文版文档见 [README_en.md](./README_en.md)。
 
-你可以在交互式首页中浏览、预览并复制这些模板，也可以在下方的画廊中查看。
+**[做我的产品发布页 →](https://luoqianshi.github.io/beautiful_web_template/launch/index.html)**　·　[浏览完整画廊](https://luoqianshi.github.io/beautiful_web_template/#gallery)
+
+用同一份真实产品资料比较 [瑞士极简](https://luoqianshi.github.io/beautiful_web_template/launch/cases/swiss.html) 与 [学院派](https://luoqianshi.github.io/beautiful_web_template/launch/cases/academia.html) 两个 Paper-Master 示例。选好风格后，填入你的产品信息，复制任务给自己的 AI 编程工具，按[发布指南](https://luoqianshi.github.io/beautiful_web_template/launch/publish.html)上线。
 
 ## 画廊
 

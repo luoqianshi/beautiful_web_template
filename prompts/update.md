@@ -131,10 +131,10 @@
 
 ### 4.1 在 `templates` 数组中新增条目
 
-定位 `<script>` 标签内的 `const templates = [...]` 数组。按 `name` 字段字母升序，在正确位置插入新对象。对象格式：
+定位首页的 `<script type="application/json" id="template-catalog">`（按 ID 查找）。按 `name` 字段字母升序插入新对象，保持整个清单为有效 JSON。运行 `python script/check_gallery_assets.py` 检查 HTML、Markdown、PNG 和 WebP。对象格式：
 
-```javascript
-{"name": "文件夹名", "display": "显示名称", "description": "中文描述", "tags": ["Dark或Light", "serif或sans-serif或mono"], "htmlPath": "./templates/文件夹名/文件夹名.html", "mdPath": "./templates/文件夹名/文件夹名.md", "shots": ["./assets/screenshots/文件夹名-01.png", "./assets/screenshots/文件夹名-02.png", "./assets/screenshots/文件夹名-03.png"]},
+```json
+{"name": "文件夹名", "display": "显示名称", "description": "中文描述", "tags": ["Dark或Light", "serif或sans-serif或mono"], "htmlPath": "./templates/文件夹名/文件夹名.html", "mdPath": "./templates/文件夹名/文件夹名.md", "shots": ["./assets/screenshots/文件夹名-01.png", "./assets/screenshots/文件夹名-02.png", "./assets/screenshots/文件夹名-03.png"]}
 ```
 
 字段说明：

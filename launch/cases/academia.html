@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Paper-Master 将论文 PDF 转为中文阅读笔记与 HTML 汇报幻灯片。">
+<title>Paper-Master · 学院派案例</title>
+<style>
+*{box-sizing:border-box}
+:root{color-scheme:dark;--wood:#1c1714;--paper:#e8dfd4;--gold:#c9a962;--rule:#54473a;--faint:#c3b4a2;--serif:Georgia,"Songti SC",SimSun,serif}
+body{margin:0;background:#1c1714;color:var(--paper);font-family:var(--serif);background-image:radial-gradient(ellipse at 70% 15%,#30251e,transparent 52%)}
+.wrap{max-width:1510px;margin:auto;padding:0 clamp(20px,5.6vw,94px)}
+h1,h2,h3,p,figure{margin:0}a{color:inherit;text-decoration:none}a:hover{text-decoration:underline;text-underline-offset:4px}a:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+header,footer{display:flex;align-items:center;justify-content:space-between;gap:16px}
+header{border-bottom:3px double var(--rule);padding:22px 0 17px}
+.brand{display:flex;align-items:center;gap:11px;font-variant:small-caps;font-size:21px;letter-spacing:.035em}
+.brand svg{width:27px;height:27px;color:var(--gold)}.back,footer{color:var(--faint);font-size:14px}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:clamp(25px,6vw,108px);padding:35px 0}
+.intro{padding:14px 0}.kicker{color:var(--gold);display:flex;align-items:center;gap:14px;font-size:15px;letter-spacing:.12em}.kicker:before{content:'';width:35px;height:1px;background:var(--gold)}
+h1{font-size:clamp(64px,6.9vw,110px);line-height:1.02;font-weight:400;letter-spacing:-.074em;color:var(--gold);margin:24px 0 27px;white-space:nowrap}
+.lead{font-size:clamp(27px,3.2vw,48px);line-height:1.4;letter-spacing:.055em}.description{max-width:31em;line-height:1.95;color:var(--faint);margin:15px 0 26px;font-size:17px}
+.cta{display:inline-flex;align-items:center;gap:30px;padding:13px 21px;background:var(--gold);color:#221912;border:1px solid #e0c587;font:600 15px var(--serif)}.cta:hover{color:var(--paper);background:#742632;text-decoration:none}
+.plate{margin:auto;width:min(100%,430px);padding:7px;background:#2c231d;border:1px solid #9b8054;border-radius:48% 48% 0 0 / 36% 36% 0 0;box-shadow:0 16px 32px #100c0a80}
+.arch{position:relative;height:clamp(310px,29vw,448px);border:1px solid #8b7556;border-radius:48% 48% 0 0 / 36% 36% 0 0;overflow:hidden;isolation:isolate;background:repeating-linear-gradient(90deg,#282119 0,#30261c 3px,#30251d 5px,#29211b 7px);display:flex;align-items:flex-end;justify-content:center;padding-bottom:34px}
+.arch:before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,#ac8d5666,transparent 65%);z-index:-1}
+.arch:after{content:'';height:11px;bottom:23px;left:0;right:0;border-top:1px solid #a08862;background:linear-gradient(#664b34,#322418);position:absolute;box-shadow:0 5px 7px #100d0a85}
+.folio{width:67%;position:relative;height:76%;border:1px solid #a68d69;border-left:9px solid #6c5034;box-shadow:-8px 3px #38291b,5px -4px #c0aa7c,9px -7px #614c37,12px -10px #998363,12px 7px 20px #17110d;transform:rotate(-6deg);background:repeating-linear-gradient(95deg,#6a3037 0,#6a3037 1px,#602b30 2px,#602b30 3px);padding:10px;z-index:1}
+.folio-inner{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px double #bea265;color:#f0dab0;text-align:center;position:relative;padding:8px}.folio-inner:after{content:'';position:absolute;top:-1px;right:11%;width:15px;height:29%;background:#a88744;clip-path:polygon(0 0,100% 0,100% 100%,50% 83%,0 100%)}
+.book-small{font-size:10px;letter-spacing:.13em}.book-title{font-size:clamp(23px,3vw,40px);line-height:1.04;margin:12px 0 9px;letter-spacing:-.035em}.book-sub{font-size:14px;letter-spacing:.12em}.book-line{width:41%;height:1px;background:#bca16c;margin-top:16px}
+figcaption{text-align:center;font-size:13px;color:var(--faint);margin:13px 0 2px;letter-spacing:.07em}
+.collection{border-top:3px double var(--rule);padding:27px 0 26px}.collection h2{font-size:clamp(23px,2.3vw,36px);font-weight:500;letter-spacing:.09em;color:var(--gold);margin-bottom:20px}
+.shelf{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.entry{padding:21px 24px 22px}.entry:first-child{padding-left:0}.entry+.entry{border-left:1px solid var(--rule)}
+h3{font-size:23px;font-weight:500}code{display:block;margin:7px 0 12px;color:var(--gold);font:13px Consolas,monospace}.entry p{font-size:15px;line-height:1.8;color:var(--faint)}
+footer{padding:0 0 22px}
+@media(max-width:800px){.hero{gap:24px}.entry{padding:16px 14px}h3{font-size:19px}.folio{width:72%}}
+@media(max-width:640px){header{padding:12px 0}.brand{font-size:18px}.brand svg{width:22px}.hero{grid-template-columns:1fr;padding:23px 0;gap:20px}.intro{padding:8px 0}.plate{max-width:330px}.arch{height:305px}h1{margin:18px 0 15px}.description{font-size:16px;margin:12px 0 20px}.shelf{grid-template-columns:1fr}.entry,.entry:first-child{padding:17px 0}.entry+.entry{border-left:0;border-top:1px solid var(--rule)}.collection{padding:21px 0}.book-title{font-size:29px}}
+@media(max-width:640px){.back,footer a{display:inline-flex;align-items:center;min-height:44px}header{padding:5px 0}}
+@media(max-width:640px){h1{font-size:clamp(46px,16vw,80px)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="brand"><svg viewBox="0 0 30 30" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5Q10 3 15 8Q21 3 27 5v19q-6-2-12 3Q10 22 3 24z"/><path d="M15 8v19M6 9q4-1 7 2m5 0q3-3 6-2"/></g></svg>Paper-Master</div><a class="back" href="../index.html?style=academia#brief">用这个风格做产品页</a></header>
+<main>
+<section class="hero" aria-labelledby="intro">
+<div class="intro"><p class="kicker">AI 论文工作站</p><h1 id="intro">Paper-Master</h1><p class="lead">一次阅读，两份产出。</p><p class="description">把论文 PDF 交给支持 Skills 的 AI 工具，整理成中文阅读笔记，也能生成在浏览器里放映的 HTML 组会幻灯片。</p>
+<a class="cta" href="https://github.com/luoqianshi/Paper-Master">查看 GitHub 项目 <span aria-hidden="true">↗</span></a></div>
+<figure class="plate"><div class="arch" role="img" aria-label="一册绯红封面的研究档案，题为 Paper-Master 论文阅读笔记"><div class="folio" aria-hidden="true"><div class="folio-inner"><span class="book-small">RESEARCH NOTES</span><strong class="book-title">Paper<br>Master</strong><span class="book-sub">论文阅读笔记</span><i class="book-line"></i></div></div></div><figcaption>个人书柜 · 收录笔记与汇报</figcaption></figure>
+</section>
+<section class="collection" aria-labelledby="skills"><h2 id="skills">选择工作流</h2><div class="shelf">
+<article class="entry"><h3>论文 → 阅读笔记</h3><code>lzk-paper-reading</code><p>把 PDF 整理为中文 Markdown 笔记，归档对应的论文配图。</p></article>
+<article class="entry"><h3>论文 → 汇报幻灯片</h3><code>html-paper-slides</code><p>从原文制作一份 HTML 演示文稿，在浏览器中直接放映。</p></article>
+<article class="entry"><h3>笔记 → 汇报幻灯片</h3><code>blog-to-slides</code><p>沿用已有阅读笔记组织组会汇报，无需重新提供论文 PDF。</p></article>
+</div></section>
+</main>
+<footer><span>Paper-Master</span><a href="https://luoqianshi.github.io/Paper-Master/">浏览示例书柜 ↗</a></footer>
+</div></body></html>

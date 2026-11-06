@@ -4,7 +4,9 @@ A curated collection of beautiful HTML landing page templates, each exploring a 
 
 > **Source of original design prompts:** Some of the templates are based on original design prompts from [designprompts.dev](https://www.designprompts.dev). Others are collections of beautiful web templates curated by myself.
 
-Browse, preview, and copy the templates in the interactive home page, or explore the gallery below.
+**[Build my product page →](https://luoqianshi.github.io/beautiful_web_template/launch/index.html)** (Chinese) · [Browse the gallery](https://luoqianshi.github.io/beautiful_web_template/#gallery)
+
+Compare the [Swiss Minimalist](https://luoqianshi.github.io/beautiful_web_template/launch/cases/swiss.html) and [Academia](https://luoqianshi.github.io/beautiful_web_template/launch/cases/academia.html) takes on the same Paper-Master brief. Pick a style, enter your own product details, and copy the task into your coding assistant. The [publishing guide](https://luoqianshi.github.io/beautiful_web_template/launch/publish.html) takes you from a local HTML file to a public URL.
 
 ## Gallery
 

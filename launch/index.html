@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="选择一种设计风格，填写真实项目资料，生成可交给 AI 编程工具的中文发布页任务单。">
+  <title>项目发布页向导 · Beautiful Web Template</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="launch.css">
+  <script defer src="launch.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html"><img src="../assets/favicon.svg" alt="" width="32" height="32">Beautiful Web Template</a>
+      <nav aria-label="主要导航"><a href="../index.html#gallery">模板画廊</a><a href="publish.html">发布指南</a></nav>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <div class="hero">
+      <h1>做一张自己的<br><em>项目发布页。</em></h1>
+      <p>选一种风格，填入你的项目资料。把生成的任务单交给 AI 编程工具，就可以开始制作自己的单页网站。</p>
+    </div>
+    <noscript><p class="notice">请启用 JavaScript 生成任务单。你也可以直接打开下面的案例和发布指南。</p></noscript>
+    <form id="builder">
+      <fieldset id="styles">
+        <legend>选择页面风格</legend>
+        <div class="section-intro"><p>用同一个项目的两份成品，看看哪种表达更适合你的读者。</p><a id="process-link" href="cases/process.md">案例制作记录 ↗</a></div>
+        <div class="styles-grid">
+          <article class="style-card">
+            <a class="preview swiss" href="cases/swiss.html" aria-label="查看瑞士极简成品"><img src="cases/swiss.webp" width="700" height="420" alt="瑞士极简案例的页面预览"></a>
+            <div class="card-content">
+              <h3>瑞士极简 <small lang="en">Swiss Minimalist</small></h3>
+              <p>黑白网格与醒目的红色图形，适合快速读懂产品功能。</p>
+              <div class="card-actions"><label class="choice"><input type="radio" name="style" value="swiss" aria-label="使用瑞士极简风格" checked><span class="pick">使用这个风格</span><span class="picked">已选此风格</span></label><a href="cases/swiss.html">打开成品 <span aria-hidden="true">↗</span></a></div>
+            </div>
+          </article>
+          <article class="style-card">
+            <a class="preview academia" href="cases/academia.html" aria-label="查看古典学院成品"><img src="cases/academia.webp" width="700" height="420" alt="古典学院案例的页面预览"></a>
+            <div class="card-content">
+              <h3>古典学院 <small lang="en">Academia</small></h3>
+              <p>深色纸面、黄铜细线与衬线标题，适合讲述项目的来历。</p>
+              <div class="card-actions"><label class="choice"><input type="radio" name="style" value="academia" aria-label="使用古典学院风格"><span class="pick">使用这个风格</span><span class="picked">已选此风格</span></label><a href="cases/academia.html">打开成品 <span aria-hidden="true">↗</span></a></div>
+            </div>
+          </article>
+        </div>
+        <p class="style-url"><a id="style-url" href="?style=swiss">当前风格的分享链接</a></p>
+      </fieldset>
+      <section id="brief" class="brief section-row" aria-labelledby="brief-title">
+        <div class="section-heading"><h2 id="brief-title">填写项目信息</h2><p>只填写你能确认的内容。资料在当前浏览器中处理。</p></div>
+        <div class="fields">
+          <div class="pair">
+            <label>项目名称<input name="project" maxlength="100" required placeholder="例如，Paper-Master"></label>
+            <label>目标读者<input name="audience" maxlength="200" required placeholder="例如，需要整理论文的研究生"></label>
+          </div>
+          <label>一句话介绍<textarea name="summary" maxlength="600" required rows="2" placeholder="它帮读者完成什么？"></textarea></label>
+          <label>已经实现的功能 <span class="hint" id="feature-hint">每行一项，填写 1–3 项。</span><textarea name="features" maxlength="1200" required rows="3" aria-describedby="feature-hint" placeholder="例如，把一篇论文整理成可阅读的 Markdown 笔记"></textarea></label>
+          <div class="pair action-fields">
+            <label>主按钮文字<input name="cta" maxlength="60" required placeholder="例如，查看项目"></label>
+            <label>主按钮目标链接<input name="url" type="url" required placeholder="https://" autocomplete="url" aria-describedby="link-hint"><span class="hint" id="link-hint">填写可访问的 http 或 https 完整地址。</span></label>
+          </div>
+          <div><button class="primary" type="submit">生成发布页任务单 <span aria-hidden="true">→</span></button></div>
+        </div>
+      </section>
+    </form>
+    <section id="result" class="section-row result" aria-labelledby="result-title" hidden>
+      <div class="section-heading"><h2 id="result-title" tabindex="-1">发布页任务单</h2><p>将整份 Markdown 复制或下载后交给 AI 编程工具。里面包含项目事实、风格要求和交付检查。</p></div>
+      <div>
+        <label class="sr-only" for="markdown">生成的 Markdown 任务单</label>
+        <textarea id="markdown" rows="14" readonly spellcheck="false"></textarea>
+        <div class="result-actions"><button type="button" class="primary" id="copy">复制任务单</button><button type="button" class="secondary" id="download">下载 .md</button></div>
+        <p class="feedback" id="feedback" role="status"></p>
+        <p class="next">拿到 HTML 成品后，按<a href="publish.html">发布指南</a>把页面上线。</p>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap"><span>Beautiful Web Template</span><a href="../index.html#gallery">返回模板画廊 ↑</a></div></footer>
+</body>
+</html>

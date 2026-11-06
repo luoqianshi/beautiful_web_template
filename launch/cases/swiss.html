@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Paper-Master 将论文 PDF 转为中文阅读笔记与 HTML 汇报幻灯片。">
+<title>Paper-Master · 瑞士网格案例</title>
+<style>
+*{box-sizing:border-box}
+:root{color-scheme:light;--red:#ff3000;--ink:#101010;--line:#bababa}
+body{margin:0;color:var(--ink);background:white;font-family:Arial,"Microsoft YaHei","PingFang SC",sans-serif}
+a{color:inherit;text-decoration:none}a:focus-visible{outline:3px solid #175ccb;outline-offset:4px}
+.wrap{max-width:1536px;margin:auto;padding:0 clamp(20px,4.8vw,86px)}
+header,footer{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+header{border-bottom:2px solid var(--ink);padding:21px 0}.brand{display:flex;align-items:center;gap:12px;font-size:18px;font-weight:800;letter-spacing:-.04em}
+.mark{width:23px;height:23px;background:var(--ink);display:grid;place-items:center}.mark:before{content:'';width:12px;height:10px;border-top:4px solid white;border-bottom:2px solid white;transform:skewY(-20deg)}
+.back{font-size:14px;padding:8px 0}.back:hover,footer a:hover{text-decoration:underline}
+.hero{display:grid;grid-template-columns:1.3fr 1fr;border-bottom:2px solid var(--ink);margin-top:31px}
+h1,h2,h3,p,figure{margin:0}
+.hero-copy{padding:clamp(28px,4.4vw,70px) clamp(22px,3.5vw,60px) clamp(31px,4vw,65px) 0}
+.kicker,figcaption,code{font-family:Consolas,"Microsoft YaHei",monospace}
+.kicker{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:bold;letter-spacing:.02em}.kicker:before{content:'';width:35px;height:6px;background:var(--red)}
+h1{font-size:clamp(64px,7.8vw,125px);font-weight:750;line-height:.86;letter-spacing:-.089em;margin:33px 0 23px;word-spacing:-.08em}
+h1 span{display:block}
+.lead{font-size:clamp(21px,2.55vw,40px);line-height:1.35;font-weight:800;letter-spacing:-.06em}
+.intro{max-width:38em;font-size:16px;line-height:1.85;margin:16px 0 23px}
+.cta{display:inline-flex;align-items:center;gap:45px;background:var(--ink);color:#fff;padding:14px 17px;font-size:15px;font-weight:bold}.cta:hover{background:var(--red);color:#111}
+.cta b{font-size:19px}.poster{align-self:stretch;display:grid;grid-template-rows:auto 1fr auto;margin-bottom:28px;border:1px solid #aaa;background-color:#f1f1ef}
+.poster-head,figcaption{display:flex;justify-content:space-between;padding:14px 16px;gap:14px;font-size:12px;font-weight:600;letter-spacing:.045em}
+.poster-head{border-bottom:1px solid #aaa}.poster figcaption{border-top:1px solid #aaa;font-size:13px;font-weight:400}
+.diagram{width:100%;height:100%;display:block;min-height:240px}
+.skills{display:grid;grid-template-columns:1fr 2.3fr;gap:5vw;padding:33px 0 46px}
+h2{font-size:clamp(24px,2.6vw,42px);letter-spacing:-.06em;line-height:1.25}.skill{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.18fr);gap:22px;border-top:1px solid var(--line);padding:16px 0}
+h3{font-size:20px;letter-spacing:-.025em}code{display:block;font-size:13px;margin:6px 0 0}.skill p{font-size:14px;line-height:1.8}
+footer{border-top:1px solid var(--ink);padding:18px 0 28px;font-size:13px}
+@media(max-width:800px){.hero{grid-template-columns:1fr 1fr}.lead{font-size:25px}.skills{grid-template-columns:1fr;gap:20px}}
+@media(max-width:620px){header{padding:12px 0}.hero{grid-template-columns:1fr;margin-top:0}.hero-copy{padding-right:0}.poster{margin-bottom:22px}.skills{padding:23px 0 26px}.skill{grid-template-columns:1fr;gap:8px}.preview{max-height:none}.poster-head,figcaption{padding:10px 12px}.diagram{height:auto;min-height:0}.brand{font-size:16px}h1{margin:24px 0 17px}}
+@media(max-width:640px){.back,footer a{display:inline-flex;align-items:center;min-height:44px}header{padding:5px 0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="brand"><i class="mark" aria-hidden="true"></i> Paper-Master</div><a class="back" href="../index.html?style=swiss#brief">用这个风格做产品页</a></header>
+<main>
+<section class="hero" aria-labelledby="intro">
+<div class="hero-copy"><p class="kicker">AI 论文工作站</p><h1 id="intro"><span>Paper-</span><span>Master</span></h1>
+<p class="lead">一次阅读，两份产出。</p><p class="intro">把论文 PDF 交给支持 Skills 的 AI 工具，整理成中文阅读笔记，也能生成在浏览器里放映的 HTML 组会幻灯片。</p>
+<a class="cta" href="https://github.com/luoqianshi/Paper-Master">查看 GitHub 项目 <b aria-hidden="true">↗</b></a></div>
+<figure class="poster"><div class="poster-head"><span>论文工作流</span><span>PDF → MD / HTML</span></div>
+<svg class="diagram" viewBox="0 0 480 380" role="img" aria-label="一篇 PDF 分为两条路径，输出 Markdown 阅读笔记与 HTML 幻灯片" xmlns="http://www.w3.org/2000/svg">
+<defs><pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="#ccc" stroke-width=".9"/></pattern></defs>
+<path fill="url(#grid)" d="M0 0h480v380H0z"/>
+<path fill="none" stroke="#101010" stroke-width="4" d="M104 191H218V91H332M218 191V290H331"/>
+<circle cx="99" cy="191" r="72" fill="#ff3000"/><text x="99" y="202" text-anchor="middle" font-family="Arial,sans-serif" font-size="38" font-weight="700" fill="#101010">PDF</text>
+<path d="M314 48h60l20 20v67h-80Z" fill="white" stroke="#101010" stroke-width="4"/><path d="M373 49v20h20" fill="none" stroke="#101010" stroke-width="3"/>
+<g stroke="#101010" stroke-width="4"><path d="M328 82h45M328 95h50M328 108h31"/></g>
+<path d="M310 264h86v54h-86z" fill="#101010"/><path d="M302 255h86v54h-86z" fill="#ff3000" stroke="#101010" stroke-width="4"/><path d="M335 268v27l22-14z" fill="#101010"/>
+<g font-size="17" font-weight="700" font-family="Arial,sans-serif" text-anchor="middle" fill="#101010"><text x="355" y="165">Markdown</text><text x="352" y="346">HTML PPT</text></g></svg>
+<figcaption><span>输入 / 论文原文</span><span>输出 / 笔记与汇报</span></figcaption></figure>
+</section>
+<section class="skills" aria-labelledby="skills"><h2 id="skills">选择工作流</h2><div>
+<div class="skill"><div><h3>论文 → 阅读笔记</h3><code>lzk-paper-reading</code></div><p>把 PDF 整理为中文 Markdown 笔记，归档对应的论文配图。</p></div>
+<div class="skill"><div><h3>论文 → 汇报幻灯片</h3><code>html-paper-slides</code></div><p>从原文制作一份 HTML 演示文稿，在浏览器中直接放映。</p></div>
+<div class="skill"><div><h3>笔记 → 汇报幻灯片</h3><code>blog-to-slides</code></div><p>沿用已有阅读笔记组织组会汇报，无需重新提供论文 PDF。</p></div>
+</div></section>
+</main>
+<footer><span>Paper-Master</span><a href="https://luoqianshi.github.io/Paper-Master/">浏览示例书柜 ↗</a></footer>
+</div></body></html>

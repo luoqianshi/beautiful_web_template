@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="把 AI 编程工具生成的产品介绍页发布到 GitHub Pages，并验证手机布局和主按钮。">
+  <title>发布到 GitHub Pages · Beautiful Web Template</title>
+  <link rel="icon" href="../assets/favicon.svg">
+  <style>
+    :root { color-scheme:light; --paper:#f7f4ed; --ink:#211f1b; --muted:#5d594f; --rule:#ccc5b7; --accent:#8e351b }
+    * { box-sizing:border-box }
+    body { margin:0; color:var(--ink); background:var(--paper); font:1rem/1.8 system-ui,"Microsoft YaHei",sans-serif }
+    main, nav { width:min(46rem,calc(100% - 2.5rem)); margin:auto }
+    nav { padding:1rem 0; border-bottom:1px solid var(--rule) }
+    a { color:var(--accent); text-underline-offset:.2em }
+    a:focus-visible { outline:3px solid var(--ink); outline-offset:4px }
+    h1,h2 { font-family:Georgia,"Songti SC","SimSun",serif; line-height:1.25 }
+    h1 { margin:2.5rem 0 1rem; font-size:clamp(2rem,5vw,3.4rem) }
+    h2 { margin:1.85rem 0 .65rem; font-size:1.4rem }
+    .intro { font-size:1.1rem; color:var(--muted) }
+    ol,ul { padding-left:1.5rem }
+    li { margin:.55rem 0 }
+    code { padding:.12em .3em; background:#eae4d8; overflow-wrap:anywhere; font-size:.95em }
+    .checks { padding:0; list-style:none }
+    .checks label { display:block; padding:.65rem 0; border-bottom:1px solid var(--rule); cursor:pointer }
+    input { accent-color:var(--accent); margin-right:.55rem }
+    footer { margin:2rem 0 3rem; color:var(--muted) }
+  </style>
+</head>
+<body>
+  <nav aria-label="返回"><a href="index.html">← 做我的产品发布页</a></nav>
+  <main>
+    <h1>发布你的产品页</h1>
+    <p class="intro">准备好 AI 生成的 <code>index.html</code> 和一个 GitHub 账号。以下步骤适用于新建公开仓库、从分支发布的单页网站。</p>
+    <h2>1. 在本机检查成品</h2>
+    <p>双击打开 <code>index.html</code>。核对产品名称、目标用户、真实功能和主按钮。用手机宽度预览，确认文字读得完。若 AI 还生成了图片或样式文件，保留它们与 HTML 的相对目录结构。</p>
+    <h2>2. 把页面放到仓库根目录</h2>
+    <ol>
+      <li>在 GitHub 新建一个公开仓库，例如 <code>my-product-page</code>，勾选添加 README，使用默认分支 <code>main</code>。</li>
+      <li>打开仓库的 <strong>Code → Add file → Upload files</strong>。上传 <code>index.html</code> 及其引用的资源，保留相对路径，再点 <strong>Commit changes</strong>。</li>
+      <li>回到 Code 页。确认第一层就能看到小写的 <code>index.html</code>，图片地址形如 <code>./assets/photo.webp</code>。</li>
+    </ol>
+    <h2>3. 开启 GitHub Pages</h2>
+    <ol>
+      <li>在仓库进入 <strong>Settings → Pages</strong>。在 <strong>Build and deployment</strong> 下选择 <strong>Deploy from a branch</strong>。</li>
+      <li>选择 <strong>main</strong> 和 <strong>/(root)</strong>，点 <strong>Save</strong>。</li>
+      <li>待 Actions 中的 Pages 部署成功，回到 <strong>Settings → Pages → Visit site</strong>。复制这里的完整网址，通常形如 <code>https://用户名.github.io/仓库名/</code>。</li>
+    </ol>
+    <h2>4. 用公开网址做最后检查</h2>
+    <div class="checks">
+      <label><input type="checkbox">在无痕窗口打开公开网址，能看到产品页。</label>
+      <label><input type="checkbox">在 390px 和 1440px 宽度下，标题、功能介绍和按钮均可读，无横向滚动。</label>
+      <label><input type="checkbox">点击主按钮，最终到达任务中填写的真实目标网址。</label>
+      <label><input type="checkbox">确认页面上的数字、价格和评价都有真实依据，所有本地资源加载成功。</label>
+    </div>
+    <h2>遇到问题</h2>
+    <p><strong>网址返回 404。</strong> 先看 Actions 中部署是否成功，再检查发布分支、根目录和入口文件的大小写。<strong>首页正常、图片丢失。</strong> 检查文件名大小写；项目站点部署在仓库名路径下，请使用相对资源地址。修正后提交到 <code>main</code>，等新一轮部署成功再刷新。</p>
+    <footer><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">GitHub Pages 官方创建指南 ↗</a></footer>
+  </main>
+</body>
+</html>
