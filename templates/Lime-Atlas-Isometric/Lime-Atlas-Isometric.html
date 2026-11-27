@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Demo-Atlas · 让每一次提交，都带着系统全景</title>
+<meta name="description" content="Lime Atlas Isometric 风格组件库：石墨绿黑基底、酸性青柠信号、等距认知地图 SVG 动图。示例文案与名称均为测试数据。"/>
+<style>
+/* ============ Token 层 ============ */
+:root{
+  color-scheme:dark;
+  --page:#0b100f; --surface:#111917; --surface-alt:#17221f;
+  --text:#eef3ef; --muted:#a6b5ad; --quiet:#899b90; --line:#2b3831;
+  --lime:#b6d94b; --lime-ink:#17210b; --lime-soft:#202d12;
+  --cyan:#88d4d8; --cyan-soft:#142b2d;
+  --amber:#e7bd83; --amber-soft:#2a2319;
+  --header:rgb(11 16 15 / .95); --code:#101714;
+  --map-energy:#97e56a; --map-energy-ink:#193617; --map-energy-edge:#edfce4;
+  --iso-top:#2b3530; --iso-mid:#1b2320; --iso-bot:#131a17;
+  --iso-contour:#3c4841; --iso-trace:#b9c4bd;
+  --prop-face:#e3e9e4; --prop-side-a:#aab5ae; --prop-side-b:#87928b; --prop-line:#5d6862;
+  --cable:#dfe6e0; --cable-under:#79857d; --label-bg:#161d1a; --label-line:#4a564f; --label-text:#f2f6f1;
+  --book-page:#f1f4ee; --book-line:#b9c2b8; --book-cover:#202824;
+  --shadow-pop:0 12px 32px -12px rgb(0 0 0 / .55);
+  --sans:Sora,system-ui,-apple-system,"Segoe UI","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  --mono:"Cascadia Code","SF Mono",Consolas,Monaco,"Liberation Mono",monospace;
+  --r-btn:8px; --r-card:16px; --r-panel:12px; --r-node:10px;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+html[data-theme="light"]{
+  color-scheme:light;
+  --page:#f3f6f0; --surface:#fcfdf9; --surface-alt:#e6eddf;
+  --text:#172519; --muted:#4c6150; --quiet:#536955; --line:#c8d4c2;
+  --lime:#516f0d; --lime-ink:#f4f8ec; --lime-soft:#e3edcf;
+  --cyan:#216a73; --cyan-soft:#deedf0;
+  --amber:#86571a; --amber-soft:#eee5d6;
+  --header:rgb(243 246 240 / .96); --code:#e6eddc;
+  --map-energy:#5aa62e; --map-energy-ink:#12310d; --map-energy-edge:#e5ffd1;
+  --iso-top:#d9dfd4; --iso-mid:#c3ccbe; --iso-bot:#aeb8a9;
+  --iso-contour:#9aa694; --iso-trace:#5d6b58;
+  --prop-face:#fbfdf8; --prop-side-a:#c6cfc2; --prop-side-b:#a8b3a3; --prop-line:#6b7767;
+  --cable:#ffffff; --cable-under:#9aa694; --label-bg:#2a352c; --label-line:#5d6b58; --label-text:#f4f8ec;
+  --book-page:#ffffff; --book-line:#c3ccbe; --book-cover:#39443a;
+  --shadow-pop:0 12px 32px -12px rgb(23 37 25 / .25);
+}
+/* ============ 基础 ============ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{background:var(--page);color:var(--text);font:400 16px/1.7 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--lime);color:var(--lime-ink)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--page)}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px;border:2px solid var(--page)}
+::-webkit-scrollbar-thumb:hover{background:var(--quiet)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+img,svg{display:block}
+.wrap{max-width:1200px;margin-inline:auto;padding-inline:24px}
+.icon{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.icon.tiny{width:14px;height:14px}
+:focus-visible{outline:2px solid var(--lime);outline-offset:2px;border-radius:4px}
+/* ============ 按钮 ============ */
+.button{display:inline-flex;justify-content:center;align-items:center;gap:12px;white-space:nowrap;border:1px solid transparent;border-radius:var(--r-btn);font-size:14px;font-weight:650;padding:14px 23px;line-height:1.5;min-height:44px;transition:transform .25s,background .25s,border-color .25s,color .25s}
+.button:hover{transform:translateY(-2px)}
+.button:active{transform:translateY(1px)}
+.button.primary{background:var(--lime);color:var(--lime-ink)}
+.button.primary:hover{background:color-mix(in srgb,var(--lime) 88%,var(--text))}
+.button.secondary{border-color:var(--line);background:var(--surface);color:var(--text)}
+.button.secondary:hover{border-color:var(--quiet)}
+.button.small{font-size:13px;padding:10px 15px;gap:9px;min-height:38px}
+.button.small .icon{width:16px;height:16px}
+.text-link{display:inline-flex;align-items:center;gap:6px;color:var(--lime);font-size:14px;font-weight:600}
+.text-link:hover{text-decoration:underline}
+/* ============ 顶栏 ============ */
+.site-header{position:fixed;inset:0 0 auto;z-index:50;height:64px;background:var(--header);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+.header-inner{max-width:1400px;margin-inline:auto;height:100%;display:flex;align-items:center;gap:28px;padding-inline:24px}
+.brand{display:flex;align-items:center;gap:10px;font:700 15px/1 var(--mono);letter-spacing:.04em}
+.brand-mark{width:32px;height:32px;border-radius:8px;background:var(--lime);display:grid;place-items:center;color:var(--lime-ink)}
+.brand-mark svg{width:20px;height:20px}
+.main-nav{display:flex;gap:26px;margin-inline:auto}
+.main-nav a{font-size:14px;color:var(--muted);padding:6px 2px;transition:color .2s}
+.main-nav a:hover{color:var(--text)}
+.main-nav a.active{color:var(--text);font-weight:650}
+.header-tools{display:flex;align-items:center;gap:10px}
+.lang-pill{border:1px solid var(--line);border-radius:999px;font:600 12px/1 var(--mono);padding:9px 12px;color:var(--muted);min-height:34px}
+.lang-pill:hover{color:var(--text);border-color:var(--quiet)}
+.theme-btn{width:36px;height:36px;border:1px solid var(--line);border-radius:999px;display:grid;place-items:center;color:var(--muted);transition:color .2s,border-color .2s}
+.theme-btn:hover{color:var(--text);border-color:var(--quiet)}
+.gh-link{display:flex;align-items:center;gap:7px;font-size:14px;color:var(--muted)}
+.gh-link:hover{color:var(--text)}
+.menu-btn{display:none;width:40px;height:40px;border:1px solid var(--line);border-radius:8px;place-items:center;color:var(--muted)}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;z-index:49;background:var(--surface);border-bottom:1px solid var(--line);padding:16px 24px;flex-direction:column;gap:4px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{padding:12px 8px;font-size:14px;color:var(--muted);border-radius:8px}
+.mobile-menu a:hover{background:var(--surface-alt);color:var(--text)}
+/* ============ Hero ============ */
+.hero{position:relative;isolation:isolate;overflow:hidden;min-height:680px;display:flex;align-items:center;padding-top:64px}
+.hero-inner{position:relative;z-index:1;pointer-events:none;width:100%}
+.hero-copy{width:760px;max-width:60%;padding-block:72px;pointer-events:auto}
+.hero h1{font-size:clamp(34px,3.3vw,50px);font-weight:650;line-height:1.36;letter-spacing:-.035em}
+.hero h1 span{color:var(--lime);font-size:.92em}
+.hero-copy>p{font-size:18px;line-height:1.9;color:var(--muted);max-width:540px;margin-top:27px}
+.hero-actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+.hero-art{position:absolute;width:56%;height:100%;right:-3%;top:0;z-index:0}
+.hero-map{display:block;width:100%;height:100%;overflow:visible;pointer-events:none;mask-image:linear-gradient(to right,transparent,black 5%,black 96%,transparent)}
+.map-hint{position:absolute;left:10%;bottom:4%;display:flex;align-items:center;min-height:44px;max-width:56%;font-size:12px;line-height:1.6;color:var(--muted);pointer-events:none}
+.scene-toggle{position:absolute;right:9%;bottom:4%;display:flex;align-items:center;gap:8px;min-height:44px;padding:9px 13px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-size:12px;color:var(--muted);transition:border-color .2s,color .2s}
+.scene-toggle:hover{border-color:var(--quiet);color:var(--text)}
+.scene-toggle .icon{width:15px;height:15px}
+/* ---- 地图 SVG 样式 ---- */
+.iso-layer-bot{fill:var(--iso-bot)}
+.iso-layer-mid{fill:var(--iso-mid)}
+.iso-layer-top{fill:var(--iso-top)}
+.iso-contour{fill:none;stroke:var(--iso-contour);stroke-width:2;opacity:.6}
+.iso-trace{fill:none;stroke:var(--iso-trace);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;opacity:.7}
+.iso-trace-dot{fill:var(--iso-trace);opacity:.7}
+.prop-face{fill:var(--prop-face)}
+.prop-a{fill:var(--prop-side-a)}
+.prop-b{fill:var(--prop-side-b)}
+.prop-line{stroke:var(--prop-line);stroke-width:2;stroke-linecap:round;fill:none}
+.prop-accent{fill:var(--map-energy)}
+.cable-under{fill:none;stroke:var(--cable-under);stroke-width:13;stroke-linecap:round;opacity:.55}
+.cable{fill:none;stroke:var(--cable);stroke-width:10;stroke-linecap:round}
+.cable-dash{fill:none;stroke:var(--iso-trace);stroke-width:2;stroke-dasharray:5 9;stroke-linecap:round;opacity:.5}
+.map-node-ring{fill:var(--map-energy);fill-opacity:.16;stroke:var(--map-energy);stroke-width:2.4}
+.map-node-core{fill:var(--map-energy)}
+.iso-label rect{fill:var(--label-bg);stroke:var(--label-line);stroke-width:1.4}
+.iso-label text{fill:var(--label-text);font:700 17px var(--mono);letter-spacing:.06em;text-anchor:middle}
+.book-cover{fill:var(--book-cover)}
+.book-page{fill:var(--book-page)}
+.book-line{stroke:var(--book-line);stroke-width:2.4;stroke-linecap:round;fill:none}
+.book-label rect{fill:var(--label-bg);stroke:var(--label-line);stroke-width:1.4}
+.book-label text{fill:var(--label-text);font:700 15px var(--mono);letter-spacing:.05em;text-anchor:middle}
+.map-floater-card{fill:var(--prop-face);stroke:var(--prop-side-b);stroke-width:2}
+.map-floater-icon{stroke:var(--prop-line);stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.map-floater-icon .fill{fill:var(--prop-line);stroke:none}
+.map-floater-icon .accent{stroke:var(--map-energy)}
+.map-flow-rail{fill:none;stroke:var(--map-energy);stroke-width:4;stroke-linecap:round;opacity:.23}
+.map-source-ring{fill:var(--map-energy);fill-opacity:.1;stroke:var(--map-energy);stroke-width:2.6;opacity:.55}
+.map-arrival{opacity:0;transform-origin:center;transform-box:fill-box}
+.map-arrival ellipse{fill:var(--map-energy);fill-opacity:.3;stroke:var(--map-energy);stroke-width:3}
+.map-route-signal,.map-packet-tail{opacity:0}
+.map-packet-halo{fill:var(--map-energy);opacity:.2}
+.map-packet-body{fill:var(--map-energy);stroke:var(--map-energy-edge);stroke-width:1.8}
+.map-packet-core{fill:var(--map-energy-edge)}
+.map-packet-tail{fill:var(--map-energy)}
+.map-flow-group.is-selected .map-flow-rail{stroke-width:6}
+.map-flow-group.is-selected .map-source-ring{stroke-width:4.5}
+.map-sem{opacity:0;pointer-events:none}
+.map-sem path{fill:var(--map-energy-edge);stroke:var(--map-energy);stroke-width:2.2;stroke-linejoin:round}
+.map-sem text{fill:var(--map-energy-ink);font:750 22px var(--sans);text-anchor:middle}
+.map-module-hit{pointer-events:all;cursor:pointer;outline:none}
+.map-hit-area{fill:transparent;stroke:var(--map-energy);stroke-width:3;stroke-opacity:0;stroke-linejoin:round;transition:fill-opacity .2s}
+.map-module-hit:hover .map-hit-area{fill:var(--map-energy);fill-opacity:.05}
+.map-module-hit.is-selected .map-hit-area{fill:var(--map-energy);fill-opacity:.05}
+.map-module-hit:focus-visible .map-hit-area{stroke-opacity:1;stroke-dasharray:9 6}
+.hero-art[data-motion="running"] .map-floater,.hero-art[data-motion="running"] .map-route-signal,.hero-art[data-motion="running"] .map-packet-tail{will-change:transform}
+.hero-art[data-motion="reduced"] .map-flow-rail{opacity:.32}
+.hero-art[data-motion="reduced"] .map-source-ring{opacity:.7}
+/* ---- 事实条 ---- */
+.product-facts{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.product-facts ul{list-style:none;display:grid;grid-template-columns:repeat(4,1fr)}
+.product-facts li{padding:26px 28px;border-left:1px solid var(--line)}
+.product-facts li:first-child{border-left:none}
+.product-facts strong{display:block;font:700 14px/1.4 var(--mono);letter-spacing:.05em;color:var(--lime)}
+.product-facts span{display:block;font-size:14px;color:var(--muted);margin-top:6px}
+.agent-strip{display:flex;align-items:center;gap:24px;padding:18px 0;font-size:13px;color:var(--quiet)}
+.agent-strip .agents{display:flex;gap:28px;margin-inline:auto;font:600 14px var(--mono);color:var(--quiet);flex-wrap:wrap}
+.agent-strip .text-link{font-size:12px}
+/* ============ 通用区块 ============ */
+.section{padding-block:104px}
+.section-heading h2{font-size:clamp(30px,3vw,42px);font-weight:650;line-height:1.3;letter-spacing:-.03em}
+.section-heading p{font-size:17px;color:var(--muted);margin-top:20px;max-width:640px}
+.reveal{opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease-out),transform .5s var(--ease-out)}
+.reveal.in-view{opacity:1;transform:none}
+/* ============ Benefits ============ */
+.benefit-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:52px}
+.benefit{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);padding:32px;transition:border-color .25s}
+.benefit:hover{border-color:color-mix(in srgb,var(--line) 55%,var(--quiet))}
+.benefit .icon{width:22px;height:22px;color:var(--muted)}
+.benefit h3{font-size:18px;font-weight:650;margin-top:22px}
+.benefit p{font-size:15px;color:var(--muted);margin-top:14px}
+.benefit-flow{display:flex;align-items:center;gap:10px;margin-top:26px;font-size:13px;color:var(--quiet);flex-wrap:wrap}
+.benefit-flow strong{color:var(--lime);font-weight:650}
+.benefit-flow .icon{width:13px;height:13px;margin:0}
+/* ============ Quick Start ============ */
+.quickstart-layout{display:grid;grid-template-columns:38fr 62fr;gap:32px;margin-top:52px;align-items:start}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;padding:4px;gap:2px;background:var(--surface)}
+.seg button{padding:9px 18px;border-radius:7px;font-size:14px;color:var(--quiet);min-height:38px;transition:background .2s,color .2s}
+.seg button.selected{background:var(--surface-alt);color:var(--text);font-weight:600}
+.setup-steps{position:relative;margin-top:26px;display:flex;flex-direction:column;gap:10px}
+.setup-marker{position:absolute;left:0;top:0;border-radius:10px;background:var(--lime-soft);border-left:3px solid var(--lime);transition:transform .3s var(--ease-out),width .3s,height .3s;pointer-events:none}
+.setup-step{position:relative;display:flex;gap:14px;padding:16px 18px;border-radius:10px;text-align:left;align-items:flex-start;transition:background .2s}
+.setup-step .num{width:26px;height:26px;border-radius:999px;border:1px solid var(--line);display:grid;place-items:center;font:600 13px var(--mono);color:var(--quiet);flex:none;margin-top:2px}
+.setup-step strong{display:block;font-size:14px;font-weight:650}
+.setup-step small{display:block;font-size:13px;color:var(--muted);margin-top:3px}
+.setup-step.selected .num{background:var(--lime);border-color:var(--lime);color:var(--lime-ink)}
+.code-panel{background:var(--code);border:1px solid var(--line);border-radius:var(--r-panel);overflow:hidden}
+.code-head{display:flex;align-items:center;gap:16px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.code-head .eyebrow{font-size:12px;color:var(--quiet)}
+.code-head strong{display:block;font-size:14px;font-weight:650;margin-top:2px}
+.code-head .button{margin-left:auto}
+.code-body{padding:20px;font:400 14px/1.8 var(--mono);color:var(--muted);white-space:pre-wrap;overflow-x:auto}
+.code-body b{color:var(--text);font-weight:600}
+.code-body .cm{color:var(--quiet)}
+/* ============ Workflow ============ */
+.workflow-panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);padding:44px;margin-top:32px;display:grid;grid-template-columns:1.2fr 1fr;gap:56px}
+.workflow-copy h3{font-size:24px;font-weight:650;letter-spacing:-.02em}
+.workflow-copy>p{font-size:15px;color:var(--muted);margin-top:16px}
+.workflow-quote{border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+.workflow-quote .q-head{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--quiet)}
+.workflow-quote .q-head .button{margin-left:auto}
+.workflow-quote blockquote{font-size:16px;font-weight:600;margin-top:16px;line-height:1.7}
+.workflow-quote small{display:block;font-size:13px;color:var(--quiet);margin-top:12px}
+.workflow-track{list-style:none;position:relative;padding-left:26px}
+.workflow-track::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.workflow-track .track-fill{position:absolute;left:5px;top:8px;width:2px;background:var(--lime);height:calc(var(--flow-progress,1) * (100% - 16px));transition:height .2s linear}
+.workflow-track li{position:relative;padding-bottom:30px}
+.workflow-track li:last-child{padding-bottom:0}
+.workflow-track li::before{content:"";position:absolute;left:-26px;top:5px;width:12px;height:12px;border-radius:999px;border:2px solid var(--line);background:var(--surface)}
+.workflow-track li.flow-passed::before,.workflow-track li.flow-active::before{background:var(--lime);border-color:var(--lime)}
+.workflow-track strong{display:block;font-size:14px;font-weight:650}
+.workflow-track li.flow-active strong{color:var(--lime)}
+.workflow-track small{display:block;font-size:13px;color:var(--muted);margin-top:3px}
+.workflow-extra{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+.workflow-extra article{display:flex;gap:16px;padding:26px 8px}
+.workflow-extra .icon{width:22px;height:22px;color:var(--muted);margin-top:3px}
+.workflow-extra h4{font-size:15px;font-weight:650}
+.workflow-extra p{font-size:14px;color:var(--muted);margin-top:8px}
+.workflow-extra code{font:600 13px var(--mono);color:var(--cyan)}
+/* ============ Live Demo ============ */
+.demo-panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);margin-top:32px;overflow:hidden}
+.demo-toolbar{display:flex;align-items:center;gap:16px;padding:20px 24px;border-bottom:1px solid var(--line)}
+.demo-toolbar strong{font-size:15px;font-weight:650}
+.demo-toolbar small{font-size:13px;color:var(--quiet)}
+.demo-toolbar .button{margin-left:auto}
+.demo-layout{display:grid;grid-template-columns:70fr 30fr;min-height:520px}
+.graph-area{min-width:0;display:flex;flex-direction:column;border-right:1px solid var(--line)}
+.graph-filters{display:flex;align-items:center;gap:6px;padding:18px 24px}
+.graph-filters button{font-size:12px;padding:7px 13px;border:1px solid transparent;background:transparent;color:var(--quiet);border-radius:6px;min-height:32px}
+.graph-filters button.selected{color:var(--lime);background:var(--lime-soft);border-color:color-mix(in srgb,var(--lime) 25%,transparent)}
+.graph-canvas{position:relative;width:100%;min-width:0;aspect-ratio:780/440;min-height:340px;isolation:isolate;flex:1}
+.graph-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.graph-lines path{fill:none;stroke-width:1}
+.base-lines path{stroke:var(--line)}
+.base-lines path.relation-active{stroke:color-mix(in srgb,var(--lime) 45%,var(--line))}
+.signal-lines path{stroke:var(--lime);opacity:.9}
+.signal-lines path.database-signal{stroke:var(--cyan)}
+.graph-canvas.changing .base-lines path.relation-active,.graph-canvas.changing .signal-lines path{stroke:var(--amber)}
+.graph-node{position:absolute;left:var(--node-x);top:var(--node-y);transform:translate(-50%,-50%);display:flex;align-items:center;gap:10px;padding:13px;width:186px;min-height:68px;border:1px solid var(--line);background:var(--surface);border-radius:var(--r-node);color:var(--text);text-align:left;transition:background .25s,border-color .25s,opacity .25s}
+.graph-node:hover,.graph-node.selected{border-color:var(--lime);background:var(--lime-soft)}
+.graph-node:active{transform:translate(-50%,-50%) scale(.98)}
+.graph-node>span{font:400 12px/1.7 var(--mono)}
+.graph-node small{display:block;color:var(--muted);font-family:var(--sans);font-size:11px;margin-top:2px}
+.graph-node .icon{width:21px;height:21px;color:var(--muted)}
+.graph-node.graph-core{width:150px;min-height:113px;flex-direction:column;justify-content:center;text-align:center;gap:9px;background:var(--lime-soft);border-color:color-mix(in srgb,var(--lime) 50%,transparent)}
+.graph-core .core-mark{width:35px;height:35px;border-radius:7px;background:var(--lime);display:grid;place-items:center;color:var(--lime-ink)}
+.graph-core .core-mark svg{width:22px;height:22px}
+.graph-core>span{font-family:var(--sans);font-size:13px;font-weight:650}
+.graph-node.dimmed{opacity:.22}
+.graph-node.affected{border-color:var(--amber);background:var(--amber-soft)}
+.graph-node.node-database.selected{border-color:var(--cyan);background:var(--cyan-soft)}
+.graph-caption{display:flex;align-items:center;gap:19px;padding:14px 24px 20px;font-size:11px;color:var(--quiet)}
+.graph-caption>span{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.graph-caption small{font-size:10px;margin-left:auto}
+.legend-line{width:13px;height:2px;display:block}
+.legend-line.green{background:var(--lime)}
+.legend-line.cyan{background:var(--cyan)}
+.object-detail{padding:26px 24px;min-width:0}
+.object-heading{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.object-heading h3{font:650 16px var(--mono)}
+.object-heading span{font-size:12px;color:var(--cyan)}
+.object-detail dl{margin-top:20px;display:flex;flex-direction:column;gap:16px}
+.object-detail dt{font-size:13px;color:var(--quiet)}
+.object-detail dt b{color:var(--lime);font:700 13px var(--mono);margin-right:6px}
+.object-detail dd{font-size:14px;color:var(--muted);margin-top:4px}
+.change-summary{border-top:1px solid var(--line);margin-top:22px;padding-top:18px}
+.change-summary strong{font-size:14px;font-weight:650}
+.change-summary p{font-size:13px;color:var(--quiet);margin-top:6px}
+.change-summary>div{margin-top:12px}
+.change-summary span{display:block;font-size:12px;color:var(--quiet)}
+.change-summary code{display:block;font:400 13px/1.7 var(--mono);color:var(--muted);margin-top:3px}
+.demo-stages{list-style:none;display:flex;gap:8px;padding:18px 24px 0;flex-wrap:wrap}
+.demo-stages li{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--quiet);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+.demo-stages li code{font:600 11px var(--mono)}
+.demo-stages li.done{color:var(--lime);border-color:color-mix(in srgb,var(--lime) 35%,transparent);background:var(--lime-soft)}
+.demo-stages li.current{color:var(--amber);border-color:color-mix(in srgb,var(--amber) 40%,transparent);background:var(--amber-soft)}
+.demo-status{display:flex;align-items:center;gap:14px;padding:16px 24px 22px;flex-wrap:wrap}
+.state-pill{display:inline-block;color:var(--lime);background:var(--lime-soft);font:12px/1.5 var(--mono);padding:4px 9px;border-radius:5px}
+.state-pill.pending{background:var(--amber-soft);color:var(--amber)}
+.demo-status p{font-size:13px;color:var(--muted)}
+.demo-status .text-button{margin-left:auto;font-size:13px;color:var(--quiet);text-decoration:underline;text-underline-offset:3px}
+.demo-status .text-button:hover{color:var(--text)}
+.demo-disclaimer{font-size:12px;color:var(--quiet);padding:0 24px 22px}
+/* ============ Comparison / FAQ ============ */
+.split-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:start}
+.split-layout .section-heading p{margin-top:20px}
+.split-layout .text-link{margin-top:24px}
+.comparison-stack{display:flex;flex-direction:column}
+.comparison-stack article{padding:24px 4px;border-bottom:1px solid var(--line)}
+.comparison-stack article:first-child{padding-top:0}
+.comparison-stack strong{font-size:15px;font-weight:650}
+.comparison-stack strong span{color:var(--lime)}
+.comparison-stack p{font-size:14px;color:var(--muted);margin-top:8px}
+.faq-list details{border-bottom:1px solid var(--line)}
+.faq-list summary{display:flex;align-items:center;gap:16px;padding:20px 4px;font-size:14px;font-weight:600;cursor:pointer;list-style:none}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary .icon{margin-left:auto;width:16px;height:16px;color:var(--quiet);transition:transform .25s}
+.faq-list details[open] summary .icon{transform:rotate(90deg)}
+.faq-list details p{font-size:15px;color:var(--muted);padding:0 4px 22px}
+/* ============ Principles ============ */
+.principles{background:var(--surface);border-block:1px solid var(--line)}
+.principle-layout{display:grid;grid-template-columns:1fr 1.3fr;gap:56px;margin-top:52px;align-items:start}
+.architecture{display:flex;flex-direction:column;gap:10px}
+.architecture>div{border:1px solid var(--line);border-radius:12px;padding:18px 22px;background:var(--page)}
+.architecture strong{display:block;font-size:14px;font-weight:650}
+.architecture span{display:block;font-size:13px;color:var(--muted);margin-top:3px}
+.architecture .atlas-layer{border-color:color-mix(in srgb,var(--lime) 50%,transparent);background:var(--lime-soft);display:flex;align-items:center;gap:16px}
+.architecture .atlas-layer .core-mark{width:38px;height:38px;border-radius:8px;background:var(--lime);display:grid;place-items:center;color:var(--lime-ink);flex:none}
+.architecture .atlas-layer .core-mark svg{width:24px;height:24px}
+.principle-copy article{padding-bottom:24px}
+.principle-copy h3{font-size:17px;font-weight:650}
+.principle-copy p{font-size:15px;color:var(--muted);margin-top:10px}
+.governance-flow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.governance-flow span{font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+.principle-details{margin-top:44px;display:flex;flex-direction:column;gap:0}
+.principle-details details{border-top:1px solid var(--line)}
+.principle-details summary{display:flex;align-items:center;gap:16px;padding:22px 4px;font-size:15px;font-weight:650;cursor:pointer;list-style:none}
+.principle-details summary::-webkit-details-marker{display:none}
+.principle-details summary .icon{margin-left:auto;width:16px;height:16px;color:var(--quiet);transition:transform .25s}
+.principle-details details[open] summary .icon{transform:rotate(90deg)}
+.volume-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:4px 4px 26px}
+.volume-grid>div{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--page)}
+.volume-grid code{font:600 13px var(--mono);color:var(--lime)}
+.volume-grid strong{display:block;font-size:14px;margin-top:10px}
+.volume-grid p{font-size:13px;color:var(--muted);margin-top:6px}
+.sem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:4px 4px 18px}
+.sem-grid p{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--page)}
+.sem-grid b{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--lime-soft);color:var(--lime);font:700 14px var(--mono)}
+.sem-grid strong{display:block;font-size:14px;margin-top:12px}
+.sem-grid span{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+.details-note{font-size:14px;color:var(--muted);padding:0 4px 26px}
+/* ============ Closing / Footer ============ */
+.closing{text-align:center;padding-block:120px;border-top:1px solid var(--line)}
+.closing h2{font-size:clamp(28px,3vw,40px);font-weight:650;line-height:1.4;letter-spacing:-.03em}
+.closing .button{margin-top:34px}
+.closing p{font-size:14px;color:var(--quiet);margin-top:22px}
+.site-footer{border-top:1px solid var(--line);padding-block:40px 28px}
+.footer-main{display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.footer-brand{display:flex;align-items:center;gap:12px;background:var(--lime);color:var(--lime-ink);border-radius:10px;padding:14px 22px;font:700 18px var(--mono);letter-spacing:.05em}
+.footer-brand svg{width:26px;height:26px}
+.footer-brand small{display:block;font:500 9px var(--sans);letter-spacing:.02em;margin-top:2px}
+.footer-links{margin-left:auto;display:flex;gap:26px;font-size:14px;color:var(--muted)}
+.footer-links a:hover{color:var(--text)}
+.footer-bottom{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid var(--line);margin-top:28px;padding-top:20px;font-size:12px;color:var(--quiet)}
+/* ============ Toast ============ */
+.toast{position:fixed;right:24px;bottom:24px;z-index:60;background:var(--surface);border:1px solid var(--lime);color:var(--text);border-radius:10px;padding:12px 18px;font-size:14px;box-shadow:var(--shadow-pop);opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .25s,transform .25s}
+.toast.show{opacity:1;transform:none}
+/* ============ 响应式 ============ */
+@media (max-width:1024px){
+  .hero-copy{max-width:70%}
+  .hero h1{font-size:36px}
+  .hero-art{width:58%}
+  .quickstart-layout{grid-template-columns:1fr}
+  .demo-layout{grid-template-columns:1fr}
+  .graph-area{border-right:none;border-bottom:1px solid var(--line)}
+  .workflow-panel{grid-template-columns:1fr;gap:36px;padding:32px}
+  .split-layout,.principle-layout{grid-template-columns:1fr;gap:36px}
+  .volume-grid,.sem-grid{grid-template-columns:repeat(2,1fr)}
+  .main-nav{display:none}
+  .menu-btn{display:grid}
+  .gh-link span{display:none}
+}
+@media (max-width:768px){
+  .hero{min-height:0;flex-direction:column;padding-bottom:8px}
+  .hero-inner{padding-top:44px;order:1}
+  .hero-copy{width:100%;max-width:none;padding-block:0 26px}
+  .hero h1{font-size:clamp(27px,5.8vw,42px);line-height:1.48;letter-spacing:-.03em}
+  .hero-copy>p{font-size:15px;line-height:1.8;margin-top:21px;max-width:34ch}
+  .hero-actions{gap:10px;margin-top:25px}
+  .hero-actions .button{padding:13px 17px;font-size:13px;gap:8px}
+  .hero-art{position:relative;width:100%;height:auto;right:auto;top:auto;order:2;padding-bottom:52px}
+  .hero-map{height:auto;aspect-ratio:3/2}
+  .scene-toggle{right:5%;bottom:6px}
+  .map-hint{left:5%;bottom:6px;font-size:11px;max-width:55%}
+  .product-facts ul{grid-template-columns:1fr 1fr}
+  .product-facts li:nth-child(3){border-left:none}
+  .product-facts li{border-top:1px solid var(--line)}
+  .product-facts li:nth-child(-n+2){border-top:none}
+  .agent-strip{flex-wrap:wrap}
+  .agent-strip .agents{margin-inline:0;gap:18px}
+  .section{padding-block:64px}
+  .benefit-grid,.workflow-extra{grid-template-columns:1fr}
+  .graph-node{width:42%;padding:10px 8px;gap:6px}
+  .graph-node>span{font-size:11px}
+  .graph-node .icon{width:15px;height:15px}
+  .graph-node.graph-core{width:112px;min-height:100px}
+  .graph-caption{flex-wrap:wrap}
+  .graph-caption small{flex-basis:100%;margin:0}
+  .header-tools .lang-pill,.header-tools .gh-link{display:none}
+  .brand{font-size:12px;gap:8px;white-space:nowrap}
+  .brand-mark{width:28px;height:28px}
+  .header-tools .button.small{padding:9px 12px;font-size:12px;gap:6px}
+  .volume-grid,.sem-grid{grid-template-columns:1fr}
+  .footer-links{margin-left:0}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- 图标库 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12.5 5 5L20 6.5"/></symbol>
+    <symbol id="i-braces" viewBox="0 0 24 24"><path d="M8 3H7a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1M16 3h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-1"/></symbol>
+    <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.6"/><circle cx="6" cy="18" r="2.6"/><circle cx="18" cy="6" r="2.6"/><path d="M6 8.6v6.8M18 8.6a9 9 0 0 1-9 9"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10z"/><path d="m9 11.5 2.2 2.2L15.5 9"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7m0-4V3m8 18v-9m0-4V3m8 18v-5m0-4V3M1 14h6m2-6h6m2 8h6"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4M21 3v6h-6"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M6.5 10v4M10 6.5h7.5V14"/></symbol>
+    <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 2v6m6-6v6M6 8h12v3a6 6 0 0 1-6 6 6 6 0 0 1-6-6zM12 17v5"/></symbol>
+    <symbol id="i-atlas" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3.4"/><circle cx="6" cy="17" r="3.4"/><circle cx="18" cy="17" r="3.4"/><path d="M12 10.4V14m-3.2 1.2 2-1.2m4.4 1.2-2-1.2"/></symbol>
+  </defs>
+</svg>
+
+<!-- ============ 顶栏 ============ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#top" aria-label="Demo-Atlas 首页">
+      <span class="brand-mark"><svg class="icon" style="stroke-width:2.4"><use href="#i-atlas"/></svg></span>
+      DEMO-ATLAS
+    </a>
+    <nav class="main-nav" aria-label="主导航">
+      <a href="#benefits" data-nav>亮点优势</a>
+      <a href="#quick-start" data-nav>安装使用</a>
+      <a href="#live-demo" data-nav>交互演示</a>
+      <a href="#workflow" data-nav>工作原理</a>
+      <a href="#reference" data-nav>文档 <svg class="icon tiny" style="display:inline-block;vertical-align:-2px"><use href="#i-arrow-up-right"/></svg></a>
+    </nav>
+    <div class="header-tools">
+      <button class="lang-pill" id="lang-toggle" aria-label="切换语言（示例）">EN</button>
+      <button class="theme-btn" id="theme-toggle" aria-label="切换深浅主题"><svg class="icon" id="theme-icon"><use href="#i-sun"/></svg></button>
+      <a class="gh-link" href="#reference"><svg class="icon"><use href="#i-github"/></svg><span>GitHub</span></a>
+      <a class="button primary small" href="#quick-start">立即开始 <svg class="icon"><use href="#i-arrow-up-right"/></svg></a>
+      <button class="menu-btn" id="menu-btn" aria-label="打开菜单" aria-expanded="false"><svg class="icon" id="menu-icon"><use href="#i-list"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="移动端导航">
+  <a href="#benefits">亮点优势</a><a href="#quick-start">安装使用</a><a href="#live-demo">交互演示</a><a href="#workflow">工作原理</a><a href="#reference">文档</a>
+</nav>
+
+<main id="main">
+<!-- ============ Hero ============ -->
+<section class="hero" id="top">
+  <div class="hero-art" id="hero-art" data-motion="static">
+    <svg class="hero-map" id="hero-map" viewBox="0 0 1536 1024" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="系统认知地图示意，点击模块发送示例数据" focusable="false">
+      <!-- 岛屿：CODE（左上） -->
+      <g transform="translate(360 320)">
+        <path class="iso-layer-bot" transform="translate(0 26)" d="M-252,-8 C-248,-52 -162,-86 -70,-94 C32,-102 152,-88 216,-60 C262,-40 270,-6 250,20 C226,54 138,82 38,90 C-72,98 -192,74 -234,40 C-254,24 -256,10 -252,-8Z"/>
+        <path class="iso-layer-mid" transform="translate(0 13)" d="M-252,-8 C-248,-52 -162,-86 -70,-94 C32,-102 152,-88 216,-60 C262,-40 270,-6 250,20 C226,54 138,82 38,90 C-72,98 -192,74 -234,40 C-254,24 -256,10 -252,-8Z"/>
+        <path class="iso-layer-top" d="M-252,-8 C-248,-52 -162,-86 -70,-94 C32,-102 152,-88 216,-60 C262,-40 270,-6 250,20 C226,54 138,82 38,90 C-72,98 -192,74 -234,40 C-254,24 -256,10 -252,-8Z"/>
+        <path class="iso-contour" transform="scale(.8)" d="M-252,-8 C-248,-52 -162,-86 -70,-94 C32,-102 152,-88 216,-60 C262,-40 270,-6 250,20 C226,54 138,82 38,90 C-72,98 -192,74 -234,40 C-254,24 -256,10 -252,-8Z"/>
+        <path class="iso-trace" d="M-190,10 L-120,-24 L-40,-10 L30,-40 L120,-20 M-120,-24 L-110,34 M30,-40 L44,26 M120,-20 L180,6"/>
+        <circle class="iso-trace-dot" cx="-190" cy="10" r="4.5"/><circle class="iso-trace-dot" cx="180" cy="6" r="4.5"/><circle class="iso-trace-dot" cx="-110" cy="34" r="4.5"/><circle class="iso-trace-dot" cx="44" cy="26" r="4.5"/>
+        <!-- 代码瓦片 -->
+        <g transform="translate(-150 -66)">
+          <path class="prop-b" d="M0,0 L52,-14 L52,44 L0,58Z"/><path class="prop-a" d="M52,-14 L64,-8 L64,50 L52,44Z"/><path class="prop-face" d="M0,0 L52,-14 L64,-8 L12,6Z"/>
+          <text x="24" y="30" style="font:700 20px var(--mono);fill:var(--prop-line)" transform="skewY(-15)">&lt;/&gt;</text>
+        </g>
+        <g transform="translate(-84 -84)">
+          <path class="prop-b" d="M0,0 L46,-12 L46,40 L0,52Z"/><path class="prop-a" d="M46,-12 L57,-7 L57,45 L46,40Z"/><path class="prop-face" d="M0,0 L46,-12 L57,-7 L11,5Z"/>
+          <path class="prop-line" d="M10,14 L36,7 M10,26 L30,20" transform="skewY(-15)"/>
+        </g>
+        <!-- 服务器堆栈 -->
+        <g transform="translate(52 -96)">
+          <g><path class="prop-b" d="M0,26 L40,14 L40,30 L0,42Z"/><path class="prop-a" d="M40,14 L72,24 L72,40 L40,30Z"/><path class="prop-face" d="M0,26 L40,14 L72,24 L32,36Z"/></g>
+          <g transform="translate(0 -18)"><path class="prop-b" d="M0,26 L40,14 L40,30 L0,42Z"/><path class="prop-a" d="M40,14 L72,24 L72,40 L40,30Z"/><path class="prop-face" d="M0,26 L40,14 L72,24 L32,36Z"/></g>
+          <g transform="translate(0 -36)"><path class="prop-b" d="M0,26 L40,14 L40,30 L0,42Z"/><path class="prop-a" d="M40,14 L72,24 L72,40 L40,30Z"/><path class="prop-face" d="M0,26 L40,14 L72,24 L32,36Z"/></g>
+        </g>
+        <!-- 文档卡 -->
+        <g transform="translate(-20 -30)">
+          <path class="prop-b" d="M0,0 L44,-12 L44,46 L0,58Z"/><path class="prop-face" d="M0,0 L44,-12 L52,-7 L8,5Z"/>
+          <path class="prop-line" d="M8,16 L34,9 M8,28 L34,21 M8,40 L24,35" transform="skewY(-15)"/>
+        </g>
+        <g class="iso-label" transform="translate(-16 62)"><rect x="-52" y="-17" width="104" height="34" rx="7"/><text y="6">CODE</text></g>
+      </g>
+
+      <!-- 岛屿：API（右上） -->
+      <g transform="translate(1160 310)">
+        <path class="iso-layer-bot" transform="translate(0 26)" d="M-240,-10 C-232,-50 -140,-82 -40,-88 C70,-94 180,-76 232,-46 C266,-26 268,4 244,26 C214,54 120,76 20,80 C-90,84 -196,62 -230,32 C-248,16 -246,4 -240,-10Z"/>
+        <path class="iso-layer-mid" transform="translate(0 13)" d="M-240,-10 C-232,-50 -140,-82 -40,-88 C70,-94 180,-76 232,-46 C266,-26 268,4 244,26 C214,54 120,76 20,80 C-90,84 -196,62 -230,32 C-248,16 -246,4 -240,-10Z"/>
+        <path class="iso-layer-top" d="M-240,-10 C-232,-50 -140,-82 -40,-88 C70,-94 180,-76 232,-46 C266,-26 268,4 244,26 C214,54 120,76 20,80 C-90,84 -196,62 -230,32 C-248,16 -246,4 -240,-10Z"/>
+        <path class="iso-contour" transform="scale(.8)" d="M-240,-10 C-232,-50 -140,-82 -40,-88 C70,-94 180,-76 232,-46 C266,-26 268,4 244,26 C214,54 120,76 20,80 C-90,84 -196,62 -230,32 C-248,16 -246,4 -240,-10Z"/>
+        <path class="iso-trace" d="M-180,4 L-100,-30 L-10,-16 L80,-44 L170,-16 M-100,-30 L-88,26 M80,-44 L92,20"/>
+        <circle class="iso-trace-dot" cx="-180" cy="4" r="4.5"/><circle class="iso-trace-dot" cx="170" cy="-16" r="4.5"/><circle class="iso-trace-dot" cx="-88" cy="26" r="4.5"/><circle class="iso-trace-dot" cx="92" cy="20" r="4.5"/>
+        <g transform="translate(-96 -86)">
+          <g><path class="prop-b" d="M0,26 L40,14 L40,30 L0,42Z"/><path class="prop-a" d="M40,14 L72,24 L72,40 L40,30Z"/><path class="prop-face" d="M0,26 L40,14 L72,24 L32,36Z"/></g>
+          <g transform="translate(0 -18)"><path class="prop-b" d="M0,26 L40,14 L40,30 L0,42Z"/><path class="prop-a" d="M40,14 L72,24 L72,40 L40,30Z"/><path class="prop-face" d="M0,26 L40,14 L72,24 L32,36Z"/></g>
+          <g transform="translate(0 -36)"><path class="prop-b" d="M0,26 L40,14 L40,30 L0,42Z"/><path class="prop-a" d="M40,14 L72,24 L72,40 L40,30Z"/><path class="prop-face" d="M0,26 L40,14 L72,24 L32,36Z"/></g>
+        </g>
+        <g transform="translate(30 -70)">
+          <path class="prop-b" d="M0,10 L56,-6 L56,44 L0,60Z"/><path class="prop-a" d="M56,-6 L88,4 L88,54 L56,44Z"/><path class="prop-face" d="M0,10 L56,-6 L88,4 L32,20Z"/>
+          <path class="prop-line" d="M8,26 L46,15 M8,40 L46,29"/>
+        </g>
+        <g class="iso-label" transform="translate(20 56)"><rect x="-46" y="-17" width="92" height="34" rx="7"/><text y="6">API</text></g>
+      </g>
+
+      <!-- 岛屿：TEST（左下） -->
+      <g transform="translate(350 740)">
+        <path class="iso-layer-bot" transform="translate(0 26)" d="M-260,-6 C-252,-48 -160,-84 -58,-92 C52,-100 170,-84 230,-54 C268,-34 272,-2 250,22 C222,52 128,78 26,84 C-86,90 -200,68 -240,36 C-260,20 -264,10 -260,-6Z"/>
+        <path class="iso-layer-mid" transform="translate(0 13)" d="M-260,-6 C-252,-48 -160,-84 -58,-92 C52,-100 170,-84 230,-54 C268,-34 272,-2 250,22 C222,52 128,78 26,84 C-86,90 -200,68 -240,36 C-260,20 -264,10 -260,-6Z"/>
+        <path class="iso-layer-top" d="M-260,-6 C-252,-48 -160,-84 -58,-92 C52,-100 170,-84 230,-54 C268,-34 272,-2 250,22 C222,52 128,78 26,84 C-86,90 -200,68 -240,36 C-260,20 -264,10 -260,-6Z"/>
+        <path class="iso-contour" transform="scale(.8)" d="M-260,-6 C-252,-48 -160,-84 -58,-92 C52,-100 170,-84 230,-54 C268,-34 272,-2 250,22 C222,52 128,78 26,84 C-86,90 -200,68 -240,36 C-260,20 -264,10 -260,-6Z"/>
+        <path class="iso-trace" d="M-200,8 L-120,-28 L-30,-12 L60,-42 L150,-14 M-120,-28 L-108,30 M60,-42 L72,24"/>
+        <circle class="iso-trace-dot" cx="-200" cy="8" r="4.5"/><circle class="iso-trace-dot" cx="150" cy="-14" r="4.5"/><circle class="iso-trace-dot" cx="-108" cy="30" r="4.5"/><circle class="iso-trace-dot" cx="72" cy="24" r="4.5"/>
+        <!-- 清单卡 -->
+        <g transform="translate(-120 -84)">
+          <path class="prop-b" d="M0,0 L52,-14 L52,58 L0,72Z"/><path class="prop-face" d="M0,0 L52,-14 L62,-8 L10,6Z"/>
+          <path class="prop-line" d="M10,18 L16,24 L26,10 M10,38 L16,44 L26,30" transform="skewY(-15)"/>
+          <path class="prop-line" d="M32,16 L44,12 M32,36 L44,32" transform="skewY(-15)"/>
+        </g>
+        <g transform="translate(-16 -60)">
+          <path class="prop-b" d="M0,0 L44,-12 L44,50 L0,62Z"/><path class="prop-face" d="M0,0 L44,-12 L52,-7 L8,5Z"/>
+          <path class="prop-line" d="M8,16 L34,9 M8,28 L34,21 M8,40 L24,35" transform="skewY(-15)"/>
+        </g>
+        <!-- 盾勾小瓦片 -->
+        <g transform="translate(96 -34)">
+          <path class="prop-b" d="M0,0 L36,-10 L36,34 L0,44Z"/><path class="prop-face" d="M0,0 L36,-10 L44,-6 L8,4Z"/>
+          <path class="prop-accent" d="M10,16 L16,22 L28,8 L24,6 L16,16 L13,12Z" transform="skewY(-15)"/>
+        </g>
+        <g class="iso-label" transform="translate(-40 60)"><rect x="-50" y="-17" width="100" height="34" rx="7"/><text y="6">TEST</text></g>
+      </g>
+
+      <!-- 岛屿：DB（右） -->
+      <g transform="translate(1270 630)">
+        <path class="iso-layer-bot" transform="translate(0 26)" d="M-210,-8 C-204,-44 -124,-74 -36,-80 C62,-86 158,-70 206,-44 C238,-26 240,2 220,22 C194,48 112,68 22,72 C-76,76 -172,58 -202,30 C-218,16 -214,4 -210,-8Z"/>
+        <path class="iso-layer-mid" transform="translate(0 13)" d="M-210,-8 C-204,-44 -124,-74 -36,-80 C62,-86 158,-70 206,-44 C238,-26 240,2 220,22 C194,48 112,68 22,72 C-76,76 -172,58 -202,30 C-218,16 -214,4 -210,-8Z"/>
+        <path class="iso-layer-top" d="M-210,-8 C-204,-44 -124,-74 -36,-80 C62,-86 158,-70 206,-44 C238,-26 240,2 220,22 C194,48 112,68 22,72 C-76,76 -172,58 -202,30 C-218,16 -214,4 -210,-8Z"/>
+        <path class="iso-contour" transform="scale(.8)" d="M-210,-8 C-204,-44 -124,-74 -36,-80 C62,-86 158,-70 206,-44 C238,-26 240,2 220,22 C194,48 112,68 22,72 C-76,76 -172,58 -202,30 C-218,16 -214,4 -210,-8Z"/>
+        <path class="iso-trace" d="M-160,4 L-90,-26 L-10,-12 L70,-38 L150,-12 M-90,-26 L-80,24 M70,-38 L80,18"/>
+        <circle class="iso-trace-dot" cx="-160" cy="4" r="4.5"/><circle class="iso-trace-dot" cx="150" cy="-12" r="4.5"/>
+        <!-- 圆柱 -->
+        <g transform="translate(-60 -96)">
+          <path class="prop-a" d="M0,10 C0,2 16,-4 36,-4 C56,-4 72,2 72,10 L72,52 C72,60 56,66 36,66 C16,66 0,60 0,52Z"/>
+          <ellipse class="prop-face" cx="36" cy="10" rx="36" ry="12"/>
+          <path class="prop-line" d="M0,30 C0,38 16,44 36,44 C56,44 72,38 72,30"/>
+        </g>
+        <!-- 表格卡 -->
+        <g transform="translate(48 -56)">
+          <path class="prop-b" d="M0,0 L48,-13 L48,44 L0,57Z"/><path class="prop-face" d="M0,0 L48,-13 L57,-8 L9,5Z"/>
+          <path class="prop-line" d="M8,14 L40,5 M8,26 L40,17 M8,38 L40,29 M24,9 L24,44" transform="skewY(-15)"/>
+          <path class="prop-accent" d="M10,16 L20,13 L20,20 L10,23Z" transform="skewY(-15)"/>
+        </g>
+        <g class="iso-label" transform="translate(-6 52)"><rect x="-40" y="-17" width="80" height="34" rx="7"/><text y="6">DB</text></g>
+      </g>
+
+      <!-- 岛屿：CONFIG（下中） -->
+      <g transform="translate(910 850)">
+        <path class="iso-layer-bot" transform="translate(0 26)" d="M-220,-6 C-214,-42 -132,-72 -42,-78 C56,-84 152,-68 200,-42 C232,-24 234,2 214,22 C188,46 108,66 20,70 C-78,74 -176,56 -208,28 C-224,14 -224,4 -220,-6Z"/>
+        <path class="iso-layer-mid" transform="translate(0 13)" d="M-220,-6 C-214,-42 -132,-72 -42,-78 C56,-84 152,-68 200,-42 C232,-24 234,2 214,22 C188,46 108,66 20,70 C-78,74 -176,56 -208,28 C-224,14 -224,4 -220,-6Z"/>
+        <path class="iso-layer-top" d="M-220,-6 C-214,-42 -132,-72 -42,-78 C56,-84 152,-68 200,-42 C232,-24 234,2 214,22 C188,46 108,66 20,70 C-78,74 -176,56 -208,28 C-224,14 -224,4 -220,-6Z"/>
+        <path class="iso-contour" transform="scale(.8)" d="M-220,-6 C-214,-42 -132,-72 -42,-78 C56,-84 152,-68 200,-42 C232,-24 234,2 214,22 C188,46 108,66 20,70 C-78,74 -176,56 -208,28 C-224,14 -224,4 -220,-6Z"/>
+        <path class="iso-trace" d="M-170,4 L-96,-24 L-16,-10 L64,-36 L144,-10 M-96,-24 L-86,22"/>
+        <circle class="iso-trace-dot" cx="-170" cy="4" r="4.5"/><circle class="iso-trace-dot" cx="144" cy="-10" r="4.5"/>
+        <g transform="translate(-130 -70)">
+          <g><path class="prop-b" d="M0,26 L36,15 L36,30 L0,41Z"/><path class="prop-a" d="M36,15 L64,24 L64,39 L36,30Z"/><path class="prop-face" d="M0,26 L36,15 L64,24 L28,35Z"/></g>
+          <g transform="translate(0 -16)"><path class="prop-b" d="M0,26 L36,15 L36,30 L0,41Z"/><path class="prop-a" d="M36,15 L64,24 L64,39 L36,30Z"/><path class="prop-face" d="M0,26 L36,15 L64,24 L28,35Z"/></g>
+        </g>
+        <!-- 齿轮 -->
+        <g transform="translate(-6 -52)">
+          <ellipse class="prop-a" cx="0" cy="14" rx="30" ry="12"/>
+          <g class="prop-face">
+            <ellipse cx="0" cy="0" rx="26" ry="11"/>
+            <g><rect x="-4" y="-16" width="8" height="8" rx="2"/><rect x="-4" y="8" width="8" height="8" rx="2"/><rect x="-30" y="-4" width="8" height="8" rx="2"/><rect x="22" y="-4" width="8" height="8" rx="2"/><rect x="-23" y="-13" width="8" height="8" rx="2" transform="rotate(20)"/><rect x="15" y="-13" width="8" height="8" rx="2" transform="rotate(-20)"/></g>
+          </g>
+          <ellipse class="prop-b" cx="0" cy="0" rx="9" ry="4"/>
+        </g>
+        <g transform="translate(72 -40)">
+          <path class="prop-b" d="M0,0 L40,-11 L40,40 L0,51Z"/><path class="prop-face" d="M0,0 L40,-11 L48,-7 L8,4Z"/>
+          <path class="prop-line" d="M8,14 L32,7 M8,26 L32,19 M8,38 L22,34" transform="skewY(-15)"/>
+        </g>
+        <g class="iso-label" transform="translate(-16 52)"><rect x="-62" y="-17" width="124" height="34" rx="7"/><text y="6">CONFIG</text></g>
+      </g>
+
+      <!-- 缆线与节点 -->
+      <g aria-hidden="true">
+        <path class="cable-dash" d="M420 200 C560 120 880 120 1060 200"/>
+        <path class="cable-dash" d="M1330 380 C1420 440 1420 520 1340 570"/>
+        <path class="cable-dash" d="M1180 720 C1100 790 1020 810 960 810"/>
+        <path class="cable-dash" d="M700 880 C560 880 460 830 420 790"/>
+        <path class="cable-dash" d="M200 620 C120 520 130 420 220 370"/>
+        <path class="cable-under" d="M467 414 C489 443 563 454 597 467"/>
+        <path class="cable" d="M467 414 C489 443 563 454 597 467"/>
+        <path class="cable-under" d="M957 324 C909 340 943 393 866 422"/>
+        <path class="cable" d="M957 324 C909 340 943 393 866 422"/>
+        <path class="cable-under" d="M1083 554 C1058 521 1004 501 939 509"/>
+        <path class="cable" d="M1083 554 C1058 521 1004 501 939 509"/>
+        <path class="cable-under" d="M459 618 C454 574 509 535 575 523"/>
+        <path class="cable" d="M459 618 C454 574 509 535 575 523"/>
+        <path class="cable-under" d="M833 761 C823 700 697 697 678 571"/>
+        <path class="cable" d="M833 761 C823 700 697 697 678 571"/>
+        <g><ellipse class="map-node-ring" cx="467" cy="414" rx="15" ry="8"/><ellipse class="map-node-core" cx="467" cy="414" rx="6" ry="3.4"/></g>
+        <g><ellipse class="map-node-ring" cx="957" cy="324" rx="15" ry="8"/><ellipse class="map-node-core" cx="957" cy="324" rx="6" ry="3.4"/></g>
+        <g><ellipse class="map-node-ring" cx="1083" cy="554" rx="15" ry="8"/><ellipse class="map-node-core" cx="1083" cy="554" rx="6" ry="3.4"/></g>
+        <g><ellipse class="map-node-ring" cx="459" cy="618" rx="15" ry="8"/><ellipse class="map-node-core" cx="459" cy="618" rx="6" ry="3.4"/></g>
+        <g><ellipse class="map-node-ring" cx="833" cy="761" rx="15" ry="8"/><ellipse class="map-node-core" cx="833" cy="761" rx="6" ry="3.4"/></g>
+      </g>
+
+      <!-- 中央全书 -->
+      <g transform="translate(740 480)">
+        <path class="book-cover" d="M-150,26 L0,-8 L150,26 L150,52 L0,86 L-150,52Z"/>
+        <path class="book-cover" d="M-140,16 L0,-16 L140,16 L140,38 L0,70 L-140,38Z" opacity=".7"/>
+        <path class="book-page" d="M-132,6 C-90,-14 -40,-20 -4,-12 L-4,52 C-40,44 -90,48 -132,66Z"/>
+        <path class="book-page" d="M132,6 C90,-14 40,-20 4,-12 L4,52 C40,44 90,48 132,66Z"/>
+        <g class="book-line">
+          <path d="M-116,10 C-84,-4 -48,-8 -16,-2 M-116,22 C-84,8 -48,4 -16,10 M-116,34 C-84,20 -48,16 -16,22 M-116,46 C-84,32 -48,28 -16,34"/>
+          <path d="M116,10 C84,-4 48,-8 16,-2 M116,22 C84,8 48,4 16,10 M116,34 C84,20 48,16 16,22 M116,46 C84,32 48,28 16,34"/>
+        </g>
+        <g class="book-label" transform="translate(0 78)"><rect x="-88" y="-16" width="176" height="32" rx="7"/><text y="5">SYSTEM-ATLAS</text></g>
+      </g>
+
+      <!-- FRAS 标签页 -->
+      <g class="map-sem" data-sem="F"><path d="M699 364 L712 352 L730 361 L731 397 L695 388Z"/><text x="714" y="379" transform="rotate(12 714 379)">F</text></g>
+      <g class="map-sem" data-sem="R"><path d="M741 373 L755 358 L775 371 L772 410 L737 400Z"/><text x="756" y="393" transform="rotate(12 756 393)">R</text></g>
+      <g class="map-sem" data-sem="A"><path d="M788 387 L804 375 L824 390 L820 423 L782 412Z"/><text x="803" y="406" transform="rotate(12 803 406)">A</text></g>
+      <g class="map-sem" data-sem="S"><path d="M834 400 L850 388 L868 402 L866 437 L830 426Z"/><text x="849" y="420" transform="rotate(12 849 420)">S</text></g>
+
+      <!-- 信号轨道 -->
+      <g class="map-flow-group" data-flow="code" data-curve="467 414 489 443 563 454 597 467" data-duration="2.55" data-phase="0.1">
+        <path class="map-flow-rail" d="M467 414 C489 443 563 454 597 467"/>
+        <ellipse class="map-source-ring" cx="467" cy="414" rx="21" ry="11"/>
+        <g transform="translate(597 467)"><g class="map-arrival"><ellipse rx="20" ry="11"/></g></g>
+        <g class="map-route-signal"><circle class="map-packet-halo" r="15"/><circle class="map-packet-body" r="7"/><circle class="map-packet-core" r="2.8"/></g>
+        <circle class="map-packet-tail" data-tail="0.055" r="5.4"/><circle class="map-packet-tail" data-tail="0.11" r="4.2"/><circle class="map-packet-tail" data-tail="0.165" r="3"/>
+      </g>
+      <g class="map-flow-group" data-flow="api" data-curve="957 324 909 340 943 393 866 422" data-duration="2.85" data-phase="0.42">
+        <path class="map-flow-rail" d="M957 324 C909 340 943 393 866 422"/>
+        <ellipse class="map-source-ring" cx="957" cy="324" rx="21" ry="11"/>
+        <g transform="translate(866 422)"><g class="map-arrival"><ellipse rx="20" ry="11"/></g></g>
+        <g class="map-route-signal"><circle class="map-packet-halo" r="15"/><circle class="map-packet-body" r="7"/><circle class="map-packet-core" r="2.8"/></g>
+        <circle class="map-packet-tail" data-tail="0.055" r="5.4"/><circle class="map-packet-tail" data-tail="0.11" r="4.2"/><circle class="map-packet-tail" data-tail="0.165" r="3"/>
+      </g>
+      <g class="map-flow-group" data-flow="database" data-curve="1083 554 1058 521 1004 501 939 509" data-duration="2.7" data-phase="0.7">
+        <path class="map-flow-rail" d="M1083 554 C1058 521 1004 501 939 509"/>
+        <ellipse class="map-source-ring" cx="1083" cy="554" rx="21" ry="11"/>
+        <g transform="translate(939 509)"><g class="map-arrival"><ellipse rx="20" ry="11"/></g></g>
+        <g class="map-route-signal"><circle class="map-packet-halo" r="15"/><circle class="map-packet-body" r="7"/><circle class="map-packet-core" r="2.8"/></g>
+        <circle class="map-packet-tail" data-tail="0.055" r="5.4"/><circle class="map-packet-tail" data-tail="0.11" r="4.2"/><circle class="map-packet-tail" data-tail="0.165" r="3"/>
+      </g>
+      <g class="map-flow-group" data-flow="test" data-curve="459 618 454 574 509 535 575 523" data-duration="3.05" data-phase="0.25">
+        <path class="map-flow-rail" d="M459 618 C454 574 509 535 575 523"/>
+        <ellipse class="map-source-ring" cx="459" cy="618" rx="21" ry="11"/>
+        <g transform="translate(575 523)"><g class="map-arrival"><ellipse rx="20" ry="11"/></g></g>
+        <g class="map-route-signal"><circle class="map-packet-halo" r="15"/><circle class="map-packet-body" r="7"/><circle class="map-packet-core" r="2.8"/></g>
+        <circle class="map-packet-tail" data-tail="0.055" r="5.4"/><circle class="map-packet-tail" data-tail="0.11" r="4.2"/><circle class="map-packet-tail" data-tail="0.165" r="3"/>
+      </g>
+      <g class="map-flow-group" data-flow="config" data-curve="833 761 823 700 697 697 678 571" data-duration="3.2" data-phase="0.58">
+        <path class="map-flow-rail" d="M833 761 C823 700 697 697 678 571"/>
+        <ellipse class="map-source-ring" cx="833" cy="761" rx="21" ry="11"/>
+        <g transform="translate(678 571)"><g class="map-arrival"><ellipse rx="20" ry="11"/></g></g>
+        <g class="map-route-signal"><circle class="map-packet-halo" r="15"/><circle class="map-packet-body" r="7"/><circle class="map-packet-core" r="2.8"/></g>
+        <circle class="map-packet-tail" data-tail="0.055" r="5.4"/><circle class="map-packet-tail" data-tail="0.11" r="4.2"/><circle class="map-packet-tail" data-tail="0.165" r="3"/>
+      </g>
+
+      <!-- 悬浮图标瓦片 -->
+      <g transform="translate(347 128)"><g class="map-floater" data-component="code" data-dx="5" data-dy="-43" data-roll="1.6" data-duration="2.8">
+        <rect class="map-floater-card" x="-56" y="-62" width="112" height="124" rx="16"/>
+        <g class="map-floater-icon" transform="translate(-30 -32) scale(2.5)"><use href="#i-braces" width="24" height="24"/></g>
+      </g></g>
+      <g transform="translate(760 150)"><g class="map-floater" data-component="relations" data-dx="-5" data-dy="-36" data-roll="-1.4" data-duration="3.5">
+        <rect class="map-floater-card" x="-62" y="-56" width="124" height="112" rx="16"/>
+        <g class="map-floater-icon" transform="translate(-30 -30) scale(2.5)"><use href="#i-branch" width="24" height="24"/></g>
+      </g></g>
+      <g transform="translate(1128 158)"><g class="map-floater" data-component="api" data-dx="5" data-dy="-44" data-roll="1.8" data-duration="3.1">
+        <rect class="map-floater-card" x="-56" y="-62" width="112" height="124" rx="16"/>
+        <g class="map-floater-icon" transform="translate(-30 -32) scale(2.5)"><use href="#i-plug" width="24" height="24"/></g>
+      </g></g>
+      <g transform="translate(228 578)"><g class="map-floater" data-component="test" data-dx="-4" data-dy="-39" data-roll="-1.5" data-duration="3.7">
+        <rect class="map-floater-card" x="-52" y="-58" width="104" height="116" rx="16"/>
+        <g class="map-floater-icon" transform="translate(-27 -29) scale(2.3)"><use href="#i-shield" width="24" height="24"/></g>
+      </g></g>
+      <g transform="translate(1420 452)"><g class="map-floater" data-component="database" data-dx="4" data-dy="-46" data-roll="1.4" data-duration="2.9">
+        <rect class="map-floater-card" x="-48" y="-60" width="96" height="120" rx="16"/>
+        <g class="map-floater-icon" transform="translate(-25 -30) scale(2.1)"><use href="#i-database" width="24" height="24"/></g>
+      </g></g>
+      <g transform="translate(952 690)"><g class="map-floater" data-component="config" data-dx="5" data-dy="-34" data-roll="-1.4" data-duration="3.8">
+        <rect class="map-floater-card" x="-58" y="-54" width="116" height="108" rx="16"/>
+        <g class="map-floater-icon" transform="translate(-28 -27) scale(2.3)"><use href="#i-sliders" width="24" height="24"/></g>
+      </g></g>
+
+      <!-- 模块热区 -->
+      <g class="map-controls">
+        <g class="map-module-hit" role="button" tabindex="0" aria-pressed="false" aria-label="向全景索引发送 CODE 示例数据" data-module="code" data-label="CODE"><path class="map-hit-area" d="M111 275 L343 195 L627 283 L614 358 L405 455 L96 353Z"/></g>
+        <g class="map-module-hit" role="button" tabindex="0" aria-pressed="false" aria-label="向全景索引发送 API 示例数据" data-module="api" data-label="API"><path class="map-hit-area" d="M911 277 L1127 204 L1408 275 L1343 388 L1140 431 L916 347Z"/></g>
+        <g class="map-module-hit" role="button" tabindex="0" aria-pressed="false" aria-label="向全景索引发送 DB 示例数据" data-module="database" data-label="DB"><path class="map-hit-area" d="M1063 572 L1271 502 L1495 596 L1419 712 L1241 761 L1048 653Z"/></g>
+        <g class="map-module-hit" role="button" tabindex="0" aria-pressed="false" aria-label="向全景索引发送 TEST 示例数据" data-module="test" data-label="TEST"><path class="map-hit-area" d="M63 685 L331 608 L649 735 L567 835 L345 877 L77 788Z"/></g>
+        <g class="map-module-hit" role="button" tabindex="0" aria-pressed="false" aria-label="向全景索引发送 CONFIG 示例数据" data-module="config" data-label="CONFIG"><path class="map-hit-area" d="M684 801 L855 740 L1154 812 L1082 921 L880 959 L672 878Z"/></g>
+      </g>
+    </svg>
+    <p class="map-hint" id="map-hint" role="status" aria-live="polite">点击模块，发送示例数据</p>
+    <button class="scene-toggle" id="scene-toggle" aria-label="暂停首屏动画" aria-pressed="false" hidden>
+      <svg class="icon" id="scene-icon"><use href="#i-pause"/></svg><span id="scene-label">暂停动画</span>
+    </button>
+  </div>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <h1>让每一次提交，<br/><span>都带着系统全景。</span></h1>
+      <p>把代码、测试、配置与数据库放进同一份可演进的认知地图，<br/>新会话、新成员、新 Agent，接手即懂。</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#quick-start">立即开始 <svg class="icon"><use href="#i-arrow-up-right"/></svg></a>
+        <a class="button secondary" href="#live-demo">体验认知演示 <svg class="icon"><use href="#i-play"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 事实条 -->
+<div class="product-facts">
+  <div class="wrap">
+    <ul>
+      <li class="reveal"><strong>SYSTEM-ATLAS</strong><span>项目级全局认知</span></li>
+      <li class="reveal"><strong>CODE + DB</strong><span>代码与数据库统一理解</span></li>
+      <li class="reveal"><strong>INCREMENTAL</strong><span>认知随项目增量演进</span></li>
+      <li class="reveal"><strong>GOVERNED</strong><span>原子写入、可审计、可恢复</span></li>
+    </ul>
+  </div>
+</div>
+<div class="wrap agent-strip">
+  <span>接入你已经在用的 Agent</span>
+  <div class="agents"><span>Demo-Agent</span><span>Sample-Code</span><span>Test-Host</span><span>Mock-IDE</span></div>
+  <a class="text-link" href="#quick-start">标准 stdio MCP <svg class="icon tiny"><use href="#i-arrow-up-right"/></svg></a>
+</div>
+
+<!-- ============ Benefits ============ -->
+<section class="section wrap" id="benefits">
+  <div class="section-heading reveal">
+    <h2>让每一次开发，<br/>都站在整个系统之上。</h2>
+    <p>从项目雏形到长期维护，把反复建立的理解，变成随代码保存的认知资产。</p>
+  </div>
+  <div class="benefit-grid">
+    <article class="benefit reveal">
+      <svg class="icon"><use href="#i-branch"/></svg>
+      <h3>从一个想法，持续演进一个系统</h3>
+      <p>沿用你的 AI Agent，把代码、测试、配置和数据库放进同一份系统认知。项目长大，理解也随之更新。</p>
+      <div class="benefit-flow"><span>软件雏形</span><svg class="icon"><use href="#i-arrow-right"/></svg><strong>系统认知</strong><svg class="icon"><use href="#i-arrow-right"/></svg><span>持续演进</span></div>
+    </article>
+    <article class="benefit reveal">
+      <svg class="icon"><use href="#i-tree"/></svg>
+      <h3>已有系统，也能接得住</h3>
+      <p>让 Agent 建立全景索引，先认识模块职责、接口与约束，再进入具体任务。</p>
+      <div class="benefit-flow"><span>已有仓库</span><svg class="icon"><use href="#i-arrow-right"/></svg><strong>全景索引</strong><svg class="icon"><use href="#i-arrow-right"/></svg><span>接手迭代</span></div>
+    </article>
+    <article class="benefit reveal">
+      <svg class="icon"><use href="#i-braces"/></svg>
+      <h3>换 Agent，认知继续</h3>
+      <p>索引随仓库由 Git 版本化。新会话、新成员或另一个 Agent，可以复用与代码版本一致的认知。</p>
+      <div class="benefit-flow"><span>会话 A</span><svg class="icon"><use href="#i-arrow-right"/></svg><strong>项目认知</strong><svg class="icon"><use href="#i-arrow-right"/></svg><span>会话 B</span></div>
+    </article>
+    <article class="benefit reveal">
+      <svg class="icon"><use href="#i-refresh"/></svg>
+      <h3>开发完成，认知同步演进</h3>
+      <p>识别受管对象的变化，引导 Agent 在完成开发与验证后维护受影响条目。</p>
+      <div class="benefit-flow"><span>代码变更</span><svg class="icon"><use href="#i-arrow-right"/></svg><strong>增量维护</strong><svg class="icon"><use href="#i-arrow-right"/></svg><span>aligned</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ Quick Start ============ -->
+<section class="section wrap" id="quick-start">
+  <div class="section-heading reveal">
+    <h2>立即开始。<br/><span style="color:var(--quiet)">把接入交给你的 Agent。</span></h2>
+    <p>准备项目仓库和受支持的 MCP 宿主。安装接入、加载工具、建立索引，按顺序完成即可。</p>
+  </div>
+  <div class="quickstart-layout">
+    <div class="reveal">
+      <div class="seg" role="tablist" aria-label="接入方式">
+        <button class="selected" role="tab" aria-selected="true" data-setup="agent">交给 Agent</button>
+        <button role="tab" aria-selected="false" data-setup="manual">手动接入</button>
+      </div>
+      <div class="setup-steps" id="setup-steps">
+        <div class="setup-marker" id="setup-marker"></div>
+        <button class="setup-step selected" data-step="0"><span class="num">1</span><span><strong>安装并接入</strong><small>下载校验，初始化，运行 scan</small></span></button>
+        <button class="setup-step" data-step="1"><span class="num">2</span><span><strong>加载 MCP 工具</strong><small>按宿主需要刷新或重启会话</small></span></button>
+        <button class="setup-step" data-step="2"><span class="num">3</span><span><strong>建立第一份索引</strong><small>让 Agent 调查系统并创作认知</small></span></button>
+      </div>
+    </div>
+    <div class="code-panel reveal">
+      <div class="code-head">
+        <div><span class="eyebrow">发送给这个 AI Agent</span><strong id="code-title">安装并接入 Demo-Atlas</strong></div>
+        <button class="button secondary small" id="copy-prompt"><svg class="icon"><use href="#i-copy"/></svg><span>复制提示词</span></button>
+      </div>
+      <pre class="code-body" id="code-body"><b>Demo-Atlas 示例仓库：</b>https://example.com/demo/atlas
+
+请从示例发布页下载适合当前操作系统与 CPU 架构的最新发布包，
+并按发布页说明完成校验。没有合适的发布包时，再从官方仓库构建。
+
+解压后，把 <b>atlas</b>（Windows 为 atlas.exe）放在稳定的绝对路径中：
+<span class="cm">1. 运行 init，完成初始化并接入当前宿主的 MCP；</span>
+<span class="cm">2. 运行 scan，不要把 init 写入的索引文件加入 .gitignore；</span>
+<span class="cm">3. 提示我重启 Agent，让 MCP 工具生效。</span></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Workflow ============ -->
+<section class="section wrap" id="workflow">
+  <div class="section-heading reveal">
+    <h2>接下来，像平常一样开发。</h2>
+    <p>第一份索引完成后，只描述业务或工程需求。Agent 结合系统认知调查证据、开发验证，再维护变化对象。</p>
+  </div>
+  <div class="seg reveal" role="tablist" aria-label="开发场景" style="margin-top:32px">
+    <button class="selected" role="tab" aria-selected="true" data-scene="takeover">接手已有项目</button>
+    <button role="tab" aria-selected="false" data-scene="fresh">从新项目开始</button>
+    <button role="tab" aria-selected="false" data-scene="recall">新会话召回认知</button>
+  </div>
+  <div class="workflow-panel reveal">
+    <div class="workflow-copy">
+      <h3 id="wf-title">读懂已有系统，再接手迭代。</h3>
+      <p id="wf-desc">在目标仓库完成接入并建立索引后，直接提出需要完成的开发任务。代码与测试稳定后，引导 Agent 增量维护。</p>
+      <div class="workflow-quote">
+        <div class="q-head"><span>试着对 Agent 说</span><button class="button secondary small" id="copy-quote"><svg class="icon"><use href="#i-copy"/></svg><span>复制</span></button></div>
+        <blockquote id="wf-quote">给任务增加优先级，完成前后端、数据库与测试修改。</blockquote>
+        <small>无需在每个需求末尾重复提醒"维护索引"。</small>
+      </div>
+    </div>
+    <ol class="workflow-track" id="workflow-track">
+      <div class="track-fill"></div>
+      <li><strong>读取当前认知</strong><small>Rules + 全景索引</small></li>
+      <li><strong>核对源码与证据</strong><small>面向当前任务调查</small></li>
+      <li><strong>开发并验证</strong><small>代码、数据库与测试</small></li>
+      <li><strong>增量维护索引</strong><small>重新收敛到 aligned</small></li>
+    </ol>
+  </div>
+  <div class="workflow-extra">
+    <article class="reveal">
+      <svg class="icon"><use href="#i-database"/></svg>
+      <div><h4>项目有数据库？再建立表级认知。</h4><p>显式声明数据源、在宿主环境提供凭据引用后，对 Agent 说"请建立这个项目的数据库索引"。仅读取 Schema，不读取业务数据。</p></div>
+    </article>
+    <article class="reveal">
+      <svg class="icon"><use href="#i-tree"/></svg>
+      <div><h4>随时查看索引的现状。</h4><p>让 Agent 提供本机面板链接，查看索引原文、预算、覆盖范围和治理状态。</p><code>atlas ui --detach --json</code></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ Live Demo ============ -->
+<section class="section wrap" id="live-demo">
+  <div class="section-heading reveal">
+    <h2>把分散的代码，<br/>连成可行动的系统认知。</h2>
+    <p>点选一个对象，查看职责、关系、接口和约束。再模拟变更，观察需要同步维护的认知。</p>
+  </div>
+  <div class="demo-panel reveal">
+    <div class="demo-toolbar">
+      <strong>系统认知演示</strong><small>示例订单系统，非真实项目面板</small>
+      <button class="button secondary small" id="simulate-btn"><svg class="icon"><use href="#i-refresh"/></svg><span>模拟一次变更</span></button>
+    </div>
+    <div class="demo-layout">
+      <div class="graph-area">
+        <div class="graph-filters" role="tablist" aria-label="认知过滤">
+          <button class="selected" role="tab" aria-selected="true" data-filter="whole">全景索引</button>
+          <button role="tab" aria-selected="false" data-filter="code">Code</button>
+          <button role="tab" aria-selected="false" data-filter="database">Database</button>
+        </div>
+        <div class="graph-canvas" id="graph-canvas">
+          <svg class="graph-lines" viewBox="0 0 780 440" preserveAspectRatio="none" aria-hidden="true">
+            <g class="base-lines">
+              <path data-link="whole api" d="M390 217 C285 217 300 90 168 90"/>
+              <path data-link="whole service" d="M390 217 C300 217 280 337 157 337"/>
+              <path data-link="whole test" d="M390 217 C460 217 470 90 604 90"/>
+              <path data-link="whole database" d="M390 217 C505 217 490 337 621 337"/>
+              <path data-link="api service" d="M168 90 C60 140 60 255 157 337"/>
+              <path data-link="service database" d="M157 337 C295 402 478 402 621 337"/>
+              <path data-link="service test" d="M157 337 C355 285 455 155 604 90"/>
+              <path data-link="api test" d="M168 90 C300 35 470 35 604 90"/>
+            </g>
+            <g class="signal-lines" id="signal-lines"></g>
+          </svg>
+          <button class="graph-node node-code" style="--node-x:21.5%;--node-y:20.5%" data-node="api" aria-pressed="false"><svg class="icon"><use href="#i-braces"/></svg><span>api/orders.ts<small>接口与权限边界</small></span></button>
+          <button class="graph-node node-code selected" style="--node-x:20.1%;--node-y:76.5%" data-node="service" aria-pressed="true"><svg class="icon"><use href="#i-braces"/></svg><span>order-service.ts<small>订单业务与事务</small></span></button>
+          <button class="graph-node graph-core" style="--node-x:50%;--node-y:49.3%" data-node="whole" aria-pressed="false"><span class="core-mark"><svg class="icon" style="stroke-width:2.4"><use href="#i-atlas"/></svg></span><span>全景索引<small>当前系统认知</small></span></button>
+          <button class="graph-node node-code" style="--node-x:77.4%;--node-y:20.5%" data-node="test" aria-pressed="false"><svg class="icon"><use href="#i-shield"/></svg><span>orders.test.ts<small>验证业务契约</small></span></button>
+          <button class="graph-node node-database" style="--node-x:79.6%;--node-y:76.5%" data-node="database" aria-pressed="false"><svg class="icon"><use href="#i-database"/></svg><span>public.orders<small>表结构与数据约束</small></span></button>
+        </div>
+        <div class="graph-caption">
+          <span><i class="legend-line green"></i>代码认知</span>
+          <span><i class="legend-line cyan"></i>数据库认知</span>
+          <small>点选对象，查看职责与约束</small>
+        </div>
+      </div>
+      <aside class="object-detail" aria-label="选中对象的认知" aria-live="polite">
+        <div class="object-heading"><h3 id="object-title">order-service.ts</h3><span id="object-kind">Code Cognition</span></div>
+        <dl>
+          <div><dt><b>F</b> 职责</dt><dd id="field-f">创建订单，协调库存扣减与支付状态。</dd></div>
+          <div><dt><b>R</b> 强关系</dt><dd id="field-r">api/orders.ts、public.orders、orders.test.ts</dd></div>
+          <div><dt><b>A</b> 接口</dt><dd id="field-a">createOrder、cancelOrder</dd></div>
+          <div><dt><b>S</b> 关键约束</dt><dd id="field-s">订单与库存操作必须共享事务；重复请求须保持幂等。</dd></div>
+        </dl>
+        <div class="change-summary">
+          <strong id="diff-title">接口变更对照</strong>
+          <p id="diff-caption">模拟后查看新增接口与字段。</p>
+          <div><span>修改前</span><code id="diff-before">createOrder、cancelOrder</code></div>
+          <div><span id="diff-after-label">修改后</span><code id="diff-after">尚未模拟变更</code></div>
+        </div>
+      </aside>
+    </div>
+    <ol class="demo-stages" aria-label="示例认知维护阶段">
+      <li data-stage="0"><span>变更待同步</span><code>stale</code></li>
+      <li data-stage="1"><span>创作维护</span><code>maintaining</code></li>
+      <li data-stage="2"><span>校验审阅</span><code>checking</code></li>
+      <li data-stage="3"><span>重新对齐</span><code>aligned</code></li>
+    </ol>
+    <div class="demo-status">
+      <span class="state-pill" id="demo-state">aligned</span>
+      <p id="demo-state-text" aria-live="polite">示例认知与示例代码处于同一版本。</p>
+      <button class="text-button" id="reset-demo">重置演示</button>
+    </div>
+    <p class="demo-disclaimer">交互图仅解释认知和治理过程，不连接你的仓库，也不推断真实调用关系。示例关系均为测试数据。</p>
+  </div>
+</section>
+
+<!-- ============ Comparison ============ -->
+<section class="section wrap" id="comparison">
+  <div class="split-layout">
+    <div class="section-heading reveal">
+      <h2>先认识系统，<br/>再寻找精确证据。</h2>
+      <p>Demo-Atlas 与你已有的搜索、代码图和测试工具一起工作，让局部证据有一个全局认知基础。</p>
+      <a class="text-link" href="#reference">阅读完整对比 <svg class="icon tiny"><use href="#i-arrow-up-right"/></svg></a>
+    </div>
+    <div class="comparison-stack reveal">
+      <article><strong><span>Demo-Atlas</span>：这个系统做什么，哪些约束不能破坏？</strong><p>持久的职责、强关系、公开契约和维护边界。</p></article>
+      <article><strong><span>搜索 / LSP / CodeGraph</span>：精确代码在哪里，实际调用路径是什么？</strong><p>针对当前任务核对符号、引用、原文和调用关系。</p></article>
+      <article><strong><span>测试与运行结果</span>：这次修改是否满足真实行为？</strong><p>验证代码与系统表现，为交付提供证据。</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section wrap" id="reference">
+  <div class="split-layout">
+    <div class="section-heading reveal">
+      <h2>开始之前，<br/>你可能想知道。</h2>
+      <a class="text-link" href="#quick-start">完整 README <svg class="icon tiny"><use href="#i-arrow-up-right"/></svg></a>
+    </div>
+    <div class="faq-list reveal">
+      <details><summary>需要更换模型或者 AI Agent 吗？<svg class="icon"><use href="#i-arrow-right"/></svg></summary><p>通过受支持的 MCP 宿主接入，可继续使用已有 Agent 和模型通道。模型名称本身不决定兼容性，宿主需要支持标准 stdio MCP 并遵循工具合同。</p></details>
+      <details><summary>我的源码、业务数据和凭据会被上传吗？<svg class="icon"><use href="#i-arrow-right"/></svg></summary><p>本地优先，不上传源码。数据库只读取显式授权的 Schema 元数据，不读取业务行；凭据通过环境变量名引用，不写入认知资产。</p></details>
+      <details><summary>什么规模的项目适合使用？<svg class="icon"><use href="#i-arrow-right"/></svg></summary><p>可先由 Agent 生成项目雏形，也可更早接入。支持规模取决于索引的信息密度、token 大小以及宿主模型上下文。首次索引需逐个阅读受管文件，支持按批次继续。</p></details>
+      <details><summary>支持哪些数据库？<svg class="icon"><use href="#i-arrow-right"/></svg></summary><p>示例支持 MySQL 与 PostgreSQL 的 Schema 元数据读取。数据库卷为可选项，需显式接受证据并完成绑定与生命周期治理。</p></details>
+      <details><summary>绿色结果是否意味着 AI 理解一定正确？<svg class="icon"><use href="#i-arrow-right"/></svg></summary><p>治理检查证明已编码的结构与治理条件成立，语义仍需用源码、Schema、测试、运行结果和人工审查核对。完整交付与模型充分理解是不同维度。</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Principles ============ -->
+<section class="section principles" id="principles">
+  <div class="wrap">
+    <div class="section-heading reveal">
+      <h2>背后，是一层<br/>可持续维护的认知基础设施。</h2>
+      <p>Demo-Atlas 位于 AI Agent 与软件系统之间。大模型推理，Agent 规划和执行，Demo-Atlas 将系统认知保存、交付并治理其演进。</p>
+    </div>
+    <div class="principle-layout">
+      <div class="architecture reveal" aria-label="Demo-Atlas 在技术栈中的位置">
+        <div><strong>大模型</strong><span>推理与语义理解</span></div>
+        <div><strong>AI Agent</strong><span>规划、调查与执行</span></div>
+        <div class="atlas-layer"><span class="core-mark"><svg class="icon" style="stroke-width:2.4"><use href="#i-atlas"/></svg></span><span><strong>Demo-Atlas</strong><span>持久认知与演进治理</span></span></div>
+        <div><strong>软件系统</strong><span>代码、测试、配置与数据库</span></div>
+      </div>
+      <div class="principle-copy reveal">
+        <article><h3>模型创作语义，Demo-Atlas 管理认知生命周期。</h3><p>Agent 根据真实源码与证据编写对象认知；Demo-Atlas 校验范围、归属、结构、版本身份与提交条件，并保存审计和恢复证据。</p></article>
+        <article><h3>先交付全局，再行动，最后维护。</h3><p>读取 Rules 与全景索引，针对任务核对精确证据，完成开发验证后维护受影响条目，让认知重新与当前受管系统对齐。</p></article>
+        <div class="governance-flow"><span>源码绑定</span><span>校验与审阅</span><span>CAS / 原子写入</span><span>审计与恢复</span></div>
+      </div>
+    </div>
+    <div class="principle-details reveal">
+      <details><summary><span>全景索引：让认知成为随项目保存的资产</span><svg class="icon"><use href="#i-arrow-right"/></svg></summary>
+        <div class="volume-grid">
+          <div><code>atlas.txt</code><strong>Root</strong><p>声明认知集合组成与激活入口。</p></div>
+          <div><code>atlas.meta.txt</code><strong>Meta</strong><p>保存标签字典、四类语义规则与创作约束。</p></div>
+          <div><code>atlas.code.txt</code><strong>Code</strong><p>保存代码与仓库资产的对象认知。</p></div>
+          <div><code>atlas.database.txt</code><strong>Database</strong><p>可选的表级认知，与 Schema Evidence 绑定。</p></div>
+        </div>
+      </details>
+      <details><summary><span>四类语义：每个对象，记录四类重要信息</span><svg class="icon"><use href="#i-arrow-right"/></svg></summary>
+        <div class="sem-grid">
+          <p><b>F</b><strong>Function</strong><span>对象的核心职责</span></p>
+          <p><b>R</b><strong>Relations</strong><span>安全修改必须关注的强关系</span></p>
+          <p><b>A</b><strong>API</strong><span>公开接口与可观察契约</span></p>
+          <p><b>S</b><strong>Constraints</strong><span>前三项未表达的重要约束</span></p>
+        </div>
+        <p class="details-note">S 补充事务、兼容性和例外等高价值信息，避免重复普通摘要。语义由模型依据证据创作，程序验证结构与治理条件。</p>
+      </details>
+      <details><summary><span>交付与治理：证明当前身份，保留恢复边界</span><svg class="icon"><use href="#i-arrow-right"/></svg></summary>
+        <p class="details-note">全景索引可按 Chunk 与 Cursor 完整交付，并通过 Receipt、Challenge 与 Attestation 校验身份和覆盖。正式更新经过校验、审阅、CAS 和原子写入；失败时保留事务证据，按可证明的状态继续或恢复。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Closing ============ -->
+<section class="closing wrap">
+  <h2>让你的下一次开发，<br/>带着整个系统的认知。</h2>
+  <a class="button primary" href="#quick-start">立即开始 <svg class="icon"><use href="#i-arrow-up-right"/></svg></a>
+  <p>From AI Coding to AI Software Engineering · 示例标语</p>
+</section>
+</main>
+
+<!-- ============ Footer ============ -->
+<footer class="site-footer">
+  <div class="wrap footer-main">
+    <a class="footer-brand" href="#top"><svg class="icon" style="stroke-width:2.4"><use href="#i-atlas"/></svg><span>DEMO-ATLAS<small>面向人工智能的认知基建 · 示例</small></span></a>
+    <div class="footer-links"><a href="#reference">GitHub</a><a href="#reference">Releases</a><a href="#reference">反馈问题</a><a href="#reference">许可证</a></div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>Demo-Atlas / AI-Oriented Cognition Infrastructure（示例）</span>
+    <span>测试备案号 00000000000000</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+/* ---------- Toast ---------- */
+let toastTimer;
+function toast(msg){
+  const el = $('#toast'); el.textContent = msg; el.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+}
+async function copyText(text, btn){
+  try { await navigator.clipboard.writeText(text); }
+  catch(e){
+    const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy'); ta.remove();
+  }
+  const label = btn.querySelector('span'); const old = label.textContent;
+  label.textContent = '已复制'; btn.querySelector('use').setAttribute('href', '#i-check');
+  toast('已复制到剪贴板');
+  setTimeout(() => { label.textContent = old; btn.querySelector('use').setAttribute('href', '#i-copy'); }, 2200);
+}
+
+/* ---------- 主题 ---------- */
+const themeBtn = $('#theme-toggle');
+function applyTheme(theme){
+  document.documentElement.dataset.theme = theme;
+  $('#theme-icon use').setAttribute('href', theme === 'dark' ? '#i-sun' : '#i-moon');
+  themeBtn.setAttribute('aria-label', theme === 'dark' ? '切换到浅色主题' : '切换到深色主题');
+}
+themeBtn.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+$('#lang-toggle').addEventListener('click', () => toast('语言切换为示例交互（测试数据）'));
+
+/* ---------- 移动菜单 ---------- */
+const menuBtn = $('#menu-btn'), mobileMenu = $('#mobile-menu');
+menuBtn.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', String(open));
+  $('#menu-icon use').setAttribute('href', open ? '#i-x' : '#i-list');
+});
+mobileMenu.addEventListener('click', e => { if (e.target.tagName === 'A'){ mobileMenu.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); $('#menu-icon use').setAttribute('href','#i-list'); } });
+
+/* ---------- 导航高亮 ---------- */
+const navLinks = $$('[data-nav]');
+const sectionIds = ['benefits','quick-start','live-demo','workflow','reference'];
+const navObserver = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (en.isIntersecting){
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + en.target.id));
+    }
+  });
+}, {rootMargin:'-40% 0px -55% 0px'});
+sectionIds.forEach(id => { const el = document.getElementById(id); if (el) navObserver.observe(el); });
+
+/* ---------- 入场 reveal ---------- */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting){ en.target.classList.add('in-view'); revealObserver.unobserve(en.target); } });
+}, {threshold:.12});
+$$('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ---------- Hero 地图动画（单一 rAF 时钟） ---------- */
+const art = $('#hero-art');
+const sceneBtn = $('#scene-toggle');
+const hint = $('#map-hint');
+let sceneUserPaused = false, sceneVisible = true, sceneSuspended = false;
+let rafId = null, lastT = 0, clock = 0;
+const routes = [];
+const floaters = [];
+const semEls = $$('.map-sem');
+
+function mapPoint(t, c){
+  t = Math.max(0, Math.min(1, t)); const u = 1 - t;
+  return {
+    x: u*u*u*c[0] + 3*u*u*t*c[2] + 3*u*t*t*c[4] + t*t*t*c[6],
+    y: u*u*u*c[1] + 3*u*u*t*c[3] + 3*u*t*t*c[5] + t*t*t*c[7]
+  };
+}
+function flowFrame(progress, c, tail){
+  const phase = progress - tail;
+  const p = mapPoint(phase, c);
+  const opacity = phase < 0 || phase > 1 ? 0 : Math.max(0, Math.min(1, phase / .06, (1 - phase) / .06));
+  return {x:p.x, y:p.y, opacity};
+}
+$$('.map-flow-group').forEach(group => {
+  const curve = group.dataset.curve.split(' ').map(Number);
+  const parts = [group.querySelector('.map-route-signal'), ...group.querySelectorAll('.map-packet-tail')]
+    .map((part, i) => ({el:part, tail:Number(part.dataset.tail || 0), strength: i === 0 ? 1 : .78 - i * .16}));
+  routes.push({
+    key: group.dataset.flow, group, curve, parts,
+    rail: group.querySelector('.map-flow-rail'),
+    arrival: group.querySelector('.map-arrival'),
+    duration: Number(group.dataset.duration),
+    phase: Number(group.dataset.phase),
+    progress: Number(group.dataset.phase)
+  });
+});
+$$('.map-floater').forEach((el, i) => {
+  floaters.push({el, dx:Number(el.dataset.dx), dy:Number(el.dataset.dy), roll:Number(el.dataset.roll), duration:Number(el.dataset.duration), offset:i / 7});
+});
+function renderScene(){
+  routes.forEach(r => {
+    r.parts.forEach(p => {
+      const f = flowFrame(r.progress, r.curve, p.tail);
+      p.el.setAttribute('transform', `translate(${f.x} ${f.y})`);
+      p.el.setAttribute('opacity', (f.opacity * p.strength).toFixed(3));
+    });
+    const receive = r.progress > .76 ? Math.sin((r.progress - .76) / .24 * Math.PI) : 0;
+    r.arrival.setAttribute('opacity', (receive * .95).toFixed(3));
+    r.arrival.setAttribute('transform', `scale(${(1 + receive * .32).toFixed(3)})`);
+    r.rail.setAttribute('opacity', (.17 + .33 * Math.sin(Math.PI * r.progress)).toFixed(3));
+  });
+  floaters.forEach(fl => {
+    const t = ((clock / fl.duration) + fl.offset) % 2;
+    const k = t < 1 ? t : 2 - t;
+    const e = .5 - .5 * Math.cos(Math.PI * k);
+    const x = -fl.dx + 2 * fl.dx * e;
+    const y = 8 + (fl.dy - 8) * e;
+    const rot = -fl.roll + 2 * fl.roll * e;
+    fl.el.setAttribute('transform', `translate(${x.toFixed(2)} ${y.toFixed(2)}) rotate(${rot.toFixed(2)})`);
+  });
+  const semIdx = Math.floor(((clock % 6.4) + 1e-7) / 1.6) % 4;
+  const local = (clock % 6.4) - semIdx * 1.6;
+  semEls.forEach((el, i) => {
+    let o = 0;
+    if (i === semIdx){ o = local < .22 ? local / .22 : local > 1.22 ? Math.max(0, 1 - (local - 1.22) / .28) : 1; }
+    el.setAttribute('opacity', o.toFixed(3));
+  });
+}
+function tick(ts){
+  rafId = requestAnimationFrame(tick);
+  if (!lastT) lastT = ts;
+  const dt = Math.min(.05, (ts - lastT) / 1000); lastT = ts;
+  clock += dt;
+  routes.forEach(r => { r.progress = (r.progress + dt / r.duration) % 1; });
+  renderScene();
+}
+function sceneStopped(){ return reduce.matches || sceneUserPaused || !sceneVisible || document.hidden || sceneSuspended; }
+function syncScene(){
+  const stopped = sceneStopped();
+  if (stopped){ if (rafId){ cancelAnimationFrame(rafId); rafId = null; lastT = 0; } }
+  else if (!rafId){ rafId = requestAnimationFrame(tick); }
+  art.dataset.motion = reduce.matches ? 'reduced' : stopped ? 'paused' : 'running';
+  sceneBtn.hidden = reduce.matches;
+  const label = sceneUserPaused ? '播放首屏动画' : '暂停首屏动画';
+  sceneBtn.setAttribute('aria-label', label);
+  sceneBtn.setAttribute('aria-pressed', String(sceneUserPaused));
+  $('#scene-label').textContent = sceneUserPaused ? '播放动画' : '暂停动画';
+  $('#scene-icon use').setAttribute('href', sceneUserPaused ? '#i-play' : '#i-pause');
+  if (reduce.matches){
+    routes.forEach(r => { r.parts.forEach(p => p.el.setAttribute('opacity', 0)); r.arrival.setAttribute('opacity', 0); r.rail.setAttribute('opacity', .32); });
+    floaters.forEach(fl => fl.el.setAttribute('transform', 'translate(0 0)'));
+    semEls.forEach((el, i) => el.setAttribute('opacity', i === 0 ? 1 : 0));
+  }
+}
+sceneBtn.addEventListener('click', () => { sceneUserPaused = !sceneUserPaused; syncScene(); });
+function sendMapData(e){
+  if (e.type === 'keydown' && !['Enter',' '].includes(e.key)) return;
+  if (e.type === 'keydown') e.preventDefault();
+  const control = e.currentTarget, key = control.dataset.module;
+  $$('.map-module-hit').forEach(item => {
+    item.classList.toggle('is-selected', item === control);
+    item.setAttribute('aria-pressed', String(item === control));
+  });
+  routes.forEach(r => r.group.classList.toggle('is-selected', r.key === key));
+  hint.textContent = reduce.matches ? control.dataset.label + ' · 示例数据已选中' : control.dataset.label + ' → 全景索引';
+  if (!reduce.matches){
+    const r = routes.find(r => r.key === key); if (r) r.progress = 0;
+    clock = 0;
+    syncScene();
+  }
+}
+$$('.map-module-hit').forEach(c => { c.addEventListener('click', sendMapData); c.addEventListener('keydown', sendMapData); });
+if ('IntersectionObserver' in window){
+  new IntersectionObserver(entries => { sceneVisible = entries[0].isIntersecting; syncScene(); }, {threshold:.05}).observe(art);
+}
+document.addEventListener('visibilitychange', syncScene);
+window.addEventListener('pagehide', () => { sceneSuspended = true; syncScene(); });
+window.addEventListener('pageshow', () => { sceneSuspended = false; syncScene(); });
+reduce.addEventListener('change', syncScene);
+renderScene(); syncScene();
+
+/* ---------- Quick Start ---------- */
+const setupSteps = $$('.setup-step');
+const marker = $('#setup-marker');
+function installMarker(instant){
+  const active = $('.setup-step.selected'); if (!active) return;
+  const rail = $('#setup-steps');
+  const pr = rail.getBoundingClientRect(), r = active.getBoundingClientRect();
+  marker.style.width = r.width + 'px'; marker.style.height = r.height + 'px';
+  marker.style.transform = `translate(${r.left - pr.left}px, ${r.top - pr.top}px)`;
+  if (instant) marker.style.transition = 'none'; else marker.style.transition = '';
+}
+setupSteps.forEach(step => step.addEventListener('click', () => {
+  setupSteps.forEach(s => s.classList.toggle('selected', s === step));
+  installMarker(false);
+}));
+$$('[data-setup]').forEach(tab => tab.addEventListener('click', () => {
+  $$('[data-setup]').forEach(t => { t.classList.toggle('selected', t === tab); t.setAttribute('aria-selected', String(t === tab)); });
+  const manual = tab.dataset.setup === 'manual';
+  $('#code-title').textContent = manual ? '手动接入 Demo-Atlas' : '安装并接入 Demo-Atlas';
+  $('#code-body').innerHTML = manual
+    ? '<b>手动接入示例步骤</b>\n\n<span class="cm"># 1. 下载并校验发布包</span>\ncurl -LO https://example.com/demo/atlas/releases/latest\n\n<span class="cm"># 2. 初始化并接入宿主 MCP</span>\n./atlas init --host your-agent\n\n<span class="cm"># 3. 扫描受管文件，建立第一份索引</span>\n./atlas scan --batch 32'
+    : '<b>Demo-Atlas 示例仓库：</b>https://example.com/demo/atlas\n\n请从示例发布页下载适合当前操作系统与 CPU 架构的最新发布包，\n并按发布页说明完成校验。没有合适的发布包时，再从官方仓库构建。\n\n解压后，把 <b>atlas</b>（Windows 为 atlas.exe）放在稳定的绝对路径中：\n<span class="cm">1. 运行 init，完成初始化并接入当前宿主的 MCP；</span>\n<span class="cm">2. 运行 scan，不要把 init 写入的索引文件加入 .gitignore；</span>\n<span class="cm">3. 提示我重启 Agent，让 MCP 工具生效。</span>';
+}));
+$('#copy-prompt').addEventListener('click', e => copyText($('#code-body').textContent, e.currentTarget));
+if ('ResizeObserver' in window) new ResizeObserver(() => installMarker(true)).observe($('#setup-steps'));
+window.addEventListener('load', () => installMarker(true));
+installMarker(true);
+
+/* ---------- Workflow ---------- */
+const scenes = {
+  takeover: {title:'读懂已有系统，再接手迭代。', desc:'在目标仓库完成接入并建立索引后，直接提出需要完成的开发任务。代码与测试稳定后，引导 Agent 增量维护。', quote:'给任务增加优先级，完成前后端、数据库与测试修改。'},
+  fresh: {title:'从一个想法，长出系统认知。', desc:'先让 Agent 搭出项目雏形，再建立第一份索引。此后每个迭代都带着全局认知推进，理解随代码一起生长。', quote:'先搭一个订单服务雏形，然后为它建立全景索引。'},
+  recall: {title:'新会话，也能接着上次继续。', desc:'索引随仓库版本化。新会话读取与当前代码版本一致的认知，无需重新调查整个系统。', quote:'读取当前仓库的全景索引，告诉我上次迭代停在哪里。'}
+};
+$$('[data-scene]').forEach(tab => tab.addEventListener('click', () => {
+  $$('[data-scene]').forEach(t => { t.classList.toggle('selected', t === tab); t.setAttribute('aria-selected', String(t === tab)); });
+  const s = scenes[tab.dataset.scene];
+  $('#wf-title').textContent = s.title; $('#wf-desc').textContent = s.desc; $('#wf-quote').textContent = s.quote;
+}));
+$('#copy-quote').addEventListener('click', e => copyText($('#wf-quote').textContent, e.currentTarget));
+const track = $('#workflow-track');
+const trackSteps = [...track.querySelectorAll('li')];
+function highlightTrack(progress){
+  track.style.setProperty('--flow-progress', String(progress));
+  const current = Math.min(trackSteps.length - 1, Math.floor(progress * trackSteps.length));
+  trackSteps.forEach((li, i) => { li.classList.toggle('flow-active', i === current); li.classList.toggle('flow-passed', i < current); });
+}
+function onScrollTrack(){
+  const r = track.getBoundingClientRect();
+  const start = innerHeight * .82, end = innerHeight * .38;
+  const progress = Math.max(0, Math.min(1, (start - r.top) / (start - end + r.height)));
+  highlightTrack(progress);
+}
+if (reduce.matches) highlightTrack(1);
+else { addEventListener('scroll', onScrollTrack, {passive:true}); onScrollTrack(); }
+
+/* ---------- Live Demo ---------- */
+const objects = {
+  api: {title:'api/orders.ts', kind:'Code Cognition', f:'暴露订单 HTTP 接口，校验权限与入参。', r:'order-service.ts、orders.test.ts', a:'POST /orders、DELETE /orders/:id', s:'接口层不写业务事务；错误码须与契约一致。', before:'POST /orders、DELETE /orders/:id'},
+  service: {title:'order-service.ts', kind:'Code Cognition', f:'创建订单，协调库存扣减与支付状态。', r:'api/orders.ts、public.orders、orders.test.ts', a:'createOrder、cancelOrder', s:'订单与库存操作必须共享事务；重复请求须保持幂等。', before:'createOrder、cancelOrder'},
+  test: {title:'orders.test.ts', kind:'Code Cognition', f:'验证订单业务契约与边界条件。', r:'order-service.ts、api/orders.ts', a:'describe/orders、it/idempotent', s:'测试不得依赖真实外部支付；失败须可复现。', before:'describe/orders、it/idempotent'},
+  database: {title:'public.orders', kind:'Database Cognition', f:'持久化订单主表与状态字段。', r:'order-service.ts', a:'id、status、amount、created_at', s:'status 变更须走事务；金额精度 decimal(12,2)。', before:'id、status、amount、created_at'},
+  whole: {title:'全景索引', kind:'System Cognition', f:'保存整个示例系统的对象认知与强关系。', r:'api、service、test、database', a:'deliver、maintain、attest', s:'认知须与代码版本一致；更新经过校验与原子写入。', before:'deliver、maintain、attest'}
+};
+const canvas = $('#graph-canvas');
+const signalLayer = $('#signal-lines');
+let linkRaf = null;
+function graphLinks(key, animate){
+  const paths = $$('.base-lines path');
+  const selected = paths.filter(p => key === 'whole' || p.dataset.link.split(' ').includes(key));
+  paths.forEach(p => p.classList.toggle('relation-active', selected.includes(p)));
+  signalLayer.replaceChildren();
+  const signals = selected.map(p => {
+    const s = document.createElementNS('http://www.w3.org/2000/svg','path');
+    s.setAttribute('d', p.getAttribute('d'));
+    if (p.dataset.link.includes('database')) s.classList.add('database-signal');
+    signalLayer.append(s); return s;
+  });
+  const lengths = signals.map(s => s.getTotalLength());
+  signals.forEach((s, i) => { s.style.strokeDasharray = '18 ' + lengths[i]; s.style.strokeDashoffset = String(lengths[i]); });
+  if (!animate || reduce.matches){ signals.forEach((s, i) => s.style.strokeDashoffset = String(-lengths[i])); return; }
+  if (linkRaf) cancelAnimationFrame(linkRaf);
+  const t0 = performance.now();
+  const step = now => {
+    let done = true;
+    signals.forEach((s, i) => {
+      const local = Math.max(0, Math.min(1, (now - t0 - i * 55) / 950));
+      if (local < 1) done = false;
+      s.style.strokeDashoffset = String(lengths[i] - 2 * lengths[i] * local);
+    });
+    if (!done) linkRaf = requestAnimationFrame(step); else linkRaf = null;
+  };
+  linkRaf = requestAnimationFrame(step);
+}
+function focusGraph(key, animate){
+  graphLinks(key, animate);
+  $$('.graph-node').forEach(n => {
+    const sel = n.dataset.node === key;
+    n.classList.toggle('selected', sel);
+    n.setAttribute('aria-pressed', String(sel));
+  });
+  const o = objects[key];
+  $('#object-title').textContent = o.title; $('#object-kind').textContent = o.kind;
+  $('#object-kind').style.color = key === 'database' ? 'var(--cyan)' : 'var(--lime)';
+  $('#field-f').textContent = o.f; $('#field-r').textContent = o.r; $('#field-a').textContent = o.a; $('#field-s').textContent = o.s;
+  $('#diff-before').textContent = o.before;
+}
+$$('.graph-node').forEach(n => n.addEventListener('click', () => { if (!demoRunning) focusGraph(n.dataset.node, true); }));
+$$('[data-filter]').forEach(tab => tab.addEventListener('click', () => {
+  $$('[data-filter]').forEach(t => { t.classList.toggle('selected', t === tab); t.setAttribute('aria-selected', String(t === tab)); });
+  const f = tab.dataset.filter;
+  $$('.graph-node').forEach(n => {
+    const kind = n.dataset.node === 'database' ? 'database' : n.dataset.node === 'whole' ? 'whole' : 'code';
+    n.classList.toggle('dimmed', f !== 'whole' && kind !== f && kind !== 'whole');
+  });
+  focusGraph(f === 'whole' ? 'whole' : f === 'database' ? 'database' : 'service', true);
+}));
+
+/* 四阶段状态机 */
+const stageEls = $$('.demo-stages li');
+const statePill = $('#demo-state'), stateText = $('#demo-state-text');
+let demoRunning = false, demoTimers = [];
+const stageInfo = [
+  {pill:'stale', text:'示例代码已变更，认知等待同步。', pending:true},
+  {pill:'maintaining', text:'Agent 正在创作受影响条目的维护。', pending:true},
+  {pill:'checking', text:'治理检查正在校验结构与提交条件。', pending:true},
+  {pill:'aligned', text:'示例认知与示例代码处于同一版本。', pending:false}
+];
+function setStage(i){
+  stageEls.forEach((li, j) => { li.classList.toggle('done', j < i); li.classList.toggle('current', j === i && i < 3); });
+  const info = stageInfo[i];
+  statePill.textContent = info.pill;
+  statePill.classList.toggle('pending', info.pending);
+  stateText.textContent = info.text;
+}
+function affected(keys){ $$('.graph-node').forEach(n => n.classList.toggle('affected', keys.includes(n.dataset.node))); }
+function resetDemo(){
+  demoTimers.forEach(clearTimeout); demoTimers = []; demoRunning = false;
+  canvas.classList.remove('changing'); affected([]);
+  setStage(3); stageEls.forEach(li => li.classList.add('done'));
+  $('#diff-after').textContent = '尚未模拟变更'; $('#diff-caption').textContent = '模拟后查看新增接口与字段。';
+  $('#simulate-btn').disabled = false;
+  focusGraph('service', false);
+}
+$('#reset-demo').addEventListener('click', resetDemo);
+$('#simulate-btn').addEventListener('click', () => {
+  if (demoRunning) return;
+  demoRunning = true; $('#simulate-btn').disabled = true;
+  canvas.classList.add('changing');
+  focusGraph('service', true);
+  affected(['service','api','database']);
+  setStage(0);
+  $('#diff-caption').textContent = '新增退款接口，订单表增加 refunded_at 字段。';
+  const interval = reduce.matches ? 150 : 1800;
+  demoTimers.push(setTimeout(() => { setStage(1); $('#diff-after').textContent = 'createOrder、cancelOrder、refundOrder'; }, interval));
+  demoTimers.push(setTimeout(() => { setStage(2); affected(['service','database']); }, interval * 2));
+  demoTimers.push(setTimeout(() => {
+    setStage(3); stageEls.forEach(li => li.classList.add('done'));
+    canvas.classList.remove('changing'); affected([]);
+    $('#diff-after-label').textContent = '修改后（已对齐）';
+    demoRunning = false; $('#simulate-btn').disabled = false;
+    focusGraph('service', true);
+  }, interval * 3));
+});
+focusGraph('service', false);
+setStage(3); stageEls.forEach(li => li.classList.add('done'));
+
+/* ---------- 锚点平滑（预留顶栏） ---------- */
+$$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+  const id = a.getAttribute('href').slice(1);
+  const el = document.getElementById(id);
+  if (el){ e.preventDefault(); el.scrollIntoView({behavior: reduce.matches ? 'auto' : 'smooth'}); history.replaceState(null, '', '#' + id); }
+}));
+})();
+</script>
+</body>
+</html>

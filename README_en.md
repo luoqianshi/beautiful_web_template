@@ -178,6 +178,16 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 
 > Motion-first design where typography is the primary visual medium. Features infinite marquees, viewport-scaled text, scroll-triggered animations, and aggressive uppercase styling. High contrast, brutalist energy with rhythmic movement.
 
+### [Lime Atlas Isometric](./templates/Lime-Atlas-Isometric/)
+
+<p>
+  <img src="./assets/screenshots/Lime-Atlas-Isometric-01-hero-atlas.png" width="32.5%" alt="Lime Atlas Isometric — slide 01" />
+  <img src="./assets/screenshots/Lime-Atlas-Isometric-02-demo-graph.png" width="32.5%" alt="Lime Atlas Isometric — slide 02" />
+  <img src="./assets/screenshots/Lime-Atlas-Isometric-03-light-sections.png" width="32.5%" alt="Lime Atlas Isometric — slide 03" />
+</p>
+
+> Lime isometric cognition atlas: graphite green-black #0b100f base with a single acid-lime #b6d94b accent; cyan #88d4d8 and amber #e7bd83 serve only as semantic aids. Signature elements include a 1536×1024 isometric SVG map (six layered islands + white cables + lime nodes), Bézier signal packets with three-layer halos and comet tails, bobbing icon tiles, rotating F/R/A/S semantic tabs, clickable module hotspots with a pausable scene, plus an interactive cognition graph with dash-signal strokes and a four-stage state-machine demo. Full dark/light theme flip, system font stack with zero external dependencies, and graceful static fallback for reduced motion.
+
 ### [Luxury](./templates/Luxury/)
 
 <p>

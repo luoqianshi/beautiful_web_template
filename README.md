@@ -178,6 +178,16 @@
 
 > 动效优先的设计，字体是主要视觉媒介。无限跑马灯、视口缩放文字、滚动触发动画与激进的大写样式。高对比、粗野主义能量，富有节奏感的运动。
 
+### [Lime Atlas Isometric](./templates/Lime-Atlas-Isometric/)
+
+<p>
+  <img src="./assets/screenshots/Lime-Atlas-Isometric-01-hero-atlas.png" width="32.5%" alt="Lime Atlas Isometric — slide 01" />
+  <img src="./assets/screenshots/Lime-Atlas-Isometric-02-demo-graph.png" width="32.5%" alt="Lime Atlas Isometric — slide 02" />
+  <img src="./assets/screenshots/Lime-Atlas-Isometric-03-light-sections.png" width="32.5%" alt="Lime Atlas Isometric — slide 03" />
+</p>
+
+> 青柠等距认知地图：石墨绿黑 #0b100f 基底配酸性青柠 #b6d94b 单一强调色，青色 #88d4d8 与琥珀 #e7bd83 仅作语义辅助。签名元素包括 1536×1024 等距轴测 SVG 地图（六块多层岛屿 + 白色缆线 + 青柠节点）、贝塞尔信号包三层光晕 + 彗尾流动、悬浮图标瓦片微动、F/R/A/S 语义标签轮换、可点选模块热区与可暂停动画，以及交互认知图 dash 信号描边与四阶段状态机演示。深浅双主题完整翻转，系统字体栈零外部依赖，动效可降级静态。
+
 ### [Luxury](./templates/Luxury/)
 
 <p>
