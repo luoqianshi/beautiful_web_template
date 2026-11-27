@@ -7,4 +7,4 @@ raw/
 .trae/documents/
 
 # Agent进行设计语言提取的过程产物
-web2template_output/
+/web2template_output/
