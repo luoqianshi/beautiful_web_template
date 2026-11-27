@@ -78,6 +78,16 @@
 
 > 复古像素游戏 CRT 美学与粗野主义设计融合。近黑背景配 3px 硬白边框，零圆角，硬偏移阴影。采用 Press Start 2P 像素字体、Space Mono 等宽字体、霓虹绿点缀（#22c55e）、CRT 扫描线叠加、像素网格背景、故障动画与阶梯式过渡，唤起 8 位游戏机与早期黑客终端的质感。
 
+### [Bright Collab Blue-Green](./templates/Bright-Collab-Blue-Green/)
+
+<p>
+  <img src="./assets/screenshots/Bright-Collab-Blue-Green-01-composer-hero.png" width="32.5%" alt="Bright Collab Blue-Green — slide 01" />
+  <img src="./assets/screenshots/Bright-Collab-Blue-Green-02-canvas-dotmatrix.png" width="32.5%" alt="Bright Collab Blue-Green — slide 02" />
+  <img src="./assets/screenshots/Bright-Collab-Blue-Green-03-aurora-profile.png" width="32.5%" alt="Bright Collab Blue-Green — slide 03" />
+</p>
+
+> 明亮协作蓝绿：白色基底配品牌蓝 #3b72ff 与协作绿 #43cf7c 双识别，橙色 #ff5733 少量强调。胶囊标签、16px 圆润卡片、1px 轻边框与微阴影，签名元素包括 7 列点阵活跃度图、无限画布点阵空间与彩色关系连线、蓝绿波浪品牌加载、吉祥物色块角色，以及个人主页的蓝/薰衣草/薄荷极光网格背景。系统字体栈零外部依赖，动效 140/200/260ms 短而克制。
+
 ### [Claymorphism](./templates/Claymorphism/)
 
 <p>

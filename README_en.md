@@ -78,6 +78,16 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 
 > Retro pixel-game CRT aesthetic fused with brutalist design. Near-black backgrounds with stark white 3px borders, zero rounded corners, and hard offset shadows. Features Press Start 2P pixel typography, Space Mono monospace, neon-green accents (#22c55e), CRT scanline overlays, pixel-grid backgrounds, glitch animations, and step-end transitions that evoke 8-bit game consoles and early hacker terminals.
 
+### [Bright Collab Blue-Green](./templates/Bright-Collab-Blue-Green/)
+
+<p>
+  <img src="./assets/screenshots/Bright-Collab-Blue-Green-01-composer-hero.png" width="32.5%" alt="Bright Collab Blue-Green — slide 01" />
+  <img src="./assets/screenshots/Bright-Collab-Blue-Green-02-canvas-dotmatrix.png" width="32.5%" alt="Bright Collab Blue-Green — slide 02" />
+  <img src="./assets/screenshots/Bright-Collab-Blue-Green-03-aurora-profile.png" width="32.5%" alt="Bright Collab Blue-Green — slide 03" />
+</p>
+
+> Bright collaboration blue-green: a white base with dual brand identity of blue #3b72ff and collab green #43cf7c, sparing orange #ff5733 accents. Pill chips, 16px rounded cards, 1px light borders and micro-shadows. Signatures include a 7-column dot-matrix activity chart, an infinite canvas with dot-grid space and colored relation edges, a blue-to-green wave brand loader, mascot blob characters, and a blue/lavender/mint aurora mesh profile background. System font stack with zero external dependencies; motion stays short at 140/200/260ms.
+
 ### [Claymorphism](./templates/Claymorphism/)
 
 <p>
