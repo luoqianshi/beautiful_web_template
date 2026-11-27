@@ -168,6 +168,16 @@
 
 > 受 Dieter Rams 与 Teenage Engineering 启发的高保真工业拟物美学。触感新拟态元素、哑光塑料表面与安全橙点缀。每个组件都模拟实体硬件，具备逼真光照、机械交互与螺丝、散热孔、LED 指示灯等制造细节。
 
+### [Jelly Bot Teammates](./templates/Jelly-Bot-Teammates/)
+
+<p>
+  <img src="./assets/screenshots/Jelly-Bot-Teammates-01-live-chat-hero.png" width="32.5%" alt="Jelly Bot Teammates — slide 01" />
+  <img src="./assets/screenshots/Jelly-Bot-Teammates-02-feature-demos.png" width="32.5%" alt="Jelly Bot Teammates — slide 02" />
+  <img src="./assets/screenshots/Jelly-Bot-Teammates-03-jobs-pricing.png" width="32.5%" alt="Jelly Bot Teammates — slide 03" />
+</p>
+
+> 果冻 Bot 队友：纯白画布 #ffffff + 墨黑 #0a0a0a 药丸按钮 + 象牙卡 #f9f8f5，全部色彩集中在十色果冻 blob 角色上（有机形 + 倾斜白药丸眼睛）。签名动效全套保留——Hero 聊天剧场按剧本循环（typing 三点 → 消息落底 → 爱心 reaction → 可点审批卡）、头像无缝跑马灯 + 独立摇摆、浏览器内 Agent 光标八站游走、录制计时 + 柱状图 barGrow、会议说话环、Slack 线程滑入、记忆建议弹出，另有任务药丸 Tab 与手机聊天联动轮播、Individual/Teams 价格切换、双色劈分 Guide 头图与页脚巨型描边果冻脸。深浅双主题，prefers-reduced-motion 全量降级，内联 SVG 零外部图片依赖。
+
 ### [Kinetic](./templates/Kinetic/)
 
 <p>
@@ -417,3 +427,13 @@
 </p>
 
 > 受比特币与去中心化金融启发的大胆未来主义美学。深邃虚空背景配比特币橙点缀、金色高光、发光元素与精准的数据可视化。
+
+### [Zero-G Confetti](./templates/Zero-G-Confetti/)
+
+<p>
+  <img src="./assets/screenshots/Zero-G-Confetti-01-confetti-hero.png" width="32.5%" alt="Zero-G Confetti — slide 01" />
+  <img src="./assets/screenshots/Zero-G-Confetti-02-orb-feature.png" width="32.5%" alt="Zero-G Confetti — slide 02" />
+  <img src="./assets/screenshots/Zero-G-Confetti-03-giant-wordmark.png" width="32.5%" alt="Zero-G Confetti — slide 03" />
+</p>
+
+> 纯白失重画布上漂浮彩色微屑的克制科技极简。近黑胶囊按钮与深色蓝晕媒体卡形成重力锚点，450 字重负字距大标题、hairline 长滚动节奏与页脚超大字标收尾；打字机标题、指针斥力彩屑、difference 光标环、下拉手导航与用例滑轨补齐动态签名，支持深浅双主题。

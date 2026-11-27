@@ -168,6 +168,16 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 
 > A high-fidelity industrial skeuomorphism aesthetic inspired by Dieter Rams and Teenage Engineering. Features tactile neumorphic elements, matte plastic surfaces, and safety-orange accents. Every component mimics physical hardware with realistic lighting, mechanical interactions, and manufacturing details like screws, vents, and LED indicators.
 
+### [Jelly Bot Teammates](./templates/Jelly-Bot-Teammates/)
+
+<p>
+  <img src="./assets/screenshots/Jelly-Bot-Teammates-01-live-chat-hero.png" width="32.5%" alt="Jelly Bot Teammates — slide 01" />
+  <img src="./assets/screenshots/Jelly-Bot-Teammates-02-feature-demos.png" width="32.5%" alt="Jelly Bot Teammates — slide 02" />
+  <img src="./assets/screenshots/Jelly-Bot-Teammates-03-jobs-pricing.png" width="32.5%" alt="Jelly Bot Teammates — slide 03" />
+</p>
+
+> Jelly bot teammates: a pure-white canvas #ffffff with ink-black #0a0a0a pill buttons and ivory cards #f9f8f5, where all color lives in ten jelly-blob characters (organic shapes with tilted white pill eyes). The full motion suite is preserved — a scripted looping hero chat theater (typing dots → message landing → heart reaction → clickable approval cards), a seamless avatar marquee with per-blob wobble, an eight-stop agent cursor inside a browser mockup, a recording timer with barGrow charts, meeting speaking rings, sliding chat threads, and popping memory suggestions, plus job-pill tabs synced to a phone chat carousel, Individual/Teams pricing toggle, split-color guide headers, and a giant outlined jelly face above the footer. Light/dark themes, full prefers-reduced-motion fallback, inline SVG with zero external image dependencies.
+
 ### [Kinetic](./templates/Kinetic/)
 
 <p>
@@ -417,3 +427,13 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 </p>
 
 > A bold, futuristic aesthetic inspired by Bitcoin and decentralized finance. Deep void backgrounds with Bitcoin orange accents, golden highlights, glowing elements, and precision data visualization.
+
+### [Zero-G Confetti](./templates/Zero-G-Confetti/)
+
+<p>
+  <img src="./assets/screenshots/Zero-G-Confetti-01-confetti-hero.png" width="32.5%" alt="Zero-G Confetti — slide 01" />
+  <img src="./assets/screenshots/Zero-G-Confetti-02-orb-feature.png" width="32.5%" alt="Zero-G Confetti — slide 02" />
+  <img src="./assets/screenshots/Zero-G-Confetti-03-giant-wordmark.png" width="32.5%" alt="Zero-G Confetti — slide 03" />
+</p>
+
+> Weightless minimalism: millimetre-scale confetti drifting across a pure-white canvas, ink pill buttons and dark orb-glow media cards as gravity anchors, 450-weight negative-tracked headlines, hairline-divided long scroll, and a giant footer wordmark. Dynamic signatures include a typed headline with blinking caret, pointer-repelled confetti with scroll parallax, a difference-blend cursor ring, dropdown subnavs, and a snap-scroll use-case slider. Light and dark themes.

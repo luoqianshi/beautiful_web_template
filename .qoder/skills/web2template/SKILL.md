@@ -82,6 +82,26 @@ python "{SKILL_DIR}/scripts/extract_and_capture.py" --file "./path/to/template.h
 - 若仍超时：用 `curl.exe -s -o NUL -w "%{http_code} %{time_total}s" --max-time 15 {URL}` 分别测试直连与代理。注意：Chromium 不一定遵循 `HTTP(S)_PROXY` 环境变量，代理不通时直连往往更可靠。
 - 若截图为空白或布局崩坏：加大 `LOAD_WAIT`，或检查站点是否有反爬（需改用本地 HTML 文件）。
 
+**动态特效勘察（强制，不可跳过）**：
+
+主脚本对动态效果存在系统性盲区，其产物**不能作为动效证据**：
+- 脚本上下文设置 `reduced_motion="reduce"`，尊重该设置的站点会关闭动画；
+- 截图前强制 reveal/fade-in 元素到最终态，入场过程被抹掉；
+- `animations` 字段只采集加载时 computed style 与顶层 `@keyframes`：`:hover/:focus/:active` 规则、JS 驱动动画（GSAP/rAF/Lottie）、canvas/WebGL、滚动驱动效果全部不可见。
+
+因此必须另写临时 Playwright 探测脚本（放于 `{output}/` 下）补测一轮，上下文用 `reduced_motion="no-preference"`、**不强制 reveal**，逐项覆盖：
+
+| 探测项 | 方法 |
+|--------|------|
+| 入场动画 | 真实滚动触发 IntersectionObserver，采样触发前后 opacity/transform |
+| 悬停/聚焦/激活 | `page.hover()` / `focus()` 后读 computed style 差值并截图 |
+| 滚动驱动 | 两个 scrollY 位置采样目标元素 transform，计算视差速率 / sticky 行为 |
+| 持续动画 | 间隔两个时间点采样同一元素（canvas 则两帧像素 diff），确认变化与周期 |
+| JS 动画库 | 检查 `window.gsap` / ScrollTrigger / AOS / Lottie 与内联脚本，记录缓动与触发配置 |
+| canvas/WebGL | 确认 context 存在、两帧 diff，记录视觉特征（粒子密度、色彩、运动方向） |
+
+探测结果写入 `{output}/motion_inventory.md`，每条动效记录：**触发条件 / 目标元素 / 变化属性与幅度 / 时长 / 缓动 / 是否循环 / 证据级别（实测 or 推断）**。无法实测的动效必须标"推断"，不得写成实测。源站确无动效时也要写明"经勘察确认无动效"。
+
 ---
 
 ### 阶段 3：视觉分析（Agent 多模态能力）
@@ -111,7 +131,7 @@ python "{SKILL_DIR}/scripts/extract_and_capture.py" --file "./path/to/template.h
 - 按钮形状与样式
 - 卡片风格（圆角/硬边/玻璃/拟态）
 - 阴影类型（柔和弥散/硬偏移/霓虹辉光/无阴影）
-- 动画痕迹（从静态截图推断可能的动态效果）
+- 动画痕迹：静态截图只能提供线索、不能证明动效。动态结论一律以阶段 2 的 `motion_inventory.md` 实测为准；仅有截图线索的项标"推断"
 
 **签名特征**：
 - 此设计最独特、最可辨识的 3-5 个视觉元素
@@ -144,6 +164,7 @@ python "{SKILL_DIR}/scripts/extract_and_capture.py" --file "./path/to/template.h
 2. **补充语境**：用视觉分析为精确数据补充使用场景与设计意图
 3. **归纳而非罗列**：不要简单复制 JSON 中的所有值，而是归纳出设计体系的规律
 4. **识别模式**：从分散的数据中识别出设计模式（如"所有卡片使用 16px 圆角 + 柔和阴影"）
+5. **动效数据不完整**：`animations` 字段只反映加载时 CSS 动画（盲区见阶段 2）。动效归纳必须合并 `motion_inventory.md`；签名动效（视差、磁性悬停、canvas 背景、跑马灯等）不得因"JSON 里没有"而被遗漏
 
 ---
 
@@ -160,13 +181,14 @@ python "{SKILL_DIR}/scripts/extract_and_capture.py" --file "./path/to/template.h
 3. 保持模板的核心结构（基本信息表 → 布局创意 → 完整提示词）
 4. **根据源页面特点灵活调整**：
    - 若页面无定价区块，则"布局创意"中不写 Pricing
-   - 若页面无动画，则"效果与动画"章节简述为"以静态为主"
+   - 若动效勘察确认页面无动画，则"效果与动画"章节简述为"以静态为主"并注明勘察结论
    - 若页面为单屏落地页，则"布局创意"仅描述现有区块
 5. **内容要求**：
    - 设计哲学：用感官语言描述，包含情感关键词与"此设计不是什么"
    - Token 系统：必须包含具体的 hex 值、px 值，以表格形式呈现
    - 组件样式：按实际页面中出现的组件类型描述
-   - 大胆要素：提炼 3-8 个使此设计独特的签名技巧
+   - 大胆要素：提炼 3-8 个使此设计独特的签名技巧；源站的签名动效必须同时列入此处与"效果与动画"章节
+   - 效果与动画：按模板必备结构填写（交互状态矩阵、入场与滚动驱动、持续与签名动效），每条动效注明触发条件、时长、缓动与证据级别（实测/推断）
    - 所有 CSS 代码示例必须可执行
 5. **合规替换（强制）**：不得把源站的备案号/ICP/公网安备等资质编号、真实产品与模型名称、品牌标语与原文营销文案复刻进产出文档；统一替换为测试数据或重写——备案类编号用 `测试备案号 00000000000000`，产品/模型名用 `Demo` 前缀演示名（如 `Demo 5 Preview`），标语与旁注自行重写为原创示例文案，并在文档中注明"示例文案与名称均为测试数据"
 
@@ -206,7 +228,7 @@ templates/{Style-Name}/
 2. **组件覆盖面**：至少包含 Header、Hero、按钮体系（主/次/描边/禁用）、卡片、输入框、徽章/标签、页脚；风格文档中的"签名元素"必须有对应展示区块
 3. **深浅双模式**（若风格支持）：用 `html[data-theme="dark"]` 覆盖 Token 实现翻转，页脚提供切换钮，验证两套底色下组件均可读
 4. **图片资源**：一律使用 `https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt={prompt}&image_size={size}` 链接（URL-encode prompt），禁止占位图。**关键陷阱**：该接口对新 prompt 首次请求返回"生成中"占位图（约 176KB 正方形 JPEG），真实图片需等待异步生成完成。优先复用项目中已就绪的 URL（grep `text_to_image` 查 index.html 与既有模板）；确需新图时，用 JPEG SOF 标记解析宽高（横向比例 = 就绪）轮询确认，未就绪则回退到已就绪图片并以不同 `background-position` 裁切区分多处使用
-5. **动效克制**：入场动画用 IntersectionObserver 触发（2-8px 位移级别），必须实现 `prefers-reduced-motion` 降级
+5. **动效保真优先、克制为默认**：新增的通用入场动画保持克制（IntersectionObserver 触发，2-8px 位移级别）；但 `motion_inventory.md` 中记录的**源站签名动效（视差、磁性悬停、canvas/WebGL 背景、跑马灯、滚动驱动效果等）必须按实测的触发条件、幅度与节奏复刻**，不得以"克制"为由省略、压平或缩小幅度。零构建约束用原生 rAF/IntersectionObserver 或 CDN 单文件引入满足。所有动效必须实现 `prefers-reduced-motion` 降级
 6. **响应式**：至少覆盖 1024px / 768px 两档断点，规则从风格文档"响应式策略"章节落地
 7. **合规替换**：组件库全部文案（导航、Hero、卡片、跑马灯、代码示例中的模型字符串、页脚法律信息行等）一律使用测试数据：不得出现源站备案号/公网安备编号、真实产品与模型名称、品牌标语；页脚资质行统一写 `测试备案号 00000000000000`
 
@@ -233,14 +255,15 @@ templates/{Style-Name}/
 
 1. 编写临时 Playwright 验证脚本（放于 `{output}/` 下）：起本地 `http.server`，以 1440×900 视口加载新模板，等待字体与图片就绪
 2. **必须收集 JS 错误**：`page.on("pageerror", ...)` 在 `goto` 之前注册，结束时打印——空数组才算通过
-3. 强制 `.reveal` 元素可见后截图三视图，保存为 `assets/screenshots/{Style-Name}-01/02/03.png`（阶段 7 注册的路径依赖此产物）
-4. **生成 WebP 变体**：每张 PNG 同名转换为 `assets/screenshots/webp/{同名}.webp`（1440×900 RGB，quality≈78）。index.html 画廊优先加载 WebP；缺变体会退化画质加载甚至裂图
-5. 用 Read 工具逐张检查截图：图片是否为占位图、组件是否溢出/重叠、文字对比度、深色模式（若实现），并合规复查：截图与 HTML 中不得残留源站备案号、真实产品/模型名、品牌标语（用 grep 复核关键词零命中）
-6. 发现问题 → 修复 HTML 后重跑脚本，直至截图全部合格
+3. **动效运行时验证（源站有动效时强制）**：验证上下文用 `reduced_motion="no-preference"`、不强制 reveal——① 真实滚动触发入场动画，采样触发前后状态；② `page.hover()` 后断言 computed style 变化；③ 持续动画/canvas 间隔两个时间点采样，结果必须不同；④ 签名动效逐项对照 `motion_inventory.md` 核对触发条件与幅度；⑤ 另起 `reduced_motion="reduce"` 上下文验证动效全部停用。**静态截图合格 ≠ 动效合格**
+4. 强制 `.reveal` 元素可见后截图三视图，保存为 `assets/screenshots/{Style-Name}-01/02/03.png`（阶段 7 注册的路径依赖此产物）
+5. **生成 WebP 变体**：每张 PNG 同名转换为 `assets/screenshots/webp/{同名}.webp`（1440×900 RGB，quality≈78）。index.html 画廊优先加载 WebP；缺变体会退化画质加载甚至裂图
+6. 用 Read 工具逐张检查截图：图片是否为占位图、组件是否溢出/重叠、文字对比度、深色模式（若实现），并合规复查：截图与 HTML 中不得残留源站备案号、真实产品/模型名、品牌标语（用 grep 复核关键词零命中）
+7. 发现问题 → 修复 HTML 后重跑脚本，直至截图全部合格
 
 **清理**（验证通过后执行）：
 
-- 删除 `{output}/`（默认 `web2template_output/`）中的全部过程产物：临时脚本、探测图片、design_data.json、抓取截图、style_prompt.md（其正式副本已在 `templates/{Style-Name}/`）
+- 删除 `{output}/`（默认 `web2template_output/`）中的全部过程产物：临时脚本、探测图片、design_data.json、motion_inventory.md、抓取截图、style_prompt.md（其正式副本已在 `templates/{Style-Name}/`）
 - 用 `git status --short` 确认最终变更集只含：新模板目录、三张截图、index.html、两个 README
 
 ---
@@ -254,6 +277,7 @@ templates/{Style-Name}/
 3. **设计意图**：不只描述"是什么"，更要解释"为什么"——设计选择的意图与气质
 4. **签名特征**：明确提炼此风格区别于其他风格的核心特征
 5. **实现导向**：包含可执行的 CSS 代码片段与组件实现建议
+6. **动效可复现**：动效条目记录触发条件、时长、缓动与证据级别（实测/推断），使另一个 Agent 仅凭文档即可还原相近交互，而不只是静态外观
 
 ---
 
@@ -323,7 +347,8 @@ Agent 执行：
 ## 注意事项
 
 - 提取脚本使用 1440×900 视口，以桌面端视图为准。移动端适配策略由 Agent 从 CSS 媒体查询中归纳。
-- 脚本会强制显示动画隐藏元素（reveal/fade-in 等），确保截图反映最终状态。
+- 脚本会强制显示动画隐藏元素（reveal/fade-in 等），确保截图反映最终状态——这也意味着截图系统性抹掉了入场动效，动态复刻必须依赖阶段 2 的动效勘察，不得从静态截图推断动效。
+- **静态 ≠ 动态**：本技能对静态 UI 风格的复刻已较可靠，但动态交互复刻是独立能力，依赖动效勘察（阶段 2）与动效运行时验证（阶段 8）。跳过动效勘察、只验证静态截图、或以"动效克制"为由省略源站签名动效，是动态复刻失真的三大主因。
 - `design_data.json` 中的颜色值为 `rgb()` 格式，Agent 在生成提示词时应转换为 `#hex` 格式以提升可读性。
 - 对于使用 CSS-in-JS 或 Tailwind 等工具的页面，`css_variables` 可能为空，此时依赖 `color_palette` 等计算样式字段。
 - 若页面需要登录或有反爬机制，脚本可能无法正常获取内容，应提示用户改用本地 HTML 文件。
