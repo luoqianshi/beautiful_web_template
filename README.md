@@ -288,6 +288,16 @@
 
 > 大地灵感的调色板，含苔藓绿、赤陶与沙色调。有机水滴形、颗粒质感叠加、不对称圆角与柔和阴影。拥抱侘寂哲学，透出温暖与自然的不完美。
 
+### [Paper Science Editorial](./templates/Paper-Science-Editorial/)
+
+<p>
+  <img src="./assets/screenshots/Paper-Science-Editorial-01.png" width="32.5%" alt="Paper Science Editorial — slide 01" />
+  <img src="./assets/screenshots/Paper-Science-Editorial-02.png" width="32.5%" alt="Paper Science Editorial — slide 02" />
+  <img src="./assets/screenshots/Paper-Science-Editorial-03.png" width="32.5%" alt="Paper Science Editorial — slide 03" />
+</p>
+
+> 纸白画布配衬线大标题与唯一信号蓝，科学档案拼贴套设计工具选框，删除线双语旁注与半调巨型数字构成研究机构编辑风。零渐变、零玻璃，深度只来自纸张叠压与偏移柔影。
+
 ### [Playful Geometric](./templates/Playful-Geometric/)
 
 <p>

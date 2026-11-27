@@ -288,6 +288,16 @@ Browse, preview, and copy the templates in the interactive home page, or explore
 
 > Earth-inspired palette with moss greens, terracotta, and sand tones. Features organic blob shapes, grain texture overlays, asymmetric rounded corners, and soft shadows. Embraces wabi-sabi philosophy with warmth and natural imperfection.
 
+### [Paper Science Editorial](./templates/Paper-Science-Editorial/)
+
+<p>
+  <img src="./assets/screenshots/Paper-Science-Editorial-01.png" width="32.5%" alt="Paper Science Editorial — slide 01" />
+  <img src="./assets/screenshots/Paper-Science-Editorial-02.png" width="32.5%" alt="Paper Science Editorial — slide 02" />
+  <img src="./assets/screenshots/Paper-Science-Editorial-03.png" width="32.5%" alt="Paper Science Editorial — slide 03" />
+</p>
+
+> Paper-white canvas with serif display headlines and a single signal blue. An archival science collage sits inside a design-tool selection marquee; struck-through bilingual notes and halftone numerals form a research-institute editorial style. Zero gradients, zero glass — depth comes only from stacked paper and offset soft shadows.
+
 ### [Playful Geometric](./templates/Playful-Geometric/)
 
 <p>
